@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, Row, Col, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import datepicker from 'js-datepicker';
-import '../node_modules/js-datepicker/datepicker.css';
+//import PropTypes from 'prop-types';
+import DatePicker from './DatePicker.js';
 
 class FormPassagem extends Component {
 
@@ -19,77 +18,82 @@ class FormPassagem extends Component {
     };
   }
 
-  componentDidMount() {
-    const picker = datepicker('.data-viagem', {
-      position: 'tr', // Top right. 
-      startDate: new Date(), // This month. 
-      dateSelected: new Date(), // Today is selected. 
-      minDate: new Date(), // June 1st, 2016. 
-      maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. 
-      formatter: function (el, date) {
-        // This will display the date as `1/1/2017`. 
-        el.value = date.toLocaleDateString('pt-BR');
-      },
-    });
-  }
-
-
   render() {
     return (
       <form action="">
-        <FormGroup controlId="formBasicText">
-          <Row className="text-left">
-            <Col xs={12}>
+        {/*NOME*/}
+        <Row className="text-left">
+          <Col xs={12}>
+            <FormGroup controlId="nome">
               <ControlLabel>Nome *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.nome} />
               <FormControl.Feedback />
-            </Col>
-          </Row>
-          <Row className="text-left">
-            <Col xs={12} className="input-col">
+            </FormGroup>
+          </Col>
+        </Row>
+
+        {/*E_MAIL*/}
+        <Row className="text-left">
+          <Col xs={12} className="input-col">
+            <FormGroup controlId="email">
               <ControlLabel>E-mail *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.email} />
               <FormControl.Feedback />
-            </Col>
-          </Row>
-          <Row className="text-left">
-            <Col md={6} className="input-col">
+            </FormGroup>
+          </Col>
+        </Row>
+
+        {/*ORIGEM / DESTINO*/}
+        <Row className="text-left">
+          <Col md={6} className="input-col">
+            <FormGroup controlId="origem">
               <ControlLabel>Origem *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.origem} />
               <FormControl.Feedback />
-            </Col>
-            <Col md={6} className="input-col">
+            </FormGroup>
+          </Col>
+          <Col md={6} className="input-col">
+            <FormGroup controlId="destino">
               <ControlLabel>Destino *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.destino} />
               <FormControl.Feedback />
-            </Col>
-          </Row>
-          <Row className="text-left">
-            <Col md={4} className="input-col">
+            </FormGroup>
+          </Col>
+        </Row>
+
+        {/*POLTRONA / DATA / HORARIO*/}
+        <Row className="text-left">
+          <Col md={4} className="input-col">
+            <FormGroup controlId="poltrona">
               <ControlLabel>Poltrona *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.poltrona} />
               <FormControl.Feedback />
-            </Col>
-            <Col md={4} className="input-col">
-              <ControlLabel>Data *</ControlLabel>
-              <FormControl type="text" defaultValue={this.state.data} className="data-viagem" readOnly />
+            </FormGroup>
+          </Col>
+          <Col md={4} className="input-col">
+            <FormGroup controlId="data">
+              <ControlLabel>data *</ControlLabel>
+              <DatePicker idc="data"></DatePicker>
               <FormControl.Feedback />
-            </Col>
-            <Col md={4} className="input-col">
+            </FormGroup>
+          </Col>
+          <Col md={4} className="input-col">
+            <FormGroup controlId="hora">
               <ControlLabel>Horário *</ControlLabel>
               <FormControl type="text" defaultValue={this.state.horario} />
               <FormControl.Feedback />
-            </Col>
-          </Row>
-        </FormGroup>
+            </FormGroup>
+          </Col>
+        </Row>
+
         <Button bsStyle="primary" className="btn-block">Reservar agora!</Button>
-      </form>
+      </form >
     );
   }
 
 }
 
-FormPassagem.PropTypes = {};
-FormPassagem.defaultProps = {}
+// FormPassagem.PropTypes = {};
+// FormPassagem.defaultProps = {}
 
 export default FormPassagem;
