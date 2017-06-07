@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { FormGroup, Row, Col, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import datepicker from 'js-datepicker';
+import '../node_modules/js-datepicker/datepicker.css';
 
 class FormPassagem extends Component {
 
@@ -15,6 +18,21 @@ class FormPassagem extends Component {
       horario: '',
     };
   }
+
+  componentDidMount() {
+    const picker = datepicker('.data-viagem', {
+      position: 'tr', // Top right. 
+      startDate: new Date(), // This month. 
+      dateSelected: new Date(), // Today is selected. 
+      minDate: new Date(), // June 1st, 2016. 
+      maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. 
+      formatter: function (el, date) {
+        // This will display the date as `1/1/2017`. 
+        el.value = date.toLocaleDateString('pt-BR');
+      },
+    });
+  }
+
 
   render() {
     return (
@@ -54,7 +72,7 @@ class FormPassagem extends Component {
             </Col>
             <Col md={4} className="input-col">
               <ControlLabel>Data *</ControlLabel>
-              <FormControl type="text" defaultValue={this.state.data} />
+              <FormControl type="text" defaultValue={this.state.data} className="data-viagem" readOnly />
               <FormControl.Feedback />
             </Col>
             <Col md={4} className="input-col">
@@ -70,5 +88,8 @@ class FormPassagem extends Component {
   }
 
 }
+
+FormPassagem.PropTypes = {};
+FormPassagem.defaultProps = {}
 
 export default FormPassagem;
