@@ -21,14 +21,19 @@ export class BaseField extends Component {
 }
 BaseField.PropTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 }
-BaseField.defaultProps = {}
 
 // INPUT FORM FIELD (HOC)
 export const withInput = (WrappedComponent) => {
   return ({ id, label, type, value, onChange }) => {
-    const props = { id, label, type, value, onChange };
+    const props = {
+      id,
+      label,
+      type,
+      value,
+      onChange
+    };
     return (
       <WrappedComponent {...props}>
         <FormControl type={type} value={value} onChange={onChange} />
@@ -39,21 +44,23 @@ export const withInput = (WrappedComponent) => {
 withInput.PropTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
-withInput.defaultProps = {}
-
 
 // SELECT FORM FIELD (HOC)
 export const withSelect = (WrappedComponent) => {
   return ({ id, label, list, value, onChange }) => {
-    const props = { id, label, list, value, onChange };
+    const props = {
+      id,
+      label,
+      list,
+      value,
+      onChange
+    };
     return (
       <WrappedComponent {...props}>
         <FormControl value={value} componentClass="select" onChange={onChange}>
-          {list.map((item, index) =>
-            <option value={index} key={index}>{item}</option>
-          )}
+          {list.map((item, index) => <option value={index} key={index}>{item}</option>)}
         </FormControl>
       </WrappedComponent>
     );
@@ -62,9 +69,8 @@ export const withSelect = (WrappedComponent) => {
 withSelect.PropTypes = {
   list: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
-withSelect.defaultProps = {}
 
 // DATE FORM FIELD (HOC)
 export const withDate = (WrappedComponent) => {
@@ -73,15 +79,13 @@ export const withDate = (WrappedComponent) => {
       const { id, onChange } = this.props;
 
       datepicker(`#${id}`, {
-        position: 'tr', // Top right. 
-        startDate: new Date(), // Today. 
-        dateSelected: new Date(), // Today is selected. 
-        minDate: new Date(), // Today is the min date. 
-        maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. 
-        formatter: (el, date) =>
-          el.value = DateBr(date),
-        onSelect: (instance) =>
-          onChange(DateBr(instance.dateSelected)),
+        position: 'tr', // Top right.
+        startDate: new Date(), // Today.
+        dateSelected: new Date(), // Today is selected.
+        minDate: new Date(), // Today is the min date.
+        maxDate: new Date(2099, 0, 1), // Jan 1st, 2099.
+        formatter: (el, date) => el.value = DateBr(date),
+        onSelect: (instance) => onChange(DateBr(instance.dateSelected))
       });
     }
 
@@ -97,6 +101,5 @@ export const withDate = (WrappedComponent) => {
 }
 withDate.PropTypes = {
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
-withDate.defaultProps = {}

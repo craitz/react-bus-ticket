@@ -6,14 +6,13 @@ import FormPassagem from './FormPassagem.js';
 import { SequenceArray } from './shared/Utils.js';
 import './App.css';
 
-const Container = ({ children }) =>
-  <Grid className="App-container">
-    <Row>
-      <Col md={6} mdOffset={3}>
-        {children}
-      </Col>
-    </Row>
-  </Grid>
+const Container = ({ children }) => <Grid className="App-container">
+  <Row>
+    <Col md={6} mdOffset={3}>
+      {children}
+    </Col>
+  </Row>
+</Grid>
 
 class App extends Component {
 
@@ -22,22 +21,28 @@ class App extends Component {
     this.state = {
       cidades: [],
       horarios: [],
-      poltronas: [],
+      poltronas: []
     };
 
   }
 
   componentDidMount() {
-    const rootRef = firebase.database().ref();
+    const rootRef = firebase
+      .database()
+      .ref();
     const cidadesRef = rootRef.child('cidades');
     const horariosRef = rootRef.child('horarios');
 
     cidadesRef.on('value', snap => {
-      this.setState({ cidades: snap.val() });
+      this.setState({
+        cidades: snap.val()
+      });
     });
 
     horariosRef.on('value', snap => {
-      this.setState({ horarios: snap.val() });
+      this.setState({
+        horarios: snap.val()
+      });
     });
 
     this.setState({ poltronas: new SequenceArray(42) });

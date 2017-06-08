@@ -14,21 +14,41 @@ class FormPassagem extends Component {
     this.state = {
       nome: '',
       email: '',
-      origem: { val: 0, text: props.cidades[0] },
-      destino: { val: 1, text: props.cidades[1] },
-      poltrona: { val: 0, text: '1' },
+      origem: {
+        val: 0,
+        text: props.cidades[0]
+      },
+      destino: {
+        val: 1,
+        text: props.cidades[1]
+      },
+      poltrona: {
+        val: 0,
+        text: '1'
+      },
       data: DateNowBr,
-      horario: { val: 0, text: props.horarios[0] },
+      horario: {
+        val: 0,
+        text: props.horarios[0]
+      }
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.handleChangeData = this.handleChangeData.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this
+      .handleInputChange
+      .bind(this);
+    this.handleSelectChange = this
+      .handleSelectChange
+      .bind(this);
+    this.handleChangeData = this
+      .handleChangeData
+      .bind(this);
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
   }
 
   handleInputChange(event) {
     this.setState({
-      [event.target.id]: event.target.value,
+      [event.target.id]: event.target.value
     });
   }
 
@@ -36,7 +56,7 @@ class FormPassagem extends Component {
     this.setState({
       [event.target.id]: {
         val: event.target.value,
-        text: event.target[event.target.value].text,
+        text: event.target[event.target.value].text
       }
     });
   }
@@ -52,7 +72,15 @@ class FormPassagem extends Component {
 
   render() {
     const { cidades, horarios, poltronas } = this.props;
-    const { nome, email, origem, destino, poltrona, data, horario } = this.state;
+    const {
+      nome,
+      email,
+      origem,
+      destino,
+      poltrona,
+      data,
+      horario
+    } = this.state;
 
     // render!
     return (
@@ -61,37 +89,71 @@ class FormPassagem extends Component {
         {/*NOME*/}
         <Row className="text-left">
           <Col xs={12}>
-            <InputField id="nome" label="Nome" type="text" value={nome} onChange={this.handleInputChange} />
+            <InputField
+              id="nome"
+              label="Nome"
+              type="text"
+              value={nome}
+              onChange={this.handleInputChange} />
           </Col>
         </Row>
 
         {/*E_MAIL*/}
         <Row className="text-left">
           <Col xs={12} className="input-col">
-            <InputField id="email" label="E-mail" type="email" value={email} onChange={this.handleInputChange} />
+            <InputField
+              id="email"
+              label="E-mail"
+              type="email"
+              value={email}
+              onChange={this.handleInputChange} />
           </Col>
         </Row>
 
         {/*ORIGEM / DESTINO*/}
         <Row className="text-left">
           <Col md={6} className="input-col">
-            <SelectField id="origem" label="Origem" list={cidades} value={origem.val} onChange={this.handleSelectChange} />
+            <SelectField
+              id="origem"
+              label="Origem"
+              list={cidades}
+              value={origem.val}
+              onChange={this.handleSelectChange} />
           </Col>
           <Col md={6} className="input-col">
-            <SelectField id="destino" label="Destino" list={cidades} value={destino.val} onChange={this.handleSelectChange} />
+            <SelectField
+              id="destino"
+              label="Destino"
+              list={cidades}
+              value={destino.val}
+              onChange={this.handleSelectChange} />
           </Col>
         </Row>
 
         {/*POLTRONA / DATA / HORARIO*/}
         <Row className="text-left">
           <Col md={4} className="input-col">
-            <SelectField id="poltrona" label="Poltrona" list={poltronas} value={poltrona.val} onChange={this.handleSelectChange} />
+            <SelectField
+              id="poltrona"
+              label="Poltrona"
+              list={poltronas}
+              value={poltrona.val}
+              onChange={this.handleSelectChange} />
           </Col>
           <Col md={4} className="input-col">
-            <DateField id="data" label="Data" value={data} onChange={this.handleChangeData} />
+            <DateField
+              id="data"
+              label="Data"
+              value={data}
+              onChange={this.handleChangeData} />
           </Col>
           <Col md={4} className="input-col">
-            <SelectField id="horario" label="Horário" list={horarios} value={horario.val} onChange={this.handleSelectChange} />
+            <SelectField
+              id="horario"
+              label="Horário"
+              list={horarios}
+              value={horario.val}
+              onChange={this.handleSelectChange} />
           </Col>
         </Row>
 
@@ -104,13 +166,13 @@ class FormPassagem extends Component {
 FormPassagem.PropTypes = {
   cidades: PropTypes.array.isRequired,
   horarios: PropTypes.array.isRequired,
-  poltronas: PropTypes.array.isRequired,
+  poltronas: PropTypes.array.isRequired
 };
 
 FormPassagem.defaultProps = {
   cidades: [],
   horarios: [],
-  poltronas: [],
+  poltronas: []
 }
 
 export default FormPassagem;
