@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { DateBr } from './Utils.js';
 import datepicker from 'js-datepicker';
 import '../../node_modules/js-datepicker/datepicker.css';
 
@@ -16,9 +17,9 @@ class DateField extends Component {
       minDate: new Date(), // Today is the min date. 
       maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. 
       formatter: (el, date) =>
-        el.value = date.toLocaleDateString('pt-BR'),
+        el.value = DateBr(date),
       onSelect: (instance) =>
-        onChange(instance.dateSelected.toLocaleDateString('pt-BR')),
+        onChange(DateBr(instance.dateSelected)),
     });
   }
 

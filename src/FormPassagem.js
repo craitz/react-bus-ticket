@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import { Row, Col, Button } from 'react-bootstrap';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import DateField from './shared/DateField.js';
 import InputField from './shared/InputField.js';
 import SelectField from './shared/SelectField.js';
+import { DateNowBr } from './shared/Utils.js';
 
 class FormPassagem extends Component {
 
@@ -13,13 +13,14 @@ class FormPassagem extends Component {
     this.state = {
       nome: '',
       email: '',
-      origem: '',
-      destino: '',
-      poltrona: '',
-      data: new Date().toLocaleDateString('pt-BR'),
-      horario: '',
+      origem: { val: 0, text: props.cidades[0] },
+      destino: { val: 1, text: props.cidades[1] },
+      poltrona: { val: 0, text: '1' },
+      data: DateNowBr,
+      horario: { val: 0, text: props.horarios[0] },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,6 +28,15 @@ class FormPassagem extends Component {
   handleInputChange(event) {
     this.setState({
       [event.target.id]: event.target.value,
+    });
+  }
+
+  handleSelectChange(event) {
+    this.setState({
+      [event.target.id]: {
+        val: event.target.value,
+        text: event.target[event.target.value].text,
+      }
     });
   }
 
@@ -39,23 +49,8 @@ class FormPassagem extends Component {
     event.preventDefault();
   }
 
-  componentDidMount() {
-    const rootRef = firebase.database().ref().child('cidades');
-    rootRef.on('value', snap => {
-      this.setState({ cidades: snap.val() });
-    });
-  }
-
   render() {
-    // mount mock lists
-    const listCidades = ['Fpolis', 'Blumenau', 'Itajaí', 'Balneário Camboriú'];
-    const listPoltronas = [...Array(42).keys()].map(i => ++i);
-    const listHorarios = [...Array(17).keys()].map(i => {
-      const is = (i + 6).toString();
-      return (is.length === 1) ? `0${is}:00` : `${is}:00`;
-    });
-
-    // get the state of the component
+    const { cidades, horarios, poltronas } = this.props;
     const { nome, email, origem, destino, poltrona, data, horario } = this.state;
 
     // render!
@@ -79,23 +74,23 @@ class FormPassagem extends Component {
         {/*ORIGEM / DESTINO*/}
         <Row className="text-left">
           <Col md={6} className="input-col">
-            <SelectField id="origem" label="Origem" list={listCidades} value={origem} onChange={this.handleInputChange} />
+            <SelectField id="origem" label="Origem" list={cidades} value={origem.val} onChange={this.handleSelectChange} />
           </Col>
           <Col md={6} className="input-col">
-            <SelectField id="destino" label="Destino" list={listCidades} value={destino} onChange={this.handleInputChange} />
+            <SelectField id="destino" label="Destino" list={cidades} value={destino.val} onChange={this.handleSelectChange} />
           </Col>
         </Row>
 
         {/*POLTRONA / DATA / HORARIO*/}
         <Row className="text-left">
           <Col md={4} className="input-col">
-            <SelectField id="poltrona" label="Poltrona" list={listPoltronas} value={poltrona} onChange={this.handleInputChange} />
+            <SelectField id="poltrona" label="Poltrona" list={poltronas} value={poltrona.val} onChange={this.handleSelectChange} />
           </Col>
           <Col md={4} className="input-col">
             <DateField id="data" label="Data" value={data} onChange={this.handleChangeData} />
           </Col>
           <Col md={4} className="input-col">
-            <SelectField id="horario" label="Horário" list={listHorarios} value={horario} onChange={this.handleInputChange} />
+            <SelectField id="horario" label="Horário" list={horarios} value={horario.val} onChange={this.handleSelectChange} />
           </Col>
         </Row>
 
@@ -106,7 +101,16 @@ class FormPassagem extends Component {
 
 }
 
-// FormPassagem.PropTypes = {};
-// FormPassagem.defaultProps = {}
+FormPassagem.PropTypes = {
+  cidades: PropTypes.array.isRequired,
+  horarios: PropTypes.array.isRequired,
+  poltronas: PropTypes.array.isRequired,
+};
+
+FormPassagem.defaultProps = {
+  cidades: [],
+  horarios: [],
+  poltronas: [],
+}
 
 export default FormPassagem;
