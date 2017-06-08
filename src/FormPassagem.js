@@ -19,42 +19,19 @@ class FormPassagem extends Component {
       data: new Date().toLocaleDateString('pt-BR'),
       horario: '',
     };
-    this.handleChangeNome = this.handleChangeNome.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
-    this.handleChangeDestino = this.handleChangeDestino.bind(this);
-    this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
-    this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeNome(event) {
-    this.setState({ nome: event.target.value });
-  }
-
-  handleChangeEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  handleChangeOrigem(event) {
-    this.setState({ origem: event.target.value });
-  }
-
-  handleChangeDestino(event) {
-    this.setState({ destino: event.target.value });
-  }
-
-  handleChangePoltrona(event) {
-    this.setState({ poltrona: event.target.value });
+  handleInputChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
   }
 
   handleChangeData(value) {
     this.setState({ data: value });
-  }
-
-  handleChangeHorario(event) {
-    this.setState({ horario: event.target.value });
   }
 
   handleSubmit(event) {
@@ -63,10 +40,10 @@ class FormPassagem extends Component {
   }
 
   componentDidMount() {
-    // const rootRef = firebase.database().ref().child('cidades');
-    // rootRef.on('value', snap => {
-    //   this.setState({ listCidades: snap.val() });
-    // });
+    const rootRef = firebase.database().ref().child('cidades');
+    rootRef.on('value', snap => {
+      this.setState({ cidades: snap.val() });
+    });
   }
 
   render() {
@@ -75,7 +52,7 @@ class FormPassagem extends Component {
     const listPoltronas = [...Array(42).keys()].map(i => ++i);
     const listHorarios = [...Array(17).keys()].map(i => {
       const is = (i + 6).toString();
-      return (is.length == 1) ? `0${is}:00` : `${is}:00`;
+      return (is.length === 1) ? `0${is}:00` : `${is}:00`;
     });
 
     // get the state of the component
@@ -88,37 +65,37 @@ class FormPassagem extends Component {
         {/*NOME*/}
         <Row className="text-left">
           <Col xs={12}>
-            <InputField id="nome" label="Nome" type="text" value={nome} onChange={this.handleChangeNome} />
+            <InputField id="nome" label="Nome" type="text" value={nome} onChange={this.handleInputChange} />
           </Col>
         </Row>
 
         {/*E_MAIL*/}
         <Row className="text-left">
           <Col xs={12} className="input-col">
-            <InputField id="email" label="E-mail" type="email" value={email} onChange={this.handleChangeEmail} />
+            <InputField id="email" label="E-mail" type="email" value={email} onChange={this.handleInputChange} />
           </Col>
         </Row>
 
         {/*ORIGEM / DESTINO*/}
         <Row className="text-left">
           <Col md={6} className="input-col">
-            <SelectField id="origem" label="Origem" list={listCidades} value={origem} onChange={this.handleChangeOrigem} />
+            <SelectField id="origem" label="Origem" list={listCidades} value={origem} onChange={this.handleInputChange} />
           </Col>
           <Col md={6} className="input-col">
-            <SelectField id="destino" label="Destino" list={listCidades} value={destino} onChange={this.handleChangeDestino} />
+            <SelectField id="destino" label="Destino" list={listCidades} value={destino} onChange={this.handleInputChange} />
           </Col>
         </Row>
 
         {/*POLTRONA / DATA / HORARIO*/}
         <Row className="text-left">
           <Col md={4} className="input-col">
-            <SelectField id="poltrona" label="Poltrona" list={listPoltronas} value={poltrona} onChange={this.handleChangePoltrona} />
+            <SelectField id="poltrona" label="Poltrona" list={listPoltronas} value={poltrona} onChange={this.handleInputChange} />
           </Col>
           <Col md={4} className="input-col">
             <DateField id="data" label="Data" value={data} onChange={this.handleChangeData} />
           </Col>
           <Col md={4} className="input-col">
-            <SelectField id="horario" label="Horário" list={listHorarios} value={horario} onChange={this.handleChangeHorario} />
+            <SelectField id="horario" label="Horário" list={listHorarios} value={horario} onChange={this.handleInputChange} />
           </Col>
         </Row>
 
