@@ -7,7 +7,7 @@ const SelectField = ({ id, label, list, value, onChange }) =>
     <ControlLabel>{label}</ControlLabel>
     <FormControl value={value} componentClass="select" onChange={onChange}>
       {list.map((item, index) =>
-        <option value={index} key={index}>{item.toUpperCase()}</option>
+        <option value={index} key={index}>{item}</option>
       )}
     </FormControl>
     <FormControl.Feedback />

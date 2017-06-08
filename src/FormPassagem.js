@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import { Row, Col, Button } from 'react-bootstrap';
 //import PropTypes from 'prop-types';
 import DateField from './shared/DateField.js';
@@ -18,88 +19,110 @@ class FormPassagem extends Component {
       data: new Date().toLocaleDateString('pt-BR'),
       horario: '',
     };
-    this.onChangeNome = this.onChangeNome.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangeOrigem = this.onChangeOrigem.bind(this);
-    this.onChangeDestino = this.onChangeDestino.bind(this);
-    this.onChangePoltrona = this.onChangePoltrona.bind(this);
-    this.onChangeData = this.onChangeData.bind(this);
-    this.onChangeHorario = this.onChangeHorario.bind(this);
+    this.handleChangeNome = this.handleChangeNome.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
+    this.handleChangeDestino = this.handleChangeDestino.bind(this);
+    this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
+    this.handleChangeData = this.handleChangeData.bind(this);
+    this.handleChangeHorario = this.handleChangeHorario.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onChangeNome(event) {
-    this.setState({ nome: event.target.value.toUpperCase() });
+  handleChangeNome(event) {
+    this.setState({ nome: event.target.value });
   }
 
-  onChangeEmail(event) {
-    this.setState({ email: event.target.value.toUpperCase() });
+  handleChangeEmail(event) {
+    this.setState({ email: event.target.value });
   }
 
-  onChangeOrigem(event) {
-    this.setState({ origem: event.target.value.toUpperCase() });
+  handleChangeOrigem(event) {
+    this.setState({ origem: event.target.value });
   }
 
-  onChangeDestino(event) {
-    this.setState({ destino: event.target.value.toUpperCase() });
+  handleChangeDestino(event) {
+    this.setState({ destino: event.target.value });
   }
 
-  onChangePoltrona(event) {
-    this.setState({ poltrona: event.target.value.toUpperCase() });
+  handleChangePoltrona(event) {
+    this.setState({ poltrona: event.target.value });
   }
 
-  onChangeData(value) {
+  handleChangeData(value) {
     this.setState({ data: value });
   }
 
-  onChangeHorario(event) {
+  handleChangeHorario(event) {
     this.setState({ horario: event.target.value });
   }
 
+  handleSubmit(event) {
+    console.log(this.state);
+    event.preventDefault();
+  }
+
+  componentDidMount() {
+    // const rootRef = firebase.database().ref().child('cidades');
+    // rootRef.on('value', snap => {
+    //   this.setState({ listCidades: snap.val() });
+    // });
+  }
+
   render() {
-    const list = ['Fpolis', 'Blumenau', 'Itajaí', 'Balneário Camboriú'];
+    // mount mock lists
+    const listCidades = ['Fpolis', 'Blumenau', 'Itajaí', 'Balneário Camboriú'];
+    const listPoltronas = [...Array(42).keys()].map(i => ++i);
+    const listHorarios = [...Array(17).keys()].map(i => {
+      const is = (i + 6).toString();
+      return (is.length == 1) ? `0${is}:00` : `${is}:00`;
+    });
+
+    // get the state of the component
     const { nome, email, origem, destino, poltrona, data, horario } = this.state;
 
+    // render!
     return (
-      <form action="">
+      <form onSubmit={this.handleSubmit}>
 
         {/*NOME*/}
         <Row className="text-left">
           <Col xs={12}>
-            <InputField id="nome" label="Nome" type="text" value={nome} onChange={this.onChangeNome} />
+            <InputField id="nome" label="Nome" type="text" value={nome} onChange={this.handleChangeNome} />
           </Col>
         </Row>
 
         {/*E_MAIL*/}
         <Row className="text-left">
           <Col xs={12} className="input-col">
-            <InputField id="email" label="E-mail" type="email" value={email} onChange={this.onChangeEmail} />
+            <InputField id="email" label="E-mail" type="email" value={email} onChange={this.handleChangeEmail} />
           </Col>
         </Row>
 
         {/*ORIGEM / DESTINO*/}
         <Row className="text-left">
           <Col md={6} className="input-col">
-            <SelectField id="origem" label="Origem" list={list} value={origem} onChange={this.onChangeOrigem} />
+            <SelectField id="origem" label="Origem" list={listCidades} value={origem} onChange={this.handleChangeOrigem} />
           </Col>
           <Col md={6} className="input-col">
-            <SelectField id="destino" label="Destino" list={list} value={destino} onChange={this.onChangeDestino} />
+            <SelectField id="destino" label="Destino" list={listCidades} value={destino} onChange={this.handleChangeDestino} />
           </Col>
         </Row>
 
         {/*POLTRONA / DATA / HORARIO*/}
         <Row className="text-left">
           <Col md={4} className="input-col">
-            <SelectField id="poltrona" label="Poltrona" list={list} value={poltrona} onChange={this.onChangePoltrona} />
+            <SelectField id="poltrona" label="Poltrona" list={listPoltronas} value={poltrona} onChange={this.handleChangePoltrona} />
           </Col>
           <Col md={4} className="input-col">
-            <DateField id="data" label="Data" value={data} onChange={this.onChangeData} />
+            <DateField id="data" label="Data" value={data} onChange={this.handleChangeData} />
           </Col>
           <Col md={4} className="input-col">
-            <SelectField id="horario" label="Horário" list={list} value={horario} onChange={this.onChangeHorario} />
+            <SelectField id="horario" label="Horário" list={listHorarios} value={horario} onChange={this.handleChangeHorario} />
           </Col>
         </Row>
 
-        <Button bsStyle="primary" className="btn-block">Reservar agora!</Button>
+        <Button type="submit" bsStyle="primary" className="btn-block">Reservar agora!</Button>
       </form >
     );
   }
