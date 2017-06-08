@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import DateField from './shared/DateField.js';
-import InputField from './shared/InputField.js';
-import SelectField from './shared/SelectField.js';
+import { BaseField, withInput, withSelect, withDate } from './shared/FormFields.js';
 import { DateNowBr } from './shared/Utils.js';
 
-class FormPassagem extends Component {
+const InputField = withInput(BaseField);
+const SelectField = withSelect(BaseField);
+const DateField = withDate(BaseField);
 
+class FormPassagem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -98,7 +99,6 @@ class FormPassagem extends Component {
       </form >
     );
   }
-
 }
 
 FormPassagem.PropTypes = {
