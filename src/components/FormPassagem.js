@@ -12,24 +12,26 @@ class FormPassagem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nome: '',
-      email: '',
-      origem: {
-        val: 0,
-        text: props.cidades[0],
-      },
-      destino: {
-        val: 1,
-        text: props.cidades[1],
-      },
-      poltrona: {
-        val: 0,
-        text: props.poltronas[0],
-      },
-      data: DateNowBr,
-      horario: {
-        val: 0,
-        text: props.horarios[0],
+      passagem: {
+        nome: '',
+        email: '',
+        origem: {
+          val: 0,
+          text: props.cidades[0],
+        },
+        destino: {
+          val: 1,
+          text: props.cidades[1],
+        },
+        poltrona: {
+          val: 0,
+          text: props.poltronas[0],
+        },
+        data: DateNowBr,
+        horario: {
+          val: 0,
+          text: props.horarios[0],
+        }
       }
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -38,23 +40,26 @@ class FormPassagem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   handleInputChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    const { passagem } = this.state;
+    passagem[event.target.id] = event.target.value;
+    this.setState({ passagem });
   }
 
   handleSelectChange(event) {
-    this.setState({
-      [event.target.id]: {
-        val: event.target.value,
-        text: event.target[event.target.value].text
-      }
-    });
+    const { passagem } = this.state;
+    passagem[event.target.id] = {
+      val: event.target.value,
+      text: event.target[event.target.value].text
+    }
+    this.setState({ passagem });
   }
 
   handleChangeData(value) {
-    this.setState({ data: value });
+    const { passagem } = this.state;
+    passagem.data = value;
+    this.setState({ passagem });
   }
 
   handleSubmit(event) {
@@ -64,16 +69,8 @@ class FormPassagem extends Component {
 
   render() {
     const { cidades, horarios, poltronas } = this.props;
-    const {
-      nome,
-      email,
-      origem,
-      destino,
-      poltrona,
-      data,
-      horario
-    } = this.state;
-
+    const { passagem } = this.state;
+    console.log(this.state);
     // render!
     return (
       <form onSubmit={this.handleSubmit}>
@@ -85,7 +82,7 @@ class FormPassagem extends Component {
               id="nome"
               label="Nome"
               type="text"
-              value={nome}
+              value={passagem.nome}
               onChange={this.handleInputChange} />
           </Col>
         </Row>
@@ -97,7 +94,7 @@ class FormPassagem extends Component {
               id="email"
               label="E-mail"
               type="email"
-              value={email}
+              value={passagem.email}
               onChange={this.handleInputChange} />
           </Col>
         </Row>
@@ -109,7 +106,7 @@ class FormPassagem extends Component {
               id="origem"
               label="Origem"
               list={cidades}
-              value={origem.val}
+              value={passagem.origem.val}
               onChange={this.handleSelectChange} />
           </Col>
           <Col md={6} className="input-col">
@@ -117,7 +114,7 @@ class FormPassagem extends Component {
               id="destino"
               label="Destino"
               list={cidades}
-              value={destino.val}
+              value={passagem.destino.val}
               onChange={this.handleSelectChange} />
           </Col>
         </Row>
@@ -129,14 +126,14 @@ class FormPassagem extends Component {
               id="poltrona"
               label="Poltrona"
               list={poltronas}
-              value={poltrona.val}
+              value={passagem.poltrona.val}
               onChange={this.handleSelectChange} />
           </Col>
           <Col md={4} className="input-col">
             <DateField
               id="data"
               label="Data"
-              value={data}
+              value={passagem.data}
               onChange={this.handleChangeData} />
           </Col>
           <Col md={4} className="input-col">
@@ -144,7 +141,7 @@ class FormPassagem extends Component {
               id="horario"
               label="Horário"
               list={horarios}
-              value={horario.val}
+              value={passagem.horario.val}
               onChange={this.handleSelectChange} />
           </Col>
         </Row>
