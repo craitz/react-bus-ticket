@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  setNome,
+  setEmail,
+  setOrigem,
+  setDestino,
+  setPoltrona,
+  setData,
+  setHorario,
+} from '../state/actions/FormPassagem.action.js';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { BaseField, withInput, withSelect, withDate } from './shared/FormFields.js';
-import { DateNowBr } from './shared/Utils.js';
+import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
+import { DateNowBr } from '../shared/Utils.js';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -11,39 +21,10 @@ const DateField = withDate(BaseField);
 class FormPassagem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      nome: '',
-      email: '',
-      origem: {
-        val: 0,
-        text: props.cidades[0]
-      },
-      destino: {
-        val: 1,
-        text: props.cidades[1]
-      },
-      poltrona: {
-        val: 0,
-        text: '1'
-      },
-      data: DateNowBr,
-      horario: {
-        val: 0,
-        text: props.horarios[0]
-      }
-    };
-    this.handleInputChange = this
-      .handleInputChange
-      .bind(this);
-    this.handleSelectChange = this
-      .handleSelectChange
-      .bind(this);
-    this.handleChangeData = this
-      .handleChangeData
-      .bind(this);
-    this.handleSubmit = this
-      .handleSubmit
-      .bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleChangeData = this.handleChangeData.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -175,4 +156,16 @@ FormPassagem.defaultProps = {
   poltronas: []
 }
 
-export default FormPassagem;
+const mapStateToProps = (state) => {
+  return {
+    nome: state.nome,
+    email: state.email,
+    origem: state.origem,
+    destino: state.destino,
+    poltrona: state.poltrona,
+    data: state.data,
+    horario: state.horario,
+  };
+};
+
+export default connect(mapStateToProps)(FormPassagem);

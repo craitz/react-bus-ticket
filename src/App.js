@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import logo from './logo.svg';
 import { Grid, Row, Col } from 'react-bootstrap';
-import FormPassagem from './FormPassagem.js';
+import FormPassagem from './components/FormPassagem.js';
 import { SequenceArray } from './shared/Utils.js';
 import './App.css';
 
