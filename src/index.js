@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from './state/store/configureStore';
 import * as firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
@@ -18,13 +16,8 @@ const config = {
 };
 firebase.initializeApp(config);
 
-const store = configureStore();
-
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+  <App />, document.getElementById('root')
 );
 
 registerServiceWorker();
