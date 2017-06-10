@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import FormPassagem from './components/FormPassagem.js';
-import { SequenceArray } from './shared/Utils.js';
+import { fetchCidades, fetchHorarios, fetchPoltronas } from './actions/listasActions.js';
+
 import './App.css';
+
+const mapStateToProps = (state) => {
+  return {
+    cidades: state.listas.cidades,
+    horarios: state.listas.horarios,
+    poltronas: state.listas.poltronas
+  };
+};
 
 const Container = ({ children }) => <Grid className="App-container">
   <Row>
@@ -15,41 +24,14 @@ const Container = ({ children }) => <Grid className="App-container">
 </Grid>
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      cidades: [],
-      horarios: [],
-      poltronas: []
-    };
-
-  }
-
   componentDidMount() {
-    const rootRef = firebase
-      .database()
-      .ref();
-    const cidadesRef = rootRef.child('cidades');
-    const horariosRef = rootRef.child('horarios');
-
-    cidadesRef.on('value', snap => {
-      this.setState({
-        cidades: snap.val()
-      });
-    });
-
-    horariosRef.on('value', snap => {
-      this.setState({
-        horarios: snap.val()
-      });
-    });
-
-    this.setState({ poltronas: new SequenceArray(42) });
+    this.props.dispatch(fetchCidades());
+    this.props.dispatch(fetchHorarios());
+    this.props.dispatch(fetchPoltronas());
   }
 
   render() {
-    const { cidades, horarios, poltronas } = this.state;
+    const { cidades, horarios, poltronas } = this.props;
 
     // it will only render when firebase finish fetch data
     if ((!cidades || cidades.length === 0) || (!horarios || horarios.length === 0))
@@ -69,4 +51,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
