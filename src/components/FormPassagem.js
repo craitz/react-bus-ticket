@@ -165,10 +165,4 @@ FormPassagem.PropTypes = {
   poltronas: PropTypes.array.isRequired
 };
 
-FormPassagem.defaultProps = {
-  cidades: [],
-  horarios: [],
-  poltronas: []
-}
-
 export default connect(mapStateToProps)(FormPassagem);
