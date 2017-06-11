@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import passagem from './passagemReducer';
-import listas from './listasReducer';
+import appState from './app.reducer';
+import formPassagemState from './formPassagem.reducer';
 
 export default combineReducers({
-  listas,
-  passagem,
+  appState,
+  formPassagemState,
 });

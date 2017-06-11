@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
 import store from '../store.js';
-import * as actions from '../actions/passagemActions.js';
+import * as actions from '../actions/formPassagem.actions.js';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -12,7 +12,9 @@ const DateField = withDate(BaseField);
 
 const mapStateToProps = (state) => {
   return {
-    passagem: state.passagem,
+    cidadesOrigem: state.formPassagemState.cidadesOrigem,
+    cidadesDestino: state.formPassagemState.cidadesDestino,
+    passagem: state.formPassagemState.passagem,
   };
 };
 
@@ -29,6 +31,33 @@ class FormPassagem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    // initialize ORIGEM values
+    this.props.dispatch(actions.changeOrigem({
+      val: 0,
+      text: this.props.cidades[0]
+    }));
+
+    // initialize DESTINO values
+    this.props.dispatch(actions.changeDestino({
+      val: 1,
+      text: this.props.cidades[1]
+    }));
+
+    // initialize POLTRONA values
+    this.props.dispatch(actions.changePoltrona({
+      val: 0,
+      text: this.props.poltronas[0]
+    }));
+
+    // initialize HORARIO values
+    this.props.dispatch(actions.changeHorario({
+      val: 0,
+      text: this.props.horarios[0]
+    }));
+
+  }
+
   handleChangeNome(event) {
     this.props.dispatch(actions.changeNome(event.target.value));
   }
@@ -38,17 +67,65 @@ class FormPassagem extends Component {
   }
 
   handleChangeOrigem(event) {
+    // build ORIGEM new state
+    const origem = {
+      val: Number(event.target.value),
+      text: this.props.cidades[event.target.value]
+    };
+    // get DESTINO state
+    const destino = {
+      val: this.props.passagem.destino.val,
+      text: this.props.passagem.destino.text
+    };
+
+    // change ORIGEM state!
     this.props.dispatch(actions.changeOrigem({
-      val: event.target.value,
-      text: event.target[event.target.value].text
+      val: origem.val,
+      text: origem.text
     }));
+
+    // if ORIGEM is already selected in DESTINO 
+    if (origem.val === destino.val) {
+      // calculate new index for DESTINO
+      const newIndexDestino = (destino.val === 0) ? (destino.val + 1) : (destino.val - 1);
+
+      // change DESTINO state!
+      this.props.dispatch(actions.changeDestino({
+        val: newIndexDestino,
+        text: this.props.cidades[newIndexDestino]
+      }));
+    }
   }
 
   handleChangeDestino(event) {
+    // build DESTINO new state
+    const destino = {
+      val: Number(event.target.value),
+      text: this.props.cidades[event.target.value]
+    };
+    // get ORIGEM state
+    const origem = {
+      val: this.props.passagem.origem.val,
+      text: this.props.passagem.origem.text
+    };
+
+    // change DESTINO state!
     this.props.dispatch(actions.changeDestino({
-      val: event.target.value,
-      text: event.target[event.target.value].text
+      val: destino.val,
+      text: destino.text
     }));
+
+    // if DESTINO is already selected in ORIGEM 
+    if (destino.val === origem.val) {
+      // calculate new index for ORIGEM
+      const newIndexOrigem = (origem.val === 0) ? (origem.val + 1) : (origem.val - 1);
+
+      // change ORIGEM state!
+      this.props.dispatch(actions.changeOrigem({
+        val: newIndexOrigem,
+        text: this.props.cidades[newIndexOrigem]
+      }));
+    }
   }
 
   handleChangePoltrona(event) {
@@ -75,8 +152,8 @@ class FormPassagem extends Component {
   }
 
   render() {
-    const { cidades, horarios, poltronas } = this.props;
-    const passagem = this.props.passagem.passagem;
+    // const { cidadesOrigem, cidadesDestino, horarios, poltronas, passagem } = this.props;
+    const { cidades, horarios, poltronas, passagem } = this.props;
 
     // render!
     return (

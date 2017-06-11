@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from './logo.svg';
 import { Grid, Row, Col } from 'react-bootstrap';
-import FormPassagem from './components/FormPassagem.js';
-import { fetchCidades, fetchHorarios, fetchPoltronas } from './actions/listasActions.js';
-
+import FormPassagem from './components/FormPassagem';
+import * as actions from './actions/app.actions';
 import './App.css';
 
 const mapStateToProps = (state) => {
   return {
-    cidades: state.listas.cidades,
-    horarios: state.listas.horarios,
-    poltronas: state.listas.poltronas
+    cidades: state.appState.cidades,
+    horarios: state.appState.horarios,
+    poltronas: state.appState.poltronas
   };
 };
 
@@ -25,9 +24,9 @@ const Container = ({ children }) => <Grid className="App-container">
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchCidades());
-    this.props.dispatch(fetchHorarios());
-    this.props.dispatch(fetchPoltronas());
+    this.props.dispatch(actions.fetchCidades());
+    this.props.dispatch(actions.fetchHorarios());
+    this.props.dispatch(actions.fetchPoltronas());
   }
 
   render() {

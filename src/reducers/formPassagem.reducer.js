@@ -1,6 +1,8 @@
-import { DateNowBr } from '../shared/Utils.js'
+import { DateNowBr } from '../shared/Utils'
 
 const reducer = (state = {
+  cidadesOrigem: [],
+  cidadesDestino: [],
   passagem: {
     nome: '',
     email: '',
