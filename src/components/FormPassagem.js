@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
 import * as actions from '../actions/formPassagem.actions.js';
 import { newPassagem } from '../actions/app.actions.js';
+import { validateRequired } from '../shared/Utils'
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -27,11 +28,6 @@ class FormPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.validateNome = this.validateNome.bind(this);
-  }
-
-  validateNome() {
-
   }
 
   componentDidMount() {
@@ -61,10 +57,12 @@ class FormPassagem extends Component {
   }
 
   handleChangeNome(event) {
+    this.isNomePristine = false;
     this.props.dispatch(actions.changeNome(event.target.value));
   }
 
   handleChangeEmail(event) {
+    this.isEmailPristine = false;
     this.props.dispatch(actions.changeEmail(event.target.value));
   }
 
@@ -168,8 +166,9 @@ class FormPassagem extends Component {
               id="nome"
               label="Nome"
               type="text"
-              value={passagem.nome}
-              onChange={this.handleChangeNome} />
+              value={passagem.nome.text}
+              onChange={this.handleChangeNome}
+              validation={validateRequired(passagem.nome)} />
           </Col>
         </Row>
 
@@ -180,8 +179,9 @@ class FormPassagem extends Component {
               id="email"
               label="E-mail"
               type="email"
-              value={passagem.email}
-              onChange={this.handleChangeEmail} />
+              value={passagem.email.text}
+              onChange={this.handleChangeEmail}
+              validation={validateRequired(passagem.email)} />
           </Col>
         </Row>
 

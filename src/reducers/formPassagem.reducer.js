@@ -2,8 +2,14 @@ import { DateNowBr } from '../shared/Utils'
 
 const reducer = (state = {
   passagem: {
-    nome: '',
-    email: '',
+    nome: {
+      text: '',
+      isPristine: true
+    },
+    email: {
+      text: '',
+      isPristine: true
+    },
     origem: {
       val: 0,
       text: 'null',
@@ -27,13 +33,25 @@ const reducer = (state = {
     case 'CHANGE_NOME': {
       return {
         ...state,
-        passagem: { ...state.passagem, nome: action.payload }
+        passagem: {
+          ...state.passagem,
+          nome: {
+            text: action.payload,
+            isPristine: false
+          }
+        }
       };
     }
     case 'CHANGE_EMAIL': {
       return {
         ...state,
-        passagem: { ...state.passagem, email: action.payload }
+        passagem: {
+          ...state.passagem,
+          email: {
+            text: action.payload,
+            isPristine: false
+          }
+        }
       };
     }
     case 'CHANGE_ORIGEM': {

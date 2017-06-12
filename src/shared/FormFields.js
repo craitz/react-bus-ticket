@@ -8,14 +8,14 @@ import '../../node_modules/js-datepicker/datepicker.css';
 // BASE FORM
 export class BaseField extends Component {
   render() {
-    const { id, label, validation, validationText, children } = this.props;
+    const { id, label, validation, children } = this.props;
 
     return (
-      <FormGroup controlId={id} validationState={validation}>
+      <FormGroup controlId={id} validationState={validation && validation.state}>
         <ControlLabel>{label}</ControlLabel>
         {children}
         {validation && <FormControl.Feedback />}
-        {validation && <HelpBlock>{validationText}</HelpBlock>}
+        {validation && <HelpBlock>{validation.text}</HelpBlock>}
       </FormGroup>
     );
   }
@@ -23,18 +23,16 @@ export class BaseField extends Component {
 BaseField.PropTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  validation: PropTypes.string,
-  validationText: PropTypes.string
+  validation: PropTypes.object
 }
 
 // INPUT FORM FIELD (HOC)
 export const withInput = (WrappedComponent) => {
-  return ({ id, label, type, value, onChange, validation, validationText }) => {
+  return ({ id, label, type, value, onChange, validation }) => {
     const props = {
       id,
       label,
-      validation,
-      validationText
+      validation
     };
     return (
       <WrappedComponent {...props}>
