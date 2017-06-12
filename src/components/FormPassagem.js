@@ -12,8 +12,6 @@ const DateField = withDate(BaseField);
 
 const mapStateToProps = (state) => {
   return {
-    cidadesOrigem: state.formPassagemState.cidadesOrigem,
-    cidadesDestino: state.formPassagemState.cidadesDestino,
     passagem: state.formPassagemState.passagem,
   };
 };
@@ -29,6 +27,11 @@ class FormPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateNome = this.validateNome.bind(this);
+  }
+
+  validateNome() {
+
   }
 
   componentDidMount() {
@@ -55,7 +58,6 @@ class FormPassagem extends Component {
       val: 0,
       text: this.props.horarios[0]
     }));
-
   }
 
   handleChangeNome(event) {

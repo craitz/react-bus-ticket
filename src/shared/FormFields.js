@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import { DateBr } from './Utils.js';
 import datepicker from 'js-datepicker';
 import '../../node_modules/js-datepicker/datepicker.css';
@@ -8,31 +8,33 @@ import '../../node_modules/js-datepicker/datepicker.css';
 // BASE FORM
 export class BaseField extends Component {
   render() {
-    const { id, label, children } = this.props;
+    const { id, label, validation, validationText, children } = this.props;
 
     return (
-      <FormGroup controlId={id}>
+      <FormGroup controlId={id} validationState={validation}>
         <ControlLabel>{label}</ControlLabel>
         {children}
-        <FormControl.Feedback />
+        {validation && <FormControl.Feedback />}
+        {validation && <HelpBlock>{validationText}</HelpBlock>}
       </FormGroup>
     );
   }
 }
 BaseField.PropTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  validation: PropTypes.string,
+  validationText: PropTypes.string
 }
 
 // INPUT FORM FIELD (HOC)
 export const withInput = (WrappedComponent) => {
-  return ({ id, label, type, value, onChange }) => {
+  return ({ id, label, type, value, onChange, validation, validationText }) => {
     const props = {
       id,
       label,
-      type,
-      value,
-      onChange
+      validation,
+      validationText
     };
     return (
       <WrappedComponent {...props}>
