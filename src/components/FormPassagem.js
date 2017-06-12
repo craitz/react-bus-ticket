@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
-import store from '../store.js';
 import * as actions from '../actions/formPassagem.actions.js';
+import { newPassagem } from '../actions/app.actions.js';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -147,7 +147,7 @@ class FormPassagem extends Component {
   }
 
   handleSubmit(event) {
-    console.log(store.getState());
+    this.props.dispatch(newPassagem(this.props.passagem));
     event.preventDefault();
   }
 

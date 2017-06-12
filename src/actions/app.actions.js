@@ -1,33 +1,21 @@
-import * as firebase from 'firebase';
+import { fetch, save } from '../shared/FirebaseHelper';
 import { SequenceArray } from '../shared/Utils.js';
 
-// Initialize Firebase
-firebase.initializeApp({
-  apiKey: "AIzaSyBQq39NXj6qvnkEVmgEi3c4UZUAQ177dGs",
-  authDomain: "busticket-be05f.firebaseapp.com",
-  databaseURL: "https://busticket-be05f.firebaseio.com",
-  projectId: "busticket-be05f",
-  storageBucket: "busticket-be05f.appspot.com",
-  messagingSenderId: "246935329575"
-});
-
-const rootRef = firebase.database().ref();
-
 export const fetchCidades = () => {
-  const cidadesRef = rootRef.child('cidades');
   return (dispatch) => {
-    cidadesRef.on('value', snap => {
-      dispatch({ type: 'FETCHING_CIDADES_FULFILLED', payload: snap.val() });
-    });
+    fetch('cidades/')
+      .then((cidades) => {
+        dispatch({ type: 'FETCHING_CIDADES_FULFILLED', payload: cidades });
+      });
   }
 };
 
 export const fetchHorarios = () => {
-  const horariosRef = rootRef.child('horarios');
   return (dispatch) => {
-    horariosRef.on('value', snap => {
-      dispatch({ type: 'FETCHING_HORARIOS_FULFILLED', payload: snap.val() });
-    });
+    fetch('horarios/')
+      .then((horarios) => {
+        dispatch({ type: 'FETCHING_HORARIOS_FULFILLED', payload: horarios });
+      })
   }
 };
 
@@ -35,5 +23,23 @@ export const fetchPoltronas = () => {
   return {
     type: 'FETCH_POLTRONAS',
     payload: SequenceArray(42)
+  }
+};
+
+export const fetchPassagens = () => {
+  return (dispatch) => {
+    fetch('passagens/')
+      .then((passagens) => {
+        dispatch({ type: 'FETCHING_PASSAGENS_FULFILLED', payload: (passagens || {}) });
+      })
+  }
+};
+
+export const newPassagem = (passagem) => {
+  return (dispatch) => {
+    save(passagem, 'passagens/')
+      .then((key) => {
+        dispatch({ type: 'NEW_PASSAGEM', payload: { passagem, key } });
+      })
   }
 };
