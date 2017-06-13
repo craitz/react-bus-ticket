@@ -1,6 +1,7 @@
 import { DateNowBr } from '../shared/Utils'
 
 const reducer = (state = {
+  redirectTo: false,
   passagem: {
     nome: {
       text: '',
@@ -83,6 +84,9 @@ const reducer = (state = {
         ...state,
         passagem: { ...state.passagem, horario: action.payload }
       };
+    }
+    case 'CHANGE_REDIRECT_TO': {
+      return { ...state, redirectTo: action.payload };
     }
     default: {
       return state;

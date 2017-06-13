@@ -46,3 +46,10 @@ export const changeHorario = (horario) => {
     payload: horario
   }
 };
+
+export const changeRedirectTo = (redirect) => {
+  return {
+    type: 'CHANGE_REDIRECT_TO',
+    payload: redirect
+  }
+};

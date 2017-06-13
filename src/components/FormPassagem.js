@@ -148,7 +148,8 @@ class FormPassagem extends Component {
   }
 
   handleSubmit(event) {
-    this.props.dispatch(newPassagem(this.props.passagem));
+    // this.props.history.push('/passagem');
+    // this.props.dispatch(newPassagem(this.props.passagem));
     event.preventDefault();
   }
 
@@ -236,6 +237,7 @@ class FormPassagem extends Component {
         <p><Link to="/passagem">Passagem!</Link></p>
         <Button type="submit" bsStyle="primary" className="btn-block">Reservar agora!</Button>
       </form >
+
     );
   }
 }

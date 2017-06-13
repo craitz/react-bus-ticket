@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import store from '../store';
 import PropTypes from 'prop-types';
 import { Jumbotron, Grid, Row, Col } from 'react-bootstrap';
-import roboto from '../fonts/Roboto-Regular.ttf';
 
 class ConfirmacaoPassagem extends Component {
   constructor(props) {
@@ -14,13 +13,8 @@ class ConfirmacaoPassagem extends Component {
 
     this.style = {
       fontSize: '18px',
-      fontFamily: { roboto },
       padding: '50px',
       marginTop: '20px'
-    }
-
-    this.headerStyle = {
-      fontFamily: { roboto },
     }
   }
 
@@ -28,7 +22,7 @@ class ConfirmacaoPassagem extends Component {
     const { passagem } = store.getState().formPassagemState;
     return (
       <div>
-        <h2 style={this.headerStyle}>Passagem reservada com sucesso!</h2>
+        <h2>Passagem reservada com sucesso!</h2>
         <Jumbotron style={this.style}>
           <Grid>
             <Row>
