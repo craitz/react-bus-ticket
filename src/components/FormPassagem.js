@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
@@ -164,7 +165,7 @@ class FormPassagem extends Component {
           <Col xs={12}>
             <InputField
               id="nome"
-              label="Nome"
+              label="Nome*"
               type="text"
               value={passagem.nome.text}
               onChange={this.handleChangeNome}
@@ -177,7 +178,7 @@ class FormPassagem extends Component {
           <Col xs={12} className="input-col">
             <InputField
               id="email"
-              label="E-mail"
+              label="E-mail*"
               type="email"
               value={passagem.email.text}
               onChange={this.handleChangeEmail}
@@ -232,6 +233,7 @@ class FormPassagem extends Component {
           </Col>
         </Row>
 
+        <p><Link to="/passagem">Passagem!</Link></p>
         <Button type="submit" bsStyle="primary" className="btn-block">Reservar agora!</Button>
       </form >
     );
