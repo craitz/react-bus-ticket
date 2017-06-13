@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
-import { DateBr } from './Utils.js';
+import { DateBr } from './Utils';
 import datepicker from 'js-datepicker';
 import '../../node_modules/js-datepicker/datepicker.css';
 

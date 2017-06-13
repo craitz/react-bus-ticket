@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 import ConfirmacaoPassagem from './components/ConfirmacaoPassagem';
 import Layout from './components/Layout'
-import App from './App';
+import CompraPassagem from './components/CompraPassagem';
 import './App.css';
 
 ReactDOM.render(
@@ -14,8 +14,9 @@ ReactDOM.render(
     <Provider store={store}>
       <Layout>
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={CompraPassagem} />
           <Route path="/passagem" component={ConfirmacaoPassagem} />
+          <Route exact path="/login" component={CompraPassagem} />
         </Switch>
       </Layout>
     </Provider>

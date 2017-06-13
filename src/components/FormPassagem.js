@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields.js';
-import * as actions from '../actions/formPassagem.actions.js';
-import { newPassagem } from '../actions/app.actions.js';
+import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
+import * as actions from '../actions/formPassagem.actions';
+import { newPassagem } from '../actions/compraPassagem.actions';
 import { validateRequired } from '../shared/Utils'
 
 const InputField = withInput(BaseField);

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FormPassagem from './components/FormPassagem';
-import * as actions from './actions/app.actions';
+import FormPassagem from './FormPassagem';
+import * as actions from '../actions/compraPassagem.actions';
 
 const mapStateToProps = (state) => {
   return {
-    cidades: state.appState.cidades,
-    horarios: state.appState.horarios,
-    poltronas: state.appState.poltronas,
-    passagens: state.appState.passagens
+    cidades: state.compraPassagemState.cidades,
+    horarios: state.compraPassagemState.horarios,
+    poltronas: state.compraPassagemState.poltronas,
+    passagens: state.compraPassagemState.passagens
   };
 };
 
-class App extends Component {
+class CompraPassagem extends Component {
   componentDidMount() {
     this.props.dispatch(actions.fetchCidades());
     this.props.dispatch(actions.fetchHorarios());
@@ -33,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(CompraPassagem);
