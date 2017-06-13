@@ -1,43 +1,27 @@
 @font-face {
-    font-family: 'Roboto';
-    src: url(./fonts/Roboto-Regular.ttf) format('trueType');
-}
+  font-family: 'Roboto';
+  src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
 
 .App {
-    text-align: center;
-}
-
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-}
-
-.App-header {
+  text-align: center; }
+  .App .App-header {
     background-color: #222;
     height: 180px;
     padding: 20px;
-    color: white;
-}
-
-.App-intro {
-    font-size: large;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.App-container {
+    color: white; }
+    .App .App-header .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 80px; }
+  .App .App-container {
     padding: 20px;
     font-family: 'Roboto';
-    /*font-size: 16px;*/
-}
+    /*font-size: 16px;*/ }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
 
 .input-col {
-    margin-top: 10px;
-}
+  margin-top: 10px; }

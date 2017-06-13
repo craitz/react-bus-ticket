@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(./styles/fonts/Roboto-Regular.ttf) format('trueType');
+}
+
+.App {
+    text-align: center;
+    .App-header {
+        .App-logo {
+            animation: App-logo-spin infinite 20s linear;
+            height: 80px;
+        }
+        background-color: #222;
+        height: 180px;
+        padding: 20px;
+        color: white;
+    }
+    .App-container {
+        padding: 20px;
+        font-family: 'Roboto';
+        /*font-size: 16px;*/
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
