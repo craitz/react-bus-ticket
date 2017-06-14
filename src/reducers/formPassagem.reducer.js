@@ -1,14 +1,18 @@
-import { DateNowBr } from '../shared/Utils'
+import { DateNowBr, ValidationStatus } from '../shared/Utils'
 
 const reducer = (state = {
   passagem: {
     nome: {
       text: '',
-      isPristine: true
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     },
     email: {
       text: '',
-      isPristine: true
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     },
     origem: {
       val: 0,
@@ -36,8 +40,45 @@ const reducer = (state = {
         passagem: {
           ...state.passagem,
           nome: {
-            text: action.payload,
+            ...state.passagem.nome,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case 'SET_NOME_PRISTINE': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          nome: {
+            ...state.passagem.nome,
+            isPristine: true
+          }
+        }
+      };
+    }
+    case 'SET_NOME_DIRTY': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          nome: {
+            ...state.passagem.nome,
             isPristine: false
+          }
+        }
+      };
+    }
+    case 'SET_NOME_VALIDATION': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          nome: {
+            ...state.passagem.nome,
+            validation: action.payload.validation,
+            message: action.payload.message
           }
         }
       };
@@ -48,8 +89,45 @@ const reducer = (state = {
         passagem: {
           ...state.passagem,
           email: {
-            text: action.payload,
+            ...state.passagem.email,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case 'SET_EMAIL_PRISTINE': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          email: {
+            ...state.passagem.email,
+            isPristine: true
+          }
+        }
+      };
+    }
+    case 'SET_EMAIL_DIRTY': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          email: {
+            ...state.passagem.email,
             isPristine: false
+          }
+        }
+      };
+    }
+    case 'SET_EMAIL_VALIDATION': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          email: {
+            ...state.passagem.email,
+            validation: action.payload.validation,
+            message: action.payload.message
           }
         }
       };

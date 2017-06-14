@@ -5,10 +5,40 @@ export const changeNome = (nome) => {
   }
 };
 
+export const setNomePristine = () => {
+  return { type: 'SET_NOME_PRISTINE' }
+};
+
+export const setNomeDirty = () => {
+  return { type: 'SET_NOME_DIRTY' }
+};
+
+export const setNomeValidation = (validation, message) => {
+  return {
+    type: 'SET_NOME_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
 export const changeEmail = (email) => {
   return {
     type: 'CHANGE_EMAIL',
     payload: email
+  }
+};
+
+export const setEmailPristine = () => {
+  return { type: 'SET_EMAIL_PRISTINE' }
+};
+
+export const setEmailDirty = () => {
+  return { type: 'SET_EMAIL_DIRTY' }
+};
+
+export const setEmailValidation = (validation, message) => {
+  return {
+    type: 'SET_EMAIL_VALIDATION',
+    payload: { validation, message }
   }
 };
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem } from '../actions/compraPassagem.actions';
-import { validateRequired } from '../shared/Utils'
+import { ValidationStatus } from '../shared/Utils'
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -58,11 +58,49 @@ class FormPassagem extends Component {
   }
 
   handleChangeNome(event) {
-    this.props.dispatch(actions.changeNome(event.target.value));
+    const isPristine = this.props.passagem.nome.isPristine;
+    const text = event.target.value;
+
+    this.props.dispatch(actions.changeNome(text));
+    isPristine && this.props.dispatch(actions.setNomeDirty());
+
+    this.updateNomeValidation(text);
+  }
+
+  updateNomeValidation(text) {
+    const oldName = this.props.passagem.nome;
+
+    // test required
+    if (text.length > 0) {
+      (oldName.validation !== ValidationStatus.SUCCESS) &&
+        this.props.dispatch(actions.setNomeValidation(ValidationStatus.SUCCESS, ''));
+    } else {
+      (oldName.validation !== ValidationStatus.ERROR) &&
+        this.props.dispatch(actions.setNomeValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
+    }
   }
 
   handleChangeEmail(event) {
-    this.props.dispatch(actions.changeEmail(event.target.value));
+    const isPristine = this.props.passagem.email.isPristine;
+    const text = event.target.value;
+
+    this.props.dispatch(actions.changeEmail(text));
+    isPristine && this.props.dispatch(actions.setEmailDirty());
+
+    this.updateEmailValidation(text);
+  }
+
+  updateEmailValidation(text) {
+    const oldEmail = this.props.passagem.email;
+
+    // test required
+    if (text.length > 0) {
+      (oldEmail.validation !== ValidationStatus.SUCCESS) &&
+        this.props.dispatch(actions.setEmailValidation(ValidationStatus.SUCCESS, ''));
+    } else {
+      (oldEmail.validation !== ValidationStatus.ERROR) &&
+        this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
+    }
   }
 
   handleChangeOrigem(event) {
@@ -165,6 +203,7 @@ class FormPassagem extends Component {
 
   render() {
     const { cidades, horarios, poltronas, passagem } = this.props;
+    const { nome, email } = passagem;
 
     // render!
     return (
@@ -177,9 +216,10 @@ class FormPassagem extends Component {
               id="nome"
               label="Nome*"
               type="text"
-              value={passagem.nome.text}
+              value={nome.text}
               onChange={this.handleChangeNome}
-              validation={validateRequired(passagem.nome)} />
+              validation={nome.validation}
+              message={nome.message} />
           </Col>
         </Row>
 
@@ -190,9 +230,10 @@ class FormPassagem extends Component {
               id="email"
               label="E-mail*"
               type="email"
-              value={passagem.email.text}
+              value={email.text}
               onChange={this.handleChangeEmail}
-              validation={validateRequired(passagem.email)} />
+              validation={email.validation}
+              message={email.message} />
           </Col>
         </Row>
 

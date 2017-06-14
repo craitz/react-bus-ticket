@@ -1,7 +1,8 @@
-export const validationSatatus = {
+export const ValidationStatus = {
   SUCCESS: 'success',
   WARNING: 'warning',
-  ERROR: 'error'
+  ERROR: 'error',
+  NONE: null
 };
 
 export const SequenceArray = size => [...Array(size).keys()].map(i => ++i);
@@ -15,12 +16,12 @@ export const validateRequired = (field) => {
     return null;
   } else if (field.text.length > 0) {
     return {
-      state: 'success',
+      state: ValidationStatus.SUCCESS,
       text: ''
     }
   } else {
     return {
-      state: 'error',
+      state: ValidationStatus.ERROR,
       text: 'Campo obrigatório!'
     }
   }
