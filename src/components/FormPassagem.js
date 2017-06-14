@@ -183,43 +183,49 @@ class FormPassagem extends Component {
     this.props.dispatch(actions.changeData(value));
   }
 
-  isFormValid() {
-    const { nome, email } = this.props.passagem;
-    return ((nome.validation === ValidationStatus.SUCCESS) || (email.validation === ValidationStatus.SUCCESS));
-  }
-
-  handleSubmit(event) {
-    const { dispatch, passagem, history } = this.props;
+  formCanBeSaved() {
+    const { dispatch, passagem } = this.props;
     const { nome, email } = passagem;
     let countPristines = 0;
 
-    event.preventDefault();
-
+    // if NOME is pristine, form cannot be saved
     if (nome.isPristine) {
       countPristines++;
-      this.props.dispatch(actions.setNomeDirty());
+      dispatch(actions.setNomeDirty());
       this.updateEmailValidation(email.text);
     }
 
+    // if EMAIL is pristine, form cannot be saved
     if (email.isPristine) {
       countPristines++;
       this.props.dispatch(actions.setEmailDirty());
       this.updateNomeValidation(nome.text);
     }
-
+    // if any field is pristine or invalid, form cannot be saved
     if ((countPristines > 0) ||
       (nome.validation !== ValidationStatus.SUCCESS) ||
       (email.validation !== ValidationStatus.SUCCESS)) {
-      return;
+      return false;
     }
 
-    dispatch(newPassagem(passagem))
-      .then((key) => {
-        history.push({
-          pathname: `/passagem/${key}`,
-          state: { passagem }
+    return true;
+  }
+
+  handleSubmit(event) {
+    const { dispatch, passagem, history } = this.props;
+
+    event.preventDefault();
+
+    if (this.formCanBeSaved()) {
+      dispatch(newPassagem(passagem))
+        .then((key) => {
+          history.push({
+            pathname: `/passagem/${key}`,
+            state: { passagem }
+          });
         });
-      });
+
+    }
   }
 
   render() {
