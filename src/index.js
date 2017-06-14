@@ -15,7 +15,7 @@ ReactDOM.render(
       <Layout>
         <Switch>
           <Route exact path="/" component={CompraPassagem} />
-          <Route path="/passagem" component={ConfirmacaoPassagem} />
+          <Route path="/passagem/:id" component={ConfirmacaoPassagem} />
           <Route exact path="/login" component={CompraPassagem} />
         </Switch>
       </Layout>

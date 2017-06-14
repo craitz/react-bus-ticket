@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
@@ -19,8 +19,8 @@ const mapStateToProps = (state) => {
 };
 
 class FormPassagem extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.handleChangeNome = this.handleChangeNome.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
@@ -58,12 +58,10 @@ class FormPassagem extends Component {
   }
 
   handleChangeNome(event) {
-    this.isNomePristine = false;
     this.props.dispatch(actions.changeNome(event.target.value));
   }
 
   handleChangeEmail(event) {
-    this.isEmailPristine = false;
     this.props.dispatch(actions.changeEmail(event.target.value));
   }
 
@@ -147,14 +145,25 @@ class FormPassagem extends Component {
     this.props.dispatch(actions.changeData(value));
   }
 
+  validateForm() {
+    const { passagem } = this.props;
+  }
+
   handleSubmit(event) {
-    // this.props.history.push('/passagem');
-    // this.props.dispatch(newPassagem(this.props.passagem));
+    const { dispatch, passagem, history } = this.props;
+
+    dispatch(newPassagem(passagem))
+      .then((key) => {
+        history.push({
+          pathname: `/passagem/${key}`,
+          state: { passagem }
+        });
+      });
+
     event.preventDefault();
   }
 
   render() {
-    // const { cidadesOrigem, cidadesDestino, horarios, poltronas, passagem } = this.props;
     const { cidades, horarios, poltronas, passagem } = this.props;
 
     // render!
@@ -248,4 +257,4 @@ FormPassagem.PropTypes = {
   poltronas: PropTypes.array.isRequired
 };
 
-export default connect(mapStateToProps)(FormPassagem);
+export default connect(mapStateToProps)(withRouter(FormPassagem));

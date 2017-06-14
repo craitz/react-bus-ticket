@@ -19,6 +19,8 @@ class ConfirmacaoPassagem extends Component {
   }
 
   render() {
+    console.log(this.props.location);
+
     const { passagem } = store.getState().formPassagemState;
     return (
       <div>
