@@ -1,3 +1,9 @@
+export const validationSatatus = {
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error'
+};
+
 export const SequenceArray = size => [...Array(size).keys()].map(i => ++i);
 
 export const DateNowBr = new Date().toLocaleDateString('pt-BR');
