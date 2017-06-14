@@ -67,6 +67,16 @@ class FormPassagem extends Component {
     this.updateNomeValidation(text);
   }
 
+  handleChangeEmail(event) {
+    const isPristine = this.props.passagem.email.isPristine;
+    const text = event.target.value;
+
+    this.props.dispatch(actions.changeEmail(text));
+    isPristine && this.props.dispatch(actions.setEmailDirty());
+
+    this.updateEmailValidation(text);
+  }
+
   updateNomeValidation(text) {
     const oldName = this.props.passagem.nome;
 
@@ -78,16 +88,6 @@ class FormPassagem extends Component {
       (oldName.validation !== ValidationStatus.ERROR) &&
         this.props.dispatch(actions.setNomeValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
     }
-  }
-
-  handleChangeEmail(event) {
-    const isPristine = this.props.passagem.email.isPristine;
-    const text = event.target.value;
-
-    this.props.dispatch(actions.changeEmail(text));
-    isPristine && this.props.dispatch(actions.setEmailDirty());
-
-    this.updateEmailValidation(text);
   }
 
   updateEmailValidation(text) {
@@ -183,12 +183,35 @@ class FormPassagem extends Component {
     this.props.dispatch(actions.changeData(value));
   }
 
-  validateForm() {
-    const { passagem } = this.props;
+  isFormValid() {
+    const { nome, email } = this.props.passagem;
+    return ((nome.validation === ValidationStatus.SUCCESS) || (email.validation === ValidationStatus.SUCCESS));
   }
 
   handleSubmit(event) {
     const { dispatch, passagem, history } = this.props;
+    const { nome, email } = passagem;
+    let countPristines = 0;
+
+    event.preventDefault();
+
+    if (nome.isPristine) {
+      countPristines++;
+      this.props.dispatch(actions.setNomeDirty());
+      this.updateEmailValidation(email.text);
+    }
+
+    if (email.isPristine) {
+      countPristines++;
+      this.props.dispatch(actions.setEmailDirty());
+      this.updateNomeValidation(nome.text);
+    }
+
+    if ((countPristines > 0) ||
+      (nome.validation !== ValidationStatus.SUCCESS) ||
+      (email.validation !== ValidationStatus.SUCCESS)) {
+      return;
+    }
 
     dispatch(newPassagem(passagem))
       .then((key) => {
@@ -197,8 +220,6 @@ class FormPassagem extends Component {
           state: { passagem }
         });
       });
-
-    event.preventDefault();
   }
 
   render() {
