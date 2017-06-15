@@ -1,6 +1,6 @@
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
 
-const reducer = (state = {
+const initialState = {
   passagem: {
     nome: {
       text: '',
@@ -32,8 +32,13 @@ const reducer = (state = {
       text: 'null',
     }
   }
-}, action) => {
+}
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'RESET_FORM_PASSAGEM': {
+      return initialState;
+    }
     case 'CHANGE_NOME': {
       return {
         ...state,

@@ -1,3 +1,16 @@
+export const Select = {
+  ORIGEM: 0,
+  DESTINO: 1,
+  POLTRONA: 2,
+  HORARIO: 3
+}
+
+export const resetFormPassagem = () => {
+  return {
+    type: 'RESET_FORM_PASSAGEM'
+  }
+};
+
 export const changeNome = (nome) => {
   return {
     type: 'CHANGE_NOME',

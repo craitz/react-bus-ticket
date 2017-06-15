@@ -3,6 +3,11 @@
     src: url(./styles/fonts/Roboto-Regular.ttf) format('trueType');
 }
 
+@font-face {
+    font-family: 'Gruppo';
+    src: url(./styles/fonts/Gruppo-Regular.ttf) format('trueType');
+}
+
 .App {
     text-align: center;
     .App-header {
@@ -18,7 +23,6 @@
     .App-container {
         padding: 20px;
         font-family: 'Roboto';
-        /*font-size: 16px;*/
     }
 }
 

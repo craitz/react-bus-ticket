@@ -5,6 +5,7 @@ export const fetchCidades = () => {
   return (dispatch) => {
     fetch('cidades/')
       .then((cidades) => {
+        cidades.sort();
         dispatch({ type: 'FETCHING_CIDADES_FULFILLED', payload: cidades });
       });
   }

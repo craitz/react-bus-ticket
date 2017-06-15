@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
-import ConfirmacaoPassagem from './components/ConfirmacaoPassagem';
+import ConfirmaPassagem from './components/ConfirmaPassagem';
 import Layout from './components/Layout'
 import CompraPassagem from './components/CompraPassagem';
 import './App.css';
@@ -15,7 +15,7 @@ ReactDOM.render(
       <Layout>
         <Switch>
           <Route exact path="/" component={CompraPassagem} />
-          <Route path="/passagem/:id" component={ConfirmacaoPassagem} />
+          <Route path="/passagem/:id" component={ConfirmaPassagem} />
           <Route exact path="/login" component={CompraPassagem} />
         </Switch>
       </Layout>

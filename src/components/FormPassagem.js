@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom'
-import { Row, Col, Button } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom'
+import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
@@ -29,31 +29,38 @@ class FormPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   componentDidMount() {
+    this.initializeSelectValues();
+  }
+
+  initializeSelectValues() {
+    const { dispatch, cidades, poltronas, horarios } = this.props;
+
     // initialize ORIGEM values
-    this.props.dispatch(actions.changeOrigem({
+    dispatch(actions.changeOrigem({
       val: 0,
-      text: this.props.cidades[0]
+      text: cidades[0]
     }));
 
     // initialize DESTINO values
-    this.props.dispatch(actions.changeDestino({
+    dispatch(actions.changeDestino({
       val: 1,
-      text: this.props.cidades[1]
+      text: cidades[1]
     }));
 
     // initialize POLTRONA values
-    this.props.dispatch(actions.changePoltrona({
+    dispatch(actions.changePoltrona({
       val: 0,
-      text: this.props.poltronas[0]
+      text: poltronas[0]
     }));
 
     // initialize HORARIO values
-    this.props.dispatch(actions.changeHorario({
+    dispatch(actions.changeHorario({
       val: 0,
-      text: this.props.horarios[0]
+      text: horarios[0]
     }));
   }
 
@@ -214,8 +221,6 @@ class FormPassagem extends Component {
   handleSubmit(event) {
     const { dispatch, passagem, history } = this.props;
 
-    event.preventDefault();
-
     if (this.formCanBeSaved()) {
       dispatch(newPassagem(passagem))
         .then((key) => {
@@ -224,8 +229,14 @@ class FormPassagem extends Component {
             state: { passagem }
           });
         });
-
     }
+
+    event.preventDefault();
+  }
+
+  handleReset() {
+    this.props.dispatch(actions.resetFormPassagem());
+    this.initializeSelectValues();
   }
 
   render() {
@@ -234,87 +245,101 @@ class FormPassagem extends Component {
 
     // render!
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div className="form-passagem">
+        <h2>Compre sua passagem!</h2>
+        <form onSubmit={this.handleSubmit}>
 
-        {/*NOME*/}
-        <Row className="text-left">
-          <Col xs={12}>
-            <InputField
-              id="nome"
-              label="Nome*"
-              type="text"
-              value={nome.text}
-              onChange={this.handleChangeNome}
-              validation={nome.validation}
-              message={nome.message} />
-          </Col>
-        </Row>
+          {/*NOME*/}
+          <Row className="text-left">
+            <Col xs={12}>
+              <InputField
+                id="nome"
+                label="Nome*"
+                type="text"
+                value={nome.text}
+                onChange={this.handleChangeNome}
+                validation={nome.validation}
+                message={nome.message} />
+            </Col>
+          </Row>
 
-        {/*E_MAIL*/}
-        <Row className="text-left">
-          <Col xs={12} className="input-col">
-            <InputField
-              id="email"
-              label="E-mail*"
-              type="email"
-              value={email.text}
-              onChange={this.handleChangeEmail}
-              validation={email.validation}
-              message={email.message} />
-          </Col>
-        </Row>
+          {/*E_MAIL*/}
+          <Row className="text-left">
+            <Col xs={12} className="input-col">
+              <InputField
+                id="email"
+                label="E-mail*"
+                type="email"
+                value={email.text}
+                onChange={this.handleChangeEmail}
+                validation={email.validation}
+                message={email.message} />
+            </Col>
+          </Row>
 
-        {/*ORIGEM / DESTINO*/}
-        <Row className="text-left">
-          <Col md={6} className="input-col">
-            <SelectField
-              id="origem"
-              label="Origem"
-              list={cidades}
-              value={passagem.origem.val}
-              onChange={this.handleChangeOrigem} />
-          </Col>
-          <Col md={6} className="input-col">
-            <SelectField
-              id="destino"
-              label="Destino"
-              list={cidades}
-              value={passagem.destino.val}
-              onChange={this.handleChangeDestino} />
-          </Col>
-        </Row>
+          {/*ORIGEM / DESTINO*/}
+          <Row className="text-left">
+            <Col md={6} className="input-col">
+              <SelectField
+                id="origem"
+                label="Origem"
+                list={cidades}
+                value={passagem.origem.val}
+                onChange={this.handleChangeOrigem} />
+            </Col>
+            <Col md={6} className="input-col">
+              <SelectField
+                id="destino"
+                label="Destino"
+                list={cidades}
+                value={passagem.destino.val}
+                onChange={this.handleChangeDestino} />
+            </Col>
+          </Row>
 
-        {/*POLTRONA / DATA / HORARIO*/}
-        <Row className="text-left">
-          <Col md={4} className="input-col">
-            <SelectField
-              id="poltrona"
-              label="Poltrona"
-              list={poltronas}
-              value={passagem.poltrona.val}
-              onChange={this.handleChangePoltrona} />
-          </Col>
-          <Col md={4} className="input-col">
-            <DateField
-              id="data"
-              label="Data"
-              value={passagem.data}
-              onChange={this.handleChangeData} />
-          </Col>
-          <Col md={4} className="input-col">
-            <SelectField
-              id="horario"
-              label="Horário"
-              list={horarios}
-              value={passagem.horario.val}
-              onChange={this.handleChangeHorario} />
-          </Col>
-        </Row>
-
-        <p><Link to="/passagem">Passagem!</Link></p>
-        <Button type="submit" bsStyle="primary" className="btn-block">Reservar agora!</Button>
-      </form >
-
+          {/*POLTRONA / DATA / HORARIO*/}
+          <Row className="text-left">
+            <Col md={4} className="input-col">
+              <SelectField
+                id="poltrona"
+                label="Poltrona"
+                list={poltronas}
+                value={passagem.poltrona.val}
+                onChange={this.handleChangePoltrona} />
+            </Col>
+            <Col md={4} className="input-col">
+              <DateField
+                id="data"
+                label="Data"
+                value={passagem.data}
+                onChange={this.handleChangeData} />
+            </Col>
+            <Col md={4} className="input-col">
+              <SelectField
+                id="horario"
+                label="Horário"
+                list={horarios}
+                value={passagem.horario.val}
+                onChange={this.handleChangeHorario} />
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col md={6} className="col-button-left">
+              <Button type="submit" bsStyle="primary" className="btn-block">
+                <Glyphicon glyph="shopping-cart" />
+                <span className="text-after-icon">Comprar!</span>
+              </Button>
+            </Col>
+            <Col md={6} className="col-button-right">
+              <Button type="button" bsStyle="danger" className="btn-block" onClick={this.handleReset}>
+                <Glyphicon glyph="erase" />
+                <span className="text-after-icon">Resetar formulário</span>
+              </Button>
+            </Col>
+          </Row>
+        </form >
+      </div>
     );
   }
 }
