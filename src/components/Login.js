@@ -26,7 +26,7 @@ class Login extends Component {
               </div>
             </div>
             <div className="login-header--icon text-right">
-              <Glyphicon glyph="log-in" className="main-icon" />
+              <Glyphicon glyph="lock" className="main-icon" />
             </div>
           </div>
           <form onSubmit={this.handleSubmit}>
@@ -41,14 +41,15 @@ class Login extends Component {
             <FormGroup>
               <InputGroup>
                 <InputGroup.Addon>
-                  <Glyphicon glyph="lock" className="addon-icon" />
+                  <Glyphicon glyph="asterisk" className="addon-icon" />
                 </InputGroup.Addon>
-                <FormControl type="text" placeholder="Senha" />
+                <FormControl type="password" placeholder="Senha" />
               </InputGroup>
             </FormGroup>
             <FormGroup>
               <Button type="submit" bsStyle="primary" className="btn-block">
-                Entrar
+                <Glyphicon glyph="log-in" />
+                <span className="text-after-icon">Entrar</span>
                 {/*<i ng-show="$ctrl.isBusy" className="fa fa-spinner fa-spin"></i>
                 <div ng-show="!$ctrl.isBusy">
                   <i className="fa fa-sign-in"></i>
