@@ -1,0 +1,69 @@
+.login-container {
+    $boxWidth: 360px;
+    $boxBgColor: white;
+    $headerHeight: 60px;
+    $headerTitleWidth: 260px;
+    $headerTitleMainColor: darkslategrey;
+    $headerTitleMainFontSize: 2.5rem;
+    $headerTitleMainLineHeight: 30px;
+    $headerIconWidth: 60px;
+    $headerIconFontSize: 2.5rem;
+    $inputBorderColor: rgba(255, 255, 255, .7);
+    @include centralizeContent();
+    .login-box {
+        text-align: left;
+        position: relative;
+        width: $boxWidth;
+        border: 1px solid rgba(0, 0, 0, .15);
+        background-color: $boxBgColor;
+        border-radius: 8px;
+        padding: 15px 20px;
+        .addon-icon {
+            color: grey;
+        }
+        .login-header {
+            height: $headerHeight;
+            margin-bottom: 15px;
+            position: relative;
+            .login-header--title {
+                position: absolute;
+                left: 0;
+                display: inline;
+                width: $headerTitleWidth;
+                height: inherit;
+                .login-header--title-main {
+                    color: $headerTitleMainColor;
+                    line-height: $headerTitleMainLineHeight;
+                    font-size: $headerTitleMainFontSize;
+                    font-weight: bold;
+                    font-family: 'Roboto';
+                }
+                .login-header--title-sub {
+                    margin-top: 6px;
+                    color: $headerTitleMainColor;
+                }
+            }
+            .login-header--icon {
+                position: absolute;
+                left: $headerTitleWidth;
+                display: inline;
+                width: $headerIconWidth;
+                height: inherit;
+                .main-icon {
+                    font-size: $headerIconFontSize;
+                    color: rgba($headerTitleMainColor, .5);
+                    margin-right: 5px;
+                }
+            }
+        }
+        // input {
+        //     border-color: $inputBorderColor;
+        //     background-color: white !important;
+        //     color: black !important;
+        //     font-weight: bold;
+        // }
+        // span {
+        //     font-weight: bold;
+        // }
+    }
+}

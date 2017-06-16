@@ -9,8 +9,8 @@ const Layout = ({ children }) =>
       <h2>Welcome to BusTicket</h2>
     </div>
     <Grid className="App-container">
-      <Row>
-        <Col md={6} mdOffset={3}>
+      <Row className="App-container__row">
+        <Col md={6} mdOffset={3} className="App-container__col">
           {children}
         </Col>
       </Row>

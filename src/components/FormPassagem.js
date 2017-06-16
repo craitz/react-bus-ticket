@@ -12,12 +12,6 @@ const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
 const DateField = withDate(BaseField);
 
-const mapStateToProps = (state) => {
-  return {
-    passagem: state.formPassagemState.passagem,
-  };
-};
-
 class FormPassagem extends Component {
   constructor(props, context) {
     super(props, context);
@@ -98,15 +92,14 @@ class FormPassagem extends Component {
   }
 
   updateEmailValidation(text) {
-    const oldEmail = this.props.passagem.email;
+    const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    // test required
-    if (text.length > 0) {
-      (oldEmail.validation !== ValidationStatus.SUCCESS) &&
-        this.props.dispatch(actions.setEmailValidation(ValidationStatus.SUCCESS, ''));
-    } else {
-      (oldEmail.validation !== ValidationStatus.ERROR) &&
-        this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
+    if (text.length === 0) { // EMPTY
+      this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
+    } else if (!emailRegexp.test(text)) { // BAD FORMAT
+      this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Formato inválido'));
+    } else { // OK
+      this.props.dispatch(actions.setEmailValidation(ValidationStatus.SUCCESS, ''));
     }
   }
 
@@ -245,100 +238,102 @@ class FormPassagem extends Component {
 
     // render!
     return (
-      <div className="form-passagem">
+      <div className="form-passagem-container">
         <h2>Compre sua passagem!</h2>
-        <form onSubmit={this.handleSubmit}>
+        <div className="form-passagem">
+          <form onSubmit={this.handleSubmit}>
 
-          {/*NOME*/}
-          <Row className="text-left">
-            <Col xs={12}>
-              <InputField
-                id="nome"
-                label="Nome*"
-                type="text"
-                value={nome.text}
-                onChange={this.handleChangeNome}
-                validation={nome.validation}
-                message={nome.message} />
-            </Col>
-          </Row>
+            {/*NOME*/}
+            <Row className="text-left">
+              <Col xs={12}>
+                <InputField
+                  id="nome"
+                  label="Nome*"
+                  type="text"
+                  value={nome.text}
+                  onChange={this.handleChangeNome}
+                  validation={nome.validation}
+                  message={nome.message} />
+              </Col>
+            </Row>
 
-          {/*E_MAIL*/}
-          <Row className="text-left">
-            <Col xs={12} className="input-col">
-              <InputField
-                id="email"
-                label="E-mail*"
-                type="email"
-                value={email.text}
-                onChange={this.handleChangeEmail}
-                validation={email.validation}
-                message={email.message} />
-            </Col>
-          </Row>
+            {/*E_MAIL*/}
+            <Row className="text-left">
+              <Col xs={12} className="input-col">
+                <InputField
+                  id="email"
+                  label="E-mail*"
+                  type="text"
+                  value={email.text}
+                  onChange={this.handleChangeEmail}
+                  validation={email.validation}
+                  message={email.message} />
+              </Col>
+            </Row>
 
-          {/*ORIGEM / DESTINO*/}
-          <Row className="text-left">
-            <Col md={6} className="input-col">
-              <SelectField
-                id="origem"
-                label="Origem"
-                list={cidades}
-                value={passagem.origem.val}
-                onChange={this.handleChangeOrigem} />
-            </Col>
-            <Col md={6} className="input-col">
-              <SelectField
-                id="destino"
-                label="Destino"
-                list={cidades}
-                value={passagem.destino.val}
-                onChange={this.handleChangeDestino} />
-            </Col>
-          </Row>
+            {/*ORIGEM / DESTINO*/}
+            <Row className="text-left">
+              <Col md={6} className="input-col">
+                <SelectField
+                  id="origem"
+                  label="Origem"
+                  list={cidades}
+                  value={passagem.origem.val}
+                  onChange={this.handleChangeOrigem} />
+              </Col>
+              <Col md={6} className="input-col">
+                <SelectField
+                  id="destino"
+                  label="Destino"
+                  list={cidades}
+                  value={passagem.destino.val}
+                  onChange={this.handleChangeDestino} />
+              </Col>
+            </Row>
 
-          {/*POLTRONA / DATA / HORARIO*/}
-          <Row className="text-left">
-            <Col md={4} className="input-col">
-              <SelectField
-                id="poltrona"
-                label="Poltrona"
-                list={poltronas}
-                value={passagem.poltrona.val}
-                onChange={this.handleChangePoltrona} />
-            </Col>
-            <Col md={4} className="input-col">
-              <DateField
-                id="data"
-                label="Data"
-                value={passagem.data}
-                onChange={this.handleChangeData} />
-            </Col>
-            <Col md={4} className="input-col">
-              <SelectField
-                id="horario"
-                label="Horário"
-                list={horarios}
-                value={passagem.horario.val}
-                onChange={this.handleChangeHorario} />
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <Col md={6} className="col-button-left">
-              <Button type="submit" bsStyle="primary" className="btn-block">
-                <Glyphicon glyph="shopping-cart" />
-                <span className="text-after-icon">Comprar!</span>
-              </Button>
-            </Col>
-            <Col md={6} className="col-button-right">
-              <Button type="button" bsStyle="danger" className="btn-block" onClick={this.handleReset}>
-                <Glyphicon glyph="erase" />
-                <span className="text-after-icon">Resetar formulário</span>
-              </Button>
-            </Col>
-          </Row>
-        </form >
+            {/*POLTRONA / DATA / HORARIO*/}
+            <Row className="text-left">
+              <Col md={4} className="input-col">
+                <SelectField
+                  id="poltrona"
+                  label="Poltrona"
+                  list={poltronas}
+                  value={passagem.poltrona.val}
+                  onChange={this.handleChangePoltrona} />
+              </Col>
+              <Col md={4} className="input-col">
+                <DateField
+                  id="data"
+                  label="Data"
+                  value={passagem.data}
+                  onChange={this.handleChangeData} />
+              </Col>
+              <Col md={4} className="input-col">
+                <SelectField
+                  id="horario"
+                  label="Horário"
+                  list={horarios}
+                  value={passagem.horario.val}
+                  onChange={this.handleChangeHorario} />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col md={8} className="col-button-left">
+                <Button type="submit" bsStyle="primary" className="btn-block">
+                  <Glyphicon glyph="shopping-cart" />
+                  <span className="text-after-icon">Comprar!</span>
+                </Button>
+              </Col>
+              <Col md={4} className="col-button-right">
+                <Button type="button" bsStyle="danger" className="btn-block" onClick={this.handleReset}>
+                  <Glyphicon glyph="erase" />
+                  <span className="text-after-icon">Limpar</span>
+                </Button>
+              </Col>
+            </Row>
+          </form >
+        </div>
       </div>
     );
   }
@@ -348,6 +343,12 @@ FormPassagem.PropTypes = {
   cidades: PropTypes.array.isRequired,
   horarios: PropTypes.array.isRequired,
   poltronas: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    passagem: state.formPassagemState.passagem,
+  };
 };
 
 export default connect(mapStateToProps)(withRouter(FormPassagem));

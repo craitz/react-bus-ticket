@@ -1,6 +1,54 @@
+@import "global";
 @import "layout";
 @import "compraPassagem";
-@import "_confirmaPassagem";
+@import "confirmaPassagem";
+@import "login";
+html {
+    height: 100%;
+    body {
+        background-color: #fafafa;
+        height: inherit;
+        #root {
+            height: inherit;
+            .App {
+                height: inherit;
+                .App-container {
+                    padding: 0;
+                    height: calc(100% - #{$header_height});
+                    .App-container__row {
+                        height: 100%;
+                        .App-container__col {
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// html {
+//     height: 100%;
+//     body {
+//         background-color: #efefef;
+//         height: inherit;
+//         #root {
+//             height: inherit;
+//             .App {
+//                 height: inherit;
+//                 .App-container {
+//                     height: inherit;
+//                     .row {
+//                         height: inherit;
+//                         .col-md-6 {
+//                             height: inherit;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 .text-after-icon {
     margin-left: 8px;
 }

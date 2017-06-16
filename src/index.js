@@ -7,6 +7,7 @@ import store from './store';
 import ConfirmaPassagem from './components/ConfirmaPassagem';
 import Layout from './components/Layout'
 import CompraPassagem from './components/CompraPassagem';
+import Login from './components/Login';
 import './App.css';
 
 ReactDOM.render(
@@ -16,7 +17,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={CompraPassagem} />
           <Route path="/passagem/:id" component={ConfirmaPassagem} />
-          <Route exact path="/login" component={CompraPassagem} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Layout>
     </Provider>

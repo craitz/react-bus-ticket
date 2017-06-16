@@ -1,0 +1,11 @@
+$header_height: 180px;
+@mixin centralizeContent() {
+    $navbarHeightAdjust: $header_height;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-top: -$navbarHeightAdjust;
+    // padding-top: $navbarHeightAdjust;
+}
