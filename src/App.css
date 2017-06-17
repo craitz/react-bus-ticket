@@ -66,8 +66,6 @@
     background-color: white;
     border-radius: 8px;
     padding: 15px 20px; }
-    .login-container .login-box .addon-icon {
-      color: grey; }
     .login-container .login-box .login-header {
       height: 60px;
       margin-bottom: 15px;
@@ -79,7 +77,7 @@
         width: 260px;
         height: inherit; }
         .login-container .login-box .login-header .login-header--title .login-header--title-main {
-          color: darkslategrey;
+          color: rgba(47, 79, 79, 0.7);
           line-height: 30px;
           font-size: 2.5rem;
           font-weight: bold;

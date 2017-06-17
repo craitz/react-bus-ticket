@@ -18,9 +18,6 @@
         background-color: $boxBgColor;
         border-radius: 8px;
         padding: 15px 20px;
-        .addon-icon {
-            color: grey;
-        }
         .login-header {
             height: $headerHeight;
             margin-bottom: 15px;
@@ -32,7 +29,7 @@
                 width: $headerTitleWidth;
                 height: inherit;
                 .login-header--title-main {
-                    color: $headerTitleMainColor;
+                    color: rgba($headerTitleMainColor, .7);
                     line-height: $headerTitleMainLineHeight;
                     font-size: $headerTitleMainFontSize;
                     font-weight: bold;

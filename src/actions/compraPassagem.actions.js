@@ -1,9 +1,9 @@
-import { fetch, save } from '../shared/FirebaseHelper';
+import FirebaseHelper from '../shared/FirebaseHelper';
 import { SequenceArray } from '../shared/Utils.js';
 
 export const fetchCidades = () => {
   return (dispatch) => {
-    fetch('cidades/')
+    FirebaseHelper.fetch('cidades/')
       .then((cidades) => {
         cidades.sort();
         dispatch({ type: 'FETCHING_CIDADES_FULFILLED', payload: cidades });
@@ -13,7 +13,7 @@ export const fetchCidades = () => {
 
 export const fetchHorarios = () => {
   return (dispatch) => {
-    fetch('horarios/')
+    FirebaseHelper.fetch('horarios/')
       .then((horarios) => {
         dispatch({ type: 'FETCHING_HORARIOS_FULFILLED', payload: horarios });
       })
@@ -29,7 +29,7 @@ export const fetchPoltronas = () => {
 
 export const fetchPassagens = () => {
   return (dispatch) => {
-    fetch('passagens/')
+    FirebaseHelper.fetch('passagens/')
       .then((passagens) => {
         dispatch({ type: 'FETCHING_PASSAGENS_FULFILLED', payload: (passagens || {}) });
       })
@@ -39,7 +39,7 @@ export const fetchPassagens = () => {
 export const newPassagem = (passagem) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
-      save(passagem, 'passagens/')
+      FirebaseHelper.save(passagem, 'passagens/')
         .then((key) => {
           dispatch({ type: 'NEW_PASSAGEM', payload: { passagem, key } });
           resolve(key);
@@ -47,16 +47,3 @@ export const newPassagem = (passagem) => {
     });
   }
 };
-
-// export const newPassagem = (passagem, history) => {
-//   return (dispatch) => {
-//     save(passagem, 'passagens/')
-//       .then((key) => {
-//         dispatch({ type: 'NEW_PASSAGEM', payload: { passagem, key } });
-//         history.push({
-//           pathname: `/passagem/${key}`,
-//           state: { passagem }
-//         });
-//       })
-//   }
-// };

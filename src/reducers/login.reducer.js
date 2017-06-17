@@ -20,16 +20,48 @@ const reducer = (state = initialState, action) => {
     case 'RESET_LOGIN': {
       return initialState;
     }
-    case 'CHANGE_LOGIN_USER': {
+    case 'CHANGE_LOGIN_EMAIL': {
       return {
         ...state,
         email: { ...state.email, text: action.payload }
       }
     }
-    case 'CHANGE_LOGIN_PWD': {
+    case 'SET_LOGIN_EMAIL_VALIDATION': {
+      return {
+        ...state,
+        email: {
+          ...state.email,
+          validation: action.payload.validation,
+          message: action.payload.message
+        }
+      }
+    }
+    case 'SET_LOGIN_EMAIL_DIRTY': {
+      return {
+        ...state,
+        email: { ...state.email, isPristine: false }
+      }
+    }
+    case 'CHANGE_LOGIN_SENHA': {
       return {
         ...state,
         senha: { ...state.senha, text: action.payload }
+      }
+    }
+    case 'SET_LOGIN_SENHA_VALIDATION': {
+      return {
+        ...state,
+        senha: {
+          ...state.senha,
+          validation: action.payload.validation,
+          message: action.payload.message
+        }
+      }
+    }
+    case 'SET_LOGIN_SENHA_DIRTY': {
+      return {
+        ...state,
+        senha: { ...state.senha, isPristine: false }
       }
     }
     default:

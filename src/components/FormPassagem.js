@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem } from '../actions/compraPassagem.actions';
-import { ValidationStatus } from '../shared/Utils'
+import { ValidationStatus } from '../shared/Utils';
+import { withAuth } from '../shared/hoc';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -351,4 +352,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(FormPassagem));
+const FormPassagemWithRouter = withRouter(FormPassagem);
+const FormPassagemWithRouterAndAuth = withAuth(FormPassagemWithRouter);
+export default connect(mapStateToProps)(FormPassagemWithRouterAndAuth);
+

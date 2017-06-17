@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Jumbotron, Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { resetFormPassagem } from '../actions/formPassagem.actions'
+import { withAuth } from '../shared/hoc';
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
@@ -85,4 +86,6 @@ const mapStateToProps = (state) => {
   return {};
 };
 
-export default connect(mapStateToProps)(withRouter(ConfirmaPassagem));
+const ConfirmaPassagemWithRouter = withRouter(ConfirmaPassagem);
+const ConfirmaPassagemWithRouterAndAuth = withAuth(ConfirmaPassagemWithRouter);
+export default connect(mapStateToProps)(ConfirmaPassagemWithRouterAndAuth);
