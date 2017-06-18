@@ -3,6 +3,7 @@ import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const NavbarCollapse = ({ email, onLgout }) =>
   <Navbar.Collapse>
@@ -23,6 +24,11 @@ const NavbarCollapse = ({ email, onLgout }) =>
       </NavItem>
     </Nav>
   </Navbar.Collapse>
+
+NavbarCollapse.PropTypes = {
+  email: PropTypes.string.isRequired,
+  onLgout: PropTypes.func
+}
 
 class Navigation extends Component {
   constructor(props) {
