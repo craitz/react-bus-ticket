@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import FirebaseHelper from './FirebaseHelper';
+import { firebaseHelper } from './FirebaseHelper';
 
 export const withAuth = (WrappedComponent) => {
   return class PageWithAuth extends Component {
     render() {
-
-      console.log('renderizou com auth!');
-      if (!FirebaseHelper.isLoggedIn()) {
+      if (!firebaseHelper.isLoggedIn()) {
         return (
           <Redirect to='/login' />
         );
@@ -16,7 +14,6 @@ export const withAuth = (WrappedComponent) => {
           <WrappedComponent {...this.props}></WrappedComponent>
         );
       }
-
     }
   }
 };

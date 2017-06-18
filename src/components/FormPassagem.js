@@ -240,7 +240,7 @@ class FormPassagem extends Component {
     // render!
     return (
       <div className="form-passagem-container">
-        <h2>Compre sua passagem!</h2>
+        <h2>Compre sua passagem</h2>
         <div className="form-passagem">
           <form onSubmit={this.handleSubmit}>
 
@@ -320,13 +320,19 @@ class FormPassagem extends Component {
             </Row>
             <hr />
             <Row>
-              <Col md={8} className="col-button-left">
+              <Col md={5} className="col-button-left">
                 <Button type="submit" bsStyle="primary" className="btn-block">
                   <Glyphicon glyph="shopping-cart" />
                   <span className="text-after-icon">Comprar!</span>
                 </Button>
               </Col>
               <Col md={4} className="col-button-right">
+                <Button type="button" bsStyle="warning" className="btn-block" onClick={this.handleReset}>
+                  <Glyphicon glyph="search" />
+                  <span className="text-after-icon">Pesquisar</span>
+                </Button>
+              </Col>
+              <Col md={3} className="col-button-right">
                 <Button type="button" bsStyle="danger" className="btn-block" onClick={this.handleReset}>
                   <Glyphicon glyph="erase" />
                   <span className="text-after-icon">Limpar</span>
@@ -335,7 +341,7 @@ class FormPassagem extends Component {
             </Row>
           </form >
         </div>
-      </div>
+      </div >
     );
   }
 }

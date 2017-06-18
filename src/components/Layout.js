@@ -1,12 +1,19 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 import logo from '../logo.svg';
+import { firebaseHelper } from '../shared/FirebaseHelper';
 
 const Layout = ({ children }) =>
   <div className="App">
     <div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <h2>Welcome to BusTicket</h2>
+      <span className="header-title">BusTicket</span>
+      {firebaseHelper.isLoggedIn() &&
+        <span>
+          <span className="header-userinfo hidden-xs">{firebaseHelper.getUser().email}</span>
+          <Glyphicon glyph="user" className="header-user-logout" />
+        </span>
+      }
     </div>
     <Grid className="App-container">
       <Row className="App-container__row">

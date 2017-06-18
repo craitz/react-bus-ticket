@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import {
   FormControl,
   FormGroup,
@@ -11,7 +12,7 @@ import {
 } from 'react-bootstrap';
 import { ValidationStatus } from '../shared/Utils'
 import * as actions from '../actions/login.actions'
-import FirebaseHelper from '../shared/FirebaseHelper'
+import { firebaseHelper } from '../shared/FirebaseHelper'
 
 class Login extends Component {
   constructor(props) {
@@ -58,7 +59,6 @@ class Login extends Component {
     const { senha, dispatch } = this.props;
     const isPristine = senha.isPristine;
     const text = event.target.value;
-    console.log(text);
     dispatch(actions.changeLoginSenha(text));
     isPristine && dispatch(actions.setLoginSenhaDirty());
 
@@ -96,13 +96,16 @@ class Login extends Component {
     const { email, senha, history } = this.props;
 
     if (this.isLoginFormOK()) {
-      FirebaseHelper.login(email.text, senha.text)
+      firebaseHelper.login(email.text, senha.text)
         .then(() => {
           history.push({
             pathname: '/',
             state: {}
           });
+        })
+        .catch((error) => {
         });
+
     }
 
     event.preventDefault();
@@ -110,56 +113,62 @@ class Login extends Component {
 
   render() {
     const { email, senha } = this.props;
-    return (
-      <div className="login-container">
-        <div className="login-box">
-          <div className="login-header">
-            <div className="login-header--title">
-              <div className="login-header--title-main">Login</div>
-              <div className="login-header--title-sub text-muted">
-                <span>Informe o usuário e a senha</span>
+    if (firebaseHelper.isLoggedIn()) {
+      return (
+        <Redirect to='/' />
+      );
+    } else {
+      return (
+        <div className="login-container">
+          <div className="login-box">
+            <div className="login-header">
+              <div className="login-header--title">
+                <div className="login-header--title-main">Login</div>
+                <div className="login-header--title-sub text-muted">
+                  <span>Informe o usuário e a senha</span>
+                </div>
+              </div>
+              <div className="login-header--icon text-right">
+                <Glyphicon glyph="lock" className="main-icon" />
               </div>
             </div>
-            <div className="login-header--icon text-right">
-              <Glyphicon glyph="lock" className="main-icon" />
-            </div>
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" validationState={email.validation}>
-              <InputGroup>
-                <InputGroup.Addon>
-                  <Glyphicon glyph="user" className="addon-icon" />
-                </InputGroup.Addon>
-                <FormControl type="text" placeholder="E-mail" value={email.text} onChange={this.handleChangeEmail} />
-              </InputGroup>
-              <FormControl.Feedback />
-              <HelpBlock>{email.message}</HelpBlock>
-            </FormGroup>
-            <FormGroup controlId="senha" validationState={senha.validation}>
-              <InputGroup>
-                <InputGroup.Addon>
-                  <Glyphicon glyph="barcode" className="addon-icon" />
-                </InputGroup.Addon>
-                <FormControl type="password" placeholder="Senha" value={senha.text} onChange={this.handleChangeSenha} />
-              </InputGroup>
-              <FormControl.Feedback />
-              <HelpBlock>{senha.message}</HelpBlock>
-            </FormGroup>
-            <FormGroup>
-              <Button type="submit" bsStyle="primary" className="btn-block">
-                <Glyphicon glyph="log-in" />
-                <span className="text-after-icon">Entrar</span>
-                {/*<i ng-show="$ctrl.isBusy" className="fa fa-spinner fa-spin"></i>
+            <form onSubmit={this.handleSubmit}>
+              <FormGroup controlId="email" validationState={email.validation}>
+                <InputGroup>
+                  <InputGroup.Addon>
+                    <Glyphicon glyph="user" className="addon-icon" />
+                  </InputGroup.Addon>
+                  <FormControl type="text" placeholder="E-mail" value={email.text} onChange={this.handleChangeEmail} />
+                </InputGroup>
+                <FormControl.Feedback />
+                <HelpBlock>{email.message}</HelpBlock>
+              </FormGroup>
+              <FormGroup controlId="senha" validationState={senha.validation}>
+                <InputGroup>
+                  <InputGroup.Addon>
+                    <Glyphicon glyph="barcode" className="addon-icon" />
+                  </InputGroup.Addon>
+                  <FormControl type="password" placeholder="Senha" value={senha.text} onChange={this.handleChangeSenha} />
+                </InputGroup>
+                <FormControl.Feedback />
+                <HelpBlock>{senha.message}</HelpBlock>
+              </FormGroup>
+              <FormGroup>
+                <Button type="submit" bsStyle="primary" className="btn-block">
+                  <Glyphicon glyph="log-in" />
+                  <span className="text-after-icon">Entrar</span>
+                  {/*<i ng-show="$ctrl.isBusy" className="fa fa-spinner fa-spin"></i>
                 <div ng-show="!$ctrl.isBusy">
                   <i className="fa fa-sign-in"></i>
                   <span>Entrar</span>
                 </div>*/}
-              </Button>
-            </FormGroup>
-          </form>
+                </Button>
+              </FormGroup>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

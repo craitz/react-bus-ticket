@@ -10,12 +10,27 @@
   text-align: center; }
   .App .App-header {
     background-color: #222;
-    height: 180px;
+    height: 80px;
     padding: 20px;
     color: white; }
     .App .App-header .App-logo {
+      position: absolute;
       animation: App-logo-spin infinite 20s linear;
-      height: 80px; }
+      height: 40px;
+      left: 20px; }
+    .App .App-header .header-title {
+      position: absolute;
+      top: 22px;
+      left: 80px;
+      font-size: 2.5rem; }
+    .App .App-header .header-userinfo {
+      position: absolute;
+      top: 32px;
+      right: 60px; }
+    .App .App-header .header-user-logout {
+      position: absolute;
+      top: 33px;
+      right: 20px; }
   .App .App-container {
     padding: 20px;
     font-family: 'Roboto'; }

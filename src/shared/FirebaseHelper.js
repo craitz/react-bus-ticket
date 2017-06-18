@@ -1,21 +1,33 @@
 import * as firebase from 'firebase';
 
 class FirebaseHelper {
-  static init() {
+  constructor() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyBQq39NXj6qvnkEVmgEi3c4UZUAQ177dGs",
+      authDomain: "busticket-be05f.firebaseapp.com",
+      databaseURL: "https://busticket-be05f.firebaseio.com",
+      projectId: "busticket-be05f",
+      storageBucket: "busticket-be05f.appspot.com",
+      messagingSenderId: "246935329575"
+    });
+
     this.db = firebase.database();
     this.user = null;
   }
 
-  static isLoggedIn = () => {
-    console.log(this.user);
+  isLoggedIn() {
     return (this.user);
   }
 
-  static setUser(user) {
+  setUser(user) {
     this.user = user;
   }
 
-  static login(user, password) {
+  getUser() {
+    return this.user;
+  }
+
+  login(user, password) {
     let errorMessage = '';
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(user, password)
@@ -41,7 +53,7 @@ class FirebaseHelper {
     });
   }
 
-  static logout() {
+  logout() {
     return new Promise((resolve, reject) => {
       firebase.auth().signOut()
         .then(() => {
@@ -54,7 +66,7 @@ class FirebaseHelper {
     });
   }
 
-  static fetch(refPath) {
+  fetch(refPath) {
     const db = firebase.database();
     return new Promise((resolve, reject) => {
       db.ref(refPath).on('value', (snap) => {
@@ -63,7 +75,7 @@ class FirebaseHelper {
     });
   };
 
-  static save(data, refPath) {
+  save(data, refPath) {
     const db = firebase.database();
     return new Promise((resolve, reject) => {
       const saved = db.ref(refPath).push(data)
@@ -78,14 +90,4 @@ class FirebaseHelper {
   };
 }
 
-firebase.initializeApp({
-  apiKey: "AIzaSyBQq39NXj6qvnkEVmgEi3c4UZUAQ177dGs",
-  authDomain: "busticket-be05f.firebaseapp.com",
-  databaseURL: "https://busticket-be05f.firebaseio.com",
-  projectId: "busticket-be05f",
-  storageBucket: "busticket-be05f.appspot.com",
-  messagingSenderId: "246935329575"
-});
-
-FirebaseHelper.init();
-export default FirebaseHelper;
+export const firebaseHelper = new FirebaseHelper();
