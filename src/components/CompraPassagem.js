@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 
 class CompraPassagem extends Component {
   componentDidMount() {
+    console.log('aqui');
     this.props.dispatch(actions.fetchCidades());
     this.props.dispatch(actions.fetchHorarios());
     this.props.dispatch(actions.fetchPoltronas());

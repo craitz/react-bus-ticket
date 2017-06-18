@@ -20,6 +20,7 @@ class Login extends Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeSenha = this.handleChangeSenha.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    props.dispatch(actions.resetLogin());
   }
 
   updateEmailValidation(text) {
@@ -98,6 +99,7 @@ class Login extends Component {
     if (this.isLoginFormOK()) {
       firebaseHelper.login(email.text, senha.text)
         .then(() => {
+          console.log(history);
           history.push({
             pathname: '/',
             state: {}
