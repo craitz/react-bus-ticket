@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { firebaseHelper } from '../shared/FirebaseHelper';
 import Navigation from '../shared/Navigation';
 
 class Layout extends Component {
