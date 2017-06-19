@@ -49,8 +49,8 @@ class Navigation extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Glyphicon glyph="time" className="App-logo text-info" />
-            <span className="header-title text-info">BusTicket</span>
+            <Glyphicon glyph="time" className="App-logo" />
+            <span className="header-title">BusTicket</span>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

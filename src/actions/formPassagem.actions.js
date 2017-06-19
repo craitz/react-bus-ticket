@@ -40,21 +40,6 @@ export const changeEmail = (email) => {
   }
 };
 
-export const setEmailPristine = () => {
-  return { type: 'SET_EMAIL_PRISTINE' }
-};
-
-export const setEmailDirty = () => {
-  return { type: 'SET_EMAIL_DIRTY' }
-};
-
-export const setEmailValidation = (validation, message) => {
-  return {
-    type: 'SET_EMAIL_VALIDATION',
-    payload: { validation, message }
-  }
-};
-
 export const changeOrigem = (origem) => {
   return {
     type: 'CHANGE_ORIGEM',

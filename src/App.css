@@ -1,3 +1,18 @@
+.tooltip > .tooltip-inner {
+  background-color: purple; }
+
+.tooltip.bottom > .tooltip-arrow {
+  border-bottom-color: purple; }
+
+.tooltip.top > .tooltip-arrow {
+  border-top-color: purple; }
+
+.tooltip.left > .tooltip-arrow {
+  border-left-color: purple; }
+
+.tooltip.right > .tooltip-arrow {
+  border-right-color: purple; }
+
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -35,10 +50,14 @@
   .navbar .navbar-nav {
     margin-left: 50px; }
   .navbar .App-logo {
-    animation: App-logo-spin infinite 5s linear; }
+    animation: App-logo-spin infinite 5s linear;
+    color: #f0ad4e; }
   .navbar .header-title {
+    color: #f0ad4e;
     margin-left: 10px;
-    font-size: 2.5rem; }
+    font-size: 2.5rem;
+    font-family: "Gruppo";
+    font-weight: bold; }
 
 @keyframes App-logo-spin {
   from {

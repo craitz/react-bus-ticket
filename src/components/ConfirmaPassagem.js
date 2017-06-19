@@ -33,7 +33,7 @@ class ConfirmaPassagem extends Component {
               </Row>
               <Row>
                 <Col xs={5} className="text-right title-label">E-mail:</Col>
-                <Col xs={7} className="text-left">{passagem.email.text}</Col>
+                <Col xs={7} className="text-left">{passagem.email}</Col>
               </Row>
               <Row>
                 <Col xs={5} className="text-right title-label">Origem:</Col>

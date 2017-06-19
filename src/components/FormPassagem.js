@@ -8,6 +8,7 @@ import * as actions from '../actions/formPassagem.actions';
 import { newPassagem } from '../actions/compraPassagem.actions';
 import { ValidationStatus } from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
+import { firebaseHelper } from '../shared/FirebaseHelper';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -17,7 +18,6 @@ class FormPassagem extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleChangeNome = this.handleChangeNome.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
@@ -28,11 +28,14 @@ class FormPassagem extends Component {
   }
 
   componentDidMount() {
-    this.initializeSelectValues();
+    this.initializeValues();
   }
 
-  initializeSelectValues() {
+  initializeValues() {
     const { dispatch, cidades, poltronas, horarios } = this.props;
+
+    // initialize EMAIL
+    dispatch(actions.changeEmail(firebaseHelper.getUser().email));
 
     // initialize ORIGEM values
     dispatch(actions.changeOrigem({
@@ -69,16 +72,6 @@ class FormPassagem extends Component {
     this.updateNomeValidation(text);
   }
 
-  handleChangeEmail(event) {
-    const isPristine = this.props.passagem.email.isPristine;
-    const text = event.target.value;
-
-    this.props.dispatch(actions.changeEmail(text));
-    isPristine && this.props.dispatch(actions.setEmailDirty());
-
-    this.updateEmailValidation(text);
-  }
-
   updateNomeValidation(text) {
     const oldName = this.props.passagem.nome;
 
@@ -89,18 +82,6 @@ class FormPassagem extends Component {
     } else {
       (oldName.validation !== ValidationStatus.ERROR) &&
         this.props.dispatch(actions.setNomeValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
-    }
-  }
-
-  updateEmailValidation(text) {
-    const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (text.length === 0) { // EMPTY
-      this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
-    } else if (!emailRegexp.test(text)) { // BAD FORMAT
-      this.props.dispatch(actions.setEmailValidation(ValidationStatus.ERROR, 'Formato inválido'));
-    } else { // OK
-      this.props.dispatch(actions.setEmailValidation(ValidationStatus.SUCCESS, ''));
     }
   }
 
@@ -186,26 +167,17 @@ class FormPassagem extends Component {
 
   formCanBeSaved() {
     const { dispatch, passagem } = this.props;
-    const { nome, email } = passagem;
+    const { nome } = passagem;
     let countPristines = 0;
 
     // if NOME is pristine, form cannot be saved
     if (nome.isPristine) {
       countPristines++;
       dispatch(actions.setNomeDirty());
-      this.updateEmailValidation(email.text);
-    }
-
-    // if EMAIL is pristine, form cannot be saved
-    if (email.isPristine) {
-      countPristines++;
-      this.props.dispatch(actions.setEmailDirty());
       this.updateNomeValidation(nome.text);
     }
-    // if any field is pristine or invalid, form cannot be saved
-    if ((countPristines > 0) ||
-      (nome.validation !== ValidationStatus.SUCCESS) ||
-      (email.validation !== ValidationStatus.SUCCESS)) {
+
+    if ((countPristines > 0) || (nome.validation !== ValidationStatus.SUCCESS)) {
       return false;
     }
 
@@ -265,10 +237,8 @@ class FormPassagem extends Component {
                   id="email"
                   label="E-mail*"
                   type="text"
-                  value={email.text}
-                  onChange={this.handleChangeEmail}
-                  validation={email.validation}
-                  message={email.message} />
+                  value={email}
+                  isDisabled={true} />
               </Col>
             </Row>
 

@@ -8,12 +8,7 @@ const initialState = {
       validation: ValidationStatus.NONE,
       message: ''
     },
-    email: {
-      text: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
+    email: '',
     origem: {
       val: 0,
       text: 'null',
@@ -93,47 +88,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         passagem: {
           ...state.passagem,
-          email: {
-            ...state.passagem.email,
-            text: action.payload
-          }
-        }
-      };
-    }
-    case 'SET_EMAIL_PRISTINE': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          email: {
-            ...state.passagem.email,
-            isPristine: true
-          }
-        }
-      };
-    }
-    case 'SET_EMAIL_DIRTY': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          email: {
-            ...state.passagem.email,
-            isPristine: false
-          }
-        }
-      };
-    }
-    case 'SET_EMAIL_VALIDATION': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          email: {
-            ...state.passagem.email,
-            validation: action.payload.validation,
-            message: action.payload.message
-          }
+          email: action.payload
         }
       };
     }

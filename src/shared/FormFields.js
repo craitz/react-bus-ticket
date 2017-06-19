@@ -29,7 +29,7 @@ BaseField.PropTypes = {
 
 // INPUT FORM FIELD (HOC)
 export const withInput = (WrappedComponent) => {
-  return ({ id, label, type, value, onChange, validation, message }) => {
+  return ({ id, label, type, value, onChange, validation, message, isDisabled }) => {
     const props = {
       id,
       label,
@@ -38,7 +38,7 @@ export const withInput = (WrappedComponent) => {
     };
     return (
       <WrappedComponent {...props}>
-        <FormControl type={type} value={value} onChange={onChange} />
+        <FormControl type={type} value={value} onChange={onChange} disabled={isDisabled} />
       </WrappedComponent>
     );
   }
@@ -46,7 +46,13 @@ export const withInput = (WrappedComponent) => {
 withInput.PropTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
+}
+
+withInput.defaultProps = {
+  isDisabled: false,
+  onChange: null
 }
 
 // SELECT FORM FIELD (HOC)

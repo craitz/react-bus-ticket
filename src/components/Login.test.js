@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CompraPassagem from './CompraPassagem';
+import Login from './Login';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux';
@@ -11,7 +11,7 @@ it('renders without crashing', () => {
   mount(
     <Router>
       <Provider store={store}>
-        <CompraPassagem />
+        <Login />
       </Provider>
     </Router>
   );
