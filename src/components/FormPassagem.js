@@ -5,8 +5,8 @@ import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
-import { newPassagem } from '../actions/compraPassagem.actions';
-import { ValidationStatus } from '../shared/Utils';
+import { newPassagem, setPoltronas } from '../actions/compraPassagem.actions';
+import { ValidationStatus, dateToFirebase, timeToFirebase } from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 
@@ -33,6 +33,9 @@ class FormPassagem extends Component {
 
   initializeValues() {
     const { dispatch, cidades, poltronas, horarios } = this.props;
+    const dataFormatted = dateToFirebase(this.props.passagem.data);
+    const horarioFormatted = timeToFirebase(horarios[0]);
+    const saidasRef = `saidas/${cidades[0]}/${cidades[1]}/${dataFormatted}/${horarioFormatted}/`;
 
     // initialize EMAIL
     dispatch(actions.changeEmail(firebaseHelper.getUser().email));
@@ -49,17 +52,33 @@ class FormPassagem extends Component {
       text: cidades[1]
     }));
 
-    // initialize POLTRONA values
-    dispatch(actions.changePoltrona({
-      val: 0,
-      text: poltronas[0]
-    }));
-
     // initialize HORARIO values
     dispatch(actions.changeHorario({
       val: 0,
       text: horarios[0]
     }));
+
+    // carrega apenas as POLTRONAS livres 
+    try {
+      firebaseHelper.fetchKeys(saidasRef)
+        .then((keys) => {
+          console.log('mesmo assim');
+          const poltronasLivres = poltronas.filter((poltrona) => {
+            return !keys.includes(poltrona)
+          });
+          dispatch(setPoltronas(poltronasLivres));
+        })
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // initialize POLTRONA values
+      dispatch(actions.changePoltrona({
+        val: 0,
+        text: poltronas[0]
+      }));
+    }
+
+
   }
 
   handleChangeNome(event) {

@@ -75,6 +75,21 @@ class FirebaseHelper {
     });
   };
 
+  fetchKeys(refPath) {
+    const keys = [];
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(refPath).on('value', (snapshot) => {
+        snapshot.forEach((snap) => {
+          keys.push(Number(snap.key));
+          if (keys.length === snapshot.numChildren()) {
+            resolve(keys);
+          }
+        });
+      });
+    });
+  };
+
   save(data, refPath) {
     const db = firebase.database();
     return new Promise((resolve, reject) => {
@@ -82,6 +97,19 @@ class FirebaseHelper {
       saved
         .then(() => {
           resolve(saved.key);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  set(data, refPath) {
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(refPath).set(data)
+        .then(() => {
+          resolve();
         })
         .catch((error) => {
           reject(error);

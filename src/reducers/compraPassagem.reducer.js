@@ -26,7 +26,7 @@ const reducer = (state = {
     case 'FETCHING_HORARIOS_FULFILLED': {
       return { ...state, fetching: false, fetched: true, horarios: action.payload };
     }
-    case 'FETCH_POLTRONAS': {
+    case 'SET_POLTRONAS': {
       return { ...state, poltronas: action.payload };
     }
     case 'FETCHING_PASSAGENS': {
