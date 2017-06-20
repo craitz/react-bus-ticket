@@ -11,20 +11,20 @@ const initialState = {
     email: '',
     origem: {
       val: 0,
-      text: 'null',
+      text: '',
     },
     destino: {
       val: 1,
-      text: 'null',
+      text: '',
     },
     poltrona: {
       val: 0,
-      text: 'null',
+      text: '',
     },
     data: DateNowBr,
     horario: {
       val: 0,
-      text: 'null',
+      text: '',
     }
   }
 }

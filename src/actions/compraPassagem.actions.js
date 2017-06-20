@@ -1,22 +1,17 @@
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import { dateToFirebase, timeToFirebase } from '../shared/Utils';
 
-export const fetchCidades = () => {
-  return (dispatch) => {
-    firebaseHelper.fetch('cidades/')
-      .then((cidades) => {
-        cidades.sort();
-        dispatch({ type: 'FETCHING_CIDADES_FULFILLED', payload: cidades });
-      });
-  }
+export const setCidades = (cidades) => {
+  return {
+    type: 'SET_CIDADES',
+    payload: cidades
+  };
 };
 
-export const fetchHorarios = () => {
-  return (dispatch) => {
-    firebaseHelper.fetch('horarios/')
-      .then((horarios) => {
-        dispatch({ type: 'FETCHING_HORARIOS_FULFILLED', payload: horarios });
-      })
+export const setHorarios = (horarios) => {
+  return {
+    type: 'SET_HORARIOS',
+    payload: horarios
   }
 };
 
@@ -29,10 +24,13 @@ export const setPoltronas = (poltronas) => {
 
 export const fetchPassagens = () => {
   return (dispatch) => {
-    firebaseHelper.fetch('passagens/')
-      .then((passagens) => {
-        dispatch({ type: 'FETCHING_PASSAGENS_FULFILLED', payload: (passagens || {}) });
-      })
+    return new Promise((resolve, reject) => {
+      firebaseHelper.fetch('passagens/')
+        .then((passagens) => {
+          dispatch({ type: 'FETCHING_PASSAGENS_FULFILLED', payload: (passagens || {}) });
+          resolve(passagens);
+        });
+    });
   }
 };
 

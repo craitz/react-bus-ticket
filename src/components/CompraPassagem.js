@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FormPassagem from './FormPassagem';
 import * as actions from '../actions/compraPassagem.actions';
-import { SequenceArray } from '../shared/Utils.js';
+import { globals } from '../shared/Globals';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,19 +14,36 @@ const mapStateToProps = (state) => {
 };
 
 class CompraPassagem extends Component {
+  constructor(props) {
+    super(props);
+    this.canRender = false;
+  }
+
+  getDefaults() {
+    const { dispatch } = this.props;
+    this.canRender = false;
+
+    globals.getCidades().then((cidades) => {
+      dispatch(actions.setCidades(cidades));
+      globals.getHorarios().then((horarios) => {
+        dispatch(actions.setHorarios(horarios));
+        dispatch(actions.setPoltronas(globals.poltronas));
+        this.canRender = true;
+        this.forceUpdate();
+      });
+    });
+  }
+
   componentDidMount() {
-    this.props.dispatch(actions.fetchCidades());
-    this.props.dispatch(actions.fetchHorarios());
-    this.props.dispatch(actions.setPoltronas(SequenceArray(42)));
-    this.props.dispatch(actions.fetchPassagens());
+    this.getDefaults();
   }
 
   render() {
     const { cidades, horarios, poltronas } = this.props;
 
-    // it will only render when firebase finish fetch data
-    if ((!cidades || cidades.length === 0) || (!horarios || horarios.length === 0))
+    if (!this.canRender) {
       return null;
+    }
 
     return (
       <FormPassagem cidades={cidades} horarios={horarios} poltronas={poltronas} />

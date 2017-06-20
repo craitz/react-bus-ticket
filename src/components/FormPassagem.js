@@ -5,10 +5,11 @@ import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
-import { newPassagem, setPoltronas } from '../actions/compraPassagem.actions';
+import { newPassagem, setPoltronas, setHorarios } from '../actions/compraPassagem.actions';
 import * as utils from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
+import { globals } from '../shared/Globals';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
@@ -36,7 +37,7 @@ class FormPassagem extends Component {
     const dataFormatted = utils.dateToFirebase(data);
     const horarioFormatted = utils.timeToFirebase(horario);
     const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
-    const todasPoltronas = utils.SequenceArray(42);
+    const todasPoltronas = globals.poltronas;
 
     // carrega apenas as POLTRONAS livres 
     firebaseHelper.fetchKeys(saidasRef)
@@ -60,8 +61,47 @@ class FormPassagem extends Component {
       });
   }
 
+  updateHorarios(data) {
+    const { dispatch, horarios } = this.props;
+    const { horario } = this.props.passagem;
+
+    // get current date
+    const dtNow = new Date().toLocaleDateString('pt-BR');
+    const tmNow = new Date().toLocaleTimeString('pt-BR');
+    const now = utils.buildDateObj(dtNow, tmNow);
+
+    // filter only the future HORARIOS
+    const newHorarios = globals.horarios.filter((hora) => {
+      const curr = utils.buildDateObj(data, hora);
+      return curr > now;
+    });
+
+    // set HORARIOS
+    dispatch(setHorarios(newHorarios));
+
+    // set default values for HORARIO
+    let newHorario = newHorarios[0];
+    let index = 0;
+
+    // check if the current HORARIO is present in the new HORARIOS array
+    if (horario.text.length > 0) {
+      index = newHorarios.indexOf(horario.text);
+      if (index >= 0) {
+        newHorario = newHorarios[index];
+      }
+    }
+
+    // update HORARIO values
+    dispatch(actions.changeHorario({
+      val: index,
+      text: newHorario
+    }));
+
+    return newHorario;
+  }
+
   initializeValues() {
-    const { dispatch, cidades, horarios } = this.props;
+    const { dispatch, cidades, passagem } = this.props;
 
     // initialize EMAIL
     dispatch(actions.changeEmail(firebaseHelper.getUser().email));
@@ -78,13 +118,8 @@ class FormPassagem extends Component {
       text: cidades[1]
     }));
 
-    // initialize HORARIO values
-    dispatch(actions.changeHorario({
-      val: 0,
-      text: horarios[0]
-    }));
-
-    this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, horarios[0]);
+    const newHorario = this.updateHorarios(passagem.data);
+    this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
   }
 
   handleChangeNome(event) {
@@ -206,9 +241,11 @@ class FormPassagem extends Component {
 
   handleChangeData(value) {
     const { origem, destino, horario } = this.props.passagem;
-
     this.props.dispatch(actions.changeData(value));
-    this.updatePoltronas(origem.text, destino.text, value, horario.text);
+    const newHorario = this.updateHorarios(value);
+    console.log(value);
+    console.log(horario.text);
+    this.updatePoltronas(origem.text, destino.text, value, newHorario);
   }
 
   formCanBeSaved() {
