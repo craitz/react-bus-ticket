@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem, setPoltronas } from '../actions/compraPassagem.actions';
-import { ValidationStatus, dateToFirebase, timeToFirebase } from '../shared/Utils';
+import { ValidationStatus, dateToFirebase, timeToFirebase, SequenceArray } from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 
@@ -31,11 +31,37 @@ class FormPassagem extends Component {
     this.initializeValues();
   }
 
+  updatePoltronas(origem, destino, data, horario) {
+    const { dispatch } = this.props;
+    const dataFormatted = dateToFirebase(data);
+    const horarioFormatted = timeToFirebase(horario);
+    const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
+    const todasPoltronas = SequenceArray(42);
+
+    // carrega apenas as POLTRONAS livres 
+    firebaseHelper.fetchKeys(saidasRef)
+      .then((keys) => {
+        const poltronasLivres = todasPoltronas.filter((poltrona) => {
+          return !keys.includes(poltrona)
+        });
+        dispatch(setPoltronas(poltronasLivres));
+        dispatch(actions.changePoltrona({
+          val: 0,
+          text: poltronasLivres[0]
+        }));
+      })
+      .catch(() => {
+        // initialize POLTRONA values
+        dispatch(setPoltronas(todasPoltronas));
+        dispatch(actions.changePoltrona({
+          val: 0,
+          text: todasPoltronas[0]
+        }));
+      });
+  }
+
   initializeValues() {
-    const { dispatch, cidades, poltronas, horarios } = this.props;
-    const dataFormatted = dateToFirebase(this.props.passagem.data);
-    const horarioFormatted = timeToFirebase(horarios[0]);
-    const saidasRef = `saidas/${cidades[0]}/${cidades[1]}/${dataFormatted}/${horarioFormatted}/`;
+    const { dispatch, cidades, horarios } = this.props;
 
     // initialize EMAIL
     dispatch(actions.changeEmail(firebaseHelper.getUser().email));
@@ -58,27 +84,7 @@ class FormPassagem extends Component {
       text: horarios[0]
     }));
 
-    // carrega apenas as POLTRONAS livres 
-    try {
-      firebaseHelper.fetchKeys(saidasRef)
-        .then((keys) => {
-          console.log('mesmo assim');
-          const poltronasLivres = poltronas.filter((poltrona) => {
-            return !keys.includes(poltrona)
-          });
-          dispatch(setPoltronas(poltronasLivres));
-        })
-    } catch (error) {
-      console.log(error);
-    } finally {
-      // initialize POLTRONA values
-      dispatch(actions.changePoltrona({
-        val: 0,
-        text: poltronas[0]
-      }));
-    }
-
-
+    this.updatePoltronas(cidades[0], cidades[1], this.props.passagem.data, horarios[0]);
   }
 
   handleChangeNome(event) {
@@ -105,10 +111,13 @@ class FormPassagem extends Component {
   }
 
   handleChangeOrigem(event) {
+    const { data, horario } = this.props.passagem;
+    const { cidades, dispatch } = this.props;
+
     // build ORIGEM new state
     const origem = {
       val: Number(event.target.value),
-      text: this.props.cidades[event.target.value]
+      text: cidades[event.target.value]
     };
     // get DESTINO state
     const destino = {
@@ -117,7 +126,7 @@ class FormPassagem extends Component {
     };
 
     // change ORIGEM state!
-    this.props.dispatch(actions.changeOrigem({
+    dispatch(actions.changeOrigem({
       val: origem.val,
       text: origem.text
     }));
@@ -126,20 +135,26 @@ class FormPassagem extends Component {
     if (origem.val === destino.val) {
       // calculate new index for DESTINO
       const newIndexDestino = (destino.val === 0) ? (destino.val + 1) : (destino.val - 1);
-
+      const newTextDestino = cidades[newIndexDestino];
       // change DESTINO state!
-      this.props.dispatch(actions.changeDestino({
+      dispatch(actions.changeDestino({
         val: newIndexDestino,
-        text: this.props.cidades[newIndexDestino]
+        text: newTextDestino
       }));
+      this.updatePoltronas(origem.text, newTextDestino, data, horario.text);
+    } else {
+      this.updatePoltronas(origem.text, destino.text, data, horario.text);
     }
   }
 
   handleChangeDestino(event) {
+    const { data, horario } = this.props.passagem;
+    const { cidades, dispatch } = this.props;
+
     // build DESTINO new state
     const destino = {
       val: Number(event.target.value),
-      text: this.props.cidades[event.target.value]
+      text: cidades[event.target.value]
     };
     // get ORIGEM state
     const origem = {
@@ -148,7 +163,7 @@ class FormPassagem extends Component {
     };
 
     // change DESTINO state!
-    this.props.dispatch(actions.changeDestino({
+    dispatch(actions.changeDestino({
       val: destino.val,
       text: destino.text
     }));
@@ -157,12 +172,16 @@ class FormPassagem extends Component {
     if (destino.val === origem.val) {
       // calculate new index for ORIGEM
       const newIndexOrigem = (origem.val === 0) ? (origem.val + 1) : (origem.val - 1);
+      const newTextOrigem = cidades[newIndexOrigem];
 
       // change ORIGEM state!
-      this.props.dispatch(actions.changeOrigem({
+      dispatch(actions.changeOrigem({
         val: newIndexOrigem,
-        text: this.props.cidades[newIndexOrigem]
+        text: newTextOrigem
       }));
+      this.updatePoltronas(newTextOrigem, destino.text, data, horario.text);
+    } else {
+      this.updatePoltronas(origem.text, destino.text, data, horario.text);
     }
   }
 
@@ -174,14 +193,22 @@ class FormPassagem extends Component {
   }
 
   handleChangeHorario(event) {
+    const { origem, destino, data } = this.props.passagem;
+    const novoHorarioText = event.target[event.target.value].text;
+
     this.props.dispatch(actions.changeHorario({
       val: event.target.value,
-      text: event.target[event.target.value].text
+      text: novoHorarioText
     }));
+
+    this.updatePoltronas(origem.text, destino.text, data, novoHorarioText);
   }
 
   handleChangeData(value) {
+    const { origem, destino, horario } = this.props.passagem;
+
     this.props.dispatch(actions.changeData(value));
+    this.updatePoltronas(origem.text, destino.text, value, horario.text);
   }
 
   formCanBeSaved() {

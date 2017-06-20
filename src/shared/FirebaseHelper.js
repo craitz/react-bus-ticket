@@ -80,12 +80,16 @@ class FirebaseHelper {
     const db = firebase.database();
     return new Promise((resolve, reject) => {
       db.ref(refPath).on('value', (snapshot) => {
-        snapshot.forEach((snap) => {
-          keys.push(Number(snap.key));
-          if (keys.length === snapshot.numChildren()) {
-            resolve(keys);
-          }
-        });
+        if (snapshot.exists()) {
+          snapshot.forEach((snap) => {
+            keys.push(Number(snap.key));
+            if (keys.length === snapshot.numChildren()) {
+              resolve(keys);
+            }
+          });
+        } else {
+          reject('Dados não encontrados!');
+        }
       });
     });
   };
