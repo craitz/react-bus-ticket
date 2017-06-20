@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem, setPoltronas } from '../actions/compraPassagem.actions';
-import { ValidationStatus, dateToFirebase, timeToFirebase, SequenceArray } from '../shared/Utils';
+import * as utils from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 
@@ -33,10 +33,10 @@ class FormPassagem extends Component {
 
   updatePoltronas(origem, destino, data, horario) {
     const { dispatch } = this.props;
-    const dataFormatted = dateToFirebase(data);
-    const horarioFormatted = timeToFirebase(horario);
+    const dataFormatted = utils.dateToFirebase(data);
+    const horarioFormatted = utils.timeToFirebase(horario);
     const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
-    const todasPoltronas = SequenceArray(42);
+    const todasPoltronas = utils.SequenceArray(42);
 
     // carrega apenas as POLTRONAS livres 
     firebaseHelper.fetchKeys(saidasRef)
@@ -84,7 +84,7 @@ class FormPassagem extends Component {
       text: horarios[0]
     }));
 
-    this.updatePoltronas(cidades[0], cidades[1], this.props.passagem.data, horarios[0]);
+    this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, horarios[0]);
   }
 
   handleChangeNome(event) {
@@ -102,11 +102,11 @@ class FormPassagem extends Component {
 
     // test required
     if (text.length > 0) {
-      (oldName.validation !== ValidationStatus.SUCCESS) &&
-        this.props.dispatch(actions.setNomeValidation(ValidationStatus.SUCCESS, ''));
+      (oldName.validation !== utils.ValidationStatus.SUCCESS) &&
+        this.props.dispatch(actions.setNomeValidation(utils.ValidationStatus.SUCCESS, ''));
     } else {
-      (oldName.validation !== ValidationStatus.ERROR) &&
-        this.props.dispatch(actions.setNomeValidation(ValidationStatus.ERROR, 'Campo obrigatório'));
+      (oldName.validation !== utils.ValidationStatus.ERROR) &&
+        this.props.dispatch(actions.setNomeValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
     }
   }
 
@@ -223,7 +223,7 @@ class FormPassagem extends Component {
       this.updateNomeValidation(nome.text);
     }
 
-    if ((countPristines > 0) || (nome.validation !== ValidationStatus.SUCCESS)) {
+    if ((countPristines > 0) || (nome.validation !== utils.ValidationStatus.SUCCESS)) {
       return false;
     }
 
@@ -248,7 +248,7 @@ class FormPassagem extends Component {
 
   handleReset() {
     this.props.dispatch(actions.resetFormPassagem());
-    this.initializeSelectValues();
+    this.initializeValues();
   }
 
   render() {

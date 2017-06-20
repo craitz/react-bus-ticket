@@ -124,7 +124,7 @@ class Login extends Component {
           <div className="login-box">
             <div className="login-header">
               <div className="login-header--title">
-                <div className="login-header--title-main">Login</div>
+                <div className="login-header--title-main">Bem-vindo</div>
                 <div className="login-header--title-sub text-muted">
                   <span>Informe o usuário e a senha</span>
                 </div>
