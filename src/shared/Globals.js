@@ -27,7 +27,7 @@ class Globals {
   getCidades() {
     return new Promise((resolve, reject) => {
       if (this.cidades) {
-        resolve(this.cidades)
+        resolve([].concat(this.cidades))
       } else {
         firebaseHelper.fetch('cidades/')
           .then((cidades) => {
@@ -41,7 +41,7 @@ class Globals {
   getHorarios() {
     return new Promise((resolve, reject) => {
       if (this.horarios) {
-        resolve(this.horarios)
+        resolve([].concat(this.horarios))
       } else {
         firebaseHelper.fetch('horarios/')
           .then((horarios) => {
@@ -50,6 +50,10 @@ class Globals {
           });
       }
     });
+  }
+
+  getPoltronas() {
+    return [].concat(this.poltronas);
   }
 };
 

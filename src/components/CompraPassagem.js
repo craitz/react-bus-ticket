@@ -27,7 +27,7 @@ class CompraPassagem extends Component {
       dispatch(actions.setCidades(cidades));
       globals.getHorarios().then((horarios) => {
         dispatch(actions.setHorarios(horarios));
-        dispatch(actions.setPoltronas(globals.poltronas));
+        dispatch(actions.setPoltronas(globals.getPoltronas()));
         this.canRender = true;
         this.forceUpdate();
       });

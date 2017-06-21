@@ -5,7 +5,7 @@ import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
-import { newPassagem, setPoltronas, setHorarios } from '../actions/compraPassagem.actions';
+import { newPassagem, setPoltronas, disablePoltrona, setHorarios } from '../actions/compraPassagem.actions';
 import * as utils from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -35,40 +35,38 @@ class FormPassagem extends Component {
 
   updatePoltronas(origem, destino, data, horario) {
     const { dispatch } = this.props;
+    const todasPoltronas = globals.getPoltronas();
 
-    // *** TEM QUE DESABILITAR OS ITENS
+    // se não há mais horários de saída no dia, 
+    // então desabilita as poltronas e retorna
     if (horario.length === 0) {
-      const newPoltronas = globals.poltronas.map((poltrona) => {
+      const newPoltronas = todasPoltronas.map((poltrona) => {
         poltrona.disabled = true;
         return poltrona;
       });
-
-      dispatch(setPoltronas(globals.poltronas));
+      dispatch(setPoltronas(newPoltronas));
       return;
     }
 
+    // monnta o ref para procurar por poltronas 
+    // já reservadas neste dia 
     const dataFormatted = utils.dateToFirebase(data);
     const horarioFormatted = utils.timeToFirebase(horario);
     const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
-    const todasPoltronas = globals.poltronas;
 
-    // carrega apenas as POLTRONAS livres 
+    // percorre as poltronas já reservadas
     firebaseHelper.fetchKeys(saidasRef)
-      .then((keys) => {
+      .then((keys) => { // desabilta as que foram encontradas
         const poltronasLivres = todasPoltronas.map((poltrona, index, arr) => {
           const numeroPoltrona = Number(arr[poltrona.value].label);
-          if (keys.includes(numeroPoltrona)) {
-            poltrona.disabled = true;
-          }
-          return poltrona;
+          return { ...poltrona, disabled: (keys.includes(numeroPoltrona)) };
         });
         dispatch(setPoltronas(poltronasLivres));
-        // dispatch(actions.changePoltrona(poltronasLivres[0].value));
+        dispatch(actions.changePoltrona(''));
       })
-      .catch(() => {
-        // initialize POLTRONA values
+      .catch(() => { // se não encontrou nada, carregua a lista default
         dispatch(setPoltronas(todasPoltronas));
-        // dispatch(actions.changePoltrona(todasPoltronas[0].value));
+        dispatch(actions.changePoltrona(''));
       });
   }
 
