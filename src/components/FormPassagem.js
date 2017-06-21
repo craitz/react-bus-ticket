@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { BaseField, withInput, withSelect, withDate } from '../shared/FormFields';
+import { BaseField, withInput, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem, setPoltronas, setHorarios } from '../actions/compraPassagem.actions';
 import * as utils from '../shared/Utils';
@@ -13,6 +13,7 @@ import { globals } from '../shared/Globals';
 
 const InputField = withInput(BaseField);
 const SelectField = withSelect(BaseField);
+const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
 
 class FormPassagem extends Component {
@@ -34,6 +35,18 @@ class FormPassagem extends Component {
 
   updatePoltronas(origem, destino, data, horario) {
     const { dispatch } = this.props;
+
+    // *** TEM QUE DESABILITAR OS ITENS
+    if (horario.length === 0) {
+      const newPoltronas = globals.poltronas.map((poltrona) => {
+        poltrona.disabled = true;
+        return poltrona;
+      });
+
+      dispatch(setPoltronas(globals.poltronas));
+      return;
+    }
+
     const dataFormatted = utils.dateToFirebase(data);
     const horarioFormatted = utils.timeToFirebase(horario);
     const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
@@ -42,27 +55,25 @@ class FormPassagem extends Component {
     // carrega apenas as POLTRONAS livres 
     firebaseHelper.fetchKeys(saidasRef)
       .then((keys) => {
-        const poltronasLivres = todasPoltronas.filter((poltrona) => {
-          return !keys.includes(poltrona)
+        const poltronasLivres = todasPoltronas.map((poltrona, index, arr) => {
+          const numeroPoltrona = Number(arr[poltrona.value].label);
+          if (keys.includes(numeroPoltrona)) {
+            poltrona.disabled = true;
+          }
+          return poltrona;
         });
         dispatch(setPoltronas(poltronasLivres));
-        dispatch(actions.changePoltrona({
-          val: 0,
-          text: poltronasLivres[0]
-        }));
+        // dispatch(actions.changePoltrona(poltronasLivres[0].value));
       })
       .catch(() => {
         // initialize POLTRONA values
         dispatch(setPoltronas(todasPoltronas));
-        dispatch(actions.changePoltrona({
-          val: 0,
-          text: todasPoltronas[0]
-        }));
+        // dispatch(actions.changePoltrona(todasPoltronas[0].value));
       });
   }
 
   updateHorarios(data) {
-    const { dispatch, horarios } = this.props;
+    const { dispatch } = this.props;
     const { horario } = this.props.passagem;
 
     // get current date
@@ -80,14 +91,19 @@ class FormPassagem extends Component {
     dispatch(setHorarios(newHorarios));
 
     // set default values for HORARIO
-    let newHorario = newHorarios[0];
+    let newHorario = '';
     let index = 0;
 
-    // check if the current HORARIO is present in the new HORARIOS array
-    if (horario.text.length > 0) {
-      index = newHorarios.indexOf(horario.text);
-      if (index >= 0) {
-        newHorario = newHorarios[index];
+    if (newHorarios.length > 0) {
+      newHorario = newHorarios[0];
+      let index = 0;
+
+      // check if the current HORARIO is present in the new HORARIOS array
+      if (horario.text.length > 0) {
+        index = newHorarios.indexOf(horario.text);
+        if (index >= 0) {
+          newHorario = newHorarios[index];
+        }
       }
     }
 
@@ -220,11 +236,8 @@ class FormPassagem extends Component {
     }
   }
 
-  handleChangePoltrona(event) {
-    this.props.dispatch(actions.changePoltrona({
-      val: event.target.value,
-      text: event.target[event.target.value].text
-    }));
+  handleChangePoltrona(value) {
+    this.props.dispatch(actions.changePoltrona(value));
   }
 
   handleChangeHorario(event) {
@@ -243,8 +256,6 @@ class FormPassagem extends Component {
     const { origem, destino, horario } = this.props.passagem;
     this.props.dispatch(actions.changeData(value));
     const newHorario = this.updateHorarios(value);
-    console.log(value);
-    console.log(horario.text);
     this.updatePoltronas(origem.text, destino.text, value, newHorario);
   }
 
@@ -290,7 +301,7 @@ class FormPassagem extends Component {
 
   render() {
     const { cidades, horarios, poltronas, passagem } = this.props;
-    const { nome, email } = passagem;
+    const { nome, email, poltrona } = passagem;
 
     // render!
     return (
@@ -345,24 +356,30 @@ class FormPassagem extends Component {
               </Col>
             </Row>
 
-            {/*POLTRONA / DATA / HORARIO*/}
+            {/*POLTRONA*/}
             <Row className="text-left">
-              <Col md={4} className="input-col">
-                <SelectField
+              <Col md={12} className="input-col">
+                <MultiSelectField
                   id="poltrona"
-                  label="Poltrona"
+                  label="Poltrona(s)*"
                   list={poltronas}
-                  value={passagem.poltrona.val}
-                  onChange={this.handleChangePoltrona} />
+                  value={passagem.poltrona.value}
+                  onChange={this.handleChangePoltrona}
+                  validation={poltrona.validation}
+                  message={poltrona.message} />
               </Col>
-              <Col md={4} className="input-col">
+            </Row>
+
+            {/*DATA / HORARIO*/}
+            <Row className="text-left">
+              <Col md={6} className="input-col">
                 <DateField
                   id="data"
                   label="Data"
                   value={passagem.data}
                   onChange={this.handleChangeData} />
               </Col>
-              <Col md={4} className="input-col">
+              <Col md={6} className="input-col">
                 <SelectField
                   id="horario"
                   label="Horário"

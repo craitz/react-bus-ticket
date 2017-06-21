@@ -61,6 +61,21 @@ export const changePoltrona = (poltrona) => {
   }
 };
 
+export const setPoltronaPristine = () => {
+  return { type: 'SET_POLTRONA_PRISTINE' }
+};
+
+export const setPoltronaDirty = () => {
+  return { type: 'SET_POLTRONA_DIRTY' }
+};
+
+export const setPoltronaValidation = (validation, message) => {
+  return {
+    type: 'SET_POLTRONA_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
 export const changeData = (data) => {
   return {
     type: 'CHANGE_DATA',

@@ -15,7 +15,13 @@ class Globals {
       this.horarios = horarios;
     });
 
-    this.poltronas = SequenceArray(42);
+    this.poltronas = SequenceArray(42).map((poltrona, index) => {
+      return {
+        label: poltrona.toString(),
+        value: index.toString(),
+        disabled: false
+      };
+    });
   }
 
   getCidades() {

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import { DateBr } from './Utils';
 import datepicker from 'js-datepicker';
+import Select from 'react-select';
 import '../../node_modules/js-datepicker/datepicker.css';
+import 'react-select/dist/react-select.css';
 
 // BASE FORM
 export class BaseField extends Component {
@@ -78,6 +80,30 @@ withSelect.PropTypes = {
   list: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
+}
+
+// MULTISELECT FORM FIELD (HOC)
+export const withMultiSelect = (WrappedComponent) => {
+  return ({ id, label, list, value, onChange, hint = "Selecione...", validation, message, isDisabled = false }) => {
+    const props = {
+      id,
+      label,
+      validation,
+      message
+    };
+    return (
+      <WrappedComponent {...props}>
+        <Select multi simpleValue disabled={isDisabled} placeholder={hint} value={value} options={list} onChange={onChange} />
+      </WrappedComponent>
+    );
+  }
+}
+withMultiSelect.PropTypes = {
+  isDisabled: PropTypes.bool,
+  hint: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  list: PropTypes.array.isRequired,
+  onChange: PropTypes.func
 }
 
 // DATE FORM FIELD (HOC)

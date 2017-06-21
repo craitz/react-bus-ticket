@@ -1,5 +1,6 @@
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import { dateToFirebase, timeToFirebase } from '../shared/Utils';
+import { globals } from '../shared/Globals';
 
 export const setCidades = (cidades) => {
   return {
@@ -40,7 +41,7 @@ const mapPassagemToFirebase = (passagem) => {
     nome: passagem.nome.text,
     origem: passagem.origem.text,
     destino: passagem.destino.text,
-    poltrona: passagem.poltrona.text,
+    poltrona: globals.poltronas[passagem.poltrona.value].label,
     horario: passagem.horario.text
   };
 }

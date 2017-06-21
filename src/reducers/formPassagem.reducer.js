@@ -18,8 +18,10 @@ const initialState = {
       text: '',
     },
     poltrona: {
-      val: 0,
-      text: '',
+      value: [],
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     },
     data: DateNowBr,
     horario: {
@@ -33,6 +35,15 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'RESET_FORM_PASSAGEM': {
       return initialState;
+    }
+    case 'CHANGE_TEST': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          test: action.payload
+        }
+      };
     }
     case 'CHANGE_NOME': {
       return {
@@ -107,7 +118,50 @@ const reducer = (state = initialState, action) => {
     case 'CHANGE_POLTRONA': {
       return {
         ...state,
-        passagem: { ...state.passagem, poltrona: action.payload }
+        passagem: {
+          ...state.passagem,
+          poltrona: {
+            ...state.passagem.poltrona,
+            value: action.payload
+          }
+        }
+      };
+    }
+    case 'SET_POLTRONA_PRISTINE': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          poltrona: {
+            ...state.passagem.poltrona,
+            isPristine: true
+          }
+        }
+      };
+    }
+    case 'SET_POLTRONA_DIRTY': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          poltrona: {
+            ...state.passagem.poltrona,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case 'SET_POLTRONA_VALIDATION': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          poltrona: {
+            ...state.passagem.poltrona,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
       };
     }
     case 'CHANGE_DATA': {
