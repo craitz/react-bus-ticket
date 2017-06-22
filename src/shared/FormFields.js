@@ -16,7 +16,7 @@ export class BaseField extends Component {
       <FormGroup controlId={id} validationState={validation}>
         <ControlLabel>{label}</ControlLabel>
         {children}
-        <FormControl.Feedback />
+        {/*<FormControl.Feedback />*/}
         <HelpBlock>{message}</HelpBlock>
       </FormGroup>
     );
@@ -93,7 +93,15 @@ export const withMultiSelect = (WrappedComponent) => {
     };
     return (
       <WrappedComponent {...props}>
-        <Select multi simpleValue disabled={isDisabled} placeholder={hint} value={value} options={list} onChange={onChange} />
+        <Select
+          multi
+          simpleValue
+          searchable={false}
+          disabled={isDisabled}
+          placeholder={hint}
+          value={value}
+          options={list}
+          onChange={onChange} />
       </WrappedComponent>
     );
   }

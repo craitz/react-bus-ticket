@@ -5,7 +5,7 @@ import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BaseField, withInput, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
-import { newPassagem, setPoltronas, disablePoltrona, setHorarios } from '../actions/compraPassagem.actions';
+import { newPassagem, setPoltronas, setHorarios } from '../actions/compraPassagem.actions';
 import * as utils from '../shared/Utils';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -17,8 +17,8 @@ const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
 
 class FormPassagem extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.handleChangeNome = this.handleChangeNome.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
@@ -41,10 +41,10 @@ class FormPassagem extends Component {
     // então desabilita as poltronas e retorna
     if (horario.length === 0) {
       const newPoltronas = todasPoltronas.map((poltrona) => {
-        poltrona.disabled = true;
-        return poltrona;
+        return { ...poltrona, disabled: true };
       });
       dispatch(setPoltronas(newPoltronas));
+      dispatch(actions.changePoltrona(''));
       return;
     }
 
@@ -64,7 +64,7 @@ class FormPassagem extends Component {
         dispatch(setPoltronas(poltronasLivres));
         dispatch(actions.changePoltrona(''));
       })
-      .catch(() => { // se não encontrou nada, carregua a lista default
+      .catch(() => { // se não encontrou nada, carrega a lista default
         dispatch(setPoltronas(todasPoltronas));
         dispatch(actions.changePoltrona(''));
       });
@@ -137,31 +137,33 @@ class FormPassagem extends Component {
   }
 
   handleChangeNome(event) {
-    const isPristine = this.props.passagem.nome.isPristine;
+    const { dispatch, passagem } = this.props;
+    const isPristine = passagem.nome.isPristine;
     const text = event.target.value;
 
-    this.props.dispatch(actions.changeNome(text));
-    isPristine && this.props.dispatch(actions.setNomeDirty());
+    dispatch(actions.changeNome(text));
+    isPristine && dispatch(actions.setNomeDirty());
 
     this.updateNomeValidation(text);
   }
 
   updateNomeValidation(text) {
-    const oldName = this.props.passagem.nome;
+    const { dispatch, passagem } = this.props;
+    const oldName = passagem.nome;
 
     // test required
     if (text.length > 0) {
-      (oldName.validation !== utils.ValidationStatus.SUCCESS) &&
-        this.props.dispatch(actions.setNomeValidation(utils.ValidationStatus.SUCCESS, ''));
+      (oldName.validation !== utils.ValidationStatus.NONE) &&
+        dispatch(actions.setNomeValidation(utils.ValidationStatus.NONE, ''));
     } else {
       (oldName.validation !== utils.ValidationStatus.ERROR) &&
-        this.props.dispatch(actions.setNomeValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
+        dispatch(actions.setNomeValidation(utils.ValidationStatus.ERROR, 'Informe o nome'));
     }
   }
 
   handleChangeOrigem(event) {
-    const { data, horario } = this.props.passagem;
-    const { cidades, dispatch } = this.props;
+    const { cidades, dispatch, passagem } = this.props;
+    const { data, horario } = passagem;
 
     // build ORIGEM new state
     const origem = {
@@ -170,8 +172,8 @@ class FormPassagem extends Component {
     };
     // get DESTINO state
     const destino = {
-      val: this.props.passagem.destino.val,
-      text: this.props.passagem.destino.text
+      val: passagem.destino.val,
+      text: passagem.destino.text
     };
 
     // change ORIGEM state!
@@ -197,8 +199,8 @@ class FormPassagem extends Component {
   }
 
   handleChangeDestino(event) {
-    const { data, horario } = this.props.passagem;
-    const { cidades, dispatch } = this.props;
+    const { cidades, dispatch, passagem } = this.props;
+    const { data, horario } = passagem;
 
     // build DESTINO new state
     const destino = {
@@ -207,8 +209,8 @@ class FormPassagem extends Component {
     };
     // get ORIGEM state
     const origem = {
-      val: this.props.passagem.origem.val,
-      text: this.props.passagem.origem.text
+      val: passagem.origem.val,
+      text: passagem.origem.text
     };
 
     // change DESTINO state!
@@ -235,14 +237,32 @@ class FormPassagem extends Component {
   }
 
   handleChangePoltrona(value) {
-    this.props.dispatch(actions.changePoltrona(value));
+    const { dispatch } = this.props;
+    const hasSelection = (value.length > 0);
+    dispatch(actions.changePoltrona(value));
+    this.updatePoltronaValidation(hasSelection);
+  }
+
+  updatePoltronaValidation(hasSelection) {
+    const { dispatch, passagem } = this.props;
+    const oldPoltrona = passagem.poltrona;
+
+    // test required
+    if (hasSelection) {
+      (oldPoltrona.validation !== utils.ValidationStatus.NONE) &&
+        dispatch(actions.setPoltronaValidation(utils.ValidationStatus.NONE, ''));
+    } else {
+      (oldPoltrona.validation !== utils.ValidationStatus.ERROR) &&
+        dispatch(actions.setPoltronaValidation(utils.ValidationStatus.ERROR, 'Escolha ao menos uma poltrona'));
+    }
   }
 
   handleChangeHorario(event) {
-    const { origem, destino, data } = this.props.passagem;
+    const { dispatch, passagem } = this.props;
+    const { origem, destino, data } = passagem;
     const novoHorarioText = event.target[event.target.value].text;
 
-    this.props.dispatch(actions.changeHorario({
+    dispatch(actions.changeHorario({
       val: event.target.value,
       text: novoHorarioText
     }));
@@ -251,15 +271,16 @@ class FormPassagem extends Component {
   }
 
   handleChangeData(value) {
-    const { origem, destino, horario } = this.props.passagem;
-    this.props.dispatch(actions.changeData(value));
+    const { dispatch, passagem } = this.props;
+    const { origem, destino } = passagem;
+    dispatch(actions.changeData(value));
     const newHorario = this.updateHorarios(value);
     this.updatePoltronas(origem.text, destino.text, value, newHorario);
   }
 
   formCanBeSaved() {
     const { dispatch, passagem } = this.props;
-    const { nome } = passagem;
+    const { nome, poltrona } = passagem;
     let countPristines = 0;
 
     // if NOME is pristine, form cannot be saved
@@ -269,7 +290,16 @@ class FormPassagem extends Component {
       this.updateNomeValidation(nome.text);
     }
 
-    if ((countPristines > 0) || (nome.validation !== utils.ValidationStatus.SUCCESS)) {
+    if (poltrona.isPristine) {
+      countPristines++;
+      const hasSelection = (poltrona.value.length > 0);
+      dispatch(actions.setPoltronaDirty());
+      this.updatePoltronaValidation(hasSelection);
+    }
+
+    if ((countPristines > 0) ||
+      (nome.validation !== utils.ValidationStatus.SUCCESS) ||
+      (poltrona.validation !== utils.ValidationStatus.SUCCESS)) {
       return false;
     }
 
