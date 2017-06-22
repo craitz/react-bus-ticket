@@ -97,6 +97,8 @@ export const withMultiSelect = (WrappedComponent) => {
           multi
           simpleValue
           searchable={false}
+          clearValueText="Remover"
+          clearAllText="Remover todas"
           disabled={isDisabled}
           placeholder={hint}
           value={value}

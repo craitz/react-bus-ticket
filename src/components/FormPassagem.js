@@ -237,9 +237,15 @@ class FormPassagem extends Component {
   }
 
   handleChangePoltrona(value) {
-    const { dispatch } = this.props;
+    const { dispatch, passagem } = this.props;
     const hasSelection = (value.length > 0);
+    const isPristine = passagem.poltrona.isPristine;
+
+    // altera poltrona e seta como 'dirty'
     dispatch(actions.changePoltrona(value));
+    isPristine && dispatch(actions.setPoltronaDirty());
+
+    // valida poltrona
     this.updatePoltronaValidation(hasSelection);
   }
 
@@ -298,8 +304,8 @@ class FormPassagem extends Component {
     }
 
     if ((countPristines > 0) ||
-      (nome.validation !== utils.ValidationStatus.SUCCESS) ||
-      (poltrona.validation !== utils.ValidationStatus.SUCCESS)) {
+      (nome.validation !== utils.ValidationStatus.NONE) ||
+      (poltrona.validation !== utils.ValidationStatus.NONE)) {
       return false;
     }
 
