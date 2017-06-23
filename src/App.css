@@ -41,19 +41,47 @@
     padding: 20px;
     font-family: 'Roboto'; }
 
-.navbar {
+.navheader-container .navbar {
+  background-color: #2d2d2d;
   margin-bottom: 0;
+  border: none;
+  padding: 50px; }
+
+.navheader-container .icon-title.links {
+  font-size: 2rem;
+  color: #9d9d9d; }
+  .navheader-container .icon-title.links:hover {
+    color: white; }
+
+.navheader-container .nav.navbar-nav {
+  margin-left: 0; }
+
+.navheader-container .page-title,
+.navheader-container .icon-title {
+  color: #e9e9e9; }
+
+.navheader-container .icon-title {
+  font-size: 3rem; }
+
+.navheader-container .page-title {
+  font-family: "Gruppo";
+  font-size: 5rem;
+  margin-left: 30px; }
+
+.App .navbar {
+  margin-bottom: 0;
+  border: none;
   border-radius: 0; }
-  .navbar .container {
+  .App .navbar .container {
     margin-left: 0;
     margin-right: 0;
     width: 100%; }
-  .navbar .navbar-nav {
+  .App .navbar .navbar-nav {
     margin-left: 50px; }
-  .navbar .App-logo {
+  .App .navbar .App-logo {
     animation: App-logo-spin infinite 5s linear;
     color: #f0ad4e; }
-  .navbar .header-title {
+  .App .navbar .header-title {
     color: #f0ad4e;
     margin-left: 10px;
     font-size: 2.5rem;
@@ -66,68 +94,59 @@
   to {
     transform: rotate(360deg); } }
 
-.comprar-passagem-container .navbar {
-  background-color: #2d2d2d;
-  margin-bottom: 30px;
-  border: none;
-  padding: 50px; }
+.comprar-passagem-container {
+  height: calc(100% - 315px); }
+  .comprar-passagem-container .form-passagem-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    padding-top: 0; }
+    .comprar-passagem-container .form-passagem-container .error-empty {
+      color: #a94442; }
+    .comprar-passagem-container .form-passagem-container .input-col {
+      margin-top: 10px; }
+    .comprar-passagem-container .form-passagem-container input#data {
+      background-color: white; }
+    .comprar-passagem-container .form-passagem-container .col-button-left {
+      padding-left: 12px;
+      padding-right: 5px; }
+    .comprar-passagem-container .form-passagem-container .col-button-right {
+      padding-left: 5px;
+      padding-right: 12px; }
+    .comprar-passagem-container .form-passagem-container hr {
+      border-color: rgba(0, 0, 0, 0.1); }
 
-.comprar-passagem-container .icon-title.links {
-  font-size: 2rem;
-  color: #9d9d9d; }
-  .comprar-passagem-container .icon-title.links:hover {
-    color: white; }
-
-.comprar-passagem-container .nav.navbar-nav {
-  margin-left: 0; }
-
-.comprar-passagem-container .page-title,
-.comprar-passagem-container .icon-title {
-  color: #e9e9e9; }
-
-.comprar-passagem-container .icon-title {
-  font-size: 3rem; }
-
-.comprar-passagem-container .page-title {
-  font-family: "Gruppo";
-  font-size: 5rem;
-  margin-left: 30px; }
-
-.comprar-passagem-container .form-passagem-container .error-empty {
-  color: #a94442; }
-
-.comprar-passagem-container .form-passagem-container .input-col {
-  margin-top: 10px; }
-
-.comprar-passagem-container .form-passagem-container input#data {
-  background-color: white; }
-
-.comprar-passagem-container .form-passagem-container .col-button-left {
-  padding-left: 12px;
-  padding-right: 5px; }
-
-.comprar-passagem-container .form-passagem-container .col-button-right {
-  padding-left: 5px;
-  padding-right: 12px; }
-
-.comprar-passagem-container .form-passagem-container hr {
-  border-color: rgba(0, 0, 0, 0.1); }
-
-.confirmacao-passagem .jumbotron {
-  color: darkslategray;
-  font-size: 18px;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px; }
-  .confirmacao-passagem .jumbotron .title-label {
-    font-weight: 'bold'; }
+.confirmacao-passagem {
+  height: calc(100% - 315px); }
+  .confirmacao-passagem .form-centered {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    padding-top: 0; }
+    .confirmacao-passagem .form-centered .jumbotron {
+      color: darkslategray;
+      font-size: 18px;
+      padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px; }
+      .confirmacao-passagem .form-centered .jumbotron .title-label {
+        font-weight: 'bold'; }
 
 .login-container {
+  height: calc(100% - 150px) !important;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  margin-top: 0;
+  padding-top: 0; }
   .login-container .login-box {
     text-align: left;
     position: relative;
@@ -185,8 +204,7 @@ html {
       html body #root .App {
         height: inherit; }
         html body #root .App .App-container {
-          padding: 0;
-          height: calc(100% - 180px); }
+          padding: 0; }
           html body #root .App .App-container .App-container__row {
             height: 100%; }
             html body #root .App .App-container .App-container__row .App-container__col {

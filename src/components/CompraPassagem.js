@@ -412,119 +412,125 @@ class CompraPassagem extends Component {
 
     return (
       <div className="comprar-passagem-container">
-        <Navbar>
-          <NavHeader label="Compre sua passagem" glyph="tags"></NavHeader>
-          <Nav pullRight>
-            <NavItem href="#">
-              <TooltipOverlay text="Ver histórico de compras" position="top">
-                <Glyphicon className="icon-title links search" glyph="search" />
-              </TooltipOverlay>
-            </NavItem>
-            <NavItem href="#" className="nav-links">
-              <TooltipOverlay text="Limpar campos" position="top">
-                <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
-              </TooltipOverlay>
-            </NavItem>
-          </Nav>
-        </Navbar>
+        <div className="navheader-container">
+          <Navbar>
+            <NavHeader label="Compre sua passagem" glyph="tags"></NavHeader>
+            <Nav pullRight>
+              <NavItem href="#">
+                <TooltipOverlay text="Ver histórico de compras" position="top">
+                  <Glyphicon className="icon-title links search" glyph="search" />
+                </TooltipOverlay>
+              </NavItem>
+              <NavItem href="#" className="nav-links">
+                <TooltipOverlay text="Limpar campos" position="top">
+                  <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
+                </TooltipOverlay>
+              </NavItem>
+            </Nav>
+          </Navbar>
+        </div>
         <div className="form-passagem-container">
-          <Grid>
-            <Row>
-              <Col md={6} mdOffset={3}>
-                <form onSubmit={this.handleSubmit}>
+          <div className="form-centered">
+            <Grid>
+              <Row>
+                <Col md={6} mdOffset={3}>
+                  <form onSubmit={this.handleSubmit}>
 
-                  {/*NOME / CPF*/}
-                  <Row className="text-left">
-                    <Col xs={8}>
-                      <InputField
-                        id="nome"
-                        label="Nome*"
-                        type="text"
-                        value={nome.text}
-                        onChange={this.handleChangeNome}
-                        validation={nome.validation}
-                        message={nome.message} />
-                    </Col>
-                    <Col xs={4}>
-                      <InputMaskField
-                        id="cpf"
-                        label="CPF*"
-                        mask="111.111.111-11"
-                        value={cpf.text}
-                        onChange={this.handleChangeCpf}
-                        validation={cpf.validation}
-                        message={cpf.message} />
-                    </Col>
-                  </Row>
+                    {/*NOME / CPF*/}
+                    <Row className="text-left">
+                      <Col xs={8}>
+                        <InputField
+                          id="nome"
+                          label="Nome*"
+                          type="text"
+                          value={nome.text}
+                          onChange={this.handleChangeNome}
+                          validation={nome.validation}
+                          message={nome.message} />
+                      </Col>
+                      <Col xs={4}>
+                        <InputMaskField
+                          id="cpf"
+                          label="CPF*"
+                          mask="111.111.111-11"
+                          value={cpf.text}
+                          onChange={this.handleChangeCpf}
+                          validation={cpf.validation}
+                          message={cpf.message} />
+                      </Col>
+                    </Row>
 
 
-                  {/*ORIGEM / DESTINO*/}
-                  <Row className="text-left">
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="origem"
-                        label="Origem"
-                        list={cidades}
-                        value={passagem.origem.val}
-                        onChange={this.handleChangeOrigem} />
-                    </Col>
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="destino"
-                        label="Destino"
-                        list={cidades}
-                        value={passagem.destino.val}
-                        onChange={this.handleChangeDestino} />
-                    </Col>
-                  </Row>
+                    {/*ORIGEM / DESTINO*/}
+                    <Row className="text-left">
+                      <Col md={6} className="input-col">
+                        <SelectField
+                          id="origem"
+                          label="Origem"
+                          list={cidades}
+                          value={passagem.origem.val}
+                          onChange={this.handleChangeOrigem} />
+                      </Col>
+                      <Col md={6} className="input-col">
+                        <SelectField
+                          id="destino"
+                          label="Destino"
+                          list={cidades}
+                          value={passagem.destino.val}
+                          onChange={this.handleChangeDestino} />
+                      </Col>
+                    </Row>
 
-                  {/*POLTRONA*/}
-                  <Row className="text-left">
-                    <Col md={12} className="input-col">
-                      <MultiSelectField
-                        id="poltrona"
-                        label="Poltrona(s)*"
-                        list={poltronas}
-                        value={passagem.poltrona.value}
-                        onChange={this.handleChangePoltrona}
-                        validation={poltrona.validation}
-                        message={poltrona.message}
-                        emptyMessage="Não há mais saídas neste dia" />
-                    </Col>
-                  </Row>
+                    {/*POLTRONA*/}
+                    <Row className="text-left">
+                      <Col md={12} className="input-col">
+                        <MultiSelectField
+                          id="poltrona"
+                          label="Poltrona(s)*"
+                          list={poltronas}
+                          value={passagem.poltrona.value}
+                          onChange={this.handleChangePoltrona}
+                          validation={poltrona.validation}
+                          message={poltrona.message}
+                          emptyMessage="Não há mais saídas neste dia" />
+                      </Col>
+                    </Row>
 
-                  {/*DATA / HORARIO*/}
-                  <Row className="text-left">
-                    <Col md={6} className="input-col">
-                      <DateField
-                        id="data"
-                        label="Data"
-                        value={passagem.data}
-                        onChange={this.handleChangeData} />
-                    </Col>
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="horario"
-                        label="Horário"
-                        list={horarios}
-                        value={passagem.horario.val}
-                        onChange={this.handleChangeHorario}
-                        emptyMessage="Não há mais saídas neste dia" />
-                    </Col>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Col md={12} className="col-button-left">
-                      <Button type="submit" bsStyle="primary" className="btn-block">
-                        <Glyphicon glyph="shopping-cart" />
-                        <span className="text-after-icon">Comprar!</span>
-                      </Button>
-                    </Col>
-                  </Row>
-                </form >
-              </Col>
-            </Row>
-          </Grid>
+                    {/*DATA / HORARIO*/}
+                    <Row className="text-left">
+                      <Col md={6} className="input-col">
+                        <DateField
+                          id="data"
+                          label="Data"
+                          value={passagem.data}
+                          onChange={this.handleChangeData} />
+                      </Col>
+                      <Col md={6} className="input-col">
+                        <SelectField
+                          id="horario"
+                          label="Horário"
+                          list={horarios}
+                          value={passagem.horario.val}
+                          onChange={this.handleChangeHorario}
+                          emptyMessage="Não há mais saídas neste dia" />
+                      </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col md={12} className="col-button-left">
+                        <Button type="submit" bsStyle="primary" className="btn-block">
+                          <Glyphicon glyph="shopping-cart" />
+                          <span className="text-after-icon">Comprar!</span>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </form >
+                </Col>
+              </Row>
+            </Grid>
+          </div>
+
+
         </div>
       </div >
     );

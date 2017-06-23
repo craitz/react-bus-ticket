@@ -1,35 +1,7 @@
 .comprar-passagem-container {
-    .navbar {
-        // background-color: #565656;
-        background-color: #2d2d2d;
-        margin-bottom: 30px;
-        border: none;
-        padding: 50px;
-    }
-    .icon-title.links {
-        font-size: 2rem;
-        color: rgb(157, 157, 157);
-        &:hover {
-            color: white;
-        }
-    }
-    .nav.navbar-nav {
-        margin-left: 0;
-    }
-    .page-title,
-    .icon-title {
-        color: rgb(233, 233, 233);
-    }
-    .icon-title {
-        font-size: 3rem;
-    }
-    .page-title {
-        font-family: "Gruppo";
-        font-size: 5rem;
-        // font-weight: bold;
-        margin-left: 30px;
-    }
+    height: calc(100% - 315px);
     .form-passagem-container {
+        @include centralizeContent();
         .error-empty {
             color: rgb(169, 68, 66);
         }

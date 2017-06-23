@@ -1,6 +1,7 @@
 @import "global";
 @import "tooltip";
 @import "layout";
+@import "navheader";
 @import "navigation";
 @import "compraPassagem";
 @import "confirmaPassagem";
@@ -17,7 +18,6 @@ html {
                 height: inherit;
                 .App-container {
                     padding: 0;
-                    height: calc(100% - #{$header_height});
                     .App-container__row {
                         height: 100%;
                         .App-container__col {

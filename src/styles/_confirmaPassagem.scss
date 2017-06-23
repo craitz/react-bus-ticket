@@ -1,14 +1,18 @@
 .confirmacao-passagem {
-    .jumbotron {
-        .title-label {
-            font-weight: 'bold';
-        }
-        color: darkslategray;
-        font-size: 18px;
-        padding: 20px;
-        margin: {
-            top: 20px;
-            bottom: 20px;
+    height: calc(100% - 315px);
+    .form-centered {
+        @include centralizeContent();
+        .jumbotron {
+            .title-label {
+                font-weight: 'bold';
+            }
+            color: darkslategray;
+            font-size: 18px;
+            padding: 20px;
+            margin: {
+                top: 20px;
+                bottom: 20px;
+            }
         }
     }
 }
