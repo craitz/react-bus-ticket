@@ -123,7 +123,6 @@ class CompraPassagem extends Component {
 
     if (newHorarios.length > 0) {
       newHorario = newHorarios[0];
-      let index = 0;
 
       // check if the current HORARIO is present in the new HORARIOS array
       if ((horario.text.length > 0) && (!isClear)) {
@@ -147,7 +146,7 @@ class CompraPassagem extends Component {
   }
 
   initializeValues() {
-    const { dispatch, cidades, passagem } = this.props;
+    const { dispatch, cidades } = this.props;
 
     // initialize EMAIL
     dispatch(actions.changeEmail(firebaseHelper.getUser().email));

@@ -60,12 +60,14 @@ export const newPassagem = (passagem) => {
   const { nome, email, origem, destino, poltrona, data, horario } = novaPassagem;
   const dataFormatted = utils.dateToFirebase(data);
   const horarioFormatted = utils.timeToFirebase(horario);
+  const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
+  const newPassgemRef = `passagens/${emailFirebase}`;
   const poltronasSelecionadas = poltrona.split(',');
 
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       // salva passagem numa lista global
-      firebaseHelper.save(novaPassagem, 'passagens/')
+      firebaseHelper.save(novaPassagem, newPassgemRef)
         .then((key) => {
           // altera o estado da passagem
           dispatch({ type: 'NEW_PASSAGEM', payload: { novaPassagem, key } });
