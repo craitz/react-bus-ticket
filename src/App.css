@@ -83,6 +83,9 @@
   font-weight: bold;
   margin-left: 14px; }
 
+.comprar-passagem-container .form-passagem-container .form-passagem .error-empty {
+  color: #a94442; }
+
 .comprar-passagem-container .form-passagem-container .form-passagem .input-col {
   margin-top: 10px; }
 

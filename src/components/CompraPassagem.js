@@ -131,13 +131,16 @@ class CompraPassagem extends Component {
           newHorario = newHorarios[index];
         }
       }
-    }
 
-    // update HORARIO values
-    dispatch(actions.changeHorario({
-      val: index,
-      text: newHorario
-    }));
+      // update HORARIO values
+      dispatch(actions.changeHorario({
+        val: index,
+        text: newHorario
+      }));
+
+    } else {
+      // VALIDAR HORARIOS
+    }
 
     return newHorario;
   }
@@ -160,7 +163,7 @@ class CompraPassagem extends Component {
       text: cidades[1]
     }));
 
-    const newHorario = this.updateHorarios(passagem.data);
+    const newHorario = this.updateHorarios(utils.DateNowBr);
     this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
   }
 
@@ -337,33 +340,37 @@ class CompraPassagem extends Component {
   }
 
   formCanBeSaved() {
-    const { dispatch, passagem } = this.props;
+    const { dispatch, passagem, horarios } = this.props;
     const { nome, cpf, poltrona } = passagem;
-    let countPristines = 0;
+    let failed = false;
+
+    if (horarios.length === 0) {
+      failed = true;
+    }
 
     // if NOME is pristine, form cannot be saved
     if (nome.isPristine) {
-      countPristines++;
+      failed = true;
       dispatch(actions.setNomeDirty());
       this.updateNomeValidation(nome.text);
     }
 
     // if CPF is pristine, form cannot be saved
     if (cpf.isPristine) {
-      countPristines++;
+      failed = true;
       dispatch(actions.setCpfDirty());
       this.updateCpfValidation(cpf.text);
     }
 
     // if POLTRONA is pristine, form cannot be saved
     if (poltrona.isPristine) {
-      countPristines++;
+      failed = true;
       const hasSelection = (poltrona.value.length > 0);
       dispatch(actions.setPoltronaDirty());
       this.updatePoltronaValidation(hasSelection);
     }
 
-    if ((countPristines > 0) ||
+    if ((failed) ||
       (nome.validation !== utils.ValidationStatus.NONE) ||
       (cpf.validation !== utils.ValidationStatus.NONE) ||
       (poltrona.validation !== utils.ValidationStatus.NONE)) {
@@ -428,9 +435,9 @@ class CompraPassagem extends Component {
           <div className="form-passagem">
             <form onSubmit={this.handleSubmit}>
 
-              {/*NOME*/}
+              {/*NOME / CPF*/}
               <Row className="text-left">
-                <Col xs={12}>
+                <Col xs={8}>
                   <InputField
                     id="nome"
                     label="Nome*"
@@ -440,11 +447,7 @@ class CompraPassagem extends Component {
                     validation={nome.validation}
                     message={nome.message} />
                 </Col>
-              </Row>
-
-              {/*CPF*/}
-              <Row className="text-left">
-                <Col xs={12}>
+                <Col xs={4}>
                   <InputMaskField
                     id="cpf"
                     label="CPF*"
@@ -455,6 +458,7 @@ class CompraPassagem extends Component {
                     message={cpf.message} />
                 </Col>
               </Row>
+
 
               {/*ORIGEM / DESTINO*/}
               <Row className="text-left">
@@ -486,7 +490,8 @@ class CompraPassagem extends Component {
                     value={passagem.poltrona.value}
                     onChange={this.handleChangePoltrona}
                     validation={poltrona.validation}
-                    message={poltrona.message} />
+                    message={poltrona.message}
+                    emptyMessage="Não há mais saídas neste dia" />
                 </Col>
               </Row>
 
@@ -505,7 +510,8 @@ class CompraPassagem extends Component {
                     label="Horário"
                     list={horarios}
                     value={passagem.horario.val}
-                    onChange={this.handleChangeHorario} />
+                    onChange={this.handleChangeHorario}
+                    emptyMessage="Não há mais saídas neste dia" />
                 </Col>
               </Row>
               <hr />

@@ -88,7 +88,7 @@ withInput.defaultProps = {
 
 // SELECT FORM FIELD (HOC)
 export const withSelect = (WrappedComponent) => {
-  return ({ id, label, list, value, onChange }) => {
+  return ({ id, label, list, value, onChange, emptyMessage = '' }) => {
     const props = {
       id,
       label,
@@ -98,9 +98,12 @@ export const withSelect = (WrappedComponent) => {
     };
     return (
       <WrappedComponent {...props}>
-        <FormControl value={value} componentClass="select" onChange={onChange}>
-          {list.map((item, index) => <option value={index} key={index}>{item}</option>)}
-        </FormControl>
+        {list.length > 0 &&
+          <FormControl value={value} componentClass="select" onChange={onChange}>
+            {list.map((item, index) => <option value={index} key={index}>{item}</option>)}
+          </FormControl>}
+        {list.length === 0 &&
+          <FormControl.Static className="error-empty">{emptyMessage}</FormControl.Static>}
       </WrappedComponent>
     );
   }
@@ -108,12 +111,13 @@ export const withSelect = (WrappedComponent) => {
 withSelect.PropTypes = {
   list: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  emptyMessage: PropTypes.string
 }
 
 // MULTISELECT FORM FIELD (HOC)
 export const withMultiSelect = (WrappedComponent) => {
-  return ({ id, label, list, value, onChange, hint = "Selecione...", validation, message, isDisabled = false }) => {
+  return ({ id, label, list, value, onChange, hint = 'Selecione...', validation, message, isDisabled = false, emptyMessage = '' }) => {
     const props = {
       id,
       label,
@@ -122,17 +126,20 @@ export const withMultiSelect = (WrappedComponent) => {
     };
     return (
       <WrappedComponent {...props}>
-        <Select
-          multi
-          simpleValue
-          searchable={false}
-          clearValueText="Remover"
-          clearAllText="Remover todas"
-          disabled={isDisabled}
-          placeholder={hint}
-          value={value}
-          options={list}
-          onChange={onChange} />
+        {(list.length > 0) &&
+          <Select
+            multi
+            simpleValue
+            searchable={false}
+            clearValueText="Remover"
+            clearAllText="Remover todas"
+            disabled={isDisabled}
+            placeholder={hint}
+            value={value}
+            options={list}
+            onChange={onChange} />}
+        {(list.length === 0) &&
+          <FormControl.Static className="error-empty">{emptyMessage}</FormControl.Static>}
       </WrappedComponent>
     );
   }
@@ -142,7 +149,8 @@ withMultiSelect.PropTypes = {
   hint: PropTypes.string,
   value: PropTypes.string.isRequired,
   list: PropTypes.array.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  emptyMessage: PropTypes.string
 }
 
 // DATE FORM FIELD (HOC)

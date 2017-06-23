@@ -19,6 +19,9 @@
     }
     .form-passagem-container {
         .form-passagem {
+            .error-empty {
+                color: rgb(169, 68, 66);
+            }
             .input-col {
                 margin-top: 10px;
             }

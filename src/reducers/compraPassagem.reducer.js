@@ -71,7 +71,49 @@ const reducer = (state = initialState, action) => {
       };
     }
     case 'RESET_FORM_PASSAGEM': {
-      return initialState;
+      return {
+        ...state,
+        horarios: [],
+        poltronas: [],
+        passagens: {},
+        fetching: false,
+        fetched: false,
+        error: null,
+        passagem: {
+          nome: {
+            text: '',
+            isPristine: true,
+            validation: ValidationStatus.NONE,
+            message: ''
+          },
+          cpf: {
+            text: '',
+            isPristine: true,
+            validation: ValidationStatus.NONE,
+            message: ''
+          },
+          email: '',
+          origem: {
+            val: 0,
+            text: '',
+          },
+          destino: {
+            val: 1,
+            text: '',
+          },
+          poltrona: {
+            value: [],
+            isPristine: true,
+            validation: ValidationStatus.NONE,
+            message: ''
+          },
+          data: DateNowBr,
+          horario: {
+            val: 0,
+            text: '',
+          }
+        }
+      }
     }
     case 'CHANGE_NOME': {
       return {
