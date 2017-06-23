@@ -42,6 +42,7 @@
     font-family: 'Roboto'; }
 
 .navbar {
+  margin-bottom: 50px;
   border-radius: 0; }
   .navbar .container {
     margin-left: 0;
@@ -65,21 +66,38 @@
   to {
     transform: rotate(360deg); } }
 
-.form-passagem-container .form-passagem .input-col {
+.comprar-passagem-container .navbar {
+  background-color: #565656;
+  margin-bottom: 30px; }
+
+.comprar-passagem-container .nav.navbar-nav {
+  margin-left: 0; }
+
+.comprar-passagem-container .page-title,
+.comprar-passagem-container .icon-title {
+  color: #e9e9e9; }
+
+.comprar-passagem-container .page-title {
+  font-family: "Gruppo";
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 14px; }
+
+.comprar-passagem-container .form-passagem-container .form-passagem .input-col {
   margin-top: 10px; }
 
-.form-passagem-container .form-passagem input#data {
+.comprar-passagem-container .form-passagem-container .form-passagem input#data {
   background-color: white; }
 
-.form-passagem-container .form-passagem .col-button-left {
+.comprar-passagem-container .form-passagem-container .form-passagem .col-button-left {
   padding-left: 12px;
   padding-right: 5px; }
 
-.form-passagem-container .form-passagem .col-button-right {
+.comprar-passagem-container .form-passagem-container .form-passagem .col-button-right {
   padding-left: 5px;
   padding-right: 12px; }
 
-.form-passagem-container .form-passagem hr {
+.comprar-passagem-container .form-passagem-container .form-passagem hr {
   border-color: rgba(0, 0, 0, 0.1); }
 
 .confirmacao-passagem .jumbotron {

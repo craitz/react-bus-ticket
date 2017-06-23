@@ -33,6 +33,29 @@ export const setNomeValidation = (validation, message) => {
   }
 };
 
+export const changeCpf = (cpf) => {
+  return {
+    type: 'CHANGE_CPF',
+    payload: cpf
+  }
+};
+
+export const setCpfPristine = () => {
+  return { type: 'SET_CPF_PRISTINE' }
+};
+
+export const setCpfDirty = () => {
+  return { type: 'SET_CPF_DIRTY' }
+};
+
+export const setCpfValidation = (validation, message) => {
+  return {
+    type: 'SET_CPF_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
+
 export const changeEmail = (email) => {
   return {
     type: 'CHANGE_EMAIL',

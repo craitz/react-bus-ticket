@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { BaseField, withInput, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
+import { BaseField, withInput, withSelect, withDate, withMultiSelect, withInputMask } from '../shared/FormFields';
 import * as actions from '../actions/formPassagem.actions';
 import { newPassagem, setPoltronas, setHorarios } from '../actions/compraPassagem.actions';
 import * as utils from '../shared/Utils';
@@ -12,6 +12,7 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { globals } from '../shared/Globals';
 
 const InputField = withInput(BaseField);
+const InputMaskField = withInputMask(BaseField);
 const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
@@ -20,13 +21,13 @@ class FormPassagem extends Component {
   constructor(props) {
     super(props);
     this.handleChangeNome = this.handleChangeNome.bind(this);
+    this.handleChangeCpf = this.handleChangeCpf.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
   }
 
   componentDidMount() {
@@ -161,6 +162,31 @@ class FormPassagem extends Component {
     }
   }
 
+  handleChangeCpf(event) {
+    const { dispatch, passagem } = this.props;
+    const isPristine = passagem.cpf.isPristine;
+    const text = event.target.value;
+
+    dispatch(actions.changeCpf(text));
+    isPristine && dispatch(actions.setCpfDirty());
+
+    this.updateCpfValidation(text);
+  }
+
+  updateCpfValidation(text) {
+    const { dispatch, passagem } = this.props;
+    const oldCpf = passagem.cpf;
+    const cpfRegexp = /^\d{3}.\d{3}.\d{3}-\d{2}$/;
+
+    if (text.length === 0) { // EMPTY
+      dispatch(actions.setCpfValidation(utils.ValidationStatus.ERROR, 'Informe o CPF'));
+    } else if (!cpfRegexp.test(text)) { // BAD FORMAT
+      dispatch(actions.setCpfValidation(utils.ValidationStatus.ERROR, 'CPF inválido'));
+    } else { // OK
+      dispatch(actions.setCpfValidation(utils.ValidationStatus.NONE, ''));
+    }
+  }
+
   handleChangeOrigem(event) {
     const { cidades, dispatch, passagem } = this.props;
     const { data, horario } = passagem;
@@ -286,7 +312,7 @@ class FormPassagem extends Component {
 
   formCanBeSaved() {
     const { dispatch, passagem } = this.props;
-    const { nome, poltrona } = passagem;
+    const { nome, cpf, poltrona } = passagem;
     let countPristines = 0;
 
     // if NOME is pristine, form cannot be saved
@@ -296,6 +322,14 @@ class FormPassagem extends Component {
       this.updateNomeValidation(nome.text);
     }
 
+    // if CPF is pristine, form cannot be saved
+    if (cpf.isPristine) {
+      countPristines++;
+      dispatch(actions.setCpfDirty());
+      this.updateCpfValidation(cpf.text);
+    }
+
+    // if POLTRONA is pristine, form cannot be saved
     if (poltrona.isPristine) {
       countPristines++;
       const hasSelection = (poltrona.value.length > 0);
@@ -305,6 +339,7 @@ class FormPassagem extends Component {
 
     if ((countPristines > 0) ||
       (nome.validation !== utils.ValidationStatus.NONE) ||
+      (cpf.validation !== utils.ValidationStatus.NONE) ||
       (poltrona.validation !== utils.ValidationStatus.NONE)) {
       return false;
     }
@@ -328,19 +363,19 @@ class FormPassagem extends Component {
     event.preventDefault();
   }
 
-  handleReset() {
+  reset() {
     this.props.dispatch(actions.resetFormPassagem());
     this.initializeValues();
   }
 
   render() {
     const { cidades, horarios, poltronas, passagem } = this.props;
-    const { nome, email, poltrona } = passagem;
+    const { nome, cpf, email, poltrona } = passagem;
 
     // render!
     return (
       <div className="form-passagem-container">
-        <h2>Compre sua passagem</h2>
+        {/*<h2>Compre sua passagem</h2>*/}
         <div className="form-passagem">
           <form onSubmit={this.handleSubmit}>
 
@@ -358,8 +393,22 @@ class FormPassagem extends Component {
               </Col>
             </Row>
 
-            {/*E_MAIL*/}
+            {/*CPF*/}
             <Row className="text-left">
+              <Col xs={12}>
+                <InputMaskField
+                  id="cpf"
+                  label="CPF*"
+                  mask="111.111.111-11"
+                  value={cpf.text}
+                  onChange={this.handleChangeCpf}
+                  validation={cpf.validation}
+                  message={cpf.message} />
+              </Col>
+            </Row>
+
+            {/*E_MAIL*/}
+            {/*<Row className="text-left">
               <Col xs={12} className="input-col">
                 <InputField
                   id="email"
@@ -368,7 +417,7 @@ class FormPassagem extends Component {
                   value={email}
                   isDisabled={true} />
               </Col>
-            </Row>
+            </Row>*/}
 
             {/*ORIGEM / DESTINO*/}
             <Row className="text-left">
@@ -424,13 +473,17 @@ class FormPassagem extends Component {
             </Row>
             <hr />
             <Row>
-              <Col md={5} className="col-button-left">
+              <Col md={12} className="col-button-left">
                 <Button type="submit" bsStyle="primary" className="btn-block">
                   <Glyphicon glyph="shopping-cart" />
                   <span className="text-after-icon">Comprar!</span>
                 </Button>
               </Col>
-              <Col md={4} className="col-button-right">
+              {/*<Col md={4} className="col-button-right">
+                <Link to="/passagens">
+                  <Glyphicon glyph="search" />
+                  <span className="text-after-icon">Pesquisar</span>
+                </Link>
                 <Button type="button" bsStyle="warning" className="btn-block" onClick={this.handleReset}>
                   <Glyphicon glyph="search" />
                   <span className="text-after-icon">Pesquisar</span>
@@ -441,7 +494,11 @@ class FormPassagem extends Component {
                   <Glyphicon glyph="erase" />
                   <span className="text-after-icon">Limpar</span>
                 </Button>
-              </Col>
+                <Link to="#">
+                  <Glyphicon glyph="erase" />
+                  <span className="text-after-icon">Limpar campos</span>
+                </Link>
+              </Col>*/}
             </Row>
           </form >
         </div>

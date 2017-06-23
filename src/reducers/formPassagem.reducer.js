@@ -8,6 +8,12 @@ const initialState = {
       validation: ValidationStatus.NONE,
       message: ''
     },
+    cpf: {
+      text: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
+    },
     email: '',
     origem: {
       val: 0,
@@ -35,15 +41,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'RESET_FORM_PASSAGEM': {
       return initialState;
-    }
-    case 'CHANGE_TEST': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          test: action.payload
-        }
-      };
     }
     case 'CHANGE_NOME': {
       return {
@@ -88,6 +85,55 @@ const reducer = (state = initialState, action) => {
           ...state.passagem,
           nome: {
             ...state.passagem.nome,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
+      };
+    }
+    case 'CHANGE_CPF': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          cpf: {
+            ...state.passagem.cpf,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case 'SET_CPF_PRISTINE': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          cpf: {
+            ...state.passagem.cpf,
+            isPristine: true
+          }
+        }
+      };
+    }
+    case 'SET_CPF_DIRTY': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          cpf: {
+            ...state.passagem.cpf,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case 'SET_CPF_VALIDATION': {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          cpf: {
+            ...state.passagem.cpf,
             validation: action.payload.validation,
             message: action.payload.message
           }

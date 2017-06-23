@@ -4,6 +4,7 @@ import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap
 import { DateBr } from './Utils';
 import datepicker from 'js-datepicker';
 import Select from 'react-select';
+import MaskedFormControl from 'react-bootstrap-maskedinput'
 import '../../node_modules/js-datepicker/datepicker.css';
 import 'react-select/dist/react-select.css';
 
@@ -41,6 +42,34 @@ export const withInput = (WrappedComponent) => {
     return (
       <WrappedComponent {...props}>
         <FormControl type={type} value={value} onChange={onChange} disabled={isDisabled} />
+      </WrappedComponent>
+    );
+  }
+}
+withInput.PropTypes = {
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  isDisabled: PropTypes.bool
+}
+
+withInput.defaultProps = {
+  isDisabled: false,
+  onChange: null
+}
+
+// INPUTMASK FORM FIELD (HOC)
+export const withInputMask = (WrappedComponent) => {
+  return ({ id, label, value, mask, onChange, validation, message }) => {
+    const props = {
+      id,
+      label,
+      validation,
+      message
+    };
+    return (
+      <WrappedComponent {...props}>
+        <MaskedFormControl type='text' mask={mask} value={value} onChange={onChange} />
       </WrappedComponent>
     );
   }

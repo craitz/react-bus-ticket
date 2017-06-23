@@ -1,23 +1,43 @@
-.form-passagem-container {
-    .form-passagem {
-        .input-col {
-            margin-top: 10px;
-        }
-        input#data {
-            background-color: white;
-        }
-        .col-button {
-            &-left {
-                padding-left: 12px;
-                padding-right: 5px;
+.comprar-passagem-container {
+    .navbar {
+        background-color: #565656;
+        margin-bottom: 30px;
+        .container {}
+    }
+    .nav.navbar-nav {
+        margin-left: 0;
+    }
+    .page-title,
+    .icon-title {
+        color: rgb(233, 233, 233);
+    }
+    .page-title {
+        font-family: "Gruppo";
+        font-size: 2rem;
+        font-weight: bold;
+        margin-left: 14px;
+    }
+    .form-passagem-container {
+        .form-passagem {
+            .input-col {
+                margin-top: 10px;
             }
-            &-right {
-                padding-left: 5px;
-                padding-right: 12px;
+            input#data {
+                background-color: white;
             }
-        }
-        hr {
-            border-color: rgba(0, 0, 0, .1);
+            .col-button {
+                &-left {
+                    padding-left: 12px;
+                    padding-right: 5px;
+                }
+                &-right {
+                    padding-left: 5px;
+                    padding-right: 12px;
+                }
+            }
+            hr {
+                border-color: rgba(0, 0, 0, .1);
+            }
         }
     }
 }

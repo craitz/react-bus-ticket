@@ -8,20 +8,20 @@ import PropTypes from 'prop-types';
 const NavbarCollapse = ({ email, onLgout }) =>
   <Navbar.Collapse>
     <Nav>
-      <NavItem eventKey={1} href="#">Comprar passagens</NavItem>
-      <NavItem eventKey={2} href="#">Histórico de compras</NavItem>
+      <NavItem href="#">Comprar passagens</NavItem>
+      <NavItem href="#">Histórico de compras</NavItem>
     </Nav>
     <Nav pullRight>
-      <NavItem eventKey={1} href="#">
-        <TooltipOverlay text="Detalhes do usuário">
+      <TooltipOverlay text="Detalhes do usuário">
+        <NavItem href="#">
           <span>{email}</span>
-        </TooltipOverlay>
-      </NavItem>
-      <NavItem eventKey={2} href="#">
-        <TooltipOverlay text="Logout">
-          <Glyphicon glyph="off" className="logoff-logo" onClick={onLgout} />
-        </TooltipOverlay>
-      </NavItem>
+        </NavItem>
+      </TooltipOverlay>
+      <TooltipOverlay text="Logout">
+        <NavItem href="#" onClick={onLgout}>
+          <Glyphicon glyph="off" className="logoff-logo" />
+        </NavItem>
+      </TooltipOverlay>
     </Nav>
   </Navbar.Collapse>
 
