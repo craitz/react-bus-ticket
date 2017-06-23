@@ -386,10 +386,13 @@ class CompraPassagem extends Component {
 
     if (this.formCanBeSaved()) {
       dispatch(actions.newPassagem(passagem))
-        .then((key) => {
+        .then((obj) => {
           history.push({
-            pathname: `/passagem/${key}`,
-            state: { passagem }
+            pathname: `/passagem/${obj.key}`,
+            state: {
+              novaPassagem: obj.novaPassagem,
+              key: obj.key
+            }
           });
         });
     }

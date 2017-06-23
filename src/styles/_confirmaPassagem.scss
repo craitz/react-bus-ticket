@@ -2,16 +2,29 @@
     height: calc(100% - 315px);
     .form-centered {
         @include centralizeContent();
+        .detalhes {
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+        .label-localizador {
+            margin-bottom: 10px;
+        }
+        .localizador {
+            font-family: "Gruppo";
+            font-size: 3rem;
+            // color: green;
+            font-weight: bold;
+        }
         .jumbotron {
-            .title-label {
-                font-weight: 'bold';
-            }
-            color: darkslategray;
-            font-size: 18px;
+            // .title-label {
+            //     font-weight: 'bold';
+            // }
+            // color: darkslategray;
+            // font-size: 18px;
             padding: 20px;
             margin: {
-                top: 20px;
-                bottom: 20px;
+                top: 5px;
+                bottom: 0;
             }
         }
     }

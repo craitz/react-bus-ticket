@@ -10,7 +10,8 @@ import {
   Grid,
   Nav,
   Navbar,
-  NavItem
+  NavItem,
+  Label
 } from 'react-bootstrap';
 import { NavHeader } from '../shared/Navigation';
 import TooltipOverlay from '../shared/TooltipOverlay';
@@ -31,12 +32,12 @@ class ConfirmaPassagem extends Component {
   }
 
   render() {
-    const { passagem } = this.props.location.state;
+    const { novaPassagem, key } = this.props.location.state;
     return (
       <div className="confirmacao-passagem">
         <div className="navheader-container">
           <Navbar>
-            <NavHeader label="Compra finalizada!" glyph="ok"></NavHeader>
+            <NavHeader label="Compra finalizada!" glyph="ok-sign text-success"></NavHeader>
             <Nav pullRight>
               <NavItem href="#">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
@@ -45,7 +46,7 @@ class ConfirmaPassagem extends Component {
               </NavItem>
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Comprar nova passagem" position="top">
-                  <Glyphicon className="icon-title links reset" glyph="shopping-cart" onClick={this.handleReset} />
+                  <Glyphicon className="icon-title links reset" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
                 </TooltipOverlay>
               </NavItem>
             </Nav>
@@ -54,51 +55,24 @@ class ConfirmaPassagem extends Component {
         <div className="form-centered">
           <Grid>
             <Row>
-              <Col md={6} mdOffset={3}>
-                <Jumbotron>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Nome:</Col>
-                    <Col xs={7} className="text-left">{passagem.nome.text}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">E-mail:</Col>
-                    <Col xs={7} className="text-left">{passagem.email}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Origem:</Col>
-                    <Col xs={7} className="text-left">{passagem.origem.text}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Destino:</Col>
-                    <Col xs={7} className="text-left">{passagem.destino.text}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Poltrona:</Col>
-                    <Col xs={7} className="text-left">{passagem.poltrona.text}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Data:</Col>
-                    <Col xs={7} className="text-left">{passagem.data}</Col>
-                  </Row>
-                  <Row>
-                    <Col xs={5} className="text-right title-label">Saída:</Col>
-                    <Col xs={7} className="text-left">{passagem.horario.text}</Col>
-                  </Row>
-                </Jumbotron>
-                <Row>
-                  <Col xs={6}>
-                    <Button type="button" bsStyle="primary" className="btn-block" onClick={this.handleComprarPassagem}>
-                      <Glyphicon glyph="shopping-cart" />
-                      <span className="text-after-icon">Continuar comprando</span>
-                    </Button>
-                  </Col>
-                  <Col xs={6}>
-                    <Button type="button" bsStyle="warning" className="btn-block">
-                      <Glyphicon glyph="search" />
-                      <span className="text-after-icon">Pesquisar comporas</span>
-                    </Button>
-                  </Col>
-                </Row>
+              <Col md={6} mdOffset={3} className="text-left">
+                <div className="label-localizador">Seu código localizador é:</div>
+                <Label bsStyle="success" className="localizador">{key}</Label>
+                <div className="detalhes">
+                  <span>Dados da passagem:</span>
+                  <Jumbotron>
+                    <div><strong>Nome:</strong> {novaPassagem.nome}</div>
+                    <div><strong>CPF:</strong> {novaPassagem.cpf}</div>
+                    {/*<div><strong>E-mail:</strong> {passagem.email}</div>*/}
+                    <div><strong>Origem:</strong> {novaPassagem.origem}</div>
+                    <div><strong>Destino:</strong> {novaPassagem.destino}</div>
+                    <div><strong>Data:</strong> {novaPassagem.data}</div>
+                    <div><strong>Saída:</strong> {novaPassagem.horario}</div>
+                    <div><strong>Poltrona(s):</strong> {novaPassagem.poltrona}</div>
+                  </Jumbotron>
+                </div>
+                <div>Parabéns pela sua compra e tenha uma boa viagem!</div>
+                <div>Um e-mail foi enviado para <strong>{novaPassagem.email}</strong> com mais detalhes.</div>
               </Col>
             </Row>
           </Grid>
@@ -109,11 +83,13 @@ class ConfirmaPassagem extends Component {
 }
 
 ConfirmaPassagem.PropTypes = {
-  passagem: PropTypes.object.isRequired,
+  novaPassagem: PropTypes.object.isRequired,
+  key: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+  };
 };
 
 const ConfirmaPassagemWithRouter = withRouter(ConfirmaPassagem);

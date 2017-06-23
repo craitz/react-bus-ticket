@@ -1,5 +1,5 @@
 import { firebaseHelper } from '../shared/FirebaseHelper';
-import { dateToFirebase, timeToFirebase } from '../shared/Utils';
+import * as utils from '../shared/Utils';
 import { globals } from '../shared/Globals';
 
 export const Select = {
@@ -46,10 +46,11 @@ const mapPassagemToFirebase = (passagem) => {
   return {
     ...passagem,
     nome: passagem.nome.text,
+    cpf: passagem.cpf.text,
     origem: passagem.origem.text,
     destino: passagem.destino.text,
-    poltrona: passagem.poltrona.value,
-    horario: passagem.horario.text
+    horario: passagem.horario.text,
+    poltrona: passagem.poltrona.value
   };
 }
 
@@ -57,10 +58,9 @@ export const newPassagem = (passagem) => {
   const todasPoltronas = globals.getPoltronas();
   const novaPassagem = mapPassagemToFirebase(passagem);
   const { nome, email, origem, destino, poltrona, data, horario } = novaPassagem;
-  const dataFormatted = dateToFirebase(data);
-  const horarioFormatted = timeToFirebase(horario);
+  const dataFormatted = utils.dateToFirebase(data);
+  const horarioFormatted = utils.timeToFirebase(horario);
   const poltronasSelecionadas = poltrona.split(',');
-
 
   return (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -81,7 +81,7 @@ export const newPassagem = (passagem) => {
               .then(() => {
                 // só resolve quando atingir a última poltrona
                 if (index === (arr.length - 1)) {
-                  resolve(key);
+                  resolve({ novaPassagem, key });
                 }
               });
           });

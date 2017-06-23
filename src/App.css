@@ -45,7 +45,8 @@
   background-color: #2d2d2d;
   margin-bottom: 0;
   border: none;
-  padding: 50px; }
+  padding: 50px;
+  padding-left: 0; }
 
 .navheader-container .icon-title.links {
   font-size: 2rem;
@@ -129,14 +130,19 @@
     align-items: center;
     margin-top: 0;
     padding-top: 0; }
+    .confirmacao-passagem .form-centered .detalhes {
+      margin-top: 60px;
+      margin-bottom: 30px; }
+    .confirmacao-passagem .form-centered .label-localizador {
+      margin-bottom: 10px; }
+    .confirmacao-passagem .form-centered .localizador {
+      font-family: "Gruppo";
+      font-size: 3rem;
+      font-weight: bold; }
     .confirmacao-passagem .form-centered .jumbotron {
-      color: darkslategray;
-      font-size: 18px;
       padding: 20px;
-      margin-top: 20px;
-      margin-bottom: 20px; }
-      .confirmacao-passagem .form-centered .jumbotron .title-label {
-        font-weight: 'bold'; }
+      margin-top: 5px;
+      margin-bottom: 0; }
 
 .login-container {
   height: calc(100% - 150px) !important;
