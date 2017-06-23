@@ -10,19 +10,24 @@ import CompraPassagem from './components/CompraPassagem';
 import Login from './components/Login';
 import './App.css';
 
-ReactDOM.render(
-  <Router>
-    <Provider store={store}>
-      <Layout>
-        <Switch>
-          <Route exact path="/" component={CompraPassagem} />
-          <Route path="/passagem/:id" component={ConfirmaPassagem} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </Layout>
-    </Provider>
-  </Router>,
-  document.getElementById('root')
-);
 
-registerServiceWorker();
+const runApp = () => {
+  ReactDOM.render(
+    <Router>
+      <Provider store={store}>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={CompraPassagem} />
+            <Route path="/passagem/:id" component={ConfirmaPassagem} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </Layout>
+      </Provider>
+    </Router>,
+    document.getElementById('root')
+  );
+
+  registerServiceWorker();
+};
+
+runApp();

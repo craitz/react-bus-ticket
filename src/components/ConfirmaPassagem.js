@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Jumbotron, Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import { resetFormPassagem } from '../actions/formPassagem.actions'
+import * as actions from '../actions/compraPassagem.actions'
 import { withAuth } from '../shared/hoc';
 
 class ConfirmaPassagem extends Component {
@@ -14,7 +14,7 @@ class ConfirmaPassagem extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    this.props.dispatch(resetFormPassagem());
+    this.props.dispatch(actions.resetFormPassagem());
     this.props.history.push('/');
   }
 

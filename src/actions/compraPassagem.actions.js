@@ -2,6 +2,13 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { dateToFirebase, timeToFirebase } from '../shared/Utils';
 import { globals } from '../shared/Globals';
 
+export const Select = {
+  ORIGEM: 0,
+  DESTINO: 1,
+  POLTRONA: 2,
+  HORARIO: 3
+}
+
 export const setCidades = (cidades) => {
   return {
     type: 'SET_CIDADES',
@@ -81,4 +88,112 @@ export const newPassagem = (passagem) => {
         });
     });
   };
+};
+
+export const resetFormPassagem = () => {
+  return {
+    type: 'RESET_FORM_PASSAGEM'
+  }
+};
+
+export const changeNome = (nome) => {
+  return {
+    type: 'CHANGE_NOME',
+    payload: nome
+  }
+};
+
+export const setNomePristine = () => {
+  return { type: 'SET_NOME_PRISTINE' }
+};
+
+export const setNomeDirty = () => {
+  return { type: 'SET_NOME_DIRTY' }
+};
+
+export const setNomeValidation = (validation, message) => {
+  return {
+    type: 'SET_NOME_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
+export const changeCpf = (cpf) => {
+  return {
+    type: 'CHANGE_CPF',
+    payload: cpf
+  }
+};
+
+export const setCpfPristine = () => {
+  return { type: 'SET_CPF_PRISTINE' }
+};
+
+export const setCpfDirty = () => {
+  return { type: 'SET_CPF_DIRTY' }
+};
+
+export const setCpfValidation = (validation, message) => {
+  return {
+    type: 'SET_CPF_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
+
+export const changeEmail = (email) => {
+  return {
+    type: 'CHANGE_EMAIL',
+    payload: email
+  }
+};
+
+export const changeOrigem = (origem) => {
+  return {
+    type: 'CHANGE_ORIGEM',
+    payload: origem
+  }
+};
+
+export const changeDestino = (destino) => {
+  return {
+    type: 'CHANGE_DESTINO',
+    payload: destino
+  }
+};
+
+export const changePoltrona = (poltrona) => {
+  return {
+    type: 'CHANGE_POLTRONA',
+    payload: poltrona
+  }
+};
+
+export const setPoltronaPristine = () => {
+  return { type: 'SET_POLTRONA_PRISTINE' }
+};
+
+export const setPoltronaDirty = () => {
+  return { type: 'SET_POLTRONA_DIRTY' }
+};
+
+export const setPoltronaValidation = (validation, message) => {
+  return {
+    type: 'SET_POLTRONA_VALIDATION',
+    payload: { validation, message }
+  }
+};
+
+export const changeData = (data) => {
+  return {
+    type: 'CHANGE_DATA',
+    payload: data
+  }
+};
+
+export const changeHorario = (horario) => {
+  return {
+    type: 'CHANGE_HORARIO',
+    payload: horario
+  }
 };
