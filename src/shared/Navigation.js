@@ -5,6 +5,19 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
+export const NavHeader = ({ label, glyph }) =>
+  <Nav>
+    <NavItem>
+      <Glyphicon className="icon-title" glyph={glyph} />
+      <span className="page-title">{label}</span>
+    </NavItem>
+  </Nav>
+
+NavHeader.PropTypes = {
+  label: PropTypes.string.isRequired,
+  glyph: PropTypes.string.isRequired
+}
+
 const NavbarCollapse = ({ email, onLgout }) =>
   <Navbar.Collapse>
     <Nav>

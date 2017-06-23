@@ -7,13 +7,7 @@ class Layout extends Component {
     return (
       <div className="App">
         <Navigation></Navigation>
-        <Grid className="App-container">
-          <Row className="App-container__row">
-            <Col md={6} mdOffset={3} className="App-container__col">
-              {this.props.children}
-            </Col>
-          </Row>
-        </Grid>
+        {this.props.children}
       </div>
     );
   }

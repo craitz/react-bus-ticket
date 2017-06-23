@@ -7,8 +7,9 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Grid, Button } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
+import { NavHeader } from '../shared/Navigation';
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -98,7 +99,7 @@ class CompraPassagem extends Component {
       });
   }
 
-  updateHorarios(data) {
+  updateHorarios(data, isClear = false) {
     const { dispatch } = this.props;
     const { horario } = this.props.passagem;
 
@@ -125,7 +126,7 @@ class CompraPassagem extends Component {
       let index = 0;
 
       // check if the current HORARIO is present in the new HORARIOS array
-      if (horario.text.length > 0) {
+      if ((horario.text.length > 0) && (!isClear)) {
         index = newHorarios.indexOf(horario.text);
         if (index >= 0) {
           newHorario = newHorarios[index];
@@ -163,7 +164,7 @@ class CompraPassagem extends Component {
       text: cidades[1]
     }));
 
-    const newHorario = this.updateHorarios(utils.DateNowBr);
+    const newHorario = this.updateHorarios(utils.DateNowBr, true);
     this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
   }
 
@@ -412,121 +413,120 @@ class CompraPassagem extends Component {
     return (
       <div className="comprar-passagem-container">
         <Navbar>
-          <Nav>
-            <NavItem>
-              <Glyphicon className="icon-title" glyph="tags" />
-              <span className="page-title">Compre sua passsagem</span>
-            </NavItem>
-          </Nav>
+          <NavHeader label="Compre sua passagem" glyph="tags"></NavHeader>
           <Nav pullRight>
-            <TooltipOverlay text="Ver histórico de compras">
-              <NavItem href="#">
-                <Glyphicon className="icon-title" glyph="search" />
-              </NavItem>
-            </TooltipOverlay>
-            <TooltipOverlay text="Limpar campos">
-              <NavItem href="#" onClick={this.handleReset}>
-                <Glyphicon className="icon-title" glyph="erase" />
-              </NavItem>
-            </TooltipOverlay>
+            <NavItem href="#">
+              <TooltipOverlay text="Ver histórico de compras" position="top">
+                <Glyphicon className="icon-title links search" glyph="search" />
+              </TooltipOverlay>
+            </NavItem>
+            <NavItem href="#" className="nav-links">
+              <TooltipOverlay text="Limpar campos" position="top">
+                <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
+              </TooltipOverlay>
+            </NavItem>
           </Nav>
         </Navbar>
         <div className="form-passagem-container">
-          <div className="form-passagem">
-            <form onSubmit={this.handleSubmit}>
+          <Grid>
+            <Row>
+              <Col md={6} mdOffset={3}>
+                <form onSubmit={this.handleSubmit}>
 
-              {/*NOME / CPF*/}
-              <Row className="text-left">
-                <Col xs={8}>
-                  <InputField
-                    id="nome"
-                    label="Nome*"
-                    type="text"
-                    value={nome.text}
-                    onChange={this.handleChangeNome}
-                    validation={nome.validation}
-                    message={nome.message} />
-                </Col>
-                <Col xs={4}>
-                  <InputMaskField
-                    id="cpf"
-                    label="CPF*"
-                    mask="111.111.111-11"
-                    value={cpf.text}
-                    onChange={this.handleChangeCpf}
-                    validation={cpf.validation}
-                    message={cpf.message} />
-                </Col>
-              </Row>
+                  {/*NOME / CPF*/}
+                  <Row className="text-left">
+                    <Col xs={8}>
+                      <InputField
+                        id="nome"
+                        label="Nome*"
+                        type="text"
+                        value={nome.text}
+                        onChange={this.handleChangeNome}
+                        validation={nome.validation}
+                        message={nome.message} />
+                    </Col>
+                    <Col xs={4}>
+                      <InputMaskField
+                        id="cpf"
+                        label="CPF*"
+                        mask="111.111.111-11"
+                        value={cpf.text}
+                        onChange={this.handleChangeCpf}
+                        validation={cpf.validation}
+                        message={cpf.message} />
+                    </Col>
+                  </Row>
 
 
-              {/*ORIGEM / DESTINO*/}
-              <Row className="text-left">
-                <Col md={6} className="input-col">
-                  <SelectField
-                    id="origem"
-                    label="Origem"
-                    list={cidades}
-                    value={passagem.origem.val}
-                    onChange={this.handleChangeOrigem} />
-                </Col>
-                <Col md={6} className="input-col">
-                  <SelectField
-                    id="destino"
-                    label="Destino"
-                    list={cidades}
-                    value={passagem.destino.val}
-                    onChange={this.handleChangeDestino} />
-                </Col>
-              </Row>
+                  {/*ORIGEM / DESTINO*/}
+                  <Row className="text-left">
+                    <Col md={6} className="input-col">
+                      <SelectField
+                        id="origem"
+                        label="Origem"
+                        list={cidades}
+                        value={passagem.origem.val}
+                        onChange={this.handleChangeOrigem} />
+                    </Col>
+                    <Col md={6} className="input-col">
+                      <SelectField
+                        id="destino"
+                        label="Destino"
+                        list={cidades}
+                        value={passagem.destino.val}
+                        onChange={this.handleChangeDestino} />
+                    </Col>
+                  </Row>
 
-              {/*POLTRONA*/}
-              <Row className="text-left">
-                <Col md={12} className="input-col">
-                  <MultiSelectField
-                    id="poltrona"
-                    label="Poltrona(s)*"
-                    list={poltronas}
-                    value={passagem.poltrona.value}
-                    onChange={this.handleChangePoltrona}
-                    validation={poltrona.validation}
-                    message={poltrona.message}
-                    emptyMessage="Não há mais saídas neste dia" />
-                </Col>
-              </Row>
+                  {/*POLTRONA*/}
+                  <Row className="text-left">
+                    <Col md={12} className="input-col">
+                      <MultiSelectField
+                        id="poltrona"
+                        label="Poltrona(s)*"
+                        list={poltronas}
+                        value={passagem.poltrona.value}
+                        onChange={this.handleChangePoltrona}
+                        validation={poltrona.validation}
+                        message={poltrona.message}
+                        emptyMessage="Não há mais saídas neste dia" />
+                    </Col>
+                  </Row>
 
-              {/*DATA / HORARIO*/}
-              <Row className="text-left">
-                <Col md={6} className="input-col">
-                  <DateField
-                    id="data"
-                    label="Data"
-                    value={passagem.data}
-                    onChange={this.handleChangeData} />
-                </Col>
-                <Col md={6} className="input-col">
-                  <SelectField
-                    id="horario"
-                    label="Horário"
-                    list={horarios}
-                    value={passagem.horario.val}
-                    onChange={this.handleChangeHorario}
-                    emptyMessage="Não há mais saídas neste dia" />
-                </Col>
-              </Row>
-              <hr />
-              <Row>
-                <Col md={12} className="col-button-left">
-                  <Button type="submit" bsStyle="primary" className="btn-block">
-                    <Glyphicon glyph="shopping-cart" />
-                    <span className="text-after-icon">Comprar!</span>
-                  </Button>
-                </Col>
-              </Row>
-            </form >
-          </div>
-        </div >
-      </div>
+                  {/*DATA / HORARIO*/}
+                  <Row className="text-left">
+                    <Col md={6} className="input-col">
+                      <DateField
+                        id="data"
+                        label="Data"
+                        value={passagem.data}
+                        onChange={this.handleChangeData} />
+                    </Col>
+                    <Col md={6} className="input-col">
+                      <SelectField
+                        id="horario"
+                        label="Horário"
+                        list={horarios}
+                        value={passagem.horario.val}
+                        onChange={this.handleChangeHorario}
+                        emptyMessage="Não há mais saídas neste dia" />
+                    </Col>
+                  </Row>
+                  <hr />
+                  <Row>
+                    <Col md={12} className="col-button-left">
+                      <Button type="submit" bsStyle="primary" className="btn-block">
+                        <Glyphicon glyph="shopping-cart" />
+                        <span className="text-after-icon">Comprar!</span>
+                      </Button>
+                    </Col>
+                  </Row>
+                </form >
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </div >
     );
   }
 }

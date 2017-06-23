@@ -1,8 +1,17 @@
 .comprar-passagem-container {
     .navbar {
-        background-color: #565656;
+        // background-color: #565656;
+        background-color: #2d2d2d;
         margin-bottom: 30px;
-        .container {}
+        border: none;
+        padding: 50px;
+    }
+    .icon-title.links {
+        font-size: 2rem;
+        color: rgb(157, 157, 157);
+        &:hover {
+            color: white;
+        }
     }
     .nav.navbar-nav {
         margin-left: 0;
@@ -11,36 +20,37 @@
     .icon-title {
         color: rgb(233, 233, 233);
     }
+    .icon-title {
+        font-size: 3rem;
+    }
     .page-title {
         font-family: "Gruppo";
-        font-size: 2rem;
-        font-weight: bold;
-        margin-left: 14px;
+        font-size: 5rem;
+        // font-weight: bold;
+        margin-left: 30px;
     }
     .form-passagem-container {
-        .form-passagem {
-            .error-empty {
-                color: rgb(169, 68, 66);
+        .error-empty {
+            color: rgb(169, 68, 66);
+        }
+        .input-col {
+            margin-top: 10px;
+        }
+        input#data {
+            background-color: white;
+        }
+        .col-button {
+            &-left {
+                padding-left: 12px;
+                padding-right: 5px;
             }
-            .input-col {
-                margin-top: 10px;
+            &-right {
+                padding-left: 5px;
+                padding-right: 12px;
             }
-            input#data {
-                background-color: white;
-            }
-            .col-button {
-                &-left {
-                    padding-left: 12px;
-                    padding-right: 5px;
-                }
-                &-right {
-                    padding-left: 5px;
-                    padding-right: 12px;
-                }
-            }
-            hr {
-                border-color: rgba(0, 0, 0, .1);
-            }
+        }
+        hr {
+            border-color: rgba(0, 0, 0, .1);
         }
     }
 }

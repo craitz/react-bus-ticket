@@ -42,7 +42,7 @@
     font-family: 'Roboto'; }
 
 .navbar {
-  margin-bottom: 50px;
+  margin-bottom: 0;
   border-radius: 0; }
   .navbar .container {
     margin-left: 0;
@@ -67,8 +67,16 @@
     transform: rotate(360deg); } }
 
 .comprar-passagem-container .navbar {
-  background-color: #565656;
-  margin-bottom: 30px; }
+  background-color: #2d2d2d;
+  margin-bottom: 30px;
+  border: none;
+  padding: 50px; }
+
+.comprar-passagem-container .icon-title.links {
+  font-size: 2rem;
+  color: #9d9d9d; }
+  .comprar-passagem-container .icon-title.links:hover {
+    color: white; }
 
 .comprar-passagem-container .nav.navbar-nav {
   margin-left: 0; }
@@ -77,30 +85,32 @@
 .comprar-passagem-container .icon-title {
   color: #e9e9e9; }
 
+.comprar-passagem-container .icon-title {
+  font-size: 3rem; }
+
 .comprar-passagem-container .page-title {
   font-family: "Gruppo";
-  font-size: 2rem;
-  font-weight: bold;
-  margin-left: 14px; }
+  font-size: 5rem;
+  margin-left: 30px; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem .error-empty {
+.comprar-passagem-container .form-passagem-container .error-empty {
   color: #a94442; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem .input-col {
+.comprar-passagem-container .form-passagem-container .input-col {
   margin-top: 10px; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem input#data {
+.comprar-passagem-container .form-passagem-container input#data {
   background-color: white; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem .col-button-left {
+.comprar-passagem-container .form-passagem-container .col-button-left {
   padding-left: 12px;
   padding-right: 5px; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem .col-button-right {
+.comprar-passagem-container .form-passagem-container .col-button-right {
   padding-left: 5px;
   padding-right: 12px; }
 
-.comprar-passagem-container .form-passagem-container .form-passagem hr {
+.comprar-passagem-container .form-passagem-container hr {
   border-color: rgba(0, 0, 0, 0.1); }
 
 .confirmacao-passagem .jumbotron {
