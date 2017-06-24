@@ -531,8 +531,6 @@ class CompraPassagem extends Component {
               </Row>
             </Grid>
           </div>
-
-
         </div>
       </div >
     );

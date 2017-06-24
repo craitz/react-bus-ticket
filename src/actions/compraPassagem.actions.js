@@ -54,40 +54,53 @@ const mapPassagemToFirebase = (passagem) => {
   };
 }
 
-export const newPassagem = (passagem) => {
-  const todasPoltronas = globals.getPoltronas();
-  const novaPassagem = mapPassagemToFirebase(passagem);
-  const { nome, email, origem, destino, poltrona, data, horario } = novaPassagem;
-  const dataFormatted = utils.dateToFirebase(data);
-  const horarioFormatted = utils.timeToFirebase(horario);
-  const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
-  const newPassgemRef = `passagens/${emailFirebase}`;
-  const poltronasSelecionadas = poltrona.split(',');
+const poltronaToFirebase = (poltrona) => {
+  return new Promise((resolve) => {
+    const todasPoltronas = globals.getPoltronas();
+    const poltronasSelecionadas = poltrona.split(',');
+    let poltronasFormatadas = '';
+    poltronasSelecionadas.forEach((poltrona, index, arr) => {
+      const poltronaCorrente = todasPoltronas[poltrona].label;
+      poltronasFormatadas = (index === 0) ? poltronaCorrente : `${poltronasFormatadas} - ${poltronaCorrente}`;
+      if (index === (arr.length - 1)) {
+        resolve(poltronasFormatadas);
+      }
+    });
+  });
+}
 
+export const newPassagem = (passagem) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
-      // salva passagem numa lista global
-      firebaseHelper.save(novaPassagem, newPassgemRef)
-        .then((key) => {
-          // altera o estado da passagem
-          dispatch({ type: 'NEW_PASSAGEM', payload: { novaPassagem, key } });
+      const novaPassagem = mapPassagemToFirebase(passagem);
+      const { nome, email, cpf, origem, destino, data, horario } = novaPassagem;
 
-          // percorre as poltronas selecionada e salva uma por uma
-          poltronasSelecionadas.forEach((val, index, arr) => {
-            // obtém o label da poltrona corrent
-            const poltronaCorrente = todasPoltronas[val].label;
+      poltronaToFirebase(novaPassagem.poltrona).then((poltronasFormatadas) => {
+        novaPassagem.poltrona = poltronasFormatadas;
+        const dataFormatted = utils.dateToFirebase(data);
+        const horarioFormatted = utils.timeToFirebase(horario);
+        const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
+        const newPassgemRef = `passagens/${emailFirebase}`;
+        const poltronasSelecionadas = novaPassagem.poltrona.split(' - ');
 
-            // salva no banco de dados
-            firebaseHelper.set({ nome, email },
-              `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${poltronaCorrente}/`)
-              .then(() => {
-                // só resolve quando atingir a última poltrona
-                if (index === (arr.length - 1)) {
-                  resolve({ novaPassagem, key });
-                }
-              });
+        // salva passagem numa lista global
+        firebaseHelper.save(novaPassagem, newPassgemRef)
+          .then((key) => {
+            // altera o estado da passagem
+            dispatch({ type: 'NEW_PASSAGEM', payload: { novaPassagem, key } });
+
+            // percorre as poltronas selecionada e salva uma por uma
+            poltronasSelecionadas.forEach((val, index, arr) => {
+              firebaseHelper.set({ nome, email, cpf },
+                `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
+                .then(() => {
+                  if (index === (arr.length - 1)) {
+                    resolve({ novaPassagem, key });
+                  }
+                });
+            });
           });
-        });
+      });
     });
   };
 };
