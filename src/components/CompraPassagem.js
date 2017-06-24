@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { BaseField, withInput, withSelect, withDate, withMultiSelect, withInputMask } from '../shared/FormFields';
 import * as actions from '../actions/compraPassagem.actions';
@@ -22,7 +22,6 @@ const mapStateToProps = (state) => {
     cidades: state.compraPassagemState.cidades,
     horarios: state.compraPassagemState.horarios,
     poltronas: state.compraPassagemState.poltronas,
-    passagens: state.compraPassagemState.passagens,
     passagem: state.compraPassagemState.passagem
   };
 };
@@ -40,6 +39,7 @@ class CompraPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
   }
 
   componentDidMount() {
@@ -399,9 +399,15 @@ class CompraPassagem extends Component {
     event.preventDefault();
   }
 
-  handleReset() {
+  handleReset(event) {
+    event.preventDefault();
     this.props.dispatch(actions.resetFormPassagem());
     this.initializeValues();
+  }
+
+  handlePesquisarPassagens(event) {
+    event.preventDefault();
+    this.props.history.push('/passagens');
   }
 
   render() {
@@ -418,9 +424,9 @@ class CompraPassagem extends Component {
           <Navbar>
             <NavHeader label="Compre sua passagem" glyph="tags"></NavHeader>
             <Nav pullRight>
-              <NavItem href="#">
+              <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <Glyphicon className="icon-title links search" glyph="search" />
+                  <Glyphicon className="icon-title links search" glyph="search" onClick={this.handlePesquisarPassagens} />
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">

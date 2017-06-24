@@ -55,15 +55,6 @@ const reducer = (state = initialState, action) => {
     case 'SET_POLTRONAS': {
       return { ...state, poltronas: action.payload };
     }
-    case 'FETCHING_PASSAGENS': {
-      return { ...state, fetching: true };
-    }
-    case 'FETCHING_PASSAGENS_REJECTED': {
-      return { ...state, fetching: false, error: action.payload };
-    }
-    case 'FETCHING_PASSAGENS_FULFILLED': {
-      return { ...state, fetching: false, fetched: true, passagens: action.payload };
-    }
     case 'NEW_PASSAGEM': {
       return {
         ...state,
@@ -75,7 +66,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         horarios: [],
         poltronas: [],
-        passagens: {},
         fetching: false,
         fetched: false,
         error: null,

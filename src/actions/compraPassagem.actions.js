@@ -30,18 +30,6 @@ export const setPoltronas = (poltronas) => {
   }
 };
 
-export const fetchPassagens = () => {
-  return (dispatch) => {
-    return new Promise((resolve, reject) => {
-      firebaseHelper.fetch('passagens/')
-        .then((passagens) => {
-          dispatch({ type: 'FETCHING_PASSAGENS_FULFILLED', payload: (passagens || {}) });
-          resolve(passagens);
-        });
-    });
-  }
-};
-
 const mapPassagemToFirebase = (passagem) => {
   return {
     ...passagem,
