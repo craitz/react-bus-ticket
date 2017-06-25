@@ -155,7 +155,7 @@ class Login extends Component {
                 <HelpBlock>{senha.message}</HelpBlock>
               </FormGroup>
               <FormGroup>
-                <Button type="submit" bsStyle="primary" className="btn-block">
+                <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
                   <Glyphicon glyph="log-in" />
                   <span className="text-after-icon">Entrar</span>
                   {/*<i ng-show="$ctrl.isBusy" className="fa fa-spinner fa-spin"></i>

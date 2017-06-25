@@ -201,6 +201,60 @@
   .form-group.has-error .Select--multi.is-focused {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
 
+.btn-google-blue {
+  background-color: #4285f4;
+  background-image: none;
+  border-color: #4285f4;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-blue:focus {
+    border-color: #4285f4 !important;
+    background: #2a75f3 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-blue:hover {
+    border-color: #4285f4 !important;
+    background: #2a75f3 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-blue:active {
+    border-color: #4285f4 !important;
+    background-color: #4285f4 !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    text-decoration: none;
+    outline: none !important; }
+
+.btn-google-purple {
+  background-color: purple;
+  background-image: none;
+  border-color: purple;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-purple:focus {
+    border-color: purple !important;
+    background: #670067 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-purple:hover {
+    border-color: purple !important;
+    background: #670067 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-purple:active {
+    border-color: purple !important;
+    background-color: purple !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    text-decoration: none;
+    outline: none !important; }
+
 html {
   height: 100%; }
   html body {

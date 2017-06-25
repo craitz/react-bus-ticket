@@ -526,9 +526,9 @@ class CompraPassagem extends Component {
                     <hr />
                     <Row>
                       <Col md={12} className="col-button-left">
-                        <Button type="submit" bsStyle="primary" className="btn-block">
+                        <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
                           <Glyphicon glyph="shopping-cart" />
-                          <span className="text-after-icon">Comprar!</span>
+                          <span className="text-after-icon">Finalizar compra</span>
                         </Button>
                       </Col>
                     </Row>
