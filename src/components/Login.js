@@ -31,7 +31,7 @@ class Login extends Component {
     } else if (!emailRegexp.test(text)) { // BAD FORMAT
       this.props.dispatch(actions.setLoginEmailValidation(ValidationStatus.ERROR, 'Formato inválido'));
     } else { // OK
-      this.props.dispatch(actions.setLoginEmailValidation(ValidationStatus.SUCCESS, ''));
+      this.props.dispatch(actions.setLoginEmailValidation(ValidationStatus.NONE, ''));
     }
   }
 
@@ -52,7 +52,7 @@ class Login extends Component {
     } else if (text.length < 6) { // MIN LENGTH
       this.props.dispatch(actions.setLoginSenhaValidation(ValidationStatus.ERROR, 'A senha deve ter no mínimo 6 caracteres'));
     } else { // OK
-      this.props.dispatch(actions.setLoginSenhaValidation(ValidationStatus.SUCCESS, ''));
+      this.props.dispatch(actions.setLoginSenhaValidation(ValidationStatus.NONE, ''));
     }
   }
 
@@ -85,8 +85,8 @@ class Login extends Component {
     }
     // if any field is pristine or invalid, form cannot be saved
     if ((countPristines > 0) ||
-      (email.validation !== ValidationStatus.SUCCESS) ||
-      (senha.validation !== ValidationStatus.SUCCESS)) {
+      (email.validation !== ValidationStatus.NONE) ||
+      (senha.validation !== ValidationStatus.NONE)) {
       return false;
     }
 
@@ -141,7 +141,7 @@ class Login extends Component {
                   </InputGroup.Addon>
                   <FormControl type="text" placeholder="E-mail" value={email.text} onChange={this.handleChangeEmail} />
                 </InputGroup>
-                <FormControl.Feedback />
+                {/*<FormControl.Feedback />*/}
                 <HelpBlock>{email.message}</HelpBlock>
               </FormGroup>
               <FormGroup controlId="senha" validationState={senha.validation}>
@@ -151,7 +151,7 @@ class Login extends Component {
                   </InputGroup.Addon>
                   <FormControl type="password" placeholder="Senha" value={senha.text} onChange={this.handleChangeSenha} />
                 </InputGroup>
-                <FormControl.Feedback />
+                {/*<FormControl.Feedback />*/}
                 <HelpBlock>{senha.message}</HelpBlock>
               </FormGroup>
               <FormGroup>

@@ -5,6 +5,13 @@ export const ValidationStatus = {
   NONE: null
 };
 
+export const SortField = {
+  NONE: 0,
+  COMPRA: 1,
+  LINHA: 2,
+  SAIDA: 3
+}
+
 export const emailToFirebaseKey = (email) => {
   return email.replace('.', '!%^&*');
 };
@@ -19,7 +26,7 @@ export const DateBr = date => date.toLocaleDateString('pt-BR');
 export const dateToFirebase = (text) => text.replace(/\//gi, '');
 export const timeToFirebase = (text) => text.replace(/:/gi, '');
 
-const buildIsoDate = (data, hora) => {
+export const buildIsoDate = (data, hora) => {
   const day = data.slice(0, 2);
   const month = data.slice(3, 5);
   const year = data.slice(6);
@@ -27,6 +34,10 @@ const buildIsoDate = (data, hora) => {
   const minute = hora.slice(3, 5);
 
   return `${year}-${month}-${day}T${hour}:${minute}:00.000Z`;
+};
+
+export const objToArray = (obj) => {
+  return Object.keys(obj).map((key) => obj[key]);
 };
 
 export const buildDateObj = (data, hora) => {

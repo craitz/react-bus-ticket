@@ -1,7 +1,7 @@
-@mixin googleButton($bkColor, $insetAlpha) {
+@mixin googleButton($bkColor, $insetAlpha, $darken) {
     background-color: $bkColor;
     background-image: none;
-    border-color: $bkColor;
+    border: none;
     font-family: 'Gruppo', Arial, sans-serif;
     font-weight: bold;
     letter-spacing: .7px;
@@ -9,20 +9,20 @@
     transition: color .15s cubic-bezier(.4, 0, .2, 1), background-color .15s cubic-bezier(.4, 0, .2, 1);
     will-change: background-color;
     &:focus {
-        border-color: $bkColor !important;
-        background: darken($bkColor, 5%) !important;
+        border: none;
+        background: darken($bkColor, $darken) !important;
         text-decoration: none;
         outline: none !important;
     }
     &:hover {
-        border-color: $bkColor !important;
-        background: darken($bkColor, 5%) !important;
+        border: none;
+        background: darken($bkColor, $darken) !important;
         text-decoration: none;
         outline: none !important;
     }
     &:active {
-        border-color: $bkColor !important;
-        background-color: $bkColor !important;
+        border: none;
+        background: darken($bkColor, $darken) !important;
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, $insetAlpha) !important;
         text-decoration: none;
         outline: none !important;
@@ -31,9 +31,9 @@
 
 .btn-google {
     &-blue {
-        @include googleButton(rgb(66, 133, 244), .2);
+        @include googleButton(rgb(66, 133, 244), .2, 10%);
     }
     &-purple {
-        @include googleButton(purple, .2);
+        @include googleButton(purple, .2, 10%);
     }
 }

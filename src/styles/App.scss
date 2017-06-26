@@ -5,13 +5,14 @@
 @import "navigation";
 @import "compraPassagem";
 @import "confirmaPassagem";
+@import "pesquisaPassagens";
 @import "login";
 @import "multiselect";
 @import "button";
 html {
     height: 100%;
     body {
-        background-color: #fafafa;
+        background-color: rgb(234, 235, 240);
         height: inherit;
         #root {
             height: inherit;
@@ -30,28 +31,3 @@ html {
         }
     }
 }
-
-.text-after-icon {
-    margin-left: 8px;
-}
-
-// button.btn {
-//     background-color: purple;
-//     border-color: darken(purple, 5%);
-//     &:active {
-//         background-color: darken(purple, 5%) !important;
-//         border-color: darken(purple, 5%) !important;
-//         outline: 5px auto lighten(purple, 30%) !important;
-//     }
-//     &:hover {
-//         background-color: darken(purple, 2%) !important;
-//         border-color: darken(purple, 5%) !important;
-//         outline: 5px auto lighten(purple, 30%) !important;
-//     }
-//     &:focus {
-//         background-color: darken(purple, 2%) !important;
-//         border-color: darken(purple, 5%) !important;
-//         outline: 5px auto lighten(purple, 30%) !important;
-//         box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1), 0 0 8px rgba(purple, .6);
-//     }
-// }

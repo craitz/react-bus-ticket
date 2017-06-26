@@ -70,7 +70,7 @@ class FirebaseHelper {
     const db = firebase.database();
     return new Promise((resolve, reject) => {
       db.ref(refPath).on('value', (snap) => {
-        resolve(snap.val());
+        resolve(snap.val() || []);
       });
     });
   };

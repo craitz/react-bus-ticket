@@ -1,5 +1,8 @@
 .comprar-passagem-container {
     height: calc(100% - 315px);
+    .form-centered {
+        width: inherit;
+    }
     .form-passagem-container {
         @include centralizeContent();
         .error-empty {

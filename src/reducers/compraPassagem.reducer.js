@@ -4,7 +4,6 @@ const initialState = {
   cidades: [],
   horarios: [],
   poltronas: [],
-  passagens: {},
   fetching: false,
   fetched: false,
   error: null,
@@ -40,7 +39,8 @@ const initialState = {
     horario: {
       val: 0,
       text: '',
-    }
+    },
+    dataCompra: DateNowBr
   }
 }
 

@@ -38,7 +38,8 @@ const mapPassagemToFirebase = (passagem) => {
     origem: passagem.origem.text,
     destino: passagem.destino.text,
     horario: passagem.horario.text,
-    poltrona: passagem.poltrona.value
+    poltrona: passagem.poltrona.value,
+    dataCompra: utils.DateNowBr
   };
 }
 
@@ -61,7 +62,7 @@ export const newPassagem = (passagem) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       const novaPassagem = mapPassagemToFirebase(passagem);
-      const { nome, email, cpf, origem, destino, data, horario } = novaPassagem;
+      const { nome, email, cpf, origem, destino, data, horario, dataCompra } = novaPassagem;
 
       poltronaToFirebase(novaPassagem.poltrona).then((poltronasFormatadas) => {
         novaPassagem.poltrona = poltronasFormatadas;
@@ -79,7 +80,7 @@ export const newPassagem = (passagem) => {
 
             // percorre as poltronas selecionada e salva uma por uma
             poltronasSelecionadas.forEach((val, index, arr) => {
-              firebaseHelper.set({ nome, email, cpf },
+              firebaseHelper.set({ nome, email, cpf, dataCompra },
                 `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
                 .then(() => {
                   if (index === (arr.length - 1)) {

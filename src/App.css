@@ -98,6 +98,8 @@
 
 .comprar-passagem-container {
   height: calc(100% - 315px); }
+  .comprar-passagem-container .form-centered {
+    width: inherit; }
   .comprar-passagem-container .form-passagem-container {
     width: 100%;
     height: 100%;
@@ -141,9 +143,33 @@
       font-size: 3rem;
       font-weight: bold; }
     .confirmacao-passagem .form-centered .jumbotron {
+      background-color: lightgray;
       padding: 20px;
       margin-top: 5px;
       margin-bottom: 0; }
+
+.pesquisar-passagens-container .text-after-icon {
+  margin-left: 8px; }
+
+.pesquisar-passagens-container .icon-table {
+  color: rgba(0, 0, 0, 0.5); }
+  .pesquisar-passagens-container .icon-table.arrow-trajeto {
+    color: green;
+    margin-left: 15px;
+    margin-right: 15px; }
+  .pesquisar-passagens-container .icon-table.data {
+    color: #4285f4;
+    margin-right: 6px; }
+  .pesquisar-passagens-container .icon-table.horario {
+    color: goldenrod;
+    margin-left: 15px;
+    margin-right: 6px; }
+
+.pesquisar-passagens-container .label-poltrona {
+  margin-right: 4px; }
+
+.pesquisar-passagens-container th {
+  cursor: pointer; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -204,7 +230,7 @@
 .btn-google-blue {
   background-color: #4285f4;
   background-image: none;
-  border-color: #4285f4;
+  border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
   letter-spacing: .7px;
@@ -212,18 +238,18 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-blue:focus {
-    border-color: #4285f4 !important;
-    background: #2a75f3 !important;
+    border: none;
+    background: #1266f1 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-blue:hover {
-    border-color: #4285f4 !important;
-    background: #2a75f3 !important;
+    border: none;
+    background: #1266f1 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-blue:active {
-    border-color: #4285f4 !important;
-    background-color: #4285f4 !important;
+    border: none;
+    background: #1266f1 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -231,7 +257,7 @@
 .btn-google-purple {
   background-color: purple;
   background-image: none;
-  border-color: purple;
+  border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
   letter-spacing: .7px;
@@ -239,18 +265,18 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-purple:focus {
-    border-color: purple !important;
-    background: #670067 !important;
+    border: none;
+    background: #4d004d !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-purple:hover {
-    border-color: purple !important;
-    background: #670067 !important;
+    border: none;
+    background: #4d004d !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-purple:active {
-    border-color: purple !important;
-    background-color: purple !important;
+    border: none;
+    background: #4d004d !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -258,7 +284,7 @@
 html {
   height: 100%; }
   html body {
-    background-color: #fafafa;
+    background-color: #eaebf0;
     height: inherit; }
     html body #root {
       height: inherit; }
@@ -270,6 +296,3 @@ html {
             height: 100%; }
             html body #root .App .App-container .App-container__row .App-container__col {
               height: 100%; }
-
-.text-after-icon {
-  margin-left: 8px; }

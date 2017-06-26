@@ -2,14 +2,14 @@ import { ValidationStatus } from '../shared/Utils';
 
 const initialState = {
   email: {
-    text: '',
-    isPristine: true,
+    text: 'craitz@gmail.com',
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   },
   senha: {
-    text: '',
-    isPristine: true,
+    text: '7asmjed4',
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   }
