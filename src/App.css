@@ -148,9 +148,6 @@
       margin-top: 5px;
       margin-bottom: 0; }
 
-.pesquisar-passagens-container .text-after-icon {
-  margin-left: 8px; }
-
 .pesquisar-passagens-container .icon-table {
   color: rgba(0, 0, 0, 0.5); }
   .pesquisar-passagens-container .icon-table.arrow-trajeto {
@@ -170,6 +167,8 @@
 
 .pesquisar-passagens-container th {
   cursor: pointer; }
+  .pesquisar-passagens-container th .th-icon {
+    margin-left: 10px; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -296,3 +295,5 @@ html {
             height: 100%; }
             html body #root .App .App-container .App-container__row .App-container__col {
               height: 100%; }
+    html body .text-after-icon {
+      margin-left: 8px; }

@@ -5,11 +5,10 @@ export const ValidationStatus = {
   NONE: null
 };
 
-export const SortField = {
-  NONE: 0,
-  COMPRA: 1,
-  LINHA: 2,
-  SAIDA: 3
+export const PesquisaPassagensField = {
+  COMPRA: 'compra',
+  LINHA: 'linha',
+  SAIDA: 'saida'
 }
 
 export const emailToFirebaseKey = (email) => {

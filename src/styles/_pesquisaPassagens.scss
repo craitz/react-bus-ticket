@@ -1,7 +1,4 @@
 .pesquisar-passagens-container {
-    .text-after-icon {
-        margin-left: 8px;
-    }
     .icon-table {
         color: rgba(black, .5);
         &.arrow-trajeto {
@@ -24,5 +21,8 @@
     }
     th {
         cursor: pointer;
+        .th-icon {
+            margin-left: 10px;
+        }
     }
 }
