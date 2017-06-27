@@ -10,9 +10,20 @@ import {
   Button,
   HelpBlock
 } from 'react-bootstrap';
-import { ValidationStatus } from '../shared/Utils'
-import * as actions from '../actions/login.actions'
-import { firebaseHelper } from '../shared/FirebaseHelper'
+import { ValidationStatus } from '../shared/Utils';
+import * as actions from '../actions/login.actions';
+import { setLoading } from '../actions/withLoading.actions';
+import { firebaseHelper } from '../shared/FirebaseHelper';
+import { withLoading } from '../shared/hoc';
+
+const buttonLogin = () =>
+  <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
+    <Glyphicon glyph="log-in" />
+    <span className="text-after-icon">Entrar</span>
+  </Button>
+
+
+const ButtonLoading = withLoading(buttonLogin);
 
 class Login extends Component {
   constructor(props) {
@@ -94,11 +105,14 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    const { email, senha, history } = this.props;
+    const { email, senha, history, dispatch } = this.props;
+    dispatch(setLoading(true));
+    this.forceUpdate();
 
     if (this.isLoginFormOK()) {
       firebaseHelper.login(email.text, senha.text)
         .then(() => {
+          dispatch(setLoading(false));
           history.push({
             pathname: '/',
             state: {}
@@ -106,7 +120,8 @@ class Login extends Component {
         })
         .catch((error) => {
         });
-
+    } else {
+      dispatch(setLoading(false));
     }
 
     event.preventDefault();
@@ -121,7 +136,7 @@ class Login extends Component {
     } else {
       return (
         <div className="login-container">
-          <div className="login-box">
+          <div className="login-box animated bounceInLeft">
             <div className="login-header">
               <div className="login-header--title">
                 <div className="login-header--title-main">Bem-vindo</div>
@@ -155,15 +170,7 @@ class Login extends Component {
                 <HelpBlock>{senha.message}</HelpBlock>
               </FormGroup>
               <FormGroup>
-                <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
-                  <Glyphicon glyph="log-in" />
-                  <span className="text-after-icon">Entrar</span>
-                  {/*<i ng-show="$ctrl.isBusy" className="fa fa-spinner fa-spin"></i>
-                <div ng-show="!$ctrl.isBusy">
-                  <i className="fa fa-sign-in"></i>
-                  <span>Entrar</span>
-                </div>*/}
-                </Button>
+                <ButtonLoading />
               </FormGroup>
             </form>
           </div>

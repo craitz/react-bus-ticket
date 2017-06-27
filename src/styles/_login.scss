@@ -60,6 +60,7 @@
 .login-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
+    background-attachment: scroll;
     opacity: 1;
     top: 0;
     left: 0;

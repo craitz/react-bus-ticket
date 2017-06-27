@@ -97,17 +97,12 @@
     transform: rotate(360deg); } }
 
 .comprar-passagem-container {
-  height: calc(100% - 315px); }
+  overflow: auto;
+  height: calc(100vh - 50px); }
   .comprar-passagem-container .form-centered {
     width: inherit; }
   .comprar-passagem-container .form-passagem-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
-    padding-top: 0; }
+    margin-top: 50px; }
     .comprar-passagem-container .form-passagem-container .error-empty {
       color: #a94442; }
     .comprar-passagem-container .form-passagem-container .input-col {
@@ -126,24 +121,21 @@
 .comprar-passagem-container::after {
   content: "";
   background: url(./styles/images/tree.jpg);
+  background-size: cover;
   opacity: .2;
+  z-index: -1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
-  z-index: -1; }
+  position: absolute; }
 
 .confirmacao-passagem {
-  height: calc(100% - 315px); }
+  overflow: auto;
+  height: calc(100vh - 50px); }
   .confirmacao-passagem .form-centered {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
-    padding-top: 0; }
+    width: inherit;
+    margin-top: 50px; }
     .confirmacao-passagem .form-centered .detalhes {
       margin-top: 60px;
       margin-bottom: 30px; }
@@ -162,57 +154,58 @@
 .confirmacao-passagem::after {
   content: "";
   background: url(./styles/images/tree.jpg);
+  background-size: cover;
   opacity: .2;
+  z-index: -1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
-  z-index: -1; }
+  position: absolute; }
 
-.pesquisar-passagens-container .icon-table {
-  color: rgba(0, 0, 0, 0.5); }
-  .pesquisar-passagens-container .icon-table.arrow-trajeto {
-    color: green;
-    margin-left: 15px;
-    margin-right: 15px; }
-  .pesquisar-passagens-container .icon-table.data {
-    color: #4285f4;
-    margin-right: 6px; }
-  .pesquisar-passagens-container .icon-table.horario {
-    color: goldenrod;
-    margin-left: 15px;
-    margin-right: 6px; }
-
-.pesquisar-passagens-container .label-poltrona {
-  margin-right: 4px; }
-
-.pesquisar-passagens-container th {
-  cursor: pointer; }
-  .pesquisar-passagens-container th .th-icon {
-    margin-left: 10px; }
-
-.pesquisar-passagens-container Table {
-  border: none !important;
-  margin-top: 30px; }
-  .pesquisar-passagens-container Table tr,
-  .pesquisar-passagens-container Table td,
-  .pesquisar-passagens-container Table th {
-    border: none !important; }
-
-.pesquisar-passagens-container .table-hover > tbody > tr:hover {
-  background-color: rgba(218, 165, 32, 0.1) !important; }
+.pesquisar-passagens-container {
+  overflow: auto;
+  height: calc(100vh - 50px); }
+  .pesquisar-passagens-container .icon-table {
+    color: rgba(0, 0, 0, 0.5); }
+    .pesquisar-passagens-container .icon-table.arrow-trajeto {
+      color: green;
+      margin-left: 15px;
+      margin-right: 15px; }
+    .pesquisar-passagens-container .icon-table.data {
+      color: #4285f4;
+      margin-right: 6px; }
+    .pesquisar-passagens-container .icon-table.horario {
+      color: goldenrod;
+      margin-left: 15px;
+      margin-right: 6px; }
+  .pesquisar-passagens-container .label-poltrona {
+    margin-right: 4px; }
+  .pesquisar-passagens-container th {
+    cursor: pointer; }
+    .pesquisar-passagens-container th .th-icon {
+      margin-left: 10px; }
+  .pesquisar-passagens-container Table {
+    border: none !important;
+    margin-top: 30px; }
+    .pesquisar-passagens-container Table tr,
+    .pesquisar-passagens-container Table td,
+    .pesquisar-passagens-container Table th {
+      border: none !important; }
+  .pesquisar-passagens-container .table-hover > tbody > tr:hover {
+    background-color: rgba(218, 165, 32, 0.1) !important; }
 
 .pesquisar-passagens-container::after {
   content: "";
   background: url(./styles/images/tree.jpg);
+  background-size: cover;
   opacity: .2;
+  z-index: -1;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
-  z-index: -1; }
+  position: absolute; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -264,6 +257,7 @@
 .login-container::after {
   content: "";
   background: url(./styles/images/tree.jpg);
+  background-attachment: scroll;
   opacity: 1;
   top: 0;
   left: 0;
@@ -334,6 +328,17 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
+
+.icon-loading {
+  animation: loading-spin infinite 500ms linear;
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.5); }
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
 
 html {
   height: 100%; }

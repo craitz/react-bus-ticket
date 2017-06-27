@@ -10,6 +10,8 @@ import * as utils from '../shared/Utils';
 import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Button } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
+import { withLoading } from '../shared/hoc';
+import { setLoading } from '../actions/withLoading.actions';
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -25,6 +27,14 @@ const mapStateToProps = (state) => {
     passagem: state.compraPassagemState.passagem
   };
 };
+
+const buttonComprar = () =>
+  <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
+    <Glyphicon glyph="shopping-cart" />
+    <span className="text-after-icon">Finalizar compra</span>
+  </Button>
+
+const ButtonWithLoading = withLoading(buttonComprar);
 
 class CompraPassagem extends Component {
   constructor(props) {
@@ -383,9 +393,12 @@ class CompraPassagem extends Component {
   handleSubmit(event) {
     const { dispatch, passagem, history } = this.props;
 
+    dispatch(setLoading(true));
+
     if (this.formCanBeSaved()) {
       dispatch(actions.newPassagem(passagem))
         .then((obj) => {
+          dispatch(setLoading(false));
           history.push({
             pathname: `/passagem/${obj.key}`,
             state: {
@@ -394,6 +407,8 @@ class CompraPassagem extends Component {
             }
           });
         });
+    } else {
+      dispatch(setLoading(false));
     }
 
     event.preventDefault();
@@ -442,7 +457,7 @@ class CompraPassagem extends Component {
           </Navbar>
         </div>
         <div className="form-passagem-container">
-          <div className="form-centered">
+          <div className="form-centered animated bounceInLeft">
             {/*<Grid>
               <Row>*/}
             <Col md={4} mdOffset={4}>
@@ -531,10 +546,7 @@ class CompraPassagem extends Component {
                 <hr />
                 <Row>
                   <Col md={12} className="col-button-left">
-                    <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
-                      <Glyphicon glyph="shopping-cart" />
-                      <span className="text-after-icon">Finalizar compra</span>
-                    </Button>
+                    <ButtonWithLoading />
                   </Col>
                 </Row>
               </form >

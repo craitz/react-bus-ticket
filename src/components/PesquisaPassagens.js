@@ -314,7 +314,7 @@ class PesquisaPassagens extends Component {
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Limpar pesquisa" position="top">
+                <TooltipOverlay text="Limpar filtros" position="top">
                   <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
                 </TooltipOverlay>
               </NavItem>
@@ -322,7 +322,7 @@ class PesquisaPassagens extends Component {
           </Navbar>
         </div>
         <Col md={10} mdOffset={1}>
-          <Table responsive hover>
+          <Table responsive hover className="animated bounceInLeft">
             <thead>
               <tr>
                 <TableHeader

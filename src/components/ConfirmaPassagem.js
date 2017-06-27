@@ -57,7 +57,7 @@ class ConfirmaPassagem extends Component {
             </Nav>
           </Navbar>
         </div>
-        <div className="form-centered">
+        <div className="form-centered animated bounceInLeft">
           <Grid>
             <Row>
               <Col md={6} mdOffset={3} className="text-left">
@@ -93,8 +93,7 @@ ConfirmaPassagem.PropTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {
-  };
+  return {};
 };
 
 const ConfirmaPassagemWithRouter = withRouter(ConfirmaPassagem);

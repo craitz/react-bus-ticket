@@ -9,6 +9,8 @@ import Login from './components/Login';
 import CompraPassagem from './components/CompraPassagem';
 import ConfirmaPassagem from './components/ConfirmaPassagem';
 import PesquisaPassagens from './components/PesquisaPassagens';
+import 'animate.css/animate.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 

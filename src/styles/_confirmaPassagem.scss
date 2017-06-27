@@ -1,7 +1,10 @@
 .confirmacao-passagem {
-    height: calc(100% - 315px);
+    overflow: auto;
+    height: calc(100vh - 50px);
     .form-centered {
-        @include centralizeContent();
+        width: inherit;
+        margin-top: 50px;
+        // @include centralizeContent();
         .detalhes {
             margin-top: 60px;
             margin-bottom: 30px;
@@ -17,7 +20,6 @@
         }
         .jumbotron {
             background-color: rgba(black, .05);
-            // background-color: lightgray;
             padding: 20px;
             margin: {
                 top: 5px;
@@ -30,11 +32,12 @@
 .confirmacao-passagem::after {
     content: "";
     background: url(./styles/images/tree.jpg);
+    background-size: cover;
     opacity: .2;
+    z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;
 }

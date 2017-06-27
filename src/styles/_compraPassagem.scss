@@ -1,10 +1,12 @@
 .comprar-passagem-container {
-    height: calc(100% - 315px);
+    overflow: auto;
+    height: calc(100vh - 50px);
     .form-centered {
         width: inherit;
     }
     .form-passagem-container {
-        @include centralizeContent();
+        margin-top: 50px;
+        // @include centralizeContent();
         .error-empty {
             color: rgb(169, 68, 66);
         }
@@ -33,11 +35,12 @@
 .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
+    background-size: cover;
     opacity: .2;
+    z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;
 }
