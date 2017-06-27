@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { BaseField, withInput, withSelect, withDate, withMultiSelect, withInputMask } from '../shared/FormFields';
 import * as actions from '../actions/compraPassagem.actions';
@@ -7,7 +7,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Grid, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Button } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 
@@ -56,7 +56,7 @@ class CompraPassagem extends Component {
         dispatch(actions.setHorarios(horarios));
         dispatch(actions.setPoltronas(globals.getPoltronas()));
         this.canRender = true;
-        this.initializeValues();
+        this.reset();
         this.forceUpdate();
       });
     });
@@ -401,6 +401,10 @@ class CompraPassagem extends Component {
 
   handleReset(event) {
     event.preventDefault();
+    this.reset();
+  }
+
+  reset() {
     this.props.dispatch(actions.resetFormPassagem());
     this.initializeValues();
   }
@@ -489,21 +493,6 @@ class CompraPassagem extends Component {
                   </Col>
                 </Row>
 
-                {/*POLTRONA*/}
-                <Row className="text-left">
-                  <Col md={12} className="input-col">
-                    <MultiSelectField
-                      id="poltrona"
-                      label="Poltrona(s)*"
-                      list={poltronas}
-                      value={passagem.poltrona.value}
-                      onChange={this.handleChangePoltrona}
-                      validation={poltrona.validation}
-                      message={poltrona.message}
-                      emptyMessage="Não há mais saídas neste dia" />
-                  </Col>
-                </Row>
-
                 {/*DATA / HORARIO*/}
                 <Row className="text-left">
                   <Col md={6} className="input-col">
@@ -523,6 +512,22 @@ class CompraPassagem extends Component {
                       emptyMessage="Não há mais saídas neste dia" />
                   </Col>
                 </Row>
+
+                {/*POLTRONA*/}
+                <Row className="text-left">
+                  <Col md={12} className="input-col">
+                    <MultiSelectField
+                      id="poltrona"
+                      label="Poltrona(s)*"
+                      list={poltronas}
+                      value={passagem.poltrona.value}
+                      onChange={this.handleChangePoltrona}
+                      validation={poltrona.validation}
+                      message={poltrona.message}
+                      emptyMessage="Não há mais saídas neste dia" />
+                  </Col>
+                </Row>
+
                 <hr />
                 <Row>
                   <Col md={12} className="col-button-left">

@@ -6,9 +6,14 @@ export const ValidationStatus = {
 };
 
 export const PesquisaPassagensField = {
+  NOME: 'nome',
   COMPRA: 'compra',
   LINHA: 'linha',
   SAIDA: 'saida'
+}
+
+export const arrayDeepCopy = (array) => {
+  return JSON.parse(JSON.stringify(array));
 }
 
 export const emailToFirebaseKey = (email) => {

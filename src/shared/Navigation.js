@@ -4,6 +4,7 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { resetFormPassagem } from '../actions/compraPassagem.actions'
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav>
@@ -18,11 +19,15 @@ NavHeader.PropTypes = {
   glyph: PropTypes.string.isRequired
 }
 
-const NavbarCollapse = ({ email, onLgout }) =>
+const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagens }) =>
   <Navbar.Collapse>
     <Nav>
-      <NavItem href="#">Comprar passagens</NavItem>
-      <NavItem href="#">Histórico de compras</NavItem>
+      <NavItem href="#" onClick={onComprarPassagem}>
+        <span>Comprar passagens</span>
+      </NavItem>
+      <NavItem href="#" onClick={onPesquisarPassagens}>
+        <span>Histórico de compras</span>
+      </NavItem>
     </Nav>
     <Nav pullRight>
       <TooltipOverlay text="Detalhes do usuário">
@@ -47,6 +52,8 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
+    this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
   }
 
   handleLogout(event) {
@@ -55,6 +62,16 @@ class Navigation extends Component {
       .then(() => {
         this.props.history.push('/login');
       });
+  }
+
+  handleComprarPassagem(event) {
+    event.preventDefault();
+    this.props.history.push('/');
+  }
+
+  handlePesquisarPassagens(event) {
+    event.preventDefault();
+    this.props.history.push('/passagens');
   }
 
   render() {
@@ -67,7 +84,15 @@ class Navigation extends Component {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        {firebaseHelper.isLoggedIn() && <NavbarCollapse email={firebaseHelper.getUser().email} onLgout={this.handleLogout} />}
+        {
+          firebaseHelper.isLoggedIn() &&
+          <NavbarCollapse
+            email={firebaseHelper.getUser().email}
+            onLgout={this.handleLogout}
+            onComprarPassagem={this.handleComprarPassagem}
+            onPesquisarPassagens={this.handlePesquisarPassagens}
+          />
+        }
       </Navbar>
     );
   }

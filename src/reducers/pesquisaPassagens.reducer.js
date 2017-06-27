@@ -1,10 +1,5 @@
 const initialState = {
-  passagens: [],
-  filtros: {
-    compra: '',
-    linha: '',
-    saida: ''
-  }
+  passagens: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,33 +8,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         passagens: action.payload
-      };
-    }
-    case 'SET_FILTRO_COMPRA': {
-      return {
-        ...state,
-        filtros: {
-          ...state.filtros,
-          compra: action.payload
-        }
-      };
-    }
-    case 'SET_FILTRO_LINHA': {
-      return {
-        ...state,
-        filtros: {
-          ...state.filtros,
-          linha: action.payload
-        }
-      };
-    }
-    case 'SET_FILTRO_SAIDA': {
-      return {
-        ...state,
-        filtros: {
-          ...state.filtros,
-          saida: action.payload
-        }
       };
     }
     default: {

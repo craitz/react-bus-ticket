@@ -22,12 +22,18 @@ class ConfirmaPassagem extends Component {
   constructor(props) {
     super(props);
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
+    this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
   }
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    this.props.dispatch(actions.resetFormPassagem());
+    // this.props.dispatch(actions.resetFormPassagem());
     this.props.history.push('/');
+  }
+
+  handlePesquisarPassagens(event) {
+    event.preventDefault();
+    this.props.history.push('/passagens');
   }
 
   render() {
@@ -40,7 +46,7 @@ class ConfirmaPassagem extends Component {
             <Nav pullRight>
               <NavItem href="#">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <Glyphicon className="icon-title links search" glyph="search" />
+                  <Glyphicon className="icon-title links search" glyph="search" onClick={this.handlePesquisarPassagens} />
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">

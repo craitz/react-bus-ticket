@@ -1,29 +1,71 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withAuth } from '../shared/hoc';
-import { Table, NavItem, Glyphicon, Navbar, Nav, Label, Grid, Row, Col, FormControl } from 'react-bootstrap';
+import { Table, NavItem, Glyphicon, Navbar, Nav, Label, Col, FormControl } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 import * as actions from '../actions/pesquisaPassagens.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-// import PropTypes from 'prop-types';
+import { resetFormPassagem } from '../actions/compraPassagem.actions'
 
-const sort = {
-  field: '',
-  direction: true
+const Consulta = {
+  sort: {
+    field: '',
+    direction: true
+  },
+  filter: {
+    nome: '',
+    compra: '',
+    linha: '',
+    saida: '',
+    poltrona: ''
+  }
 }
+
+const getGlyph = (field) => {
+  const { sort } = Consulta;
+  if (sort.field === field) {
+    return (
+      <Glyphicon
+        glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
+        className="th-icon"
+      />
+    );
+  } else {
+    return null;
+  }
+}
+
+const TableHeader = ({ className, label, onClick, field }) =>
+  <th className={className}>
+    <span onClick={onClick}>{label}</span>
+    {getGlyph(field)}
+  </th>
+
+
+const TableColFilter = ({ tooltip, value, onChange }) =>
+  <td>
+    <TooltipOverlay text={tooltip} position="top">
+      <FormControl value={value} onChange={onChange} />
+    </TooltipOverlay>
+  </td>
 
 class PesquisaPassagens extends Component {
   constructor(props) {
     super(props);
+    this.handleClickNome = this.handleClickNome.bind(this);
     this.handleClickDataCompra = this.handleClickDataCompra.bind(this);
     this.handleClickLinha = this.handleClickLinha.bind(this);
     this.handleClickSaida = this.handleClickSaida.bind(this);
-    this.handleChangeFilterCompra = this.handleChangeFilterCompra.bind(this);
+    this.handleChangeFilterNome = this.handleChangeFilterNome.bind(this);
+    this.handleChangeFilterDataCompra = this.handleChangeFilterDataCompra.bind(this);
     this.handleChangeFilterLinha = this.handleChangeFilterLinha.bind(this);
     this.handleChangeFilterSaida = this.handleChangeFilterSaida.bind(this);
+    this.handleChangeFilterPoltrona = this.handleChangeFilterPoltrona.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
     this.passagensBackup = [];
   }
 
@@ -31,15 +73,43 @@ class PesquisaPassagens extends Component {
     const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
     const ref = `passagens/${emailFirebase}`;
 
+    this.handleReset();
+
     firebaseHelper.fetch(ref).then((passagens) => {
-      this.passagensBackup = [].concat(utils.objToArray(passagens));
-      this.props.dispatch(actions.setPassagens(utils.objToArray(passagens)));
+      const arr = utils.objToArray(passagens);
+      this.passagensBackup = utils.arrayDeepCopy(arr);
+      this.props.dispatch(actions.setPassagens(arr));
       this.forceUpdate();
     });
   }
 
+  handleReset() {
+    const { sort, filter } = Consulta;
+
+    sort.field = '';
+    sort.direction = true;
+    filter.nome = '';
+    filter.compra = '';
+    filter.linha = '';
+    filter.saida = '';
+    filter.poltrona = '';
+
+    this.props.dispatch(actions.setPassagens(utils.arrayDeepCopy(this.passagensBackup)));
+  }
+
+  handleComprarPassagem(event) {
+    event.preventDefault();
+    // this.props.dispatch(resetFormPassagem());
+    this.props.history.push('/');
+  }
+
+  aplicaPesqusia() {
+    this.props.dispatch(actions.setPassagens(this.filtraPassagens(this.sortByField())));
+  }
+
   sortByField() {
-    const passagensOrdenadas = [].concat(this.props.passagens);
+    const { sort } = Consulta;
+    const passagensOrdenadas = utils.arrayDeepCopy(this.passagensBackup);
 
     passagensOrdenadas.sort((a, b) => {
       let objA = '';
@@ -59,6 +129,11 @@ class PesquisaPassagens extends Component {
         case utils.PesquisaPassagensField.COMPRA: {
           objA = a.dataCompra;
           objB = b.dataCompra;
+          break;
+        }
+        case utils.PesquisaPassagensField.NOME: {
+          objA = a.nome;
+          objB = b.nome;
           break;
         }
         default: {
@@ -84,10 +159,23 @@ class PesquisaPassagens extends Component {
       }
     });
 
-    this.props.dispatch(actions.setPassagens(passagensOrdenadas));
+    return passagensOrdenadas;
+  }
+
+  handleClickNome(event) {
+    const { sort } = Consulta;
+    if (sort.field === utils.PesquisaPassagensField.NOME) {
+      sort.direction = !sort.direction;
+    } else {
+      sort.field = utils.PesquisaPassagensField.NOME;
+      sort.direction = true;
+    }
+
+    this.aplicaPesqusia();
   }
 
   handleClickDataCompra(event) {
+    const { sort } = Consulta;
     if (sort.field === utils.PesquisaPassagensField.COMPRA) {
       sort.direction = !sort.direction;
     } else {
@@ -95,10 +183,11 @@ class PesquisaPassagens extends Component {
       sort.direction = true;
     }
 
-    this.sortByField();
+    this.aplicaPesqusia();
   }
 
   handleClickLinha(event) {
+    const { sort } = Consulta;
     if (sort.field === utils.PesquisaPassagensField.LINHA) {
       sort.direction = !sort.direction;
     } else {
@@ -106,10 +195,11 @@ class PesquisaPassagens extends Component {
       sort.direction = true;
     }
 
-    this.sortByField();
+    this.aplicaPesqusia();
   }
 
   handleClickSaida(event) {
+    const { sort } = Consulta;
     if (sort.field === utils.PesquisaPassagensField.SAIDA) {
       sort.direction = !sort.direction;
     } else {
@@ -117,84 +207,100 @@ class PesquisaPassagens extends Component {
       sort.direction = true;
     }
 
-    this.sortByField();
+    this.aplicaPesqusia();
   }
 
-  handleChangeFilterCompra(event) {
-    const { dispatch, filtros } = this.props;
+  handleChangeFilterNome(event) {
+    const { filter } = Consulta;
+    const value = event.target.value.toLowerCase();
+
+    filter.nome = value;
+
+    this.aplicaPesqusia();
+  }
+
+  handleChangeFilterDataCompra(event) {
+    const { filter } = Consulta;
     const value = event.target.value;
 
-    dispatch(actions.setFiltroCompra(value));
-    this.filtraPassagens({
-      ...filtros,
-      compra: value
-    });
+    filter.compra = value;
+
+    this.aplicaPesqusia();
   }
 
   handleChangeFilterLinha(event) {
-    const { dispatch, filtros } = this.props;
+    const { filter } = Consulta;
     const value = event.target.value.toLowerCase();
 
-    dispatch(actions.setFiltroLinha(value));
-    this.filtraPassagens({
-      ...filtros,
-      linha: value
-    });
+    filter.linha = value;
+
+    this.aplicaPesqusia();
   }
 
   handleChangeFilterSaida(event) {
-    const { dispatch, filtros } = this.props;
+    const { filter } = Consulta;
     const value = event.target.value;
 
-    dispatch(actions.setFiltroSaida(value));
-    this.filtraPassagens({
-      ...filtros,
-      saida: value
-    });
+    filter.saida = value;
+
+    this.aplicaPesqusia();
   }
 
-  filtraPassagens(filtros) {
-    const { passagens } = this.props;
+  handleChangeFilterPoltrona(event) {
+    const { filter } = Consulta;
+    const value = event.target.value;
 
-    const passagensFiltradas = this.passagensBackup.filter((passagem) => {
+    filter.poltrona = value;
+
+    this.aplicaPesqusia();
+  }
+
+  filtraPassagens(passagensComOrdenacao) {
+    const { filter } = Consulta;
+    const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
+      const nome = passagem.nome.toLowerCase();
       const compra = passagem.dataCompra;
       const saida = passagem.data.concat(passagem.horario);
       const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
+      const poltronas = passagem.poltrona.split(' - ');
       let include = true;
 
-      if (filtros.compra.length > 0) {
-        include = include && (compra.includes(filtros.compra));
+      if (filter.nome.length > 0) {
+        include = include && (nome.includes(filter.nome));
       }
 
-      if (filtros.linha.length > 0) {
-        include = include && (linha.includes(filtros.linha));
+      if (filter.compra.length > 0) {
+        include = include && (compra.includes(filter.compra));
       }
 
-      if (filtros.saida.length > 0) {
-        include = include && (saida.includes(filtros.saida));
+      if (filter.linha.length > 0) {
+        include = include && (linha.includes(filter.linha));
+      }
+
+      if (filter.saida.length > 0) {
+        include = include && (saida.includes(filter.saida));
+      }
+
+      if (filter.poltrona.length > 0) {
+        const poltronasFiltro = filter.poltrona.split(',');
+
+        include = include &&
+          poltronas.find((poltrona) => {
+            return poltronasFiltro.includes(poltrona);
+          });
       }
 
       return include;
     });
 
-    this.props.dispatch(actions.setPassagens(passagensFiltradas));
-  }
-
-  getGlyph(field) {
-    if (sort.field === field) {
-      return (
-        <Glyphicon
-          glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
-          className="th-icon"
-        />
-      );
-    } else {
-      return null;
-    }
+    return passagensFiltradas;
   }
 
   render() {
-    const { passagens, filtros } = this.props;
+    const { passagens } = this.props;
+    const { filter } = Consulta;
+    const fields = utils.PesquisaPassagensField;
+
     // console.log('render >>> ', passagens);
     return (
       <div className="pesquisar-passagens-container">
@@ -204,50 +310,81 @@ class PesquisaPassagens extends Component {
             <Nav pullRight>
               <NavItem href="/passagens">
                 <TooltipOverlay text="Comprar passagem" position="top">
-                  <Glyphicon className="icon-title links search" glyph="shopping-cart" />
+                  <Glyphicon className="icon-title links comprar" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Limpar campos" position="top">
+                <TooltipOverlay text="Limpar pesquisa" position="top">
                   <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
                 </TooltipOverlay>
               </NavItem>
             </Nav>
           </Navbar>
         </div>
-        <Col md={8} mdOffset={2}>
+        <Col md={10} mdOffset={1}>
           <Table responsive>
             <thead>
               <tr>
-                <th className="th-data-compra">
-                  <span onClick={this.handleClickDataCompra}>Data da compra</span>
-                  {this.getGlyph(utils.PesquisaPassagensField.COMPRA)}
-                </th>
-                <th className="th-linha">
-                  <span onClick={this.handleClickLinha}>Linha</span>
-                  {this.getGlyph(utils.PesquisaPassagensField.LINHA)}
-                </th>
-                <th className="th-saida">
-                  <span onClick={this.handleClickSaida}>Saída</span>
-                  {this.getGlyph(utils.PesquisaPassagensField.SAIDA)}
-                </th>
+                <TableHeader
+                  className="th-nome"
+                  onClick={this.handleClickNome}
+                  label="Nome"
+                  field={fields.NOME}
+                />
+                <TableHeader
+                  className="th-data-compra"
+                  onClick={this.handleClickDataCompra}
+                  label="Data da compra"
+                  field={fields.COMPRA}
+                />
+                <TableHeader
+                  className="th-linha"
+                  onClick={this.handleClickLinha}
+                  label="Linha"
+                  field={fields.LINHA}
+                />
+                <TableHeader
+                  className="th-saida"
+                  onClick={this.handleClickSaida}
+                  label="Saída"
+                  field={fields.SAIDA}
+                />
                 <th>Poltrona(s)</th>
               </tr>
             </thead>
             <tbody className="text-left">
               <tr>
-                <td>
-                  <FormControl value={filtros.compra} onChange={this.handleChangeFilterCompra} />
-                </td>
-                <td>
-                  <FormControl value={filtros.linha} onChange={this.handleChangeFilterLinha} />
-                </td>
-                <td>
-                  <FormControl value={filtros.saida} onChange={this.handleChangeFilterSaida} />
-                </td>
+                <TableColFilter
+                  tooltip="Pesquisar pelo nome"
+                  value={filter.nome}
+                  onChange={this.handleChangeFilterNome}
+                />
+                <TableColFilter
+                  tooltip="Pesquisar pela data da compra da passagem"
+                  value={filter.compra}
+                  onChange={this.handleChangeFilterDataCompra}
+                />
+                <TableColFilter
+                  tooltip="Pesquisar pela origem e destino da viagem"
+                  value={filter.linha}
+                  onChange={this.handleChangeFilterLinha}
+                />
+                <TableColFilter
+                  tooltip="Pesquisar pela data e horário de saída"
+                  value={filter.saida}
+                  onChange={this.handleChangeFilterSaida}
+                />
+                <TableColFilter
+                  tooltip="Pesquisar por poltrona(s). Se necessário, separe por vírgulas"
+                  value={filter.poltrona}
+                  onChange={this.handleChangeFilterPoltrona}
+                />
               </tr>
               {passagens.map((value, index) =>
                 <tr key={index}>
+                  <td>
+                    {value.nome}
+                  </td>
                   <td>
                     {value.dataCompra}
                   </td>
@@ -277,13 +414,9 @@ class PesquisaPassagens extends Component {
   }
 }
 
-// PesquisaPassagens.PropTypes = {}
-// PesquisaPassagens.defaultProps = {}
-
 const mapStateToProps = (state) => {
   return {
     passagens: state.pesquisaPassagensState.passagens,
-    filtros: state.pesquisaPassagensState.filtros
   };
 };
 

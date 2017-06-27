@@ -1,17 +1,17 @@
 .tooltip > .tooltip-inner {
-  background-color: purple; }
+  background-color: rgba(128, 0, 128, 0.9); }
 
 .tooltip.bottom > .tooltip-arrow {
-  border-bottom-color: purple; }
+  border-bottom-color: rgba(128, 0, 128, 0.9); }
 
 .tooltip.top > .tooltip-arrow {
-  border-top-color: purple; }
+  border-top-color: rgba(128, 0, 128, 0.9); }
 
 .tooltip.left > .tooltip-arrow {
-  border-left-color: purple; }
+  border-left-color: rgba(128, 0, 128, 0.9); }
 
 .tooltip.right > .tooltip-arrow {
-  border-right-color: purple; }
+  border-right-color: rgba(128, 0, 128, 0.9); }
 
 @font-face {
   font-family: 'Roboto';
@@ -168,7 +168,11 @@
 .pesquisar-passagens-container th {
   cursor: pointer; }
   .pesquisar-passagens-container th .th-icon {
-    margin-left: 10px; }
+    margin-left: 10px;
+    color: purple; }
+
+.pesquisar-passagens-container Table {
+  margin-top: 30px; }
 
 .login-container {
   height: calc(100% - 150px) !important;
