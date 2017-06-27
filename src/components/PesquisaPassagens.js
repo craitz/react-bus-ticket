@@ -322,7 +322,7 @@ class PesquisaPassagens extends Component {
           </Navbar>
         </div>
         <Col md={10} mdOffset={1}>
-          <Table responsive>
+          <Table responsive hover>
             <thead>
               <tr>
                 <TableHeader

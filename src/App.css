@@ -123,6 +123,17 @@
     .comprar-passagem-container .form-passagem-container hr {
       border-color: rgba(0, 0, 0, 0.1); }
 
+.comprar-passagem-container::after {
+  content: "";
+  background: url(./styles/images/tree.jpg);
+  opacity: .2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
 .confirmacao-passagem {
   height: calc(100% - 315px); }
   .confirmacao-passagem .form-centered {
@@ -143,10 +154,21 @@
       font-size: 3rem;
       font-weight: bold; }
     .confirmacao-passagem .form-centered .jumbotron {
-      background-color: lightgray;
+      background-color: rgba(0, 0, 0, 0.05);
       padding: 20px;
       margin-top: 5px;
       margin-bottom: 0; }
+
+.confirmacao-passagem::after {
+  content: "";
+  background: url(./styles/images/tree.jpg);
+  opacity: .2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
 
 .pesquisar-passagens-container .icon-table {
   color: rgba(0, 0, 0, 0.5); }
@@ -168,11 +190,29 @@
 .pesquisar-passagens-container th {
   cursor: pointer; }
   .pesquisar-passagens-container th .th-icon {
-    margin-left: 10px;
-    color: purple; }
+    margin-left: 10px; }
 
 .pesquisar-passagens-container Table {
+  border: none !important;
   margin-top: 30px; }
+  .pesquisar-passagens-container Table tr,
+  .pesquisar-passagens-container Table td,
+  .pesquisar-passagens-container Table th {
+    border: none !important; }
+
+.pesquisar-passagens-container .table-hover > tbody > tr:hover {
+  background-color: rgba(218, 165, 32, 0.1) !important; }
+
+.pesquisar-passagens-container::after {
+  content: "";
+  background: url(./styles/images/tree.jpg);
+  opacity: .2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -187,8 +227,8 @@
     text-align: left;
     position: relative;
     width: 360px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 15px 20px; }
     .login-container .login-box .login-header {
@@ -202,14 +242,14 @@
         width: 260px;
         height: inherit; }
         .login-container .login-box .login-header .login-header--title .login-header--title-main {
-          color: rgba(47, 79, 79, 0.7);
+          color: rgba(0, 0, 0, 0.5);
           line-height: 30px;
           font-size: 2.5rem;
           font-weight: bold;
           font-family: 'Roboto'; }
         .login-container .login-box .login-header .login-header--title .login-header--title-sub {
           margin-top: 6px;
-          color: darkslategrey; }
+          color: rgba(0, 0, 0, 0.5); }
       .login-container .login-box .login-header .login-header--icon {
         position: absolute;
         left: 260px;
@@ -218,8 +258,19 @@
         height: inherit; }
         .login-container .login-box .login-header .login-header--icon .main-icon {
           font-size: 2.5rem;
-          color: rgba(47, 79, 79, 0.5);
+          color: rgba(0, 0, 0, 0.5);
           margin-right: 5px; }
+
+.login-container::after {
+  content: "";
+  background: url(./styles/images/tree.jpg);
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
 
 .form-group {
   text-align: left; }
@@ -287,7 +338,6 @@
 html {
   height: 100%; }
   html body {
-    background-color: #eaebf0;
     height: inherit; }
     html body #root {
       height: inherit; }

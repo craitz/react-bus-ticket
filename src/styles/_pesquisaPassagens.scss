@@ -23,10 +23,32 @@
         cursor: pointer;
         .th-icon {
             margin-left: 10px;
-            color: purple;
+            // color: purple;
         }
     }
     Table {
+        border: none !important;
         margin-top: 30px;
+        tr,
+        td,
+        th {
+            border: none !important;
+            // border-color: rgba(black, .05) !important;
+        }
     }
+    .table-hover>tbody>tr:hover {
+        background-color: rgba(goldenrod, .1) !important;
+    }
+}
+
+.pesquisar-passagens-container::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    opacity: .2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
 }

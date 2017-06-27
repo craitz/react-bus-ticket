@@ -16,7 +16,8 @@
             font-weight: bold;
         }
         .jumbotron {
-            background-color: lightgray;
+            background-color: rgba(black, .05);
+            // background-color: lightgray;
             padding: 20px;
             margin: {
                 top: 5px;
@@ -24,4 +25,16 @@
             }
         }
     }
+}
+
+.confirmacao-passagem::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    opacity: .2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
 }
