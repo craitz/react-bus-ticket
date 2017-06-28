@@ -7,3 +7,21 @@
     margin-top: 0;
     padding-top: 0;
 }
+
+@mixin containerHeight() {
+    overflow: auto;
+    height: calc(100vh - 50px);
+}
+
+@mixin bkgImage() {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-size: cover;
+    opacity: .2;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}

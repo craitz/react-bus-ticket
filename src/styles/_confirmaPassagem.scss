@@ -1,6 +1,5 @@
 .confirmacao-passagem {
-    overflow: auto;
-    height: calc(100vh - 50px);
+    @include containerHeight();
     .form-centered {
         width: inherit;
         margin-top: 50px;
@@ -30,14 +29,5 @@
 }
 
 .confirmacao-passagem::after {
-    content: "";
-    background: url(./styles/images/tree.jpg);
-    background-size: cover;
-    opacity: .2;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
+    @include bkgImage();
 }

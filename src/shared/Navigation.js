@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import TooltipOverlay from '../shared/TooltipOverlay';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { resetFormPassagem } from '../actions/compraPassagem.actions'
+import FontAwesome from 'react-fontawesome';
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav>
     <NavItem>
-      <Glyphicon className="icon-title" glyph={glyph} />
+      {/*<FontAwesome className="icon-title" size="3x" name={glyph}></FontAwesome>*/}
       <span className="page-title">{label}</span>
     </NavItem>
   </Nav>
@@ -23,23 +24,29 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
   <Navbar.Collapse>
     <Nav>
       <NavItem href="#" onClick={onComprarPassagem}>
-        <span>Comprar passagens</span>
+        <FontAwesome name="shopping-cart"></FontAwesome>
+        <span className="text-after-icon">Comprar passagens</span>
       </NavItem>
       <NavItem href="#" onClick={onPesquisarPassagens}>
-        <span>Histórico de compras</span>
+        <FontAwesome name="history"></FontAwesome>
+        <span className="text-after-icon">Histórico de compras</span>
       </NavItem>
     </Nav>
+    <Navbar.Text>
+      <Navbar.Link href="https://github.com/craitz/react-bus-ticket" target="_blank">
+        <FontAwesome name="github"></FontAwesome>
+        <span className="text-after-icon">Código-fonte</span>
+      </Navbar.Link>
+    </Navbar.Text>
     <Nav pullRight>
-      <TooltipOverlay text="Detalhes do usuário">
-        <NavItem href="#">
-          <span>{email}</span>
-        </NavItem>
-      </TooltipOverlay>
-      <TooltipOverlay text="Logout">
-        <NavItem href="#" onClick={onLgout}>
-          <Glyphicon glyph="off" className="logoff-logo" />
-        </NavItem>
-      </TooltipOverlay>
+      <NavItem href="#">
+        <FontAwesome name="user"></FontAwesome>
+        <span className="text-after-icon">{email}</span>
+      </NavItem>
+      <NavItem href="#" onClick={onLgout}>
+        <FontAwesome name="power-off"></FontAwesome>
+        <span className="text-after-icon">Sair</span>
+      </NavItem>
     </Nav>
   </Navbar.Collapse>
 
@@ -79,7 +86,7 @@ class Navigation extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Glyphicon glyph="time" className="App-logo" />
+            <FontAwesome name="bus" className="App-logo"></FontAwesome>
             <span className="header-title">BusTicket</span>
           </Navbar.Brand>
           <Navbar.Toggle />

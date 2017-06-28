@@ -12,6 +12,7 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 import { withLoading } from '../shared/hoc';
 import { setLoading } from '../actions/withLoading.actions';
+import FontAwesome from 'react-fontawesome';
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -30,7 +31,7 @@ const mapStateToProps = (state) => {
 
 const buttonComprar = () =>
   <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
-    <Glyphicon glyph="shopping-cart" />
+    <FontAwesome name="check"></FontAwesome>
     <span className="text-after-icon">Finalizar compra</span>
   </Button>
 
@@ -441,7 +442,7 @@ class CompraPassagem extends Component {
       <div className="comprar-passagem-container">
         <div className="navheader-container">
           <Navbar>
-            <NavHeader label="Compre sua passagem" glyph="tags"></NavHeader>
+            <NavHeader label="Compre sua passagem" glyph="shopping-cart"></NavHeader>
             <Nav pullRight>
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Ver histórico de compras" position="top">

@@ -55,20 +55,16 @@
     color: white; }
 
 .navheader-container .nav.navbar-nav {
-  margin-left: 0; }
+  margin-left: 20px !important; }
 
 .navheader-container .page-title,
 .navheader-container .icon-title {
   color: #e9e9e9; }
 
-.navheader-container .icon-title {
-  font-size: 3rem; }
-
 .navheader-container .page-title {
   font-family: "Gruppo";
   font-size: 5rem;
-  font-weight: bold;
-  margin-left: 30px; }
+  font-weight: bold; }
 
 .App .navbar {
   margin-bottom: 0;
@@ -81,11 +77,10 @@
   .App .navbar .navbar-nav {
     margin-left: 50px; }
   .App .navbar .App-logo {
-    animation: App-logo-spin infinite 5s linear;
     color: #f0ad4e; }
   .App .navbar .header-title {
     color: #f0ad4e;
-    margin-left: 10px;
+    margin-left: 15px;
     font-size: 2.5rem;
     font-family: "Gruppo";
     font-weight: bold; }
@@ -330,8 +325,6 @@
     outline: none !important; }
 
 .icon-loading {
-  animation: loading-spin infinite 500ms linear;
-  font-size: 2rem;
   color: rgba(0, 0, 0, 0.5); }
 
 @keyframes loading-spin {

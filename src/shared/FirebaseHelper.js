@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import { LoginFields } from './Utils';
 
 class FirebaseHelper {
   constructor() {
@@ -28,7 +29,11 @@ class FirebaseHelper {
   }
 
   login(user, password) {
-    let errorMessage = '';
+    let errorMessage = {
+      text: '',
+      field: ''
+    };
+
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(user, password)
         .then((user) => {
@@ -37,15 +42,30 @@ class FirebaseHelper {
         })
         .catch((error) => {
           if (error.code === 'auth/invalid-email') {
-            errorMessage = 'E-mail inválido!';
+            errorMessage = {
+              text: 'E-mail inválido',
+              field: LoginFields.EMAIL
+            };
           } else if (error.code === 'auth/user-not-found') {
-            errorMessage = 'E-mail não cadastrado!';
+            errorMessage = {
+              text: 'E-mail não cadastrado',
+              field: LoginFields.EMAIL
+            };
           } else if (error.code === 'auth/wrong-password') {
-            errorMessage = 'Senha inválida!';
+            errorMessage = {
+              text: 'Senha inválida',
+              field: LoginFields.SENHA
+            };
           } else if (error.code === 'auth/user-disabled') {
-            errorMessage = 'Usuário desabilitado. Por favor, procure o administrador do sistema.';
+            errorMessage = {
+              text: 'Usuário desabilitado. Por favor, procure o administrador do sistema',
+              field: LoginFields.EMAIL
+            };
           } else if (error.code === 'auth/too-many-requests') {
-            errorMessage = 'Usuário bloqueado temporariamente. Tente novamente mais tarde.';
+            errorMessage = {
+              text: 'Usuário bloqueado temporariamente. Tente novamente mais tarde',
+              field: LoginFields.EMAIL
+            };
           }
 
           reject(errorMessage);

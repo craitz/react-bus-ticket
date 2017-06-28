@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withAuth } from '../shared/hoc';
-import { Table, NavItem, Glyphicon, Navbar, Nav, Label, Col, FormControl } from 'react-bootstrap';
+import { Table, NavItem, Glyphicon, Navbar, Nav, Label, Col, FormControl, Pagination } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 import * as actions from '../actions/pesquisaPassagens.actions';
@@ -306,7 +306,7 @@ class PesquisaPassagens extends Component {
       <div className="pesquisar-passagens-container">
         <div className="navheader-container">
           <Navbar>
-            <NavHeader label="Histórico de passagens" glyph="tags"></NavHeader>
+            <NavHeader label="Histórico de compras" glyph="history"></NavHeader>
             <Nav pullRight>
               <NavItem href="/passagens">
                 <TooltipOverlay text="Comprar passagem" position="top">
@@ -408,6 +408,11 @@ class PesquisaPassagens extends Component {
               )}
             </tbody>
           </Table>
+          <Pagination
+            bsSize="small"
+            items={10}
+            activePage={1}
+            onSelect={this.handleSelect} />
         </Col>
       </div>
     );

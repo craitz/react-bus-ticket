@@ -12,6 +12,11 @@ export const PesquisaPassagensField = {
   SAIDA: 'saida'
 }
 
+export const LoginFields = {
+  EMAIL: 'email',
+  SENHA: 'senha'
+}
+
 export const arrayDeepCopy = (array) => {
   return JSON.parse(JSON.stringify(array));
 }

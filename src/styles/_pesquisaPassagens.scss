@@ -1,6 +1,5 @@
 .pesquisar-passagens-container {
-    overflow: auto;
-    height: calc(100vh - 50px);
+    @include containerHeight();
     .icon-table {
         color: rgba(black, .5);
         &.arrow-trajeto {
@@ -44,14 +43,5 @@
 }
 
 .pesquisar-passagens-container::after {
-    content: "";
-    background: url(./styles/images/tree.jpg);
-    background-size: cover;
-    opacity: .2;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
+    @include bkgImage();
 }

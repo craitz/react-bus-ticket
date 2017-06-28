@@ -17,6 +17,7 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions/compraPassagem.actions'
 import { withAuth } from '../shared/hoc';
+import FontAwesome from 'react-fontawesome';
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class ConfirmaPassagem extends Component {
       <div className="confirmacao-passagem">
         <div className="navheader-container">
           <Navbar>
-            <NavHeader label="Compra finalizada!" glyph="ok-sign text-success"></NavHeader>
+            <NavHeader label="Compra finalizada!" glyph="check"></NavHeader>
             <Nav pullRight>
               <NavItem href="#">
                 <TooltipOverlay text="Ver histórico de compras" position="top">

@@ -10,11 +10,12 @@ import {
   Button,
   HelpBlock
 } from 'react-bootstrap';
-import { ValidationStatus } from '../shared/Utils';
+import { ValidationStatus, LoginFields } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
 import { setLoading } from '../actions/withLoading.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withLoading } from '../shared/hoc';
+import FontAwesome from 'react-fontawesome';
 
 const buttonLogin = () =>
   <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
@@ -119,6 +120,12 @@ class Login extends Component {
           });
         })
         .catch((error) => {
+          if (error.field === LoginFields.EMAIL) { // E-MAIL
+            dispatch(actions.setLoginEmailValidation(ValidationStatus.ERROR, error.text));
+          } else { // SENHA
+            dispatch(actions.setLoginSenhaValidation(ValidationStatus.ERROR, error.text));
+          }
+          dispatch(setLoading(false));
         });
     } else {
       dispatch(setLoading(false));
@@ -162,7 +169,7 @@ class Login extends Component {
               <FormGroup controlId="senha" validationState={senha.validation}>
                 <InputGroup>
                   <InputGroup.Addon>
-                    <Glyphicon glyph="barcode" className="addon-icon" />
+                    <FontAwesome name="key" className="addon-icon"></FontAwesome>
                   </InputGroup.Addon>
                   <FormControl type="password" placeholder="Senha" value={senha.text} onChange={this.handleChangeSenha} />
                 </InputGroup>
