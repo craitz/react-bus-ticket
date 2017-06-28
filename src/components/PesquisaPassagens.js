@@ -24,7 +24,8 @@ const Consulta = {
     linha: '',
     saida: '',
     poltrona: ''
-  }
+  },
+  activePage: 1
 }
 
 const getGlyph = (field) => {
@@ -71,6 +72,7 @@ class PesquisaPassagens extends Component {
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
     this.handleSelectPage = this.handleSelectPage.bind(this);
     this.passagensBackup = [];
+    this.page = [];
   }
 
   componentWillMount() {
@@ -82,13 +84,16 @@ class PesquisaPassagens extends Component {
     firebaseHelper.fetch(ref).then((passagens) => {
       const arr = utils.objToArray(passagens);
       this.passagensBackup = utils.arrayDeepCopy(arr);
-      this.props.dispatch(actions.setPassagens(arr));
+      this.aplicaPesqusia();
+      // this.props.dispatch(actions.setPassagens(arr));
       this.forceUpdate();
     });
   }
 
   handleSelectPage(eventKey) {
-    this.props.dispatch(actions.setActivePage(eventKey));
+    Consulta.activePage = eventKey;
+    this.setPage(this.props.passagens);
+    this.forceUpdate();
   }
 
   handleReset() {
@@ -112,7 +117,24 @@ class PesquisaPassagens extends Component {
   }
 
   aplicaPesqusia() {
-    this.props.dispatch(actions.setPassagens(this.filtraPassagens(this.sortByField())));
+    const arrSorted = this.sortByField();
+    const arrSortedFiltered = this.filtraPassagens(arrSorted);
+    this.setPage(arrSortedFiltered);
+    this.props.dispatch(actions.setPassagens(arrSortedFiltered));
+  }
+
+  setPage(passagemOrdenadaFiltrada) {
+    const total = this.getTotalPages(passagemOrdenadaFiltrada);
+
+    if (Consulta.activePage > total) {
+      Consulta.activePage = total;
+    }
+
+    console.log(Consulta.activePage);
+
+    const start = (Consulta.activePage - 1) * totalPageItems;
+    const end = Consulta.activePage * totalPageItems;
+    this.page = passagemOrdenadaFiltrada.slice(start, end);
   }
 
   sortByField() {
@@ -304,27 +326,20 @@ class PesquisaPassagens extends Component {
     return passagensFiltradas;
   }
 
-  getPage() {
-    const { passagens, activePage } = this.props;
-    const start = (activePage - 1) * totalPageItems;
-    const end = activePage * totalPageItems;
-    return passagens.slice(start, end);
-  }
-
-  getTotalPages() {
-    const total = this.props.passagens.length;
-    const quot = total / totalPageItems;
+  getTotalPages(passagens) {
+    const total = passagens.length;
+    const quot = parseInt((total / totalPageItems), 10);
     const rest = total % totalPageItems
     return (rest > 0) ? (quot + 1) : quot;
   }
 
   render() {
-    const { activePage } = this.props;
-    const { filter } = Consulta;
+    const { passagens } = this.props;
+    const { filter, activePage } = Consulta;
     const fields = utils.PesquisaPassagensField;
 
-    const page = this.getPage();
-    const totalPages = this.getTotalPages();
+    const totalPages = this.getTotalPages(passagens);
+    // const page = this.getPage();
 
 
     // console.log('render >>> ', passagens);
@@ -353,7 +368,7 @@ class PesquisaPassagens extends Component {
           <Col md={10} mdOffset={1}>
             <Pagination
               bsSize="medium"
-              items={this.getTotalPages()}
+              items={totalPages > 1 ? totalPages : 0}
               activePage={activePage}
               onSelect={this.handleSelectPage}
               className="pagination-pesquisa"
@@ -416,7 +431,7 @@ class PesquisaPassagens extends Component {
                     onChange={this.handleChangeFilterPoltrona}
                   />
                 </tr>
-                {page.map((value, index) =>
+                {this.page.map((value, index) =>
                   <tr key={index}>
                     <td>
                       {value.nome}
@@ -455,7 +470,6 @@ class PesquisaPassagens extends Component {
 const mapStateToProps = (state) => {
   return {
     passagens: state.pesquisaPassagensState.passagens,
-    activePage: state.pesquisaPassagensState.activePage
   };
 };
 

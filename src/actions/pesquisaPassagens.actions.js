@@ -5,10 +5,4 @@ export const setPassagens = (passagens) => {
   }
 };
 
-export const setActivePage = (page) => {
-  return {
-    type: 'SET_ACTIVE_PAGE',
-    payload: page
-  }
-};
 
