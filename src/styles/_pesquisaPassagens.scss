@@ -50,19 +50,24 @@
         }
     }
     .table-hover>tbody>tr:hover {
-        background-color: rgba(goldenrod, .1) !important;
+        background-color: rgba(goldenrod, .15) !important;
     }
     .pagination-pesquisa {
-        margin: 30px, 0, 0, 0;
         li a {
-            // border-color: rgba(66, 133, 244, .5);
-            color: rgb(66, 133, 244);
+            background-color: rgba(white, 1);
+            border-color: rgba(#2d2d2d, .3);
+            color: #2d2d2d;
         }
         li.active a {
-            background-color: rgb(66, 133, 244);
+            background-color: rgba(#2d2d2d, .9);
             border: none;
             color: white;
         }
+    }
+    .jumbotron {
+        border-radius: 6px;
+        padding: 20px;
+        background-color: rgba(black, .05);
     }
 }
 

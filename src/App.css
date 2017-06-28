@@ -54,6 +54,15 @@
   .navheader-container .icon-title.links:hover {
     color: white; }
 
+.navheader-container .resultados {
+  font-size: 1.5rem;
+  margin-right: 20px; }
+  .navheader-container .resultados a,
+  .navheader-container .resultados a:hover {
+    color: #777777 !important; }
+  .navheader-container .resultados .icon {
+    font-size: 2rem; }
+
 .navheader-container .nav.navbar-nav {
   margin-left: 20px !important; }
 
@@ -112,6 +121,24 @@
       padding-right: 12px; }
     .comprar-passagem-container .form-passagem-container hr {
       border-color: rgba(0, 0, 0, 0.1); }
+    .comprar-passagem-container .form-passagem-container .jumbotron {
+      border-radius: 6px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.05);
+      border: none; }
+      .comprar-passagem-container .form-passagem-container .jumbotron .text-left.row.first {
+        padding-top: 60px; }
+    .comprar-passagem-container .form-passagem-container .form-title {
+      font-family: "Gruppo";
+      font-size: 2rem; }
+    .comprar-passagem-container .form-passagem-container .form-header {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      margin: 0;
+      padding: 10px;
+      padding-left: 20px;
+      padding-left: -15px !important;
+      background-color: rgba(0, 0, 0, 0.05); }
 
 .comprar-passagem-container::after {
   content: "";
@@ -196,15 +223,19 @@
     .pesquisar-passagens-container Table .th-saida {
       width: 20%; }
   .pesquisar-passagens-container .table-hover > tbody > tr:hover {
-    background-color: rgba(218, 165, 32, 0.1) !important; }
-  .pesquisar-passagens-container .pagination-pesquisa {
-    margin: 30px, 0, 0, 0; }
-    .pesquisar-passagens-container .pagination-pesquisa li a {
-      color: #4285f4; }
-    .pesquisar-passagens-container .pagination-pesquisa li.active a {
-      background-color: #4285f4;
-      border: none;
-      color: white; }
+    background-color: rgba(218, 165, 32, 0.15) !important; }
+  .pesquisar-passagens-container .pagination-pesquisa li a {
+    background-color: white;
+    border-color: rgba(45, 45, 45, 0.3);
+    color: #2d2d2d; }
+  .pesquisar-passagens-container .pagination-pesquisa li.active a {
+    background-color: rgba(45, 45, 45, 0.9);
+    border: none;
+    color: white; }
+  .pesquisar-passagens-container .jumbotron {
+    border-radius: 6px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05); }
 
 .pesquisar-passagens-container::after {
   content: "";
@@ -287,6 +318,7 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
 
 .btn-google-blue {
+  color: white !important;
   background-color: #4285f4;
   background-image: none;
   border: none;
@@ -314,6 +346,7 @@
     outline: none !important; }
 
 .btn-google-purple {
+  color: white !important;
   background-color: purple;
   background-image: none;
   border: none;
@@ -348,6 +381,31 @@
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.welcome-container {
+  overflow: auto;
+  height: calc(100vh - 50px); }
+  .welcome-container::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-size: cover;
+    opacity: .2;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute; }
+  .welcome-container .info-container {
+    margin-top: 50px; }
+  .welcome-container h1 {
+    font-family: "Gruppo";
+    font-weight: bold; }
+  .welcome-container .welcome-button {
+    margin-bottom: 50px; }
+  .welcome-container .jumbotron {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05); }
 
 html {
   height: 100%; }

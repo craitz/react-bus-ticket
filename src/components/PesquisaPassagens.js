@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withAuth } from '../shared/hoc';
-import { Table, NavItem, Glyphicon, Navbar, Nav, Label, Col, FormControl, Pagination } from 'react-bootstrap';
+import {
+  Table,
+  NavItem,
+  Glyphicon,
+  Navbar,
+  Nav,
+  Label,
+  Col,
+  FormControl,
+  Pagination,
+  Jumbotron
+} from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 import * as actions from '../actions/pesquisaPassagens.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { resetFormPassagem } from '../actions/compraPassagem.actions'
 import DivAnimated from '../shared/DivAnimated'
+import FontAwesome from 'react-fontawesome';
 
-const totalPageItems = 10;
+const totalPageItems = 12;
 
-const Consulta = {
+let Consulta = {
   sort: {
     field: '',
     direction: true
@@ -25,7 +36,8 @@ const Consulta = {
     saida: '',
     poltrona: ''
   },
-  activePage: 1
+  activePage: 1,
+  page: []
 }
 
 const getGlyph = (field) => {
@@ -72,20 +84,17 @@ class PesquisaPassagens extends Component {
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
     this.handleSelectPage = this.handleSelectPage.bind(this);
     this.passagensBackup = [];
-    this.page = [];
   }
 
   componentWillMount() {
     const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
     const ref = `passagens/${emailFirebase}`;
 
-    this.handleReset();
-
-    firebaseHelper.fetch(ref).then((passagens) => {
-      const arr = utils.objToArray(passagens);
-      this.passagensBackup = utils.arrayDeepCopy(arr);
+    firebaseHelper.fetch(ref).then((passagensObj) => {
+      const passagensArray = utils.objToArray(passagensObj);
+      this.passagensBackup = utils.arrayDeepCopy(passagensArray);
+      this.handleReset();
       this.aplicaPesqusia();
-      // this.props.dispatch(actions.setPassagens(arr));
       this.forceUpdate();
     });
   }
@@ -97,23 +106,28 @@ class PesquisaPassagens extends Component {
   }
 
   handleReset() {
-    const { sort, filter } = Consulta;
+    Consulta = {
+      sort: {
+        field: '',
+        direction: true
+      },
+      filter: {
+        nome: '',
+        compra: '',
+        linha: '',
+        saida: '',
+        poltrona: ''
+      },
+      activePage: 1,
+      page: []
+    }
 
-    sort.field = '';
-    sort.direction = true;
-    filter.nome = '';
-    filter.compra = '';
-    filter.linha = '';
-    filter.saida = '';
-    filter.poltrona = '';
-
-    this.props.dispatch(actions.setPassagens(utils.arrayDeepCopy(this.passagensBackup)));
+    this.aplicaPesqusia();
   }
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    // this.props.dispatch(resetFormPassagem());
-    this.props.history.push('/');
+    this.props.history.push('/comprar');
   }
 
   aplicaPesqusia() {
@@ -130,11 +144,9 @@ class PesquisaPassagens extends Component {
       Consulta.activePage = total;
     }
 
-    console.log(Consulta.activePage);
-
     const start = (Consulta.activePage - 1) * totalPageItems;
     const end = Consulta.activePage * totalPageItems;
-    this.page = passagemOrdenadaFiltrada.slice(start, end);
+    Consulta.page = utils.arrayDeepCopy(passagemOrdenadaFiltrada.slice(start, end));
   }
 
   sortByField() {
@@ -335,36 +347,34 @@ class PesquisaPassagens extends Component {
 
   render() {
     const { passagens } = this.props;
-    const { filter, activePage } = Consulta;
+    const { filter, activePage, page } = Consulta;
     const fields = utils.PesquisaPassagensField;
-
     const totalPages = this.getTotalPages(passagens);
-    // const page = this.getPage();
 
-
-    // console.log('render >>> ', passagens);
     return (
       <div className="pesquisar-passagens-container">
         <div className="navheader-container">
           <Navbar>
             <NavHeader label="Histórico de compras" glyph="history"></NavHeader>
             <Nav pullRight>
-              <NavItem href="#">
+              <NavItem className="resultados" href="#">
+                <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
+                <span className="text-after-icon">{passagens.length} resultados encontrados</span>
               </NavItem>
               <NavItem href="/passagens">
                 <TooltipOverlay text="Comprar passagem" position="top">
-                  <Glyphicon className="icon-title links comprar" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
+                  <FontAwesome className="icon-title links comprar" name="shopping-cart" onClick={this.handleComprarPassagem} />
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Limpar filtros" position="top">
-                  <Glyphicon className="icon-title links reset" glyph="erase" onClick={this.handleReset} />
+                  <FontAwesome className="icon-title links reset" name="eraser" onClick={this.handleReset} />
                 </TooltipOverlay>
               </NavItem>
             </Nav>
           </Navbar>
         </div>
-        <DivAnimated className="text-left">
+        <DivAnimated className="text-center">
           <Col md={10} mdOffset={1}>
             <Pagination
               bsSize="medium"
@@ -373,92 +383,94 @@ class PesquisaPassagens extends Component {
               onSelect={this.handleSelectPage}
               className="pagination-pesquisa"
             />
-            <Table responsive hover>
-              <thead>
-                <tr>
-                  <TableHeader
-                    className="th-nome"
-                    onClick={this.handleClickNome}
-                    label="Nome"
-                    field={fields.NOME}
-                  />
-                  <TableHeader
-                    className="th-data-compra"
-                    onClick={this.handleClickDataCompra}
-                    label="Data da compra"
-                    field={fields.COMPRA}
-                  />
-                  <TableHeader
-                    className="th-linha"
-                    onClick={this.handleClickLinha}
-                    label="Linha"
-                    field={fields.LINHA}
-                  />
-                  <TableHeader
-                    className="th-saida"
-                    onClick={this.handleClickSaida}
-                    label="Saída"
-                    field={fields.SAIDA}
-                  />
-                  <th>Poltrona(s)</th>
-                </tr>
-              </thead>
-              <tbody className="text-left">
-                <tr>
-                  <TableColFilter
-                    tooltip="Pesquisar pelo nome"
-                    value={filter.nome}
-                    onChange={this.handleChangeFilterNome}
-                  />
-                  <TableColFilter
-                    tooltip="Pesquisar pela data da compra da passagem"
-                    value={filter.compra}
-                    onChange={this.handleChangeFilterDataCompra}
-                  />
-                  <TableColFilter
-                    tooltip="Pesquisar pela origem e destino da viagem"
-                    value={filter.linha}
-                    onChange={this.handleChangeFilterLinha}
-                  />
-                  <TableColFilter
-                    tooltip="Pesquisar pela data e horário de saída"
-                    value={filter.saida}
-                    onChange={this.handleChangeFilterSaida}
-                  />
-                  <TableColFilter
-                    tooltip="Pesquisar por poltrona(s). Se necessário, separe por vírgulas"
-                    value={filter.poltrona}
-                    onChange={this.handleChangeFilterPoltrona}
-                  />
-                </tr>
-                {this.page.map((value, index) =>
-                  <tr key={index}>
-                    <td>
-                      {value.nome}
-                    </td>
-                    <td>
-                      {value.dataCompra}
-                    </td>
-                    <td>
-                      <span>{value.origem}</span>
-                      <Glyphicon glyph="arrow-right" className="icon-table arrow-trajeto" />
-                      <span>{value.destino}</span>
-                    </td>
-                    <td>
-                      <Glyphicon glyph="calendar" className="icon-table data" />
-                      <span>{value.data}</span>
-                      <Glyphicon glyph="time" className="icon-table horario" />
-                      <span>{value.horario}</span>
-                    </td>
-                    <td>
-                      {value.poltrona.split(' - ').map((value, index) =>
-                        <Label key={index} bsStyle="danger" className="label-poltrona">{value}</Label>
-                      )}
-                    </td>
+            <Jumbotron>
+              <Table responsive hover>
+                <thead>
+                  <tr>
+                    <TableHeader
+                      className="th-nome"
+                      onClick={this.handleClickNome}
+                      label="Nome"
+                      field={fields.NOME}
+                    />
+                    <TableHeader
+                      className="th-data-compra"
+                      onClick={this.handleClickDataCompra}
+                      label="Data da compra"
+                      field={fields.COMPRA}
+                    />
+                    <TableHeader
+                      className="th-linha"
+                      onClick={this.handleClickLinha}
+                      label="Linha"
+                      field={fields.LINHA}
+                    />
+                    <TableHeader
+                      className="th-saida"
+                      onClick={this.handleClickSaida}
+                      label="Saída"
+                      field={fields.SAIDA}
+                    />
+                    <th>Poltrona(s)</th>
                   </tr>
-                )}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody className="text-left">
+                  <tr>
+                    <TableColFilter
+                      tooltip="Pesquisar pelo nome"
+                      value={filter.nome}
+                      onChange={this.handleChangeFilterNome}
+                    />
+                    <TableColFilter
+                      tooltip="Pesquisar pela data da compra da passagem"
+                      value={filter.compra}
+                      onChange={this.handleChangeFilterDataCompra}
+                    />
+                    <TableColFilter
+                      tooltip="Pesquisar pela origem e destino da viagem"
+                      value={filter.linha}
+                      onChange={this.handleChangeFilterLinha}
+                    />
+                    <TableColFilter
+                      tooltip="Pesquisar pela data e horário de saída"
+                      value={filter.saida}
+                      onChange={this.handleChangeFilterSaida}
+                    />
+                    <TableColFilter
+                      tooltip="Pesquisar por poltrona(s). Se necessário, separe por vírgulas"
+                      value={filter.poltrona}
+                      onChange={this.handleChangeFilterPoltrona}
+                    />
+                  </tr>
+                  {page.map((value, index) =>
+                    <tr key={index}>
+                      <td>
+                        {value.nome}
+                      </td>
+                      <td>
+                        {value.dataCompra}
+                      </td>
+                      <td>
+                        <span>{value.origem}</span>
+                        <Glyphicon glyph="arrow-right" className="icon-table arrow-trajeto" />
+                        <span>{value.destino}</span>
+                      </td>
+                      <td>
+                        <Glyphicon glyph="calendar" className="icon-table data" />
+                        <span>{value.data}</span>
+                        <Glyphicon glyph="time" className="icon-table horario" />
+                        <span>{value.horario}</span>
+                      </td>
+                      <td>
+                        {value.poltrona.split(' - ').map((value, index) =>
+                          <Label key={index} bsStyle="danger" className="label-poltrona">{value}</Label>
+                        )}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </Jumbotron>
           </Col>
         </DivAnimated>
 

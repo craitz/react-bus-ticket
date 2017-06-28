@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { firebaseHelper } from '../shared/FirebaseHelper';
-import TooltipOverlay from '../shared/TooltipOverlay';
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { resetFormPassagem } from '../actions/compraPassagem.actions'
 import FontAwesome from 'react-fontawesome';
 
 export const NavHeader = ({ label, glyph }) =>
@@ -20,9 +18,13 @@ NavHeader.PropTypes = {
   glyph: PropTypes.string.isRequired
 }
 
-const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagens }) =>
+const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagens, onHome }) =>
   <Navbar.Collapse>
     <Nav>
+      <NavItem href="#" onClick={onHome}>
+        <FontAwesome name="home"></FontAwesome>
+        <span className="text-after-icon">Página inicial</span>
+      </NavItem>
       <NavItem href="#" onClick={onComprarPassagem}>
         <FontAwesome name="shopping-cart"></FontAwesome>
         <span className="text-after-icon">Comprar passagens</span>
@@ -61,6 +63,7 @@ class Navigation extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
+    this.handleHome = this.handleHome.bind(this);
   }
 
   handleLogout(event) {
@@ -73,12 +76,17 @@ class Navigation extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    this.props.history.push('/');
+    this.props.history.push('/comprar');
   }
 
   handlePesquisarPassagens(event) {
     event.preventDefault();
     this.props.history.push('/passagens');
+  }
+
+  handleHome(event) {
+    event.preventDefault();
+    this.props.history.push('/');
   }
 
   render() {
@@ -98,6 +106,7 @@ class Navigation extends Component {
             onLgout={this.handleLogout}
             onComprarPassagem={this.handleComprarPassagem}
             onPesquisarPassagens={this.handlePesquisarPassagens}
+            onHome={this.handleHome}
           />
         }
       </Navbar>

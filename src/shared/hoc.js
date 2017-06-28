@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { firebaseHelper } from './FirebaseHelper';
-import { Glyphicon, Row } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome';
 
 export const withAuth = (WrappedComponent) => {

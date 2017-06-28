@@ -14,6 +14,18 @@
             color: white;
         }
     }
+    .resultados {
+        font-size: 1.5rem;
+        // color: rgb(157, 157, 157);
+        margin-right: 20px;
+        a,
+        a:hover {
+            color: rgb(119, 119, 119) !important;
+        }
+        .icon {
+            font-size: 2rem;
+        }
+    }
     .nav.navbar-nav {
         margin-left: 20px !important;
     }

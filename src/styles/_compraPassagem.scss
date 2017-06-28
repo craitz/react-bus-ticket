@@ -28,6 +28,30 @@
         hr {
             border-color: rgba(0, 0, 0, .1);
         }
+        .jumbotron {
+            border-radius: 6px;
+            padding: 20px;
+            background-color: rgba(black, .05);
+            border: none;
+            .text-left.row.first {
+                padding-top: 60px;
+            }
+        }
+        .form-title {
+            font-family: "Gruppo";
+            font-size: 2rem;
+            // font-weight: bold;
+            // color: rgba(black, .5);
+        }
+        .form-header {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            margin: 0;
+            padding: 10px;
+            padding-left: 20px;
+            padding-left: -15px !important;
+            background-color: rgba(black, .05);
+        }
     }
 }
 

@@ -15,10 +15,9 @@ import {
 import { NavHeader } from '../shared/Navigation';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { withRouter } from 'react-router-dom';
-import * as actions from '../actions/compraPassagem.actions'
 import { withAuth } from '../shared/hoc';
-import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
+import FontAwesome from 'react-fontawesome';
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
@@ -29,8 +28,7 @@ class ConfirmaPassagem extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    // this.props.dispatch(actions.resetFormPassagem());
-    this.props.history.push('/');
+    this.props.history.push('/comprar');
   }
 
   handlePesquisarPassagens(event) {
@@ -48,12 +46,12 @@ class ConfirmaPassagem extends Component {
             <Nav pullRight>
               <NavItem href="#">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <Glyphicon className="icon-title links search" glyph="search" onClick={this.handlePesquisarPassagens} />
+                  <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
                 </TooltipOverlay>
               </NavItem>
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Comprar nova passagem" position="top">
-                  <Glyphicon className="icon-title links reset" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
+                  <FontAwesome className="icon-title links reset" name="shopping-cart" onClick={this.handleComprarPassagem} />
                 </TooltipOverlay>
               </NavItem>
             </Nav>

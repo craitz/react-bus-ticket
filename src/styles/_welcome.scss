@@ -1,0 +1,24 @@
+.welcome-container {
+    @include containerHeight();
+    &::after {
+        @include bkgImage();
+    }
+    .info-container {
+        margin-top: 50px;
+    }
+    h1 {
+        font-family: "Gruppo";
+        font-weight: bold;
+    }
+    article.tech {
+        // color: orangered;
+        // font-weight: bold;
+    }
+    .welcome-button {
+        margin-bottom: 50px;
+    }
+    .jumbotron {
+        padding: 20px;
+        background-color: rgba(black, .05);
+    }
+}
