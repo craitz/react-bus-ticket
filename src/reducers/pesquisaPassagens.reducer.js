@@ -1,5 +1,6 @@
 const initialState = {
-  passagens: []
+  passagens: [],
+  activePage: 1
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,10 +11,17 @@ const reducer = (state = initialState, action) => {
         passagens: action.payload
       };
     }
+    case 'SET_ACTIVE_PAGE': {
+      return {
+        ...state,
+        activePage: action.payload
+      };
+    }
     default: {
       return state;
     }
   }
 };
+
 
 export default reducer;

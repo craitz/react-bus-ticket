@@ -9,6 +9,9 @@ import * as actions from '../actions/pesquisaPassagens.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
 import { resetFormPassagem } from '../actions/compraPassagem.actions'
+import DivAnimated from '../shared/DivAnimated'
+
+const totalPageItems = 10;
 
 const Consulta = {
   sort: {
@@ -66,6 +69,7 @@ class PesquisaPassagens extends Component {
     this.handleChangeFilterPoltrona = this.handleChangeFilterPoltrona.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
+    this.handleSelectPage = this.handleSelectPage.bind(this);
     this.passagensBackup = [];
   }
 
@@ -81,6 +85,10 @@ class PesquisaPassagens extends Component {
       this.props.dispatch(actions.setPassagens(arr));
       this.forceUpdate();
     });
+  }
+
+  handleSelectPage(eventKey) {
+    this.props.dispatch(actions.setActivePage(eventKey));
   }
 
   handleReset() {
@@ -296,10 +304,28 @@ class PesquisaPassagens extends Component {
     return passagensFiltradas;
   }
 
+  getPage() {
+    const { passagens, activePage } = this.props;
+    const start = (activePage - 1) * totalPageItems;
+    const end = activePage * totalPageItems;
+    return passagens.slice(start, end);
+  }
+
+  getTotalPages() {
+    const total = this.props.passagens.length;
+    const quot = total / totalPageItems;
+    const rest = total % totalPageItems
+    return (rest > 0) ? (quot + 1) : quot;
+  }
+
   render() {
-    const { passagens } = this.props;
+    const { activePage } = this.props;
     const { filter } = Consulta;
     const fields = utils.PesquisaPassagensField;
+
+    const page = this.getPage();
+    const totalPages = this.getTotalPages();
+
 
     // console.log('render >>> ', passagens);
     return (
@@ -308,6 +334,8 @@ class PesquisaPassagens extends Component {
           <Navbar>
             <NavHeader label="Histórico de compras" glyph="history"></NavHeader>
             <Nav pullRight>
+              <NavItem href="#">
+              </NavItem>
               <NavItem href="/passagens">
                 <TooltipOverlay text="Comprar passagem" position="top">
                   <Glyphicon className="icon-title links comprar" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
@@ -321,99 +349,104 @@ class PesquisaPassagens extends Component {
             </Nav>
           </Navbar>
         </div>
-        <Col md={10} mdOffset={1}>
-          <Table responsive hover className="animated bounceInLeft">
-            <thead>
-              <tr>
-                <TableHeader
-                  className="th-nome"
-                  onClick={this.handleClickNome}
-                  label="Nome"
-                  field={fields.NOME}
-                />
-                <TableHeader
-                  className="th-data-compra"
-                  onClick={this.handleClickDataCompra}
-                  label="Data da compra"
-                  field={fields.COMPRA}
-                />
-                <TableHeader
-                  className="th-linha"
-                  onClick={this.handleClickLinha}
-                  label="Linha"
-                  field={fields.LINHA}
-                />
-                <TableHeader
-                  className="th-saida"
-                  onClick={this.handleClickSaida}
-                  label="Saída"
-                  field={fields.SAIDA}
-                />
-                <th>Poltrona(s)</th>
-              </tr>
-            </thead>
-            <tbody className="text-left">
-              <tr>
-                <TableColFilter
-                  tooltip="Pesquisar pelo nome"
-                  value={filter.nome}
-                  onChange={this.handleChangeFilterNome}
-                />
-                <TableColFilter
-                  tooltip="Pesquisar pela data da compra da passagem"
-                  value={filter.compra}
-                  onChange={this.handleChangeFilterDataCompra}
-                />
-                <TableColFilter
-                  tooltip="Pesquisar pela origem e destino da viagem"
-                  value={filter.linha}
-                  onChange={this.handleChangeFilterLinha}
-                />
-                <TableColFilter
-                  tooltip="Pesquisar pela data e horário de saída"
-                  value={filter.saida}
-                  onChange={this.handleChangeFilterSaida}
-                />
-                <TableColFilter
-                  tooltip="Pesquisar por poltrona(s). Se necessário, separe por vírgulas"
-                  value={filter.poltrona}
-                  onChange={this.handleChangeFilterPoltrona}
-                />
-              </tr>
-              {passagens.map((value, index) =>
-                <tr key={index}>
-                  <td>
-                    {value.nome}
-                  </td>
-                  <td>
-                    {value.dataCompra}
-                  </td>
-                  <td>
-                    <span>{value.origem}</span>
-                    <Glyphicon glyph="arrow-right" className="icon-table arrow-trajeto" />
-                    <span>{value.destino}</span>
-                  </td>
-                  <td>
-                    <Glyphicon glyph="calendar" className="icon-table data" />
-                    <span>{value.data}</span>
-                    <Glyphicon glyph="time" className="icon-table horario" />
-                    <span>{value.horario}</span>
-                  </td>
-                  <td>
-                    {value.poltrona.split(' - ').map((value, index) =>
-                      <Label key={index} bsStyle="danger" className="label-poltrona">{value}</Label>
-                    )}
-                  </td>
+        <DivAnimated className="text-left">
+          <Col md={10} mdOffset={1}>
+            <Pagination
+              bsSize="medium"
+              items={this.getTotalPages()}
+              activePage={activePage}
+              onSelect={this.handleSelectPage}
+              className="pagination-pesquisa"
+            />
+            <Table responsive hover>
+              <thead>
+                <tr>
+                  <TableHeader
+                    className="th-nome"
+                    onClick={this.handleClickNome}
+                    label="Nome"
+                    field={fields.NOME}
+                  />
+                  <TableHeader
+                    className="th-data-compra"
+                    onClick={this.handleClickDataCompra}
+                    label="Data da compra"
+                    field={fields.COMPRA}
+                  />
+                  <TableHeader
+                    className="th-linha"
+                    onClick={this.handleClickLinha}
+                    label="Linha"
+                    field={fields.LINHA}
+                  />
+                  <TableHeader
+                    className="th-saida"
+                    onClick={this.handleClickSaida}
+                    label="Saída"
+                    field={fields.SAIDA}
+                  />
+                  <th>Poltrona(s)</th>
                 </tr>
-              )}
-            </tbody>
-          </Table>
-          <Pagination
-            bsSize="small"
-            items={10}
-            activePage={1}
-            onSelect={this.handleSelect} />
-        </Col>
+              </thead>
+              <tbody className="text-left">
+                <tr>
+                  <TableColFilter
+                    tooltip="Pesquisar pelo nome"
+                    value={filter.nome}
+                    onChange={this.handleChangeFilterNome}
+                  />
+                  <TableColFilter
+                    tooltip="Pesquisar pela data da compra da passagem"
+                    value={filter.compra}
+                    onChange={this.handleChangeFilterDataCompra}
+                  />
+                  <TableColFilter
+                    tooltip="Pesquisar pela origem e destino da viagem"
+                    value={filter.linha}
+                    onChange={this.handleChangeFilterLinha}
+                  />
+                  <TableColFilter
+                    tooltip="Pesquisar pela data e horário de saída"
+                    value={filter.saida}
+                    onChange={this.handleChangeFilterSaida}
+                  />
+                  <TableColFilter
+                    tooltip="Pesquisar por poltrona(s). Se necessário, separe por vírgulas"
+                    value={filter.poltrona}
+                    onChange={this.handleChangeFilterPoltrona}
+                  />
+                </tr>
+                {page.map((value, index) =>
+                  <tr key={index}>
+                    <td>
+                      {value.nome}
+                    </td>
+                    <td>
+                      {value.dataCompra}
+                    </td>
+                    <td>
+                      <span>{value.origem}</span>
+                      <Glyphicon glyph="arrow-right" className="icon-table arrow-trajeto" />
+                      <span>{value.destino}</span>
+                    </td>
+                    <td>
+                      <Glyphicon glyph="calendar" className="icon-table data" />
+                      <span>{value.data}</span>
+                      <Glyphicon glyph="time" className="icon-table horario" />
+                      <span>{value.horario}</span>
+                    </td>
+                    <td>
+                      {value.poltrona.split(' - ').map((value, index) =>
+                        <Label key={index} bsStyle="danger" className="label-poltrona">{value}</Label>
+                      )}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </Col>
+        </DivAnimated>
+
       </div>
     );
   }
@@ -422,6 +455,7 @@ class PesquisaPassagens extends Component {
 const mapStateToProps = (state) => {
   return {
     passagens: state.pesquisaPassagensState.passagens,
+    activePage: state.pesquisaPassagensState.activePage
   };
 };
 

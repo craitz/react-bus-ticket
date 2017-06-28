@@ -13,6 +13,7 @@ import { NavHeader } from '../shared/Navigation';
 import { withLoading } from '../shared/hoc';
 import { setLoading } from '../actions/withLoading.actions';
 import FontAwesome from 'react-fontawesome';
+import DivAnimated from '../shared/DivAnimated'
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -458,7 +459,7 @@ class CompraPassagem extends Component {
           </Navbar>
         </div>
         <div className="form-passagem-container">
-          <div className="form-centered animated bounceInLeft">
+          <DivAnimated className="form-centered">
             {/*<Grid>
               <Row>*/}
             <Col md={4} mdOffset={4}>
@@ -554,7 +555,7 @@ class CompraPassagem extends Component {
             </Col>
             {/*</Row>
             </Grid>*/}
-          </div>
+          </DivAnimated>
         </div>
       </div >
     );

@@ -18,6 +18,7 @@ import { withRouter } from 'react-router-dom';
 import * as actions from '../actions/compraPassagem.actions'
 import { withAuth } from '../shared/hoc';
 import FontAwesome from 'react-fontawesome';
+import DivAnimated from '../shared/DivAnimated'
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class ConfirmaPassagem extends Component {
             </Nav>
           </Navbar>
         </div>
-        <div className="form-centered animated bounceInLeft">
+        <DivAnimated className="form-centered">
           <Grid>
             <Row>
               <Col md={6} mdOffset={3} className="text-left">
@@ -82,7 +83,7 @@ class ConfirmaPassagem extends Component {
               </Col>
             </Row>
           </Grid>
-        </div>
+        </DivAnimated>
       </div>
     );
   }

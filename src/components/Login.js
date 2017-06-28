@@ -16,6 +16,7 @@ import { setLoading } from '../actions/withLoading.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withLoading } from '../shared/hoc';
 import FontAwesome from 'react-fontawesome';
+import DivAnimated from '../shared/DivAnimated';
 
 const buttonLogin = () =>
   <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
@@ -143,7 +144,7 @@ class Login extends Component {
     } else {
       return (
         <div className="login-container">
-          <div className="login-box animated bounceInLeft">
+          <DivAnimated className="login-box">
             <div className="login-header">
               <div className="login-header--title">
                 <div className="login-header--title-main">Bem-vindo</div>
@@ -180,7 +181,7 @@ class Login extends Component {
                 <ButtonLoading />
               </FormGroup>
             </form>
-          </div>
+          </DivAnimated>
         </div>
       );
     }

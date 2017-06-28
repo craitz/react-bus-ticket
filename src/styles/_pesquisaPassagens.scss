@@ -29,16 +29,40 @@
     }
     Table {
         border: none !important;
-        margin-top: 30px;
+        margin-top: 0;
         tr,
         td,
         th {
             border: none !important;
             // border-color: rgba(black, .05) !important;
         }
+        .th-nome {
+            width: 25%;
+        }
+        .th-data-compra {
+            width: 12%;
+        }
+        .th-linha {
+            width: 30%;
+        }
+        .th-saida {
+            width: 20%;
+        }
     }
     .table-hover>tbody>tr:hover {
         background-color: rgba(goldenrod, .1) !important;
+    }
+    .pagination-pesquisa {
+        margin: 30px, 0, 0, 0;
+        li a {
+            // border-color: rgba(66, 133, 244, .5);
+            color: rgb(66, 133, 244);
+        }
+        li.active a {
+            background-color: rgb(66, 133, 244);
+            border: none;
+            color: white;
+        }
     }
 }
 

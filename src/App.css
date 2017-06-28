@@ -182,13 +182,29 @@
       margin-left: 10px; }
   .pesquisar-passagens-container Table {
     border: none !important;
-    margin-top: 30px; }
+    margin-top: 0; }
     .pesquisar-passagens-container Table tr,
     .pesquisar-passagens-container Table td,
     .pesquisar-passagens-container Table th {
       border: none !important; }
+    .pesquisar-passagens-container Table .th-nome {
+      width: 25%; }
+    .pesquisar-passagens-container Table .th-data-compra {
+      width: 12%; }
+    .pesquisar-passagens-container Table .th-linha {
+      width: 30%; }
+    .pesquisar-passagens-container Table .th-saida {
+      width: 20%; }
   .pesquisar-passagens-container .table-hover > tbody > tr:hover {
     background-color: rgba(218, 165, 32, 0.1) !important; }
+  .pesquisar-passagens-container .pagination-pesquisa {
+    margin: 30px, 0, 0, 0; }
+    .pesquisar-passagens-container .pagination-pesquisa li a {
+      color: #4285f4; }
+    .pesquisar-passagens-container .pagination-pesquisa li.active a {
+      background-color: #4285f4;
+      border: none;
+      color: white; }
 
 .pesquisar-passagens-container::after {
   content: "";
