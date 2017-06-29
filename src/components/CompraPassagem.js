@@ -33,7 +33,8 @@ const mapStateToProps = (state) => {
 const buttonComprar = () =>
   <Button type="submit" bsStyle="primary" className="btn-google-blue">
     <FontAwesome name="check"></FontAwesome>
-    <span className="text-after-icon">Finalizar compra</span>
+    <span className="text-after-icon hidden-xs">Finalizar compra</span>
+    <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
   </Button>
 
 const ButtonWithLoading = withLoading(buttonComprar);
@@ -444,7 +445,7 @@ class CompraPassagem extends Component {
         <div className="navheader-container">
           <Navbar>
             <NavHeader label="Compre sua passagem" glyph="shopping-cart"></NavHeader>
-            <Nav pullRight>
+            <Nav pullRight className="hidden-xs">
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
                   <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
@@ -462,14 +463,15 @@ class CompraPassagem extends Component {
           <DivAnimated className="form-centered">
             <Col md={10} mdOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
               <Col xs={12} className="form-header text-left">
-                <span className="form-title">Por favor, preencha o formulário.</span>
+                <span className="form-title hidden-xs">Por favor, preencha o formulário.</span>
+                <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>
               </Col>
               <Jumbotron>
                 <form onSubmit={this.handleSubmit}>
 
                   {/*NOME / CPF*/}
                   <Row className="text-left first">
-                    <Col xs={8}>
+                    <Col sm={8}>
                       <InputField
                         id="nome"
                         label="Nome*"
@@ -479,7 +481,7 @@ class CompraPassagem extends Component {
                         validation={nome.validation}
                         message={nome.message} />
                     </Col>
-                    <Col xs={4}>
+                    <Col sm={4}>
                       <InputMaskField
                         id="cpf"
                         label="CPF*"
@@ -549,6 +551,14 @@ class CompraPassagem extends Component {
 
                   <hr />
                   <div className="text-right">
+                    <Button
+                      type="button"
+                      bsStyle="danger"
+                      className="btn-google-red btn-limpar"
+                      onClick={this.handleReset}>
+                      <FontAwesome name="eraser"></FontAwesome>
+                      <span className="text-after-icon">Limpar</span>
+                    </Button>
                     <ButtonWithLoading />
                   </div>
                 </form >

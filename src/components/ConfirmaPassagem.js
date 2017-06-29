@@ -43,7 +43,7 @@ class ConfirmaPassagem extends Component {
         <div className="navheader-container">
           <Navbar>
             <NavHeader label="Compra finalizada!" glyph="check"></NavHeader>
-            <Nav pullRight>
+            <Nav pullRight className="hidden-xs">
               <NavItem href="#">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
                   <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />

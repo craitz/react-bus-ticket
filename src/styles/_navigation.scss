@@ -1,14 +1,12 @@
 .App {
     .navbar {
+        text-align: left;
         margin-bottom: 0;
         border: none;
         .container {
             margin-left: 0;
             margin-right: 0;
             width: 100%;
-        }
-        .navbar-nav {
-            margin-left: 50px;
         }
         .App-logo {
             // animation: App-logo-spin infinite 5s linear;
@@ -30,5 +28,11 @@
         to {
             transform: rotate(360deg);
         }
+    }
+    .navbar-collapse.collapse.in {
+        text-align: left;
+    }
+    .navbar-nav {
+        margin-left: 20px;
     }
 }

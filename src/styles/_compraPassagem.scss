@@ -4,10 +4,11 @@
         width: inherit;
     }
     .form-passagem-container {
-        margin-top: 50px;
+        margin-top: 15px;
         // @include centralizeContent();
         .error-empty {
             color: rgb(169, 68, 66);
+            font-size: inherit;
         }
         .input-col {
             margin-top: 10px;
@@ -52,7 +53,19 @@
             padding-left: -15px !important;
             background-color: rgba(black, .05);
         }
+        .btn-limpar {
+            margin-right: 10px;
+        }
     }
+    @media screen and (min-width: 320px) {}
+    @media screen and (min-width: 480px) {}
+    @media screen and (min-width: 768px) {}
+    @media screen and (min-width: 992px) {
+        .form-passagem-container {
+            margin-top: 50px;
+        }
+    }
+    @media screen and (min-width: 1200px) {}
 }
 
 .comprar-passagem-container::after {

@@ -1,9 +1,9 @@
 .login-container {
     height: calc(100% - 150px) !important;
-    $boxWidth: 360px;
+    $boxWidth: 320px;
     $boxBgColor: rgba(white, .3);
     $headerHeight: 60px;
-    $headerTitleWidth: 260px;
+    $headerTitleWidth: 220px;
     $headerTitleMainColor: black;
     $headerTitleMainFontSize: 2.5rem;
     $headerTitleMainLineHeight: 30px;
@@ -55,6 +55,18 @@
             }
         }
     }
+    @media screen and (min-width: 320px) {}
+    @media screen and (min-width: 480px) {
+        .login-box {
+            width: 360px;
+        }
+        .login-header--icon {
+            left: 260px !important;
+        }
+    }
+    @media screen and (min-width: 768px) {}
+    @media screen and (min-width: 992px) {}
+    @media screen and (min-width: 1200px) {}
 }
 
 .login-container::after {

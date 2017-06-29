@@ -38,12 +38,7 @@ class Welcome extends Component {
         <div className="navheader-container">
           <Navbar>
             <NavHeader label="Seja bem-vindo !" glyph="shopping-cart"></NavHeader>
-            <Nav pullRight>
-              {/*<NavItem href="#">
-                <TooltipOverlay text="Comprar passagem" position="top">
-                  <Glyphicon className="icon-title links comprar" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
-                </TooltipOverlay>
-              </NavItem>*/}
+            <Nav pullRight className="hidden-xs hidden-sm">
               <NavItem href="#" className="nav-links">
                 <TooltipOverlay text="Ver histórico de compras" position="top">
                   <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
@@ -53,12 +48,14 @@ class Welcome extends Component {
           </Navbar>
         </div>
         <DivAnimated className="text-center info-container">
-          <Col md={4} mdOffset={4} className="text-left">
+          <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-left">
             <h1>Introdução</h1>
             <article className="text-left">
-              O BusTicket é um aplicativo que simula um guichê virtual para compra
-            de passagens de ônibus (sem os valores envolvidos na transação) para
-            viagens entre as capitais de Brasil.
+              O BusTicket é uma SPA (Single Page Application) totalmente responsiva
+              que utiliza o conceito Mobile First para se adaptar e responder adequadamante
+              a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
+              um guichê virtual para compra de passagens de ônibus (sem os valores
+              envolvidos na transação) para viagens entre as capitais de Brasil.
           </article>
             <hr />
             <h1>Algumas das tecnologias utilizadas:</h1>
@@ -67,7 +64,7 @@ class Welcome extends Component {
                 React,
                 Redux,
                 JSX,
-                Javascript (ES5/ES6/ES7),
+                Javascript (ES5,ES6,ES7),
                 Firebase,
                 Jest,
                 Enzyme,
@@ -88,7 +85,8 @@ class Welcome extends Component {
             <div className="text-center welcome-button">
               <Button className="btn btn-google-blue" onClick={this.handleComprarPassagem}>
                 <Glyphicon className="icon-title links comprar" glyph="shopping-cart" />
-                <span className="text-after-icon">Compre agora sua passagem</span>
+                <span className="text-after-icon hidden-xs">Compre agora sua passagem</span>
+                <span className="text-after-icon hidden-sm hidden-md hidden-lg">Comprar passagens</span>
               </Button>
             </div>
           </Col>

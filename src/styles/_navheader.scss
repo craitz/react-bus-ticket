@@ -4,8 +4,9 @@
         background-color: #2d2d2d;
         margin-bottom: 0;
         border: none;
-        padding: 50px;
         padding-left: 0;
+        padding: 0;
+        text-align: left;
     }
     .icon-title.links {
         font-size: 2rem;
@@ -27,7 +28,7 @@
         }
     }
     .nav.navbar-nav {
-        margin-left: 20px !important;
+        margin-left: 0px;
     }
     .page-title,
     .icon-title {
@@ -38,7 +39,7 @@
     }
     .page-title {
         font-family: "Gruppo";
-        font-size: 5rem;
+        font-size: 2rem;
         font-weight: bold;
         // margin-left: 30px;
     }

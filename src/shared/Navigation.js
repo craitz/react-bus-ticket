@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
 export const NavHeader = ({ label, glyph }) =>
-  <Nav>
+  <Nav className="navheader-nav">
     <NavItem>
       {/*<FontAwesome className="icon-title" size="3x" name={glyph}></FontAwesome>*/}
       <span className="page-title">{label}</span>
@@ -23,31 +23,31 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
     <Nav>
       <NavItem href="#" onClick={onHome}>
         <FontAwesome name="home"></FontAwesome>
-        <span className="text-after-icon">Página inicial</span>
+        <span className="text-after-icon hidden-sm">Página inicial</span>
       </NavItem>
       <NavItem href="#" onClick={onComprarPassagem}>
         <FontAwesome name="shopping-cart"></FontAwesome>
-        <span className="text-after-icon">Comprar passagens</span>
+        <span className="text-after-icon hidden-sm">Comprar passagens</span>
       </NavItem>
       <NavItem href="#" onClick={onPesquisarPassagens}>
         <FontAwesome name="history"></FontAwesome>
-        <span className="text-after-icon">Histórico de compras</span>
+        <span className="text-after-icon hidden-sm">Histórico de compras</span>
       </NavItem>
     </Nav>
     <Navbar.Text>
       <Navbar.Link href="https://github.com/craitz/react-bus-ticket" target="_blank">
         <FontAwesome name="github"></FontAwesome>
-        <span className="text-after-icon">Código-fonte</span>
+        <span className="text-after-icon hidden-sm">Código-fonte</span>
       </Navbar.Link>
     </Navbar.Text>
     <Nav pullRight>
       <NavItem href="#">
         <FontAwesome name="user"></FontAwesome>
-        <span className="text-after-icon">{email}</span>
+        <span className="text-after-icon hidden-sm hidden-md">{email}</span>
       </NavItem>
       <NavItem href="#" onClick={onLgout}>
         <FontAwesome name="power-off"></FontAwesome>
-        <span className="text-after-icon">Sair</span>
+        <span className="text-after-icon hidden-sm hidden-md">Sair</span>
       </NavItem>
     </Nav>
   </Navbar.Collapse>

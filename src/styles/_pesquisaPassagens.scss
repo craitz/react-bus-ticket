@@ -69,6 +69,16 @@
         padding: 20px;
         background-color: rgba(black, .05);
     }
+    @media screen and (min-width: 320px) {}
+    @media screen and (min-width: 480px) {}
+    @media screen and (min-width: 768px) {}
+    @media screen and (min-width: 992px) {}
+    @media screen and (min-width: 1200px) {}
+    // @media screen and (min-width: 320px) {}
+    // @media screen and (min-width: 480px) {}
+    // @media screen and (min-width: 768px) {}
+    // @media screen and (min-width: 992px) {}
+    // @media screen and (min-width: 1200px) {}
 }
 
 .pesquisar-passagens-container::after {

@@ -356,13 +356,13 @@ class PesquisaPassagens extends Component {
         <div className="navheader-container">
           <Navbar>
             <NavHeader label="Histórico de compras" glyph="history"></NavHeader>
-            <Nav pullRight>
-              <NavItem className="resultados" href="#">
+            <Nav pullRight className="hidden-xs">
+              <NavItem className="resultados hidden-sm" href="#">
                 <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
                 <span className="text-after-icon">{passagens.length} resultados encontrados</span>
               </NavItem>
               <NavItem href="/passagens">
-                <TooltipOverlay text="Comprar passagem" position="top">
+                <TooltipOverlay text="Comprar passagens" position="top">
                   <FontAwesome className="icon-title links comprar" name="shopping-cart" onClick={this.handleComprarPassagem} />
                 </TooltipOverlay>
               </NavItem>
