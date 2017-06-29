@@ -1,34 +1,3 @@
-@font-face {
-    font-family: 'Roboto';
-    src: url(./styles/fonts/Roboto-Regular.ttf) format('trueType');
-}
-
-@font-face {
-    font-family: 'Gruppo';
-    src: url(./styles/fonts/Gruppo-Regular.ttf) format('trueType');
-}
-
 .App {
     text-align: center;
-    .App-header {
-        .header-userinfo {
-            position: absolute;
-            top: 32px;
-            right: 60px;
-        }
-        .header-user-logout {
-            position: absolute;
-            top: 33px;
-            right: 20px;
-            cursor: pointer;
-        }
-        background-color: #222;
-        height: 80px;
-        padding: 20px;
-        color: white;
-    }
-    .App-container {
-        padding: 20px;
-        font-family: 'Roboto';
-    }
 }

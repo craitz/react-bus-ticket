@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
+
+@font-face {
+  font-family: 'Gruppo';
+  src: url(./styles/fonts/Gruppo-Regular.ttf) format("trueType"); }
+
 .tooltip > .tooltip-inner {
   background-color: rgba(128, 0, 128, 0.9); }
 
@@ -13,33 +21,8 @@
 .tooltip.right > .tooltip-arrow {
   border-right-color: rgba(128, 0, 128, 0.9); }
 
-@font-face {
-  font-family: 'Roboto';
-  src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
-
-@font-face {
-  font-family: 'Gruppo';
-  src: url(./styles/fonts/Gruppo-Regular.ttf) format("trueType"); }
-
 .App {
   text-align: center; }
-  .App .App-header {
-    background-color: #222;
-    height: 80px;
-    padding: 20px;
-    color: white; }
-    .App .App-header .header-userinfo {
-      position: absolute;
-      top: 32px;
-      right: 60px; }
-    .App .App-header .header-user-logout {
-      position: absolute;
-      top: 33px;
-      right: 20px;
-      cursor: pointer; }
-  .App .App-container {
-    padding: 20px;
-    font-family: 'Roboto'; }
 
 .navheader-container .navbar {
   background-color: #2d2d2d;
@@ -116,45 +99,39 @@
 .comprar-passagem-container {
   overflow: auto;
   height: calc(100vh - 50px); }
-  .comprar-passagem-container .form-centered {
-    width: inherit; }
   .comprar-passagem-container .form-passagem-container {
     margin-top: 15px; }
-    .comprar-passagem-container .form-passagem-container .error-empty {
-      color: #a94442;
-      font-size: inherit; }
-    .comprar-passagem-container .form-passagem-container .input-col {
-      margin-top: 10px; }
-    .comprar-passagem-container .form-passagem-container input#data {
-      background-color: white; }
-    .comprar-passagem-container .form-passagem-container .col-button-left {
-      padding-left: 12px;
-      padding-right: 5px; }
-    .comprar-passagem-container .form-passagem-container .col-button-right {
-      padding-left: 5px;
-      padding-right: 12px; }
-    .comprar-passagem-container .form-passagem-container hr {
-      border-color: rgba(0, 0, 0, 0.1); }
-    .comprar-passagem-container .form-passagem-container .jumbotron {
-      border-radius: 6px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.05);
-      border: none; }
-      .comprar-passagem-container .form-passagem-container .jumbotron .text-left.row.first {
-        padding-top: 60px; }
-    .comprar-passagem-container .form-passagem-container .form-title {
-      font-family: "Gruppo";
-      font-size: 2rem; }
-    .comprar-passagem-container .form-passagem-container .form-header {
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      margin: 0;
-      padding: 10px;
-      padding-left: 20px;
-      padding-left: -15px !important;
-      background-color: rgba(0, 0, 0, 0.05); }
-    .comprar-passagem-container .form-passagem-container .btn-limpar {
-      margin-right: 10px; }
+    .comprar-passagem-container .form-passagem-container .form-centered {
+      width: inherit; }
+      .comprar-passagem-container .form-passagem-container .form-centered .form-header {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        margin: 0;
+        padding: 10px;
+        padding-left: 20px;
+        padding-left: -15px !important;
+        background-color: rgba(0, 0, 0, 0.05); }
+        .comprar-passagem-container .form-passagem-container .form-centered .form-header .form-title {
+          font-family: "Gruppo";
+          font-size: 2rem; }
+      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron {
+        border-radius: 6px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.05);
+        border: none; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.first {
+          padding-top: 60px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .btn-limpar {
+          margin-right: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron hr {
+          border-color: rgba(0, 0, 0, 0.1); }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .input-col {
+          margin-top: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron input#data {
+          background-color: white; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .error-empty {
+          color: #a94442;
+          font-size: inherit; }
   @media screen and (min-width: 768px) {
     .comprar-passagem-container .form-passagem-container {
       margin-top: 50px; } }
@@ -177,20 +154,31 @@
   .confirmacao-passagem .form-centered {
     width: inherit;
     margin-top: 15px; }
-    .confirmacao-passagem .form-centered .detalhes {
-      margin-top: 60px;
-      margin-bottom: 30px; }
     .confirmacao-passagem .form-centered .label-localizador {
       margin-bottom: 10px; }
     .confirmacao-passagem .form-centered .localizador {
       font-family: "Gruppo";
       font-size: 2rem;
       font-weight: bold; }
-    .confirmacao-passagem .form-centered .jumbotron {
-      background-color: rgba(0, 0, 0, 0.05);
-      padding: 20px;
-      margin-top: 5px;
-      margin-bottom: 0; }
+    .confirmacao-passagem .form-centered .detalhes {
+      margin-top: 60px;
+      margin-bottom: 30px; }
+      .confirmacao-passagem .form-centered .detalhes .jumbotron {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin-top: 5px;
+        margin-bottom: 0; }
+  .confirmacao-passagem::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-size: cover;
+    opacity: .2;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute; }
   @media screen and (min-width: 480px) {
     .confirmacao-passagem .localizador {
       font-size: 3rem !important;
@@ -198,18 +186,6 @@
   @media screen and (min-width: 768px) {
     .confirmacao-passagem .form-centered {
       margin-top: 50px; } }
-
-.confirmacao-passagem::after {
-  content: "";
-  background: url(./styles/images/tree.jpg);
-  background-size: cover;
-  opacity: .2;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute; }
 
 .pesquisar-passagens-container {
   overflow: auto;
@@ -321,23 +297,22 @@
           font-size: 2.5rem;
           color: rgba(0, 0, 0, 0.5);
           margin-right: 5px; }
+  .login-container:after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-attachment: scroll;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; }
   @media screen and (min-width: 480px) {
     .login-container .login-box {
       width: 360px; }
-    .login-container .login-header--icon {
-      left: 260px !important; } }
-
-.login-container::after {
-  content: "";
-  background: url(./styles/images/tree.jpg);
-  background-attachment: scroll;
-  opacity: 1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1; }
+      .login-container .login-box .login-header--icon {
+        left: 260px !important; } }
 
 .form-group {
   text-align: left; }

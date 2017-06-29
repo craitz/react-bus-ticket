@@ -1,60 +1,47 @@
 .comprar-passagem-container {
     @include containerHeight();
-    .form-centered {
-        width: inherit;
-    }
     .form-passagem-container {
         margin-top: 15px;
-        // @include centralizeContent();
-        .error-empty {
-            color: rgb(169, 68, 66);
-            font-size: inherit;
-        }
-        .input-col {
-            margin-top: 10px;
-        }
-        input#data {
-            background-color: white;
-        }
-        .col-button {
-            &-left {
-                padding-left: 12px;
-                padding-right: 5px;
+        .form-centered {
+            width: inherit;
+            .form-header {
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+                margin: 0;
+                padding: 10px;
+                padding-left: 20px;
+                padding-left: -15px !important;
+                background-color: rgba(black, .05);
+                .form-title {
+                    font-family: "Gruppo";
+                    font-size: 2rem;
+                }
             }
-            &-right {
-                padding-left: 5px;
-                padding-right: 12px;
+            .jumbotron {
+                border-radius: 6px;
+                padding: 20px;
+                background-color: rgba(black, .05);
+                border: none;
+                .text-left.row.first {
+                    padding-top: 60px;
+                }
+                .btn-limpar {
+                    margin-right: 10px;
+                }
+                hr {
+                    border-color: rgba(0, 0, 0, .1);
+                }
+                .input-col {
+                    margin-top: 10px;
+                }
+                input#data {
+                    background-color: white;
+                }
+                .error-empty {
+                    color: rgb(169, 68, 66);
+                    font-size: inherit;
+                }
             }
-        }
-        hr {
-            border-color: rgba(0, 0, 0, .1);
-        }
-        .jumbotron {
-            border-radius: 6px;
-            padding: 20px;
-            background-color: rgba(black, .05);
-            border: none;
-            .text-left.row.first {
-                padding-top: 60px;
-            }
-        }
-        .form-title {
-            font-family: "Gruppo";
-            font-size: 2rem;
-            // font-weight: bold;
-            // color: rgba(black, .5);
-        }
-        .form-header {
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-            margin: 0;
-            padding: 10px;
-            padding-left: 20px;
-            padding-left: -15px !important;
-            background-color: rgba(black, .05);
-        }
-        .btn-limpar {
-            margin-right: 10px;
         }
     }
     @media screen and (min-width: 320px) {}

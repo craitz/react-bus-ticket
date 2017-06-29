@@ -551,14 +551,14 @@ class CompraPassagem extends Component {
 
                   <hr />
                   <div className="text-right">
-                    <Button
+                    {/*<Button
                       type="button"
                       bsStyle="danger"
-                      className="btn-google-red btn-limpar"
+                      className="btn-google-red btn-limpar hidden-sm hidden-md hidden-lg"
                       onClick={this.handleReset}>
                       <FontAwesome name="eraser"></FontAwesome>
                       <span className="text-after-icon">Limpar</span>
-                    </Button>
+                    </Button>*/}
                     <ButtonWithLoading />
                   </div>
                 </form >

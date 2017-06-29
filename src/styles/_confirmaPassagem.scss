@@ -3,34 +3,41 @@
     .form-centered {
         width: inherit;
         margin-top: 15px;
-        // @include centralizeContent();
-        .detalhes {
-            margin-top: 60px;
-            margin-bottom: 30px;
-        }
         .label-localizador {
             margin-bottom: 10px;
         }
         .localizador {
-            font-family: "Gruppo";
-            font-size: 2rem;
-            // color: green;
-            font-weight: bold;
-        }
-        .jumbotron {
-            background-color: rgba(black, .05);
-            padding: 20px;
-            margin: {
-                top: 5px;
-                bottom: 0;
+            font: {
+                family: "Gruppo";
+                size: 2rem;
+                weight: bold;
             }
         }
+        .detalhes {
+            margin: {
+                top: 60px;
+                bottom: 30px;
+            }
+            .jumbotron {
+                background-color: rgba(black, .05);
+                padding: 20px;
+                margin: {
+                    top: 5px;
+                    bottom: 0;
+                }
+            }
+        }
+    }
+    &::after {
+        @include bkgImage();
     }
     @media screen and (min-width: 320px) {}
     @media screen and (min-width: 480px) {
         .localizador {
-            font-size: 3rem !important;
-            font-weight: bold;
+            font: {
+                size: 3rem !important;
+                weight: bold;
+            }
         }
     }
     @media screen and (min-width: 768px) {
@@ -40,8 +47,4 @@
     }
     @media screen and (min-width: 992px) {}
     @media screen and (min-width: 1200px) {}
-}
-
-.confirmacao-passagem::after {
-    @include bkgImage();
 }

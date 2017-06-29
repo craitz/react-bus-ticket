@@ -55,29 +55,28 @@
             }
         }
     }
+    &:after {
+        content: "";
+        background: url(./styles/images/tree.jpg);
+        background-attachment: scroll;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+    }
     @media screen and (min-width: 320px) {}
     @media screen and (min-width: 480px) {
         .login-box {
             width: 360px;
-        }
-        .login-header--icon {
-            left: 260px !important;
+            .login-header--icon {
+                left: 260px !important;
+            }
         }
     }
     @media screen and (min-width: 768px) {}
     @media screen and (min-width: 992px) {}
     @media screen and (min-width: 1200px) {}
-}
-
-.login-container::after {
-    content: "";
-    background: url(./styles/images/tree.jpg);
-    background-attachment: scroll;
-    opacity: 1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
 }
