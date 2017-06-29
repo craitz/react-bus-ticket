@@ -8,7 +8,6 @@ import FontAwesome from 'react-fontawesome';
 export const NavHeader = ({ label, glyph }) =>
   <Nav className="navheader-nav">
     <NavItem>
-      {/*<FontAwesome className="icon-title" size="3x" name={glyph}></FontAwesome>*/}
       <span className="page-title">{label}</span>
     </NavItem>
   </Nav>

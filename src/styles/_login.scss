@@ -55,7 +55,7 @@
             }
         }
     }
-    &:after {
+    &::after {
         content: "";
         background: url(./styles/images/tree.jpg);
         background-attachment: scroll;
@@ -67,8 +67,7 @@
         position: absolute;
         z-index: -1;
     }
-    @media screen and (min-width: 320px) {}
-    @media screen and (min-width: 480px) {
+    @include xs {
         .login-box {
             width: 360px;
             .login-header--icon {
@@ -76,7 +75,4 @@
             }
         }
     }
-    @media screen and (min-width: 768px) {}
-    @media screen and (min-width: 992px) {}
-    @media screen and (min-width: 1200px) {}
 }

@@ -28,36 +28,30 @@
   background-color: #2d2d2d;
   margin-bottom: 0;
   border: none;
-  padding-left: 0;
   padding: 0;
   text-align: left; }
-
-.navheader-container .icon-title.links {
-  font-size: 2rem;
-  color: #9d9d9d; }
-  .navheader-container .icon-title.links:hover {
-    color: white; }
-
-.navheader-container .resultados {
-  font-size: 1.5rem;
-  margin-right: 20px; }
-  .navheader-container .resultados a,
-  .navheader-container .resultados a:hover {
-    color: #777777 !important; }
-  .navheader-container .resultados .icon {
-    font-size: 2rem; }
-
-.navheader-container .nav.navbar-nav {
-  margin-left: 0px; }
-
-.navheader-container .page-title,
-.navheader-container .icon-title {
-  color: #e9e9e9; }
-
-.navheader-container .page-title {
-  font-family: "Gruppo";
-  font-size: 2rem;
-  font-weight: bold; }
+  .navheader-container .navbar .navbar-nav {
+    margin-left: 0px; }
+    .navheader-container .navbar .navbar-nav .page-title,
+    .navheader-container .navbar .navbar-nav .icon-title {
+      color: #e9e9e9; }
+    .navheader-container .navbar .navbar-nav .page-title {
+      font-family: "Gruppo";
+      font-size: 2rem;
+      font-weight: bold; }
+    .navheader-container .navbar .navbar-nav .icon-title.links {
+      font-size: 2rem;
+      color: #9d9d9d; }
+      .navheader-container .navbar .navbar-nav .icon-title.links:hover {
+        color: white; }
+    .navheader-container .navbar .navbar-nav .resultados {
+      font-size: 1.5rem;
+      margin-right: 20px; }
+      .navheader-container .navbar .navbar-nav .resultados a,
+      .navheader-container .navbar .navbar-nav .resultados a:hover {
+        color: #777777 !important; }
+      .navheader-container .navbar .navbar-nav .resultados .icon {
+        font-size: 2rem; }
 
 .App .navbar {
   text-align: left;
@@ -68,32 +62,23 @@
     margin-left: 0;
     margin-right: 0;
     width: 100%; }
-  .App .navbar .App-logo {
-    color: #f0ad4e; }
-  .App .navbar .header-title {
-    color: #f0ad4e;
-    margin-left: 15px;
-    font-size: 2.5rem;
-    font-family: "Gruppo";
-    font-weight: bold; }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
-.App .navbar-collapse.collapse.in {
-  text-align: left; }
-
-.App .navbar-nav {
-  margin-left: 20px; }
-
-.App .nav-fontes {
-  margin: 0 0 0 33px; }
+    .App .navbar .container .navbar-collapse.collapse.in {
+      text-align: left; }
+    .App .navbar .container .header-title {
+      color: #f0ad4e;
+      margin-left: 15px;
+      font-size: 2.5rem;
+      font-family: "Gruppo";
+      font-weight: bold; }
+    .App .navbar .container .App-logo {
+      color: #f0ad4e; }
+    .App .navbar .container .navbar-nav {
+      margin-left: 20px; }
+    .App .navbar .container .nav-fontes {
+      margin: 0 0 0 33px; }
 
 @media screen and (min-width: 768px) {
-  .App .nav-fontes {
+  .App .navbar .container .nav-fontes {
     margin: 15px 0 15px 13px; } }
 
 .comprar-passagem-container {
@@ -132,21 +117,20 @@
         .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .error-empty {
           color: #a94442;
           font-size: inherit; }
+  .comprar-passagem-container::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-size: cover;
+    opacity: .2;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute; }
   @media screen and (min-width: 768px) {
     .comprar-passagem-container .form-passagem-container {
       margin-top: 50px; } }
-
-.comprar-passagem-container::after {
-  content: "";
-  background: url(./styles/images/tree.jpg);
-  background-size: cover;
-  opacity: .2;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute; }
 
 .confirmacao-passagem {
   overflow: auto;
@@ -190,42 +174,46 @@
 .pesquisar-passagens-container {
   overflow: auto;
   height: calc(100vh - 50px); }
-  .pesquisar-passagens-container .icon-table {
-    color: rgba(0, 0, 0, 0.5); }
-    .pesquisar-passagens-container .icon-table.arrow-trajeto {
-      color: green;
-      margin-left: 15px;
-      margin-right: 15px; }
-    .pesquisar-passagens-container .icon-table.data {
-      color: #4285f4;
-      margin-right: 6px; }
-    .pesquisar-passagens-container .icon-table.horario {
-      color: goldenrod;
-      margin-left: 15px;
-      margin-right: 6px; }
-  .pesquisar-passagens-container .label-poltrona {
-    margin-right: 4px; }
-  .pesquisar-passagens-container th {
-    cursor: pointer; }
-    .pesquisar-passagens-container th .th-icon {
-      margin-left: 10px; }
-  .pesquisar-passagens-container Table {
-    border: none !important;
-    margin-top: 0; }
-    .pesquisar-passagens-container Table tr,
-    .pesquisar-passagens-container Table td,
-    .pesquisar-passagens-container Table th {
-      border: none !important; }
-    .pesquisar-passagens-container Table .th-nome {
-      width: 25%; }
-    .pesquisar-passagens-container Table .th-data-compra {
-      width: 12%; }
-    .pesquisar-passagens-container Table .th-linha {
-      width: 30%; }
-    .pesquisar-passagens-container Table .th-saida {
-      width: 20%; }
-  .pesquisar-passagens-container .table-hover > tbody > tr:hover {
-    background-color: rgba(218, 165, 32, 0.15) !important; }
+  .pesquisar-passagens-container .jumbotron {
+    border-radius: 6px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05); }
+    .pesquisar-passagens-container .jumbotron .icon-table {
+      color: rgba(0, 0, 0, 0.5); }
+      .pesquisar-passagens-container .jumbotron .icon-table.arrow-trajeto {
+        color: green;
+        margin-left: 15px;
+        margin-right: 15px; }
+      .pesquisar-passagens-container .jumbotron .icon-table.data {
+        color: #4285f4;
+        margin-right: 6px; }
+      .pesquisar-passagens-container .jumbotron .icon-table.horario {
+        color: goldenrod;
+        margin-left: 15px;
+        margin-right: 6px; }
+    .pesquisar-passagens-container .jumbotron .label-poltrona {
+      margin-right: 4px; }
+    .pesquisar-passagens-container .jumbotron Table {
+      border: none !important;
+      margin-top: 0; }
+      .pesquisar-passagens-container .jumbotron Table th {
+        cursor: pointer; }
+        .pesquisar-passagens-container .jumbotron Table th .th-icon {
+          margin-left: 10px; }
+      .pesquisar-passagens-container .jumbotron Table tr,
+      .pesquisar-passagens-container .jumbotron Table td,
+      .pesquisar-passagens-container .jumbotron Table th {
+        border: none !important; }
+      .pesquisar-passagens-container .jumbotron Table .th-nome {
+        width: 25%; }
+      .pesquisar-passagens-container .jumbotron Table .th-data-compra {
+        width: 12%; }
+      .pesquisar-passagens-container .jumbotron Table .th-linha {
+        width: 30%; }
+      .pesquisar-passagens-container .jumbotron Table .th-saida {
+        width: 20%; }
+    .pesquisar-passagens-container .jumbotron .table-hover > tbody > tr:hover {
+      background-color: rgba(218, 165, 32, 0.15) !important; }
   .pesquisar-passagens-container .pagination-pesquisa li a {
     background-color: white;
     border-color: rgba(45, 45, 45, 0.3);
@@ -234,22 +222,17 @@
     background-color: rgba(45, 45, 45, 0.9);
     border: none;
     color: white; }
-  .pesquisar-passagens-container .jumbotron {
-    border-radius: 6px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.05); }
-
-.pesquisar-passagens-container::after {
-  content: "";
-  background: url(./styles/images/tree.jpg);
-  background-size: cover;
-  opacity: .2;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute; }
+  .pesquisar-passagens-container::after {
+    content: "";
+    background: url(./styles/images/tree.jpg);
+    background-size: cover;
+    opacity: .2;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -297,7 +280,7 @@
           font-size: 2.5rem;
           color: rgba(0, 0, 0, 0.5);
           margin-right: 5px; }
-  .login-container:after {
+  .login-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
     background-attachment: scroll;
@@ -419,6 +402,16 @@
 .welcome-container {
   overflow: auto;
   height: calc(100vh - 50px); }
+  .welcome-container .info-container {
+    margin-top: 50px; }
+    .welcome-container .info-container h1 {
+      font-family: "Gruppo";
+      font-weight: bold; }
+    .welcome-container .info-container .jumbotron {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.05); }
+    .welcome-container .info-container .welcome-button {
+      margin-bottom: 50px; }
   .welcome-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
@@ -430,16 +423,6 @@
     bottom: 0;
     right: 0;
     position: absolute; }
-  .welcome-container .info-container {
-    margin-top: 50px; }
-  .welcome-container h1 {
-    font-family: "Gruppo";
-    font-weight: bold; }
-  .welcome-container .welcome-button {
-    margin-bottom: 50px; }
-  .welcome-container .jumbotron {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.05); }
 
 html {
   height: 100%; }

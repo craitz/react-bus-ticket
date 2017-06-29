@@ -67,7 +67,6 @@ class ConfirmaPassagem extends Component {
                   <Jumbotron>
                     <div><strong>Nome:</strong> {novaPassagem.nome}</div>
                     <div><strong>CPF:</strong> {novaPassagem.cpf}</div>
-                    {/*<div><strong>E-mail:</strong> {passagem.email}</div>*/}
                     <div><strong>Origem:</strong> {novaPassagem.origem}</div>
                     <div><strong>Destino:</strong> {novaPassagem.destino}</div>
                     <div><strong>Data:</strong> {novaPassagem.data}</div>

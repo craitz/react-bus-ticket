@@ -21,15 +21,6 @@ const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
 
-const mapStateToProps = (state) => {
-  return {
-    cidades: state.compraPassagemState.cidades,
-    horarios: state.compraPassagemState.horarios,
-    poltronas: state.compraPassagemState.poltronas,
-    passagem: state.compraPassagemState.passagem
-  };
-};
-
 const buttonComprar = () =>
   <Button type="submit" bsStyle="primary" className="btn-google-blue">
     <FontAwesome name="check"></FontAwesome>
@@ -394,6 +385,7 @@ class CompraPassagem extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const { dispatch, passagem, history } = this.props;
 
     dispatch(setLoading(true));
@@ -413,8 +405,6 @@ class CompraPassagem extends Component {
     } else {
       dispatch(setLoading(false));
     }
-
-    event.preventDefault();
   }
 
   handleReset(event) {
@@ -551,18 +541,9 @@ class CompraPassagem extends Component {
 
                   <hr />
                   <div className="text-right">
-                    {/*<Button
-                      type="button"
-                      bsStyle="danger"
-                      className="btn-google-red btn-limpar hidden-sm hidden-md hidden-lg"
-                      onClick={this.handleReset}>
-                      <FontAwesome name="eraser"></FontAwesome>
-                      <span className="text-after-icon">Limpar</span>
-                    </Button>*/}
                     <ButtonWithLoading />
                   </div>
                 </form >
-
               </Jumbotron>
             </Col>
           </DivAnimated>
@@ -571,6 +552,15 @@ class CompraPassagem extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cidades: state.compraPassagemState.cidades,
+    horarios: state.compraPassagemState.horarios,
+    poltronas: state.compraPassagemState.poltronas,
+    passagem: state.compraPassagemState.passagem
+  };
+};
 
 const CompraPassagemWithRouter = withRouter(CompraPassagem);
 const CompraPassagemWithRouterAndAuth = withAuth(CompraPassagemWithRouter);

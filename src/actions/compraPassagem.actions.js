@@ -48,9 +48,11 @@ const poltronaToFirebase = (poltrona) => {
     const todasPoltronas = globals.getPoltronas();
     const poltronasSelecionadas = poltrona.split(',');
     let poltronasFormatadas = '';
+
     poltronasSelecionadas.forEach((poltrona, index, arr) => {
       const poltronaCorrente = todasPoltronas[poltrona].label;
       poltronasFormatadas = (index === 0) ? poltronaCorrente : `${poltronasFormatadas} - ${poltronaCorrente}`;
+
       if (index === (arr.length - 1)) {
         resolve(poltronasFormatadas);
       }

@@ -1,56 +1,63 @@
 .pesquisar-passagens-container {
     @include containerHeight();
-    .icon-table {
-        color: rgba(black, .5);
-        &.arrow-trajeto {
-            color: green;
-            margin-left: 15px;
-            margin-right: 15px;
+    .jumbotron {
+        border-radius: 6px;
+        padding: 20px;
+        background-color: rgba(black, .05);
+        .icon-table {
+            color: rgba(black, .5);
+            &.arrow-trajeto {
+                color: green;
+                margin: {
+                    left: 15px;
+                    right: 15px;
+                }
+            }
+            &.data {
+                color: $googleBlue;
+                margin-right: 6px;
+            }
+            &.horario {
+                color: goldenrod;
+                margin: {
+                    left: 15px;
+                    right: 6px;
+                }
+            }
         }
-        &.data {
-            color: rgb(66, 133, 244);
-            margin-right: 6px;
+        .label-poltrona {
+            margin-right: 4px;
         }
-        &.horario {
-            color: goldenrod;
-            margin-left: 15px;
-            margin-right: 6px;
-        }
-    }
-    .label-poltrona {
-        margin-right: 4px;
-    }
-    th {
-        cursor: pointer;
-        .th-icon {
-            margin-left: 10px;
-            // color: purple;
-        }
-    }
-    Table {
-        border: none !important;
-        margin-top: 0;
-        tr,
-        td,
-        th {
+        Table {
             border: none !important;
-            // border-color: rgba(black, .05) !important;
+            margin-top: 0;
+            th {
+                cursor: pointer;
+                .th-icon {
+                    margin-left: 10px;
+                }
+            }
+            tr,
+            td,
+            th {
+                border: none !important;
+            }
+            .th-nome {
+                width: 25%;
+            }
+            .th-data-compra {
+                width: 12%;
+            }
+            .th-linha {
+                width: 30%;
+            }
+            .th-saida {
+                width: 20%;
+            }
         }
-        .th-nome {
-            width: 25%;
+        .table-hover>tbody>tr:hover {
+            background-color: rgba(goldenrod, .15) !important;
         }
-        .th-data-compra {
-            width: 12%;
-        }
-        .th-linha {
-            width: 30%;
-        }
-        .th-saida {
-            width: 20%;
-        }
-    }
-    .table-hover>tbody>tr:hover {
-        background-color: rgba(goldenrod, .15) !important;
     }
     .pagination-pesquisa {
         li a {
@@ -64,23 +71,7 @@
             color: white;
         }
     }
-    .jumbotron {
-        border-radius: 6px;
-        padding: 20px;
-        background-color: rgba(black, .05);
+    &::after {
+        @include bkgImage();
     }
-    @media screen and (min-width: 320px) {}
-    @media screen and (min-width: 480px) {}
-    @media screen and (min-width: 768px) {}
-    @media screen and (min-width: 992px) {}
-    @media screen and (min-width: 1200px) {}
-    // @media screen and (min-width: 320px) {}
-    // @media screen and (min-width: 480px) {}
-    // @media screen and (min-width: 768px) {}
-    // @media screen and (min-width: 992px) {}
-    // @media screen and (min-width: 1200px) {}
-}
-
-.pesquisar-passagens-container::after {
-    @include bkgImage();
 }

@@ -1,46 +1,41 @@
 .navheader-container {
     .navbar {
-        // background-color: #565656;
         background-color: #2d2d2d;
         margin-bottom: 0;
         border: none;
-        padding-left: 0;
         padding: 0;
         text-align: left;
-    }
-    .icon-title.links {
-        font-size: 2rem;
-        color: rgb(157, 157, 157);
-        &:hover {
-            color: white;
+        .navbar-nav {
+            margin-left: 0px;
+            .page-title,
+            .icon-title {
+                color: rgb(233, 233, 233);
+            }
+            .page-title {
+                font: {
+                    family: "Gruppo";
+                    size: 2rem;
+                    weight: bold;
+                }
+            }
+            .icon-title.links {
+                font-size: 2rem;
+                color: rgb(157, 157, 157);
+                &:hover {
+                    color: white;
+                }
+            }
+            .resultados {
+                font-size: 1.5rem;
+                margin-right: 20px;
+                a,
+                a:hover {
+                    color: rgb(119, 119, 119) !important;
+                }
+                .icon {
+                    font-size: 2rem;
+                }
+            }
         }
-    }
-    .resultados {
-        font-size: 1.5rem;
-        // color: rgb(157, 157, 157);
-        margin-right: 20px;
-        a,
-        a:hover {
-            color: rgb(119, 119, 119) !important;
-        }
-        .icon {
-            font-size: 2rem;
-        }
-    }
-    .nav.navbar-nav {
-        margin-left: 0px;
-    }
-    .page-title,
-    .icon-title {
-        color: rgb(233, 233, 233);
-    }
-    .icon-title {
-        // font-size: 3.5rem;
-    }
-    .page-title {
-        font-family: "Gruppo";
-        font-size: 2rem;
-        font-weight: bold;
-        // margin-left: 30px;
     }
 }

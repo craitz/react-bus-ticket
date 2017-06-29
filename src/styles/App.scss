@@ -37,15 +37,13 @@ html {
     }
 }
 
-@media screen and (min-width: 320px) {
+@include retina {
     .page-title {
         font-size: 2rem !important;
     }
 }
 
-@media screen and (min-width: 480px) {}
-
-@media screen and (min-width: 768px) {
+@include sm {
     .page-title {
         font-size: 3rem !important;
     }
@@ -60,13 +58,13 @@ html {
     }
 }
 
-@media screen and (min-width: 992px) {
+@include md {
     .page-title {
         font-size: 4rem !important;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@include lg {
     .page-title {
         font-size: 5rem !important;
     }

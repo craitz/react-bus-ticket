@@ -31,8 +31,7 @@
     &::after {
         @include bkgImage();
     }
-    @media screen and (min-width: 320px) {}
-    @media screen and (min-width: 480px) {
+    @include xs {
         .localizador {
             font: {
                 size: 3rem !important;
@@ -40,11 +39,9 @@
             }
         }
     }
-    @media screen and (min-width: 768px) {
+    @include sm {
         .form-centered {
             margin-top: 50px;
         }
     }
-    @media screen and (min-width: 992px) {}
-    @media screen and (min-width: 1200px) {}
 }
