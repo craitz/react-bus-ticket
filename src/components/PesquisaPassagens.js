@@ -138,9 +138,17 @@ class PesquisaPassagens extends Component {
   }
 
   setPage(passagemOrdenadaFiltrada) {
+    if (passagemOrdenadaFiltrada.length === 0) {
+      Consulta.activePage = 0;
+      Consulta.page = [];
+      return;
+    }
+
     const total = this.getTotalPages(passagemOrdenadaFiltrada);
 
-    if (Consulta.activePage > total) {
+    if (Consulta.activePage === 0) {
+      Consulta.activePage = 1;
+    } else if (Consulta.activePage > total) {
       Consulta.activePage = total;
     }
 
@@ -339,6 +347,10 @@ class PesquisaPassagens extends Component {
   }
 
   getTotalPages(passagens) {
+    if (passagens.length === 0) {
+      return 0;
+    }
+
     const total = passagens.length;
     const quot = parseInt((total / totalPageItems), 10);
     const rest = total % totalPageItems

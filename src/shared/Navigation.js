@@ -34,7 +34,7 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
         <span className="text-after-icon hidden-sm">Histórico de compras</span>
       </NavItem>
     </Nav>
-    <Navbar.Text>
+    <Navbar.Text className="nav-fontes">
       <Navbar.Link href="https://github.com/craitz/react-bus-ticket" target="_blank">
         <FontAwesome name="github"></FontAwesome>
         <span className="text-after-icon hidden-sm">Código-fonte</span>

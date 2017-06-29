@@ -7,7 +7,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Nav, NavItem, Glyphicon, Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Row, Col, Button, Jumbotron } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { NavHeader } from '../shared/Navigation';
 import { withLoading } from '../shared/hoc';
@@ -461,7 +461,7 @@ class CompraPassagem extends Component {
         </div>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
-            <Col md={10} mdOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
+            <Col sm={10} smOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
               <Col xs={12} className="form-header text-left">
                 <span className="form-title hidden-xs">Por favor, preencha o formulário.</span>
                 <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>

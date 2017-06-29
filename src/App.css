@@ -106,6 +106,13 @@
 .App .navbar-nav {
   margin-left: 20px; }
 
+.App .nav-fontes {
+  margin: 0 0 0 33px; }
+
+@media screen and (min-width: 768px) {
+  .App .nav-fontes {
+    margin: 15px 0 15px 13px; } }
+
 .comprar-passagem-container {
   overflow: auto;
   height: calc(100vh - 50px); }
@@ -148,7 +155,7 @@
       background-color: rgba(0, 0, 0, 0.05); }
     .comprar-passagem-container .form-passagem-container .btn-limpar {
       margin-right: 10px; }
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 768px) {
     .comprar-passagem-container .form-passagem-container {
       margin-top: 50px; } }
 
@@ -169,7 +176,7 @@
   height: calc(100vh - 50px); }
   .confirmacao-passagem .form-centered {
     width: inherit;
-    margin-top: 50px; }
+    margin-top: 15px; }
     .confirmacao-passagem .form-centered .detalhes {
       margin-top: 60px;
       margin-bottom: 30px; }
@@ -188,6 +195,9 @@
     .confirmacao-passagem .localizador {
       font-size: 3rem !important;
       font-weight: bold; } }
+  @media screen and (min-width: 768px) {
+    .confirmacao-passagem .form-centered {
+      margin-top: 50px; } }
 
 .confirmacao-passagem::after {
   content: "";

@@ -5,7 +5,6 @@ import {
   Jumbotron,
   Row,
   Col,
-  Glyphicon,
   Grid,
   Nav,
   Navbar,

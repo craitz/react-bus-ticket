@@ -2,7 +2,7 @@
     @include containerHeight();
     .form-centered {
         width: inherit;
-        margin-top: 50px;
+        margin-top: 15px;
         // @include centralizeContent();
         .detalhes {
             margin-top: 60px;
@@ -33,7 +33,11 @@
             font-weight: bold;
         }
     }
-    @media screen and (min-width: 768px) {}
+    @media screen and (min-width: 768px) {
+        .form-centered {
+            margin-top: 50px;
+        }
+    }
     @media screen and (min-width: 992px) {}
     @media screen and (min-width: 1200px) {}
 }
