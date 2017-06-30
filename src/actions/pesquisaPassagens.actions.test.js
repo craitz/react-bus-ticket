@@ -1,5 +1,5 @@
 import * as actions from './pesquisaPassagens.actions';
-import { PesquisaPassagensActionType } from '../reducers/actionTypes'
+import { PesquisaPassagensActionType } from './actionTypes'
 
 describe('pesquisaPassagens actions', () => {
   it('deve setar as passagens', () => {

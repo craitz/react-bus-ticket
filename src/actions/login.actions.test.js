@@ -1,6 +1,6 @@
 import * as actions from './login.actions';
 import { ValidationStatus } from '../shared/Utils';
-import { LoginActionType } from '../reducers/actionTypes'
+import { LoginActionType } from './actionTypes'
 
 
 describe('login actions', () => {

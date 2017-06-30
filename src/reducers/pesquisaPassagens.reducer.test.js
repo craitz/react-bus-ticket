@@ -1,5 +1,5 @@
 import reducer from './pesquisaPassagens.reducer';
-import { PesquisaPassagensActionType } from './actionTypes'
+import { PesquisaPassagensActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({

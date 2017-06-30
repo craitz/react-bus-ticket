@@ -1,5 +1,5 @@
 import * as actions from './withLoading.actions';
-import { withLoadingActionType } from '../reducers/actionTypes'
+import { withLoadingActionType } from './actionTypes'
 
 describe('withLoading actions', () => {
   it('deve setar o loading', () => {

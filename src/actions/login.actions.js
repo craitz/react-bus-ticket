@@ -1,4 +1,4 @@
-import { LoginActionType } from '../reducers/actionTypes'
+import { LoginActionType } from './actionTypes'
 
 export const resetLogin = () => {
   return {

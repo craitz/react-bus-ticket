@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable';
-import { withLoadingActionType } from './actionTypes'
+import { withLoadingActionType } from '../actions/actionTypes'
 
 const initialState = Immutable({
   isLoading: false

@@ -1,4 +1,4 @@
-import { PesquisaPassagensActionType } from '../reducers/actionTypes'
+import { PesquisaPassagensActionType } from './actionTypes'
 
 export const setPassagens = (passagens) => {
   return {

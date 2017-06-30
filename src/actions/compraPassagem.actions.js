@@ -1,4 +1,4 @@
-import { CompraPassagemActionType } from '../reducers/actionTypes'
+import { CompraPassagemActionType } from './actionTypes'
 
 export const Select = {
   ORIGEM: 0,

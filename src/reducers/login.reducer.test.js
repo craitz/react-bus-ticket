@@ -1,6 +1,6 @@
 import reducer from './login.reducer';
 import { ValidationStatus } from '../shared/Utils';
-import { LoginActionType } from './actionTypes'
+import { LoginActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({

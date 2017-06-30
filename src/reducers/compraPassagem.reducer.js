@@ -1,6 +1,6 @@
 import Immutable from 'seamless-immutable';
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
-import { CompraPassagemActionType } from './actionTypes'
+import { CompraPassagemActionType } from '../actions/actionTypes'
 
 const initialState = Immutable({
   cidades: [],
