@@ -1,3 +1,4 @@
+import { PesquisaPassagensActionType } from './actionTypes'
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
@@ -6,7 +7,7 @@ const initialState = Immutable({
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'SET_PASSAGENS': {
+    case PesquisaPassagensActionType.SET_PASSAGENS: {
       return {
         ...state,
         passagens: action.payload

@@ -1,6 +1,8 @@
+import { PesquisaPassagensActionType } from '../reducers/actionTypes'
+
 export const setPassagens = (passagens) => {
   return {
-    type: 'SET_PASSAGENS',
+    type: PesquisaPassagensActionType.SET_PASSAGENS,
     payload: passagens
   }
 };

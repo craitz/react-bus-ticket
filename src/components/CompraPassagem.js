@@ -30,6 +30,38 @@ const buttonComprar = () =>
 
 const ButtonWithLoading = withLoading(buttonComprar);
 
+const helper = {
+  mapPassagemToFirebase(passagem) {
+    return {
+      ...passagem,
+      nome: passagem.nome.text,
+      cpf: passagem.cpf.text,
+      email: firebaseHelper.getUser().email,
+      origem: passagem.origem.text,
+      destino: passagem.destino.text,
+      horario: passagem.horario.text,
+      poltrona: passagem.poltrona.value,
+      dataCompra: utils.DateNowBr
+    };
+  },
+  poltronaToFirebase(poltrona) {
+    return new Promise((resolve) => {
+      const todasPoltronas = globals.getPoltronas();
+      const poltronasSelecionadas = poltrona.split(',');
+      let poltronasFormatadas = '';
+
+      poltronasSelecionadas.forEach((poltrona, index, arr) => {
+        const poltronaCorrente = todasPoltronas[poltrona].label;
+        poltronasFormatadas = (index === 0) ? poltronaCorrente : `${poltronasFormatadas} - ${poltronaCorrente}`;
+
+        if (index === (arr.length - 1)) {
+          resolve(poltronasFormatadas);
+        }
+      });
+    });
+  }
+};
+
 class CompraPassagem extends Component {
   constructor(props) {
     super(props);
@@ -151,9 +183,6 @@ class CompraPassagem extends Component {
 
   initializeValues() {
     const { dispatch, cidades } = this.props;
-
-    // initialize EMAIL
-    dispatch(actions.changeEmail(firebaseHelper.getUser().email));
 
     // initialize ORIGEM values
     dispatch(actions.changeOrigem({
@@ -391,7 +420,7 @@ class CompraPassagem extends Component {
     dispatch(setLoading(true));
 
     if (this.formCanBeSaved()) {
-      dispatch(actions.newPassagem(passagem))
+      this.savePassagem(passagem)
         .then((obj) => {
           dispatch(setLoading(false));
           history.push({
@@ -422,6 +451,39 @@ class CompraPassagem extends Component {
     event.preventDefault();
     this.props.history.push('/passagens');
   }
+
+  savePassagem(passagem) {
+    return new Promise((resolve, reject) => {
+      const novaPassagem = helper.mapPassagemToFirebase(passagem);
+      const { nome, email, cpf, origem, destino, data, horario, dataCompra } = novaPassagem;
+
+      helper.poltronaToFirebase(novaPassagem.poltrona).then((poltronasFormatadas) => {
+        novaPassagem.poltrona = poltronasFormatadas;
+        const dataFormatted = utils.dateToFirebase(data);
+        const horarioFormatted = utils.timeToFirebase(horario);
+        const emailFirebase = utils.emailToFirebaseKey(email);
+        const newPassgemRef = `passagens/${emailFirebase}`;
+        const poltronasSelecionadas = novaPassagem.poltrona.split(' - ');
+
+        // salva passagem numa lista global
+        firebaseHelper.save(novaPassagem, newPassgemRef)
+          .then((key) => {
+
+            // percorre as poltronas selecionada e salva uma por uma
+            poltronasSelecionadas.forEach((val, index, arr) => {
+              firebaseHelper.set({ nome, email, cpf, dataCompra },
+                `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
+                .then(() => {
+                  if (index === (arr.length - 1)) {
+                    resolve({ novaPassagem, key });
+                  }
+                });
+            });
+          });
+      });
+    });
+  };
+
 
   render() {
     const { cidades, horarios, poltronas, passagem } = this.props;

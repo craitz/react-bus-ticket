@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable';
+import { withLoadingActionType } from './actionTypes'
 
 const initialState = Immutable({
   isLoading: false
@@ -6,7 +7,7 @@ const initialState = Immutable({
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'SET_LOADING': {
+    case withLoadingActionType.SET_LOADING: {
       return {
         ...state,
         isLoading: action.payload

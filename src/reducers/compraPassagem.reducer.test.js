@@ -1,14 +1,12 @@
 import reducer from './compraPassagem.reducer';
 import Immutable from 'seamless-immutable';
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
+import { CompraPassagemActionType } from './actionTypes'
 
 const initialState = Immutable({
   cidades: [],
   horarios: [],
   poltronas: [],
-  fetching: false,
-  fetched: false,
-  error: null,
   passagem: {
     nome: {
       text: '',
@@ -22,7 +20,6 @@ const initialState = Immutable({
       validation: ValidationStatus.NONE,
       message: ''
     },
-    email: '',
     origem: {
       val: 0,
       text: '',
@@ -74,22 +71,23 @@ describe('pesquisaPassagens reducer', () => {
 
   it('deve mudar as cidades', () => {
     expect(reducer(initialState, {
-      type: 'SET_CIDADES',
+      type: CompraPassagemActionType.SET_CIDADES,
       payload: [1, 2, 3]
     })).toEqual(setCidadesAfterState);
   });
 
   it('deve mudar os horarios', () => {
     expect(reducer(initialState, {
-      type: 'SET_HORARIOS',
+      type: CompraPassagemActionType.SET_HORARIOS,
       payload: [4, 5, 6]
     })).toEqual(setHorariosAfterState);
   });
 
   it('deve mudar as poltronas', () => {
     expect(reducer(initialState, {
-      type: 'SET_POLTRONAS',
+      type: CompraPassagemActionType.SET_POLTRONAS,
       payload: [7, 8, 9]
     })).toEqual(setPoltronasAfterState);
   });
+
 });

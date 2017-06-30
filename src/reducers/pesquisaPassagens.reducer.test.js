@@ -1,4 +1,5 @@
 import reducer from './pesquisaPassagens.reducer';
+import { PesquisaPassagensActionType } from './actionTypes'
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
@@ -25,7 +26,7 @@ describe('pesquisaPassagens reducer', () => {
 
   it('deve mudar as passagens', () => {
     expect(reducer(initialState, {
-      type: 'SET_PASSAGENS',
+      type: PesquisaPassagensActionType.SET_PASSAGENS,
       payload: [1, 2, 3, 4, 5]
     })).toEqual(changePassagemAfterState);
   });

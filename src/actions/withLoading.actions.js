@@ -1,6 +1,8 @@
+import { withLoadingActionType } from '../reducers/actionTypes'
+
 export const setLoading = (isLoading) => {
   return {
-    type: 'SET_LOADING',
+    type: withLoadingActionType.SET_LOADING,
     payload: isLoading
   }
 };

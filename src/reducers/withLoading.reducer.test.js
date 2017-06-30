@@ -1,5 +1,6 @@
 import reducer from './withLoading.reducer';
 import Immutable from 'seamless-immutable';
+import { withLoadingActionType } from './actionTypes'
 
 const initialState = Immutable({
   isLoading: false
@@ -25,7 +26,7 @@ describe('withLoading reducer', () => {
 
   it('deve mudar o loading', () => {
     expect(reducer(initialState, {
-      type: 'SET_LOADING',
+      type: withLoadingActionType.SET_LOADING,
       payload: true
     })).toEqual(changeLoadingAfterState);
   });

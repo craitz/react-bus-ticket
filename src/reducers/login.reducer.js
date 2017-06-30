@@ -1,16 +1,17 @@
 import { ValidationStatus } from '../shared/Utils';
+import { LoginActionType } from './actionTypes'
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
   email: {
     text: 'guest@busticket.com',
-    isPristine: true,
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   },
   senha: {
     text: '#guest#',
-    isPristine: true,
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   }
@@ -18,16 +19,16 @@ const initialState = Immutable({
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'RESET_LOGIN': {
+    case LoginActionType.RESET_LOGIN: {
       return initialState;
     }
-    case 'CHANGE_LOGIN_EMAIL': {
+    case LoginActionType.CHANGE_LOGIN_EMAIL: {
       return {
         ...state,
         email: { ...state.email, text: action.payload }
       }
     }
-    case 'SET_LOGIN_EMAIL_VALIDATION': {
+    case LoginActionType.SET_LOGIN_EMAIL_VALIDATION: {
       return {
         ...state,
         email: {
@@ -37,19 +38,19 @@ const reducer = (state = initialState, action = {}) => {
         }
       }
     }
-    case 'SET_LOGIN_EMAIL_DIRTY': {
+    case LoginActionType.SET_LOGIN_EMAIL_DIRTY: {
       return {
         ...state,
         email: { ...state.email, isPristine: false }
       }
     }
-    case 'CHANGE_LOGIN_SENHA': {
+    case LoginActionType.CHANGE_LOGIN_SENHA: {
       return {
         ...state,
         senha: { ...state.senha, text: action.payload }
       }
     }
-    case 'SET_LOGIN_SENHA_VALIDATION': {
+    case LoginActionType.SET_LOGIN_SENHA_VALIDATION: {
       return {
         ...state,
         senha: {
@@ -59,7 +60,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       }
     }
-    case 'SET_LOGIN_SENHA_DIRTY': {
+    case LoginActionType.SET_LOGIN_SENHA_DIRTY: {
       return {
         ...state,
         senha: { ...state.senha, isPristine: false }

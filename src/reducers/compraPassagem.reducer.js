@@ -1,13 +1,12 @@
-import { DateNowBr, ValidationStatus } from '../shared/Utils'
 import Immutable from 'seamless-immutable';
+import { firebaseHelper } from '../shared/FirebaseHelper';
+import { DateNowBr, ValidationStatus } from '../shared/Utils'
+import { CompraPassagemActionType } from './actionTypes'
 
 const initialState = Immutable({
   cidades: [],
   horarios: [],
   poltronas: [],
-  fetching: false,
-  fetched: false,
-  error: null,
   passagem: {
     nome: {
       text: '',
@@ -21,7 +20,6 @@ const initialState = Immutable({
       validation: ValidationStatus.NONE,
       message: ''
     },
-    email: '',
     origem: {
       val: 0,
       text: '',
@@ -47,28 +45,22 @@ const initialState = Immutable({
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'SET_CIDADES': {
+    case CompraPassagemActionType.SET_CIDADES: {
       return { ...state, cidades: action.payload };
     }
-    case 'SET_HORARIOS': {
+    case CompraPassagemActionType.SET_HORARIOS: {
       return { ...state, horarios: action.payload };
     }
-    case 'SET_POLTRONAS': {
+    case CompraPassagemActionType.SET_POLTRONAS: {
       return { ...state, poltronas: action.payload };
     }
-    case 'NEW_PASSAGEM': {
-      return {
-        ...state,
-        passagens: { ...state.passagens, [action.payload.key]: action.payload.passagem }
-      };
-    }
-    case 'RESET_FORM_PASSAGEM': {
+    case CompraPassagemActionType.RESET_FORM_PASSAGEM: {
       return {
         ...initialState,
         cidades: action.payload
       }
     }
-    case 'CHANGE_NOME': {
+    case CompraPassagemActionType.CHANGE_NOME: {
       return {
         ...state,
         passagem: {
@@ -80,19 +72,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_NOME_PRISTINE': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          nome: {
-            ...state.passagem.nome,
-            isPristine: true
-          }
-        }
-      };
-    }
-    case 'SET_NOME_DIRTY': {
+    case CompraPassagemActionType.SET_NOME_DIRTY: {
       return {
         ...state,
         passagem: {
@@ -104,7 +84,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_NOME_VALIDATION': {
+    case CompraPassagemActionType.SET_NOME_VALIDATION: {
       return {
         ...state,
         passagem: {
@@ -117,7 +97,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'CHANGE_CPF': {
+    case CompraPassagemActionType.CHANGE_CPF: {
       return {
         ...state,
         passagem: {
@@ -129,19 +109,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_CPF_PRISTINE': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          cpf: {
-            ...state.passagem.cpf,
-            isPristine: true
-          }
-        }
-      };
-    }
-    case 'SET_CPF_DIRTY': {
+    case CompraPassagemActionType.SET_CPF_DIRTY: {
       return {
         ...state,
         passagem: {
@@ -153,7 +121,9 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_CPF_VALIDATION': {
+    case CompraPassagemActionType.SET_CPF_VALIDATION: {
+
+
       return {
         ...state,
         passagem: {
@@ -166,28 +136,19 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'CHANGE_EMAIL': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          email: action.payload
-        }
-      };
-    }
-    case 'CHANGE_ORIGEM': {
+    case CompraPassagemActionType.CHANGE_ORIGEM: {
       return {
         ...state,
         passagem: { ...state.passagem, origem: action.payload }
       };
     }
-    case 'CHANGE_DESTINO': {
+    case CompraPassagemActionType.CHANGE_DESTINO: {
       return {
         ...state,
         passagem: { ...state.passagem, destino: action.payload }
       };
     }
-    case 'CHANGE_POLTRONA': {
+    case CompraPassagemActionType.CHANGE_POLTRONA: {
       return {
         ...state,
         passagem: {
@@ -199,19 +160,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_POLTRONA_PRISTINE': {
-      return {
-        ...state,
-        passagem: {
-          ...state.passagem,
-          poltrona: {
-            ...state.passagem.poltrona,
-            isPristine: true
-          }
-        }
-      };
-    }
-    case 'SET_POLTRONA_DIRTY': {
+    case CompraPassagemActionType.SET_POLTRONA_DIRTY: {
       return {
         ...state,
         passagem: {
@@ -223,7 +172,7 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'SET_POLTRONA_VALIDATION': {
+    case CompraPassagemActionType.SET_POLTRONA_VALIDATION: {
       return {
         ...state,
         passagem: {
@@ -236,13 +185,13 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
-    case 'CHANGE_DATA': {
+    case CompraPassagemActionType.CHANGE_DATA: {
       return {
         ...state,
         passagem: { ...state.passagem, data: action.payload }
       };
     }
-    case 'CHANGE_HORARIO': {
+    case CompraPassagemActionType.CHANGE_HORARIO: {
       return {
         ...state,
         passagem: { ...state.passagem, horario: action.payload }
