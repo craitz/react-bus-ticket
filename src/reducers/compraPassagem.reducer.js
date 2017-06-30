@@ -1,5 +1,4 @@
 import Immutable from 'seamless-immutable';
-import { firebaseHelper } from '../shared/FirebaseHelper';
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
 import { CompraPassagemActionType } from './actionTypes'
 
@@ -29,7 +28,7 @@ const initialState = Immutable({
       text: '',
     },
     poltrona: {
-      value: [],
+      value: '',
       isPristine: true,
       validation: ValidationStatus.NONE,
       message: ''
