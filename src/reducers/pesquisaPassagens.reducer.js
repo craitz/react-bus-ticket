@@ -1,8 +1,10 @@
-const initialState = {
-  passagens: []
-}
+import Immutable from 'seamless-immutable';
 
-const reducer = (state = initialState, action) => {
+const initialState = Immutable({
+  passagens: []
+});
+
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'SET_PASSAGENS': {
       return {

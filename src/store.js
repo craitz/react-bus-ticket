@@ -9,7 +9,7 @@ const configureStore = () => {
     collapsed: true,
     duration: true,
     diff: true,
-    level: 'warn'
+    level: ''
   });
 
   const middleware = applyMiddleware(promise(), thunk, logger);

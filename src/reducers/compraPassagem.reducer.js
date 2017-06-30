@@ -1,6 +1,7 @@
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
+import Immutable from 'seamless-immutable';
 
-const initialState = {
+const initialState = Immutable({
   cidades: [],
   horarios: [],
   poltronas: [],
@@ -42,9 +43,9 @@ const initialState = {
     },
     dataCompra: DateNowBr
   }
-}
+});
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'SET_CIDADES': {
       return { ...state, cidades: action.payload };
@@ -63,46 +64,8 @@ const reducer = (state = initialState, action) => {
     }
     case 'RESET_FORM_PASSAGEM': {
       return {
-        ...state,
-        horarios: [],
-        poltronas: [],
-        fetching: false,
-        fetched: false,
-        error: null,
-        passagem: {
-          nome: {
-            text: '',
-            isPristine: true,
-            validation: ValidationStatus.NONE,
-            message: ''
-          },
-          cpf: {
-            text: '',
-            isPristine: true,
-            validation: ValidationStatus.NONE,
-            message: ''
-          },
-          email: '',
-          origem: {
-            val: 0,
-            text: '',
-          },
-          destino: {
-            val: 1,
-            text: '',
-          },
-          poltrona: {
-            value: [],
-            isPristine: true,
-            validation: ValidationStatus.NONE,
-            message: ''
-          },
-          data: DateNowBr,
-          horario: {
-            val: 0,
-            text: '',
-          }
-        }
+        ...initialState,
+        cidades: action.payload
       }
     }
     case 'CHANGE_NOME': {

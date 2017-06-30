@@ -413,7 +413,8 @@ class CompraPassagem extends Component {
   }
 
   reset() {
-    this.props.dispatch(actions.resetFormPassagem());
+    const { cidades, dispatch } = this.props;
+    dispatch(actions.resetFormPassagem(cidades));
     this.initializeValues();
   }
 

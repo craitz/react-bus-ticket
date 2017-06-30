@@ -1,21 +1,22 @@
 import { ValidationStatus } from '../shared/Utils';
+import Immutable from 'seamless-immutable';
 
-const initialState = {
+const initialState = Immutable({
   email: {
     text: 'guest@busticket.com',
-    isPristine: false,
+    isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   },
   senha: {
     text: '#guest#',
-    isPristine: false,
+    isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   }
-}
+});
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'RESET_LOGIN': {
       return initialState;

@@ -1,8 +1,10 @@
-const initialState = {
-  isLoading: false
-}
+import Immutable from 'seamless-immutable';
 
-const reducer = (state = initialState, action) => {
+const initialState = Immutable({
+  isLoading: false
+});
+
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'SET_LOADING': {
       return {

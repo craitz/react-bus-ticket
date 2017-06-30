@@ -96,9 +96,10 @@ export const newPassagem = (passagem) => {
   };
 };
 
-export const resetFormPassagem = () => {
+export const resetFormPassagem = (cidades) => {
   return {
-    type: 'RESET_FORM_PASSAGEM'
+    type: 'RESET_FORM_PASSAGEM',
+    payload: cidades
   }
 };
 

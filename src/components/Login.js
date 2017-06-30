@@ -18,16 +18,16 @@ import { withLoading } from '../shared/hoc';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated';
 
-const buttonLogin = () =>
-  <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue">
+const buttonLogin = ({ onClick }) =>
+  <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue btn-login" onClick={onClick}>
     <Glyphicon glyph="log-in" />
-    <span className="text-after-icon">Entrar</span>
+    <span className="text-after-icon btn-login-lable">Entrar</span>
   </Button>
 
 
 const ButtonLoading = withLoading(buttonLogin);
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -107,6 +107,7 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
     dispatch(setLoading(true));
     this.forceUpdate();
@@ -131,8 +132,6 @@ class Login extends Component {
     } else {
       dispatch(setLoading(false));
     }
-
-    event.preventDefault();
   }
 
   render() {
@@ -156,7 +155,7 @@ class Login extends Component {
                 <Glyphicon glyph="lock" className="main-icon" />
               </div>
             </div>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <FormGroup controlId="email" validationState={email.validation}>
                 <InputGroup>
                   <InputGroup.Addon>
@@ -178,7 +177,7 @@ class Login extends Component {
                 <HelpBlock>{senha.message}</HelpBlock>
               </FormGroup>
               <FormGroup>
-                <ButtonLoading />
+                <ButtonLoading onClick={this.handleSubmit} />
               </FormGroup>
             </form>
           </DivAnimated>
