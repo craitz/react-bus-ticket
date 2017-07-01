@@ -1,7 +1,7 @@
 import { PesquisaPassagensActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
 
-const initialState = Immutable({
+export const initialState = Immutable({
   passagens: []
 });
 

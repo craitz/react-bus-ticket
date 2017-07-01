@@ -1,10 +1,6 @@
-import reducer from './pesquisaPassagens.reducer';
+import reducer, { initialState } from './pesquisaPassagens.reducer';
 import { PesquisaPassagensActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
-
-const initialState = Immutable({
-  passagens: []
-});
 
 const merge = (obj) => {
   return initialState.merge(obj, { deep: true });

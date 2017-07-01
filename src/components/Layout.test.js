@@ -3,14 +3,15 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from '../store';
 import renderer from 'react-test-renderer';
-import CompraPassagem from './CompraPassagem';
+// import Navigation from '../shared/Navigation';
+import Layout from './Layout';
 
-describe('CompraPassagem VIEW', () => {
+describe('Layout VIEW', () => {
   it('renders correctly', () => {
     const tree = renderer.create(
       <Router>
         <Provider store={store}>
-          <CompraPassagem />
+          <Layout />
         </Provider>
       </Router>
     ).toJSON();

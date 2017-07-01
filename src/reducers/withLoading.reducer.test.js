@@ -1,10 +1,6 @@
-import reducer from './withLoading.reducer';
+import reducer, { initialState } from './withLoading.reducer';
 import Immutable from 'seamless-immutable';
 import { withLoadingActionType } from '../actions/actionTypes'
-
-const initialState = Immutable({
-  isLoading: false
-});
 
 const merge = (obj) => {
   return initialState.merge(obj, { deep: true });

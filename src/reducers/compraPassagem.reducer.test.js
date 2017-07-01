@@ -1,47 +1,7 @@
-import reducer from './compraPassagem.reducer';
+import reducer, { initialState } from './compraPassagem.reducer';
 import Immutable from 'seamless-immutable';
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
 import { CompraPassagemActionType } from '../actions/actionTypes'
-
-const initialState = Immutable({
-  cidades: [],
-  horarios: [],
-  poltronas: [],
-  passagem: {
-    nome: {
-      text: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    cpf: {
-      text: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    origem: {
-      val: 0,
-      text: '',
-    },
-    destino: {
-      val: 1,
-      text: '',
-    },
-    poltrona: {
-      value: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    data: DateNowBr,
-    horario: {
-      val: 0,
-      text: '',
-    },
-    dataCompra: DateNowBr
-  }
-});
 
 const merge = (obj) => {
   return initialState.merge(obj, { deep: true });

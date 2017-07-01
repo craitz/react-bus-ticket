@@ -1,22 +1,7 @@
-import reducer from './login.reducer';
+import reducer, { initialState } from './login.reducer';
 import { ValidationStatus } from '../shared/Utils';
 import { LoginActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
-
-const initialState = Immutable({
-  email: {
-    text: 'guest@busticket.com',
-    isPristine: false,
-    validation: ValidationStatus.NONE,
-    message: ''
-  },
-  senha: {
-    text: '#guest#',
-    isPristine: false,
-    validation: ValidationStatus.NONE,
-    message: ''
-  }
-});
 
 const merge = (obj) => {
   return initialState.merge(obj, { deep: true });

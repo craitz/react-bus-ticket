@@ -2,7 +2,7 @@ import { ValidationStatus } from '../shared/Utils';
 import { LoginActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
 
-const initialState = Immutable({
+export const initialState = Immutable({
   email: {
     text: 'guest@busticket.com',
     isPristine: false,
