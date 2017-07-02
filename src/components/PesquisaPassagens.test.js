@@ -1,8 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux';
 import store from '../store';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import Immutable from 'seamless-immutable';
 import { Glyphicon } from 'react-bootstrap';
 import PesquisaPassagens, {
@@ -36,14 +34,10 @@ const merge = (obj) => {
 
 describe('PesquisaPassagens - VIEW', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(
-      <Router>
-        <Provider store={store}>
-          <PesquisaPassagens />
-        </Provider>
-      </Router>
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(
+      <PesquisaPassagens store={store} />
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });
 

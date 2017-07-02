@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout VIEW renders correctly 1`] = `
+exports[`Navigation VIEW renders correctly 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -8,50 +8,28 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div
-    className="App"
->
-    <withRouter(Navigation) />
-</div>,
+  "node": <Route
+    render={[Function]}
+/>,
   "nodes": Array [
-    <div
-      className="App"
->
-      <withRouter(Navigation) />
-</div>,
+    <Route
+      render={[Function]}
+/>,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
     "_instance": ShallowComponentWrapper {
       "_calledComponentWillUnmount": false,
-      "_compositeType": 0,
+      "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <Layout
-        store={
-                Object {
-                        "dispatch": [Function],
-                        "getState": [Function],
-                        "replaceReducer": [Function],
-                        "subscribe": [Function],
-                        Symbol(observable): [Function],
-                      }
-        }
-/>,
+      "_currentElement": <withRouter(Navigation) />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": Layout {
+      "_instance": StatelessComponent {
         "_reactInternalInstance": [Circular],
         "context": Object {},
-        "props": Object {
-          "store": Object {
-            "dispatch": [Function],
-            "getState": [Function],
-            "replaceReducer": [Function],
-            "subscribe": [Function],
-            Symbol(observable): [Function],
-          },
-        },
+        "props": Object {},
         "refs": Object {},
         "state": null,
         "updater": Object {
@@ -72,19 +50,15 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div
-          className="App"
->
-          <withRouter(Navigation) />
-</div>,
+        "_currentElement": <Route
+          render={[Function]}
+/>,
         "_debugID": 2,
-        "_renderedOutput": <div
-          className="App"
->
-          <withRouter(Navigation) />
-</div>,
+        "_renderedOutput": <Route
+          render={[Function]}
+/>,
       },
-      "_renderedNodeType": 0,
+      "_renderedNodeType": 1,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,
@@ -94,16 +68,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Layout
-    store={
-        Object {
-            "dispatch": [Function],
-            "getState": [Function],
-            "replaceReducer": [Function],
-            "subscribe": [Function],
-            Symbol(observable): [Function],
-          }
-    }
-/>,
+  "unrendered": <withRouter(Navigation) />,
 }
 `;

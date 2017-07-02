@@ -1,13 +1,12 @@
 import React from 'react';
 import store from '../store';
-import renderer from 'react-test-renderer';
-import ConfirmaPassagem from './ConfirmaPassagem';
 import { shallow } from 'enzyme';
+import TooltipOverlay from './TooltipOverlay';
 
-describe('ConfirmaPassagem VIEW', () => {
+describe('TooltipOverlay VIEW', () => {
   it('renders correctly', () => {
     const wrapper = shallow(
-      <ConfirmaPassagem store={store} />
+      <TooltipOverlay />
     );
     expect(wrapper).toMatchSnapshot();
   });

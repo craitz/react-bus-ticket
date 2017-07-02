@@ -1,117 +1,704 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login VIEW renders correctly 1`] = `
-<div
-  className="login-container"
+exports[`ButtonLogin renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <FormGroup
+    bsClass="form-group"
 >
-  <div
-    className="login-box animated bounceInLeft"
-  >
-    <div
-      className="login-header"
+    <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="btn-block btn-google-blue btn-login"
+        disabled={false}
+        onClick={[Function]}
+        type="submit"
     >
-      <div
-        className="login-header--title"
-      >
-        <div
-          className="login-header--title-main"
-        >
-          Login
-        </div>
-        <div
-          className="login-header--title-sub text-muted"
-        >
-          <span>
-            Informe o usuário e a senha
-          </span>
-        </div>
-      </div>
-      <div
-        className="login-header--icon text-right"
-      >
-        <span
-          className="main-icon glyphicon glyphicon-lock"
+        <Glyphicon
+            bsClass="glyphicon"
+            glyph="log-in"
         />
-      </div>
-    </div>
-    <form>
-      <div
-        className="form-group"
-      >
         <span
-          className="input-group"
+            className="text-after-icon btn-login-lable"
         >
-          <span
-            className="input-group-addon"
-          >
-            <span
-              className="addon-icon glyphicon glyphicon-user"
+            Entrar
+        </span>
+    </Button>
+</FormGroup>,
+  "nodes": Array [
+    <FormGroup
+      bsClass="form-group"
+>
+      <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            className="btn-block btn-google-blue btn-login"
+            disabled={false}
+            onClick={[Function]}
+            type="submit"
+      >
+            <Glyphicon
+                  bsClass="glyphicon"
+                  glyph="log-in"
             />
-          </span>
-          <input
-            className="form-control"
-            id="email"
+            <span
+                  className="text-after-icon btn-login-lable"
+            >
+                  Entrar
+            </span>
+      </Button>
+</FormGroup>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 2,
+      "_context": Object {},
+      "_currentElement": <Unknown
+        handleLogin={[Function]}
+/>,
+      "_debugID": 7,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": StatelessComponent {
+        "_reactInternalInstance": [Circular],
+        "context": Object {},
+        "props": Object {
+          "handleLogin": [Function],
+        },
+        "refs": Object {},
+        "state": null,
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+      },
+      "_mountOrder": 4,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <FormGroup
+          bsClass="form-group"
+>
+          <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="primary"
+                    className="btn-block btn-google-blue btn-login"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="submit"
+          >
+                    <Glyphicon
+                              bsClass="glyphicon"
+                              glyph="log-in"
+                    />
+                    <span
+                              className="text-after-icon btn-login-lable"
+                    >
+                              Entrar
+                    </span>
+          </Button>
+</FormGroup>,
+        "_debugID": 8,
+        "_renderedOutput": <FormGroup
+          bsClass="form-group"
+>
+          <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="primary"
+                    className="btn-block btn-google-blue btn-login"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="submit"
+          >
+                    <Glyphicon
+                              bsClass="glyphicon"
+                              glyph="log-in"
+                    />
+                    <span
+                              className="text-after-icon btn-login-lable"
+                    >
+                              Entrar
+                    </span>
+          </Button>
+</FormGroup>,
+      },
+      "_renderedNodeType": 1,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <Unknown
+    handleLogin={[Function]}
+/>,
+}
+`;
+
+exports[`Login VIEW renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <withRouter(Login)
+    dispatch={[Function]}
+    email={
+        Object {
+            "isPristine": false,
+            "message": "",
+            "text": "guest@busticket.com",
+            "validation": null,
+          }
+    }
+    senha={
+        Object {
+            "isPristine": false,
+            "message": "",
+            "text": "#guest#",
+            "validation": null,
+          }
+    }
+    store={
+        Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          }
+    }
+    storeSubscription={
+        Subscription {
+            "listeners": Object {
+              "notify": [Function],
+            },
+            "onStateChange": [Function],
+            "parentSub": undefined,
+            "store": Object {
+              "dispatch": [Function],
+              "getState": [Function],
+              "replaceReducer": [Function],
+              "subscribe": [Function],
+              Symbol(observable): [Function],
+            },
+            "unsubscribe": null,
+          }
+    }
+/>,
+  "nodes": Array [
+    <withRouter(Login)
+      dispatch={[Function]}
+      email={
+            Object {
+                  "isPristine": false,
+                  "message": "",
+                  "text": "guest@busticket.com",
+                  "validation": null,
+                }
+      }
+      senha={
+            Object {
+                  "isPristine": false,
+                  "message": "",
+                  "text": "#guest#",
+                  "validation": null,
+                }
+      }
+      store={
+            Object {
+                  "dispatch": [Function],
+                  "getState": [Function],
+                  "replaceReducer": [Function],
+                  "subscribe": [Function],
+                  Symbol(observable): [Function],
+                }
+      }
+      storeSubscription={
+            Subscription {
+                  "listeners": Object {
+                    "notify": [Function],
+                  },
+                  "onStateChange": [Function],
+                  "parentSub": undefined,
+                  "store": Object {
+                    "dispatch": [Function],
+                    "getState": [Function],
+                    "replaceReducer": [Function],
+                    "subscribe": [Function],
+                    Symbol(observable): [Function],
+                  },
+                  "unsubscribe": null,
+                }
+      }
+/>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 0,
+      "_context": Object {},
+      "_currentElement": <Connect(withRouter(Login))
+        store={
+                Object {
+                        "dispatch": [Function],
+                        "getState": [Function],
+                        "replaceReducer": [Function],
+                        "subscribe": [Function],
+                        Symbol(observable): [Function],
+                      }
+        }
+/>,
+      "_debugID": 1,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": Connect {
+        "_reactInternalInstance": [Circular],
+        "context": Object {
+          "store": undefined,
+          "storeSubscription": undefined,
+        },
+        "notifyNestedSubs": [Function],
+        "props": Object {
+          "store": Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          },
+        },
+        "propsMode": true,
+        "refs": Object {},
+        "renderCount": 0,
+        "selector": Object {
+          "error": null,
+          "props": Object {
+            "dispatch": [Function],
+            "email": Object {
+              "isPristine": false,
+              "message": "",
+              "text": "guest@busticket.com",
+              "validation": null,
+            },
+            "senha": Object {
+              "isPristine": false,
+              "message": "",
+              "text": "#guest#",
+              "validation": null,
+            },
+            "store": Object {
+              "dispatch": [Function],
+              "getState": [Function],
+              "replaceReducer": [Function],
+              "subscribe": [Function],
+              Symbol(observable): [Function],
+            },
+          },
+          "run": [Function],
+          "shouldComponentUpdate": false,
+        },
+        "setWrappedInstance": [Function],
+        "state": Object {},
+        "store": Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        },
+        "subscription": Subscription {
+          "listeners": Object {
+            "notify": [Function],
+          },
+          "onStateChange": [Function],
+          "parentSub": undefined,
+          "store": Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          },
+          "unsubscribe": null,
+        },
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+        "version": 1,
+      },
+      "_mountOrder": 1,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <withRouter(Login)
+          dispatch={[Function]}
+          email={
+                    Object {
+                              "isPristine": false,
+                              "message": "",
+                              "text": "guest@busticket.com",
+                              "validation": null,
+                            }
+          }
+          senha={
+                    Object {
+                              "isPristine": false,
+                              "message": "",
+                              "text": "#guest#",
+                              "validation": null,
+                            }
+          }
+          store={
+                    Object {
+                              "dispatch": [Function],
+                              "getState": [Function],
+                              "replaceReducer": [Function],
+                              "subscribe": [Function],
+                              Symbol(observable): [Function],
+                            }
+          }
+          storeSubscription={
+                    Subscription {
+                              "listeners": Object {
+                                "notify": [Function],
+                              },
+                              "onStateChange": [Function],
+                              "parentSub": undefined,
+                              "store": Object {
+                                "dispatch": [Function],
+                                "getState": [Function],
+                                "replaceReducer": [Function],
+                                "subscribe": [Function],
+                                Symbol(observable): [Function],
+                              },
+                              "unsubscribe": null,
+                            }
+          }
+/>,
+        "_debugID": 2,
+        "_renderedOutput": <withRouter(Login)
+          dispatch={[Function]}
+          email={
+                    Object {
+                              "isPristine": false,
+                              "message": "",
+                              "text": "guest@busticket.com",
+                              "validation": null,
+                            }
+          }
+          senha={
+                    Object {
+                              "isPristine": false,
+                              "message": "",
+                              "text": "#guest#",
+                              "validation": null,
+                            }
+          }
+          store={
+                    Object {
+                              "dispatch": [Function],
+                              "getState": [Function],
+                              "replaceReducer": [Function],
+                              "subscribe": [Function],
+                              Symbol(observable): [Function],
+                            }
+          }
+          storeSubscription={
+                    Subscription {
+                              "listeners": Object {
+                                "notify": [Function],
+                              },
+                              "onStateChange": [Function],
+                              "parentSub": undefined,
+                              "store": Object {
+                                "dispatch": [Function],
+                                "getState": [Function],
+                                "replaceReducer": [Function],
+                                "subscribe": [Function],
+                                Symbol(observable): [Function],
+                              },
+                              "unsubscribe": null,
+                            }
+          }
+/>,
+      },
+      "_renderedNodeType": 1,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <Connect(withRouter(Login))
+    store={
+        Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          }
+    }
+/>,
+}
+`;
+
+exports[`LoginInputGroup renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <FormGroup
+    bsClass="form-group"
+    controlId="email"
+    validationState={null}
+>
+    <InputGroup
+        bsClass="input-group"
+    >
+        <InputGroupAddon
+            bsClass="input-group-addon"
+        >
+            <FontAwesome
+                className="addon-icon"
+                name="user"
+            />
+        </InputGroupAddon>
+        <FormControl
+            bsClass="form-control"
+            componentClass="input"
             onChange={[Function]}
             placeholder="E-mail"
             type="text"
             value="guest@busticket.com"
-          />
-        </span>
-        <span
-          className="help-block"
-        >
-          
-        </span>
-      </div>
-      <div
-        className="form-group"
+        />
+    </InputGroup>
+    <HelpBlock
+        bsClass="help-block"
+    />
+</FormGroup>,
+  "nodes": Array [
+    <FormGroup
+      bsClass="form-group"
+      controlId="email"
+      validationState={null}
+>
+      <InputGroup
+            bsClass="input-group"
       >
-        <span
-          className="input-group"
-        >
-          <span
-            className="input-group-addon"
-          >
-            <span
-              aria-hidden={true}
-              className="fa fa-key addon-icon"
+            <InputGroupAddon
+                  bsClass="input-group-addon"
+            >
+                  <FontAwesome
+                        className="addon-icon"
+                        name="user"
+                  />
+            </InputGroupAddon>
+            <FormControl
+                  bsClass="form-control"
+                  componentClass="input"
+                  onChange={[Function]}
+                  placeholder="E-mail"
+                  type="text"
+                  value="guest@busticket.com"
             />
-          </span>
-          <input
-            className="form-control"
-            id="senha"
-            onChange={[Function]}
-            placeholder="Senha"
-            type="password"
-            value="#guest#"
-          />
-        </span>
-        <span
-          className="help-block"
-        >
-          
-        </span>
-      </div>
-      <div
-        className="form-group"
-      >
-        <button
-          className="btn-block btn-google-blue btn-login btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="submit"
-        >
-          <span
-            className="glyphicon glyphicon-log-in"
-          />
-          <span
-            className="text-after-icon btn-login-lable"
+      </InputGroup>
+      <HelpBlock
+            bsClass="help-block"
+      />
+</FormGroup>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 2,
+      "_context": Object {},
+      "_currentElement": <Unknown
+        field={
+                Object {
+                        "isPristine": false,
+                        "message": "",
+                        "text": "guest@busticket.com",
+                        "validation": null,
+                      }
+        }
+        glyph="user"
+        id="email"
+        onChange={[Function]}
+        placeholder="E-mail"
+        type="text"
+/>,
+      "_debugID": 3,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": StatelessComponent {
+        "_reactInternalInstance": [Circular],
+        "context": Object {},
+        "props": Object {
+          "field": Object {
+            "isPristine": false,
+            "message": "",
+            "text": "guest@busticket.com",
+            "validation": null,
+          },
+          "glyph": "user",
+          "id": "email",
+          "onChange": [Function],
+          "placeholder": "E-mail",
+          "type": "text",
+        },
+        "refs": Object {},
+        "state": null,
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+      },
+      "_mountOrder": 2,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <FormGroup
+          bsClass="form-group"
+          controlId="email"
+          validationState={null}
+>
+          <InputGroup
+                    bsClass="input-group"
           >
-            Entrar
-          </span>
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+                    <InputGroupAddon
+                              bsClass="input-group-addon"
+                    >
+                              <FontAwesome
+                                        className="addon-icon"
+                                        name="user"
+                              />
+                    </InputGroupAddon>
+                    <FormControl
+                              bsClass="form-control"
+                              componentClass="input"
+                              onChange={[Function]}
+                              placeholder="E-mail"
+                              type="text"
+                              value="guest@busticket.com"
+                    />
+          </InputGroup>
+          <HelpBlock
+                    bsClass="help-block"
+          />
+</FormGroup>,
+        "_debugID": 4,
+        "_renderedOutput": <FormGroup
+          bsClass="form-group"
+          controlId="email"
+          validationState={null}
+>
+          <InputGroup
+                    bsClass="input-group"
+          >
+                    <InputGroupAddon
+                              bsClass="input-group-addon"
+                    >
+                              <FontAwesome
+                                        className="addon-icon"
+                                        name="user"
+                              />
+                    </InputGroupAddon>
+                    <FormControl
+                              bsClass="form-control"
+                              componentClass="input"
+                              onChange={[Function]}
+                              placeholder="E-mail"
+                              type="text"
+                              value="guest@busticket.com"
+                    />
+          </InputGroup>
+          <HelpBlock
+                    bsClass="help-block"
+          />
+</FormGroup>,
+      },
+      "_renderedNodeType": 1,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <Unknown
+    field={
+        Object {
+            "isPristine": false,
+            "message": "",
+            "text": "guest@busticket.com",
+            "validation": null,
+          }
+    }
+    glyph="user"
+    id="email"
+    onChange={[Function]}
+    placeholder="E-mail"
+    type="text"
+/>,
+}
 `;

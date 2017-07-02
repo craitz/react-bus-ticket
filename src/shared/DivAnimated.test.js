@@ -1,13 +1,12 @@
 import React from 'react';
 import store from '../store';
-import renderer from 'react-test-renderer';
-import ConfirmaPassagem from './ConfirmaPassagem';
 import { shallow } from 'enzyme';
+import DivAnimated from './DivAnimated';
 
-describe('ConfirmaPassagem VIEW', () => {
+describe('DivAnimated VIEW', () => {
   it('renders correctly', () => {
     const wrapper = shallow(
-      <ConfirmaPassagem store={store} />
+      <DivAnimated />
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -18,21 +18,33 @@ import { withLoading } from '../shared/hoc';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated';
 
-const buttonLogin = ({ onClick }) =>
-  <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue btn-login" onClick={onClick}>
-    <Glyphicon glyph="log-in" />
-    <span className="text-after-icon btn-login-lable">Entrar</span>
-  </Button>
+export const ButtonLogin = ({ handleLogin }) =>
+  <FormGroup>
+    <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue btn-login" onClick={handleLogin}>
+      <Glyphicon glyph="log-in" />
+      <span className="text-after-icon btn-login-lable">Entrar</span>
+    </Button>
+  </FormGroup>
 
+export const ButtonLoading = withLoading(ButtonLogin);
 
-const ButtonLoading = withLoading(buttonLogin);
+export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
+  <FormGroup controlId={id} validationState={field.validation}>
+    <InputGroup>
+      <InputGroup.Addon>
+        <FontAwesome name={glyph} className="addon-icon"></FontAwesome>
+      </InputGroup.Addon>
+      <FormControl type={type} placeholder={placeholder} value={field.text} onChange={onChange} />
+    </InputGroup>
+    <HelpBlock>{field.message}</HelpBlock>
+  </FormGroup>
 
 export class Login extends Component {
   constructor(props) {
     super(props);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeSenha = this.handleChangeSenha.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     props.dispatch(actions.resetLogin());
   }
 
@@ -106,7 +118,7 @@ export class Login extends Component {
     return true;
   }
 
-  handleSubmit(event) {
+  handleLogin(event) {
     event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
     dispatch(setLoading(true));
@@ -156,29 +168,23 @@ export class Login extends Component {
               </div>
             </div>
             <form>
-              <FormGroup controlId="email" validationState={email.validation}>
-                <InputGroup>
-                  <InputGroup.Addon>
-                    <Glyphicon glyph="user" className="addon-icon" />
-                  </InputGroup.Addon>
-                  <FormControl type="text" placeholder="E-mail" value={email.text} onChange={this.handleChangeEmail} />
-                </InputGroup>
-                {/*<FormControl.Feedback />*/}
-                <HelpBlock>{email.message}</HelpBlock>
-              </FormGroup>
-              <FormGroup controlId="senha" validationState={senha.validation}>
-                <InputGroup>
-                  <InputGroup.Addon>
-                    <FontAwesome name="key" className="addon-icon"></FontAwesome>
-                  </InputGroup.Addon>
-                  <FormControl type="password" placeholder="Senha" value={senha.text} onChange={this.handleChangeSenha} />
-                </InputGroup>
-                {/*<FormControl.Feedback />*/}
-                <HelpBlock>{senha.message}</HelpBlock>
-              </FormGroup>
-              <FormGroup>
-                <ButtonLoading onClick={this.handleSubmit} />
-              </FormGroup>
+              <LoginInputGroup
+                id="email"
+                type="text"
+                field={email}
+                glyph="user"
+                placeholder="E-mail"
+                onChange={this.handleChangeEmail}
+              />
+              <LoginInputGroup
+                id="senha"
+                type="password"
+                field={senha}
+                glyph="key"
+                placeholder="Senha"
+                onChange={this.handleChangeSenha}
+              />
+              <ButtonLoading handleLogin={this.handleLogin} />
             </form>
           </DivAnimated>
         </div>

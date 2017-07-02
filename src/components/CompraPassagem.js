@@ -62,7 +62,7 @@ const helper = {
   }
 };
 
-class CompraPassagem extends Component {
+export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;

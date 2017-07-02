@@ -1,19 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux';
-import store from '../store';
-import renderer from 'react-test-renderer';
-import Welcome from './Welcome';
+import { shallow } from 'enzyme';
+import Welcome, {ButtonComprar} from './Welcome';
 
 describe('Welcome VIEW', () => {
+  const wrapper = shallow(
+    <Welcome />
+  );
+
   it('renders correctly', () => {
-    const tree = renderer.create(
-      <Router>
-        <Provider store={store}>
-          <Welcome />
-        </Provider>
-      </Router>
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
+describe('ButtonComprar', () => {
+  const props = {
+    handleComprar: jest.fn()
+  };
+  
+  const wrapper = shallow(
+    <ButtonComprar {...props}/>
+  );
+
+  it('chama a tela de compras', () => {
+    const innerButton = wrapper.find('Button');
+    innerButton.simulate('click');
+    expect(props.handleComprar).toHaveBeenCalledTimes(1);
   });
 });

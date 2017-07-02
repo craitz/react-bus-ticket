@@ -1,3 +1,443 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CompraPassagem VIEW renders correctly 1`] = `null`;
+exports[`CompraPassagem VIEW renders correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <PageWithAuth
+    cidades={Array []}
+    dispatch={[Function]}
+    horarios={Array []}
+    passagem={
+        Object {
+            "cpf": Object {
+              "isPristine": true,
+              "message": "",
+              "text": "",
+              "validation": null,
+            },
+            "data": "2017-7-2",
+            "dataCompra": "2017-7-2",
+            "destino": Object {
+              "text": "",
+              "val": 1,
+            },
+            "horario": Object {
+              "text": "",
+              "val": 0,
+            },
+            "nome": Object {
+              "isPristine": true,
+              "message": "",
+              "text": "",
+              "validation": null,
+            },
+            "origem": Object {
+              "text": "",
+              "val": 0,
+            },
+            "poltrona": Object {
+              "isPristine": true,
+              "message": "",
+              "validation": null,
+              "value": "",
+            },
+          }
+    }
+    poltronas={Array []}
+    store={
+        Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          }
+    }
+    storeSubscription={
+        Subscription {
+            "listeners": Object {
+              "notify": [Function],
+            },
+            "onStateChange": [Function],
+            "parentSub": undefined,
+            "store": Object {
+              "dispatch": [Function],
+              "getState": [Function],
+              "replaceReducer": [Function],
+              "subscribe": [Function],
+              Symbol(observable): [Function],
+            },
+            "unsubscribe": null,
+          }
+    }
+/>,
+  "nodes": Array [
+    <PageWithAuth
+      cidades={Array []}
+      dispatch={[Function]}
+      horarios={Array []}
+      passagem={
+            Object {
+                  "cpf": Object {
+                    "isPristine": true,
+                    "message": "",
+                    "text": "",
+                    "validation": null,
+                  },
+                  "data": "2017-7-2",
+                  "dataCompra": "2017-7-2",
+                  "destino": Object {
+                    "text": "",
+                    "val": 1,
+                  },
+                  "horario": Object {
+                    "text": "",
+                    "val": 0,
+                  },
+                  "nome": Object {
+                    "isPristine": true,
+                    "message": "",
+                    "text": "",
+                    "validation": null,
+                  },
+                  "origem": Object {
+                    "text": "",
+                    "val": 0,
+                  },
+                  "poltrona": Object {
+                    "isPristine": true,
+                    "message": "",
+                    "validation": null,
+                    "value": "",
+                  },
+                }
+      }
+      poltronas={Array []}
+      store={
+            Object {
+                  "dispatch": [Function],
+                  "getState": [Function],
+                  "replaceReducer": [Function],
+                  "subscribe": [Function],
+                  Symbol(observable): [Function],
+                }
+      }
+      storeSubscription={
+            Subscription {
+                  "listeners": Object {
+                    "notify": [Function],
+                  },
+                  "onStateChange": [Function],
+                  "parentSub": undefined,
+                  "store": Object {
+                    "dispatch": [Function],
+                    "getState": [Function],
+                    "replaceReducer": [Function],
+                    "subscribe": [Function],
+                    Symbol(observable): [Function],
+                  },
+                  "unsubscribe": null,
+                }
+      }
+/>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 0,
+      "_context": Object {},
+      "_currentElement": <Connect(PageWithAuth)
+        store={
+                Object {
+                        "dispatch": [Function],
+                        "getState": [Function],
+                        "replaceReducer": [Function],
+                        "subscribe": [Function],
+                        Symbol(observable): [Function],
+                      }
+        }
+/>,
+      "_debugID": 1,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": Connect {
+        "_reactInternalInstance": [Circular],
+        "context": Object {
+          "store": undefined,
+          "storeSubscription": undefined,
+        },
+        "notifyNestedSubs": [Function],
+        "props": Object {
+          "store": Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          },
+        },
+        "propsMode": true,
+        "refs": Object {},
+        "renderCount": 0,
+        "selector": Object {
+          "error": null,
+          "props": Object {
+            "cidades": Array [],
+            "dispatch": [Function],
+            "horarios": Array [],
+            "passagem": Object {
+              "cpf": Object {
+                "isPristine": true,
+                "message": "",
+                "text": "",
+                "validation": null,
+              },
+              "data": "2017-7-2",
+              "dataCompra": "2017-7-2",
+              "destino": Object {
+                "text": "",
+                "val": 1,
+              },
+              "horario": Object {
+                "text": "",
+                "val": 0,
+              },
+              "nome": Object {
+                "isPristine": true,
+                "message": "",
+                "text": "",
+                "validation": null,
+              },
+              "origem": Object {
+                "text": "",
+                "val": 0,
+              },
+              "poltrona": Object {
+                "isPristine": true,
+                "message": "",
+                "validation": null,
+                "value": "",
+              },
+            },
+            "poltronas": Array [],
+            "store": Object {
+              "dispatch": [Function],
+              "getState": [Function],
+              "replaceReducer": [Function],
+              "subscribe": [Function],
+              Symbol(observable): [Function],
+            },
+          },
+          "run": [Function],
+          "shouldComponentUpdate": false,
+        },
+        "setWrappedInstance": [Function],
+        "state": Object {},
+        "store": Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        },
+        "subscription": Subscription {
+          "listeners": Object {
+            "notify": [Function],
+          },
+          "onStateChange": [Function],
+          "parentSub": undefined,
+          "store": Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          },
+          "unsubscribe": null,
+        },
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+        "version": 1,
+      },
+      "_mountOrder": 1,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <PageWithAuth
+          cidades={Array []}
+          dispatch={[Function]}
+          horarios={Array []}
+          passagem={
+                    Object {
+                              "cpf": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "text": "",
+                                "validation": null,
+                              },
+                              "data": "2017-7-2",
+                              "dataCompra": "2017-7-2",
+                              "destino": Object {
+                                "text": "",
+                                "val": 1,
+                              },
+                              "horario": Object {
+                                "text": "",
+                                "val": 0,
+                              },
+                              "nome": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "text": "",
+                                "validation": null,
+                              },
+                              "origem": Object {
+                                "text": "",
+                                "val": 0,
+                              },
+                              "poltrona": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "validation": null,
+                                "value": "",
+                              },
+                            }
+          }
+          poltronas={Array []}
+          store={
+                    Object {
+                              "dispatch": [Function],
+                              "getState": [Function],
+                              "replaceReducer": [Function],
+                              "subscribe": [Function],
+                              Symbol(observable): [Function],
+                            }
+          }
+          storeSubscription={
+                    Subscription {
+                              "listeners": Object {
+                                "notify": [Function],
+                              },
+                              "onStateChange": [Function],
+                              "parentSub": undefined,
+                              "store": Object {
+                                "dispatch": [Function],
+                                "getState": [Function],
+                                "replaceReducer": [Function],
+                                "subscribe": [Function],
+                                Symbol(observable): [Function],
+                              },
+                              "unsubscribe": null,
+                            }
+          }
+/>,
+        "_debugID": 2,
+        "_renderedOutput": <PageWithAuth
+          cidades={Array []}
+          dispatch={[Function]}
+          horarios={Array []}
+          passagem={
+                    Object {
+                              "cpf": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "text": "",
+                                "validation": null,
+                              },
+                              "data": "2017-7-2",
+                              "dataCompra": "2017-7-2",
+                              "destino": Object {
+                                "text": "",
+                                "val": 1,
+                              },
+                              "horario": Object {
+                                "text": "",
+                                "val": 0,
+                              },
+                              "nome": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "text": "",
+                                "validation": null,
+                              },
+                              "origem": Object {
+                                "text": "",
+                                "val": 0,
+                              },
+                              "poltrona": Object {
+                                "isPristine": true,
+                                "message": "",
+                                "validation": null,
+                                "value": "",
+                              },
+                            }
+          }
+          poltronas={Array []}
+          store={
+                    Object {
+                              "dispatch": [Function],
+                              "getState": [Function],
+                              "replaceReducer": [Function],
+                              "subscribe": [Function],
+                              Symbol(observable): [Function],
+                            }
+          }
+          storeSubscription={
+                    Subscription {
+                              "listeners": Object {
+                                "notify": [Function],
+                              },
+                              "onStateChange": [Function],
+                              "parentSub": undefined,
+                              "store": Object {
+                                "dispatch": [Function],
+                                "getState": [Function],
+                                "replaceReducer": [Function],
+                                "subscribe": [Function],
+                                Symbol(observable): [Function],
+                              },
+                              "unsubscribe": null,
+                            }
+          }
+/>,
+      },
+      "_renderedNodeType": 1,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <Connect(PageWithAuth)
+    store={
+        Object {
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(observable): [Function],
+          }
+    }
+/>,
+}
+`;

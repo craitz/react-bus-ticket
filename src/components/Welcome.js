@@ -7,6 +7,15 @@ import { NavHeader } from '../shared/Navigation';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 
+export const ButtonComprar = ({handleComprar}) =>
+  <div className="text-center welcome-button">
+    <Button className="btn btn-google-blue" onClick={handleComprar}>
+      <Glyphicon className="icon-title links comprar" glyph="shopping-cart" />
+      <span className="text-after-icon hidden-xs">Compre agora sua passagem</span>
+      <span className="text-after-icon hidden-sm hidden-md hidden-lg">Comprar passagens</span>
+    </Button>
+  </div>
+
 class Welcome extends Component {
   constructor(props) {
     super(props);
@@ -74,13 +83,7 @@ class Welcome extends Component {
               </Jumbotron>
             </article>
             <hr />
-            <div className="text-center welcome-button">
-              <Button className="btn btn-google-blue" onClick={this.handleComprarPassagem}>
-                <Glyphicon className="icon-title links comprar" glyph="shopping-cart" />
-                <span className="text-after-icon hidden-xs">Compre agora sua passagem</span>
-                <span className="text-after-icon hidden-sm hidden-md hidden-lg">Comprar passagens</span>
-              </Button>
-            </div>
+            <ButtonComprar handleComprar={this.handleComprarPassagem}/>
           </Col>
         </DivAnimated>
       </div >
