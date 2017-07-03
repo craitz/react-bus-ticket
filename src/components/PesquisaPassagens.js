@@ -37,7 +37,126 @@ const TableColFilter = ({ tooltip, value, onChange }) =>
     </TooltipOverlay>
   </td>
 
-class PesquisaPassagens extends Component {
+export const getGlyphEx = (fieldName, sort) => {
+  if ((fieldName.length > 0) && (sort && (sort.field === fieldName))) {
+    return (
+      <Glyphicon
+        glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
+        className="th-icon"
+      />
+    );
+  } else {
+    return null;
+  }
+};
+
+export const sortByFieldEx = (passagensBackup, sort) => {
+  if (!passagensBackup) {
+    return [];
+  }
+
+  const passagensOrdenadas = utils.arrayDeepCopy(passagensBackup);
+
+  if (!sort || (sort.field.length === 0)) {
+    return passagensOrdenadas;
+  }
+
+  passagensOrdenadas.sort((a, b) => {
+    let objA = '';
+    let objB = '';
+
+    switch (sort.field) {
+      case utils.PesquisaPassagensField.LINHA: {
+        objA = a.origem.concat(a.destino);
+        objB = b.origem.concat(b.destino);
+        break;
+      }
+      case utils.PesquisaPassagensField.SAIDA: {
+        objA = utils.buildIsoDate(a.data, a.horario);
+        objB = utils.buildIsoDate(b.data, b.horario);
+        break;
+      }
+      case utils.PesquisaPassagensField.COMPRA: {
+        objA = a.dataCompra;
+        objB = b.dataCompra;
+        break;
+      }
+      case utils.PesquisaPassagensField.NOME: {
+        objA = a.nome;
+        objB = b.nome;
+        break;
+      }
+      default: {
+      }
+    }
+
+    if (sort.direction) {
+      if (objA > objB) {
+        return 1;
+      }
+      if (objA < objB) {
+        return -1;
+      }
+      return 0;
+    } else {
+      if (objA < objB) {
+        return 1;
+      }
+      if (objA > objB) {
+        return -1;
+      }
+      return 0;
+    }
+  });
+
+  return passagensOrdenadas;
+};
+
+export const filtraPassagensEx = (passagensComOrdenacao, filter) => {
+  if (!passagensComOrdenacao || !filter) {
+    return [];
+  }
+
+  const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
+    const nome = passagem.nome.toLowerCase();
+    const compra = passagem.dataCompra;
+    const saida = passagem.data.concat(passagem.horario);
+    const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
+    const poltronas = passagem.poltrona.split(' - ');
+    let include = true;
+
+    if (filter.nome.length > 0) {
+      include = include && (nome.includes(filter.nome));
+    }
+
+    if (filter.compra.length > 0) {
+      include = include && (compra.includes(filter.compra));
+    }
+
+    if (filter.linha.length > 0) {
+      include = include && (linha.includes(filter.linha));
+    }
+
+    if (filter.saida.length > 0) {
+      include = include && (saida.includes(filter.saida));
+    }
+
+    if (filter.poltrona.length > 0) {
+      const poltronasFiltro = filter.poltrona.split(',');
+
+      include = include &&
+        poltronas.find((poltrona) => {
+          return poltronasFiltro.includes(poltrona);
+        });
+    }
+
+    return include;
+  });
+
+  return passagensFiltradas;
+};
+
+export class PesquisaPassagens extends Component {
   constructor(props) {
     super(props);
     this.handleClickNome = this.handleClickNome.bind(this);
@@ -55,126 +174,16 @@ class PesquisaPassagens extends Component {
     this.passagensBackup = [];
   }
 
-  getGlyph(field) {
-    const { sort } = this.props.consulta;
-    if ((field.length > 0) && (sort.field === field)) {
-      return (
-        <Glyphicon
-          glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
-          className="th-icon"
-        />
-      );
-    } else {
-      return null;
-    }
+  getGlyph(fieldName) {
+    return getGlyphEx(fieldName, this.props.consulta.sort);
   }
 
   sortByField() {
-    if (!this.passagensBackup) {
-      return [];
-    }
-
-    const { sort } = this.props.consulta;
-    const passagensOrdenadas = utils.arrayDeepCopy(this.passagensBackup);
-
-    if (sort.field.length === 0) {
-      return passagensOrdenadas;
-    }
-
-    passagensOrdenadas.sort((a, b) => {
-      let objA = '';
-      let objB = '';
-
-      switch (sort.field) {
-        case utils.PesquisaPassagensField.LINHA: {
-          objA = a.origem.concat(a.destino);
-          objB = b.origem.concat(b.destino);
-          break;
-        }
-        case utils.PesquisaPassagensField.SAIDA: {
-          objA = utils.buildIsoDate(a.data, a.horario);
-          objB = utils.buildIsoDate(b.data, b.horario);
-          break;
-        }
-        case utils.PesquisaPassagensField.COMPRA: {
-          objA = a.dataCompra;
-          objB = b.dataCompra;
-          break;
-        }
-        case utils.PesquisaPassagensField.NOME: {
-          objA = a.nome;
-          objB = b.nome;
-          break;
-        }
-        default: {
-        }
-      }
-
-      if (sort.direction) {
-        if (objA > objB) {
-          return 1;
-        }
-        if (objA < objB) {
-          return -1;
-        }
-        return 0;
-      } else {
-        if (objA < objB) {
-          return 1;
-        }
-        if (objA > objB) {
-          return -1;
-        }
-        return 0;
-      }
-    });
-
-    return passagensOrdenadas;
+    return sortByFieldEx(this.passagensBackup, this.props.consulta.sort)
   }
 
   filtraPassagens(passagensComOrdenacao) {
-    if (!passagensComOrdenacao) {
-      return [];
-    }
-
-    const { filter } = this.props.consulta;
-    const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
-      const nome = passagem.nome.toLowerCase();
-      const compra = passagem.dataCompra;
-      const saida = passagem.data.concat(passagem.horario);
-      const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
-      const poltronas = passagem.poltrona.split(' - ');
-      let include = true;
-
-      if (filter.nome.length > 0) {
-        include = include && (nome.includes(filter.nome));
-      }
-
-      if (filter.compra.length > 0) {
-        include = include && (compra.includes(filter.compra));
-      }
-
-      if (filter.linha.length > 0) {
-        include = include && (linha.includes(filter.linha));
-      }
-
-      if (filter.saida.length > 0) {
-        include = include && (saida.includes(filter.saida));
-      }
-
-      if (filter.poltrona.length > 0) {
-        const poltronasFiltro = filter.poltrona.split(',');
-
-        include = include &&
-          poltronas.find((poltrona) => {
-            return poltronasFiltro.includes(poltrona);
-          });
-      }
-
-      return include;
-    });
-
-    return passagensFiltradas;
+    return filtraPassagensEx(passagensComOrdenacao, this.props.consulta.filter);
   }
 
   getTotalPages(passagens) {

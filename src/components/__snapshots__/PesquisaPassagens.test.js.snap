@@ -9,6 +9,23 @@ ShallowWrapper {
   },
   "length": 1,
   "node": <PageWithAuth
+    consulta={
+        Object {
+            "activePage": 1,
+            "filter": Object {
+              "compra": "",
+              "linha": "",
+              "nome": "",
+              "poltrona": "",
+              "saida": "",
+            },
+            "page": Array [],
+            "sort": Object {
+              "direction": true,
+              "field": "",
+            },
+          }
+    }
     dispatch={[Function]}
     passagens={Array []}
     store={
@@ -40,6 +57,23 @@ ShallowWrapper {
 />,
   "nodes": Array [
     <PageWithAuth
+      consulta={
+            Object {
+                  "activePage": 1,
+                  "filter": Object {
+                    "compra": "",
+                    "linha": "",
+                    "nome": "",
+                    "poltrona": "",
+                    "saida": "",
+                  },
+                  "page": Array [],
+                  "sort": Object {
+                    "direction": true,
+                    "field": "",
+                  },
+                }
+      }
       dispatch={[Function]}
       passagens={Array []}
       store={
@@ -87,7 +121,7 @@ ShallowWrapper {
                       }
         }
 />,
-      "_debugID": 1,
+      "_debugID": 3,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": Connect {
@@ -112,6 +146,21 @@ ShallowWrapper {
         "selector": Object {
           "error": null,
           "props": Object {
+            "consulta": Object {
+              "activePage": 1,
+              "filter": Object {
+                "compra": "",
+                "linha": "",
+                "nome": "",
+                "poltrona": "",
+                "saida": "",
+              },
+              "page": Array [],
+              "sort": Object {
+                "direction": true,
+                "field": "",
+              },
+            },
             "dispatch": [Function],
             "passagens": Array [],
             "store": Object {
@@ -161,7 +210,7 @@ ShallowWrapper {
         },
         "version": 0,
       },
-      "_mountOrder": 1,
+      "_mountOrder": 2,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
@@ -169,6 +218,23 @@ ShallowWrapper {
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <PageWithAuth
+          consulta={
+                    Object {
+                              "activePage": 1,
+                              "filter": Object {
+                                "compra": "",
+                                "linha": "",
+                                "nome": "",
+                                "poltrona": "",
+                                "saida": "",
+                              },
+                              "page": Array [],
+                              "sort": Object {
+                                "direction": true,
+                                "field": "",
+                              },
+                            }
+          }
           dispatch={[Function]}
           passagens={Array []}
           store={
@@ -198,8 +264,25 @@ ShallowWrapper {
                             }
           }
 />,
-        "_debugID": 2,
+        "_debugID": 4,
         "_renderedOutput": <PageWithAuth
+          consulta={
+                    Object {
+                              "activePage": 1,
+                              "filter": Object {
+                                "compra": "",
+                                "linha": "",
+                                "nome": "",
+                                "poltrona": "",
+                                "saida": "",
+                              },
+                              "page": Array [],
+                              "sort": Object {
+                                "direction": true,
+                                "field": "",
+                              },
+                            }
+          }
           dispatch={[Function]}
           passagens={Array []}
           store={

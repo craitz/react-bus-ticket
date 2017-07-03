@@ -62,32 +62,32 @@ const buttonComprar = () =>
 
 const ButtonWithLoading = withLoading(buttonComprar);
 
-export const FormComprar = ({props}) => {
-  const { 
-    cidades, 
-    horarios, 
-    poltronas, 
+export const FormComprar = ({ props }) => {
+  const {
+    cidades,
+    horarios,
+    poltronas,
     passagem } = props.fields;
-  const { 
-    handleChangeNome, 
-    handleChangeCpf, 
-    handleChangeOrigem, 
+  const {
+    handleChangeNome,
+    handleChangeCpf,
+    handleChangeOrigem,
     handleChangeDestino,
     handleChangeData,
     handleChangeHorario,
     handleChangePoltrona,
     handleSubmit
    } = props.handlers;
-  const { 
-    nome, 
-    cpf, 
-    origem, 
-    destino, 
-    data, 
-    horario, 
+  const {
+    nome,
+    cpf,
+    origem,
+    destino,
+    data,
+    horario,
     poltrona } = passagem;
 
-  return (  
+  return (
     <form onSubmit={handleSubmit}>
       {/*NOME / CPF*/}
       <Row className="text-left first">
@@ -137,7 +137,7 @@ export const FormComprar = ({props}) => {
           <DateField
             id="data"
             label="Data"
-            value={data}
+            value="2016-11-19T12:00:00.000Z"
             onChange={handleChangeData} />
         </Col>
         <Col md={6} className="input-col">
@@ -212,7 +212,7 @@ export class CompraPassagem extends Component {
     const { dispatch } = this.props;
     const todasPoltronas = globals.getPoltronas();
 
-    // se não há mais horários de saída no dia, 
+    // se não há mais horários de saída no dia,
     // então desabilita as poltronas e retorna
     if (horario.length === 0) {
       const newPoltronas = todasPoltronas.map((poltrona) => {
@@ -223,8 +223,8 @@ export class CompraPassagem extends Component {
       return;
     }
 
-    // monnta o ref para procurar por poltronas 
-    // já reservadas neste dia 
+    // monnta o ref para procurar por poltronas
+    // já reservadas neste dia
     const dataFormatted = utils.dateToFirebase(data);
     const horarioFormatted = utils.timeToFirebase(horario);
     const saidasRef = `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/`;
@@ -380,7 +380,7 @@ export class CompraPassagem extends Component {
       text: origem.text
     }));
 
-    // if ORIGEM is already selected in DESTINO 
+    // if ORIGEM is already selected in DESTINO
     if (origem.val === destino.val) {
       // calculate new index for DESTINO
       const newIndexDestino = (destino.val === 0) ? (destino.val + 1) : (destino.val - 1);
@@ -417,7 +417,7 @@ export class CompraPassagem extends Component {
       text: destino.text
     }));
 
-    // if DESTINO is already selected in ORIGEM 
+    // if DESTINO is already selected in ORIGEM
     if (destino.val === origem.val) {
       // calculate new index for ORIGEM
       const newIndexOrigem = (origem.val === 0) ? (origem.val + 1) : (origem.val - 1);
@@ -608,9 +608,9 @@ export class CompraPassagem extends Component {
         passagem: this.props.passagem
       },
       handlers: {
-        handleChangeNome: this.handleChangeNome, 
-        handleChangeCpf: this.handleChangeCpf, 
-        handleChangeOrigem: this.handleChangeOrigem, 
+        handleChangeNome: this.handleChangeNome,
+        handleChangeCpf: this.handleChangeCpf,
+        handleChangeOrigem: this.handleChangeOrigem,
         handleChangeDestino: this.handleChangeDestino,
         handleChangeData: this.handleChangeData,
         handleChangeHorario: this.handleChangeHorario,
@@ -646,7 +646,7 @@ export class CompraPassagem extends Component {
                 <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>
               </Col>
               <Jumbotron>
-                <FormComprar props={formComprarProps}/>
+                <FormComprar props={formComprarProps} />
               </Jumbotron>
             </Col>
           </DivAnimated>

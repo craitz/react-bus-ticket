@@ -7,7 +7,7 @@ import { NavHeader } from '../shared/Navigation';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 
-export const ButtonComprar = ({handleComprar}) =>
+export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-center welcome-button">
     <Button className="btn btn-google-blue" onClick={handleComprar}>
       <Glyphicon className="icon-title links comprar" glyph="shopping-cart" />
@@ -74,6 +74,7 @@ class Welcome extends Component {
                 Webpack,
                 Babel,
                 Boostrap, Responsive Web Design,
+                Mobile First,
                 JSON,
                 Git,
                 CSS3,
@@ -83,7 +84,7 @@ class Welcome extends Component {
               </Jumbotron>
             </article>
             <hr />
-            <ButtonComprar handleComprar={this.handleComprarPassagem}/>
+            <ButtonComprar handleComprar={this.handleComprarPassagem} />
           </Col>
         </DivAnimated>
       </div >

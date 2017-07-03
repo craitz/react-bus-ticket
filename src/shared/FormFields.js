@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import { DateBr } from './Utils';
-import datepicker from 'js-datepicker';
+// import datepicker from 'js-datepicker';
 import Select from 'react-select';
 import MaskedFormControl from 'react-bootstrap-maskedinput'
-import '../../node_modules/js-datepicker/datepicker.css';
+import DatePicker from 'react-bootstrap-date-picker';
+// import '../../node_modules/js-datepicker/datepicker.css';
 import 'react-select/dist/react-select.css';
 
 // BASE FORM
@@ -159,22 +160,23 @@ export const withDate = (WrappedComponent) => {
     componentDidMount() {
       const { id, onChange } = this.props;
 
-      datepicker(`#${id}`, {
-        position: 'tr', // Top right.
-        startDate: new Date(), // Today.
-        dateSelected: new Date(), // Today is selected.
-        minDate: new Date(), // Today is the min date.
-        maxDate: new Date(2099, 0, 1), // Jan 1st, 2099.
-        formatter: (el, date) => el.value = DateBr(date),
-        onSelect: (instance) => onChange(DateBr(instance.dateSelected))
-      });
+      // datepicker(`#${id}`, {
+      //   position: 'tr', // Top right.
+      //   startDate: new Date(), // Today.
+      //   dateSelected: new Date(), // Today is selected.
+      //   minDate: new Date(), // Today is the min date.
+      //   maxDate: new Date(2099, 0, 1), // Jan 1st, 2099.
+      //   formatter: (el, date) => el.value = DateBr(date),
+      //   onSelect: (instance) => onChange(DateBr(instance.dateSelected))
+      // });
     }
 
     render() {
       const { value } = this.props;
       return (
         <WrappedComponent {...this.props}>
-          <FormControl type="text" value={value} readOnly />
+          <DatePicker value={value} showClearButton={false} onkeydown="return false" />
+          {/*<FormControl type="text" value={value} readOnly />*/}
         </WrappedComponent>
       );
     }

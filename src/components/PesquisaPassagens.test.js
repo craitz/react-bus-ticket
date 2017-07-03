@@ -1,21 +1,19 @@
 import React from 'react';
 import store from '../store';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Immutable from 'seamless-immutable';
 import { Glyphicon } from 'react-bootstrap';
 import PesquisaPassagens, {
-  Consulta,
-  getGlyph,
-  sortByField,
-  filtraPassagens,
-  resetConsulta,
-  getTotalPages,
-  setPage,
-  totalPageItems
+  totalPageItems,
+  getGlyphEx,
+  sortByFieldEx,
+  filtraPassagensEx
 } from './PesquisaPassagens';
 import { PesquisaPassagensField } from '../shared/Utils';
 import { SequenceArray } from '../shared/Utils';
+import { firebaseHelper } from '../shared/FirebaseHelper';
 
+// mock passagem
 const passagem = Immutable({
   cpf: "032.445.687-22",
   data: "23/08/2017",
@@ -28,8 +26,29 @@ const passagem = Immutable({
   poltrona: "35"
 });
 
+// mock consulta
+const consulta = Immutable({
+  sort: {
+    field: '',
+    direction: true
+  },
+  filter: {
+    nome: '',
+    compra: '',
+    linha: '',
+    saida: '',
+    poltrona: ''
+  },
+  activePage: 1,
+  page: []
+});
+
 const merge = (obj) => {
   return passagem.merge(obj, { deep: true });
+}
+
+const mergeConsulta = (obj) => {
+  return consulta.merge(obj, { deep: true });
 }
 
 describe('PesquisaPassagens - VIEW', () => {
@@ -43,8 +62,12 @@ describe('PesquisaPassagens - VIEW', () => {
 
 
 describe('PesquisaPassagens - setPage()', () => {
+  const wrapper = shallow(
+    <PesquisaPassagens store={store} />
+  );
+
   it('retorna [] se o array está vazio', () => {
-    setPage([]);
+    wrapper.instance().setPage([]);
     expect(Consulta.activePage).toBe(0);
     expect(Consulta.page).toEqual([]);
   });
@@ -111,15 +134,15 @@ describe('PesquisaPassagens - getTotalPages()', () => {
 
 describe('PesquisaPassagens - filtraPassagens()', () => {
   it('retorna [] se o array está vazio', () => {
-    expect(filtraPassagens([])).toEqual([]);
+    expect(filtraPassagensEx([], null)).toEqual([]);
   });
 
   it('retorna [] se o array é nulo', () => {
-    expect(filtraPassagens(null)).toEqual([]);
+    expect(filtraPassagensEx(null, null)).toEqual([]);
   });
 
   it('retorna [] se o array é undefined', () => {
-    expect(filtraPassagens(undefined)).toEqual([]);
+    expect(filtraPassagensEx(undefined, null)).toEqual([]);
   });
 
   it('filtra por nome', () => {
@@ -130,10 +153,9 @@ describe('PesquisaPassagens - filtraPassagens()', () => {
       nome: 'AABBBCC',
     });
     const passagens = [passagem1, passagem2];
+    const mockFilter = { ...consulta.filter, nome: 'bbb' }
 
-    Consulta.filter.nome = 'bbb';
-
-    expect(filtraPassagens(passagens)[0].nome).toBe('AABBBCC');
+    expect(filtraPassagensEx(passagens, mockFilter)[0].nome).toBe('AABBBCC');
   });
 
   it('filtra por data da compra', () => {
@@ -148,9 +170,9 @@ describe('PesquisaPassagens - filtraPassagens()', () => {
     const passagens = [passagem1, passagem2];
 
     resetConsulta();
-    Consulta.filter.compra = '78';
+    const mockFilter = { ...consulta.filter, compra: '78' }
 
-    expect(filtraPassagens(passagens)[0].nome).toBe('AABBBCC');
+    expect(filtraPassagens(passagens, mockFilter)[0].nome).toBe('AABBBCC');
   });
 
   it('filtra por linha', () => {
@@ -212,31 +234,37 @@ describe('PesquisaPassagens - filtraPassagens()', () => {
 
 describe('PesquisaPassagens - sortByField()', () => {
   it('retorna [] se o array está vazio', () => {
-    expect(sortByField([])).toEqual([]);
+    expect(sortByFieldEx([], null)).toEqual([]);
   });
 
   it('retorna [] se o array é nulo', () => {
-    expect(sortByField(null)).toEqual([]);
+    expect(sortByFieldEx(null, null)).toEqual([]);
   });
 
   it('retorna [] se o array é undefined', () => {
-    expect(sortByField(undefined)).toEqual([]);
+    expect(sortByFieldEx(undefined, null)).toEqual([]);
   });
 
   it('ordena por nome', () => {
     const passagem1 = passagem.merge({ nome: 'CBA' });
     const passagem2 = passagem.merge({ nome: 'ABC' });
     const passagens = [passagem1, passagem2];
-    Consulta.sort.field = PesquisaPassagensField.NOME;
-    expect(sortByField(passagens)[0].nome).toBe('ABC');
+    const mockSort = {
+      field: PesquisaPassagensField.NOME,
+      direction: true
+    }
+    expect(sortByFieldEx(passagens, mockSort)[0].nome).toBe('ABC');
   });
 
   it('ordena por data da compra', () => {
     const passagem1 = passagem.merge({ dataCompra: '22/09/1978' });
     const passagem2 = passagem.merge({ dataCompra: '18/09/1974' });
     const passagens = [passagem1, passagem2];
-    Consulta.sort.field = PesquisaPassagensField.COMPRA;
-    expect(sortByField(passagens)[0].dataCompra).toBe('18/09/1974');
+    const mockSort = {
+      field: PesquisaPassagensField.COMPRA,
+      direction: true
+    }
+    expect(sortByFieldEx(passagens, mockSort)[0].dataCompra).toBe('18/09/1974');
   });
 
   it('ordena por linha', () => {
@@ -249,8 +277,11 @@ describe('PesquisaPassagens - sortByField()', () => {
       destino: 'Rio de Janeiro (RJ)'
     });
     const passagens = [passagem1, passagem2];
-    Consulta.sort.field = PesquisaPassagensField.LINHA;
-    expect(sortByField(passagens)[0].origem).toBe('Florianópolis (SC)');
+    const mockSort = {
+      field: PesquisaPassagensField.LINHA,
+      direction: true
+    }
+    expect(sortByFieldEx(passagens, mockSort)[0].origem).toBe('Florianópolis (SC)');
   });
 
   it('ordena por saída', () => {
@@ -263,29 +294,44 @@ describe('PesquisaPassagens - sortByField()', () => {
       horario: '06:00'
     });
     const passagens = [passagem1, passagem2];
-    Consulta.sort.field = PesquisaPassagensField.SAIDA;
-    expect(sortByField(passagens)[0].horario).toBe('06:00');
+    const mockSort = {
+      field: PesquisaPassagensField.SAIDA,
+      direction: true
+    }
+    expect(sortByFieldEx(passagens, mockSort)[0].horario).toBe('06:00');
   });
 });
 
 describe('PesquisaPassagens - getGlyph()', () => {
   it('retorna null se field não está sendo pesquisado', () => {
-    Consulta.sort.field = PesquisaPassagensField.COMPRA;
-    expect(getGlyph(PesquisaPassagensField.LINHA)).toBeNull();
+
+    const wrapper = shallow(
+      <PesquisaPassagens store={store} />
+    );
+
+    const mockSort = {
+      field: PesquisaPassagensField.COMPRA,
+      direction: true
+    }
+
+    expect(getGlyphEx(PesquisaPassagensField.LINHA, mockSort)).toBeNull();
   });
 
   it('retorna null se field vazio', () => {
-    expect(getGlyph('')).toBeNull();
+    expect(getGlyphEx('', null)).toBeNull();
   });
 
   it('retorna null se field invalido', () => {
-    expect(getGlyph('INVALID_FIELD')).toBeNull();
+    expect(getGlyphEx('INVALID_FIELD', null)).toBeNull();
   });
 
   it('retorna gliph se field é igual', () => {
-    Consulta.sort.field = PesquisaPassagensField.COMPRA;
-    Consulta.sort.direction = false;
-    expect(getGlyph(PesquisaPassagensField.COMPRA))
+    const mockSort = {
+      field: PesquisaPassagensField.COMPRA,
+      direction: false
+    };
+
+    expect(getGlyphEx(PesquisaPassagensField.COMPRA, mockSort))
       .toEqual(<Glyphicon bsClass="glyphicon" className="th-icon" glyph="sort-by-attributes-alt" />);
   });
 });
