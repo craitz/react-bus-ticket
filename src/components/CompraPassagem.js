@@ -21,15 +21,6 @@ const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
 
-const buttonComprar = () =>
-  <Button type="submit" bsStyle="primary" className="btn-google-blue">
-    <FontAwesome name="check"></FontAwesome>
-    <span className="text-after-icon hidden-xs">Finalizar compra</span>
-    <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
-  </Button>
-
-const ButtonWithLoading = withLoading(buttonComprar);
-
 const helper = {
   mapPassagemToFirebase(passagem) {
     return {
@@ -60,6 +51,125 @@ const helper = {
       });
     });
   }
+};
+
+const buttonComprar = () =>
+  <Button type="submit" bsStyle="primary" className="btn-google-blue">
+    <FontAwesome name="check"></FontAwesome>
+    <span className="text-after-icon hidden-xs">Finalizar compra</span>
+    <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
+  </Button>
+
+const ButtonWithLoading = withLoading(buttonComprar);
+
+export const FormComprar = ({props}) => {
+  const { 
+    cidades, 
+    horarios, 
+    poltronas, 
+    passagem } = props.fields;
+  const { 
+    handleChangeNome, 
+    handleChangeCpf, 
+    handleChangeOrigem, 
+    handleChangeDestino,
+    handleChangeData,
+    handleChangeHorario,
+    handleChangePoltrona,
+    handleSubmit
+   } = props.handlers;
+  const { 
+    nome, 
+    cpf, 
+    origem, 
+    destino, 
+    data, 
+    horario, 
+    poltrona } = passagem;
+
+  return (  
+    <form onSubmit={handleSubmit}>
+      {/*NOME / CPF*/}
+      <Row className="text-left first">
+        <Col sm={8}>
+          <InputField
+            id="nome"
+            label="Nome*"
+            type="text"
+            value={nome.text}
+            onChange={handleChangeNome}
+            validation={nome.validation}
+            message={nome.message} />
+        </Col>
+        <Col sm={4}>
+          <InputMaskField
+            id="cpf"
+            label="CPF*"
+            mask="111.111.111-11"
+            value={cpf.text}
+            onChange={handleChangeCpf}
+            validation={cpf.validation}
+            message={cpf.message} />
+        </Col>
+      </Row>
+      {/*ORIGEM / DESTINO*/}
+      <Row className="text-left">
+        <Col md={6} className="input-col">
+          <SelectField
+            id="origem"
+            label="Origem"
+            list={cidades}
+            value={origem.val}
+            onChange={handleChangeOrigem} />
+        </Col>
+        <Col md={6} className="input-col">
+          <SelectField
+            id="destino"
+            label="Destino"
+            list={cidades}
+            value={destino.val}
+            onChange={handleChangeDestino} />
+        </Col>
+      </Row>
+      {/*DATA / HORARIO*/}
+      <Row className="text-left">
+        <Col md={6} className="input-col">
+          <DateField
+            id="data"
+            label="Data"
+            value={data}
+            onChange={handleChangeData} />
+        </Col>
+        <Col md={6} className="input-col">
+          <SelectField
+            id="horario"
+            label="Horário"
+            list={horarios}
+            value={horario.val}
+            onChange={handleChangeHorario}
+            emptyMessage="Não há mais saídas neste dia" />
+        </Col>
+      </Row>
+      {/*POLTRONA*/}
+      <Row className="text-left">
+        <Col md={12} className="input-col">
+          <MultiSelectField
+            id="poltrona"
+            label="Poltrona(s)*"
+            list={poltronas}
+            value={poltrona.value}
+            onChange={handleChangePoltrona}
+            validation={poltrona.validation}
+            message={poltrona.message}
+            emptyMessage="Não há mais saídas neste dia" />
+        </Col>
+      </Row>
+      <hr />
+      <div className="text-right">
+        <ButtonWithLoading />
+      </div>
+    </form >
+  )
 };
 
 export class CompraPassagem extends Component {
@@ -486,11 +596,27 @@ export class CompraPassagem extends Component {
 
 
   render() {
-    const { cidades, horarios, poltronas, passagem } = this.props;
-    const { nome, cpf, poltrona } = passagem;
-
     if (!this.canRender) {
       return null;
+    }
+
+    const formComprarProps = {
+      fields: {
+        cidades: this.props.cidades,
+        horarios: this.props.horarios,
+        poltronas: this.props.poltronas,
+        passagem: this.props.passagem
+      },
+      handlers: {
+        handleChangeNome: this.handleChangeNome, 
+        handleChangeCpf: this.handleChangeCpf, 
+        handleChangeOrigem: this.handleChangeOrigem, 
+        handleChangeDestino: this.handleChangeDestino,
+        handleChangeData: this.handleChangeData,
+        handleChangeHorario: this.handleChangeHorario,
+        handleChangePoltrona: this.handleChangePoltrona,
+        handleSubmit: this.handleSubmit
+      }
     }
 
     return (
@@ -520,93 +646,7 @@ export class CompraPassagem extends Component {
                 <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>
               </Col>
               <Jumbotron>
-                <form onSubmit={this.handleSubmit}>
-
-                  {/*NOME / CPF*/}
-                  <Row className="text-left first">
-                    <Col sm={8}>
-                      <InputField
-                        id="nome"
-                        label="Nome*"
-                        type="text"
-                        value={nome.text}
-                        onChange={this.handleChangeNome}
-                        validation={nome.validation}
-                        message={nome.message} />
-                    </Col>
-                    <Col sm={4}>
-                      <InputMaskField
-                        id="cpf"
-                        label="CPF*"
-                        mask="111.111.111-11"
-                        value={cpf.text}
-                        onChange={this.handleChangeCpf}
-                        validation={cpf.validation}
-                        message={cpf.message} />
-                    </Col>
-                  </Row>
-
-
-                  {/*ORIGEM / DESTINO*/}
-                  <Row className="text-left">
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="origem"
-                        label="Origem"
-                        list={cidades}
-                        value={passagem.origem.val}
-                        onChange={this.handleChangeOrigem} />
-                    </Col>
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="destino"
-                        label="Destino"
-                        list={cidades}
-                        value={passagem.destino.val}
-                        onChange={this.handleChangeDestino} />
-                    </Col>
-                  </Row>
-
-                  {/*DATA / HORARIO*/}
-                  <Row className="text-left">
-                    <Col md={6} className="input-col">
-                      <DateField
-                        id="data"
-                        label="Data"
-                        value={passagem.data}
-                        onChange={this.handleChangeData} />
-                    </Col>
-                    <Col md={6} className="input-col">
-                      <SelectField
-                        id="horario"
-                        label="Horário"
-                        list={horarios}
-                        value={passagem.horario.val}
-                        onChange={this.handleChangeHorario}
-                        emptyMessage="Não há mais saídas neste dia" />
-                    </Col>
-                  </Row>
-
-                  {/*POLTRONA*/}
-                  <Row className="text-left">
-                    <Col md={12} className="input-col">
-                      <MultiSelectField
-                        id="poltrona"
-                        label="Poltrona(s)*"
-                        list={poltronas}
-                        value={passagem.poltrona.value}
-                        onChange={this.handleChangePoltrona}
-                        validation={poltrona.validation}
-                        message={poltrona.message}
-                        emptyMessage="Não há mais saídas neste dia" />
-                    </Col>
-                  </Row>
-
-                  <hr />
-                  <div className="text-right">
-                    <ButtonWithLoading />
-                  </div>
-                </form >
+                <FormComprar props={formComprarProps}/>
               </Jumbotron>
             </Col>
           </DivAnimated>

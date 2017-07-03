@@ -53,7 +53,6 @@ describe('LoginInputGroup', () => {
     expect(props.onChange).toHaveBeenCalledTimes(1);
     expect(props.onChange).toHaveBeenCalledWith(event);
   });
-
 });
 
 describe('ButtonLogin', () => {
