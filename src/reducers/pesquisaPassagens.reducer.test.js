@@ -26,4 +26,12 @@ describe('pesquisaPassagens reducer', () => {
       payload: [1, 2, 3, 4, 5]
     })).toEqual(changePassagemAfterState);
   });
+
+  it('deve mudar as passagens', () => {
+    expect(reducer(initialState, {
+      type: PesquisaPassagensActionType.SET_PASSAGENS,
+      payload: [1, 2, 3, 4, 5]
+    })).toEqual(changePassagemAfterState);
+  });
+
 });

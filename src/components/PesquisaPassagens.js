@@ -24,197 +24,11 @@ import FontAwesome from 'react-fontawesome';
 
 export const totalPageItems = 12;
 
-export let Consulta = {
-  sort: {
-    field: '',
-    direction: true
-  },
-  filter: {
-    nome: '',
-    compra: '',
-    linha: '',
-    saida: '',
-    poltrona: ''
-  },
-  activePage: 1,
-  page: []
-}
-
-// TESTADO
-export const getGlyph = (field) => {
-  const { sort } = Consulta;
-  console.log(sort.field);
-  if ((field.length > 0) && (sort.field === field)) {
-    return (
-      <Glyphicon
-        glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
-        className="th-icon"
-      />
-    );
-  } else {
-    return null;
-  }
-}
-
-export const sortByField = (passagensBackup) => {
-  if (!passagensBackup) {
-    return [];
-  }
-
-  const { sort } = Consulta;
-  const passagensOrdenadas = utils.arrayDeepCopy(passagensBackup);
-
-  passagensOrdenadas.sort((a, b) => {
-    let objA = '';
-    let objB = '';
-
-    switch (sort.field) {
-      case utils.PesquisaPassagensField.LINHA: {
-        objA = a.origem.concat(a.destino);
-        objB = b.origem.concat(b.destino);
-        break;
-      }
-      case utils.PesquisaPassagensField.SAIDA: {
-        objA = utils.buildIsoDate(a.data, a.horario);
-        objB = utils.buildIsoDate(b.data, b.horario);
-        break;
-      }
-      case utils.PesquisaPassagensField.COMPRA: {
-        objA = a.dataCompra;
-        objB = b.dataCompra;
-        break;
-      }
-      case utils.PesquisaPassagensField.NOME: {
-        objA = a.nome;
-        objB = b.nome;
-        break;
-      }
-      default: {
-      }
-    }
-
-    if (sort.direction) {
-      if (objA > objB) {
-        return 1;
-      }
-      if (objA < objB) {
-        return -1;
-      }
-      return 0;
-    } else {
-      if (objA < objB) {
-        return 1;
-      }
-      if (objA > objB) {
-        return -1;
-      }
-      return 0;
-    }
-  });
-
-  return passagensOrdenadas;
-}
-
-export const filtraPassagens = (passagensComOrdenacao) => {
-  if (!passagensComOrdenacao) {
-    return [];
-  }
-
-  const { filter } = Consulta;
-  const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
-    const nome = passagem.nome.toLowerCase();
-    const compra = passagem.dataCompra;
-    const saida = passagem.data.concat(passagem.horario);
-    const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
-    const poltronas = passagem.poltrona.split(' - ');
-    let include = true;
-
-    if (filter.nome.length > 0) {
-      include = include && (nome.includes(filter.nome));
-    }
-
-    if (filter.compra.length > 0) {
-      include = include && (compra.includes(filter.compra));
-    }
-
-    if (filter.linha.length > 0) {
-      include = include && (linha.includes(filter.linha));
-    }
-
-    if (filter.saida.length > 0) {
-      include = include && (saida.includes(filter.saida));
-    }
-
-    if (filter.poltrona.length > 0) {
-      const poltronasFiltro = filter.poltrona.split(',');
-
-      include = include &&
-        poltronas.find((poltrona) => {
-          return poltronasFiltro.includes(poltrona);
-        });
-    }
-
-    return include;
-  });
-
-  return passagensFiltradas;
-}
-
-export const resetConsulta = () => {
-  Consulta = {
-    sort: {
-      field: '',
-      direction: true
-    },
-    filter: {
-      nome: '',
-      compra: '',
-      linha: '',
-      saida: '',
-      poltrona: ''
-    },
-    activePage: 1,
-    page: []
-  }
-}
-
-export const getTotalPages = (passagens) => {
-  if (!passagens || (passagens.length === 0)) {
-    return 0;
-  }
-
-  const total = passagens.length;
-  const quot = parseInt((total / totalPageItems), 10);
-  const rest = total % totalPageItems
-  return (rest > 0) ? (quot + 1) : quot;
-}
-
-export const setPage = (passagemOrdenadaFiltrada) => {
-  if (!passagemOrdenadaFiltrada || (passagemOrdenadaFiltrada.length === 0)) {
-    Consulta.activePage = 0;
-    Consulta.page = [];
-    return;
-  }
-
-  const total = getTotalPages(passagemOrdenadaFiltrada);
-
-  if (Consulta.activePage === 0) {
-    Consulta.activePage = 1;
-  } else if (Consulta.activePage > total) {
-    Consulta.activePage = total;
-  }
-
-  const start = (Consulta.activePage - 1) * totalPageItems;
-  const end = Consulta.activePage * totalPageItems;
-  Consulta.page = utils.arrayDeepCopy(passagemOrdenadaFiltrada.slice(start, end));
-}
-
-const TableHeader = ({ className, label, onClick, field }) =>
+const TableHeader = ({ className, label, onClick, sortIcon }) =>
   <th className={className}>
     <span onClick={onClick}>{label}</span>
-    {getGlyph(field)}
+    {sortIcon}
   </th>
-
 
 const TableColFilter = ({ tooltip, value, onChange }) =>
   <td>
@@ -241,6 +55,166 @@ class PesquisaPassagens extends Component {
     this.passagensBackup = [];
   }
 
+  getGlyph(field) {
+    const { sort } = this.props.consulta;
+    if ((field.length > 0) && (sort.field === field)) {
+      return (
+        <Glyphicon
+          glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
+          className="th-icon"
+        />
+      );
+    } else {
+      return null;
+    }
+  }
+
+  sortByField() {
+    if (!this.passagensBackup) {
+      return [];
+    }
+
+    const { sort } = this.props.consulta;
+    const passagensOrdenadas = utils.arrayDeepCopy(this.passagensBackup);
+
+    if (sort.field.length === 0) {
+      return passagensOrdenadas;
+    }
+
+    passagensOrdenadas.sort((a, b) => {
+      let objA = '';
+      let objB = '';
+
+      switch (sort.field) {
+        case utils.PesquisaPassagensField.LINHA: {
+          objA = a.origem.concat(a.destino);
+          objB = b.origem.concat(b.destino);
+          break;
+        }
+        case utils.PesquisaPassagensField.SAIDA: {
+          objA = utils.buildIsoDate(a.data, a.horario);
+          objB = utils.buildIsoDate(b.data, b.horario);
+          break;
+        }
+        case utils.PesquisaPassagensField.COMPRA: {
+          objA = a.dataCompra;
+          objB = b.dataCompra;
+          break;
+        }
+        case utils.PesquisaPassagensField.NOME: {
+          objA = a.nome;
+          objB = b.nome;
+          break;
+        }
+        default: {
+        }
+      }
+
+      if (sort.direction) {
+        if (objA > objB) {
+          return 1;
+        }
+        if (objA < objB) {
+          return -1;
+        }
+        return 0;
+      } else {
+        if (objA < objB) {
+          return 1;
+        }
+        if (objA > objB) {
+          return -1;
+        }
+        return 0;
+      }
+    });
+
+    return passagensOrdenadas;
+  }
+
+  filtraPassagens(passagensComOrdenacao) {
+    if (!passagensComOrdenacao) {
+      return [];
+    }
+
+    const { filter } = this.props.consulta;
+    const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
+      const nome = passagem.nome.toLowerCase();
+      const compra = passagem.dataCompra;
+      const saida = passagem.data.concat(passagem.horario);
+      const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
+      const poltronas = passagem.poltrona.split(' - ');
+      let include = true;
+
+      if (filter.nome.length > 0) {
+        include = include && (nome.includes(filter.nome));
+      }
+
+      if (filter.compra.length > 0) {
+        include = include && (compra.includes(filter.compra));
+      }
+
+      if (filter.linha.length > 0) {
+        include = include && (linha.includes(filter.linha));
+      }
+
+      if (filter.saida.length > 0) {
+        include = include && (saida.includes(filter.saida));
+      }
+
+      if (filter.poltrona.length > 0) {
+        const poltronasFiltro = filter.poltrona.split(',');
+
+        include = include &&
+          poltronas.find((poltrona) => {
+            return poltronasFiltro.includes(poltrona);
+          });
+      }
+
+      return include;
+    });
+
+    return passagensFiltradas;
+  }
+
+  getTotalPages(passagens) {
+    if (!passagens || (passagens.length === 0)) {
+      return 0;
+    }
+
+    const total = passagens.length;
+    const quot = parseInt((total / totalPageItems), 10);
+    const rest = total % totalPageItems
+    return (rest > 0) ? (quot + 1) : quot;
+  }
+
+  buildPage(passagemOrdenadaFiltrada) {
+    const { dispatch, consulta } = this.props;
+    const { activePage } = consulta;
+    let newActivePage = activePage;
+
+    if (!passagemOrdenadaFiltrada || (passagemOrdenadaFiltrada.length === 0)) {
+      dispatch(actions.setActivePage(0));
+      dispatch(actions.setPage([]));
+      return;
+    }
+
+    const total = this.getTotalPages(passagemOrdenadaFiltrada);
+
+    if (activePage === 0) {
+      newActivePage = 1;
+    } else if (activePage > total) {
+      newActivePage = total;
+    }
+
+    const start = (newActivePage - 1) * totalPageItems;
+    const end = newActivePage * totalPageItems;
+    const newPage = utils.arrayDeepCopy(passagemOrdenadaFiltrada.slice(start, end));
+
+    dispatch(actions.setActivePage(newActivePage));
+    dispatch(actions.setPage(newPage));
+  }
+
   componentWillMount() {
     const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
     const ref = `passagens/${emailFirebase}`;
@@ -249,20 +223,27 @@ class PesquisaPassagens extends Component {
       const passagensArray = utils.objToArray(passagensObj);
       this.passagensBackup = utils.arrayDeepCopy(passagensArray);
       this.handleReset();
-      this.aplicaPesqusia();
-      this.forceUpdate();
     });
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return true;
+  // }
+
   handleSelectPage(eventKey) {
-    Consulta.activePage = eventKey;
-    setPage(this.props.passagens);
-    this.forceUpdate();
+    const { passagens, dispatch } = this.props;
+
+    dispatch(actions.setActivePageThunk(eventKey))
+      .then(() => {
+        this.buildPage(passagens);
+      });
   }
 
   handleReset() {
-    resetConsulta();
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.resetConsultaThunk())
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   handleComprarPassagem(event) {
@@ -271,110 +252,125 @@ class PesquisaPassagens extends Component {
   }
 
   aplicaPesqusia() {
-    const arrSorted = sortByField(this.passagensBackup);
-    const arrSortedFiltered = filtraPassagens(arrSorted);
-    setPage(arrSortedFiltered);
+    const arrSorted = this.sortByField();
+    const arrSortedFiltered = this.filtraPassagens(arrSorted);
+    this.buildPage(arrSortedFiltered);
     this.props.dispatch(actions.setPassagens(arrSortedFiltered));
   }
 
   handleClickNome(event) {
-    const { sort } = Consulta;
-    if (sort.field === utils.PesquisaPassagensField.NOME) {
-      sort.direction = !sort.direction;
-    } else {
-      sort.field = utils.PesquisaPassagensField.NOME;
-      sort.direction = true;
-    }
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
 
-    this.aplicaPesqusia();
+    if (sort.field === utils.PesquisaPassagensField.NOME) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.NOME, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
   }
 
   handleClickDataCompra(event) {
-    const { sort } = Consulta;
-    if (sort.field === utils.PesquisaPassagensField.COMPRA) {
-      sort.direction = !sort.direction;
-    } else {
-      sort.field = utils.PesquisaPassagensField.COMPRA;
-      sort.direction = true;
-    }
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
 
-    this.aplicaPesqusia();
+    if (sort.field === utils.PesquisaPassagensField.COMPRA) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.COMPRA, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
   }
 
   handleClickLinha(event) {
-    const { sort } = Consulta;
-    if (sort.field === utils.PesquisaPassagensField.LINHA) {
-      sort.direction = !sort.direction;
-    } else {
-      sort.field = utils.PesquisaPassagensField.LINHA;
-      sort.direction = true;
-    }
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
 
-    this.aplicaPesqusia();
+    if (sort.field === utils.PesquisaPassagensField.LINHA) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.LINHA, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
   }
 
   handleClickSaida(event) {
-    const { sort } = Consulta;
-    if (sort.field === utils.PesquisaPassagensField.SAIDA) {
-      sort.direction = !sort.direction;
-    } else {
-      sort.field = utils.PesquisaPassagensField.SAIDA;
-      sort.direction = true;
-    }
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
 
-    this.aplicaPesqusia();
+    if (sort.field === utils.PesquisaPassagensField.SAIDA) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.SAIDA, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
   }
 
   handleChangeFilterNome(event) {
-    const { filter } = Consulta;
     const value = event.target.value.toLowerCase();
-
-    filter.nome = value;
-
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.setFilterNomeThunk(value))
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   handleChangeFilterDataCompra(event) {
-    const { filter } = Consulta;
     const value = event.target.value;
-
-    filter.compra = value;
-
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.setFilterCompraThunk(value))
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   handleChangeFilterLinha(event) {
-    const { filter } = Consulta;
     const value = event.target.value.toLowerCase();
-
-    filter.linha = value;
-
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.setFilterLinhaThunk(value))
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   handleChangeFilterSaida(event) {
-    const { filter } = Consulta;
     const value = event.target.value;
-
-    filter.saida = value;
-
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.setFilterSaidaThunk(value))
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   handleChangeFilterPoltrona(event) {
-    const { filter } = Consulta;
     const value = event.target.value;
-
-    filter.poltrona = value;
-
-    this.aplicaPesqusia();
+    this.props.dispatch(actions.setFilterPoltronaThunk(value))
+      .then(() => {
+        this.aplicaPesqusia();
+      });
   }
 
   render() {
-    const { passagens } = this.props;
-    const { filter, activePage, page } = Consulta;
+    const { passagens, consulta } = this.props;
+    const { filter, activePage, page } = consulta;
     const fields = utils.PesquisaPassagensField;
-    const totalPages = getTotalPages(passagens);
+    const totalPages = this.getTotalPages(passagens);
 
     return (
       <div className="pesquisar-passagens-container">
@@ -416,25 +412,25 @@ class PesquisaPassagens extends Component {
                       className="th-nome"
                       onClick={this.handleClickNome}
                       label="Nome"
-                      field={fields.NOME}
+                      sortIcon={this.getGlyph(fields.NOME)}
                     />
                     <TableHeader
                       className="th-data-compra"
                       onClick={this.handleClickDataCompra}
                       label="Data da compra"
-                      field={fields.COMPRA}
+                      sortIcon={this.getGlyph(fields.COMPRA)}
                     />
                     <TableHeader
                       className="th-linha"
                       onClick={this.handleClickLinha}
                       label="Linha"
-                      field={fields.LINHA}
+                      sortIcon={this.getGlyph(fields.LINHA)}
                     />
                     <TableHeader
                       className="th-saida"
                       onClick={this.handleClickSaida}
                       label="Saída"
-                      field={fields.SAIDA}
+                      sortIcon={this.getGlyph(fields.SAIDA)}
                     />
                     <th>Poltrona(s)</th>
                   </tr>
@@ -507,6 +503,7 @@ class PesquisaPassagens extends Component {
 const mapStateToProps = (state) => {
   return {
     passagens: state.pesquisaPassagensState.passagens,
+    consulta: state.pesquisaPassagensState.consulta
   };
 };
 
