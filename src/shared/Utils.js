@@ -17,7 +17,13 @@ export const LoginFields = {
   SENHA: 'senha'
 }
 
-export const arrayDeepCopy = (array) => {
+export const PoltronaStatus = {
+  RESERVED: 'reserved',
+  SELECTED: 'selected',
+  FREE: 'free'
+}
+
+export const deepCopy = (array) => {
   return JSON.parse(JSON.stringify(array));
 }
 

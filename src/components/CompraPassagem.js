@@ -14,6 +14,7 @@ import { withLoading } from '../shared/hoc';
 import { setLoading } from '../actions/withLoading.actions';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
+import moment from 'moment';
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -76,6 +77,7 @@ export const FormComprar = ({ props }) => {
     handleChangeData,
     handleChangeHorario,
     handleChangePoltrona,
+    handleClickSeat,
     handleSubmit
    } = props.handlers;
   const {
@@ -137,7 +139,7 @@ export const FormComprar = ({ props }) => {
           <DateField
             id="data"
             label="Data"
-            value="2016-11-19T12:00:00.000Z"
+            value={data}
             onChange={handleChangeData} />
         </Col>
         <Col md={6} className="input-col">
@@ -159,6 +161,7 @@ export const FormComprar = ({ props }) => {
             list={poltronas}
             value={poltrona.value}
             onChange={handleChangePoltrona}
+            onClickSeat={handleClickSeat}
             validation={poltrona.validation}
             message={poltrona.message}
             emptyMessage="Não há mais saídas neste dia" />
@@ -184,8 +187,58 @@ export class CompraPassagem extends Component {
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
+    this.handleClickSeat = this.handleClickSeat.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
+  }
+
+  addPoltronaToSelect(current, value) {
+    return (current.length === 0) ? value.toString() : `${current},${value}`;
+  }
+
+  removePoltronaFromSelect(current, value) {
+    const count = current.match(',');
+    const maisDeUma = count && (count.length > 0);
+
+    if (maisDeUma) {
+      const array = current.split(',');
+      const index = array.findIndex((item) => {
+        return item.toString() === value.toString();
+      });
+      if (index >= 0) {
+        array.splice(index, 1);
+      }
+
+      return array.join();
+    } else {
+      return '';
+    }
+  }
+
+  handleClickSeat(seat) {
+    const { dispatch, poltronas, passagem } = this.props;
+
+    // se a poltrona já está ocupada, não faz nada
+    if (poltronas[seat].status === utils.PoltronaStatus.RESERVED) {
+      return;
+    }
+
+    console.log('ere');
+
+    const newPoltronas = utils.deepCopy(poltronas);
+    const currentValue = passagem.poltrona.value;
+    let newPoltronaVal = '';
+
+    if (newPoltronas[seat].status === utils.PoltronaStatus.FREE) {
+      newPoltronas[seat].status = utils.PoltronaStatus.SELECTED;
+      newPoltronaVal = this.addPoltronaToSelect(currentValue, seat);
+    } else if (newPoltronas[seat].status === utils.PoltronaStatus.SELECTED) {
+      newPoltronas[seat].status = utils.PoltronaStatus.FREE;
+      newPoltronaVal = this.removePoltronaFromSelect(currentValue, seat);
+    }
+
+    dispatch(actions.setPoltronas(newPoltronas));
+    dispatch(actions.changePoltrona(newPoltronaVal));
   }
 
   componentDidMount() {
@@ -216,7 +269,11 @@ export class CompraPassagem extends Component {
     // então desabilita as poltronas e retorna
     if (horario.length === 0) {
       const newPoltronas = todasPoltronas.map((poltrona) => {
-        return { ...poltrona, disabled: true };
+        return {
+          ...poltrona,
+          disabled: true,
+          status: utils.PoltronaStatus.RESERVED
+        };
       });
       dispatch(actions.setPoltronas(newPoltronas));
       dispatch(actions.changePoltrona(''));
@@ -234,7 +291,12 @@ export class CompraPassagem extends Component {
       .then((keys) => { // desabilta as que foram encontradas
         const poltronasLivres = todasPoltronas.map((poltrona, index, arr) => {
           const numeroPoltrona = Number(arr[poltrona.value].label);
-          return { ...poltrona, disabled: (keys.includes(numeroPoltrona)) };
+          const isDisabled = keys.includes(numeroPoltrona);
+          return {
+            ...poltrona,
+            disabled: isDisabled,
+            status: isDisabled ? utils.PoltronaStatus.RESERVED : utils.PoltronaStatus.FREE
+          };
         });
         dispatch(actions.setPoltronas(poltronasLivres));
         dispatch(actions.changePoltrona(''));
@@ -299,6 +361,8 @@ export class CompraPassagem extends Component {
       val: 0,
       text: cidades[0]
     }));
+
+    dispatch(actions.changeData(moment().format('DD/MM/YYYY')));
 
     // initialize DESTINO values
     dispatch(actions.changeDestino({
@@ -434,10 +498,47 @@ export class CompraPassagem extends Component {
     }
   }
 
+  updateStatusPoltronas(oldValue, newValue) {
+    const { dispatch, passagem } = this.props;
+    const hasSelection = (newValue.length > 0);
+    const newPoltronas = utils.deepCopy(this.props.poltronas);
+    const arrayNew = newValue.split(',');
+    const arrayOld = oldValue.split(',');
+
+    if (hasSelection) {
+      const diffNewToOld = arrayNew.filter((item) => {
+        return !arrayOld.includes(item);
+      });
+
+      if (diffNewToOld.length > 0) {
+        const index = diffNewToOld[0];
+        newPoltronas[index].status = utils.PoltronaStatus.SELECTED; // adiciona
+      } else {
+        const diffOldToNew = arrayOld.filter((item) => {
+          return !arrayNew.includes(item);
+        })
+
+        if (diffOldToNew.length > 0) {
+          const index = diffOldToNew[0];
+          newPoltronas[index].status = utils.PoltronaStatus.FREE; // remove
+        }
+      }
+    } else {
+      arrayOld.map((item) => {
+        newPoltronas[item].status = utils.PoltronaStatus.FREE;
+        return item;
+      });
+    }
+
+    dispatch(actions.setPoltronas(newPoltronas));
+
+    return hasSelection;
+  }
+
   handleChangePoltrona(value) {
     const { dispatch, passagem } = this.props;
-    const hasSelection = (value.length > 0);
     const isPristine = passagem.poltrona.isPristine;
+    const hasSelection = this.updateStatusPoltronas(passagem.poltrona.value, value);
 
     // altera poltrona e seta como 'dirty'
     dispatch(actions.changePoltrona(value));
@@ -476,10 +577,13 @@ export class CompraPassagem extends Component {
 
   handleChangeData(value) {
     const { dispatch, passagem } = this.props;
+    const data = value.format('DD/MM/YYYY');
     const { origem, destino } = passagem;
-    dispatch(actions.changeData(value));
-    const newHorario = this.updateHorarios(value);
-    this.updatePoltronas(origem.text, destino.text, value, newHorario);
+
+    dispatch(actions.changeData(data));
+
+    const newHorario = this.updateHorarios(data);
+    this.updatePoltronas(origem.text, destino.text, data, newHorario);
   }
 
   formCanBeSaved() {
@@ -615,6 +719,7 @@ export class CompraPassagem extends Component {
         handleChangeData: this.handleChangeData,
         handleChangeHorario: this.handleChangeHorario,
         handleChangePoltrona: this.handleChangePoltrona,
+        handleClickSeat: this.handleClickSeat,
         handleSubmit: this.handleSubmit
       }
     }

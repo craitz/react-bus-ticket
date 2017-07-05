@@ -55,7 +55,7 @@ export const sortByFieldEx = (passagensBackup, sort) => {
     return [];
   }
 
-  const passagensOrdenadas = utils.arrayDeepCopy(passagensBackup);
+  const passagensOrdenadas = utils.deepCopy(passagensBackup);
 
   if (!sort || (sort.field.length === 0)) {
     return passagensOrdenadas;
@@ -218,7 +218,7 @@ export class PesquisaPassagens extends Component {
 
     const start = (newActivePage - 1) * totalPageItems;
     const end = newActivePage * totalPageItems;
-    const newPage = utils.arrayDeepCopy(passagemOrdenadaFiltrada.slice(start, end));
+    const newPage = utils.deepCopy(passagemOrdenadaFiltrada.slice(start, end));
 
     dispatch(actions.setActivePage(newActivePage));
     dispatch(actions.setPage(newPage));
@@ -230,7 +230,7 @@ export class PesquisaPassagens extends Component {
 
     firebaseHelper.fetch(ref).then((passagensObj) => {
       const passagensArray = utils.objToArray(passagensObj);
-      this.passagensBackup = utils.arrayDeepCopy(passagensArray);
+      this.passagensBackup = utils.deepCopy(passagensArray);
       this.handleReset();
     });
   }

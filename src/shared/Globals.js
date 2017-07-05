@@ -1,5 +1,5 @@
 import { firebaseHelper } from './FirebaseHelper';
-import { SequenceArray } from './Utils';
+import { SequenceArray, PoltronaStatus } from './Utils';
 
 class Globals {
   constructor() {
@@ -15,11 +15,12 @@ class Globals {
       this.horarios = horarios;
     });
 
-    this.poltronas = SequenceArray(42).map((poltrona, index) => {
+    this.poltronas = SequenceArray(44).map((poltrona, index) => {
       return {
-        label: poltrona.toString(),
+        label: poltrona.toString().padStart(2, '0'),
         value: index.toString(),
-        disabled: false
+        disabled: false,
+        status: PoltronaStatus.FREE
       };
     });
   }

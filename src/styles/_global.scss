@@ -9,6 +9,20 @@ $googleBlue: rgb(66, 133, 244);
     src: url(./styles/fonts/Gruppo-Regular.ttf) format('trueType');
 }
 
+@mixin noSelection() {
+    -moz-user-select: -moz-none !important;
+    -khtml-user-select: none !important;
+    -webkit-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+@mixin boxShadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
 @mixin centralizeContent() {
     width: 100%;
     height: 100%;
@@ -37,9 +51,7 @@ $googleBlue: rgb(66, 133, 244);
     position: absolute;
 }
 
-
 // Media Queries - Mobile First
-
 @mixin retina {
     @media screen and (min-width: 320px) {
         @content
