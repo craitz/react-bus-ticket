@@ -11,24 +11,17 @@ class FirebaseHelper {
       storageBucket: "busticket-be05f.appspot.com",
       messagingSenderId: "246935329575"
     });
-
-    this.db = firebase.database();
-    this.user = null;
   }
 
   isLoggedIn() {
-    return (this.user);
-  }
-
-  setUser(user) {
-    this.user = user;
+    return this.getUser();
   }
 
   getUser() {
-    return this.user;
+    return firebase.auth().currentUser;
   }
 
-  login(user, password) {
+  signIn(user, password) {
     let errorMessage = {
       text: '',
       field: ''
@@ -37,7 +30,7 @@ class FirebaseHelper {
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(user, password)
         .then((user) => {
-          this.setUser(user);
+          // this.setUser(user);
           resolve();
         })
         .catch((error) => {
@@ -73,11 +66,11 @@ class FirebaseHelper {
     });
   }
 
-  logout() {
+  signOut() {
     return new Promise((resolve, reject) => {
       firebase.auth().signOut()
         .then(() => {
-          this.setUser(null);
+          // this.setUser(null);
           resolve();
         })
         .catch((error) => {

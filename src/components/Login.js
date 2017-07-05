@@ -125,7 +125,7 @@ export class Login extends Component {
     this.forceUpdate();
 
     if (this.isLoginFormOK()) {
-      firebaseHelper.login(email.text, senha.text)
+      firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
           dispatch(setLoading(false));
           history.push({

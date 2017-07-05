@@ -10,6 +10,7 @@ import CompraPassagem from './components/CompraPassagem';
 import ConfirmaPassagem from './components/ConfirmaPassagem';
 import PesquisaPassagens from './components/PesquisaPassagens';
 import Welcome from './components/Welcome';
+import PerfilUsuario from './components/PerfilUsuario';
 import 'animate.css/animate.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -25,6 +26,7 @@ const runApp = () => {
             <Route exact path="/login" component={Login} />
             <Route path="/passagem/:id" component={ConfirmaPassagem} />
             <Route path="/passagens" component={PesquisaPassagens} />
+            <Route path="/perfil" component={PerfilUsuario} />
             <Route path="/" component={Welcome} />
           </Switch>
         </Layout>

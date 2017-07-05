@@ -17,7 +17,7 @@ NavHeader.PropTypes = {
   glyph: PropTypes.string.isRequired
 }
 
-const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagens, onHome }) =>
+const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagens, onHome, onPerfilUsuario }) =>
   <Navbar.Collapse>
     <Nav>
       <NavItem href="#" onClick={onHome}>
@@ -40,7 +40,7 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
       </Navbar.Link>
     </Navbar.Text>
     <Nav pullRight>
-      <NavItem href="#">
+      <NavItem href="#" onClick={onPerfilUsuario}>
         <FontAwesome name="user"></FontAwesome>
         <span className="text-after-icon hidden-sm hidden-md">{email}</span>
       </NavItem>
@@ -63,14 +63,20 @@ class Navigation extends Component {
     this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
     this.handleHome = this.handleHome.bind(this);
+    this.handlePerfilUsuario = this.handlePerfilUsuario.bind(this);
   }
 
   handleLogout(event) {
     event.preventDefault();
-    firebaseHelper.logout()
+    firebaseHelper.signOut()
       .then(() => {
         this.props.history.push('/login');
       });
+  }
+
+  handlePerfilUsuario(event) {
+    event.preventDefault();
+    this.props.history.push('/perfil');
   }
 
   handleComprarPassagem(event) {
@@ -106,6 +112,7 @@ class Navigation extends Component {
             onComprarPassagem={this.handleComprarPassagem}
             onPesquisarPassagens={this.handlePesquisarPassagens}
             onHome={this.handleHome}
+            onPerfilUsuario={this.handlePerfilUsuario}
           />
         }
       </Navbar>
