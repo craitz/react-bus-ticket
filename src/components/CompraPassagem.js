@@ -40,6 +40,7 @@ const helper = {
     return new Promise((resolve) => {
       const todasPoltronas = globals.getPoltronas();
       const poltronasSelecionadas = poltrona.split(',');
+      poltronasSelecionadas.sort();
       let poltronasFormatadas = '';
 
       poltronasSelecionadas.forEach((poltrona, index, arr) => {
