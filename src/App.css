@@ -314,16 +314,22 @@
     cursor: pointer; }
 
 #bus-seats {
-  max-width: 395px !important; }
+  max-width: 380px !important; }
   #bus-seats .popover-title {
     -moz-user-select: -moz-none !important;
     -khtml-user-select: none !important;
     -webkit-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
-    cursor: pointer; }
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Gruppo';
+    font-size: 1.6rem; }
+  #bus-seats .popover-content {
+    padding-left: 9px;
+    padding-right: 9px; }
   #bus-seats .bus-row {
-    padding: 3px 15px 3px 15px; }
+    padding: 3px 15px 3px 12px; }
     #bus-seats .bus-row .label {
       -moz-user-select: -moz-none !important;
       -khtml-user-select: none !important;
@@ -331,32 +337,49 @@
       -ms-user-select: none !important;
       user-select: none !important;
       background-color: #33b4ff;
-      margin-right: 10px;
-      padding: 2px 4px 2px 4px;
+      -webkit-box-shadow: 5px 0px 0px -1px #0081cc;
+      -moz-box-shadow: 5px 0px 0px -1px #0081cc;
+      box-shadow: 5px 0px 0px -1px #0081cc;
+      margin-right: 8px;
+      padding: 2px 3px 2px 4px;
       font-size: 1.4rem;
-      -webkit-box-shadow: 6px 0px 0px -1px #0081cc;
-      -moz-box-shadow: 6px 0px 0px -1px #0081cc;
-      box-shadow: 6px 0px 0px -1px #0081cc;
       cursor: pointer; }
-      #bus-seats .bus-row .label:hover {
-        background-color: #4285f4; }
       #bus-seats .bus-row .label.reserved {
-        background-color: lightgray;
-        -webkit-box-shadow: 6px 0px 0px -1px #adadad;
-        -moz-box-shadow: 6px 0px 0px -1px #adadad;
-        box-shadow: 6px 0px 0px -1px #adadad;
-        cursor: not-allowed; }
+        cursor: not-allowed;
+        background-color: rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4);
+        box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4); }
       #bus-seats .bus-row .label.selected {
-        background-color: #ffb300;
-        -webkit-box-shadow: 6px 0px 0px -1px #b37d00;
-        -moz-box-shadow: 6px 0px 0px -1px #b37d00;
-        box-shadow: 6px 0px 0px -1px #b37d00; }
+        background-color: #FFB300;
+        -webkit-box-shadow: 5px 0px 0px -1px #cc8f00;
+        -moz-box-shadow: 5px 0px 0px -1px #cc8f00;
+        box-shadow: 5px 0px 0px -1px #cc8f00; }
+      #bus-seats .bus-row .label.legenda {
+        cursor: default; }
     #bus-seats .bus-row.corredor-acima {
       padding-top: 0;
       padding-bottom: 8px; }
     #bus-seats .bus-row.corredor-abaixo {
       padding-top: 8px;
       padding-bottom: 0; }
+    #bus-seats .bus-row.bus-row-legenda {
+      padding-left: 20px;
+      padding-right: 15px; }
+  #bus-seats hr {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  #bus-seats .clean-bus {
+    padding-top: 0;
+    padding-bottom: 0; }
+  #bus-seats .jumbotron {
+    margin-bottom: 0;
+    padding: 8px 15px 8px 10px;
+    border-radius: 3% / 50%;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-left: 10px solid rgba(128, 128, 128, 0.1); }
 
 .btn-google-blue {
   color: white !important;

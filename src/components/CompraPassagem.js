@@ -78,6 +78,7 @@ export const FormComprar = ({ props }) => {
     handleChangeHorario,
     handleChangePoltrona,
     handleClickSeat,
+    handleResetSeats,
     handleSubmit
    } = props.handlers;
   const {
@@ -162,6 +163,7 @@ export const FormComprar = ({ props }) => {
             value={poltrona.value}
             onChange={handleChangePoltrona}
             onClickSeat={handleClickSeat}
+            onResetSeats={handleResetSeats}
             validation={poltrona.validation}
             message={poltrona.message}
             emptyMessage="Não há mais saídas neste dia" />
@@ -188,6 +190,7 @@ export class CompraPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
     this.handleClickSeat = this.handleClickSeat.bind(this);
+    this.handleResetSeats = this.handleResetSeats.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
   }
@@ -223,8 +226,7 @@ export class CompraPassagem extends Component {
       return;
     }
 
-    console.log('ere');
-
+    const isPristine = passagem.poltrona.isPristine;
     const newPoltronas = utils.deepCopy(poltronas);
     const currentValue = passagem.poltrona.value;
     let newPoltronaVal = '';
@@ -239,6 +241,17 @@ export class CompraPassagem extends Component {
 
     dispatch(actions.setPoltronas(newPoltronas));
     dispatch(actions.changePoltrona(newPoltronaVal));
+    isPristine && dispatch(actions.setPoltronaDirty());
+
+    // valida poltrona
+    const hasSelection = (newPoltronaVal.length > 0);
+    this.updatePoltronaValidation(hasSelection);
+
+  }
+
+  handleResetSeats() {
+    const isPristine = this.props.passagem.poltrona.isPristine;
+    !isPristine && this.handleChangePoltrona('');
   }
 
   componentDidMount() {
@@ -501,33 +514,41 @@ export class CompraPassagem extends Component {
   updateStatusPoltronas(oldValue, newValue) {
     const { dispatch, passagem } = this.props;
     const hasSelection = (newValue.length > 0);
+
+    const isNewValueEmpty = (newValue.length === 0);
+    const isOldValueEmpty = (oldValue.length === 0);
+
     const newPoltronas = utils.deepCopy(this.props.poltronas);
     const arrayNew = newValue.split(',');
     const arrayOld = oldValue.split(',');
 
-    if (hasSelection) {
-      const diffNewToOld = arrayNew.filter((item) => {
-        return !arrayOld.includes(item);
-      });
-
-      if (diffNewToOld.length > 0) {
-        const index = diffNewToOld[0];
-        newPoltronas[index].status = utils.PoltronaStatus.SELECTED; // adiciona
-      } else {
-        const diffOldToNew = arrayOld.filter((item) => {
-          return !arrayNew.includes(item);
-        })
-
-        if (diffOldToNew.length > 0) {
-          const index = diffOldToNew[0];
-          newPoltronas[index].status = utils.PoltronaStatus.FREE; // remove
-        }
+    if (isNewValueEmpty) {
+      if (!isOldValueEmpty) {
+        arrayOld.map((item) => {
+          newPoltronas[item].status = utils.PoltronaStatus.FREE;
+          return item;
+        });
       }
     } else {
-      arrayOld.map((item) => {
-        newPoltronas[item].status = utils.PoltronaStatus.FREE;
-        return item;
-      });
+      if (hasSelection) {
+        const diffNewToOld = arrayNew.filter((item) => {
+          return !arrayOld.includes(item);
+        });
+
+        if (diffNewToOld.length > 0) {
+          const index = diffNewToOld[0];
+          newPoltronas[index].status = utils.PoltronaStatus.SELECTED; // adiciona
+        } else {
+          const diffOldToNew = arrayOld.filter((item) => {
+            return !arrayNew.includes(item);
+          })
+
+          if (diffOldToNew.length > 0) {
+            const index = diffOldToNew[0];
+            newPoltronas[index].status = utils.PoltronaStatus.FREE; // remove
+          }
+        }
+      }
     }
 
     dispatch(actions.setPoltronas(newPoltronas));
@@ -720,6 +741,7 @@ export class CompraPassagem extends Component {
         handleChangeHorario: this.handleChangeHorario,
         handleChangePoltrona: this.handleChangePoltrona,
         handleClickSeat: this.handleClickSeat,
+        handleResetSeats: this.handleResetSeats,
         handleSubmit: this.handleSubmit
       }
     }

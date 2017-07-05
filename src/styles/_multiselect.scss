@@ -30,32 +30,47 @@
     .popover-title {
         @include noSelection();
         cursor: pointer;
+        font-weight: bold;
+        font-family: 'Gruppo';
+        font-size: 1.6rem;
     }
-    // .popover-content {
-    //     background-color: rgba(white, .9);
-    // }
-    max-width: 395px !important;
+    .popover-content {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+    max-width: 380px !important;
     .bus-row {
-        padding: 3px 15px 3px 15px;
+        padding: 3px 15px 3px 12px;
+        $colorFree: rgb(51, 180, 255);
+        $colorSelected: #FFB300;
+        $colorReserved: black;
         .label {
             @include noSelection();
-            background-color: rgba(rgb(51, 180, 255), 1);
-            margin-right: 10px;
-            padding: 2px 4px 2px 4px;
+            background-color: $colorFree;
+            @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
+            // background-color: rgba(#4CAF50, .9);
+            // @include boxShadow(6px 0px 0px -1px darken(rgba(#4CAF50, .9), 10%));
+            margin-right: 8px;
+            padding: 2px 3px 2px 4px;
             font-size: 1.4rem;
-            @include boxShadow(6px 0px 0px -1px darken(rgb(0, 161, 255), 10%));
+            // font-weight: 300;
             cursor: pointer;
-            &:hover {
-                background-color: rgba($googleBlue, 1);
-            }
             &.reserved {
-                background-color: rgba(lightgrey, 1);
-                @include boxShadow(6px 0px 0px -1px darken(lightgrey, 15%));
                 cursor: not-allowed;
+                background-color: rgba($colorReserved, .2);
+                @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .4), 20%));
             }
             &.selected {
-                background-color: rgba(#FFB300, 1);
-                @include boxShadow(6px 0px 0px -1px darken(#FFB300, 15%));
+                background-color: $colorSelected;
+                @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
+                // background-color: rgba(#F44336, .9);
+                // @include boxShadow(6px 0px 0px -1px darken(rgba(#F44336, .9), 15%));
+            }
+            &.legenda {
+                // font-weight: bold;
+                // font-family: 'Gruppo';
+                // font-size: 1.6rem;
+                cursor: default;
             }
         }
         &.corredor-acima {
@@ -66,5 +81,26 @@
             padding-top: 8px;
             padding-bottom: 0;
         }
+        &.bus-row-legenda {
+            padding-left: 20px;
+            padding-right: 15px;
+        }
+    }
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .clean-bus {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .jumbotron {
+        margin-bottom: 0;
+        padding: 8px 15px 8px 10px;
+        border-radius: 3% / 50%;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 1px solid rgba(grey, .1);
+        border-left: 10px solid rgba(grey, .1);
     }
 }
