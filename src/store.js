@@ -17,5 +17,4 @@ const configureStore = () => {
   return createStore(reducer, middleware);
 }
 
-
 export default configureStore();

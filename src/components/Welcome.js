@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { withAuth } from '../shared/hoc';
-import { Navbar, Nav, NavItem, Glyphicon, Col, Button, Jumbotron } from 'react-bootstrap';
-import TooltipOverlay from '../shared/TooltipOverlay';
-import { NavHeader } from '../shared/Navigation';
-import FontAwesome from 'react-fontawesome';
+import { Glyphicon, Col, Button, Jumbotron } from 'react-bootstrap';
 import DivAnimated from '../shared/DivAnimated'
+import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 
 export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-center welcome-button">
@@ -36,18 +34,9 @@ class Welcome extends Component {
   render() {
     return (
       <div className="welcome-container">
-        <div className="navheader-container">
-          <Navbar>
-            <NavHeader label="Seja bem-vindo !" glyph="shopping-cart"></NavHeader>
-            <Nav pullRight className="hidden-xs hidden-sm">
-              <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
-                </TooltipOverlay>
-              </NavItem>
-            </Nav>
-          </Navbar>
-        </div>
+        <PageHeader title="Seja bem-vindo !">
+          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
+        </PageHeader>
         <DivAnimated className="text-center info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-left">
             <h1>Introdução</h1>

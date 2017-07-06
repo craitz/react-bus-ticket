@@ -5,6 +5,12 @@ export const ValidationStatus = {
   NONE: null
 };
 
+export const SavingStatus = {
+  SAVING: 'SAVING',
+  FEEDBACK: 'FEEDBACK',
+  DONE: 'DONE'
+};
+
 export const PesquisaPassagensField = {
   NOME: 'nome',
   COMPRA: 'compra',

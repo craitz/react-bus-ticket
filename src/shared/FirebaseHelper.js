@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import { LoginFields } from './Utils';
+import { LoginFields, emailToFirebaseKey } from './Utils';
 
 class FirebaseHelper {
   constructor() {
@@ -17,8 +17,28 @@ class FirebaseHelper {
     return this.getUser();
   }
 
+  setUser(user) {
+    this.user = user;
+  }
+
   getUser() {
-    return firebase.auth().currentUser;
+    return this.user;
+  }
+
+  getUserEmail() {
+    return this.user.email;
+  }
+
+  getFirebaseUserEmail() {
+    return emailToFirebaseKey(this.user.email);
+  }
+
+  getUserName() {
+    return this.user.nome;
+  }
+
+  getUserCpf() {
+    return this.user.cpf;
   }
 
   signIn(user, password) {
@@ -30,8 +50,19 @@ class FirebaseHelper {
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(user, password)
         .then((user) => {
-          // this.setUser(user);
-          resolve();
+          this.fetchUser(`users/${emailToFirebaseKey(user.email)}`)
+            .then((fetchedUser) => {
+              this.setUser({
+                email: user.email,
+                nome: fetchedUser.nome,
+                cpf: fetchedUser.cpf
+              });
+              resolve();
+            })
+            .catch((error) => {
+              console.log(error);
+              this.setUser(null);
+            });
         })
         .catch((error) => {
           if (error.code === 'auth/invalid-email') {
@@ -70,7 +101,7 @@ class FirebaseHelper {
     return new Promise((resolve, reject) => {
       firebase.auth().signOut()
         .then(() => {
-          // this.setUser(null);
+          this.setUser(null);
           resolve();
         })
         .catch((error) => {
@@ -84,6 +115,15 @@ class FirebaseHelper {
     return new Promise((resolve, reject) => {
       db.ref(refPath).on('value', (snap) => {
         resolve(snap.val() || []);
+      });
+    });
+  };
+
+  fetchUser(refPath) {
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(refPath).on('value', (snap) => {
+        resolve(snap.val() || null);
       });
     });
   };
@@ -126,6 +166,24 @@ class FirebaseHelper {
     return new Promise((resolve, reject) => {
       db.ref(refPath).set(data)
         .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  setUserOnFirebase(user) {
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(`users/${this.getFirebaseUserEmail()}`).set(user)
+        .then(() => {
+          this.setUser({
+            ...this.getUser(),
+            nome: user.nome,
+            cpf: user.cpf
+          });
           resolve();
         })
         .catch((error) => {

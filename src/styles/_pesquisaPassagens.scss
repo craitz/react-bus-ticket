@@ -1,9 +1,6 @@
 .pesquisar-passagens-container {
     @include containerHeight();
     .jumbotron {
-        border-radius: 6px;
-        padding: 20px;
-        background-color: rgba(black, .05);
         .icon-table {
             color: rgba(black, .5);
             &.arrow-trajeto {

@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 import compraPassagemState from './compraPassagem.reducer';
 import pesquisaPassagensState from './pesquisaPassagens.reducer';
 import loginState from './login.reducer';
-import withLoadingState from './withLoading.reducer';
+import perfilUsuarioState from './perfilUsuario.reducer';
+import loadingDialogState from './loadingDialog.reducer';
 
 export default combineReducers({
   compraPassagemState,
   pesquisaPassagensState,
   loginState,
-  withLoadingState
+  perfilUsuarioState,
+  loadingDialogState
 });

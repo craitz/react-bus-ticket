@@ -11,6 +11,7 @@
 @import "button";
 @import "withLoading";
 @import "welcome";
+@import "perfilUsuario";
 html {
     height: 100%;
     body {
@@ -33,6 +34,33 @@ html {
         }
         .text-after-icon {
             margin-left: 8px;
+        }
+        .jumbotron {
+            padding: 20px;
+            border-radius: 6px;
+            background-color: rgba(black, .05);
+            border: none;
+            hr {
+                border-color: rgba(0, 0, 0, .1);
+            }
+        }
+        .modal.fade.in {
+            cursor: wait;
+        }
+        .modal-dialog {
+            @include noSelection();
+            font-size: 1.5rem;
+            width: 300px;
+            height: 52px;
+            position: absolute;
+            top: calc(50% - 52px/2);
+            left: calc(50% - 300px/2);
+            .icon-saving {
+                color: $googleBlue;
+            }
+            .icon-feedback {
+                color: green;
+            }
         }
     }
 }

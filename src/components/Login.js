@@ -10,13 +10,12 @@ import {
   Button,
   HelpBlock
 } from 'react-bootstrap';
-import { ValidationStatus, LoginFields } from '../shared/Utils';
+import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
-import { setLoading } from '../actions/withLoading.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
-import { withLoading } from '../shared/hoc';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated';
+import * as loadingActions from '../actions/loadingDialog.actions'
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup>
@@ -25,8 +24,6 @@ export const ButtonLogin = ({ handleLogin }) =>
       <span className="text-after-icon btn-login-lable">Entrar</span>
     </Button>
   </FormGroup>
-
-export const ButtonLoading = withLoading(ButtonLogin);
 
 export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
   <FormGroup controlId={id} validationState={field.validation}>
@@ -46,6 +43,16 @@ export class Login extends Component {
     this.handleChangeSenha = this.handleChangeSenha.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     props.dispatch(actions.resetLogin());
+  }
+
+  componentDidMount() {
+    this.initLoadingDialog();
+  }
+
+  initLoadingDialog() {
+    const { dispatch } = this.props;
+    dispatch(loadingActions.setLoadingMessage('Verificando credenciais...'));
+    dispatch(loadingActions.setLoadingIcon('spinner'));
   }
 
   updateEmailValidation(text) {
@@ -121,17 +128,19 @@ export class Login extends Component {
   handleLogin(event) {
     event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
-    dispatch(setLoading(true));
-    this.forceUpdate();
+
+    dispatch(loadingActions.setStatus(SavingStatus.SAVING));
 
     if (this.isLoginFormOK()) {
       firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
-          dispatch(setLoading(false));
-          history.push({
-            pathname: '/',
-            state: {}
-          });
+          setTimeout(function () {
+            dispatch(loadingActions.setStatus(SavingStatus.DONE));
+            history.push({
+              pathname: '/',
+              state: {}
+            });
+          }, 1000);
         })
         .catch((error) => {
           if (error.field === LoginFields.EMAIL) { // E-MAIL
@@ -139,10 +148,10 @@ export class Login extends Component {
           } else { // SENHA
             dispatch(actions.setLoginSenhaValidation(ValidationStatus.ERROR, error.text));
           }
-          dispatch(setLoading(false));
+          dispatch(loadingActions.setStatus(SavingStatus.DONE));
         });
     } else {
-      dispatch(setLoading(false));
+      dispatch(loadingActions.setStatus(SavingStatus.DONE));
     }
   }
 
@@ -184,7 +193,7 @@ export class Login extends Component {
                 placeholder="Senha"
                 onChange={this.handleChangeSenha}
               />
-              <ButtonLoading handleLogin={this.handleLogin} />
+              <ButtonLogin handleLogin={this.handleLogin} />
             </form>
           </DivAnimated>
         </div>

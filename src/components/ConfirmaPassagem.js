@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Jumbotron,
-  Row,
-  Col,
-  Grid,
-  Nav,
-  Navbar,
-  NavItem,
-  Label
-} from 'react-bootstrap';
-import { NavHeader } from '../shared/Navigation';
-import TooltipOverlay from '../shared/TooltipOverlay';
+import { Jumbotron, Row, Col, Grid, Label } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { withAuth } from '../shared/hoc';
 import DivAnimated from '../shared/DivAnimated'
-import FontAwesome from 'react-fontawesome';
+import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
@@ -39,23 +28,10 @@ class ConfirmaPassagem extends Component {
     const { novaPassagem, key } = this.props.location.state;
     return (
       <div className="confirmacao-passagem">
-        <div className="navheader-container">
-          <Navbar>
-            <NavHeader label="Compra finalizada!" glyph="check"></NavHeader>
-            <Nav pullRight className="hidden-xs">
-              <NavItem href="#">
-                <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
-                </TooltipOverlay>
-              </NavItem>
-              <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Comprar nova passagem" position="top">
-                  <FontAwesome className="icon-title links reset" name="shopping-cart" onClick={this.handleComprarPassagem} />
-                </TooltipOverlay>
-              </NavItem>
-            </Nav>
-          </Navbar>
-        </div>
+        <PageHeader title="Compra finalizada !">
+          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
+          <PageHeaderItem tooltip="Comprar nova passagem" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
+        </PageHeader>
         <DivAnimated className="form-centered">
           <Grid>
             <Row>

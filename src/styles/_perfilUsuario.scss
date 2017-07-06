@@ -1,0 +1,14 @@
+.perfil-usuario-container {
+    @include containerHeight();
+    .jumbotron {
+        margin-top: 15px;
+    }
+    &::after {
+        @include bkgImage();
+    }
+    @include sm {
+        .jumbotron {
+            margin-top: 50px;
+        }
+    }
+}

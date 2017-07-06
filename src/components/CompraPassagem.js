@@ -7,14 +7,12 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Nav, NavItem, Row, Col, Button, Jumbotron } from 'react-bootstrap';
-import TooltipOverlay from '../shared/TooltipOverlay';
-import { NavHeader } from '../shared/Navigation';
-import { withLoading } from '../shared/hoc';
-import { setLoading } from '../actions/withLoading.actions';
+import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
+import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import * as loadingActions from '../actions/loadingDialog.actions'
 
 const InputField = withInput(BaseField);
 const InputMaskField = withInputMask(BaseField);
@@ -28,7 +26,7 @@ const helper = {
       ...passagem,
       nome: passagem.nome.text,
       cpf: passagem.cpf.text,
-      email: firebaseHelper.getUser().email,
+      email: firebaseHelper.getUserEmail(),
       origem: passagem.origem.text,
       destino: passagem.destino.text,
       horario: passagem.horario.text,
@@ -55,41 +53,19 @@ const helper = {
   }
 };
 
-const buttonComprar = () =>
+const ButtonComprar = () =>
   <Button type="submit" bsStyle="primary" className="btn-google-blue">
     <FontAwesome name="check"></FontAwesome>
     <span className="text-after-icon hidden-xs">Finalizar compra</span>
     <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
   </Button>
 
-const ButtonWithLoading = withLoading(buttonComprar);
-
 export const FormComprar = ({ props }) => {
-  const {
-    cidades,
-    horarios,
-    poltronas,
-    passagem } = props.fields;
-  const {
-    handleChangeNome,
-    handleChangeCpf,
-    handleChangeOrigem,
-    handleChangeDestino,
-    handleChangeData,
-    handleChangeHorario,
-    handleChangePoltrona,
-    handleClickSeat,
-    handleResetSeats,
-    handleSubmit
-   } = props.handlers;
-  const {
-    nome,
-    cpf,
-    origem,
-    destino,
-    data,
-    horario,
-    poltrona } = passagem;
+  const { cidades, horarios, poltronas, passagem } = props.fields;
+  const { handleChangeNome, handleChangeCpf, handleChangeOrigem, handleChangeDestino,
+    handleChangeData, handleChangeHorario, handleChangePoltrona, handleClickSeat,
+    handleResetSeats, handleSubmit } = props.handlers;
+  const { nome, cpf, origem, destino, data, horario, poltrona } = passagem;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -172,7 +148,7 @@ export const FormComprar = ({ props }) => {
       </Row>
       <hr />
       <div className="text-right">
-        <ButtonWithLoading />
+        <ButtonComprar />
       </div>
     </form >
   )
@@ -255,8 +231,16 @@ export class CompraPassagem extends Component {
     !isPristine && this.handleChangePoltrona('');
   }
 
+  initLoadingDialog() {
+    const { dispatch } = this.props;
+    dispatch(loadingActions.setLoadingMessage('Salvando dados...'));
+    dispatch(loadingActions.setLoadingIcon('spinner'));
+  }
+
+
   componentDidMount() {
     this.getDefaults();
+    this.initLoadingDialog();
   }
 
   getDefaults() {
@@ -513,7 +497,7 @@ export class CompraPassagem extends Component {
   }
 
   updateStatusPoltronas(oldValue, newValue) {
-    const { dispatch, passagem } = this.props;
+    const { dispatch } = this.props;
     const hasSelection = (newValue.length > 0);
 
     const isNewValueEmpty = (newValue.length === 0);
@@ -653,22 +637,27 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     const { dispatch, passagem, history } = this.props;
 
-    dispatch(setLoading(true));
+    dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
 
     if (this.formCanBeSaved()) {
       this.savePassagem(passagem)
         .then((obj) => {
-          dispatch(setLoading(false));
-          history.push({
-            pathname: `/passagem/${obj.key}`,
-            state: {
-              novaPassagem: obj.novaPassagem,
-              key: obj.key
-            }
-          });
+          setTimeout(function () {
+            dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+            history.push({
+              pathname: `/passagem/${obj.key}`,
+              state: {
+                novaPassagem: obj.novaPassagem,
+                key: obj.key
+              }
+            });
+          }, 1000);
+        })
+        .catch((error) => {
+          dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
         });
     } else {
-      dispatch(setLoading(false));
+      dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
     }
   }
 
@@ -749,23 +738,10 @@ export class CompraPassagem extends Component {
 
     return (
       <div className="comprar-passagem-container">
-        <div className="navheader-container">
-          <Navbar>
-            <NavHeader label="Compre sua passagem" glyph="shopping-cart"></NavHeader>
-            <Nav pullRight className="hidden-xs">
-              <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Ver histórico de compras" position="top">
-                  <FontAwesome className="icon-title links search" name="history" onClick={this.handlePesquisarPassagens} />
-                </TooltipOverlay>
-              </NavItem>
-              <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Limpar campos" position="top">
-                  <FontAwesome className="icon-title links reset" name="eraser" onClick={this.handleReset} />
-                </TooltipOverlay>
-              </NavItem>
-            </Nav>
-          </Navbar>
-        </div>
+        <PageHeader title="Compre sua passagem">
+          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
+          <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
+        </PageHeader>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <Col sm={10} smOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>

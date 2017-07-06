@@ -107,7 +107,7 @@ class Navigation extends Component {
         {
           firebaseHelper.isLoggedIn() &&
           <NavbarCollapse
-            email={firebaseHelper.getUser().email}
+            email={firebaseHelper.getUserEmail()}
             onLgout={this.handleLogout}
             onComprarPassagem={this.handleComprarPassagem}
             onPesquisarPassagens={this.handlePesquisarPassagens}

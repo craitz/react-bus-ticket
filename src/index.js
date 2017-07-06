@@ -11,6 +11,7 @@ import ConfirmaPassagem from './components/ConfirmaPassagem';
 import PesquisaPassagens from './components/PesquisaPassagens';
 import Welcome from './components/Welcome';
 import PerfilUsuario from './components/PerfilUsuario';
+import LoadingDialog from './shared/LoadingDialog';
 import 'animate.css/animate.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -21,6 +22,7 @@ const runApp = () => {
     <Router>
       <Provider store={store}>
         <Layout>
+          <LoadingDialog />
           <Switch>
             <Route exact path="/comprar" component={CompraPassagem} />
             <Route exact path="/login" component={Login} />

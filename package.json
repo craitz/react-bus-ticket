@@ -19,6 +19,7 @@
     "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.10",
     "react-select": "^1.0.0-rc.5",
+    "react-toastr": "^2.8.2",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^4.3.0",

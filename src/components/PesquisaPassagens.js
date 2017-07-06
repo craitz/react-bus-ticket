@@ -6,8 +6,6 @@ import {
   Table,
   NavItem,
   Glyphicon,
-  Navbar,
-  Nav,
   Label,
   Col,
   FormControl,
@@ -15,12 +13,12 @@ import {
   Jumbotron
 } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
-import { NavHeader } from '../shared/Navigation';
 import * as actions from '../actions/pesquisaPassagens.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
 import DivAnimated from '../shared/DivAnimated'
 import FontAwesome from 'react-fontawesome';
+import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 
 export const totalPageItems = 12;
 
@@ -225,7 +223,7 @@ export class PesquisaPassagens extends Component {
   }
 
   componentWillMount() {
-    const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUser().email);
+    const emailFirebase = utils.emailToFirebaseKey(firebaseHelper.getUserEmail());
     const ref = `passagens/${emailFirebase}`;
 
     firebaseHelper.fetch(ref).then((passagensObj) => {
@@ -383,27 +381,14 @@ export class PesquisaPassagens extends Component {
 
     return (
       <div className="pesquisar-passagens-container">
-        <div className="navheader-container">
-          <Navbar>
-            <NavHeader label="Histórico de compras" glyph="history"></NavHeader>
-            <Nav pullRight className="hidden-xs">
-              <NavItem className="resultados hidden-sm" href="#">
-                <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
-                <span className="text-after-icon">{passagens.length} resultados encontrados</span>
-              </NavItem>
-              <NavItem href="/passagens">
-                <TooltipOverlay text="Comprar passagens" position="top">
-                  <FontAwesome className="icon-title links comprar" name="shopping-cart" onClick={this.handleComprarPassagem} />
-                </TooltipOverlay>
-              </NavItem>
-              <NavItem href="#" className="nav-links">
-                <TooltipOverlay text="Limpar filtros" position="top">
-                  <FontAwesome className="icon-title links reset" name="eraser" onClick={this.handleReset} />
-                </TooltipOverlay>
-              </NavItem>
-            </Nav>
-          </Navbar>
-        </div>
+        <PageHeader title="Histórico de compras">
+          <NavItem className="resultados hidden-sm" href="#">
+            <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
+            <span className="text-after-icon">{passagens.length} resultados encontrados</span>
+          </NavItem>
+          <PageHeaderItem tooltip="Comprar passagens" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
+          <PageHeaderItem tooltip="Limpar filtros" glyph="eraser" onClick={this.handleReset} />
+        </PageHeader>
         <DivAnimated className="text-center">
           <Col md={10} mdOffset={1}>
             <Pagination
