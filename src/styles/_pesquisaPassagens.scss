@@ -38,15 +38,13 @@
             td,
             th {
                 border: none !important;
-            }
-            .th-nome {
-                width: 25%;
+                @include noSelection();
             }
             .th-data-compra {
                 width: 12%;
             }
             .th-linha {
-                width: 30%;
+                width: 40%;
             }
             .th-saida {
                 width: 20%;

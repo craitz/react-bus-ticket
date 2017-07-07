@@ -35,14 +35,14 @@ class LoadingDialog extends Component {
                 {/*<FontAwesome name="spinner" spin className="icon-saving"></FontAwesome>
                 <span className="text-after-icon hidden-xs">Salvando alterações...</span>*/}
                 <FontAwesome name={loadingIcon} spin className="icon-saving"></FontAwesome>
-                <span className="text-after-icon hidden-xs">{loadingMessage}</span>
+                <span className="loading-text-after-icon">{loadingMessage}</span>
               </div>}
             {(status === SavingStatus.FEEDBACK) &&
               <div className="text-center">
                 {/*<FontAwesome name="check" className="icon-feedback"></FontAwesome>
                 <span className="text-after-icon hidden-xs">Perfil salvo com sucesso!</span>*/}
                 <FontAwesome name={doneIcon} className="icon-feedback"></FontAwesome>
-                <span className="text-after-icon hidden-xs">{doneMessage}</span>
+                <span className="loading-text-after-icon">{doneMessage}</span>
               </div>}
           </Modal.Body>
         </Modal>

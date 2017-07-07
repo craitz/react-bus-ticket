@@ -47,3 +47,9 @@ export const setSaving = (savingStatus) => {
   }
 };
 
+export const setEdicaoHabilitada = (isEdicaoHabilitada) => {
+  return {
+    type: PerfilUsuarioActionType.SET_EDICAO_HABILITADA,
+    payload: isEdicaoHabilitada
+  }
+};

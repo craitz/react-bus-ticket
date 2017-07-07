@@ -17,6 +17,7 @@ const initialState = Immutable({
       message: ''
     }
   },
+  edicaoHabilitada: false
 });
 
 const reducer = (state = initialState, action = {}) => {
@@ -93,6 +94,12 @@ const reducer = (state = initialState, action = {}) => {
             message: action.payload.message
           }
         }
+      };
+    }
+    case PerfilUsuarioActionType.SET_EDICAO_HABILITADA: {
+      return {
+        ...state,
+        edicaoHabilitada: action.payload
       };
     }
     case PerfilUsuarioActionType.RESET_PERFIL: {

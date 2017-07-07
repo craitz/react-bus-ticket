@@ -79,11 +79,6 @@ export const sortByFieldEx = (passagensBackup, sort) => {
         objB = b.dataCompra;
         break;
       }
-      case utils.PesquisaPassagensField.NOME: {
-        objA = a.nome;
-        objB = b.nome;
-        break;
-      }
       default: {
       }
     }
@@ -116,16 +111,11 @@ export const filtraPassagensEx = (passagensComOrdenacao, filter) => {
   }
 
   const passagensFiltradas = passagensComOrdenacao.filter((passagem) => {
-    const nome = passagem.nome.toLowerCase();
     const compra = passagem.dataCompra;
     const saida = passagem.data.concat(passagem.horario);
     const linha = passagem.origem.toLowerCase().concat(passagem.destino.toLowerCase());
     const poltronas = passagem.poltrona.split(' - ');
     let include = true;
-
-    if (filter.nome.length > 0) {
-      include = include && (nome.includes(filter.nome));
-    }
 
     if (filter.compra.length > 0) {
       include = include && (compra.includes(filter.compra));
@@ -157,11 +147,9 @@ export const filtraPassagensEx = (passagensComOrdenacao, filter) => {
 export class PesquisaPassagens extends Component {
   constructor(props) {
     super(props);
-    this.handleClickNome = this.handleClickNome.bind(this);
     this.handleClickDataCompra = this.handleClickDataCompra.bind(this);
     this.handleClickLinha = this.handleClickLinha.bind(this);
     this.handleClickSaida = this.handleClickSaida.bind(this);
-    this.handleChangeFilterNome = this.handleChangeFilterNome.bind(this);
     this.handleChangeFilterDataCompra = this.handleChangeFilterDataCompra.bind(this);
     this.handleChangeFilterLinha = this.handleChangeFilterLinha.bind(this);
     this.handleChangeFilterSaida = this.handleChangeFilterSaida.bind(this);
@@ -265,23 +253,6 @@ export class PesquisaPassagens extends Component {
     this.props.dispatch(actions.setPassagens(arrSortedFiltered));
   }
 
-  handleClickNome(event) {
-    const { consulta, dispatch } = this.props;
-    const { sort } = consulta;
-
-    if (sort.field === utils.PesquisaPassagensField.NOME) {
-      dispatch(actions.setSortDirectionThunk(!sort.direction))
-        .then(() => {
-          this.aplicaPesqusia();
-        });
-    } else {
-      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.NOME, true))
-        .then(() => {
-          this.aplicaPesqusia();
-        });
-    }
-  }
-
   handleClickDataCompra(event) {
     const { consulta, dispatch } = this.props;
     const { sort } = consulta;
@@ -331,14 +302,6 @@ export class PesquisaPassagens extends Component {
           this.aplicaPesqusia();
         });
     }
-  }
-
-  handleChangeFilterNome(event) {
-    const value = event.target.value.toLowerCase();
-    this.props.dispatch(actions.setFilterNomeThunk(value))
-      .then(() => {
-        this.aplicaPesqusia();
-      });
   }
 
   handleChangeFilterDataCompra(event) {
@@ -403,12 +366,6 @@ export class PesquisaPassagens extends Component {
                 <thead>
                   <tr>
                     <TableHeader
-                      className="th-nome"
-                      onClick={this.handleClickNome}
-                      label="Nome"
-                      sortIcon={this.getGlyph(fields.NOME)}
-                    />
-                    <TableHeader
                       className="th-data-compra"
                       onClick={this.handleClickDataCompra}
                       label="Data da compra"
@@ -432,11 +389,6 @@ export class PesquisaPassagens extends Component {
                 <tbody className="text-left">
                   <tr>
                     <TableColFilter
-                      tooltip="Pesquisar pelo nome"
-                      value={filter.nome}
-                      onChange={this.handleChangeFilterNome}
-                    />
-                    <TableColFilter
                       tooltip="Pesquisar pela data da compra da passagem"
                       value={filter.compra}
                       onChange={this.handleChangeFilterDataCompra}
@@ -459,9 +411,6 @@ export class PesquisaPassagens extends Component {
                   </tr>
                   {page.map((value, index) =>
                     <tr key={index}>
-                      <td>
-                        {value.nome}
-                      </td>
                       <td>
                         {value.dataCompra}
                       </td>

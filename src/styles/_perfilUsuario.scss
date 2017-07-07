@@ -1,7 +1,47 @@
 .perfil-usuario-container {
     @include containerHeight();
+    .form-header {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        margin: 0;
+        margin-top: 50px;
+        padding: 10px;
+        padding-left: 20px;
+        padding-left: -15px !important;
+        background-color: rgba(black, .05);
+        border: none;
+        .form-title {
+            font-family: "Gruppo";
+            font-size: 2rem;
+            line-height: 40px;
+        }
+        .btn.edicao {
+            font-size: 2rem;
+            background-color: transparent;
+            color: black !important;
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: rgba(black, .1) !important;
+                color: black !important;
+            }
+        }
+    }
     .jumbotron {
         margin-top: 15px;
+        .text-left.row.first {
+            padding-top: 50px;
+        }
+        .static-label {
+            font-size: 3rem;
+            font-family: 'Gruppo';
+            margin-left: 20px;
+        }
+        .static-value {
+            font-size: 3rem;
+            font-family: 'Gruppo';
+            margin-left: 10px;
+        }
     }
     &::after {
         @include bkgImage();

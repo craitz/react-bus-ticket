@@ -4,56 +4,72 @@ import { withAuth } from '../shared/hoc';
 import { connect } from 'react-redux';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
-import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Row, Col, Button, Jumbotron, FormControl } from 'react-bootstrap';
 import { BaseField, withInput, withInputMask } from '../shared/FormFields';
 import FontAwesome from 'react-fontawesome';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as actions from '../actions/perfilUsuario.actions'
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as utils from '../shared/Utils';
+import TooltipOverlay from '../shared/TooltipOverlay';
 // import PropTypes from 'prop-types';
 
 const ButtonAtualizar = () =>
   <Button type="submit" bsStyle="primary" className="btn-google-blue">
-    <FontAwesome name="refresh" />
-    <span className="text-after-icon hidden-xs">Atualizar dados</span>
+    <FontAwesome name="check" />
+    <span className="text-after-icon hidden-xs">Salvar alterações</span>
     <span className="text-after-icon hidden-sm hidden-md hidden-lg">Atualizar</span>
   </Button>
 
 
-const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, user }) => {
+const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, user, edicaoHabilitada }) => {
   const { nome, cpf } = user;
 
   return (
     <form onSubmit={onSubmit}>
       <Row className="text-left first">
         <Col xs={12}>
-          <InputField
-            id="nome"
-            label="Nome*"
-            type="text"
-            value={nome.text}
-            onChange={onChangeNome}
-            validation={nome.validation}
-            message={nome.message} />
+          {edicaoHabilitada &&
+            <InputField
+              id="nome"
+              label="Nome*"
+              type="text"
+              value={nome.text}
+              onChange={onChangeNome}
+              validation={nome.validation}
+              message={nome.message} />}
+          {!edicaoHabilitada &&
+            <div>
+              <span className="static-label"><strong>Nome:</strong></span>
+              <span className="static-value">{nome.text}</span>
+            </div>}
         </Col>
       </Row>
-      <Row className="text-left first">
+      <Row className="text-left">
         <Col xs={12}>
-          <InputMaskField
-            id="cpf"
-            label="CPF*"
-            mask="111.111.111-11"
-            value={cpf.text}
-            onChange={onChangeCpf}
-            validation={cpf.validation}
-            message={cpf.message} />
+          {edicaoHabilitada &&
+            <InputMaskField
+              id="cpf"
+              label="CPF*"
+              mask="111.111.111-11"
+              value={cpf.text}
+              onChange={onChangeCpf}
+              validation={cpf.validation}
+              message={cpf.message} />}
+          {!edicaoHabilitada &&
+            <div>
+              <span className="static-label"><strong>CPF:</strong></span>
+              <span className="static-value">{cpf.text}</span>
+            </div>}
         </Col>
       </Row>
-      <hr />
-      <div className="text-right">
-        <ButtonAtualizar />
-      </div>
+      {edicaoHabilitada &&
+        <div>
+          <hr />
+          <div className="text-right">
+            <ButtonAtualizar />
+          </div>
+        </div>}
     </form>
   );
 }
@@ -69,6 +85,7 @@ class PerfilUsuario extends Component {
     this.handleChangeNome = this.handleChangeNome.bind(this);
     this.handleChangeCpf = this.handleChangeCpf.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleHabilitarEdicao = this.handleHabilitarEdicao.bind(this);
   }
 
   componentDidMount() {
@@ -91,6 +108,11 @@ class PerfilUsuario extends Component {
     dispatch(loadingActions.setLoadingIcon('spinner'));
     dispatch(loadingActions.setDoneMessage('Perfil salvo com sucesso !'));
     dispatch(loadingActions.setDoneIcon('check'));
+  }
+
+  handleHabilitarEdicao() {
+    const { dispatch } = this.props;
+    dispatch(actions.setEdicaoHabilitada(!this.props.edicaoHabilitada));
   }
 
   handleComprarPassagem(event) {
@@ -201,6 +223,7 @@ class PerfilUsuario extends Component {
             dispatch(loadingActions.setStatus(utils.SavingStatus.FEEDBACK));
             setTimeout(() => {
               dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+              dispatch(actions.setEdicaoHabilitada(false));
             }, 1000);
           })
           .catch((error) => {
@@ -215,9 +238,10 @@ class PerfilUsuario extends Component {
   render() {
     const formProps = {
       user: this.props.user,
+      edicaoHabilitada: this.props.edicaoHabilitada,
       onChangeNome: this.handleChangeNome,
       onChangeCpf: this.handleChangeCpf,
-      onSubmit: this.handleSubmit,
+      onSubmit: this.handleSubmit
     }
 
     return (
@@ -228,6 +252,23 @@ class PerfilUsuario extends Component {
         </PageHeader>
         <DivAnimated className="text-center">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-center">
+            <Col xs={12} className="form-header text-left">
+              <span className="form-title">Informações pessoais</span>
+              {!this.props.edicaoHabilitada &&
+                <TooltipOverlay text="Edição desabilitada" position="top">
+                  <Button className='pull-right btn-google-blue edicao' onClick={this.handleHabilitarEdicao}>
+                    <FontAwesome name="lock" />
+                    {/*<span className="text-after-icon">Habilitar edição</span>*/}
+                  </Button>
+                </TooltipOverlay>}
+              {this.props.edicaoHabilitada &&
+                <TooltipOverlay text="Edição habilitada" position="top">
+                  <Button className="pull-right btn-google-red edicao" onClick={this.handleHabilitarEdicao}>
+                    <FontAwesome name="unlock" />
+                    {/*<span className="text-after-icon">Desabilitar edição</span>*/}
+                  </Button>
+                </TooltipOverlay>}
+            </Col>
             <Jumbotron>
               <FormPerfil {...formProps} />
             </Jumbotron>
@@ -244,6 +285,7 @@ class PerfilUsuario extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.perfilUsuarioState.user,
+    edicaoHabilitada: state.perfilUsuarioState.edicaoHabilitada
   };
 };
 

@@ -190,13 +190,16 @@
     .pesquisar-passagens-container .jumbotron Table tr,
     .pesquisar-passagens-container .jumbotron Table td,
     .pesquisar-passagens-container .jumbotron Table th {
-      border: none !important; }
-    .pesquisar-passagens-container .jumbotron Table .th-nome {
-      width: 25%; }
+      border: none !important;
+      -moz-user-select: -moz-none !important;
+      -khtml-user-select: none !important;
+      -webkit-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important; }
     .pesquisar-passagens-container .jumbotron Table .th-data-compra {
       width: 12%; }
     .pesquisar-passagens-container .jumbotron Table .th-linha {
-      width: 30%; }
+      width: 40%; }
     .pesquisar-passagens-container .jumbotron Table .th-saida {
       width: 20%; }
   .pesquisar-passagens-container .jumbotron .table-hover > tbody > tr:hover {
@@ -452,15 +455,6 @@
     text-decoration: none;
     outline: none !important; }
 
-.icon-loading {
-  color: rgba(0, 0, 0, 0.5); }
-
-@keyframes loading-spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
 .welcome-container {
   overflow: auto;
   height: calc(100vh - 50px); }
@@ -486,8 +480,39 @@
 .perfil-usuario-container {
   overflow: auto;
   height: calc(100vh - 50px); }
+  .perfil-usuario-container .form-header {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin: 0;
+    margin-top: 50px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-left: -15px !important;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: none; }
+    .perfil-usuario-container .form-header .form-title {
+      font-family: "Gruppo";
+      font-size: 2rem;
+      line-height: 40px; }
+    .perfil-usuario-container .form-header .btn.edicao {
+      font-size: 2rem;
+      background-color: transparent;
+      color: black !important; }
+      .perfil-usuario-container .form-header .btn.edicao:hover, .perfil-usuario-container .form-header .btn.edicao:active, .perfil-usuario-container .form-header .btn.edicao:focus {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        color: black !important; }
   .perfil-usuario-container .jumbotron {
     margin-top: 15px; }
+    .perfil-usuario-container .jumbotron .text-left.row.first {
+      padding-top: 50px; }
+    .perfil-usuario-container .jumbotron .static-label {
+      font-size: 3rem;
+      font-family: 'Gruppo';
+      margin-left: 20px; }
+    .perfil-usuario-container .jumbotron .static-value {
+      font-size: 3rem;
+      font-family: 'Gruppo';
+      margin-left: 10px; }
   .perfil-usuario-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
@@ -502,6 +527,39 @@
   @media screen and (min-width: 768px) {
     .perfil-usuario-container .jumbotron {
       margin-top: 50px; } }
+
+.modal.fade.in {
+  cursor: wait;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.modal-dialog {
+  background-color: transparent;
+  width: 300px;
+  height: 52px;
+  position: fixed;
+  top: calc(50% - 52px/2);
+  left: calc(50% - 300px/2); }
+  .modal-dialog .modal-content {
+    background-color: inherit;
+    border-radius: 6px;
+    -moz-user-select: -moz-none !important;
+    -khtml-user-select: none !important;
+    -webkit-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    font-size: 1.5rem; }
+    .modal-dialog .modal-content .modal-body {
+      background-color: rgba(240, 173, 78, 0.7);
+      border-radius: inherit;
+      color: white; }
+    .modal-dialog .modal-content .icon-saving {
+      font-size: 2rem;
+      color: white; }
+    .modal-dialog .modal-content .icon-feedback {
+      font-size: 2rem;
+      color: white; }
+    .modal-dialog .modal-content .loading-text-after-icon {
+      margin-left: 15px; }
 
 html {
   height: 100%; }
@@ -526,24 +584,6 @@ html {
       border: none; }
       html body .jumbotron hr {
         border-color: rgba(0, 0, 0, 0.1); }
-    html body .modal.fade.in {
-      cursor: wait; }
-    html body .modal-dialog {
-      -moz-user-select: -moz-none !important;
-      -khtml-user-select: none !important;
-      -webkit-user-select: none !important;
-      -ms-user-select: none !important;
-      user-select: none !important;
-      font-size: 1.5rem;
-      width: 300px;
-      height: 52px;
-      position: absolute;
-      top: calc(50% - 52px/2);
-      left: calc(50% - 300px/2); }
-      html body .modal-dialog .icon-saving {
-        color: #4285f4; }
-      html body .modal-dialog .icon-feedback {
-        color: green; }
 
 @media screen and (min-width: 320px) {
   .page-title {

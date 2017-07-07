@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { BaseField, withInput, withSelect, withDate, withMultiSelect, withInputMask } from '../shared/FormFields';
+import { BaseField, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import * as actions from '../actions/compraPassagem.actions';
 import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
@@ -14,8 +14,6 @@ import moment from 'moment';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 
-const InputField = withInput(BaseField);
-const InputMaskField = withInputMask(BaseField);
 const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
 const DateField = withDate(BaseField);
@@ -24,8 +22,8 @@ const helper = {
   mapPassagemToFirebase(passagem) {
     return {
       ...passagem,
-      nome: passagem.nome.text,
-      cpf: passagem.cpf.text,
+      nome: firebaseHelper.getUserName(),
+      cpf: firebaseHelper.getUserCpf(),
       email: firebaseHelper.getUserEmail(),
       origem: passagem.origem.text,
       destino: passagem.destino.text,
@@ -37,18 +35,13 @@ const helper = {
   poltronaToFirebase(poltrona) {
     return new Promise((resolve) => {
       const todasPoltronas = globals.getPoltronas();
-      const poltronasSelecionadas = poltrona.split(',');
-      poltronasSelecionadas.sort();
       let poltronasFormatadas = '';
-
-      poltronasSelecionadas.forEach((poltrona, index, arr) => {
-        const poltronaCorrente = todasPoltronas[poltrona].label;
-        poltronasFormatadas = (index === 0) ? poltronaCorrente : `${poltronasFormatadas} - ${poltronaCorrente}`;
-
-        if (index === (arr.length - 1)) {
-          resolve(poltronasFormatadas);
-        }
-      });
+      const array = poltrona.split(',');
+      const padArray = array.map(item => (todasPoltronas[item].label).padStart(2, '0'));
+      padArray.sort();
+      const padString = padArray.join();
+      const formatted = padString.replace(/,/g, ' - ');
+      resolve(formatted);
     });
   }
 };
@@ -62,39 +55,16 @@ const ButtonComprar = () =>
 
 export const FormComprar = ({ props }) => {
   const { cidades, horarios, poltronas, passagem } = props.fields;
-  const { handleChangeNome, handleChangeCpf, handleChangeOrigem, handleChangeDestino,
+  const { handleChangeOrigem, handleChangeDestino,
     handleChangeData, handleChangeHorario, handleChangePoltrona, handleClickSeat,
     handleResetSeats, handleSubmit } = props.handlers;
-  const { nome, cpf, origem, destino, data, horario, poltrona } = passagem;
+  const { origem, destino, data, horario, poltrona } = passagem;
 
   return (
     <form onSubmit={handleSubmit}>
-      {/*NOME / CPF*/}
-      <Row className="text-left first">
-        <Col sm={8}>
-          <InputField
-            id="nome"
-            label="Nome*"
-            type="text"
-            value={nome.text}
-            onChange={handleChangeNome}
-            validation={nome.validation}
-            message={nome.message} />
-        </Col>
-        <Col sm={4}>
-          <InputMaskField
-            id="cpf"
-            label="CPF*"
-            mask="111.111.111-11"
-            value={cpf.text}
-            onChange={handleChangeCpf}
-            validation={cpf.validation}
-            message={cpf.message} />
-        </Col>
-      </Row>
       {/*ORIGEM / DESTINO*/}
       <Row className="text-left">
-        <Col md={6} className="input-col">
+        <Col xs={12} className="input-col">
           <SelectField
             id="origem"
             label="Origem"
@@ -102,7 +72,9 @@ export const FormComprar = ({ props }) => {
             value={origem.val}
             onChange={handleChangeOrigem} />
         </Col>
-        <Col md={6} className="input-col">
+      </Row>
+      <Row className="text-left">
+        <Col xs={12} className="input-col">
           <SelectField
             id="destino"
             label="Destino"
@@ -113,14 +85,14 @@ export const FormComprar = ({ props }) => {
       </Row>
       {/*DATA / HORARIO*/}
       <Row className="text-left">
-        <Col md={6} className="input-col">
+        <Col xs={6} className="input-col">
           <DateField
             id="data"
             label="Data"
             value={data}
             onChange={handleChangeData} />
         </Col>
-        <Col md={6} className="input-col">
+        <Col xs={6} className="input-col">
           <SelectField
             id="horario"
             label="Horário"
@@ -159,8 +131,6 @@ export class CompraPassagem extends Component {
     super(props);
     this.canRender = false;
     this.handleReset = this.handleReset.bind(this);
-    this.handleChangeNome = this.handleChangeNome.bind(this);
-    this.handleChangeCpf = this.handleChangeCpf.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
@@ -372,55 +342,6 @@ export class CompraPassagem extends Component {
     this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
   }
 
-  handleChangeNome(event) {
-    const { dispatch, passagem } = this.props;
-    const isPristine = passagem.nome.isPristine;
-    const text = event.target.value;
-
-    dispatch(actions.changeNome(text));
-    isPristine && dispatch(actions.setNomeDirty());
-
-    this.updateNomeValidation(text);
-  }
-
-  updateNomeValidation(text) {
-    const { dispatch, passagem } = this.props;
-    const oldName = passagem.nome;
-
-    // test required
-    if (text.length > 0) {
-      (oldName.validation !== utils.ValidationStatus.NONE) &&
-        dispatch(actions.setNomeValidation(utils.ValidationStatus.NONE, ''));
-    } else {
-      (oldName.validation !== utils.ValidationStatus.ERROR) &&
-        dispatch(actions.setNomeValidation(utils.ValidationStatus.ERROR, 'Informe o nome'));
-    }
-  }
-
-  handleChangeCpf(event) {
-    const { dispatch, passagem } = this.props;
-    const isPristine = passagem.cpf.isPristine;
-    const text = event.target.value;
-
-    dispatch(actions.changeCpf(text));
-    isPristine && dispatch(actions.setCpfDirty());
-
-    this.updateCpfValidation(text);
-  }
-
-  updateCpfValidation(text) {
-    const { dispatch } = this.props;
-    const cpfRegexp = /^\d{3}.\d{3}.\d{3}-\d{2}$/;
-
-    if (text.length === 0) { // EMPTY
-      dispatch(actions.setCpfValidation(utils.ValidationStatus.ERROR, 'Informe o CPF'));
-    } else if (!cpfRegexp.test(text)) { // BAD FORMAT
-      dispatch(actions.setCpfValidation(utils.ValidationStatus.ERROR, 'CPF inválido'));
-    } else { // OK
-      dispatch(actions.setCpfValidation(utils.ValidationStatus.NONE, ''));
-    }
-  }
-
   handleChangeOrigem(event) {
     const { cidades, dispatch, passagem } = this.props;
     const { data, horario } = passagem;
@@ -594,25 +515,11 @@ export class CompraPassagem extends Component {
 
   formCanBeSaved() {
     const { dispatch, passagem, horarios } = this.props;
-    const { nome, cpf, poltrona } = passagem;
+    const { poltrona } = passagem;
     let failed = false;
 
     if (horarios.length === 0) {
       failed = true;
-    }
-
-    // if NOME is pristine, form cannot be saved
-    if (nome.isPristine) {
-      failed = true;
-      dispatch(actions.setNomeDirty());
-      this.updateNomeValidation(nome.text);
-    }
-
-    // if CPF is pristine, form cannot be saved
-    if (cpf.isPristine) {
-      failed = true;
-      dispatch(actions.setCpfDirty());
-      this.updateCpfValidation(cpf.text);
     }
 
     // if POLTRONA is pristine, form cannot be saved
@@ -623,10 +530,7 @@ export class CompraPassagem extends Component {
       this.updatePoltronaValidation(hasSelection);
     }
 
-    if ((failed) ||
-      (nome.validation !== utils.ValidationStatus.NONE) ||
-      (cpf.validation !== utils.ValidationStatus.NONE) ||
-      (poltrona.validation !== utils.ValidationStatus.NONE)) {
+    if ((failed) || (poltrona.validation !== utils.ValidationStatus.NONE)) {
       return false;
     }
 
@@ -682,30 +586,31 @@ export class CompraPassagem extends Component {
       const novaPassagem = helper.mapPassagemToFirebase(passagem);
       const { nome, email, cpf, origem, destino, data, horario, dataCompra } = novaPassagem;
 
-      helper.poltronaToFirebase(novaPassagem.poltrona).then((poltronasFormatadas) => {
-        novaPassagem.poltrona = poltronasFormatadas;
-        const dataFormatted = utils.dateToFirebase(data);
-        const horarioFormatted = utils.timeToFirebase(horario);
-        const emailFirebase = utils.emailToFirebaseKey(email);
-        const newPassgemRef = `passagens/${emailFirebase}`;
-        const poltronasSelecionadas = novaPassagem.poltrona.split(' - ');
+      helper.poltronaToFirebase(novaPassagem.poltrona)
+        .then((poltronasFormatadas) => {
+          novaPassagem.poltrona = poltronasFormatadas;
+          const dataFormatted = utils.dateToFirebase(data);
+          const horarioFormatted = utils.timeToFirebase(horario);
+          const emailFirebase = utils.emailToFirebaseKey(email);
+          const newPassgemRef = `passagens/${emailFirebase}`;
+          const poltronasSelecionadas = novaPassagem.poltrona.split(' - ');
 
-        // salva passagem numa lista global
-        firebaseHelper.save(novaPassagem, newPassgemRef)
-          .then((key) => {
+          // salva passagem numa lista global
+          firebaseHelper.save(novaPassagem, newPassgemRef)
+            .then((key) => {
 
-            // percorre as poltronas selecionada e salva uma por uma
-            poltronasSelecionadas.forEach((val, index, arr) => {
-              firebaseHelper.set({ nome, email, cpf, dataCompra },
-                `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
-                .then(() => {
-                  if (index === (arr.length - 1)) {
-                    resolve({ novaPassagem, key });
-                  }
-                });
+              // percorre as poltronas selecionada e salva uma por uma
+              poltronasSelecionadas.forEach((val, index, arr) => {
+                firebaseHelper.set({ nome, email, cpf, dataCompra },
+                  `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
+                  .then(() => {
+                    if (index === (arr.length - 1)) {
+                      resolve({ novaPassagem, key });
+                    }
+                  });
+              });
             });
-          });
-      });
+        });
     });
   };
 
@@ -744,7 +649,7 @@ export class CompraPassagem extends Component {
         </PageHeader>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
-            <Col sm={10} smOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
+            <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
               <Col xs={12} className="form-header text-left">
                 <span className="form-title hidden-xs">Por favor, preencha o formulário.</span>
                 <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>

@@ -9,9 +9,9 @@
 @import "login";
 @import "multiselect";
 @import "button";
-@import "withLoading";
 @import "welcome";
 @import "perfilUsuario";
+@import "loadingDialog";
 html {
     height: 100%;
     body {
@@ -42,24 +42,6 @@ html {
             border: none;
             hr {
                 border-color: rgba(0, 0, 0, .1);
-            }
-        }
-        .modal.fade.in {
-            cursor: wait;
-        }
-        .modal-dialog {
-            @include noSelection();
-            font-size: 1.5rem;
-            width: 300px;
-            height: 52px;
-            position: absolute;
-            top: calc(50% - 52px/2);
-            left: calc(50% - 300px/2);
-            .icon-saving {
-                color: $googleBlue;
-            }
-            .icon-feedback {
-                color: green;
             }
         }
     }

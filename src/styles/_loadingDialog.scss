@@ -1,0 +1,37 @@
+.modal.fade.in {
+    cursor: wait;
+    background-color: rgba(black, .6);
+}
+
+.modal-dialog {
+    background-color: transparent;
+    width: 300px;
+    height: 52px;
+    position: fixed;
+    top: calc(50% - 52px/2);
+    left: calc(50% - 300px/2);
+    .modal-content {
+        background-color: inherit;
+        border-radius: 6px;
+        .modal-body {
+            background-color: rgba(240, 173, 78, .7);
+            // background-color: rgba(92, 184, 92, .7);
+            border-radius: inherit;
+            color: white;
+        }
+        @include noSelection();
+        font-size: 1.5rem;
+        .icon-saving {
+            font-size: 2rem;
+            color: white;
+            // color: $googleBlue;
+        }
+        .icon-feedback {
+            font-size: 2rem;
+            color: white;
+        }
+        .loading-text-after-icon {
+            margin-left: 15px;
+        }
+    }
+}
