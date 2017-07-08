@@ -6,6 +6,7 @@ export const initialState = Immutable({
   cidades: [],
   horarios: [],
   poltronas: [],
+  isIdaVolta: false,
   passagem: {
     nome: {
       text: '',
@@ -20,12 +21,16 @@ export const initialState = Immutable({
       message: ''
     },
     origem: {
-      val: 0,
-      text: '',
+      value: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     },
     destino: {
-      val: 1,
-      text: '',
+      value: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     },
     poltrona: {
       value: '',
@@ -52,6 +57,9 @@ const reducer = (state = initialState, action = {}) => {
     }
     case CompraPassagemActionType.SET_POLTRONAS: {
       return { ...state, poltronas: action.payload };
+    }
+    case CompraPassagemActionType.SET_IDA_VOLTA: {
+      return { ...state, isIdaVolta: action.payload };
     }
     case CompraPassagemActionType.RESET_FORM_PASSAGEM: {
       return {
@@ -138,13 +146,27 @@ const reducer = (state = initialState, action = {}) => {
     case CompraPassagemActionType.CHANGE_ORIGEM: {
       return {
         ...state,
-        passagem: { ...state.passagem, origem: action.payload }
+        passagem:
+        {
+          ...state.passagem,
+          origem: {
+            ...state.passagem.origem,
+            value: action.payload
+          }
+        }
       };
     }
     case CompraPassagemActionType.CHANGE_DESTINO: {
       return {
         ...state,
-        passagem: { ...state.passagem, destino: action.payload }
+        passagem:
+        {
+          ...state.passagem,
+          destino: {
+            ...state.passagem.destino,
+            value: action.payload
+          }
+        }
       };
     }
     case CompraPassagemActionType.CHANGE_POLTRONA: {

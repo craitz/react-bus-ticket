@@ -4,6 +4,8 @@ import { withAuth } from '../shared/hoc';
 import { Glyphicon, Col, Button, Jumbotron } from 'react-bootstrap';
 import DivAnimated from '../shared/DivAnimated'
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import store from '../store';
+import * as actions from '../actions/modalTrajeto.actions';
 
 export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-center welcome-button">
@@ -23,7 +25,8 @@ class Welcome extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    this.props.history.push('/comprar');
+    store.dispatch(actions.setVisible(true));
+    // this.props.history.push('/comprar');
   }
 
   handlePesquisarPassagens(event) {

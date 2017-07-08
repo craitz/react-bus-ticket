@@ -16,6 +16,8 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated';
 import * as loadingActions from '../actions/loadingDialog.actions'
+import { globals } from '../shared/Globals';
+import * as compraPassagemActions from '../actions/compraPassagem.actions'
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup>
@@ -125,6 +127,20 @@ export class Login extends Component {
     return true;
   }
 
+  getListasDefault() {
+    return new Promise(resolve => {
+      const { dispatch } = this.props;
+      globals.getCidades().then((cidades) => {
+        dispatch(compraPassagemActions.setCidades(cidades));
+        globals.getHorarios().then((horarios) => {
+          dispatch(compraPassagemActions.setHorarios(horarios));
+          dispatch(compraPassagemActions.setPoltronas(globals.getPoltronas()));
+          resolve();
+        });
+      });
+    });
+  }
+
   handleLogin(event) {
     event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
@@ -134,13 +150,16 @@ export class Login extends Component {
     if (this.isLoginFormOK()) {
       firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
-          setTimeout(function () {
-            dispatch(loadingActions.setStatus(SavingStatus.DONE));
-            history.push({
-              pathname: '/',
-              state: {}
+          this.getListasDefault()
+            .then(() => {
+              setTimeout(() => {
+                dispatch(loadingActions.setStatus(SavingStatus.DONE));
+                history.push({
+                  pathname: '/',
+                  state: {}
+                });
+              }, 1000);
             });
-          }, 1000);
         })
         .catch((error) => {
           if (error.field === LoginFields.EMAIL) { // E-MAIL

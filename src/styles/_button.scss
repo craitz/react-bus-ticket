@@ -40,4 +40,7 @@
     &-red {
         @include googleButton(rgb(219, 68, 55), .35, 10%);
     }
+    &-glass {
+        @include googleButton(rgba(black, .15), .35, 10%);
+    }
 }

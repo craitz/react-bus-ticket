@@ -4,11 +4,13 @@ import pesquisaPassagensState from './pesquisaPassagens.reducer';
 import loginState from './login.reducer';
 import perfilUsuarioState from './perfilUsuario.reducer';
 import loadingDialogState from './loadingDialog.reducer';
+import modalTrajetoState from './modalTrajeto.reducer';
 
 export default combineReducers({
   compraPassagemState,
   pesquisaPassagensState,
   loginState,
   perfilUsuarioState,
-  loadingDialogState
+  loadingDialogState,
+  modalTrajetoState
 });

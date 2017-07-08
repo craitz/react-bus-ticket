@@ -42,6 +42,10 @@ export const LoadingDialogActionType = {
   SET_STATUS: 'SET_STATUS'
 }
 
+export const ModalTrajetoActionType = {
+  SET_VISIBLE: 'SET_VISIBLE',
+}
+
 export const CompraPassagemActionType = {
   SET_CIDADES: 'SET_CIDADES',
   SET_HORARIOS: 'SET_HORARIOS',
@@ -60,5 +64,6 @@ export const CompraPassagemActionType = {
   SET_POLTRONA_DIRTY: 'SET_POLTRONA_DIRTY',
   SET_POLTRONA_VALIDATION: 'SET_POLTRONA_VALIDATION',
   CHANGE_DATA: 'CHANGE_DATA',
-  CHANGE_HORARIO: 'CHANGE_HORARIO'
+  CHANGE_HORARIO: 'CHANGE_HORARIO',
+  SET_IDA_VOLTA: 'SET_IDA_VOLTA'
 };

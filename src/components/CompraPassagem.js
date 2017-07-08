@@ -53,15 +53,19 @@ const ButtonComprar = () =>
     <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
   </Button>
 
-export const FormComprar = ({ props }) => {
-  const { cidades, horarios, poltronas, passagem } = props.fields;
-  const { handleChangeOrigem, handleChangeDestino,
-    handleChangeData, handleChangeHorario, handleChangePoltrona, handleClickSeat,
-    handleResetSeats, handleSubmit } = props.handlers;
-  const { origem, destino, data, horario, poltrona } = passagem;
+export const FormTrajeto = ({ props }) => {
+  const { cidades, passagem } = props.fields;
+  const { handleChangeOrigem, handleChangeDestino } = props.handlers;
+  const { origem, destino } = passagem;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
+      <Row className="text-left title-row">
+        <Col xs={12}>
+          <FontAwesome name="compass" className="form-header--icon" />
+          <span className="title-after-icon">Selecione o trajeto</span>
+        </Col>
+      </Row>
       {/*ORIGEM / DESTINO*/}
       <Row className="text-left">
         <Col xs={12} className="input-col">
@@ -81,6 +85,24 @@ export const FormComprar = ({ props }) => {
             list={cidades}
             value={destino.val}
             onChange={handleChangeDestino} />
+        </Col>
+      </Row>
+    </form >
+  )
+};
+
+export const FormIda = ({ props }) => {
+  const { horarios, poltronas, passagem } = props.fields;
+  const { handleChangeData, handleChangeHorario, handleChangePoltrona, handleClickSeat,
+    handleResetSeats, handleSubmit } = props.handlers;
+  const { data, horario, poltrona } = passagem;
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Row className="text-left title-row">
+        <Col xs={12}>
+          <FontAwesome name="compass" className="form-header--icon" />
+          <span className="title-after-icon">Selecione a ida</span>
         </Col>
       </Row>
       {/*DATA / HORARIO*/}
@@ -103,7 +125,7 @@ export const FormComprar = ({ props }) => {
         </Col>
       </Row>
       {/*POLTRONA*/}
-      <Row className="text-left">
+      <Row className="text-left last">
         <Col md={12} className="input-col">
           <MultiSelectField
             id="poltrona"
@@ -125,6 +147,7 @@ export const FormComprar = ({ props }) => {
     </form >
   )
 };
+
 
 export class CompraPassagem extends Component {
   constructor(props) {
@@ -209,25 +232,25 @@ export class CompraPassagem extends Component {
 
 
   componentDidMount() {
-    this.getDefaults();
+    // this.getDefaults();
     this.initLoadingDialog();
   }
 
-  getDefaults() {
-    const { dispatch } = this.props;
-    this.canRender = false;
+  // getDefaults() {
+  //   const { dispatch } = this.props;
+  //   this.canRender = false;
 
-    globals.getCidades().then((cidades) => {
-      dispatch(actions.setCidades(cidades));
-      globals.getHorarios().then((horarios) => {
-        dispatch(actions.setHorarios(horarios));
-        dispatch(actions.setPoltronas(globals.getPoltronas()));
-        this.canRender = true;
-        this.reset();
-        this.forceUpdate();
-      });
-    });
-  }
+  //   globals.getCidades().then((cidades) => {
+  //     dispatch(actions.setCidades(cidades));
+  //     globals.getHorarios().then((horarios) => {
+  //       dispatch(actions.setHorarios(horarios));
+  //       dispatch(actions.setPoltronas(globals.getPoltronas()));
+  //       this.canRender = true;
+  //       this.reset();
+  //       this.forceUpdate();
+  //     });
+  //   });
+  // }
 
   updatePoltronas(origem, destino, data, horario) {
     const { dispatch } = this.props;
@@ -620,18 +643,24 @@ export class CompraPassagem extends Component {
       return null;
     }
 
-    const formComprarProps = {
+    const formTrajetoProps = {
       fields: {
         cidades: this.props.cidades,
+        passagem: this.props.passagem
+      },
+      handlers: {
+        handleChangeOrigem: this.handleChangeOrigem,
+        handleChangeDestino: this.handleChangeDestino,
+      }
+    }
+
+    const formIdaProps = {
+      fields: {
         horarios: this.props.horarios,
         poltronas: this.props.poltronas,
         passagem: this.props.passagem
       },
       handlers: {
-        handleChangeNome: this.handleChangeNome,
-        handleChangeCpf: this.handleChangeCpf,
-        handleChangeOrigem: this.handleChangeOrigem,
-        handleChangeDestino: this.handleChangeDestino,
         handleChangeData: this.handleChangeData,
         handleChangeHorario: this.handleChangeHorario,
         handleChangePoltrona: this.handleChangePoltrona,
@@ -640,6 +669,27 @@ export class CompraPassagem extends Component {
         handleSubmit: this.handleSubmit
       }
     }
+
+    // const formTrajetoProps = {
+    //   fields: {
+    //     cidades: this.props.cidades,
+    //     horarios: this.props.horarios,
+    //     poltronas: this.props.poltronas,
+    //     passagem: this.props.passagem
+    //   },
+    //   handlers: {
+    //     handleChangeNome: this.handleChangeNome,
+    //     handleChangeCpf: this.handleChangeCpf,
+    //     handleChangeOrigem: this.handleChangeOrigem,
+    //     handleChangeDestino: this.handleChangeDestino,
+    //     handleChangeData: this.handleChangeData,
+    //     handleChangeHorario: this.handleChangeHorario,
+    //     handleChangePoltrona: this.handleChangePoltrona,
+    //     handleClickSeat: this.handleClickSeat,
+    //     handleResetSeats: this.handleResetSeats,
+    //     handleSubmit: this.handleSubmit
+    //   }
+    // }
 
     return (
       <div className="comprar-passagem-container">
@@ -650,12 +700,15 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
-              <Col xs={12} className="form-header text-left">
+              {/*<Col xs={12} className="form-header text-left">
                 <span className="form-title hidden-xs">Por favor, preencha o formulário.</span>
                 <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>
-              </Col>
+              </Col>*/}
               <Jumbotron>
-                <FormComprar props={formComprarProps} />
+                <FormTrajeto props={formTrajetoProps} />
+              </Jumbotron>
+              <Jumbotron>
+                <FormIda props={formIdaProps} />
               </Jumbotron>
             </Col>
           </DivAnimated>

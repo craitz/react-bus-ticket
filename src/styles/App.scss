@@ -12,6 +12,7 @@
 @import "welcome";
 @import "perfilUsuario";
 @import "loadingDialog";
+@import "modalTrajeto";
 html {
     height: 100%;
     body {
@@ -32,6 +33,9 @@ html {
                 }
             }
         }
+        .title-after-icon {
+            margin-left: 12px;
+        }
         .text-after-icon {
             margin-left: 8px;
         }
@@ -43,6 +47,9 @@ html {
             hr {
                 border-color: rgba(0, 0, 0, .1);
             }
+        }
+        .modal.fade.in {
+            background-color: rgba(black, .3);
         }
     }
 }

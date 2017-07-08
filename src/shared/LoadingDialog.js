@@ -27,26 +27,24 @@ class LoadingDialog extends Component {
     const { status, doneIcon, doneMessage, loadingIcon, loadingMessage } = this.props;
 
     return (
-      <div className="static-modal">
-        <Modal show={status !== SavingStatus.DONE}>
-          <Modal.Body>
-            {(status === SavingStatus.SAVING) &&
-              <div className="text-center">
-                {/*<FontAwesome name="spinner" spin className="icon-saving"></FontAwesome>
+      <Modal show={status !== SavingStatus.DONE} className="loading-dialog-container">
+        <Modal.Body>
+          {(status === SavingStatus.SAVING) &&
+            <div className="text-center">
+              {/*<FontAwesome name="spinner" spin className="icon-saving"></FontAwesome>
                 <span className="text-after-icon hidden-xs">Salvando alterações...</span>*/}
-                <FontAwesome name={loadingIcon} spin className="icon-saving"></FontAwesome>
-                <span className="loading-text-after-icon">{loadingMessage}</span>
-              </div>}
-            {(status === SavingStatus.FEEDBACK) &&
-              <div className="text-center">
-                {/*<FontAwesome name="check" className="icon-feedback"></FontAwesome>
+              <FontAwesome name={loadingIcon} spin className="icon-saving"></FontAwesome>
+              <span className="loading-text-after-icon">{loadingMessage}</span>
+            </div>}
+          {(status === SavingStatus.FEEDBACK) &&
+            <div className="text-center">
+              {/*<FontAwesome name="check" className="icon-feedback"></FontAwesome>
                 <span className="text-after-icon hidden-xs">Perfil salvo com sucesso!</span>*/}
-                <FontAwesome name={doneIcon} className="icon-feedback"></FontAwesome>
-                <span className="loading-text-after-icon">{doneMessage}</span>
-              </div>}
-          </Modal.Body>
-        </Modal>
-      </div>
+              <FontAwesome name={doneIcon} className="icon-feedback"></FontAwesome>
+              <span className="loading-text-after-icon">{doneMessage}</span>
+            </div>}
+        </Modal.Body>
+      </Modal>
     );
     // }
   }

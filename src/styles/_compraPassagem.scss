@@ -1,5 +1,5 @@
 .comprar-passagem-container {
-    @include containerHeight();
+    @include containerHeight;
     .form-passagem-container {
         margin-top: 15px;
         .form-centered {
@@ -18,8 +18,17 @@
                 }
             }
             .jumbotron {
+                border: none;
+                padding: 15px;
+                padding-top: 0;
+                .title-row {
+                    @include formHeader;
+                }
                 .text-left.row.first {
                     padding-top: 60px;
+                }
+                .text-left.row.last {
+                    padding-bottom: 10px;
                 }
                 .btn-limpar {
                     margin-right: 10px;
@@ -34,11 +43,14 @@
                     color: rgb(169, 68, 66);
                     font-size: inherit;
                 }
+                hr {
+                    margin-top: 0;
+                }
             }
         }
     }
     &::after {
-        @include bkgImage();
+        @include bkgImage;
     }
     @include sm {
         .form-passagem-container {

@@ -99,17 +99,34 @@
         .comprar-passagem-container .form-passagem-container .form-centered .form-header .form-title {
           font-family: "Gruppo";
           font-size: 2rem; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.first {
-        padding-top: 60px; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .btn-limpar {
-        margin-right: 10px; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .input-col {
-        margin-top: 10px; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron input#data {
-        background-color: white; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .error-empty {
-        color: #a94442;
-        font-size: inherit; }
+      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron {
+        border: none;
+        padding: 15px;
+        padding-top: 0; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .title-row {
+          background-color: rgba(0, 0, 0, 0.1);
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+          line-height: 40px;
+          font-family: "Gruppo";
+          font-size: 2rem; }
+          .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .title-row .form-header--icon {
+            color: rgba(0, 0, 0, 0.5); }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.first {
+          padding-top: 60px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.last {
+          padding-bottom: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .btn-limpar {
+          margin-right: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .input-col {
+          margin-top: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron input#data {
+          background-color: white; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .error-empty {
+          color: #a94442;
+          font-size: inherit; }
+        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron hr {
+          margin-top: 0; }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
@@ -455,6 +472,34 @@
     text-decoration: none;
     outline: none !important; }
 
+.btn-google-glass {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.15);
+  background-image: none;
+  border: none;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-glass:focus {
+    border: none;
+    background: rgba(0, 0, 0, 0.15) !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-glass:hover {
+    border: none;
+    background: rgba(0, 0, 0, 0.15) !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-glass:active {
+    border: none;
+    background: rgba(0, 0, 0, 0.15) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    text-decoration: none;
+    outline: none !important; }
+
 .welcome-container {
   overflow: auto;
   height: calc(100vh - 50px); }
@@ -528,37 +573,65 @@
     .perfil-usuario-container .jumbotron {
       margin-top: 50px; } }
 
-.modal.fade.in {
-  cursor: wait;
-  background-color: rgba(0, 0, 0, 0.6); }
+.loading-dialog-container {
+  cursor: wait; }
+  .loading-dialog-container .modal-dialog {
+    width: 300px; }
+    .loading-dialog-container .modal-dialog .modal-content {
+      background-color: rgba(255, 152, 0, 0.9);
+      color: white;
+      border-radius: 6px;
+      -moz-user-select: -moz-none !important;
+      -khtml-user-select: none !important;
+      -webkit-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+      font-size: 1.5rem;
+      font-weight: bold; }
+      .loading-dialog-container .modal-dialog .modal-content .icon-saving {
+        font-size: 2rem;
+        color: white; }
+      .loading-dialog-container .modal-dialog .modal-content .icon-feedback {
+        font-size: 2rem;
+        color: white; }
+      .loading-dialog-container .modal-dialog .modal-content .loading-text-after-icon {
+        margin-left: 15px; }
 
-.modal-dialog {
-  background-color: transparent;
+.modal-trajeto-container .modal-dialog {
   width: 300px;
-  height: 52px;
-  position: fixed;
-  top: calc(50% - 52px/2);
-  left: calc(50% - 300px/2); }
-  .modal-dialog .modal-content {
-    background-color: inherit;
-    border-radius: 6px;
+  color: white;
+  border-radius: 6px; }
+  .modal-trajeto-container .modal-dialog .modal-content {
+    background-color: rgba(255, 152, 0, 0.9);
     -moz-user-select: -moz-none !important;
     -khtml-user-select: none !important;
     -webkit-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
     font-size: 1.5rem; }
-    .modal-dialog .modal-content .modal-body {
-      background-color: rgba(240, 173, 78, 0.7);
-      border-radius: inherit;
-      color: white; }
-    .modal-dialog .modal-content .icon-saving {
+    .modal-trajeto-container .modal-dialog .modal-content .modal-header {
+      padding: 0 20px 0 20px;
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+      font-family: 'Gruppo';
+      font-weight: bold;
       font-size: 2rem;
-      color: white; }
-    .modal-dialog .modal-content .icon-feedback {
-      font-size: 2rem;
-      color: white; }
-    .modal-dialog .modal-content .loading-text-after-icon {
+      line-height: 51px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-header .ida-volta {
+        font-size: 2rem;
+        line-height: 51px !important;
+        cursor: pointer; }
+    .modal-trajeto-container .modal-dialog .modal-content .modal-body {
+      padding: 20px;
+      padding-bottom: 3px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .input-group-addon {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .Select-control {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0; }
+    .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
+      border-top-color: rgba(255, 255, 255, 0.2); }
+    .modal-trajeto-container .modal-dialog .modal-content .loading-text-after-icon {
       margin-left: 15px; }
 
 html {
@@ -575,6 +648,8 @@ html {
             height: 100%; }
             html body #root .App .App-container .App-container__row .App-container__col {
               height: 100%; }
+    html body .title-after-icon {
+      margin-left: 12px; }
     html body .text-after-icon {
       margin-left: 8px; }
     html body .jumbotron {
@@ -584,6 +659,8 @@ html {
       border: none; }
       html body .jumbotron hr {
         border-color: rgba(0, 0, 0, 0.1); }
+    html body .modal.fade.in {
+      background-color: rgba(0, 0, 0, 0.3); }
 
 @media screen and (min-width: 320px) {
   .page-title {

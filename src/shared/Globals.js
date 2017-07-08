@@ -8,7 +8,13 @@ class Globals {
     this.poltronas = null;
 
     this.getCidades().then((cidades) => {
-      this.cidades = cidades;
+      this.cidades = cidades.map((item, index) => {
+        return {
+          label: item,
+          value: index.toString(),
+          disabled: false
+        }
+      });
     });
 
     this.getHorarios().then((horarios) => {

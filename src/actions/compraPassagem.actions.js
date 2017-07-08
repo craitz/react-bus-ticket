@@ -116,3 +116,10 @@ export const changeHorario = (horario) => {
     payload: horario
   }
 };
+
+export const setIdaVolta = (isIdaVolta) => {
+  return {
+    type: CompraPassagemActionType.SET_IDA_VOLTA,
+    payload: isIdaVolta
+  }
+};
