@@ -2,7 +2,8 @@ import { ModalTrajetoActionType } from '../actions/actionTypes'
 import Immutable from 'seamless-immutable';
 
 export const initialState = Immutable({
-  isVisible: false
+  isVisible: false,
+  isFromWelcome: false
 });
 
 const reducer = (state = initialState, action = {}) => {
@@ -10,7 +11,8 @@ const reducer = (state = initialState, action = {}) => {
     case ModalTrajetoActionType.SET_VISIBLE: {
       return {
         ...state,
-        isVisible: action.payload
+        isVisible: action.payload.isVisible,
+        isFromWelcome: action.payload.isFromWelcome,
       };
     }
     default: {

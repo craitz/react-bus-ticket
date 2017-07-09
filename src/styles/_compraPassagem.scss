@@ -1,27 +1,48 @@
 $header-trajeto-width: 50px;
-.header-trajeto {
-    width: 100%;
-    height: $header-trajeto-width;
+.navbar-trajeto {
+    &::after {
+        @include afterShadow;
+    }
     background-color: #FF9800;
-    color: white;
-    font-family: 'Gruppo';
-    font-size: 3rem;
-    &-icon {
-        &.delimiter {
-            margin-left: 30px;
-            margin-right: 30px;
-            font-size: 2rem;
-            color: darken($googleBlue, 10%);
-        }
-        &.origem {
-            color: #388E3C;
-        }
-        &.destino {
-            color: #F44336;
-            margin-left: 10px;
+    font-family: 'Days One';
+    font-size: 1.7rem;
+    .container {
+        padding-left: 0;
+    }
+    a {
+        color: white !important;
+        line-height: 62px !important;
+        padding: 0 !important;
+        &:focus {
+            outline: none;
         }
     }
-    &.text {}
+    .navbar-trajeto-toggle {
+        margin-right: 0;
+    }
+    $size: 31px;
+    $firstArrowColor: rgba(black, .15);
+    $secondArrowColor: rgba(black, .15);
+    .first-nav {
+        padding-left: 40px;
+        padding-right: 35px;
+        margin-left: 0 !important;
+        background-color: $firstArrowColor;
+        .delimiter {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+    .arrow-nav {
+        margin-left: 0 !important;
+    }
+    .arrow-right {
+        width: 0;
+        height: 0;
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $firstArrowColor;
+    }
 }
 
 .comprar-passagem-container {

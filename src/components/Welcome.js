@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { withAuth } from '../shared/hoc';
-import { Glyphicon, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Col, Jumbotron } from 'react-bootstrap';
 import DivAnimated from '../shared/DivAnimated'
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import store from '../store';
 import * as actions from '../actions/modalTrajeto.actions';
+import { ButtonIconFit } from '../shared/ButtonIcon';
 
 export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-center welcome-button">
-    <Button className="btn btn-google-blue" onClick={handleComprar}>
-      <Glyphicon className="icon-title links comprar" glyph="shopping-cart" />
-      <span className="text-after-icon hidden-xs">Compre agora sua passagem</span>
-      <span className="text-after-icon hidden-sm hidden-md hidden-lg">Comprar passagens</span>
-    </Button>
+    <ButtonIconFit
+      type="button"
+      className="btn btn-google-blue"
+      labelAll="Compre agora sua passagem"
+      labelXs="Comprar passagens"
+      icon="shopping-cart"
+      onClick={handleComprar} />
   </div>
 
 class Welcome extends Component {
@@ -25,7 +28,7 @@ class Welcome extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    store.dispatch(actions.setVisible(true));
+    store.dispatch(actions.setVisible(true, true));
     // this.props.history.push('/comprar');
   }
 

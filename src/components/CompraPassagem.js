@@ -7,12 +7,14 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Row, Col, Jumbotron, Navbar, Nav, NavItem } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
+import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
+import { ButtonIcon, ButtonIconFit } from '../shared/ButtonIcon';
 
 const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
@@ -44,14 +46,6 @@ const helper = {
     });
   }
 };
-
-const ButtonComprar = () =>
-  <Button type="submit" bsStyle="primary" className="btn-google-blue">
-    <FontAwesome name="check"></FontAwesome>
-    <span className="text-after-icon hidden-xs">Finalizar compra</span>
-    <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
-  </Button>
-
 
 export const FormIda = ({ props }) => {
   const { horarios, poltronas, passagem } = props.fields;
@@ -104,7 +98,12 @@ export const FormIda = ({ props }) => {
       </Row>
       <hr />
       <div className="text-right">
-        <ButtonComprar />
+        <ButtonIconFit
+          type="submit"
+          className="btn-google-blue"
+          labelAll="Finalizar compra"
+          labelXs="Finalizar"
+          icon="check" />
       </div>
     </form >
   )
@@ -122,6 +121,8 @@ export class CompraPassagem extends Component {
     this.handleResetSeats = this.handleResetSeats.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
+    this.handleClickIdaVolta = this.handleClickIdaVolta.bind(this);
+    this.handleChangeTrajeto = this.handleChangeTrajeto.bind(this);
   }
 
   addPoltronaToSelect(current, value) {
@@ -145,6 +146,16 @@ export class CompraPassagem extends Component {
     } else {
       return '';
     }
+  }
+
+  handleClickIdaVolta() {
+    const { dispatch, isIdaVolta } = this.props;
+    dispatch(actions.setIdaVolta(!isIdaVolta));
+  }
+
+  handleChangeTrajeto(event) {
+    event.preventDefault();
+    this.props.dispatch(modalTrajetoActions.setVisible(true, false));
   }
 
   handleClickSeat(seat) {
@@ -446,8 +457,8 @@ export class CompraPassagem extends Component {
   }
 
   reset() {
-    const { cidades, dispatch } = this.props;
-    dispatch(actions.resetFormPassagem(cidades));
+    const { dispatch } = this.props;
+    dispatch(actions.resetFormPassagem());
     this.initializeValues();
   }
 
@@ -491,12 +502,11 @@ export class CompraPassagem extends Component {
 
 
   render() {
+    const { horarios, poltronas, cidades, passagem, isIdaVolta } = this.props;
+    const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
+    const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const formIdaProps = {
-      fields: {
-        horarios: this.props.horarios,
-        poltronas: this.props.poltronas,
-        passagem: this.props.passagem
-      },
+      fields: { horarios, poltronas, passagem },
       handlers: {
         handleChangeData: this.handleChangeData,
         handleChangeHorario: this.handleChangeHorario,
@@ -513,19 +523,28 @@ export class CompraPassagem extends Component {
           <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
           <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
         </PageHeader>
-        <Row className="header-trajeto">
-          <FontAwesome name="location-arrow" className="header-trajeto-icon origem" />
-          <span className="header-trajeto text origem text-after-icon">
-            <strong>Florianópolis (SC)</strong>
-          </span>
-
-          <FontAwesome name="exchange" className="header-trajeto-icon delimiter" />
-
-          <span className="header-trajeto text destino">
-            <strong>Curitiba (PR)</strong>
-          </span>
-          <FontAwesome name="map-marker" className="header-trajeto-icon destino" />
-        </Row>
+        <Navbar className="navbar-trajeto">
+          <Nav className="first-nav" onClick={this.handleChangeTrajeto}>
+            <NavItem>
+              <span>{cidades[passagem.origem.value].label}</span>
+              <FontAwesome name="arrow-right" className="delimiter" />
+              <span>{cidades[passagem.destino.value].label}</span>
+            </NavItem>
+          </Nav>
+          <Nav className="arrow-nav">
+            <NavItem>
+              <div className="arrow-right"></div>
+            </NavItem>
+          </Nav>
+          <Navbar.Text pullRight className="navbar-trajeto-toggle">
+            <ButtonIcon
+              type="button"
+              className="btn-google-glass"
+              label={getButtonLabel()}
+              icon={getButtonIcon()}
+              onClick={this.handleClickIdaVolta} />
+          </Navbar.Text>
+        </Navbar>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
@@ -545,7 +564,8 @@ const mapStateToProps = (state) => {
     cidades: state.compraPassagemState.cidades,
     horarios: state.compraPassagemState.horarios,
     poltronas: state.compraPassagemState.poltronas,
-    passagem: state.compraPassagemState.passagem
+    passagem: state.compraPassagemState.passagem,
+    isIdaVolta: state.compraPassagemState.isIdaVolta
   };
 };
 

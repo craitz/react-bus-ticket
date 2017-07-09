@@ -2,49 +2,51 @@ import Immutable from 'seamless-immutable';
 import { DateNowBr, ValidationStatus } from '../shared/Utils'
 import { CompraPassagemActionType } from '../actions/actionTypes'
 
+export const passagemInitialState = Immutable({
+  nome: {
+    text: '',
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
+  cpf: {
+    text: '',
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
+  origem: {
+    value: '',
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
+  destino: {
+    value: '',
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
+  poltrona: {
+    value: '',
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
+  data: DateNowBr,
+  horario: {
+    val: 0,
+    text: '',
+  },
+  dataCompra: DateNowBr
+});
+
 export const initialState = Immutable({
   cidades: [],
   horarios: [],
   poltronas: [],
   isIdaVolta: false,
-  passagem: {
-    nome: {
-      text: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    cpf: {
-      text: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    origem: {
-      value: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    destino: {
-      value: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    poltrona: {
-      value: '',
-      isPristine: true,
-      validation: ValidationStatus.NONE,
-      message: ''
-    },
-    data: DateNowBr,
-    horario: {
-      val: 0,
-      text: '',
-    },
-    dataCompra: DateNowBr
-  }
+  passagem: passagemInitialState
 });
 
 const reducer = (state = initialState, action = {}) => {
@@ -63,8 +65,8 @@ const reducer = (state = initialState, action = {}) => {
     }
     case CompraPassagemActionType.RESET_FORM_PASSAGEM: {
       return {
-        ...initialState,
-        cidades: action.payload
+        ...state,
+        passagem: { ...passagemInitialState }
       }
     }
     case CompraPassagemActionType.CHANGE_NOME: {

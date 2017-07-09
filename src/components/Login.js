@@ -7,7 +7,6 @@ import {
   FormGroup,
   InputGroup,
   Glyphicon,
-  Button,
   HelpBlock
 } from 'react-bootstrap';
 import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
@@ -18,13 +17,16 @@ import DivAnimated from '../shared/DivAnimated';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'
+import { ButtonIcon, ButtonIconFit } from '../shared/ButtonIcon';
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup>
-    <Button type="submit" bsStyle="primary" className="btn-block btn-google-blue btn-login" onClick={handleLogin}>
-      <Glyphicon glyph="log-in" />
-      <span className="text-after-icon btn-login-lable">Entrar</span>
-    </Button>
+    <ButtonIcon
+      type="button"
+      className="btn-block btn-google-blue btn-login"
+      label="Entrar"
+      icon="sign-in"
+      onClick={handleLogin} />
   </FormGroup>
 
 export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
@@ -53,7 +55,7 @@ export class Login extends Component {
 
   initLoadingDialog() {
     const { dispatch } = this.props;
-    dispatch(loadingActions.setLoadingMessage('Verificando credenciais...'));
+    dispatch(loadingActions.setLoadingMessage('Autenticando usuário...'));
     dispatch(loadingActions.setLoadingIcon('spinner'));
   }
 

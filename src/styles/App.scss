@@ -68,9 +68,16 @@ html {
         .navbar {
             padding: 50px;
             padding-left: 0;
+            padding-right: 0;
+            .container {
+                padding: 0;
+            }
         }
         .nav.navbar-nav {
             margin-left: 10px;
+        }
+        .navbar-right {
+            margin-right: 10px;
         }
     }
 }

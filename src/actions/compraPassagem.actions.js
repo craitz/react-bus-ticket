@@ -28,11 +28,8 @@ export const setPoltronas = (poltronas) => {
   }
 };
 
-export const resetFormPassagem = (cidades) => {
-  return {
-    type: CompraPassagemActionType.RESET_FORM_PASSAGEM,
-    payload: cidades
-  }
+export const resetFormPassagem = () => {
+  return { type: CompraPassagemActionType.RESET_FORM_PASSAGEM }
 };
 
 export const changeNome = (nome) => {

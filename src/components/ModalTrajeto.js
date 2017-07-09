@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
-import { Modal, FormGroup, HelpBlock, InputGroup, Button } from 'react-bootstrap';
+import { Modal, FormGroup, HelpBlock, InputGroup } from 'react-bootstrap';
 import Select from 'react-select';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
 import { withRouter } from 'react-router-dom'
+import { ButtonIcon } from '../shared/ButtonIcon';
 
 const SelectTrajeto = ({ list, value, placeholder, onChange, icon }) =>
   <InputGroup>
@@ -38,10 +39,7 @@ export class ModalTrajeto extends Component {
     this.onShow = this.onShow.bind(this);
   }
 
-  onShow() {
-    const { dispatch, cidades } = this.props;
-    dispatch(compraPassagemActions.resetFormPassagem(cidades));
-  }
+  onShow() { }
 
   handleChangeOrigem(value) {
     const { dispatch, origem, destino } = this.props;
@@ -112,13 +110,15 @@ export class ModalTrajeto extends Component {
   };
 
   render() {
-    const { isVisible, origem, destino, cidades, isIdaVolta } = this.props;
+    const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome } = this.props;
     const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
-
+    const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
+    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirma e fechar';
+    const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
     return (
       <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited} onShow={this.onShow}>
         <Modal.Header>
-          <span>Defina o trajeto</span>
+          <span>{getTitle()}</span>
           <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
         </Modal.Header>
         <form onSubmit={this.handleSubmit}>
@@ -145,10 +145,11 @@ export class ModalTrajeto extends Component {
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="submit" className="btn-block btn-google-glass btn-buscar">
-              <FontAwesome name="search" />
-              <span className="text-after-icon">Buscar passagens</span>
-            </Button>
+            <ButtonIcon
+              type="submit"
+              className="btn-block btn-google-glass"
+              label={getButtonLabel()}
+              icon={getButtonIcon()} />
           </Modal.Footer>
         </form>
       </Modal >
@@ -159,6 +160,7 @@ export class ModalTrajeto extends Component {
 const mapStateToProps = (state) => {
   return {
     isVisible: state.modalTrajetoState.isVisible,
+    isFromWelcome: state.modalTrajetoState.isFromWelcome,
     origem: state.compraPassagemState.passagem.origem,
     destino: state.compraPassagemState.passagem.destino,
     cidades: state.compraPassagemState.cidades,
