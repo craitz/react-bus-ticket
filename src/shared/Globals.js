@@ -3,6 +3,12 @@ import { SequenceArray, PoltronaStatus } from './Utils';
 import * as utils from './Utils';
 import moment from 'moment';
 
+
+const randomMinute = () => Math.floor((Math.random() * 59));
+const randomBoolean = () => !!Math.floor(Math.random() * 2);
+const randomPercent = percent => (Math.random() < percent);
+const getFutureDay = daysAhead => moment().add(daysAhead, 'days').format('YYYY/MM/DD');
+
 const fakeDataOptions = {
   days: 5,
   startHour: 8,
@@ -12,44 +18,37 @@ const fakeDataOptions = {
 }
 
 const generateFakeData = (cidades, options) => {
-  const cidadesOrigem = utils.deepCopy(cidades);
-  const cidadesDestino = utils.deepCopy(cidades);
   const { days, startHour, endHour, reservedPercentage, email } = options;
 
-  cidadesOrigem.forEach((origem, indexOrigem) => {
-    cidadesDestino.forEach((destino, indexDestino) => {
-      if (indexOrigem !== indexDestino) {
+  for (let o = 0; o < cidades.length; o++) {
+    for (let d = 0; d < cidades.length; d++) {
+      const origem = cidades[o];
+      const destino = cidades[d];
 
-        for (let i = 1; i <= days; i++) {
-          const dayAfter = moment().add(i, 'days').format('YYYY/MM/DD');
-          const formattedDayAfter = utils.dateToFirebase(dayAfter);
+      if (o !== d) { // só entre cidades diferentes!
 
-          for (let j = startHour; j <= endHour; j++) {
-            if (!!Math.floor(Math.random() * 2)) {
-              const minuto = Math.floor((Math.random() * 59) + 1);
-              const hora = j.toString().padStart(2, '0') + minuto.toString().padStart(2, '0');
+        for (let i = 1; i <= days; i++) { // número de dias a serem gerados
+          const data = utils.dateToFirebase(getFutureDay(i));
 
-              for (let k = 1; k <= 44; k++) {
-                if (Math.random() < reservedPercentage) {
+          for (let j = startHour; j <= endHour; j++) { // período válido para o horário
+            if (randomBoolean()) {
+              const horario = j.toString().padStart(2, '0') + randomMinute().toString().padStart(2, '0');
+
+              for (let k = 1; k <= 44; k++) { // poltronas
+                if (randomPercent(reservedPercentage)) {
                   const poltrona = k.toString().padStart(2, '0');
-                  const ref = `saidas/${origem}/${destino}/${formattedDayAfter}/${hora}/${poltrona}`;
-
-                  firebaseHelper.set({
-                    user: email
-                  }, ref)
-                    .then(() => {
-                      console.log(ref);
-                    });
+                  const ref = `saidas/${origem}/${destino}/${data}/${horario}/${poltrona}`;
+                  firebaseHelper.set({ user: email }, ref).then(() => {
+                    console.log(ref);
+                  });
                 }
               }
             }
           }
         }
       }
-      return destino;
-    });
-    return origem;
-  });
+    }
+  }
 };
 
 class Globals {
