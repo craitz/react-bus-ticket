@@ -78,10 +78,32 @@ export const changeOrigem = (origem) => {
   }
 };
 
+export const setOrigemDirty = () => {
+  return { type: CompraPassagemActionType.SET_ORIGEM_DIRTY }
+};
+
+export const setOrigemValidation = (validation, message) => {
+  return {
+    type: CompraPassagemActionType.SET_ORIGEM_VALIDATION,
+    payload: { validation, message }
+  }
+};
+
 export const changeDestino = (destino) => {
   return {
     type: CompraPassagemActionType.CHANGE_DESTINO,
     payload: destino
+  }
+};
+
+export const setDestinoDirty = () => {
+  return { type: CompraPassagemActionType.SET_DESTINO_DIRTY }
+};
+
+export const setDestinoValidation = (validation, message) => {
+  return {
+    type: CompraPassagemActionType.SET_DESTINO_VALIDATION,
+    payload: { validation, message }
   }
 };
 

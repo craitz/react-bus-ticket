@@ -35,7 +35,6 @@ const helper = {
   poltronaToFirebase(poltrona) {
     return new Promise((resolve) => {
       const todasPoltronas = globals.getPoltronas();
-      let poltronasFormatadas = '';
       const array = poltrona.split(',');
       const padArray = array.map(item => (todasPoltronas[item].label).padStart(2, '0'));
       padArray.sort();
@@ -53,43 +52,6 @@ const ButtonComprar = () =>
     <span className="text-after-icon hidden-sm hidden-md hidden-lg">Finalizar</span>
   </Button>
 
-export const FormTrajeto = ({ props }) => {
-  const { cidades, passagem } = props.fields;
-  const { handleChangeOrigem, handleChangeDestino } = props.handlers;
-  const { origem, destino } = passagem;
-
-  return (
-    <form>
-      <Row className="text-left title-row">
-        <Col xs={12}>
-          <FontAwesome name="compass" className="form-header--icon" />
-          <span className="title-after-icon">Selecione o trajeto</span>
-        </Col>
-      </Row>
-      {/*ORIGEM / DESTINO*/}
-      <Row className="text-left">
-        <Col xs={12} className="input-col">
-          <SelectField
-            id="origem"
-            label="Origem"
-            list={cidades}
-            value={origem.val}
-            onChange={handleChangeOrigem} />
-        </Col>
-      </Row>
-      <Row className="text-left">
-        <Col xs={12} className="input-col">
-          <SelectField
-            id="destino"
-            label="Destino"
-            list={cidades}
-            value={destino.val}
-            onChange={handleChangeDestino} />
-        </Col>
-      </Row>
-    </form >
-  )
-};
 
 export const FormIda = ({ props }) => {
   const { horarios, poltronas, passagem } = props.fields;
@@ -148,14 +110,11 @@ export const FormIda = ({ props }) => {
   )
 };
 
-
 export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;
     this.handleReset = this.handleReset.bind(this);
-    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
-    this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleChangeData = this.handleChangeData.bind(this);
@@ -230,27 +189,9 @@ export class CompraPassagem extends Component {
     dispatch(loadingActions.setLoadingIcon('spinner'));
   }
 
-
   componentDidMount() {
-    // this.getDefaults();
     this.initLoadingDialog();
   }
-
-  // getDefaults() {
-  //   const { dispatch } = this.props;
-  //   this.canRender = false;
-
-  //   globals.getCidades().then((cidades) => {
-  //     dispatch(actions.setCidades(cidades));
-  //     globals.getHorarios().then((horarios) => {
-  //       dispatch(actions.setHorarios(horarios));
-  //       dispatch(actions.setPoltronas(globals.getPoltronas()));
-  //       this.canRender = true;
-  //       this.reset();
-  //       this.forceUpdate();
-  //     });
-  //   });
-  // }
 
   updatePoltronas(origem, destino, data, horario) {
     const { dispatch } = this.props;
@@ -346,98 +287,9 @@ export class CompraPassagem extends Component {
 
   initializeValues() {
     const { dispatch, cidades } = this.props;
-
-    // initialize ORIGEM values
-    dispatch(actions.changeOrigem({
-      val: 0,
-      text: cidades[0]
-    }));
-
-    dispatch(actions.changeData(moment().format('DD/MM/YYYY')));
-
-    // initialize DESTINO values
-    dispatch(actions.changeDestino({
-      val: 1,
-      text: cidades[1]
-    }));
-
     const newHorario = this.updateHorarios(utils.DateNowBr, true);
+    dispatch(actions.changeData(moment().format('DD/MM/YYYY')));
     this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
-  }
-
-  handleChangeOrigem(event) {
-    const { cidades, dispatch, passagem } = this.props;
-    const { data, horario } = passagem;
-
-    // build ORIGEM new state
-    const origem = {
-      val: Number(event.target.value),
-      text: cidades[event.target.value]
-    };
-    // get DESTINO state
-    const destino = {
-      val: passagem.destino.val,
-      text: passagem.destino.text
-    };
-
-    // change ORIGEM state!
-    dispatch(actions.changeOrigem({
-      val: origem.val,
-      text: origem.text
-    }));
-
-    // if ORIGEM is already selected in DESTINO
-    if (origem.val === destino.val) {
-      // calculate new index for DESTINO
-      const newIndexDestino = (destino.val === 0) ? (destino.val + 1) : (destino.val - 1);
-      const newTextDestino = cidades[newIndexDestino];
-      // change DESTINO state!
-      dispatch(actions.changeDestino({
-        val: newIndexDestino,
-        text: newTextDestino
-      }));
-      this.updatePoltronas(origem.text, newTextDestino, data, horario.text);
-    } else {
-      this.updatePoltronas(origem.text, destino.text, data, horario.text);
-    }
-  }
-
-  handleChangeDestino(event) {
-    const { cidades, dispatch, passagem } = this.props;
-    const { data, horario } = passagem;
-
-    // build DESTINO new state
-    const destino = {
-      val: Number(event.target.value),
-      text: cidades[event.target.value]
-    };
-    // get ORIGEM state
-    const origem = {
-      val: passagem.origem.val,
-      text: passagem.origem.text
-    };
-
-    // change DESTINO state!
-    dispatch(actions.changeDestino({
-      val: destino.val,
-      text: destino.text
-    }));
-
-    // if DESTINO is already selected in ORIGEM
-    if (destino.val === origem.val) {
-      // calculate new index for ORIGEM
-      const newIndexOrigem = (origem.val === 0) ? (origem.val + 1) : (origem.val - 1);
-      const newTextOrigem = cidades[newIndexOrigem];
-
-      // change ORIGEM state!
-      dispatch(actions.changeOrigem({
-        val: newIndexOrigem,
-        text: newTextOrigem
-      }));
-      this.updatePoltronas(newTextOrigem, destino.text, data, horario.text);
-    } else {
-      this.updatePoltronas(origem.text, destino.text, data, horario.text);
-    }
   }
 
   updateStatusPoltronas(oldValue, newValue) {
@@ -639,21 +491,6 @@ export class CompraPassagem extends Component {
 
 
   render() {
-    if (!this.canRender) {
-      return null;
-    }
-
-    const formTrajetoProps = {
-      fields: {
-        cidades: this.props.cidades,
-        passagem: this.props.passagem
-      },
-      handlers: {
-        handleChangeOrigem: this.handleChangeOrigem,
-        handleChangeDestino: this.handleChangeDestino,
-      }
-    }
-
     const formIdaProps = {
       fields: {
         horarios: this.props.horarios,
@@ -670,43 +507,28 @@ export class CompraPassagem extends Component {
       }
     }
 
-    // const formTrajetoProps = {
-    //   fields: {
-    //     cidades: this.props.cidades,
-    //     horarios: this.props.horarios,
-    //     poltronas: this.props.poltronas,
-    //     passagem: this.props.passagem
-    //   },
-    //   handlers: {
-    //     handleChangeNome: this.handleChangeNome,
-    //     handleChangeCpf: this.handleChangeCpf,
-    //     handleChangeOrigem: this.handleChangeOrigem,
-    //     handleChangeDestino: this.handleChangeDestino,
-    //     handleChangeData: this.handleChangeData,
-    //     handleChangeHorario: this.handleChangeHorario,
-    //     handleChangePoltrona: this.handleChangePoltrona,
-    //     handleClickSeat: this.handleClickSeat,
-    //     handleResetSeats: this.handleResetSeats,
-    //     handleSubmit: this.handleSubmit
-    //   }
-    // }
-
     return (
       <div className="comprar-passagem-container">
         <PageHeader title="Compre sua passagem">
           <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
           <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
         </PageHeader>
+        <Row className="header-trajeto">
+          <FontAwesome name="location-arrow" className="header-trajeto-icon origem" />
+          <span className="header-trajeto text origem text-after-icon">
+            <strong>Florianópolis (SC)</strong>
+          </span>
+
+          <FontAwesome name="exchange" className="header-trajeto-icon delimiter" />
+
+          <span className="header-trajeto text destino">
+            <strong>Curitiba (PR)</strong>
+          </span>
+          <FontAwesome name="map-marker" className="header-trajeto-icon destino" />
+        </Row>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
-              {/*<Col xs={12} className="form-header text-left">
-                <span className="form-title hidden-xs">Por favor, preencha o formulário.</span>
-                <span className="form-title hidden-sm hidden-md hidden-lg">Preencha o formulário.</span>
-              </Col>*/}
-              <Jumbotron>
-                <FormTrajeto props={formTrajetoProps} />
-              </Jumbotron>
               <Jumbotron>
                 <FormIda props={formIdaProps} />
               </Jumbotron>

@@ -1,3 +1,29 @@
+$header-trajeto-width: 50px;
+.header-trajeto {
+    width: 100%;
+    height: $header-trajeto-width;
+    background-color: #FF9800;
+    color: white;
+    font-family: 'Gruppo';
+    font-size: 3rem;
+    &-icon {
+        &.delimiter {
+            margin-left: 30px;
+            margin-right: 30px;
+            font-size: 2rem;
+            color: darken($googleBlue, 10%);
+        }
+        &.origem {
+            color: #388E3C;
+        }
+        &.destino {
+            color: #F44336;
+            margin-left: 10px;
+        }
+    }
+    &.text {}
+}
+
 .comprar-passagem-container {
     @include containerHeight;
     .form-passagem-container {

@@ -152,13 +152,13 @@ export class Login extends Component {
         .then(() => {
           this.getListasDefault()
             .then(() => {
-              setTimeout(() => {
-                dispatch(loadingActions.setStatus(SavingStatus.DONE));
-                history.push({
-                  pathname: '/',
-                  state: {}
-                });
-              }, 1000);
+              // setTimeout(() => {
+              dispatch(loadingActions.setStatus(SavingStatus.DONE));
+              history.push({
+                pathname: '/',
+                state: {}
+              });
+              // }, 1000);
             });
         })
         .catch((error) => {

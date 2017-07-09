@@ -4,7 +4,7 @@ import { withAuth } from '../shared/hoc';
 import { connect } from 'react-redux';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
-import { Row, Col, Button, Jumbotron, FormControl } from 'react-bootstrap';
+import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
 import { BaseField, withInput, withInputMask } from '../shared/FormFields';
 import FontAwesome from 'react-fontawesome';
 import { firebaseHelper } from '../shared/FirebaseHelper';

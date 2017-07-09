@@ -156,6 +156,31 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
+    case CompraPassagemActionType.SET_ORIGEM_DIRTY: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          origem: {
+            ...state.passagem.origem,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_ORIGEM_VALIDATION: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          origem: {
+            ...state.passagem.origem,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
+      };
+    }
     case CompraPassagemActionType.CHANGE_DESTINO: {
       return {
         ...state,
@@ -165,6 +190,31 @@ const reducer = (state = initialState, action = {}) => {
           destino: {
             ...state.passagem.destino,
             value: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DESTINO_DIRTY: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          destino: {
+            ...state.passagem.destino,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DESTINO_VALIDATION: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          destino: {
+            ...state.passagem.destino,
+            validation: action.payload.validation,
+            message: action.payload.message
           }
         }
       };

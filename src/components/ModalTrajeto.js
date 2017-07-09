@@ -1,0 +1,175 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import FontAwesome from 'react-fontawesome';
+import { Modal, FormGroup, HelpBlock, InputGroup, Button } from 'react-bootstrap';
+import Select from 'react-select';
+import * as compraPassagemActions from '../actions/compraPassagem.actions';
+import * as actions from '../actions/modalTrajeto.actions';
+import * as utils from '../shared/Utils'
+import { withRouter } from 'react-router-dom'
+
+const SelectTrajeto = ({ list, value, placeholder, onChange, icon }) =>
+  <InputGroup>
+    <InputGroup.Addon>
+      <FontAwesome name={icon}></FontAwesome>
+    </InputGroup.Addon>
+    <Select
+      simpleValue
+      searchable={true}
+      clearable={false}
+      disabled={false}
+      placeholder={placeholder}
+      value={value}
+      options={list}
+      onChange={onChange}
+      noResultsText="Nenhum resultado"
+    />
+  </InputGroup>
+
+export class ModalTrajeto extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
+    this.handleChangeDestino = this.handleChangeDestino.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
+    this.handleChangeIdaVolta = this.handleChangeIdaVolta.bind(this);
+    this.handleExited = this.handleExited.bind(this);
+    this.onShow = this.onShow.bind(this);
+  }
+
+  onShow() {
+    const { dispatch, cidades } = this.props;
+    dispatch(compraPassagemActions.resetFormPassagem(cidades));
+  }
+
+  handleChangeOrigem(value) {
+    const { dispatch, origem, destino } = this.props;
+    const isPristine = origem.isPristine;
+    dispatch(compraPassagemActions.changeOrigem(value));
+    isPristine && dispatch(compraPassagemActions.setOrigemDirty());
+
+    // this.updateOrigemValidation(value);
+
+    // if ORIGEM is already selected in DESTINO, change DESTINO
+    const origemVal = parseInt(value, 10);
+    const destinoVal = parseInt(destino.value, 10);
+    if (origemVal === destinoVal) {
+      const newIndexDestino = (destinoVal === 0) ? (destinoVal + 1) : (destinoVal - 1);
+      dispatch(compraPassagemActions.changeDestino(newIndexDestino.toString()));
+    };
+  }
+
+  updateOrigemValidation(hasSelection) {
+    const { dispatch, origem } = this.props;
+    const oldOrigem = origem;
+
+    // test required
+    if (hasSelection) {
+      (oldOrigem.validation !== utils.ValidationStatus.NONE) &&
+        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.NONE, ''));
+    } else {
+      (oldOrigem.validation !== utils.ValidationStatus.ERROR) &&
+        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.ERROR, 'Escolha uma origem'));
+    }
+  }
+
+  handleChangeDestino(value) {
+    const { dispatch, origem, destino } = this.props;
+    const isPristine = destino.isPristine;
+    dispatch(compraPassagemActions.changeDestino(value));
+    isPristine && dispatch(compraPassagemActions.setDestinoDirty());
+
+    // if ORIGEM is already selected in DESTINO, change DESTINO
+    const origemVal = parseInt(origem.value, 10);
+    const destinoVal = parseInt(value, 10);
+    if (origemVal === destinoVal) {
+      const newIndexOrigem = (origemVal === 0) ? (origemVal + 1) : (origemVal - 1);
+      dispatch(compraPassagemActions.changeOrigem(newIndexOrigem.toString()));
+    };
+  };
+
+  handleChangeIdaVolta() {
+    const { dispatch, isIdaVolta } = this.props;
+    dispatch(compraPassagemActions.setIdaVolta(!isIdaVolta));
+  }
+
+  handleExited() {
+    const { dispatch } = this.props;
+    dispatch(actions.setVisible(false));
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { history, dispatch, origem, destino } = this.props;
+
+    if (!origem.value || !destino.value) {
+      return;
+    }
+
+    dispatch(actions.setVisible(false));
+    history.push('/comprar');
+  };
+
+  render() {
+    const { isVisible, origem, destino, cidades, isIdaVolta } = this.props;
+    const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
+
+    return (
+      <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited} onShow={this.onShow}>
+        <Modal.Header>
+          <span>Defina o trajeto</span>
+          <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
+        </Modal.Header>
+        <form onSubmit={this.handleSubmit}>
+          <Modal.Body>
+            <FormGroup controlId="origem" validationState={origem.validation}>
+              <SelectTrajeto
+                list={cidades}
+                value={origem.value}
+                placeholder="Escolha a origem"
+                onChange={this.handleChangeOrigem}
+                icon="location-arrow"
+              />
+              <HelpBlock>{origem.message}</HelpBlock>
+            </FormGroup>
+            <FormGroup controlId="destino" validationState={destino.validation}>
+              <SelectTrajeto
+                list={cidades}
+                value={destino.value}
+                placeholder="Escolha o destino"
+                onChange={this.handleChangeDestino}
+                icon="map-marker"
+              />
+              <HelpBlock>{destino.message}</HelpBlock>
+            </FormGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button type="submit" className="btn-block btn-google-glass btn-buscar">
+              <FontAwesome name="search" />
+              <span className="text-after-icon">Buscar passagens</span>
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal >
+    );
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isVisible: state.modalTrajetoState.isVisible,
+    origem: state.compraPassagemState.passagem.origem,
+    destino: state.compraPassagemState.passagem.destino,
+    cidades: state.compraPassagemState.cidades,
+    isIdaVolta: state.compraPassagemState.isIdaVolta
+  };
+};
+
+// ModalTrajeto.PropTypes = {}
+// ModalTrajeto.defaultProps = {}
+
+const ModalTrajetoWithRouter = withRouter(ModalTrajeto);
+export default connect(mapStateToProps)(ModalTrajetoWithRouter);
+
+

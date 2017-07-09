@@ -1,0 +1,47 @@
+.modal-trajeto-container {
+    .modal-dialog {
+        width: 360px;
+        // position: fixed;
+        // top: calc(50% - 238px/2);
+        // left: calc(50% - 300px/2);
+        color: white;
+        border-radius: 6px;
+        .modal-content {
+            .modal-header {
+                padding: 0 20px 0 20px;
+                border-bottom-color: rgba(white, .2);
+                font-family: 'Gruppo';
+                font-weight: bold;
+                font-size: 2rem;
+                line-height: 51px;
+                .ida-volta {
+                    font-size: 2rem;
+                    line-height: 51px !important;
+                    cursor: pointer;
+                }
+                .icon-ida-volta {}
+            }
+            .modal-body {
+                padding: 20px;
+                padding-bottom: 3px;
+                .input-group-addon {
+                    border-top-left-radius: 6px;
+                    border-bottom-left-radius: 6px;
+                }
+                .Select-control {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+            .modal-footer {
+                border-top-color: rgba(white, .2);
+            }
+            background-color: rgba(#FF9800, .9);
+            @include noSelection();
+            font-size: 1.5rem;
+            .loading-text-after-icon {
+                margin-left: 15px;
+            }
+        }
+    }
+}
