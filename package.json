@@ -10,7 +10,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
-    "react-bootstrap-date-picker": "^5.0.1",
     "react-bootstrap-maskedinput": "^0.2.1",
     "react-datetime": "^2.8.10",
     "react-dom": "^15.6.1",

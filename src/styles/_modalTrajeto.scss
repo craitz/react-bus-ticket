@@ -1,5 +1,11 @@
 .modal-trajeto-container {
+    .rdtDays {
+        color: initial;
+    }
     .modal-dialog {
+        input#data {
+            background-color: white;
+        }
         width: 360px;
         // position: fixed;
         // top: calc(50% - 238px/2);
@@ -31,6 +37,26 @@
                 .Select-control {
                     border-top-left-radius: 0;
                     border-bottom-left-radius: 0;
+                }
+                .Select-menu-outer {
+                    z-index: 101;
+                }
+                .input-date input {
+                    background-color: white !important;
+                    color: black !important;
+                    border-radius: 4px !important;
+                    border-top-left-radius: 0 !important;
+                    border-bottom-left-radius: 0 !important;
+                    z-index: 100;
+                }
+                .input-group-addon {
+                    // background-color: rgba(black, .2);
+                    // color: rgba(white, .7);
+                    // border-color: rgba(black, 0);
+                }
+                .rdtPicker {
+                    margin-top: 35px;
+                    left: -37px;
                 }
             }
             .modal-footer {

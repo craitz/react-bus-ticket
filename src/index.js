@@ -13,8 +13,11 @@ import Welcome from './components/Welcome';
 import PerfilUsuario from './components/PerfilUsuario';
 import LoadingDialog from './shared/LoadingDialog';
 import ModalTrajeto from './components/ModalTrajeto';
+import 'moment/locale/pt-br';
 import 'animate.css/animate.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-datetime/css/react-datetime.css';
+import 'react-select/dist/react-select.css';
 import './App.css';
 
 const runApp = () => {

@@ -15,11 +15,9 @@ import {
 } from 'react-bootstrap';
 import Select from 'react-select';
 import MaskedFormControl from 'react-bootstrap-maskedinput'
-import DateTime from 'react-datetime';
 import FontAwesome from 'react-fontawesome';
-import 'react-datetime/css/react-datetime.css';
-import 'moment/locale/pt-br';
-import 'react-select/dist/react-select.css';
+// import DateTime from 'react-datetime';
+
 
 // BASE FORM
 export class BaseField extends Component {
@@ -275,20 +273,20 @@ export const withDate = (WrappedComponent) => {
 
     render() {
       const { id, value, onChange } = this.props;
-      const yesterday = DateTime.moment().subtract(1, 'day');
-      const valid = (current) => current.isAfter(yesterday);
+      // const yesterday = DateTime.moment().subtract(1, 'day');
+      // const valid = (current) => current.isAfter(yesterday);
       const inputProps = { readOnly: true, id }
 
       return (
         <WrappedComponent {...this.props}>
-          <DateTime
+          {/*<DateTime
             locale="pt-br"
             closeOnSelect={true}
             timeFormat={false}
             isValidDate={valid}
             inputProps={inputProps}
             value={value}
-            onChange={onChange} />
+            onChange={onChange} />*/}
         </WrappedComponent>
       );
     }

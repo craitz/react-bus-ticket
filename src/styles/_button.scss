@@ -1,5 +1,5 @@
-@mixin googleButton($bkColor, $insetAlpha, $darken) {
-    color: white !important;
+@mixin googleButton($bkColor, $insetAlpha, $darken, $fgColor: white) {
+    color: $fgColor !important;
     background-color: $bkColor;
     background-image: none;
     border: none;
@@ -39,6 +39,9 @@
     }
     &-red {
         @include googleButton(rgb(219, 68, 55), .35, 10%);
+    }
+    &-white {
+        @include googleButton(white, .2, 10%, darkslategrey);
     }
     &-glass {
         @include googleButton(rgba(black, .15), .35, 10%);

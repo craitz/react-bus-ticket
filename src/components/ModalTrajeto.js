@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
-import { Modal, FormGroup, HelpBlock, InputGroup } from 'react-bootstrap';
+import { Row, Col, Modal, FormGroup, HelpBlock, InputGroup, FormControl } from 'react-bootstrap';
 import Select from 'react-select';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
 import { withRouter } from 'react-router-dom'
 import { ButtonIcon } from '../shared/ButtonIcon';
+import { BaseField, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
+import InputDate from '../shared/InputDate';
+import moment from 'moment';
+
+const DateField = withDate(BaseField);
+
+let openDate = false;
 
 const SelectTrajeto = ({ list, value, placeholder, onChange, icon }) =>
   <InputGroup>
@@ -37,9 +44,14 @@ export class ModalTrajeto extends Component {
     this.handleChangeIdaVolta = this.handleChangeIdaVolta.bind(this);
     this.handleExited = this.handleExited.bind(this);
     this.onShow = this.onShow.bind(this);
+    this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
   }
 
   onShow() { }
+
+  handleDatetimeKeyDown(event) {
+    event.preventDefault();
+  }
 
   handleChangeOrigem(value) {
     const { dispatch, origem, destino } = this.props;
@@ -111,10 +123,16 @@ export class ModalTrajeto extends Component {
 
   render() {
     const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome } = this.props;
+
     const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
     const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirma e fechar';
     const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
+
+    const yesterday = moment().subtract(1, 'day');
+    const futureDay = moment().add(5, 'days');
+    const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
+
     return (
       <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited} onShow={this.onShow}>
         <Modal.Header>
@@ -143,6 +161,28 @@ export class ModalTrajeto extends Component {
               />
               <HelpBlock>{destino.message}</HelpBlock>
             </FormGroup>
+            <Row>
+              <Col xs={6}>
+                <FormGroup controlId="data-ida">
+                  <InputGroup>
+                    <InputGroup.Addon>
+                      <FontAwesome name="calendar-plus-o" />
+                    </InputGroup.Addon>
+                    <InputDate placeholder="Dia da ida" isValidDate={valid} />
+                  </InputGroup>
+                </FormGroup>
+              </Col>
+              <Col xs={6}>
+                <FormGroup controlId="data-volta">
+                  <InputGroup>
+                    <InputGroup.Addon>
+                      <FontAwesome name="calendar-minus-o" />
+                    </InputGroup.Addon>
+                    <InputDate placeholder="Dia da volta" isValidDate={valid} />
+                  </InputGroup>
+                </FormGroup>
+              </Col>
+            </Row>
           </Modal.Body>
           <Modal.Footer>
             <ButtonIcon
