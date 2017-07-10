@@ -112,12 +112,17 @@ export class ModalTrajeto extends Component {
   }
 
   handleChangeOrigem(value) {
+    // não deixa selecionar um valor nulo
+    if (!value || value.length === 0) {
+      return;
+    }
+
     const { dispatch, origem, destino } = this.props;
     const isPristine = origem.isPristine;
     dispatch(compraPassagemActions.changeOrigem(value));
     isPristine && dispatch(compraPassagemActions.setOrigemDirty());
 
-    this.updateOrigemValidation(value);
+    // this.updateOrigemValidation(value);
 
     // if ORIGEM is already selected in DESTINO, change DESTINO
     const origemVal = parseInt(value, 10);
@@ -161,12 +166,17 @@ export class ModalTrajeto extends Component {
   }
 
   handleChangeDestino(value) {
+    // não deixa selecionar um valor nulo
+    if (!value || value.length === 0) {
+      return;
+    }
+
     const { dispatch, origem, destino } = this.props;
     const isPristine = destino.isPristine;
     dispatch(compraPassagemActions.changeDestino(value));
     isPristine && dispatch(compraPassagemActions.setDestinoDirty());
 
-    this.updateDestinoValidation(value);
+    // this.updateDestinoValidation(value);
 
     // if ORIGEM is already selected in DESTINO, change DESTINO
     const origemVal = parseInt(origem.value, 10);
@@ -189,13 +199,23 @@ export class ModalTrajeto extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { history, dispatch, validation } = this.props;
+    const { history, dispatch, validation, backupState } = this.props;
 
     if (!validation.all) {
       return;
     }
 
+    // if (backupState) {
+    //   dispatch(compraPassagemActions.backToState(backupState));
+    // }
+
+    dispatch(compraPassagemActions.SetFrozen(false));
     dispatch(actions.setVisible(false));
+
+    setTimeout(() => {
+      dispatch(compraPassagemActions.setOrigemDirty());
+    }, 100);
+
     history.push('/comprar');
   };
 
@@ -206,7 +226,7 @@ export class ModalTrajeto extends Component {
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
     const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirma e fechar';
     const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
-
+    const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
     const futureDay = moment().add(5, 'days');
     const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
@@ -215,7 +235,9 @@ export class ModalTrajeto extends Component {
       <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited} onShow={this.onShow}>
         <Modal.Header>
           <span>{getTitle()}</span>
-          <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
+          <TooltipOverlay text={getTooltip()} position="right">
+            <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
+          </TooltipOverlay>
         </Modal.Header>
         <form onSubmit={this.handleSubmit}>
           <Modal.Body>
@@ -291,6 +313,7 @@ const mapStateToProps = (state) => {
 
   return {
     isVisible: state.modalTrajetoState.isVisible,
+    backupState: state.modalTrajetoState.backupState,
     isFromWelcome: state.modalTrajetoState.isFromWelcome,
     origem: passagem.origem,
     destino: passagem.destino,

@@ -45,6 +45,7 @@ export const initialState = Immutable({
   horarios: [],
   poltronas: [],
   isIdaVolta: false,
+  isFrozen: false,
   passagem: { ...passagemInitialState },
   passagemVolta: { ...passagemInitialState }
 });
@@ -382,6 +383,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         passagemVolta: { ...state.passagemVolta, horario: action.payload }
       };
+    }
+    case CompraPassagemActionType.BACK_TO_STATE: {
+      return { ...action.payload }
+    }
+    case CompraPassagemActionType.SET_FROZEN: {
+      return {
+        ...state,
+        isFrozen: action.payload
+      }
     }
     default: {
       return state;

@@ -29,7 +29,6 @@ class Welcome extends Component {
   handleComprarPassagem(event) {
     event.preventDefault();
     store.dispatch(actions.setVisible(true, true));
-    // this.props.history.push('/comprar');
   }
 
   handlePesquisarPassagens(event) {

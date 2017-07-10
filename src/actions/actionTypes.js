@@ -43,7 +43,7 @@ export const LoadingDialogActionType = {
 }
 
 export const ModalTrajetoActionType = {
-  SET_VISIBLE: 'SET_VISIBLE',
+  SET_VISIBLE: 'SET_VISIBLE'
 }
 
 export const CompraPassagemActionType = {
@@ -78,5 +78,7 @@ export const CompraPassagemActionType = {
   SET_DATA_VOLTA_VALIDATION: 'SET_DATA_VOLTA_VALIDATION',
   CHANGE_HORARIO: 'CHANGE_HORARIO',
   CHANGE_HORARIO_VOLTA: 'CHANGE_HORARIO_VOLTA',
-  SET_IDA_VOLTA: 'SET_IDA_VOLTA'
+  SET_IDA_VOLTA: 'SET_IDA_VOLTA',
+  BACK_TO_STATE: 'BACK_TO_STATE',
+  SET_FROZEN: 'SET_FROZEN'
 };

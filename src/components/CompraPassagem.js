@@ -155,7 +155,9 @@ export class CompraPassagem extends Component {
 
   handleChangeTrajeto(event) {
     event.preventDefault();
-    this.props.dispatch(modalTrajetoActions.setVisible(true, false));
+    const { dispatch, snapshot } = this.props;
+    dispatch(actions.SetFrozen(true));
+    dispatch(modalTrajetoActions.setVisible(true, false, utils.deepCopy(snapshot)));
   }
 
   handleClickSeat(seat) {
@@ -187,6 +189,10 @@ export class CompraPassagem extends Component {
     const hasSelection = (newPoltronaVal.length > 0);
     this.updatePoltronaValidation(hasSelection);
 
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !this.props.isFrozen;
   }
 
   handleResetSeats() {
@@ -565,7 +571,9 @@ const mapStateToProps = (state) => {
     horarios: state.compraPassagemState.horarios,
     poltronas: state.compraPassagemState.poltronas,
     passagem: state.compraPassagemState.passagem,
-    isIdaVolta: state.compraPassagemState.isIdaVolta
+    isIdaVolta: state.compraPassagemState.isIdaVolta,
+    isFrozen: state.compraPassagemState.isFrozen,
+    snapshot: state.compraPassagemState
   };
 };
 

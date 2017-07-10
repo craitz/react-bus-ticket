@@ -194,3 +194,17 @@ export const setIdaVolta = (isIdaVolta) => {
     payload: isIdaVolta
   }
 };
+
+export const backToState = (oldState) => {
+  return {
+    type: CompraPassagemActionType.BACK_TO_STATE,
+    payload: oldState
+  }
+};
+
+export const SetFrozen = (isFrozen) => {
+  return {
+    type: CompraPassagemActionType.SET_FROZEN,
+    payload: isFrozen
+  }
+};
