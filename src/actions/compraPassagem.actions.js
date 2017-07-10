@@ -75,6 +75,13 @@ export const changeOrigem = (origem) => {
   }
 };
 
+export const changeOrigemVolta = (origem) => {
+  return {
+    type: CompraPassagemActionType.CHANGE_ORIGEM_VOLTA,
+    payload: origem
+  }
+};
+
 export const setOrigemDirty = () => {
   return { type: CompraPassagemActionType.SET_ORIGEM_DIRTY }
 };
@@ -89,6 +96,13 @@ export const setOrigemValidation = (validation, message) => {
 export const changeDestino = (destino) => {
   return {
     type: CompraPassagemActionType.CHANGE_DESTINO,
+    payload: destino
+  }
+};
+
+export const changeDestinoVolta = (destino) => {
+  return {
+    type: CompraPassagemActionType.CHANGE_DESTINO_VOLTA,
     payload: destino
   }
 };
@@ -111,6 +125,13 @@ export const changePoltrona = (poltrona) => {
   }
 };
 
+export const changePoltronaVolta = (poltrona) => {
+  return {
+    type: CompraPassagemActionType.CHANGE_POLTRONA_VOLTA,
+    payload: poltrona
+  }
+};
+
 export const setPoltronaDirty = () => {
   return { type: CompraPassagemActionType.SET_POLTRONA_DIRTY }
 };
@@ -129,9 +150,23 @@ export const changeData = (data) => {
   }
 };
 
+export const changeDataVolta = (data) => {
+  return {
+    type: CompraPassagemActionType.CHANGE_DATA_VOLTA,
+    payload: data
+  }
+};
+
 export const changeHorario = (horario) => {
   return {
     type: CompraPassagemActionType.CHANGE_HORARIO,
+    payload: horario
+  }
+};
+
+export const changeHorarioVolta = (horario) => {
+  return {
+    type: CompraPassagemActionType.CHANGE_HORARIO_VOLTA,
     payload: horario
   }
 };

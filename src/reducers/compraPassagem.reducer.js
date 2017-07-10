@@ -5,24 +5,18 @@ import { CompraPassagemActionType } from '../actions/actionTypes'
 export const passagemInitialState = Immutable({
   nome: {
     text: '',
-    isPristine: true,
-    validation: ValidationStatus.NONE,
-    message: ''
   },
   cpf: {
     text: '',
-    isPristine: true,
-    validation: ValidationStatus.NONE,
-    message: ''
   },
   origem: {
-    value: '',
+    value: '0',
     isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   },
   destino: {
-    value: '',
+    value: '1',
     isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
@@ -46,7 +40,8 @@ export const initialState = Immutable({
   horarios: [],
   poltronas: [],
   isIdaVolta: false,
-  passagem: passagemInitialState
+  passagem: { ...passagemInitialState },
+  passagemVolta: { ...passagemInitialState }
 });
 
 const reducer = (state = initialState, action = {}) => {
@@ -66,7 +61,8 @@ const reducer = (state = initialState, action = {}) => {
     case CompraPassagemActionType.RESET_FORM_PASSAGEM: {
       return {
         ...state,
-        passagem: { ...passagemInitialState }
+        passagem: { ...passagemInitialState },
+        passagemVolta: { ...passagemInitialState }
       }
     }
     case CompraPassagemActionType.CHANGE_NOME: {
@@ -158,6 +154,19 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
+    case CompraPassagemActionType.CHANGE_ORIGEM_VOLTA: {
+      return {
+        ...state,
+        passagemVolta:
+        {
+          ...state.passagemVolta,
+          origem: {
+            ...state.passagemVolta.origem,
+            value: action.payload
+          }
+        }
+      };
+    }
     case CompraPassagemActionType.SET_ORIGEM_DIRTY: {
       return {
         ...state,
@@ -191,6 +200,19 @@ const reducer = (state = initialState, action = {}) => {
           ...state.passagem,
           destino: {
             ...state.passagem.destino,
+            value: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.CHANGE_DESTINO_VOLTA: {
+      return {
+        ...state,
+        passagemVolta:
+        {
+          ...state.passagemVolta,
+          destino: {
+            ...state.passagemVolta.destino,
             value: action.payload
           }
         }
@@ -233,6 +255,18 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
+    case CompraPassagemActionType.CHANGE_POLTRONA_VOLTA: {
+      return {
+        ...state,
+        passagemVolta: {
+          ...state.passagemVolta,
+          poltrona: {
+            ...state.passagemVolta.poltrona,
+            value: action.payload
+          }
+        }
+      };
+    }
     case CompraPassagemActionType.SET_POLTRONA_DIRTY: {
       return {
         ...state,
@@ -264,10 +298,22 @@ const reducer = (state = initialState, action = {}) => {
         passagem: { ...state.passagem, data: action.payload }
       };
     }
+    case CompraPassagemActionType.CHANGE_DATA_VOLTA: {
+      return {
+        ...state,
+        passagemVolta: { ...state.passagemVolta, data: action.payload }
+      };
+    }
     case CompraPassagemActionType.CHANGE_HORARIO: {
       return {
         ...state,
         passagem: { ...state.passagem, horario: action.payload }
+      };
+    }
+    case CompraPassagemActionType.CHANGE_HORARIO_VOLTA: {
+      return {
+        ...state,
+        passagemVolta: { ...state.passagemVolta, horario: action.payload }
       };
     }
     default: {

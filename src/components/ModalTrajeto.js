@@ -45,9 +45,21 @@ export class ModalTrajeto extends Component {
     this.handleExited = this.handleExited.bind(this);
     this.onShow = this.onShow.bind(this);
     this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
+    this.handleChangeDataIda = this.handleChangeDataIda.bind(this);
+    this.handleChangeDataVolta = this.handleChangeDataVolta.bind(this);
   }
 
   onShow() { }
+
+  handleChangeDataIda(momentValue) {
+    const data = momentValue.format('DD/MM/YYYY');
+    this.props.dispatch(compraPassagemActions.changeData(data));
+  }
+
+  handleChangeDataVolta(momentValue) {
+    const data = momentValue.format('DD/MM/YYYY');
+    this.props.dispatch(compraPassagemActions.changeDataVolta(data));
+  }
 
   handleDatetimeKeyDown(event) {
     event.preventDefault();
@@ -122,7 +134,7 @@ export class ModalTrajeto extends Component {
   };
 
   render() {
-    const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome } = this.props;
+    const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome, data, dataVolta } = this.props;
 
     const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
@@ -162,26 +174,36 @@ export class ModalTrajeto extends Component {
               <HelpBlock>{destino.message}</HelpBlock>
             </FormGroup>
             <Row>
-              <Col xs={6}>
+              <Col xs={isIdaVolta ? 6 : 12}>
                 <FormGroup controlId="data-ida">
                   <InputGroup>
                     <InputGroup.Addon>
-                      <FontAwesome name="calendar-plus-o" />
+                      <FontAwesome name="arrow-right" />
                     </InputGroup.Addon>
-                    <InputDate placeholder="Dia da ida" isValidDate={valid} />
+                    <InputDate
+                      value={data}
+                      placeholder="Dia da ida"
+                      isValidDate={valid}
+                      onChange={this.handleChangeDataIda} />
                   </InputGroup>
                 </FormGroup>
               </Col>
-              <Col xs={6}>
-                <FormGroup controlId="data-volta">
-                  <InputGroup>
-                    <InputGroup.Addon>
-                      <FontAwesome name="calendar-minus-o" />
-                    </InputGroup.Addon>
-                    <InputDate placeholder="Dia da volta" isValidDate={valid} />
-                  </InputGroup>
-                </FormGroup>
-              </Col>
+              {isIdaVolta &&
+                <Col xs={6}>
+                  <FormGroup controlId="data-volta">
+                    <InputGroup>
+                      <InputGroup.Addon>
+                        <FontAwesome name="arrow-left" />
+                      </InputGroup.Addon>
+                      <InputDate
+                        value={dataVolta}
+                        placeholder="Dia da volta"
+                        isValidDate={valid}
+                        onChange={this.handleChangeDataVolta} />
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              }
             </Row>
           </Modal.Body>
           <Modal.Footer>
@@ -203,6 +225,10 @@ const mapStateToProps = (state) => {
     isFromWelcome: state.modalTrajetoState.isFromWelcome,
     origem: state.compraPassagemState.passagem.origem,
     destino: state.compraPassagemState.passagem.destino,
+    origemVolta: state.compraPassagemState.passagemVolta.origem,
+    destinoVolta: state.compraPassagemState.passagemVolta.destino,
+    data: state.compraPassagemState.passagem.data,
+    dataVolta: state.compraPassagemState.passagemVolta.data,
     cidades: state.compraPassagemState.cidades,
     isIdaVolta: state.compraPassagemState.isIdaVolta
   };
