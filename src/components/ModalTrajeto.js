@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
-import { Row, Col, Modal, FormGroup, HelpBlock, InputGroup, FormControl } from 'react-bootstrap';
+import { Row, Col, Modal, FormGroup, InputGroup, Label } from 'react-bootstrap';
 import Select from 'react-select';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
 import { withRouter } from 'react-router-dom'
 import { ButtonIcon } from '../shared/ButtonIcon';
-import { BaseField, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import InputDate from '../shared/InputDate';
-import moment from 'moment';
+import * as moment from 'moment';
+import TooltipOverlay from '../shared/TooltipOverlay';
 
-const DateField = withDate(BaseField);
-
-let openDate = false;
-
-const SelectTrajeto = ({ list, value, placeholder, onChange, icon }) =>
-  <InputGroup>
+const AddOn = ({ tooltip, icon }) =>
+  <TooltipOverlay text={tooltip} position="top">
     <InputGroup.Addon>
-      <FontAwesome name={icon}></FontAwesome>
+      <FontAwesome name={icon} />
     </InputGroup.Addon>
+  </TooltipOverlay>
+
+const ErrorBlock = ({ message }) => {
+  if (message.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="bloco-ajuda">
+      <Label>
+        <FontAwesome name="exclamation" />
+        <span className="text-after-icon">{message}</span>
+      </Label>
+    </div>
+  );
+}
+
+const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip }) =>
+  <InputGroup>
+    <AddOn tooltip={tooltip} icon={icon} />
     <Select
       simpleValue
       searchable={true}
@@ -52,13 +68,43 @@ export class ModalTrajeto extends Component {
   onShow() { }
 
   handleChangeDataIda(momentValue) {
-    const data = momentValue.format('DD/MM/YYYY');
-    this.props.dispatch(compraPassagemActions.changeData(data));
+    const { dispatch, data } = this.props;
+    const isPristine = data.isPristine;
+    const strData = momentValue.format('DD/MM/YYYY');
+
+    this.props.dispatch(compraPassagemActions.changeData(strData));
+    isPristine && dispatch(compraPassagemActions.setDataDirty());
+    this.updateDataValidation(momentValue);
+  }
+
+  updateDataValidation(momentIda) {
+    const { dispatch, dataVolta } = this.props;
+    const momentVolta = moment(dataVolta.value, 'DD/MM/YYYY');
+
+    if (momentIda.isAfter(momentVolta)) {
+      const strDataIda = momentIda.format('DD/MM/YYYY');
+      dispatch(compraPassagemActions.changeDataVolta(strDataIda));
+    }
   }
 
   handleChangeDataVolta(momentValue) {
-    const data = momentValue.format('DD/MM/YYYY');
-    this.props.dispatch(compraPassagemActions.changeDataVolta(data));
+    const { dispatch, dataVolta } = this.props;
+    const isPristine = dataVolta.isPristine;
+    const strData = momentValue.format('DD/MM/YYYY');
+
+    this.props.dispatch(compraPassagemActions.changeDataVolta(strData));
+    isPristine && dispatch(compraPassagemActions.setDataVoltaDirty());
+    this.updateDataVoltaValidation(momentValue);
+  }
+
+  updateDataVoltaValidation(momentVolta) {
+    const { dispatch, data } = this.props;
+    const momentIda = moment(data.value, 'DD/MM/YYYY');
+
+    if (momentVolta.isBefore(momentIda)) {
+      const strDataVolta = momentVolta.format('DD/MM/YYYY');
+      dispatch(compraPassagemActions.changeData(strDataVolta));
+    }
   }
 
   handleDatetimeKeyDown(event) {
@@ -71,7 +117,7 @@ export class ModalTrajeto extends Component {
     dispatch(compraPassagemActions.changeOrigem(value));
     isPristine && dispatch(compraPassagemActions.setOrigemDirty());
 
-    // this.updateOrigemValidation(value);
+    this.updateOrigemValidation(value);
 
     // if ORIGEM is already selected in DESTINO, change DESTINO
     const origemVal = parseInt(value, 10);
@@ -90,9 +136,27 @@ export class ModalTrajeto extends Component {
     if (hasSelection) {
       (oldOrigem.validation !== utils.ValidationStatus.NONE) &&
         dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.NONE, ''));
+      return true;
     } else {
       (oldOrigem.validation !== utils.ValidationStatus.ERROR) &&
-        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.ERROR, 'Escolha uma origem'));
+        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
+      return false;
+    }
+  }
+
+  updateDestinoValidation(hasSelection) {
+    const { dispatch, destino } = this.props;
+    const oldDestino = destino;
+
+    // test required
+    if (hasSelection) {
+      (oldDestino.validation !== utils.ValidationStatus.NONE) &&
+        dispatch(compraPassagemActions.setDestinoValidation(utils.ValidationStatus.NONE, ''));
+      return true;
+    } else {
+      (oldDestino.validation !== utils.ValidationStatus.ERROR) &&
+        dispatch(compraPassagemActions.setDestinoValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
+      return false;
     }
   }
 
@@ -101,6 +165,8 @@ export class ModalTrajeto extends Component {
     const isPristine = destino.isPristine;
     dispatch(compraPassagemActions.changeDestino(value));
     isPristine && dispatch(compraPassagemActions.setDestinoDirty());
+
+    this.updateDestinoValidation(value);
 
     // if ORIGEM is already selected in DESTINO, change DESTINO
     const origemVal = parseInt(origem.value, 10);
@@ -123,9 +189,9 @@ export class ModalTrajeto extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { history, dispatch, origem, destino } = this.props;
+    const { history, dispatch, validation } = this.props;
 
-    if (!origem.value || !destino.value) {
+    if (!validation.all) {
       return;
     }
 
@@ -160,8 +226,9 @@ export class ModalTrajeto extends Component {
                 placeholder="Escolha a origem"
                 onChange={this.handleChangeOrigem}
                 icon="location-arrow"
+                tooltip="Origem"
               />
-              <HelpBlock>{origem.message}</HelpBlock>
+              <ErrorBlock message={origem.message} />
             </FormGroup>
             <FormGroup controlId="destino" validationState={destino.validation}>
               <SelectTrajeto
@@ -170,37 +237,36 @@ export class ModalTrajeto extends Component {
                 placeholder="Escolha o destino"
                 onChange={this.handleChangeDestino}
                 icon="map-marker"
+                tooltip="Destino"
               />
-              <HelpBlock>{destino.message}</HelpBlock>
+              <ErrorBlock message={destino.message} />
             </FormGroup>
             <Row>
-              <Col xs={isIdaVolta ? 6 : 12}>
-                <FormGroup controlId="data-ida">
+              <Col xs={isIdaVolta ? 6 : 12} className="col-ida">
+                <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
-                    <InputGroup.Addon>
-                      <FontAwesome name="arrow-right" />
-                    </InputGroup.Addon>
+                    <AddOn tooltip="Data de ida" icon="arrow-right" />
                     <InputDate
-                      value={data}
+                      value={data.value}
                       placeholder="Dia da ida"
                       isValidDate={valid}
                       onChange={this.handleChangeDataIda} />
                   </InputGroup>
+                  <ErrorBlock message={data.message} />
                 </FormGroup>
               </Col>
               {isIdaVolta &&
-                <Col xs={6}>
-                  <FormGroup controlId="data-volta">
+                <Col xs={6} className="col-volta">
+                  <FormGroup controlId="data-volta" validationState={dataVolta.validation}>
                     <InputGroup>
-                      <InputGroup.Addon>
-                        <FontAwesome name="arrow-left" />
-                      </InputGroup.Addon>
+                      <AddOn tooltip="Data de volta" icon="arrow-left" />
                       <InputDate
-                        value={dataVolta}
+                        value={dataVolta.value}
                         placeholder="Dia da volta"
                         isValidDate={valid}
                         onChange={this.handleChangeDataVolta} />
                     </InputGroup>
+                    <ErrorBlock message={dataVolta.message} />
                   </FormGroup>
                 </Col>
               }
@@ -220,18 +286,26 @@ export class ModalTrajeto extends Component {
 };
 
 const mapStateToProps = (state) => {
+  const { passagem, passagemVolta } = state.compraPassagemState;
+  const error = utils.ValidationStatus.ERROR;
+
   return {
     isVisible: state.modalTrajetoState.isVisible,
     isFromWelcome: state.modalTrajetoState.isFromWelcome,
-    origem: state.compraPassagemState.passagem.origem,
-    destino: state.compraPassagemState.passagem.destino,
-    origemVolta: state.compraPassagemState.passagemVolta.origem,
-    destinoVolta: state.compraPassagemState.passagemVolta.destino,
-    data: state.compraPassagemState.passagem.data,
-    dataVolta: state.compraPassagemState.passagemVolta.data,
+    origem: passagem.origem,
+    destino: passagem.destino,
+    origemVolta: passagemVolta.origem,
+    destinoVolta: passagemVolta.destino,
+    data: passagem.data,
+    dataVolta: passagemVolta.data,
     cidades: state.compraPassagemState.cidades,
-    isIdaVolta: state.compraPassagemState.isIdaVolta
-  };
+    isIdaVolta: state.compraPassagemState.isIdaVolta,
+    validation: {
+      origem: passagem.origem.validation !== error,
+      destino: passagem.destino.validation !== error,
+      all: ((passagem.origem.validation !== error) && (passagem.destino.validation !== error))
+    }
+  }
 };
 
 // ModalTrajeto.PropTypes = {}

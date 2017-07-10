@@ -2,7 +2,8 @@
 // $tooltipColor: rgba(217, 83, 79, 1);
 // $tooltipColor: rgba(92, 184, 92, 1);
 // $tooltipColor: rgba(91, 192, 222, 1);
-$tooltipColor: rgba(purple, .9);
+// $tooltipColor: rgba(purple, .9);
+$tooltipColor: rgba(#424242, 1);
 .tooltip {
     &>.tooltip-inner {
         background-color: $tooltipColor;

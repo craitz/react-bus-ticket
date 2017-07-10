@@ -11,19 +11,19 @@
   src: url(./styles/fonts/DaysOne-Regular.ttf) format("trueType"); }
 
 .tooltip > .tooltip-inner {
-  background-color: rgba(128, 0, 128, 0.9); }
+  background-color: #424242; }
 
 .tooltip.bottom > .tooltip-arrow {
-  border-bottom-color: rgba(128, 0, 128, 0.9); }
+  border-bottom-color: #424242; }
 
 .tooltip.top > .tooltip-arrow {
-  border-top-color: rgba(128, 0, 128, 0.9); }
+  border-top-color: #424242; }
 
 .tooltip.left > .tooltip-arrow {
-  border-left-color: rgba(128, 0, 128, 0.9); }
+  border-left-color: #424242; }
 
 .tooltip.right > .tooltip-arrow {
-  border-right-color: rgba(128, 0, 128, 0.9); }
+  border-right-color: #424242; }
 
 .App {
   text-align: center; }
@@ -735,6 +735,39 @@
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .rdtPicker {
         margin-top: 35px;
         left: -37px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-ida {
+        padding-right: 10px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-volta {
+        padding-left: 10px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .Select-control {
+        border: 1px solid #e71d36; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .Select-control .Select-arrow {
+          border-color: #e71d36 transparent transparent; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .Select-control .Select-value-label {
+          color: #e71d36; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .bloco-ajuda {
+        margin-top: 7px;
+        position: relative; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .bloco-ajuda .label {
+          -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+          -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+          font-size: 1.1rem;
+          background-color: #e71d36;
+          color: white;
+          padding: 5px 10px 5px 10px;
+          border-radius: 3px; }
+          .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .bloco-ajuda .label::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid #e71d36;
+            clear: both; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
       border-top-color: rgba(255, 255, 255, 0.2); }
     .modal-trajeto-container .modal-dialog .modal-content .loading-text-after-icon {

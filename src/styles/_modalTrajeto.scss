@@ -1,3 +1,18 @@
+$colorHasError: rgb(231, 29, 54);
+$arrowSize: 6px;
+@mixin arrowUp {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: (1px - $arrowSize);
+    width: 0;
+    height: 0;
+    border-left: $arrowSize solid transparent;
+    border-right: $arrowSize solid transparent;
+    border-bottom: $arrowSize solid $colorHasError;
+    clear: both;
+}
+
 .modal-trajeto-container {
     .rdtDays {
         color: initial;
@@ -7,9 +22,6 @@
             background-color: white;
         }
         width: 360px;
-        // position: fixed;
-        // top: calc(50% - 238px/2);
-        // left: calc(50% - 300px/2);
         color: white;
         border-radius: 6px;
         .modal-content {
@@ -53,6 +65,38 @@
                 .rdtPicker {
                     margin-top: 35px;
                     left: -37px;
+                }
+                .col-ida {
+                    padding-right: 10px;
+                }
+                .col-volta {
+                    padding-left: 10px;
+                }
+                .has-error {
+                    .Select-control {
+                        border: 1px solid $colorHasError;
+                        .Select-arrow {
+                            border-color: $colorHasError rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)
+                        }
+                        .Select-value-label {
+                            color: $colorHasError;
+                        }
+                    }
+                    .bloco-ajuda {
+                        margin-top: 7px;
+                        position: relative;
+                        .label {
+                            @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+                            font-size: 1.1rem;
+                            background-color: $colorHasError;
+                            color: white;
+                            padding: 5px 10px 5px 10px;
+                            border-radius: 3px;
+                            &::before {
+                                @include arrowUp;
+                            }
+                        }
+                    }
                 }
             }
             .modal-footer {

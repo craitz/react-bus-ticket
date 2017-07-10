@@ -27,7 +27,12 @@ export const passagemInitialState = Immutable({
     validation: ValidationStatus.NONE,
     message: ''
   },
-  data: DateNowBr,
+  data: {
+    value: DateNowBr,
+    isPristine: true,
+    validation: ValidationStatus.NONE,
+    message: ''
+  },
   horario: {
     val: 0,
     text: '',
@@ -295,13 +300,75 @@ const reducer = (state = initialState, action = {}) => {
     case CompraPassagemActionType.CHANGE_DATA: {
       return {
         ...state,
-        passagem: { ...state.passagem, data: action.payload }
+        passagem: {
+          ...state.passagem,
+          data: {
+            ...state.passagem.data,
+            value: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DATA_DIRTY: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          data: {
+            ...state.passagem.data,
+            isPristine: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DATA_VALIDATION: {
+      return {
+        ...state,
+        passagem: {
+          ...state.passagem,
+          data: {
+            ...state.passagem.data,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
       };
     }
     case CompraPassagemActionType.CHANGE_DATA_VOLTA: {
       return {
         ...state,
-        passagemVolta: { ...state.passagemVolta, data: action.payload }
+        passagemVolta: {
+          ...state.passagemVolta,
+          data: {
+            ...state.passagemVolta.data,
+            value: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DATA_VOLTA_DIRTY: {
+      return {
+        ...state,
+        passagemVolta: {
+          ...state.passagemVolta,
+          data: {
+            ...state.passagemVolta.data,
+            isPristine: action.payload
+          }
+        }
+      };
+    }
+    case CompraPassagemActionType.SET_DATA_VOLTA_VALIDATION: {
+      return {
+        ...state,
+        passagemVolta: {
+          ...state.passagemVolta,
+          data: {
+            ...state.passagemVolta.data,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
       };
     }
     case CompraPassagemActionType.CHANGE_HORARIO: {

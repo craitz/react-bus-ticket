@@ -272,21 +272,8 @@ export const withDate = (WrappedComponent) => {
   return class DateField extends Component {
 
     render() {
-      const { id, value, onChange } = this.props;
-      // const yesterday = DateTime.moment().subtract(1, 'day');
-      // const valid = (current) => current.isAfter(yesterday);
-      const inputProps = { readOnly: true, id }
-
       return (
         <WrappedComponent {...this.props}>
-          {/*<DateTime
-            locale="pt-br"
-            closeOnSelect={true}
-            timeFormat={false}
-            isValidDate={valid}
-            inputProps={inputProps}
-            value={value}
-            onChange={onChange} />*/}
         </WrappedComponent>
       );
     }

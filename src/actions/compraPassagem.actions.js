@@ -149,14 +149,31 @@ export const changeData = (data) => {
     payload: data
   }
 };
+export const setDataDirty = () => {
+  return { type: CompraPassagemActionType.SET_DATA_DIRTY }
+};
 
+export const setDataValidation = (validation, message) => {
+  return {
+    type: CompraPassagemActionType.SET_DATA_VALIDATION,
+    payload: { validation, message }
+  }
+};
 export const changeDataVolta = (data) => {
   return {
     type: CompraPassagemActionType.CHANGE_DATA_VOLTA,
     payload: data
   }
 };
-
+export const setDataVoltaDirty = () => {
+  return { type: CompraPassagemActionType.SET_DATA_VOLTA_DIRTY }
+};
+export const setDataVoltaValidation = (validation, message) => {
+  return {
+    type: CompraPassagemActionType.SET_DATA_VOLTA_VALIDATION,
+    payload: { validation, message }
+  }
+};
 export const changeHorario = (horario) => {
   return {
     type: CompraPassagemActionType.CHANGE_HORARIO,
