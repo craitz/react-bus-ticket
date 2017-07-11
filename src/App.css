@@ -98,6 +98,12 @@
   .App .navbar .container .nav-fontes {
     margin: 15px 0 15px 13px; } }
 
+@keyframes SHAKER {
+  0% {
+    margin-left: 5px; }
+  100% {
+    margin-left: initial; } }
+
 .navbar-trajeto {
   background-color: #FF9800;
   font-family: 'Days One';
@@ -118,11 +124,14 @@
   .navbar-trajeto .container {
     padding-left: 0; }
   .navbar-trajeto a {
-    color: white !important;
     line-height: 62px !important;
     padding: 0 !important; }
     .navbar-trajeto a:focus {
       outline: none; }
+    .navbar-trajeto a span {
+      color: white; }
+  .navbar-trajeto .navbar-nav > li > a:hover {
+    animation: pulse 500ms !important; }
   .navbar-trajeto .navbar-trajeto-toggle {
     margin-right: 0; }
   .navbar-trajeto .first-nav {

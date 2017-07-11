@@ -1,8 +1,8 @@
 import { ModalTrajetoActionType } from './actionTypes'
 
-export const setVisible = (isVisible, isFromWelcome = false, backupState = null) => {
+export const setVisible = (isVisible, isFromWelcome = false, snapshot = null) => {
   return {
     type: ModalTrajetoActionType.SET_VISIBLE,
-    payload: { isVisible, isFromWelcome, backupState }
+    payload: { isVisible, isFromWelcome, snapshot }
   }
 };

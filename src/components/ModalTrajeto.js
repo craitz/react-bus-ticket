@@ -59,28 +59,27 @@ export class ModalTrajeto extends Component {
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeIdaVolta = this.handleChangeIdaVolta.bind(this);
     this.handleExited = this.handleExited.bind(this);
-    this.onShow = this.onShow.bind(this);
     this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
     this.handleChangeDataIda = this.handleChangeDataIda.bind(this);
     this.handleChangeDataVolta = this.handleChangeDataVolta.bind(this);
   }
-
-  onShow() { }
 
   handleChangeDataIda(momentValue) {
     const { dispatch, data } = this.props;
     const isPristine = data.isPristine;
     const strData = momentValue.format('DD/MM/YYYY');
 
-    this.props.dispatch(compraPassagemActions.changeData(strData));
-    isPristine && dispatch(compraPassagemActions.setDataDirty());
-    this.updateDataValidation(momentValue);
+    this.props.dispatch(compraPassagemActions.changeData(strData)); // muda a data de ida
+    isPristine && dispatch(compraPassagemActions.setDataDirty()); // seta dirty
+    this.updateDataValidation(momentValue); // verifica validade das datas
   }
 
   updateDataValidation(momentIda) {
     const { dispatch, dataVolta } = this.props;
     const momentVolta = moment(dataVolta.value, 'DD/MM/YYYY');
 
+    // se a ida é depois da volta, seta a volta
+    // para a mesma data da ida
     if (momentIda.isAfter(momentVolta)) {
       const strDataIda = momentIda.format('DD/MM/YYYY');
       dispatch(compraPassagemActions.changeDataVolta(strDataIda));
@@ -92,15 +91,17 @@ export class ModalTrajeto extends Component {
     const isPristine = dataVolta.isPristine;
     const strData = momentValue.format('DD/MM/YYYY');
 
-    this.props.dispatch(compraPassagemActions.changeDataVolta(strData));
-    isPristine && dispatch(compraPassagemActions.setDataVoltaDirty());
-    this.updateDataVoltaValidation(momentValue);
+    this.props.dispatch(compraPassagemActions.changeDataVolta(strData)); // muda a data de volta
+    isPristine && dispatch(compraPassagemActions.setDataVoltaDirty()); // seta dirty
+    this.updateDataVoltaValidation(momentValue); // verifica validade das datas
   }
 
   updateDataVoltaValidation(momentVolta) {
     const { dispatch, data } = this.props;
     const momentIda = moment(data.value, 'DD/MM/YYYY');
 
+    // se a volta é antes da ida, seta a ida
+    // para a mesma data da volta
     if (momentVolta.isBefore(momentIda)) {
       const strDataVolta = momentVolta.format('DD/MM/YYYY');
       dispatch(compraPassagemActions.changeData(strDataVolta));
@@ -108,23 +109,22 @@ export class ModalTrajeto extends Component {
   }
 
   handleDatetimeKeyDown(event) {
-    event.preventDefault();
+    event.preventDefault(); // transforma os inputs data em readonly
   }
 
   handleChangeOrigem(value) {
-    // não deixa selecionar um valor nulo
+    // Se limpou o input origem, cancela o evento e retorna sem fazer nada
+    // Ou seja, o input nunca pode ficar vazio
     if (!value || value.length === 0) {
       return;
     }
 
     const { dispatch, origem, destino } = this.props;
     const isPristine = origem.isPristine;
-    dispatch(compraPassagemActions.changeOrigem(value));
-    isPristine && dispatch(compraPassagemActions.setOrigemDirty());
+    dispatch(compraPassagemActions.changeOrigem(value)); // muda a origem
+    isPristine && dispatch(compraPassagemActions.setOrigemDirty()); // seta dirty
 
-    // this.updateOrigemValidation(value);
-
-    // if ORIGEM is already selected in DESTINO, change DESTINO
+    // Se a origem é a mesma do destino, muda o destino
     const origemVal = parseInt(value, 10);
     const destinoVal = parseInt(destino.value, 10);
     if (origemVal === destinoVal) {
@@ -133,52 +133,19 @@ export class ModalTrajeto extends Component {
     };
   }
 
-  updateOrigemValidation(hasSelection) {
-    const { dispatch, origem } = this.props;
-    const oldOrigem = origem;
-
-    // test required
-    if (hasSelection) {
-      (oldOrigem.validation !== utils.ValidationStatus.NONE) &&
-        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.NONE, ''));
-      return true;
-    } else {
-      (oldOrigem.validation !== utils.ValidationStatus.ERROR) &&
-        dispatch(compraPassagemActions.setOrigemValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
-      return false;
-    }
-  }
-
-  updateDestinoValidation(hasSelection) {
-    const { dispatch, destino } = this.props;
-    const oldDestino = destino;
-
-    // test required
-    if (hasSelection) {
-      (oldDestino.validation !== utils.ValidationStatus.NONE) &&
-        dispatch(compraPassagemActions.setDestinoValidation(utils.ValidationStatus.NONE, ''));
-      return true;
-    } else {
-      (oldDestino.validation !== utils.ValidationStatus.ERROR) &&
-        dispatch(compraPassagemActions.setDestinoValidation(utils.ValidationStatus.ERROR, 'Campo obrigatório'));
-      return false;
-    }
-  }
-
   handleChangeDestino(value) {
-    // não deixa selecionar um valor nulo
+    // Se limpou o input destino, cancela o evento e retorna sem fazer nada
+    // Ou seja, o input nunca pode ficar vazio
     if (!value || value.length === 0) {
       return;
     }
 
     const { dispatch, origem, destino } = this.props;
     const isPristine = destino.isPristine;
-    dispatch(compraPassagemActions.changeDestino(value));
-    isPristine && dispatch(compraPassagemActions.setDestinoDirty());
+    dispatch(compraPassagemActions.changeDestino(value)); // muda o destino
+    isPristine && dispatch(compraPassagemActions.setDestinoDirty()); // seta dirty
 
-    // this.updateDestinoValidation(value);
-
-    // if ORIGEM is already selected in DESTINO, change DESTINO
+    // Se o destino é o mesmo da origem, muda a origem
     const origemVal = parseInt(origem.value, 10);
     const destinoVal = parseInt(value, 10);
     if (origemVal === destinoVal) {
@@ -187,36 +154,38 @@ export class ModalTrajeto extends Component {
     };
   };
 
-  handleChangeIdaVolta() {
+  handleChangeIdaVolta() { // se clicou no toggle ida/ida-volta
     const { dispatch, isIdaVolta } = this.props;
-    dispatch(compraPassagemActions.setIdaVolta(!isIdaVolta));
+    dispatch(compraPassagemActions.setIdaVolta(!isIdaVolta)); // toggle
   }
 
-  handleExited() {
-    const { dispatch } = this.props;
-    dispatch(actions.setVisible(false));
+  handleExited() { // se cancelou as alterações
+    const { dispatch, snapshot, isFromWelcome } = this.props;
+    dispatch(actions.setVisible(false)); // fecha o modal
+    dispatch(compraPassagemActions.SetFrozen(false)); // descongela o form ComprarPassagem
+
+    // volta ao estado antes das alterações, caso tenha sido chamado do form ComprarPassagem
+    !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { history, dispatch, validation, backupState } = this.props;
+    const { history, dispatch, validation } = this.props;
 
+    // se alguma validação falhou, retorna sem fazer nada
     if (!validation.all) {
       return;
     }
 
-    // if (backupState) {
-    //   dispatch(compraPassagemActions.backToState(backupState));
-    // }
-
-    dispatch(compraPassagemActions.SetFrozen(false));
-    dispatch(actions.setVisible(false));
+    dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
+    dispatch(actions.setVisible(false)); // fecha o modal
 
     setTimeout(() => {
+      // altera um estado qualquer, apenas para forçar o render no form CompraPassagem
       dispatch(compraPassagemActions.setOrigemDirty());
-    }, 100);
+    }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
 
-    history.push('/comprar');
+    history.push('/comprar'); // retorna ao form CompraPassagem
   };
 
   render() {
@@ -232,7 +201,7 @@ export class ModalTrajeto extends Component {
     const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
 
     return (
-      <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited} onShow={this.onShow}>
+      <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited}>
         <Modal.Header>
           <span>{getTitle()}</span>
           <TooltipOverlay text={getTooltip()} position="right">
@@ -313,8 +282,8 @@ const mapStateToProps = (state) => {
 
   return {
     isVisible: state.modalTrajetoState.isVisible,
-    backupState: state.modalTrajetoState.backupState,
     isFromWelcome: state.modalTrajetoState.isFromWelcome,
+    snapshot: state.modalTrajetoState.snapshot,
     origem: passagem.origem,
     destino: passagem.destino,
     origemVolta: passagemVolta.origem,

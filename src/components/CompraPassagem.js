@@ -157,7 +157,7 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     const { dispatch, snapshot } = this.props;
     dispatch(actions.SetFrozen(true));
-    dispatch(modalTrajetoActions.setVisible(true, false, utils.deepCopy(snapshot)));
+    dispatch(modalTrajetoActions.setVisible(true, false, snapshot));
   }
 
   handleClickSeat(seat) {

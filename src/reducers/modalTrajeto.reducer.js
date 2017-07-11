@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable';
 export const initialState = Immutable({
   isVisible: false,
   isFromWelcome: false,
-  backupState: null
+  snapshot: null
 });
 
 const reducer = (state = initialState, action = {}) => {
@@ -14,7 +14,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isVisible: action.payload.isVisible,
         isFromWelcome: action.payload.isFromWelcome,
-        backupState: action.payload.backupState,
+        snapshot: action.payload.snapshot
       };
     }
     default: {
