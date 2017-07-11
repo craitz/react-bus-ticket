@@ -1,68 +1,123 @@
-@keyframes SHAKER {
-    0% {
-        margin-left: 5px
-    }
-    100% {
-        margin-left: initial
-    }
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
-$header-trajeto-width: 50px;
+/*
+font-family: 'Oswald', sans-serif;
+font-family: 'Archivo Black', sans-serif;
+font-family: 'Russo One', sans-serif;
+font-family: 'Days One', sans-serif;
+font-family: 'Coda', cursive;
+font-family: 'Michroma', sans-serif;
+font-family: 'Aldrich', sans-serif;
+font-family: 'Squada One', cursive;
+font-family: 'Krona One', sans-serif;
+font-family: 'Sonsie One', cursive;
+*/
+
 .navbar-trajeto {
+    background-color: #FF9800;
+    font-family: 'Days One', sans-serif;
+    font-size: 1.7rem;
+    .text-trajeto {
+        @include noSelection;
+        line-height: 50px;
+        color: rgba(black, .5);
+        margin-top: 0;
+        margin-bottom: 0;
+        .text-trajeto-cidades-icondestino {
+            margin-left: 20px;
+        }
+        .text-trajeto-data {
+            // margin-left: 30px;
+            &-icon {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+        .icon {
+            color: rgba(black, .3);
+        }
+        .delimiter {
+            margin-left: 25px;
+            margin-right: 25px;
+            color: rgba(black, .3);
+        }
+    }
+    .text-config {
+        @include noSelection;
+        line-height: 47px;
+        color: rgba(black, .5);
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 0;
+    }
     &::after {
         @include afterShadow;
     }
-    background-color: #FF9800;
-    font-family: 'Days One';
-    font-size: 1.7rem;
-    .container {
-        padding-left: 0;
-    }
-    a {
-        line-height: 62px !important;
-        padding: 0 !important;
-        &:focus {
-            outline: none;
-        }
-        span {
-            color: white;
-        }
-    }
-    .navbar-nav>li>a {
-        // margin-left: initial !important;
-        // transition: linear all 400ms;
-        &:hover {
-            animation: pulse 500ms !important;
-        }
-    }
-    .navbar-trajeto-toggle {
-        margin-right: 0;
-    }
-    $size: 31px;
-    $firstArrowColor: rgba(black, .15);
-    $secondArrowColor: rgba(black, .15);
-    .first-nav {
-        padding-left: 40px;
-        padding-right: 35px;
-        margin-left: 0 !important;
-        background-color: $firstArrowColor;
-        .delimiter {
-            margin-left: 20px;
-            margin-right: 20px;
-        }
-    }
-    .arrow-nav {
-        margin-left: 0 !important;
-    }
-    .arrow-right {
-        width: 0;
-        height: 0;
-        border-top: $size solid transparent;
-        border-bottom: $size solid transparent;
-        border-left: $size solid $firstArrowColor;
-    }
 }
 
+// @keyframes SHAKER {
+//     0% {
+//         margin-left: 5px
+//     }
+//     100% {
+//         margin-left: initial
+//     }
+// }
+// $header-trajeto-width: 50px;
+// .navbar-trajeto {
+//     &::after {
+//         @include afterShadow;
+//     }
+//     background-color: #FF9800;
+//     font-family: 'Days One';
+//     font-size: 1.7rem;
+//     .container {
+//         padding-left: 0;
+//     }
+//     a {
+//         line-height: 62px !important;
+//         padding: 0 !important;
+//         &:focus {
+//             outline: none;
+//         }
+//         span {
+//             color: white;
+//         }
+//     }
+//     .navbar-nav>li>a {
+//         // margin-left: initial !important;
+//         // transition: linear all 400ms;
+//         &:hover {
+//             animation: pulse 500ms !important;
+//         }
+//     }
+//     .navbar-trajeto-toggle {
+//         margin-right: 0;
+//     }
+//     $size: 31px;
+//     $firstArrowColor: rgba(black, .15);
+//     $secondArrowColor: rgba(black, .15);
+//     .first-nav {
+//         padding-left: 40px;
+//         padding-right: 35px;
+//         margin-left: 0 !important;
+//         background-color: $firstArrowColor;
+//         .delimiter {
+//             margin-left: 20px;
+//             margin-right: 20px;
+//         }
+//     }
+//     .arrow-nav {
+//         margin-left: 0 !important;
+//     }
+//     .arrow-right {
+//         width: 0;
+//         height: 0;
+//         border-top: $size solid transparent;
+//         border-bottom: $size solid transparent;
+//         border-left: $size solid $firstArrowColor;
+//     }
+// }
 .comprar-passagem-container {
     @include containerHeight;
     .form-passagem-container {

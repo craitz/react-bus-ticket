@@ -508,7 +508,7 @@ export class CompraPassagem extends Component {
 
 
   render() {
-    const { horarios, poltronas, cidades, passagem, isIdaVolta } = this.props;
+    const { horarios, poltronas, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
     const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const formIdaProps = {
@@ -523,6 +523,13 @@ export class CompraPassagem extends Component {
       }
     }
 
+    const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
+    const strDataIda = momentIda.format('DD/MMM/YYYY');
+    const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
+    const strDataVolta = momentVolta.format('DD/MMM/YYYY');
+    const strOrigem = cidades[passagem.origem.value].label;
+    const strDestino = cidades[passagem.destino.value].label;
+
     return (
       <div className="comprar-passagem-container">
         <PageHeader title="Compre sua passagem">
@@ -530,7 +537,33 @@ export class CompraPassagem extends Component {
           <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
         </PageHeader>
         <Navbar className="navbar-trajeto">
-          <Nav className="first-nav" onClick={this.handleChangeTrajeto}>
+          <Navbar.Text className="text-trajeto">
+            <span className="text-trajeto-cidades">
+              <FontAwesome name="location-arrow" className="icon" />
+              <span className="text-after-icon">{strOrigem}</span>
+              <FontAwesome name="map-marker" className="text-trajeto-cidades-icondestino icon" />
+              <span className="text-after-icon">{strDestino}</span>
+            </span>
+            <span className="delimiter">|</span>
+            <span className="text-trajeto-data">
+              <span>{strDataIda}</span>
+              {isIdaVolta &&
+                <span>
+                  <FontAwesome name="exchange" className="text-trajeto-data-icon icon" />
+                  <span>{strDataVolta}</span>
+                </span>}
+            </span>
+          </Navbar.Text>
+          <Navbar.Text pullRight className="text-config">
+            <ButtonIcon
+              type="button"
+              className="btn-google-glass"
+              label="Alterar"
+              icon="cog"
+              onClick={this.handleChangeTrajeto} />
+          </Navbar.Text>
+
+          {/*<Nav className="first-nav" onClick={this.handleChangeTrajeto}>
             <NavItem>
               <span>{cidades[passagem.origem.value].label}</span>
               <FontAwesome name="arrow-right" className="delimiter" />
@@ -549,7 +582,7 @@ export class CompraPassagem extends Component {
               label={getButtonLabel()}
               icon={getButtonIcon()}
               onClick={this.handleClickIdaVolta} />
-          </Navbar.Text>
+          </Navbar.Text>*/}
         </Navbar>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
@@ -571,6 +604,7 @@ const mapStateToProps = (state) => {
     horarios: state.compraPassagemState.horarios,
     poltronas: state.compraPassagemState.poltronas,
     passagem: state.compraPassagemState.passagem,
+    passagemVolta: state.compraPassagemState.passagemVolta,
     isIdaVolta: state.compraPassagemState.isIdaVolta,
     isFrozen: state.compraPassagemState.isFrozen,
     snapshot: state.compraPassagemState
