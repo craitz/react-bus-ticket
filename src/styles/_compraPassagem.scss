@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab');
+@mixin labelData {
+    font-family: 'Carrois Gothic', sans-serif;
+    font-size: 1.3rem;
+    padding-bottom: 3px;
+    @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+    span {
+        color: white;
+    }
+}
 
-/*
-font-family: 'Oswald', sans-serif;
-font-family: 'Archivo Black', sans-serif;
-font-family: 'Russo One', sans-serif;
-font-family: 'Days One', sans-serif;
-font-family: 'Coda', cursive;
-font-family: 'Michroma', sans-serif;
-font-family: 'Aldrich', sans-serif;
-font-family: 'Squada One', cursive;
-font-family: 'Krona One', sans-serif;
-font-family: 'Sonsie One', cursive;
-*/
+@mixin collapseTrigger {
+    font-family: 'Carrois Gothic', sans-serif;
+}
 
 .navbar-trajeto {
     background-color: #FF9800;
@@ -27,10 +27,14 @@ font-family: 'Sonsie One', cursive;
             margin-left: 20px;
         }
         .text-trajeto-data {
-            // margin-left: 30px;
-            &-icon {
+            &-ida {
+                background-color: $googleGreen;
+                @include labelData;
+            }
+            &-volta {
+                background-color: $googleRed;
                 margin-left: 10px;
-                margin-right: 10px;
+                @include labelData;
             }
         }
         .icon {
@@ -63,61 +67,7 @@ font-family: 'Sonsie One', cursive;
 //         margin-left: initial
 //     }
 // }
-// $header-trajeto-width: 50px;
-// .navbar-trajeto {
-//     &::after {
-//         @include afterShadow;
-//     }
-//     background-color: #FF9800;
-//     font-family: 'Days One';
-//     font-size: 1.7rem;
-//     .container {
-//         padding-left: 0;
-//     }
-//     a {
-//         line-height: 62px !important;
-//         padding: 0 !important;
-//         &:focus {
-//             outline: none;
-//         }
-//         span {
-//             color: white;
-//         }
-//     }
-//     .navbar-nav>li>a {
-//         // margin-left: initial !important;
-//         // transition: linear all 400ms;
-//         &:hover {
 //             animation: pulse 500ms !important;
-//         }
-//     }
-//     .navbar-trajeto-toggle {
-//         margin-right: 0;
-//     }
-//     $size: 31px;
-//     $firstArrowColor: rgba(black, .15);
-//     $secondArrowColor: rgba(black, .15);
-//     .first-nav {
-//         padding-left: 40px;
-//         padding-right: 35px;
-//         margin-left: 0 !important;
-//         background-color: $firstArrowColor;
-//         .delimiter {
-//             margin-left: 20px;
-//             margin-right: 20px;
-//         }
-//     }
-//     .arrow-nav {
-//         margin-left: 0 !important;
-//     }
-//     .arrow-right {
-//         width: 0;
-//         height: 0;
-//         border-top: $size solid transparent;
-//         border-bottom: $size solid transparent;
-//         border-left: $size solid $firstArrowColor;
-//     }
-// }
 .comprar-passagem-container {
     @include containerHeight;
     .form-passagem-container {
@@ -137,34 +87,89 @@ font-family: 'Sonsie One', cursive;
                     font-size: 2rem;
                 }
             }
-            .jumbotron {
-                border: none;
-                padding: 15px;
-                padding-top: 0;
-                .title-row {
-                    @include formHeader;
-                }
-                .text-left.row.first {
-                    padding-top: 60px;
-                }
-                .text-left.row.last {
-                    padding-bottom: 10px;
-                }
-                .btn-limpar {
-                    margin-right: 10px;
-                }
-                .input-col {
-                    margin-top: 10px;
-                }
-                input#data {
-                    background-color: white;
-                }
-                .error-empty {
-                    color: rgb(169, 68, 66);
-                    font-size: inherit;
-                }
-                hr {
-                    margin-top: 0;
+            .horarios-container {
+                position: relative;
+                width: 780px;
+                left: calc(50% - 390px);
+                // background-color: red;
+                .Collapsible {
+                    $size: 380px;
+                    .collapse-trigger {
+                        width: $size !important;
+                        position: relative;
+                        left: 0;
+                        @include collapseTrigger;
+                    }
+                    .bus-seat-select {
+                        position: relative;
+                        width: $size !important;
+                        padding: 10px;
+                        background-color: rgba(black, .05);
+                        .bus-row {
+                            padding: 3px 15px 3px 12px;
+                            $colorFree: rgb(51, 180, 255);
+                            $colorSelected: #FFB300;
+                            $colorReserved: black;
+                            .label {
+                                @include noSelection();
+                                background-color: $colorFree;
+                                @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
+                                // background-color: rgba(#4CAF50, .9);
+                                // @include boxShadow(6px 0px 0px -1px darken(rgba(#4CAF50, .9), 10%));
+                                margin-right: 8px;
+                                padding: 2px 3px 2px 4px;
+                                font-size: 1.4rem;
+                                // font-weight: 300;
+                                cursor: pointer;
+                                &.reserved {
+                                    cursor: not-allowed;
+                                    background-color: rgba($colorReserved, .2);
+                                    @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .4), 20%));
+                                }
+                                &.selected {
+                                    background-color: $colorSelected;
+                                    @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
+                                    // background-color: rgba(#F44336, .9);
+                                    // @include boxShadow(6px 0px 0px -1px darken(rgba(#F44336, .9), 15%));
+                                }
+                                &.legenda {
+                                    // font-weight: bold;
+                                    // font-family: 'Gruppo';
+                                    // font-size: 1.6rem;
+                                    cursor: default;
+                                }
+                            }
+                            &.corredor-acima {
+                                padding-top: 0;
+                                padding-bottom: 8px;
+                            }
+                            &.corredor-abaixo {
+                                padding-top: 8px;
+                                padding-bottom: 0;
+                            }
+                            &.bus-row-legenda {
+                                padding-left: 0;
+                                padding-right: 15px;
+                            }
+                        }
+                    }
+                    hr {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .clean-bus {
+                        padding-top: 0;
+                        padding-bottom: 0;
+                    }
+                    .jumbotron {
+                        margin-bottom: 0;
+                        padding: 8px 15px 8px 10px;
+                        border-radius: 3% / 50%;
+                        border-bottom-right-radius: 10px;
+                        border-top-right-radius: 10px;
+                        border: 1px solid rgba(grey, .1);
+                        border-left: 10px solid rgba(grey, .1);
+                    }
                 }
             }
         }

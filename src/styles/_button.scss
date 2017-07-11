@@ -38,7 +38,10 @@
         @include googleButton(purple, .2, 10%);
     }
     &-red {
-        @include googleButton(rgb(219, 68, 55), .35, 10%);
+        @include googleButton($googleRed, .35, 10%);
+    }
+    &-green {
+        @include googleButton($googleGreen, .35, 10%);
     }
     &-white {
         @include googleButton(white, .2, 10%, darkslategrey);

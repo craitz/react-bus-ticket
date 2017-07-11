@@ -134,13 +134,13 @@ export class Login extends Component {
       const { dispatch } = this.props;
       globals.getCidades().then((cidades) => {
         dispatch(compraPassagemActions.setCidades(cidades));
-        globals.getHorarios().then((horarios) => {
-          dispatch(compraPassagemActions.setHorarios(horarios));
-          dispatch(compraPassagemActions.setPoltronas(globals.getPoltronas()));
-          resolve();
-        });
+        // globals.getHorarios().then((horarios) => {
+        //   dispatch(compraPassagemActions.setHorarios(horarios));
+        //   dispatch(compraPassagemActions.setPoltronas(globals.getPoltronas()));
+        resolve();
       });
     });
+    // });
   }
 
   handleLogin(event) {

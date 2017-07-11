@@ -7,7 +7,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Row, Col, Jumbotron, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Row, Col, Jumbotron, Navbar, Nav, NavItem, Collapse, Label, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -15,6 +15,7 @@ import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import { ButtonIcon, ButtonIconFit } from '../shared/ButtonIcon';
+import Collapsible from 'react-collapsible';
 
 const SelectField = withSelect(BaseField);
 const MultiSelectField = withMultiSelect(BaseField);
@@ -47,6 +48,84 @@ const helper = {
   }
 };
 
+const Seat = ({ children, className, onClickSeat, value }) => {
+  return (
+    <Label bsSize="xsmall" bsStyle="default" className={className} onClick={() => onClickSeat(value)}>{children}</Label>
+  );
+}
+
+const BusRow = ({ rowClass, seats, onClickSeat, row }) => {
+  const getValue = index => seats[index].value;
+  const getLabel = index => seats[index].label;
+  const getStatus = index => seats[index].status;
+
+  return (
+    <Row className={rowClass}>
+      {row.map((seat, index) =>
+        <Seat
+          key={index}
+          bsStyle="default"
+          className={getStatus(seat)}
+          onClickSeat={onClickSeat}
+          value={getValue(seat)}>
+          {getLabel(seat)}
+        </Seat>)}
+    </Row>
+
+  );
+}
+
+const BusSeatsSelect = ({ seats, onClickSeat, onResetSeats }) => {
+  return (
+    <div className="bus-seat-select">
+      {/*<Row className="bus-row bus-row-legenda">
+        <Col xs={12}>
+          <Label bsSize="xsmall" className="free legenda">
+            <span>Livre</span>
+          </Label>
+          <Label bsSize="xsmall" className="selected legenda">
+            <span>Selecionada</span>
+          </Label>
+          <Label bsSize="xsmall" className="reserved legenda">
+            <span>Ocupada</span>
+          </Label>
+          <Button bsStyle="default" bsSize="xsmall" className="clean-bus pull-right" onClick={onResetSeats}>
+            <FontAwesome name="times-circle" />
+            <span className="text-after-icon">Limpar</span>
+          </Button>
+        </Col>
+      </Row>*/}
+      <Jumbotron>
+        <BusRow
+          rowClass="bus-row"
+          seats={seats}
+          onClickSeat={onClickSeat}
+          row={[2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42]}>
+        </BusRow>
+        <BusRow
+          rowClass="bus-row corredor-acima"
+          seats={seats}
+          onClickSeat={onClickSeat}
+          row={[3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43]}>
+        </BusRow>
+        <BusRow
+          rowClass="bus-row corredor-abaixo"
+          seats={seats}
+          onClickSeat={onClickSeat}
+          row={[1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41]}>
+        </BusRow>
+        <BusRow
+          rowClass="bus-row"
+          seats={seats}
+          onClickSeat={onClickSeat}
+          row={[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40]}>
+        </BusRow>
+      </Jumbotron>
+    </div >
+  );
+};
+
+
 export const FormIda = ({ props }) => {
   const { horarios, poltronas, passagem } = props.fields;
   const { handleChangeData, handleChangeHorario, handleChangePoltrona, handleClickSeat,
@@ -55,12 +134,6 @@ export const FormIda = ({ props }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Row className="text-left title-row">
-        <Col xs={12}>
-          <FontAwesome name="compass" className="form-header--icon" />
-          <span className="title-after-icon">Selecione a ida</span>
-        </Col>
-      </Row>
       {/*DATA / HORARIO*/}
       <Row className="text-left">
         <Col xs={6} className="input-col">
@@ -394,17 +467,6 @@ export class CompraPassagem extends Component {
     this.updatePoltronas(origem.text, destino.text, data, novoHorarioText);
   }
 
-  handleChangeData(value) {
-    const { dispatch, passagem } = this.props;
-    const data = value.format('DD/MM/YYYY');
-    const { origem, destino } = passagem;
-
-    dispatch(actions.changeData(data));
-
-    const newHorario = this.updateHorarios(data);
-    this.updatePoltronas(origem.text, destino.text, data, newHorario);
-  }
-
   formCanBeSaved() {
     const { dispatch, passagem, horarios } = this.props;
     const { poltrona } = passagem;
@@ -524,11 +586,27 @@ export class CompraPassagem extends Component {
     }
 
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
-    const strDataIda = momentIda.format('DD/MMM/YYYY');
+    const strDataIda = momentIda.format('DD / MM / YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
-    const strDataVolta = momentVolta.format('DD/MMM/YYYY');
+    const strDataVolta = momentVolta.format('DD / MM / YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
+
+    const triggerIda = (
+      <ButtonIcon
+        type="button"
+        className="btn-google-green btn-block collapse-trigger"
+        label="08:05"
+        icon="clock-o" />
+    );
+
+    const triggerVolta = (
+      <ButtonIcon
+        type="button"
+        className="btn-google-red btn-block collapse-trigger"
+        label="08:05"
+        icon="clock-o" />
+    );
 
     return (
       <div className="comprar-passagem-container">
@@ -546,11 +624,17 @@ export class CompraPassagem extends Component {
             </span>
             <span className="delimiter">|</span>
             <span className="text-trajeto-data">
-              <span>{strDataIda}</span>
+              <Label className="text-trajeto-data-ida">
+                <FontAwesome name="arrow-circle-right" className="icon" />
+                <span className="text-after-icon">{strDataIda}</span>
+              </Label>
               {isIdaVolta &&
                 <span>
-                  <FontAwesome name="exchange" className="text-trajeto-data-icon icon" />
-                  <span>{strDataVolta}</span>
+                  {/*<FontAwesome name="exchange" className="text-trajeto-data-icon icon" />*/}
+                  <Label className="text-trajeto-data-volta">
+                    <span>{strDataVolta}</span>
+                    <FontAwesome name="arrow-circle-left" className="icon icon-after-text" />
+                  </Label>
                 </span>}
             </span>
           </Navbar.Text>
@@ -562,35 +646,29 @@ export class CompraPassagem extends Component {
               icon="cog"
               onClick={this.handleChangeTrajeto} />
           </Navbar.Text>
-
-          {/*<Nav className="first-nav" onClick={this.handleChangeTrajeto}>
-            <NavItem>
-              <span>{cidades[passagem.origem.value].label}</span>
-              <FontAwesome name="arrow-right" className="delimiter" />
-              <span>{cidades[passagem.destino.value].label}</span>
-            </NavItem>
-          </Nav>
-          <Nav className="arrow-nav">
-            <NavItem>
-              <div className="arrow-right"></div>
-            </NavItem>
-          </Nav>
-          <Navbar.Text pullRight className="navbar-trajeto-toggle">
-            <ButtonIcon
-              type="button"
-              className="btn-google-glass"
-              label={getButtonLabel()}
-              icon={getButtonIcon()}
-              onClick={this.handleClickIdaVolta} />
-          </Navbar.Text>*/}
         </Navbar>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
-            <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
-              <Jumbotron>
-                <FormIda props={formIdaProps} />
-              </Jumbotron>
-            </Col>
+            <div className="horarios-container">
+              <Row>
+                <Col xs={6}>
+                  {
+
+                  }
+                  <Collapsible trigger={triggerIda} className="collapse-ida">
+                    <BusSeatsSelect seats={poltronas} onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
+                  </Collapsible>
+                  <Collapsible trigger={triggerIda} className="collapse-ida">
+                    <BusSeatsSelect seats={poltronas} onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
+                  </Collapsible>
+                </Col>
+                <Col xs={6}>
+                  <Collapsible trigger={triggerVolta} className="collapse-volta">
+                    <BusSeatsSelect seats={poltronas} onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
+                  </Collapsible>
+                </Col>
+              </Row>
+            </div>
           </DivAnimated>
         </div>
       </div >

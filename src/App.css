@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
+@import url("https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -99,18 +99,6 @@
   .App .navbar .container .nav-fontes {
     margin: 15px 0 15px 13px; } }
 
-/*
-font-family: 'Oswald', sans-serif;
-font-family: 'Archivo Black', sans-serif;
-font-family: 'Russo One', sans-serif;
-font-family: 'Days One', sans-serif;
-font-family: 'Coda', cursive;
-font-family: 'Michroma', sans-serif;
-font-family: 'Aldrich', sans-serif;
-font-family: 'Squada One', cursive;
-font-family: 'Krona One', sans-serif;
-font-family: 'Sonsie One', cursive;
-*/
 .navbar-trajeto {
   background-color: #FF9800;
   font-family: 'Days One', sans-serif;
@@ -127,9 +115,27 @@ font-family: 'Sonsie One', cursive;
     margin-bottom: 0; }
     .navbar-trajeto .text-trajeto .text-trajeto-cidades-icondestino {
       margin-left: 20px; }
-    .navbar-trajeto .text-trajeto .text-trajeto-data-icon {
+    .navbar-trajeto .text-trajeto .text-trajeto-data-ida {
+      background-color: #4CAF50;
+      font-family: 'Carrois Gothic', sans-serif;
+      font-size: 1.3rem;
+      padding-bottom: 3px;
+      -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+      box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25); }
+      .navbar-trajeto .text-trajeto .text-trajeto-data-ida span {
+        color: white; }
+    .navbar-trajeto .text-trajeto .text-trajeto-data-volta {
+      background-color: #F44336;
       margin-left: 10px;
-      margin-right: 10px; }
+      font-family: 'Carrois Gothic', sans-serif;
+      font-size: 1.3rem;
+      padding-bottom: 3px;
+      -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+      box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25); }
+      .navbar-trajeto .text-trajeto .text-trajeto-data-volta span {
+        color: white; }
     .navbar-trajeto .text-trajeto .icon {
       color: rgba(0, 0, 0, 0.3); }
     .navbar-trajeto .text-trajeto .delimiter {
@@ -179,34 +185,72 @@ font-family: 'Sonsie One', cursive;
         .comprar-passagem-container .form-passagem-container .form-centered .form-header .form-title {
           font-family: "Gruppo";
           font-size: 2rem; }
-      .comprar-passagem-container .form-passagem-container .form-centered .jumbotron {
-        border: none;
-        padding: 15px;
-        padding-top: 0; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .title-row {
-          background-color: rgba(0, 0, 0, 0.1);
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
-          line-height: 40px;
-          font-family: "Gruppo";
-          font-size: 2rem; }
-          .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .title-row .form-header--icon {
-            color: rgba(0, 0, 0, 0.5); }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.first {
-          padding-top: 60px; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .text-left.row.last {
-          padding-bottom: 10px; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .btn-limpar {
-          margin-right: 10px; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .input-col {
-          margin-top: 10px; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron input#data {
-          background-color: white; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron .error-empty {
-          color: #a94442;
-          font-size: inherit; }
-        .comprar-passagem-container .form-passagem-container .form-centered .jumbotron hr {
-          margin-top: 0; }
+      .comprar-passagem-container .form-passagem-container .form-centered .horarios-container {
+        position: relative;
+        width: 780px;
+        left: calc(50% - 390px); }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .collapse-trigger {
+          width: 380px !important;
+          position: relative;
+          left: 0;
+          font-family: 'Carrois Gothic', sans-serif; }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select {
+          position: relative;
+          width: 380px !important;
+          padding: 10px;
+          background-color: rgba(0, 0, 0, 0.05); }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row {
+            padding: 3px 15px 3px 12px; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row .label {
+              -moz-user-select: -moz-none !important;
+              -khtml-user-select: none !important;
+              -webkit-user-select: none !important;
+              -ms-user-select: none !important;
+              user-select: none !important;
+              background-color: #33b4ff;
+              -webkit-box-shadow: 5px 0px 0px -1px #0081cc;
+              -moz-box-shadow: 5px 0px 0px -1px #0081cc;
+              box-shadow: 5px 0px 0px -1px #0081cc;
+              margin-right: 8px;
+              padding: 2px 3px 2px 4px;
+              font-size: 1.4rem;
+              cursor: pointer; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row .label.reserved {
+                cursor: not-allowed;
+                background-color: rgba(0, 0, 0, 0.2);
+                -webkit-box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4);
+                box-shadow: 5px 0px 0px -1px rgba(0, 0, 0, 0.4); }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row .label.selected {
+                background-color: #FFB300;
+                -webkit-box-shadow: 5px 0px 0px -1px #cc8f00;
+                -moz-box-shadow: 5px 0px 0px -1px #cc8f00;
+                box-shadow: 5px 0px 0px -1px #cc8f00; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row .label.legenda {
+                cursor: default; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row.corredor-acima {
+              padding-top: 0;
+              padding-bottom: 8px; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row.corredor-abaixo {
+              padding-top: 8px;
+              padding-bottom: 0; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .bus-seat-select .bus-row.bus-row-legenda {
+              padding-left: 0;
+              padding-right: 15px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible hr {
+          margin-top: 10px;
+          margin-bottom: 10px; }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .clean-bus {
+          padding-top: 0;
+          padding-bottom: 0; }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .Collapsible .jumbotron {
+          margin-bottom: 0;
+          padding: 8px 15px 8px 10px;
+          border-radius: 3% / 50%;
+          border-bottom-right-radius: 10px;
+          border-top-right-radius: 10px;
+          border: 1px solid rgba(128, 128, 128, 0.1);
+          border-left: 10px solid rgba(128, 128, 128, 0.1); }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
@@ -526,7 +570,7 @@ font-family: 'Sonsie One', cursive;
 
 .btn-google-red {
   color: white !important;
-  background-color: #db4437;
+  background-color: #F44336;
   background-image: none;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
@@ -537,17 +581,45 @@ font-family: 'Sonsie One', cursive;
   will-change: background-color; }
   .btn-google-red:focus {
     border: none;
-    background: #bd2e22 !important;
+    background: #ea1c0d !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-red:hover {
     border: none;
-    background: #bd2e22 !important;
+    background: #ea1c0d !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-red:active {
     border: none;
-    background: #bd2e22 !important;
+    background: #ea1c0d !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    text-decoration: none;
+    outline: none !important; }
+
+.btn-google-green {
+  color: white !important;
+  background-color: #4CAF50;
+  background-image: none;
+  border: none;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-green:focus {
+    border: none;
+    background: #3d8b40 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-green:hover {
+    border: none;
+    background: #3d8b40 !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-green:active {
+    border: none;
+    background: #3d8b40 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -809,6 +881,8 @@ html {
     html body .title-after-icon {
       margin-left: 12px; }
     html body .text-after-icon {
+      margin-left: 8px; }
+    html body .icon-after-text {
       margin-left: 8px; }
     html body .jumbotron {
       padding: 20px;

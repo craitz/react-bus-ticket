@@ -11,6 +11,7 @@
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-bootstrap-maskedinput": "^0.2.1",
+    "react-collapsible": "^1.4.0",
     "react-datetime": "^2.8.10",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
