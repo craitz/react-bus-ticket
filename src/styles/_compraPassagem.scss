@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab');
+$size: 380px;
 @mixin labelData {
     font-family: 'Carrois Gothic', sans-serif;
     font-size: 1.3rem;
@@ -9,8 +10,14 @@
     }
 }
 
-@mixin collapseTrigger {
+@mixin collapseTrigger($width) {
     font-family: 'Carrois Gothic', sans-serif;
+    width: $width !important;
+    position: relative;
+    left: 0;
+    .icon {
+        line-height: 19px;
+    }
 }
 
 .navbar-trajeto {
@@ -68,107 +75,112 @@
 //     }
 // }
 //             animation: pulse 500ms !important;
+@mixin accordion($borderColor) {
+    $collpaseSize: 382px;
+    width: $collpaseSize !important;
+    margin-bottom: 10px;
+    background-color: rgba(white, 1);
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+    // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+    &__trigger.is-open {
+        .collapse-trigger-button {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            @include collapseTrigger($size);
+        }
+    }
+    &__trigger.is-closed {
+        .collapse-trigger-button {
+            @include collapseTrigger($size);
+        }
+    }
+    @content
+}
+
+@mixin busSelect {
+    .bus-seat-select {
+        position: relative;
+        width: $size !important;
+        padding: 10px;
+        background-color: rgba(black, .05);
+        .bus-row {
+            padding: 3px 15px 3px 12px;
+            $colorFree: rgb(51, 180, 255);
+            $colorSelected: #FFB300;
+            $colorReserved: black;
+            .label {
+                @include noSelection();
+                @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
+                background-color: $colorFree;
+                margin-right: 8px;
+                padding: 2px 3px 2px 4px;
+                font-size: 1.4rem;
+                cursor: pointer;
+                &.reserved {
+                    cursor: not-allowed;
+                    background-color: rgba($colorReserved, .2);
+                    @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .4), 20%));
+                }
+                &.selected {
+                    background-color: $colorSelected;
+                    @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
+                }
+                &.legenda {
+                    cursor: default;
+                }
+            }
+            &.corredor-acima {
+                padding-top: 0;
+                padding-bottom: 8px;
+            }
+            &.corredor-abaixo {
+                padding-top: 8px;
+                padding-bottom: 0;
+            }
+            &.bus-row-legenda {
+                padding-left: 0;
+                padding-right: 15px;
+            }
+        }
+    }
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .clean-bus {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .jumbotron {
+        margin-bottom: 0;
+        padding: 8px 15px 8px 10px;
+        border-radius: 3% / 50%;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 1px solid rgba(grey, .2);
+        border-left: 10px solid rgba(grey, .3);
+    }
+}
+
 .comprar-passagem-container {
     @include containerHeight;
     .form-passagem-container {
         margin-top: 15px;
         .form-centered {
             width: inherit;
-            .form-header {
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
-                margin: 0;
-                padding: 10px;
-                padding-left: 20px;
-                padding-left: -15px !important;
-                background-color: rgba(black, .05);
-                .form-title {
-                    font-family: "Gruppo";
-                    font-size: 2rem;
-                }
-            }
             .horarios-container {
                 position: relative;
                 width: 780px;
                 left: calc(50% - 390px);
-                // background-color: red;
-                .Collapsible {
-                    $size: 380px;
-                    .collapse-trigger {
-                        width: $size !important;
-                        position: relative;
-                        left: 0;
-                        @include collapseTrigger;
+                .accordion-ida {
+                    @include accordion(rgba($googleGreen, .5)) {
+                        @include busSelect;
                     }
-                    .bus-seat-select {
-                        position: relative;
-                        width: $size !important;
-                        padding: 10px;
-                        background-color: rgba(black, .05);
-                        .bus-row {
-                            padding: 3px 15px 3px 12px;
-                            $colorFree: rgb(51, 180, 255);
-                            $colorSelected: #FFB300;
-                            $colorReserved: black;
-                            .label {
-                                @include noSelection();
-                                background-color: $colorFree;
-                                @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
-                                // background-color: rgba(#4CAF50, .9);
-                                // @include boxShadow(6px 0px 0px -1px darken(rgba(#4CAF50, .9), 10%));
-                                margin-right: 8px;
-                                padding: 2px 3px 2px 4px;
-                                font-size: 1.4rem;
-                                // font-weight: 300;
-                                cursor: pointer;
-                                &.reserved {
-                                    cursor: not-allowed;
-                                    background-color: rgba($colorReserved, .2);
-                                    @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .4), 20%));
-                                }
-                                &.selected {
-                                    background-color: $colorSelected;
-                                    @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
-                                    // background-color: rgba(#F44336, .9);
-                                    // @include boxShadow(6px 0px 0px -1px darken(rgba(#F44336, .9), 15%));
-                                }
-                                &.legenda {
-                                    // font-weight: bold;
-                                    // font-family: 'Gruppo';
-                                    // font-size: 1.6rem;
-                                    cursor: default;
-                                }
-                            }
-                            &.corredor-acima {
-                                padding-top: 0;
-                                padding-bottom: 8px;
-                            }
-                            &.corredor-abaixo {
-                                padding-top: 8px;
-                                padding-bottom: 0;
-                            }
-                            &.bus-row-legenda {
-                                padding-left: 0;
-                                padding-right: 15px;
-                            }
-                        }
-                    }
-                    hr {
-                        margin-top: 10px;
-                        margin-bottom: 10px;
-                    }
-                    .clean-bus {
-                        padding-top: 0;
-                        padding-bottom: 0;
-                    }
-                    .jumbotron {
-                        margin-bottom: 0;
-                        padding: 8px 15px 8px 10px;
-                        border-radius: 3% / 50%;
-                        border-bottom-right-radius: 10px;
-                        border-top-right-radius: 10px;
-                        border: 1px solid rgba(grey, .1);
-                        border-left: 10px solid rgba(grey, .1);
+                }
+                .accordion-volta {
+                    @include accordion(rgba($googleRed, .3)) {
+                        @include busSelect;
                     }
                 }
             }

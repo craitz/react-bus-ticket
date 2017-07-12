@@ -119,6 +119,15 @@ class FirebaseHelper {
     });
   };
 
+  fetchSnapshot(refPath) {
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(refPath).on('value', (snap) => {
+        resolve(snap || []);
+      });
+    });
+  };
+
   fetchUser(refPath) {
     const db = firebase.database();
     return new Promise((resolve, reject) => {

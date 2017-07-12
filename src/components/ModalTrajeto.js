@@ -11,6 +11,7 @@ import { ButtonIcon } from '../shared/ButtonIcon';
 import InputDate from '../shared/InputDate';
 import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
+import { firebaseHelper } from '../shared/FirebaseHelper';
 
 const AddOn = ({ tooltip, icon }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -168,6 +169,54 @@ export class ModalTrajeto extends Component {
     !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
+  getProperties(obj) {
+    console.log(Object.keys(obj));
+    // for (let prop in obj) {
+    //   if (Object.keys(obj[prop]).length > 0) {
+    //     this.getProperties(obj[prop]);
+    //   } else {
+    //     console.log(prop);
+    //     return;
+    //   }
+    // }
+  }
+
+
+  updateHorarios() {
+    const { dispatch, cidades, origem, destino, data, dataVolta } = this.props;
+
+    const strOrigem = cidades[origem.value].label;
+    const strDestino = cidades[destino.value].label;
+    const strData = utils.dateToFirebase(data.value);
+    const strDataVolta = utils.dateToFirebase(dataVolta.value);
+    const refIda = `saidas/${strOrigem}/${strDestino}/${strData}/`;
+    const refVolta = `saidas/${strDestino}/${strOrigem}/${strDataVolta}/`;
+
+    firebaseHelper.fetchSnapshot(refIda)
+      .then(snapIda => {
+        dispatch(compraPassagemActions.setHorarios(snapIda.val()));
+        firebaseHelper.fetchSnapshot(refVolta)
+          .then(snapVolta => {
+            dispatch(compraPassagemActions.setHorariosVolta(snapVolta.val()));
+          });
+      });
+  }
+
+  // updatePoltronas(horariosIda, horariosVolta) {
+  //   const arrayIda = Object.keys(horariosIda);
+  //   const arrayVolta = Object.keys(horariosVolta);
+  //   // console.log(arrayIda, arrayVolta);
+  //   // console.log(arrayIda[0], arrayVolta[0]);
+
+  //   const horarios = arrayIda.map(item => {
+  //     const arr = Object.keys(horariosIda[item]);
+  //     arr.unshift(item);
+  //     return arr;
+  //   });
+
+  //   console.log(horarios);
+  // }
+
   handleSubmit(event) {
     event.preventDefault();
     const { history, dispatch, validation } = this.props;
@@ -176,6 +225,8 @@ export class ModalTrajeto extends Component {
     if (!validation.all) {
       return;
     }
+
+    this.updateHorarios();
 
     dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
     dispatch(actions.setVisible(false)); // fecha o modal

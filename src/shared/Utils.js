@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export const ValidationStatus = {
   SUCCESS: 'success',
   WARNING: 'warning',
@@ -44,8 +46,20 @@ export const firebaseKeyToEmail = (key) => {
 export const SequenceArray = size => [...Array(size).keys()].map(i => ++i);
 export const DateNowBr = new Date().toLocaleDateString('pt-BR');
 export const DateBr = date => date.toLocaleDateString('pt-BR');
-export const dateToFirebase = (text) => text.replace(/\//gi, '');
+
+export const dateToFirebase = (text) => {
+  const momentDate = moment(text, 'DD/MM/YYYY');
+  return momentDate.format('YYYYMMDD');
+}
+
+export const isObject = obj => (obj === Object(obj));
+
 export const timeToFirebase = (text) => text.replace(/:/gi, '');
+
+export const firebaseToTime = (text) => {
+  const momentTime = moment(text, 'HHmm');
+  return momentTime.format('HH:mm');
+}
 
 export const buildIsoDate = (data, hora) => {
   const day = data.slice(0, 2);

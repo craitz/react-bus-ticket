@@ -3,7 +3,6 @@ import { SequenceArray, PoltronaStatus } from './Utils';
 import * as utils from './Utils';
 import moment from 'moment';
 
-
 const randomMinute = () => Math.floor((Math.random() * 59));
 const randomBoolean = () => !!Math.floor(Math.random() * 2);
 const randomPercent = percent => (Math.random() < percent);
@@ -54,8 +53,6 @@ const generateFakeData = (cidades, options) => {
 class Globals {
   constructor() {
     this.cidades = null;
-    this.horarios = null;
-    this.poltronas = null;
 
     this.getCidades().then((cidades) => {
 
@@ -69,19 +66,6 @@ class Globals {
           disabled: false
         }
       });
-    });
-
-    this.getHorarios().then((horarios) => {
-      this.horarios = horarios;
-    });
-
-    this.poltronas = SequenceArray(44).map((poltrona, index) => {
-      return {
-        label: poltrona.toString().padStart(2, '0'),
-        value: index.toString(),
-        disabled: false,
-        status: PoltronaStatus.FREE
-      };
     });
   }
 
@@ -97,24 +81,6 @@ class Globals {
           });
       }
     });
-  }
-
-  getHorarios() {
-    return new Promise((resolve, reject) => {
-      if (this.horarios) {
-        resolve([].concat(this.horarios))
-      } else {
-        firebaseHelper.fetch('horarios/')
-          .then((horarios) => {
-            horarios.sort();
-            resolve(horarios);
-          });
-      }
-    });
-  }
-
-  getPoltronas() {
-    return [].concat(this.poltronas);
   }
 };
 

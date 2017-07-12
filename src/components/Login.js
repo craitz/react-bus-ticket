@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router';
-import {
-  FormControl,
-  FormGroup,
-  InputGroup,
-  Glyphicon,
-  HelpBlock
-} from 'react-bootstrap';
+import { FormControl, FormGroup, InputGroup, Glyphicon, HelpBlock } from 'react-bootstrap';
 import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -129,18 +123,14 @@ export class Login extends Component {
     return true;
   }
 
-  getListasDefault() {
+  getStaticListCidades() {
     return new Promise(resolve => {
       const { dispatch } = this.props;
       globals.getCidades().then((cidades) => {
         dispatch(compraPassagemActions.setCidades(cidades));
-        // globals.getHorarios().then((horarios) => {
-        //   dispatch(compraPassagemActions.setHorarios(horarios));
-        //   dispatch(compraPassagemActions.setPoltronas(globals.getPoltronas()));
         resolve();
       });
     });
-    // });
   }
 
   handleLogin(event) {
@@ -152,15 +142,13 @@ export class Login extends Component {
     if (this.isLoginFormOK()) {
       firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
-          this.getListasDefault()
+          this.getStaticListCidades()
             .then(() => {
-              // setTimeout(() => {
               dispatch(loadingActions.setStatus(SavingStatus.DONE));
               history.push({
                 pathname: '/',
                 state: {}
               });
-              // }, 1000);
             });
         })
         .catch((error) => {

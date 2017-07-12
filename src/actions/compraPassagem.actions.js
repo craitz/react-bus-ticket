@@ -21,6 +21,13 @@ export const setHorarios = (horarios) => {
   }
 };
 
+export const setHorariosVolta = (horarios) => {
+  return {
+    type: CompraPassagemActionType.SET_HORARIOS_VOLTA,
+    payload: horarios
+  }
+};
+
 export const setPoltronas = (poltronas) => {
   return {
     type: CompraPassagemActionType.SET_POLTRONAS,
