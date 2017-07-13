@@ -2,6 +2,16 @@ import { firebaseHelper } from './FirebaseHelper';
 import * as utils from './Utils';
 import moment from 'moment';
 
+const fakeDataOptions = {
+  days: 30,
+  startHour: 8,
+  endHour: 22,
+  reservedPercentage: 0.2, // 20%
+  horariosPercentage: 0.3, // 20%
+  email: 'guest@busticket.com',
+  doGenerate: false
+}
+
 const fakeGenerator = (() => {
   const getFutureDay = daysAhead => moment().add(daysAhead, 'days').format('DD/MM/YYYY');
   const randomMinute = () => Math.floor((Math.random() * 59));
@@ -25,12 +35,12 @@ const fakeGenerator = (() => {
     return (Math.random() < 0.1);
   }
 
-  const generate = (cidades, options, confirm) => {
-    if (!confirm) {
+  const generate = (cidades, options) => {
+    const { days, startHour, endHour, horariosPercentage, email, doGenerate } = options;
+
+    if (!doGenerate) {
       return;
     }
-
-    const { days, startHour, endHour, horariosPercentage, email } = options;
 
     for (let o = 0; o < cidades.length; o++) {
       for (let d = 0; d < cidades.length; d++) {
@@ -75,24 +85,11 @@ const fakeGenerator = (() => {
   return { generate };
 })();
 
-const fakeDataOptions = {
-  days: 30,
-  startHour: 8,
-  endHour: 22,
-  reservedPercentage: 0.2, // 20%
-  horariosPercentage: 0.3, // 20%
-  email: 'guest@busticket.com'
-}
-
 class Globals {
   constructor() {
     this.cidades = null;
-
     this.getCidades().then((cidades) => {
-
-      // generate fake data
-      const doGenerate = false;
-      fakeGenerator.generate(cidades, fakeDataOptions, doGenerate);
+      fakeGenerator.generate(cidades, fakeDataOptions); // generate fake data
 
       this.cidades = cidades.map((item, index) => {
         return {
