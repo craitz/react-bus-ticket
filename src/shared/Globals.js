@@ -5,9 +5,28 @@ import moment from 'moment';
 const randomMinute = () => Math.floor((Math.random() * 59));
 const randomBoolean = () => !!Math.floor(Math.random() * 2);
 const randomPercent = percent => (Math.random() < percent);
+
+const randomPoltronas = () => {
+  const master = Math.random();
+
+  if (master < 0.1) {
+    return (Math.random() < 0.9);
+  }
+
+  if (master < 0.3) {
+    return (Math.random() < 0.6);
+  }
+
+  if (master < 0.5) {
+    return (Math.random() < 0.3);
+  }
+
+  return (Math.random() < 0.1);
+}
+
 const getFutureDay = daysAhead => moment().add(daysAhead, 'days').format('DD/MM/YYYY');
 const fakeDataOptions = {
-  days: 10,
+  days: 30,
   startHour: 8,
   endHour: 22,
   reservedPercentage: 0.2, // 20%
@@ -25,21 +44,30 @@ const generateFakeData = (cidades, options) => {
 
       if (o !== d) { // só entre cidades diferentes!
 
-        for (let i = 1; i <= days; i++) { // número de dias a serem gerados
+        for (let i = 0; i <= days; i++) { // número de dias a serem gerados
           const data = utils.dateToFirebase(getFutureDay(i));
 
           for (let j = startHour; j <= endHour; j++) { // período válido para o horário
             if (randomPercent(horariosPercentage)) {
               const horario = j.toString().padStart(2, '0') + randomMinute().toString().padStart(2, '0');
 
-              for (let k = 1; k <= 44; k++) { // poltronas
-                if (randomPercent(reservedPercentage)) {
-                  const poltrona = k.toString().padStart(2, '0');
-                  const ref = `saidas/${origem}/${destino}/${data}/${horario}/${poltrona}`;
-                  firebaseHelper.set({ user: email }, ref).then(() => {
-                    console.log(ref);
-                  });
+              if (randomBoolean()) {
+                const refHora = `saidas/${origem}/${destino}/${data}/${horario}/`;
+                firebaseHelper.set({ status: 'ocupado' }, refHora);
+                for (let k = 1; k <= 44; k++) { // poltronas
+                  if (randomPoltronas()) {
+                    const poltrona = k.toString().padStart(2, '0');
+                    const ref = `saidas/${origem}/${destino}/${data}/${horario}/${poltrona}`;
+                    firebaseHelper.set({ user: email }, ref).then(() => {
+                      console.log(ref);
+                    });
+                  }
                 }
+              } else {
+                const ref = `saidas/${origem}/${destino}/${data}/${horario}/`;
+                firebaseHelper.set({ status: 'vazio' }, ref).then(() => {
+                  console.log(ref);
+                });
               }
             }
           }

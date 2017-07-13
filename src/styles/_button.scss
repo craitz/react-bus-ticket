@@ -46,6 +46,9 @@
     &-white {
         @include googleButton(white, .2, 10%, darkslategrey);
     }
+    &-orange {
+        @include googleButton(#FFB300, .2, 10%);
+    }
     &-glass {
         @include googleButton(rgba(black, .15), .35, 10%);
     }

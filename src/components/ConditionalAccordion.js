@@ -38,24 +38,59 @@ const ConditionalAccordion = ({ className, array, color, icon, onClickSeat }) =>
     return null;
   }
 
+  const buildCollapsibles = () => {
+    return arrHorarios.map((item, index) => {
+      const hora = utils.timeToFirebase(item);
+      const poltronas = getPoltronas(array, hora);
+      const allSize = poltronas.length;
+
+      // diminui 1 para desconsiderar o objeto 'status'
+      const ocupadasSize = Object.keys(array[hora]).length - 1;
+
+      const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`
+
+      const getIconLotacao = () => {
+        const breakpoint = allSize / 3;
+        if (ocupadasSize === 0) {
+          return 'battery-0';
+        } else if (ocupadasSize < breakpoint) {
+          return 'battery-1';
+        } else if (ocupadasSize < breakpoint * 2) {
+          return 'battery-2';
+        } else if (ocupadasSize < breakpoint * 3) {
+          return 'battery-3';
+        } else {
+          return 'battery-4';
+        }
+      }
+
+      return (
+        <div
+          key={index}
+          data-trigger={
+            <Button type="button" className={setTriggerClass()}>
+              <span className="trigger-left pull-left">
+                <FontAwesome name="clock-o" className="icon" />
+                {(item.length > 0) && <span className="text-after-icon">{item}</span>}
+              </span>
+              <span className="pull-right">
+                <FontAwesome name={getIconLotacao()} className="icon" />
+                <span className="trigger-right text-after-icon">{strLotacao}</span>
+              </span>
+            </Button>
+          }>
+          <BusSelect seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
+        </div>
+      );
+    });
+  }
+
   return (
     <Accordion
       startPosition={-1}
       transitionTime={300}
       classParentString={className}>
-      {arrHorarios.map((item, index) =>
-        <div
-          key={index}
-          data-trigger={
-            <Button type="button" className={setTriggerClass()}>
-              {/*<FontAwesome name={icon} className="pull-left icon" />*/}
-              <FontAwesome name="clock-o" className="icon" />
-              {(item.length > 0) && <span className="text-after-icon">{item}</span>}
-            </Button>
-          }>
-          <BusSelect seats={getPoltronas(array, utils.timeToFirebase(item))} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
-        </div>
-      )}
+      {buildCollapsibles()}
     </Accordion>
   );
 };
