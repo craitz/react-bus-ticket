@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { BaseField, withSelect, withDate, withMultiSelect } from '../shared/FormFields';
 import * as actions from '../actions/compraPassagem.actions';
 import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Row, Col, Jumbotron, Navbar, Nav, NavItem, Collapse, Label, Button } from 'react-bootstrap';
+import { Row, Col, Navbar, Label, Tabs, Tab } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
-import { ButtonIcon, ButtonIconFit } from '../shared/ButtonIcon';
-import Collapsible from 'react-collapsible';
-import Accordion from 'react-responsive-accordion';
-
-const SelectField = withSelect(BaseField);
-const MultiSelectField = withMultiSelect(BaseField);
-const DateField = withDate(BaseField);
+import { ButtonIcon } from '../shared/ButtonIcon';
+import ConditionalAccordion from './ConditionalAccordion';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -47,122 +41,6 @@ const helper = {
       resolve(formatted);
     });
   }
-};
-
-const ConditionalAccordion = ({ className, array, color, icon }) => {
-  // retorna todos os horarios de determnada data
-  const getHorarios = () => {
-    if (!array) { return null }
-    const newArray = Object.keys(array);
-    return newArray.sort().map(item => utils.firebaseToTime(item));
-  }
-
-  // retorna as poltronas reservadas de determinado horário
-  const getPoltronas = (array, hora) => {
-    const ocupadasArray = Object.keys(array[hora]);
-    return [...Array(44).keys()].map(item => {
-      const strValue = (++item).toString().padStart(2, '0');
-      return {
-        value: strValue,
-        status: ocupadasArray.includes(strValue)
-          ? utils.PoltronaStatus.RESERVED
-          : utils.PoltronaStatus.FREE
-      }
-    });
-  }
-
-  // monta o class
-  const setTriggerClass = () => `btn-google-${color} btn-block collapse-trigger-button`;
-
-  // pega os horarios do dia
-  const arrHorarios = getHorarios();
-
-  // se não houver horários, não renderiza nada
-  if (!arrHorarios) {
-    return null;
-  }
-
-  return (
-    <Accordion
-      startPosition={-1}
-      transitionTime={300}
-      classParentString={className}>
-      {arrHorarios.map((item, index) =>
-        <div
-          key={index}
-          data-trigger={
-            <Button type="button" className={setTriggerClass()}>
-              <FontAwesome name={icon} className="pull-left icon" />
-              {(item.length > 0) && <span className="text-after-icon pull-right">{item}</span>}
-              <FontAwesome name="clock-o" className="pull-right icon" />
-            </Button>
-          }>
-          <BusSeatsSelect seats={getPoltronas(array, utils.timeToFirebase(item))} onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
-        </div>
-      )}
-    </Accordion>
-
-  );
-}
-
-const Seat = ({ children, className, onClickSeat, value }) => {
-  return (
-    <Label bsSize="xsmall" bsStyle="default" className={className} onClick={() => onClickSeat(value)}>{children}</Label>
-  );
-}
-
-const BusRow = ({ rowClass, seats, onClickSeat, row }) => {
-  const getValue = index => seats[index].value;
-  const getStatus = index => seats[index].status;
-
-  return (
-    <Row className={rowClass}>
-      {row.map((item, index) =>
-        <Seat
-          key={index}
-          bsStyle="default"
-          className={getStatus(item)}
-          onClickSeat={onClickSeat}
-          value={getValue(item)}>
-          {getValue(item)}
-        </Seat>)}
-    </Row>
-
-  );
-}
-
-const BusSeatsSelect = ({ seats, onClickSeat, onResetSeats }) => {
-  console.log(seats);
-  return (
-    <div className="bus-seat-select">
-      <Jumbotron>
-        <BusRow
-          rowClass="bus-row"
-          seats={seats}
-          onClickSeat={onClickSeat}
-          row={[2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42]}>
-        </BusRow>
-        <BusRow
-          rowClass="bus-row corredor-acima"
-          seats={seats}
-          onClickSeat={onClickSeat}
-          row={[3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43]}>
-        </BusRow>
-        <BusRow
-          rowClass="bus-row corredor-abaixo"
-          seats={seats}
-          onClickSeat={onClickSeat}
-          row={[1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41]}>
-        </BusRow>
-        <BusRow
-          rowClass="bus-row"
-          seats={seats}
-          onClickSeat={onClickSeat}
-          row={[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40]}>
-        </BusRow>
-      </Jumbotron>
-    </div >
-  );
 };
 
 export class CompraPassagem extends Component {
@@ -550,53 +428,16 @@ export class CompraPassagem extends Component {
     });
   };
 
-  // getHorarios() {
-  //   if (!this.props.horarios) {
-  //     return null;
-  //   }
-
-  //   const arr = Object.keys(this.props.horarios);
-  //   arr.sort();
-  //   return arr.map(item => utils.firebaseToTime(item));
-  // }
-
-  // getHorariosVolta() {
-  //   if (!this.props.horariosVolta) {
-  //     return null;
-  //   }
-
-  //   const arr = Object.keys(this.props.horariosVolta);
-  //   arr.sort();
-  //   return arr.map(item => utils.firebaseToTime(item));
-  // }
-
   render() {
-    const { horarios, horariosVolta, poltronas, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
-    const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
-    const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
+    const { horarios, horariosVolta, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
+    // const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
+    // const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD / MM / YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
     const strDataVolta = momentVolta.format('DD / MM / YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
-    const getCollapseKey = (text, index) => `${text}-${index}`;
-
-    const triggerIda = (
-      <ButtonIcon
-        type="button"
-        className="btn-google-green btn-block collapse-trigger"
-        label="08:05"
-        icon="clock-o" />
-    );
-
-    const triggerVolta = (
-      <ButtonIcon
-        type="button"
-        className="btn-google-red btn-block collapse-trigger"
-        label="08:05"
-        icon="clock-o" />
-    );
 
     return (
       <div className="comprar-passagem-container">
@@ -640,23 +481,49 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
+              {/*<Row>
+                <Col xs={6} xsOffset={3}>*/}
+              <Tabs defaultActiveKey={2} id="tab-horarios" animation={false}>
+                <Tab eventKey={1} title="Tab 1">
+                  <ConditionalAccordion
+                    className="accordion-ida"
+                    array={horarios}
+                    color="green"
+                    icon="arrow-circle-right"
+                    onClickSeat={this.handleClickSeat} />
+                </Tab>
+                <Tab eventKey={2} title="Tab 2">
+                  <ConditionalAccordion
+                    className="accordion-volta"
+                    array={horariosVolta}
+                    color="red"
+                    icon="arrow-circle-left"
+                    onClickSeat={this.handleClickSeat} />
+                </Tab>
+              </Tabs>
+              {/*</Col>
+              </Row>*/}
+            </div>
+            {/*<div className="horarios-container">
               <Row>
                 <Col xs={6}>
                   <ConditionalAccordion
                     className="accordion-ida"
                     array={horarios}
                     color="green"
-                    icon="arrow-circle-right" />
+                    icon="arrow-circle-right"
+                    onClickSeat={this.handleClickSeat} />
                 </Col>
                 <Col xs={6}>
                   <ConditionalAccordion
                     className="accordion-volta"
                     array={horariosVolta}
                     color="red"
-                    icon="arrow-circle-left" />
+                    icon="arrow-circle-left"
+                    onClickSeat={this.handleClickSeat} />
                 </Col>
               </Row>
-            </div>
+            </div>*/}
           </DivAnimated>
         </div>
       </div >
@@ -682,42 +549,14 @@ const CompraPassagemWithRouter = withRouter(CompraPassagem);
 const CompraPassagemWithRouterAndAuth = withAuth(CompraPassagemWithRouter);
 export default connect(mapStateToProps)(CompraPassagemWithRouterAndAuth);
 
-              // <Row>
-              //   <Col xs={6}>
-              //     {arrHorarios && arrHorarios.map((item, index) =>
-              //       <Collapsible
-              //         key={index}
-              //         transitionTime={200}
-              //         trigger={
-              //           <ButtonIcon
-              //             type="button"
-              //             className="btn-google-green btn-block collapse-trigger-button"
-              //             label={item}
-              //             icon="clock-o" />}
-              //         className="collapse-ida"
-              //         accordionPosition={getCollapseKey("collapse-ida", index)}
-              //         easing={'cubic-bezier(0.175, 0.885, 0.32, 2.275)'}>
-              //         item
-              //       <BusSeatsSelect onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
-              //       </Collapsible>
-              //     )}
-              //   </Col>
-              //   <Col xs={6}>
-              //     {arrHorariosVolta && arrHorariosVolta.map((item, index) =>
-              //       <Collapsible
-              //         key={index}
-              //         transitionTime={200}
-              //         trigger={
-              //           <ButtonIcon
-              //             type="button"
-              //             className="btn-google-red btn-block collapse-trigger-button"
-              //             label={item}
-              //             icon="clock-o" />}
-              //         className="collapse-volta"
-              //         accordionPosition={getCollapseKey("collapse-volta", { index })} >
-              //         item
-              //       <BusSeatsSelect onClickSeat={this.handleClickSeat} onResetSeats={this.handleResetSeats} />
-              //       </Collapsible>
-              //     )}
-              //   </Col>
-              // </Row>
+
+{/*<div class="tab-content" style="
+    background-color: white;
+    padding: 20px;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;">*/}
+
+  // uncontrolled-tab-example width: 424px;
+
+// .nav-tabs li width: 50%

@@ -1,5 +1,4 @@
 import { firebaseHelper } from './FirebaseHelper';
-import { SequenceArray, PoltronaStatus } from './Utils';
 import * as utils from './Utils';
 import moment from 'moment';
 

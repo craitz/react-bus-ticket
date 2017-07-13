@@ -78,7 +78,7 @@ $size: 380px;
 @mixin accordion($borderColor) {
     $collpaseSize: 382px;
     width: $collpaseSize !important;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     background-color: rgba(white, 1);
     border: 1px solid $borderColor;
     border-radius: 5px;
@@ -98,33 +98,38 @@ $size: 380px;
     @content
 }
 
-@mixin busSelect {
+@mixin busSelect($seatColor) {
     .bus-seat-select {
         position: relative;
         width: $size !important;
         padding: 10px;
         background-color: rgba(black, .05);
         .bus-row {
-            padding: 3px 15px 3px 12px;
+            padding: 3px 10px 3px 22px;
             $colorFree: rgb(51, 180, 255);
             $colorSelected: #FFB300;
             $colorReserved: black;
             .label {
                 @include noSelection();
-                @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
-                background-color: $colorFree;
-                margin-right: 8px;
+                @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+                // @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
+                // background-color: $colorFree;
+                background-color: $seatColor;
+                margin-right: 4px;
                 padding: 2px 3px 2px 4px;
                 font-size: 1.4rem;
+                float: left;
+                width: 25px !important;
                 cursor: pointer;
                 &.reserved {
                     cursor: not-allowed;
-                    background-color: rgba($colorReserved, .2);
-                    @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .4), 20%));
+                    background-color: rgba($colorReserved, .15);
+                    color: rgba(white, .5);
+                    // @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .3), 20%));
                 }
                 &.selected {
                     background-color: $colorSelected;
-                    @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
+                    // @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
                 }
                 &.legenda {
                     cursor: default;
@@ -173,14 +178,32 @@ $size: 380px;
                 position: relative;
                 width: 780px;
                 left: calc(50% - 390px);
-                .accordion-ida {
-                    @include accordion(rgba($googleGreen, .5)) {
-                        @include busSelect;
+                #tab-horarios {
+                    width: 424px;
+                    .nav-tabs li {
+                        width: 50%;
+                        &.active>a {
+                            border-top-left-radius: 5px;
+                            border-top-right-radius: 5px;
+                        }
                     }
-                }
-                .accordion-volta {
-                    @include accordion(rgba($googleRed, .3)) {
-                        @include busSelect;
+                    .tab-content {
+                        background-color: rgba(black, .05);
+                        border-radius: 5px;
+                        padding: 20px;
+                        border-left: 1px solid lightgray;
+                        border-bottom: 1px solid lightgray;
+                        border-right: 1px solid lightgray;
+                        .accordion-ida {
+                            @include accordion(rgba($googleGreen, .5)) {
+                                @include busSelect(rgba($googleGreen, .6));
+                            }
+                        }
+                        .accordion-volta {
+                            @include accordion(rgba($googleRed, .3)) {
+                                @include busSelect(rgba($googleRed, .5));
+                            }
+                        }
                     }
                 }
             }

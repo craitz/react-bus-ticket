@@ -11,7 +11,7 @@ import DivAnimated from '../shared/DivAnimated';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'
-import { ButtonIcon, ButtonIconFit } from '../shared/ButtonIcon';
+import { ButtonIcon } from '../shared/ButtonIcon';
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup>
