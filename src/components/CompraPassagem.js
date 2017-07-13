@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Row, Col, Navbar, Label, Tabs, Tab } from 'react-bootstrap';
+import { Navbar, Label, Tabs, Tab } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';

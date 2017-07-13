@@ -67,15 +67,6 @@ $tabSize: 424px;
     }
 }
 
-// @keyframes SHAKER {
-//     0% {
-//         margin-left: 5px
-//     }
-//     100% {
-//         margin-left: initial
-//     }
-// }
-//             animation: pulse 500ms !important;
 @mixin accordion($borderColor) {
     $collpaseSize: 382px;
     width: $collpaseSize !important;
@@ -128,22 +119,6 @@ $tabSize: 424px;
                     position: absolute;
                     right: 25px;
                 }
-                // }
-                // &#tab-horarios-tab-2 {
-                //     position: relative;
-                //     height: 42px;
-                //     .tab-icon {
-                //         position: absolute;
-                //         left: 25px;
-                //         .icon-group-before {
-                //             margin-right: 3px;
-                //         }
-                //     }
-                //     .tab-text {
-                //         position: absolute;
-                //         right: 25px;
-                //     }
-                // }
             }
             &.active>a,
             &.active>a:active,
@@ -175,12 +150,12 @@ $tabSize: 424px;
         border-right: 1px solid lightgray;
         .accordion-ida {
             @include accordion(rgba($googleGreen, .5)) {
-                @include busSelect(rgba($googleGreen, .6));
+                @include busSelect(rgba($googleGreen, 1));
             }
         }
         .accordion-volta {
             @include accordion(rgba($googleRed, .3)) {
-                @include busSelect(rgba($googleRed, .5));
+                @include busSelect(rgba($googleRed, .8));
             }
         }
     }
@@ -200,8 +175,6 @@ $tabSize: 424px;
             .label {
                 @include noSelection();
                 @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                // @include boxShadow(5px 0px 0px -1px darken($colorFree, 20%));
-                // background-color: $colorFree;
                 background-color: $seatColor;
                 margin-right: 4px;
                 padding: 2px 3px 2px 4px;
@@ -213,11 +186,9 @@ $tabSize: 424px;
                     cursor: not-allowed;
                     background-color: rgba($colorReserved, .15);
                     color: rgba(white, .5);
-                    // @include boxShadow(5px 0px 0px -1px darken(rgba($colorReserved, .3), 20%));
                 }
                 &.selected {
                     background-color: $colorSelected;
-                    // @include boxShadow(5px 0px 0px -1px darken($colorSelected, 10%));
                 }
                 &.legenda {
                     cursor: default;
