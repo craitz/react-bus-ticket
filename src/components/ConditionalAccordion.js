@@ -48,9 +48,9 @@ const ConditionalAccordion = ({ className, array, color, icon, onClickSeat }) =>
           key={index}
           data-trigger={
             <Button type="button" className={setTriggerClass()}>
-              <FontAwesome name={icon} className="pull-left icon" />
-              {(item.length > 0) && <span className="text-after-icon pull-right">{item}</span>}
-              <FontAwesome name="clock-o" className="pull-right icon" />
+              {/*<FontAwesome name={icon} className="pull-left icon" />*/}
+              <FontAwesome name="clock-o" className="icon" />
+              {(item.length > 0) && <span className="text-after-icon">{item}</span>}
             </Button>
           }>
           <BusSelect seats={getPoltronas(array, utils.timeToFirebase(item))} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />

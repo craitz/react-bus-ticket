@@ -248,7 +248,7 @@ export class ModalTrajeto extends Component {
     const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
-    const futureDay = moment().add(5, 'days');
+    const futureDay = moment().add(10, 'days');
     const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
 
     return (

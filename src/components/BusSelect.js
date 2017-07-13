@@ -31,7 +31,6 @@ const BusRow = ({ rowClass, seats, onClickSeat, row }) => {
 }
 
 const BusSelect = ({ seats, onClickSeat, onResetSeats }) => {
-  console.log(seats);
   return (
     <div className="bus-seat-select">
       <Jumbotron>

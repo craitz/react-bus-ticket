@@ -433,9 +433,9 @@ export class CompraPassagem extends Component {
     // const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     // const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
-    const strDataIda = momentIda.format('DD / MM / YYYY');
+    const strDataIda = momentIda.format('DD-MM-YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
-    const strDataVolta = momentVolta.format('DD / MM / YYYY');
+    const strDataVolta = momentVolta.format('DD-MM-YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
 
@@ -456,8 +456,8 @@ export class CompraPassagem extends Component {
             <span className="delimiter">|</span>
             <span className="text-trajeto-data">
               <Label className="text-trajeto-data-ida">
-                <FontAwesome name="arrow-circle-right" className="icon" />
-                <span className="text-after-icon">{strDataIda}</span>
+                <span>{strDataIda}</span>
+                <FontAwesome name="arrow-circle-right" className="icon icon-after-text" />
               </Label>
               {isIdaVolta &&
                 <span>
@@ -481,49 +481,43 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              {/*<Row>
-                <Col xs={6} xsOffset={3}>*/}
               <Tabs defaultActiveKey={2} id="tab-horarios" animation={false}>
-                <Tab eventKey={1} title="Tab 1">
+
+                <Tab eventKey={1} className="tab-ida" title={
+                  <div>
+                    <span className="tab-left">{strDataIda}</span>
+                    <span className="tab-right">
+                      <FontAwesome name="bus" className="icon-group-before" />
+                      <FontAwesome name="arrow-right" />
+                    </span>
+                  </div>
+                }>
                   <ConditionalAccordion
                     className="accordion-ida"
                     array={horarios}
                     color="green"
-                    icon="arrow-circle-right"
+                    icon="arrow-right"
                     onClickSeat={this.handleClickSeat} />
                 </Tab>
-                <Tab eventKey={2} title="Tab 2">
+
+                <Tab eventKey={2} className="tab-volta" title={
+                  <div>
+                    <span className="tab-left">{strDataVolta}</span>
+                    <span className="tab-right">
+                      <FontAwesome name="arrow-left" className="icon-group-before" />
+                      <FontAwesome name="bus" />
+                    </span>
+                  </div>
+                }>
                   <ConditionalAccordion
                     className="accordion-volta"
                     array={horariosVolta}
                     color="red"
-                    icon="arrow-circle-left"
+                    icon="arrow-left"
                     onClickSeat={this.handleClickSeat} />
                 </Tab>
               </Tabs>
-              {/*</Col>
-              </Row>*/}
             </div>
-            {/*<div className="horarios-container">
-              <Row>
-                <Col xs={6}>
-                  <ConditionalAccordion
-                    className="accordion-ida"
-                    array={horarios}
-                    color="green"
-                    icon="arrow-circle-right"
-                    onClickSeat={this.handleClickSeat} />
-                </Col>
-                <Col xs={6}>
-                  <ConditionalAccordion
-                    className="accordion-volta"
-                    array={horariosVolta}
-                    color="red"
-                    icon="arrow-circle-left"
-                    onClickSeat={this.handleClickSeat} />
-                </Col>
-              </Row>
-            </div>*/}
           </DivAnimated>
         </div>
       </div >
@@ -548,15 +542,3 @@ const mapStateToProps = (state) => {
 const CompraPassagemWithRouter = withRouter(CompraPassagem);
 const CompraPassagemWithRouterAndAuth = withAuth(CompraPassagemWithRouter);
 export default connect(mapStateToProps)(CompraPassagemWithRouterAndAuth);
-
-
-{/*<div class="tab-content" style="
-    background-color: white;
-    padding: 20px;
-    border-left: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-  border-right: 1px solid lightgray;">*/}
-
-  // uncontrolled-tab-example width: 424px;
-
-// .nav-tabs li width: 50%

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab');
 $size: 380px;
+$tabSize: 424px;
 @mixin labelData {
     font-family: 'Carrois Gothic', sans-serif;
     font-size: 1.3rem;
@@ -98,6 +99,93 @@ $size: 380px;
     @content
 }
 
+@mixin tabControl {
+    width: $tabSize;
+    .nav-tabs {
+        li {
+            width: 50%;
+            &>a,
+            &>a:active,
+            &>a:hover,
+            &>a:focus {
+                margin-right: 0;
+                background-color: transparent;
+                outline: none;
+                border-color: transparent;
+                color: rgba(darkslategrey, .5);
+                font-family: 'Days One';
+                // &#tab-horarios-tab-1 {
+                position: relative;
+                height: 42px;
+                .icon-group-before {
+                    margin-right: 8px;
+                }
+                .tab-left {
+                    position: absolute;
+                    left: 30px;
+                }
+                .tab-right {
+                    position: absolute;
+                    right: 25px;
+                }
+                // }
+                // &#tab-horarios-tab-2 {
+                //     position: relative;
+                //     height: 42px;
+                //     .tab-icon {
+                //         position: absolute;
+                //         left: 25px;
+                //         .icon-group-before {
+                //             margin-right: 3px;
+                //         }
+                //     }
+                //     .tab-text {
+                //         position: absolute;
+                //         right: 25px;
+                //     }
+                // }
+            }
+            &.active>a,
+            &.active>a:active,
+            &.active>a:hover,
+            &.active>a:focus {
+                background-color: white;
+                border-top-color: lightgray;
+                border-left-color: lightgray;
+                border-right-color: lightgray;
+                border-bottom-color: transparent;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+            &.active>a#tab-horarios-tab-1 {
+                color: $googleGreen !important;
+            }
+            &.active>a#tab-horarios-tab-2 {
+                color: $googleRed !important;
+            }
+        }
+    }
+    .tab-content {
+        background-color: white;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 20px;
+        border-left: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        border-right: 1px solid lightgray;
+        .accordion-ida {
+            @include accordion(rgba($googleGreen, .5)) {
+                @include busSelect(rgba($googleGreen, .6));
+            }
+        }
+        .accordion-volta {
+            @include accordion(rgba($googleRed, .3)) {
+                @include busSelect(rgba($googleRed, .5));
+            }
+        }
+    }
+}
+
 @mixin busSelect($seatColor) {
     .bus-seat-select {
         position: relative;
@@ -176,35 +264,10 @@ $size: 380px;
             width: inherit;
             .horarios-container {
                 position: relative;
-                width: 780px;
-                left: calc(50% - 390px);
+                width: 424px;
+                left: calc(50% - 212px);
                 #tab-horarios {
-                    width: 424px;
-                    .nav-tabs li {
-                        width: 50%;
-                        &.active>a {
-                            border-top-left-radius: 5px;
-                            border-top-right-radius: 5px;
-                        }
-                    }
-                    .tab-content {
-                        background-color: rgba(black, .05);
-                        border-radius: 5px;
-                        padding: 20px;
-                        border-left: 1px solid lightgray;
-                        border-bottom: 1px solid lightgray;
-                        border-right: 1px solid lightgray;
-                        .accordion-ida {
-                            @include accordion(rgba($googleGreen, .5)) {
-                                @include busSelect(rgba($googleGreen, .6));
-                            }
-                        }
-                        .accordion-volta {
-                            @include accordion(rgba($googleRed, .3)) {
-                                @include busSelect(rgba($googleRed, .5));
-                            }
-                        }
-                    }
+                    @include tabControl
                 }
             }
         }
