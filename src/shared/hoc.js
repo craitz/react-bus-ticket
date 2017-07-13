@@ -18,3 +18,20 @@ export const withAuth = (WrappedComponent) => {
   }
 };
 
+export const withNoResults = (WrappedComponent, array) => {
+  return class extends Component {
+    render() {
+      if (!array || array.length === 0) {
+        return (
+          <span className="text-muted"><em>Nenhum resultado encontrado</em></span>
+        );
+      } else {
+        return (
+          <WrappedComponent {...this.props} />
+        );
+      }
+    }
+  }
+}
+
+

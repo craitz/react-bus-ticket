@@ -15,6 +15,7 @@ import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
 import ConditionalAccordion from './ConditionalAccordion';
+import { withNoResults } from '../shared/hoc';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -430,14 +431,14 @@ export class CompraPassagem extends Component {
 
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
-    // const getButtonIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
-    // const getButtonLabel = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD-MM-YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
     const strDataVolta = momentVolta.format('DD-MM-YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
+    const NoResultsAccordionIda = withNoResults(ConditionalAccordion, horarios);
+    const NoResultsAccordionVolta = withNoResults(ConditionalAccordion, horariosVolta);
 
     return (
       <div className="comprar-passagem-container">
@@ -481,7 +482,7 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              <Tabs defaultActiveKey={2} id="tab-horarios" animation={false}>
+              <Tabs defaultActiveKey={1} id="tab-horarios" animation={false}>
 
                 <Tab eventKey={1} className="tab-ida" title={
                   <div>
@@ -492,7 +493,7 @@ export class CompraPassagem extends Component {
                     </span>
                   </div>
                 }>
-                  <ConditionalAccordion
+                  <NoResultsAccordionIda
                     className="accordion-ida"
                     array={horarios}
                     color="green"
@@ -500,22 +501,24 @@ export class CompraPassagem extends Component {
                     onClickSeat={this.handleClickSeat} />
                 </Tab>
 
-                <Tab eventKey={2} className="tab-volta" title={
-                  <div>
-                    <span className="tab-left">{strDataVolta}</span>
-                    <span className="tab-right">
-                      <FontAwesome name="arrow-left" className="icon-group-before" />
-                      <FontAwesome name="bus" />
-                    </span>
-                  </div>
-                }>
-                  <ConditionalAccordion
-                    className="accordion-volta"
-                    array={horariosVolta}
-                    color="red"
-                    icon="arrow-left"
-                    onClickSeat={this.handleClickSeat} />
-                </Tab>
+                {isIdaVolta &&
+                  <Tab eventKey={2} className="tab-volta" title={
+                    <div>
+                      <span className="tab-left">{strDataVolta}</span>
+                      <span className="tab-right">
+                        <FontAwesome name="arrow-left" className="icon-group-before" />
+                        <FontAwesome name="bus" />
+                      </span>
+                    </div>
+                  }>
+                    <NoResultsAccordionVolta
+                      className="accordion-volta"
+                      array={horariosVolta}
+                      color="red"
+                      icon="arrow-left"
+                      onClickSeat={this.handleClickSeat} />
+                  </Tab>
+                }
               </Tabs>
             </div>
           </DivAnimated>
