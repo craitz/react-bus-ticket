@@ -181,25 +181,40 @@ export class ModalTrajeto extends Component {
     // }
   }
 
+  transformHorarios(snap) {
+    const horarios = snap.val();
+    for (let horario in horarios) {
+      const poltronas = horarios[horario];
+      for (let i = 0; i < 44; i++) {
+        const strValue = (i + 1).toString().padStart(2, '0');
+        poltronas[strValue] = (poltronas.hasOwnProperty(strValue))
+          ? utils.PoltronaStatus.RESERVED : utils.PoltronaStatus.FREE;
+      }
+    }
+
+    return horarios;
+  }
 
   updateHorarios() {
-    const { dispatch, cidades, origem, destino, data, dataVolta } = this.props;
+    return new Promise(resolve => {
+      const { dispatch, cidades, origem, destino, data, dataVolta } = this.props;
+      const strOrigem = cidades[origem.value].label;
+      const strDestino = cidades[destino.value].label;
+      const strData = utils.dateToFirebase(data.value);
+      const strDataVolta = utils.dateToFirebase(dataVolta.value);
+      const refIda = `saidas/${strOrigem}/${strDestino}/${strData}/`;
+      const refVolta = `saidas/${strDestino}/${strOrigem}/${strDataVolta}/`;
 
-    const strOrigem = cidades[origem.value].label;
-    const strDestino = cidades[destino.value].label;
-    const strData = utils.dateToFirebase(data.value);
-    const strDataVolta = utils.dateToFirebase(dataVolta.value);
-    const refIda = `saidas/${strOrigem}/${strDestino}/${strData}/`;
-    const refVolta = `saidas/${strDestino}/${strOrigem}/${strDataVolta}/`;
-
-    firebaseHelper.fetchSnapshot(refIda)
-      .then(snapIda => {
-        dispatch(compraPassagemActions.setHorarios(snapIda.val()));
-        firebaseHelper.fetchSnapshot(refVolta)
-          .then(snapVolta => {
-            dispatch(compraPassagemActions.setHorariosVolta(snapVolta.val()));
-          });
-      });
+      firebaseHelper.fetchSnapshot(refIda)
+        .then(snapIda => {
+          dispatch(compraPassagemActions.setHorarios(this.transformHorarios(snapIda)));
+          firebaseHelper.fetchSnapshot(refVolta)
+            .then(snapVolta => {
+              dispatch(compraPassagemActions.setHorariosVolta(this.transformHorarios(snapVolta)));
+              resolve();
+            });
+        });
+    });
   }
 
   // updatePoltronas(horariosIda, horariosVolta) {
@@ -226,17 +241,17 @@ export class ModalTrajeto extends Component {
       return;
     }
 
-    this.updateHorarios();
+    this.updateHorarios().then(() => {
+      dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
+      dispatch(actions.setVisible(false)); // fecha o modal
 
-    dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
-    dispatch(actions.setVisible(false)); // fecha o modal
+      setTimeout(() => {
+        // altera um estado qualquer, apenas para forçar o render no form CompraPassagem
+        dispatch(compraPassagemActions.setOrigemDirty());
+      }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
 
-    setTimeout(() => {
-      // altera um estado qualquer, apenas para forçar o render no form CompraPassagem
-      dispatch(compraPassagemActions.setOrigemDirty());
-    }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
-
-    history.push('/comprar'); // retorna ao form CompraPassagem
+      history.push('/comprar'); // retorna ao form CompraPassagem
+    });
   };
 
   render() {

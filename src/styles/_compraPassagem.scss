@@ -162,7 +162,7 @@ monospace;
             &.active>a#tab-horarios-tab-1 {
                 padding-top: 8px;
                 width: calc(100% - 3px);
-                color: $googleGreen !important;
+                color: rgba($googleGreen, .7) !important;
             }
             &:not(.active)>a#tab-horarios-tab-1 {
                 width: calc(100% - 3px);
@@ -170,7 +170,7 @@ monospace;
             }
             &.active>a#tab-horarios-tab-2 {
                 padding-top: 9px;
-                color: $googleRed !important;
+                color: rgba($googleRed, .7) !important;
             }
             &:not(.active)>a#tab-horarios-tab-2 {
                 padding-top: 8px;

@@ -14,7 +14,7 @@ import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
-import ConditionalAccordion from './ConditionalAccordion';
+import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
 
 const helper = {
@@ -98,31 +98,18 @@ export class CompraPassagem extends Component {
     const { dispatch, poltronas, passagem } = this.props;
 
     // se a poltrona já está ocupada, não faz nada
-    if (poltronas[seat].status === utils.PoltronaStatus.RESERVED) {
+    if (seat.status === utils.PoltronaStatus.RESERVED) {
       return;
     }
 
-    const isPristine = passagem.poltrona.isPristine;
-    const newPoltronas = utils.deepCopy(poltronas);
-    const currentValue = passagem.poltrona.value;
-    let newPoltronaVal = '';
-
-    if (newPoltronas[seat].status === utils.PoltronaStatus.FREE) {
-      newPoltronas[seat].status = utils.PoltronaStatus.SELECTED;
-      newPoltronaVal = this.addPoltronaToSelect(currentValue, seat);
-    } else if (newPoltronas[seat].status === utils.PoltronaStatus.SELECTED) {
-      newPoltronas[seat].status = utils.PoltronaStatus.FREE;
-      newPoltronaVal = this.removePoltronaFromSelect(currentValue, seat);
+    if (seat.status === utils.PoltronaStatus.FREE) {
+      seat.status = utils.PoltronaStatus.SELECTED;
+    } else if (seat.status === utils.PoltronaStatus.SELECTED) {
+      seat.status = utils.PoltronaStatus.FREE;
     }
 
-    dispatch(actions.setPoltronas(newPoltronas));
-    dispatch(actions.changePoltrona(newPoltronaVal));
-    isPristine && dispatch(actions.setPoltronaDirty());
-
-    // valida poltrona
-    const hasSelection = (newPoltronaVal.length > 0);
-    this.updatePoltronaValidation(hasSelection);
-
+    // dispatch(actions.setPoltronas(newPoltronas));
+    // dispatch(actions.changePoltrona(newPoltronaVal));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -437,8 +424,10 @@ export class CompraPassagem extends Component {
     const strDataVolta = momentVolta.format('DD/MM/YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
-    const NoResultsAccordionIda = withNoResults(ConditionalAccordion, horarios);
-    const NoResultsAccordionVolta = withNoResults(ConditionalAccordion, horariosVolta);
+    const NoResultsAccordionIda = withNoResults(HorariosAccordion, horarios);
+    const NoResultsAccordionVolta = withNoResults(HorariosAccordion, horariosVolta);
+
+    console.log(horarios);
 
     return (
       <div className="comprar-passagem-container">
@@ -498,9 +487,8 @@ export class CompraPassagem extends Component {
                 }>
                   <NoResultsAccordionIda
                     className="accordion-ida"
-                    array={horarios}
                     color="green"
-                    icon="arrow-right"
+                    horarios={horarios}
                     onClickSeat={this.handleClickSeat} />
                 </Tab>
 
@@ -516,9 +504,8 @@ export class CompraPassagem extends Component {
                   }>
                     <NoResultsAccordionVolta
                       className="accordion-volta"
-                      array={horariosVolta}
                       color="red"
-                      icon="arrow-left"
+                      horarios={horariosVolta}
                       onClickSeat={this.handleClickSeat} />
                   </Tab>
                 }

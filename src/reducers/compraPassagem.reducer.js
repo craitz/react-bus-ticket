@@ -23,9 +23,6 @@ export const passagemInitialState = Immutable({
   },
   poltrona: {
     value: '',
-    isPristine: true,
-    validation: ValidationStatus.NONE,
-    message: ''
   },
   data: {
     value: DateNowBr,
@@ -44,7 +41,7 @@ export const initialState = Immutable({
   cidades: [],
   horarios: {},
   horariosVolta: {},
-  poltronas: [],
+  // poltronas: [],
   isIdaVolta: false,
   isFrozen: false,
   passagem: { ...passagemInitialState },

@@ -46,6 +46,11 @@ export const ModalTrajetoActionType = {
   SET_VISIBLE: 'SET_VISIBLE'
 }
 
+export const BusSelectActionType = {
+  SET_POLTRONAS: 'SET_POLTRONAS',
+  SET_POLTRONA_STATUS: 'SET_POLTRONA_STATUS'
+}
+
 export const CompraPassagemActionType = {
   SET_CIDADES: 'SET_CIDADES',
   SET_HORARIOS: 'SET_HORARIOS',

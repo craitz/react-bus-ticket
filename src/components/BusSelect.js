@@ -14,19 +14,16 @@ const Seat = ({ className, onClickSeat, value, status }) => {
 }
 
 const BusRow = ({ rowClass, seats, onClickSeat, row }) => {
-  const getValue = index => seats[index].value;
-  const getStatus = index => seats[index].status;
-
   return (
     <Row className={rowClass}>
       {row.map((item, index) =>
         <Seat
           key={index}
           bsStyle="default"
-          className={getStatus(item)}
+          className={seats[item]}
           onClickSeat={onClickSeat}
-          value={getValue(item)}
-          status={getStatus(item)} />)}
+          value={item}
+          status={seats[item]} />)}
     </Row>
   );
 }
@@ -39,22 +36,22 @@ const BusSelect = ({ seats, onClickSeat, onResetSeats }) => {
           rowClass="bus-row"
           seats={seats}
           onClickSeat={onClickSeat}
-          row={[2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42]} />
+          row={['03', '07', '11', '15', '19', '23', '27', '31', '35', '39', '43']} />
         <BusRow
           rowClass="bus-row corredor-acima"
           seats={seats}
           onClickSeat={onClickSeat}
-          row={[3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43]} />
+          row={['04', '08', '12', '16', '20', '24', '28', '32', '36', '40', '44']} />
         <BusRow
           rowClass="bus-row corredor-abaixo"
           seats={seats}
           onClickSeat={onClickSeat}
-          row={[1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41]} />
+          row={['02', '06', '10', '14', '18', '22', '26', '30', '34', '38', '42']} />
         <BusRow
           rowClass="bus-row"
           seats={seats}
           onClickSeat={onClickSeat}
-          row={[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40]} />
+          row={['01', '05', '09', '13', '17', '21', '25', '29', '33', '37', '41']} />
       </Jumbotron>
     </div >
   );
