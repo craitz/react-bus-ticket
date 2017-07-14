@@ -6,8 +6,9 @@ import * as utils from '../shared/Utils';
 const Seat = ({ className, onClickSeat, value, status }) => {
   return (
     <Label bsSize="xsmall" bsStyle="default" className={className} onClick={() => onClickSeat(value)}>
-      {(status === utils.PoltronaStatus.RESERVED) && <FontAwesome name="ban" />}
-      {(status !== utils.PoltronaStatus.RESERVED) && value}
+      {/*{(status === utils.PoltronaStatus.RESERVED) && <FontAwesome name="ban" />}
+      {(status !== utils.PoltronaStatus.RESERVED) && value}*/}
+      {value}
     </Label>
   );
 }

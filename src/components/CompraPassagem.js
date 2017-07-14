@@ -432,9 +432,9 @@ export class CompraPassagem extends Component {
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
-    const strDataIda = momentIda.format('DD-MM-YYYY');
+    const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
-    const strDataVolta = momentVolta.format('DD-MM-YYYY');
+    const strDataVolta = momentVolta.format('DD/MM/YYYY');
     const strOrigem = cidades[passagem.origem.value].label;
     const strDestino = cidades[passagem.destino.value].label;
     const NoResultsAccordionIda = withNoResults(ConditionalAccordion, horarios);
