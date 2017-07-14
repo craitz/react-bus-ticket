@@ -482,9 +482,12 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              <Tabs defaultActiveKey={1} id="tab-horarios" animation={false}>
+              <Tabs
+                defaultActiveKey={1}
+                id="tab-horarios"
+                className={isIdaVolta ? "tab-control" : "tab-control-only-ida"} animation={false}>
 
-                <Tab eventKey={1} className="tab-ida" title={
+                <Tab eventKey={1} title={
                   <div>
                     <span className="tab-left">{strDataIda}</span>
                     <span className="tab-right">

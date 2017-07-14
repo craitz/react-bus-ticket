@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab");
+@import url("https://fonts.googleapis.com/css?family=Carrois+Gothic|Roboto+Condensed");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -567,94 +567,107 @@
       width: inherit; }
       .comprar-passagem-container .form-passagem-container .form-centered .horarios-container {
         position: relative;
-        width: 424px;
-        left: calc(50% - 212px); }
+        width: 600px;
+        left: calc(50% - 225px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios {
-          width: 424px; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li {
-            width: 50%; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus {
-              margin-right: 0;
-              background-color: transparent;
-              outline: none;
-              border-color: transparent;
-              color: rgba(47, 79, 79, 0.5);
-              font-family: 'Days One';
-              position: relative;
-              height: 42px; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .icon-group-before,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .icon-group-before,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .icon-group-before,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .icon-group-before {
-                margin-right: 8px; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-left,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-left,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-left,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left {
-                position: absolute;
-                left: 30px; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-right,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-right,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-right,
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-right {
-                position: absolute;
-                right: 25px; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:active,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:hover,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:focus {
-              background-color: white;
-              border-top-color: lightgray;
-              border-left-color: lightgray;
-              border-right-color: lightgray;
-              border-bottom-color: transparent;
-              border-top-left-radius: 5px;
-              border-top-right-radius: 5px; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a#tab-horarios-tab-1 {
-              color: #4CAF50 !important; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a#tab-horarios-tab-2 {
-              color: #F44336 !important; }
+          width: 595px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios.tab-control-only-ida .nav-tabs li {
+            width: 100%; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs {
+            border: none; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li {
+              height: 43px;
+              width: 50%; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus {
+                margin-right: 0;
+                background-color: transparent;
+                outline: none;
+                border-color: transparent;
+                color: rgba(47, 79, 79, 0.5);
+                font-family: 'Days One';
+                position: relative;
+                height: 42px; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .icon-group-before,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .icon-group-before,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .icon-group-before,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .icon-group-before {
+                  margin-right: 8px; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-left,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-left,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-left,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left {
+                  position: absolute;
+                  left: 30px; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-right,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-right,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-right,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-right {
+                  position: absolute;
+                  right: 25px; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:active,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:hover,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:focus {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:active,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:hover,
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:focus {
+                background-color: rgba(0, 0, 0, 0.1);
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                border-right: 1px solid rgba(0, 0, 0, 0.1);
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
+                border-bottom: none; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a#tab-horarios-tab-1 {
+                color: #4CAF50 !important; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a#tab-horarios-tab-2 {
+                color: #F44336 !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content {
-            background-color: white;
+            background-color: rgba(0, 0, 0, 0.1);
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             padding: 19px 20px 13px 21px;
-            border-left: 1px solid lightgray;
-            border-bottom: 1px solid lightgray;
-            border-right: 1px solid lightgray; }
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: none; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida {
-              width: 382px !important;
+              width: 552px !important;
               margin-bottom: 4px;
               background-color: white;
-              border: 1px solid rgba(76, 175, 80, 0.5);
+              border: 1px solid rgba(0, 0, 0, 0.25);
               border-radius: 5px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-open .collapse-trigger-button {
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
                 font-family: 'Carrois Gothic', sans-serif;
-                width: 380px !important;
+                width: 550px !important;
                 position: relative;
                 left: 0; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-open .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-closed .collapse-trigger-button {
                 font-family: 'Carrois Gothic', sans-serif;
-                width: 380px !important;
+                width: 550px !important;
                 position: relative;
                 left: 0; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-closed .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select {
                 position: relative;
-                width: 380px !important;
-                padding: 10px;
-                background-color: rgba(0, 0, 0, 0.05); }
+                width: 550px !important;
+                height: 180px !important;
+                border-radius: 4px;
+                padding: 10px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row {
                   padding: 3px 10px 3px 22px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label {
+                    font-family: 'Roboto Condensed', sans-serif;
                     -moz-user-select: -moz-none !important;
                     -khtml-user-select: none !important;
                     -webkit-user-select: none !important;
@@ -664,29 +677,31 @@
                     -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
                     box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
                     background-color: #4caf50;
-                    margin-right: 4px;
-                    padding: 2px 3px 2px 4px;
-                    font-size: 1.4rem;
+                    margin-right: 12px;
+                    padding: 4px 8px 4px 8px;
+                    font-size: 1.5rem;
                     float: left;
-                    width: 25px !important;
+                    width: 28px !important;
                     cursor: pointer; }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label.reserved {
                       cursor: not-allowed;
                       background-color: rgba(0, 0, 0, 0.15);
-                      color: rgba(255, 255, 255, 0.5); }
+                      color: rgba(0, 0, 0, 0.3); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label.selected {
                       background-color: #FFB300; }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label.legenda {
                       cursor: default; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row.corredor-acima {
                     padding-top: 0;
-                    padding-bottom: 8px; }
+                    padding-bottom: 13px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row.corredor-abaixo {
-                    padding-top: 8px;
+                    padding-top: 13px;
                     padding-bottom: 0; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row.bus-row-legenda {
                     padding-left: 0;
                     padding-right: 15px; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row.bus-row.row {
+                    padding-left: 56px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida hr {
                 margin-top: 10px;
                 margin-bottom: 10px; }
@@ -694,43 +709,44 @@
                 padding-top: 0;
                 padding-bottom: 0; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .jumbotron {
+                background: url(./styles/images/seats.svg);
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
                 margin-bottom: 0;
-                padding: 8px 15px 8px 10px;
-                border-radius: 3% / 50%;
-                border-bottom-right-radius: 10px;
-                border-top-right-radius: 10px;
-                border: 1px solid rgba(128, 128, 128, 0.2);
-                border-left: 10px solid rgba(128, 128, 128, 0.3); }
+                height: 100% !important;
+                padding: 14px 15px 5px 30px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta {
-              width: 382px !important;
+              width: 552px !important;
               margin-bottom: 4px;
               background-color: white;
-              border: 1px solid rgba(244, 67, 54, 0.3);
+              border: 1px solid rgba(0, 0, 0, 0.25);
               border-radius: 5px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-open .collapse-trigger-button {
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
                 font-family: 'Carrois Gothic', sans-serif;
-                width: 380px !important;
+                width: 550px !important;
                 position: relative;
                 left: 0; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-open .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-closed .collapse-trigger-button {
                 font-family: 'Carrois Gothic', sans-serif;
-                width: 380px !important;
+                width: 550px !important;
                 position: relative;
                 left: 0; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-closed .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select {
                 position: relative;
-                width: 380px !important;
-                padding: 10px;
-                background-color: rgba(0, 0, 0, 0.05); }
+                width: 550px !important;
+                height: 180px !important;
+                border-radius: 4px;
+                padding: 10px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row {
                   padding: 3px 10px 3px 22px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label {
+                    font-family: 'Roboto Condensed', sans-serif;
                     -moz-user-select: -moz-none !important;
                     -khtml-user-select: none !important;
                     -webkit-user-select: none !important;
@@ -740,29 +756,31 @@
                     -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
                     box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
                     background-color: rgba(244, 67, 54, 0.8);
-                    margin-right: 4px;
-                    padding: 2px 3px 2px 4px;
-                    font-size: 1.4rem;
+                    margin-right: 12px;
+                    padding: 4px 8px 4px 8px;
+                    font-size: 1.5rem;
                     float: left;
-                    width: 25px !important;
+                    width: 28px !important;
                     cursor: pointer; }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label.reserved {
                       cursor: not-allowed;
                       background-color: rgba(0, 0, 0, 0.15);
-                      color: rgba(255, 255, 255, 0.5); }
+                      color: rgba(0, 0, 0, 0.3); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label.selected {
                       background-color: #FFB300; }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label.legenda {
                       cursor: default; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row.corredor-acima {
                     padding-top: 0;
-                    padding-bottom: 8px; }
+                    padding-bottom: 13px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row.corredor-abaixo {
-                    padding-top: 8px;
+                    padding-top: 13px;
                     padding-bottom: 0; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row.bus-row-legenda {
                     padding-left: 0;
                     padding-right: 15px; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row.bus-row.row {
+                    padding-left: 56px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta hr {
                 margin-top: 10px;
                 margin-bottom: 10px; }
@@ -770,13 +788,12 @@
                 padding-top: 0;
                 padding-bottom: 0; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .jumbotron {
+                background: url(./styles/images/seats.svg);
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
                 margin-bottom: 0;
-                padding: 8px 15px 8px 10px;
-                border-radius: 3% / 50%;
-                border-bottom-right-radius: 10px;
-                border-top-right-radius: 10px;
-                border: 1px solid rgba(128, 128, 128, 0.2);
-                border-left: 10px solid rgba(128, 128, 128, 0.3); }
+                height: 100% !important;
+                padding: 14px 15px 5px 30px; }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);

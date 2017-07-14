@@ -1,6 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Alfa+Slab+One|Droid+Sans+Mono|Economica|Exo|Francois+One|Oswald|Russo+One|Zilla+Slab');
-$size: 380px;
-$tabSize: 424px;
+@import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Roboto+Condensed');
+$size: 550px;
+$tabSize: 600px;
+$widthAccordion: 552px;
+$heightAccordion: 500px;
+$tabColor: rgba(black,
+.1);
+$tabBorderColor: rgba(black,
+.1);
+$tabBorderColorEx: rgba(black,
+.2);
 @mixin labelData {
     font-family: 'Carrois Gothic', sans-serif;
     font-size: 1.3rem;
@@ -68,13 +76,11 @@ $tabSize: 424px;
 }
 
 @mixin accordion($borderColor) {
-    $collpaseSize: 382px;
-    width: $collpaseSize !important;
+    width: $widthAccordion !important;
     margin-bottom: 4px;
     background-color: rgba(white, 1);
-    border: 1px solid $borderColor;
+    border: 1px solid rgba(black, .25);
     border-radius: 5px;
-    // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
     &__trigger.is-open {
         .collapse-trigger-button {
             border-bottom-left-radius: 0;
@@ -91,9 +97,14 @@ $tabSize: 424px;
 }
 
 @mixin tabControl {
-    width: $tabSize;
+    width: $tabSize - 5px;
+    &.tab-control-only-ida .nav-tabs li {
+        width: 100%;
+    }
     .nav-tabs {
+        border: none;
         li {
+            height: 43px;
             width: 50%;
             &>a,
             &>a:active,
@@ -105,7 +116,6 @@ $tabSize: 424px;
                 border-color: transparent;
                 color: rgba(darkslategrey, .5);
                 font-family: 'Days One';
-                // &#tab-horarios-tab-1 {
                 position: relative;
                 height: 42px;
                 .icon-group-before {
@@ -120,17 +130,23 @@ $tabSize: 424px;
                     right: 25px;
                 }
             }
+            &:not(.active)>a,
+            &:not(.active)>a:active,
+            &:not(.active)>a:hover,
+            &:not(.active)>a:focus {
+                border-bottom: 1px solid $tabBorderColorEx;
+            }
             &.active>a,
             &.active>a:active,
             &.active>a:hover,
             &.active>a:focus {
-                background-color: white;
-                border-top-color: lightgray;
-                border-left-color: lightgray;
-                border-right-color: lightgray;
-                border-bottom-color: transparent;
+                background-color: $tabColor;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
+                border-top: 1px solid $tabBorderColor;
+                border-right: 1px solid $tabBorderColor;
+                border-left: 1px solid $tabBorderColor;
+                border-bottom: none;
             }
             &.active>a#tab-horarios-tab-1 {
                 color: $googleGreen !important;
@@ -141,13 +157,14 @@ $tabSize: 424px;
         }
     }
     .tab-content {
-        background-color: white;
+        background-color: $tabColor;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         padding: 19px 20px 13px 21px;
-        border-left: 1px solid lightgray;
-        border-bottom: 1px solid lightgray;
-        border-right: 1px solid lightgray;
+        border-bottom: 1px solid $tabBorderColor;
+        border-right: 1px solid $tabBorderColor;
+        border-left: 1px solid $tabBorderColor;
+        border-top: none;
         .accordion-ida {
             @include accordion(rgba($googleGreen, .5)) {
                 @include busSelect(rgba($googleGreen, 1));
@@ -165,27 +182,29 @@ $tabSize: 424px;
     .bus-seat-select {
         position: relative;
         width: $size !important;
+        height: 180px !important;
+        border-radius: 4px;
         padding: 10px;
-        background-color: rgba(black, .05);
         .bus-row {
             padding: 3px 10px 3px 22px;
             $colorFree: rgb(51, 180, 255);
             $colorSelected: #FFB300;
             $colorReserved: black;
             .label {
+                font-family: 'Roboto Condensed', sans-serif;
                 @include noSelection();
                 @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
                 background-color: $seatColor;
-                margin-right: 4px;
-                padding: 2px 3px 2px 4px;
-                font-size: 1.4rem;
+                margin-right: 12px;
+                padding: 4px 8px 4px 8px;
+                font-size: 1.5rem;
                 float: left;
-                width: 25px !important;
+                width: 28px !important;
                 cursor: pointer;
                 &.reserved {
                     cursor: not-allowed;
                     background-color: rgba($colorReserved, .15);
-                    color: rgba(white, .5);
+                    color: rgba(black, .3);
                 }
                 &.selected {
                     background-color: $colorSelected;
@@ -196,15 +215,18 @@ $tabSize: 424px;
             }
             &.corredor-acima {
                 padding-top: 0;
-                padding-bottom: 8px;
+                padding-bottom: 13px;
             }
             &.corredor-abaixo {
-                padding-top: 8px;
+                padding-top: 13px;
                 padding-bottom: 0;
             }
             &.bus-row-legenda {
                 padding-left: 0;
                 padding-right: 15px;
+            }
+            &.bus-row.row {
+                padding-left: 56px;
             }
         }
     }
@@ -217,13 +239,12 @@ $tabSize: 424px;
         padding-bottom: 0;
     }
     .jumbotron {
+        background: url(./styles/images/seats.svg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
         margin-bottom: 0;
-        padding: 8px 15px 8px 10px;
-        border-radius: 3% / 50%;
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
-        border: 1px solid rgba(grey, .2);
-        border-left: 10px solid rgba(grey, .3);
+        height: 100% !important;
+        padding: 14px 15px 5px 30px;
     }
 }
 
@@ -235,8 +256,8 @@ $tabSize: 424px;
             width: inherit;
             .horarios-container {
                 position: relative;
-                width: 424px;
-                left: calc(50% - 212px);
+                width: $tabSize;
+                left: calc(50% - 225px);
                 #tab-horarios {
                     @include tabControl
                 }
