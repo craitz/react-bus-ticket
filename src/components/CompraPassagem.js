@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Label, Tabs, Tab } from 'react-bootstrap';
+import { Navbar, Label, Tabs, Tab, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -16,6 +16,11 @@ import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
 import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
+import seatLogo from '../styles/images/seat2.svg';
+import examLogo from '../styles/images/exam.svg';
+import reviewLogo from '../styles/images/review.svg';
+import idaLogo from '../styles/images/ida.svg';
+import voltaLogo from '../styles/images/volta.svg';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -416,21 +421,6 @@ export class CompraPassagem extends Component {
               <FontAwesome name="map-marker" className="text-trajeto-cidades-icondestino icon" />
               <span className="text-after-icon">{strDestino}</span>
             </span>
-            <span className="delimiter">|</span>
-            <span className="text-trajeto-data">
-              <Label className="text-trajeto-data-ida">
-                <span>{strDataIda}</span>
-                <FontAwesome name="arrow-circle-right" className="icon icon-after-text" />
-              </Label>
-              {isIdaVolta &&
-                <span>
-                  {/*<FontAwesome name="exchange" className="text-trajeto-data-icon icon" />*/}
-                  <Label className="text-trajeto-data-volta">
-                    <span>{strDataVolta}</span>
-                    <FontAwesome name="arrow-circle-left" className="icon icon-after-text" />
-                  </Label>
-                </span>}
-            </span>
           </Navbar.Text>
           <Navbar.Text pullRight className="text-config">
             <ButtonIcon
@@ -447,20 +437,17 @@ export class CompraPassagem extends Component {
               <Tabs
                 defaultActiveKey={1}
                 id="tab-horarios"
-                className={isIdaVolta ? "tab-control" : "tab-control-only-ida"} animation={false}>
-
+                className={isIdaVolta ? "tab-control" : "tab-control-only-ida"}
+                animation={true}>
                 <Tab eventKey={1} title={
-                  <div>
-                    <span className="tab-left">{strDataIda}</span>
-                    <span className="tab-right">
-                      <FontAwesome name="bus" className="icon-group-before" />
-                      <FontAwesome name="arrow-right" />
-                    </span>
-                  </div>
+                  <span className="tab-left">
+                    <img src={idaLogo} alt="" className="icon-ida" />
+                    <span className="title-after-icon">{strDataIda}</span>
+                  </span>
                 }>
                   <NoResultsAccordionIda
                     className="accordion-ida"
-                    color="green"
+                    color="indigo-100"
                     isVolta={false}
                     horarios={horarios}
                     active={activeAccordion}
@@ -469,17 +456,14 @@ export class CompraPassagem extends Component {
 
                 {isIdaVolta &&
                   <Tab eventKey={2} className="tab-volta" title={
-                    <div>
-                      <span className="tab-left">{strDataVolta}</span>
-                      <span className="tab-right">
-                        <FontAwesome name="arrow-left" className="icon-group-before" />
-                        <FontAwesome name="bus" />
-                      </span>
-                    </div>
+                    <span className="tab-left">
+                      <img src={voltaLogo} alt="" className="icon-ida" />
+                      <span className="title-after-icon">{strDataVolta}</span>
+                    </span>
                   }>
                     <NoResultsAccordionVolta
                       className="accordion-volta"
-                      color="red"
+                      color="indigo-100"
                       isVolta={true}
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
@@ -487,6 +471,13 @@ export class CompraPassagem extends Component {
                   </Tab>
                 }
               </Tabs>
+              <Button type="button" className="btn-google-yellow btn-revisar btn-block">
+                <img src={reviewLogo} alt="" className="icon-review" />
+                <span className="finalizar-text">
+                  Revise e finalize a sua reserva!
+                </span>
+              </Button>
+
             </div>
           </DivAnimated>
         </div>

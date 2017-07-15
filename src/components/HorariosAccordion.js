@@ -78,8 +78,9 @@ class HorariosAccordion extends Component {
 
     return (
       <Accordion
+        transitionTime={2000}
+        easing="liner"
         startPosition={active}
-        transitionTime={200}
         classParentString={className}>
         {this.buildCollapsibles()}
       </Accordion>

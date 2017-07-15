@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Share|Oswald|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro');
 $size: 550px;
 $tabSize: 600px;
 $widthAccordion: 552px;
@@ -9,13 +9,13 @@ $tabBorderColor: rgba(black,
 .1);
 $tabBorderColorEx: rgba(black,
 .2);
-$fontNumeros: 'Source Code Pro',
+$fontNumeros: 'Acme',
 monospace;
 @mixin labelData {
     font-family: $fontNumeros;
     font-weight: 100;
     font-size: 1.5rem;
-    padding-top: 5px;
+    padding-top: 2px;
     padding-bottom: 3px;
     @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
     span {
@@ -33,52 +33,6 @@ monospace;
     left: 0;
     .icon {
         line-height: 19px;
-    }
-}
-
-.navbar-trajeto {
-    background-color: #FF9800;
-    font-family: 'Days One', sans-serif;
-    font-size: 1.7rem;
-    .text-trajeto {
-        @include noSelection;
-        line-height: 50px;
-        color: rgba(black, .5);
-        margin-top: 0;
-        margin-bottom: 0;
-        .text-trajeto-cidades-icondestino {
-            margin-left: 20px;
-        }
-        .text-trajeto-data {
-            &-ida {
-                background-color: $googleGreen;
-                @include labelData;
-            }
-            &-volta {
-                background-color: $googleRed;
-                margin-left: 10px;
-                @include labelData;
-            }
-        }
-        .icon {
-            color: rgba(black, .3);
-        }
-        .delimiter {
-            margin-left: 25px;
-            margin-right: 25px;
-            color: rgba(black, .3);
-        }
-    }
-    .text-config {
-        @include noSelection;
-        line-height: 47px;
-        color: rgba(black, .5);
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-right: 0;
-    }
-    &::after {
-        @include afterShadow;
     }
 }
 
@@ -100,7 +54,7 @@ monospace;
             @include collapseTrigger($size);
         }
     }
-    @content
+    @content;
 }
 
 @mixin tabControl {
@@ -129,12 +83,18 @@ monospace;
                     margin-right: 8px;
                 }
                 .tab-left {
-                    position: absolute;
-                    left: 30px;
-                }
-                .tab-right {
-                    position: absolute;
-                    right: 25px;
+                    color: rgba(black, .45);
+                    font-family: 'Days One';
+                    font-weight: bold;
+                    font-size: 1.7rem;
+                    line-height: 20px;
+                    .icon-ida {
+                        position: absolute;
+                        top: 0;
+                        left: 15px;
+                        width: 40px;
+                        height: 40px;
+                    }
                 }
             }
             &:not(.active)>a,
@@ -146,6 +106,16 @@ monospace;
                 // border-bottom: red;
                 background-color: rgba(black, .03);
                 border-radius: 4px;
+                .label {
+                    background-color: transparent;
+                    color: rgba(darkslategrey, .2);
+                }
+                .tab-left {
+                    color: rgba(black, .15);
+                    .icon-ida {
+                        opacity: .2;
+                    }
+                }
             }
             &.active>a,
             &.active>a:active,
@@ -210,28 +180,38 @@ monospace;
         border-radius: 4px;
         padding: 10px;
         .bus-row {
-            padding: 3px 10px 3px 22px;
+            padding: 0 10px 0 22px;
             $colorFree: rgb(51, 180, 255);
-            $colorSelected: #FFB300;
+            $colorSelected: #FFCC3E;
             $colorReserved: black;
             .label {
                 font-family: $fontNumeros;
+                text-shadow: 1px 1px rgba(black, .3);
                 @include noSelection();
-                @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                background-color: $seatColor;
+                // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+                background: url(./styles/images/busseat-green-2.svg);
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                //   background-size: cover;
+                color: white;
+                // background-color: $seatColor;
                 margin-right: 8px;
-                padding: 5px 9px 4px 9px;
+                padding: 8px 3px 0 0;
                 font-size: 1.5rem;
                 float: left;
+                height: 32px !important;
                 width: 32px !important;
                 cursor: pointer;
                 &.reserved {
                     cursor: not-allowed;
-                    background-color: rgba($colorReserved, .15);
+                    text-shadow: none;
+                    background: url(./styles/images/busseat-reserved.svg);
+                    // background-color: rgba($colorReserved, .15);
                     color: rgba(black, .3);
                 }
                 &.selected {
-                    background-color: $colorSelected;
+                    // background-color: $colorSelected;
+                    background: url(./styles/images/busseat-selected.svg);
                 }
                 &.legenda {
                     cursor: default;
@@ -239,10 +219,10 @@ monospace;
             }
             &.corredor-acima {
                 padding-top: 0;
-                padding-bottom: 13px;
+                padding-bottom: 8px;
             }
             &.corredor-abaixo {
-                padding-top: 15px;
+                padding-top: 8px;
                 padding-bottom: 0;
             }
             &.bus-row-legenda {
@@ -268,15 +248,82 @@ monospace;
         background-repeat: no-repeat;
         margin-bottom: 0;
         height: 100% !important;
-        padding: 14px 15px 5px 30px;
+        padding: 8px 15px 5px 30px;
+    }
+}
+
+@mixin navbarTrajeto {
+    background-color: #FFCC3E;
+    font-family: 'Days One', sans-serif;
+    font-size: 1.7rem;
+    .text-trajeto {
+        @include noSelection;
+        line-height: 50px;
+        color: rgba(black, .5);
+        margin-top: 0;
+        margin-bottom: 0;
+        .text-trajeto-cidades-icondestino {
+            margin-left: 20px;
+        }
+        .text-trajeto-data {
+            &-ida {
+                background-color: $googleGreen;
+                @include labelData;
+            }
+            &-volta {
+                background-color: $googleRed;
+                margin-left: 10px;
+                @include labelData;
+            }
+        }
+        .icon {
+            color: rgba(black, .3);
+        }
+        .delimiter {
+            margin-left: 25px;
+            margin-right: 25px;
+            color: rgba(black, .3);
+        }
+    }
+    .text-config {
+        @include noSelection;
+        line-height: 47px;
+        color: rgba(black, .5);
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+    &::after {
+        @include afterShadow;
     }
 }
 
 .comprar-passagem-container {
     @include containerHeight;
+    .navbar-trajeto {
+        @include navbarTrajeto;
+    }
     .form-passagem-container {
         margin-top: 15px;
         .form-centered {
+            .btn-revisar {
+                width: calc(100% - 5px);
+                height: 60px;
+                @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
+                line-height: 20px;
+                font-weight: 100;
+                margin-top: 20px;
+                font-size: 2.2rem;
+                font-family: 'Days One';
+                .finalizar-text {
+                    margin-left: 15px;
+                }
+                .icon-review {
+                    width: 32px;
+                    height: 32px;
+                    opacity: .5;
+                }
+            }
             width: inherit;
             .horarios-container {
                 position: relative;
