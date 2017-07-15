@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import * as utils from '../shared/Utils';
 import { Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import Accordion from 'react-responsive-accordion';
 import BusSelect from './BusSelect';
+import store from '../store';
+import * as compraPassagemActions from '../actions/compraPassagem.actions';
 
 class HorariosAccordion extends Component {
   constructor(props) {
     super(props);
     this.triggerClass = `btn-google-${this.props.color} btn-block collapse-trigger-button`;
+    this.onClickTrigger = this.onClickTrigger.bind(this);
   }
 
   getIconLotacao(ocupadas, size) {
@@ -27,10 +29,16 @@ class HorariosAccordion extends Component {
     }
   }
 
-  buildCollapsibles() {
-    const { horarios, onClickSeat } = this.props;
-    const collapsibles = [];
+  onClickTrigger(position) {
+    const { isVolta } = this.props;
+    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(position));
+    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(position));
+  }
 
+  buildCollapsibles() {
+    const { horarios, onClickSeat, isVolta } = this.props;
+    const collapsibles = [];
+    let count = 0;
     for (let horario in horarios) {
       const poltronas = horarios[horario];
       const allSize = Object.keys(poltronas).length - 1;
@@ -38,11 +46,12 @@ class HorariosAccordion extends Component {
         .filter(item => poltronas[item] === utils.PoltronaStatus.RESERVED).length;
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
+      const position = count;
       collapsibles.push(
         <div
           key={horario}
           data-trigger={
-            <Button type="button" className={this.triggerClass}>
+            <Button type="button" className={this.triggerClass} onClick={() => this.onClickTrigger(position)}>
               <span className="trigger-left pull-left">
                 <FontAwesome name="clock-o" className="icon" />
                 {(strHorario.length > 0) && <span className="text-after-icon">{strHorario}</span>}
@@ -52,15 +61,16 @@ class HorariosAccordion extends Component {
                 <span className="trigger-right text-after-icon">{strLotacao}</span>
               </span>
             </Button>}>
-          <BusSelect seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
+          <BusSelect isVolta={isVolta} horario={horario} seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
         </div>);
+      count++;
     }
 
     return collapsibles;
   }
 
   render() {
-    const { horarios, className } = this.props;
+    const { horarios, className, active } = this.props;
 
     if ((!horarios) || (horarios.length === 0)) {
       return null;
@@ -68,8 +78,8 @@ class HorariosAccordion extends Component {
 
     return (
       <Accordion
-        startPosition={-1}
-        transitionTime={300}
+        startPosition={active}
+        transitionTime={200}
         classParentString={className}>
         {this.buildCollapsibles()}
       </Accordion>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Share");
+@import url("https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Share|Oswald|Source+Code+Pro");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -564,7 +564,7 @@
       margin-left: 20px; }
     .navbar-trajeto .text-trajeto .text-trajeto-data-ida {
       background-color: #43A047;
-      font-family: "Share Tech Mono", monospace;
+      font-family: "Source Code Pro", monospace;
       font-weight: 100;
       font-size: 1.5rem;
       padding-top: 5px;
@@ -577,7 +577,7 @@
     .navbar-trajeto .text-trajeto .text-trajeto-data-volta {
       background-color: #F44336;
       margin-left: 10px;
-      font-family: "Share Tech Mono", monospace;
+      font-family: "Source Code Pro", monospace;
       font-weight: 100;
       font-size: 1.5rem;
       padding-top: 5px;
@@ -647,8 +647,8 @@
                 color: rgba(47, 79, 79, 0.2);
                 position: relative;
                 height: 42px;
-                font-family: 'Changa One';
-                font-weight: 100;
+                font-family: "Source Code Pro", monospace;
+                font-weight: 900;
                 font-size: 1.8rem; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .icon-group-before,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .icon-group-before,
@@ -718,7 +718,7 @@
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-open .collapse-trigger-button {
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
-                font-family: "Share Tech Mono", monospace;
+                font-family: "Source Code Pro", monospace;
                 font-weight: 100;
                 font-size: 1.5rem;
                 width: 550px !important;
@@ -727,7 +727,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-open .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-closed .collapse-trigger-button {
-                font-family: "Share Tech Mono", monospace;
+                font-family: "Source Code Pro", monospace;
                 font-weight: 100;
                 font-size: 1.5rem;
                 width: 550px !important;
@@ -744,7 +744,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row {
                   padding: 3px 10px 3px 22px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label {
-                    font-family: "Share Tech Mono", monospace;
+                    font-family: "Source Code Pro", monospace;
                     -moz-user-select: -moz-none !important;
                     -khtml-user-select: none !important;
                     -webkit-user-select: none !important;
@@ -801,7 +801,7 @@
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-open .collapse-trigger-button {
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
-                font-family: "Share Tech Mono", monospace;
+                font-family: "Source Code Pro", monospace;
                 font-weight: 100;
                 font-size: 1.5rem;
                 width: 550px !important;
@@ -810,7 +810,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-open .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-closed .collapse-trigger-button {
-                font-family: "Share Tech Mono", monospace;
+                font-family: "Source Code Pro", monospace;
                 font-weight: 100;
                 font-size: 1.5rem;
                 width: 550px !important;
@@ -827,7 +827,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row {
                   padding: 3px 10px 3px 22px; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label {
-                    font-family: "Share Tech Mono", monospace;
+                    font-family: "Source Code Pro", monospace;
                     -moz-user-select: -moz-none !important;
                     -khtml-user-select: none !important;
                     -webkit-user-select: none !important;

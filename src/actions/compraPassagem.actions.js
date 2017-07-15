@@ -46,6 +46,28 @@ export const changeNome = (nome) => {
   }
 };
 
+export const setActiveAccordion = (position) => {
+  return {
+    type: CompraPassagemActionType.SET_ACTIVE_ACCORDION,
+    payload: position
+  }
+};
+
+export const setActiveAccordionVolta = (position) => {
+  return {
+    type: CompraPassagemActionType.SET_ACTIVE_ACCORDION_VOLTA,
+    payload: position
+  }
+};
+
+// export const changePoltronaStatus = (status) => {
+//   return {
+//     type: CompraPassagemActionType.CHANGE_POLTRONA_STATUS,
+//     payload: nome
+//   }
+// };
+
+
 export const setNomeDirty = () => {
   return { type: CompraPassagemActionType.SET_NOME_DIRTY }
 };

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Share');
+@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Share|Oswald|Source+Code+Pro');
 $size: 550px;
 $tabSize: 600px;
 $widthAccordion: 552px;
@@ -9,7 +9,7 @@ $tabBorderColor: rgba(black,
 .1);
 $tabBorderColorEx: rgba(black,
 .2);
-$fontNumeros: 'Share Tech Mono',
+$fontNumeros: 'Source Code Pro',
 monospace;
 @mixin labelData {
     font-family: $fontNumeros;
@@ -122,8 +122,8 @@ monospace;
                 // font-family: 'Days One';
                 position: relative;
                 height: 42px;
-                font-family: 'Changa One';
-                font-weight: 100;
+                font-family: $fontNumeros;
+                font-weight: 900;
                 font-size: 1.8rem;
                 .icon-group-before {
                     margin-right: 8px;

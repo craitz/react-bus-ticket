@@ -169,18 +169,6 @@ export class ModalTrajeto extends Component {
     !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
-  getProperties(obj) {
-    console.log(Object.keys(obj));
-    // for (let prop in obj) {
-    //   if (Object.keys(obj[prop]).length > 0) {
-    //     this.getProperties(obj[prop]);
-    //   } else {
-    //     console.log(prop);
-    //     return;
-    //   }
-    // }
-  }
-
   transformHorarios(snap) {
     const horarios = snap.val();
     for (let horario in horarios) {

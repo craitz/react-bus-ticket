@@ -41,9 +41,10 @@ export const initialState = Immutable({
   cidades: [],
   horarios: {},
   horariosVolta: {},
-  // poltronas: [],
   isIdaVolta: false,
   isFrozen: false,
+  activeAccordion: -1,
+  activeAccordionVolta: -1,
   passagem: { ...passagemInitialState },
   passagemVolta: { ...passagemInitialState }
 });
@@ -398,6 +399,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isFrozen: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_ACTIVE_ACCORDION: {
+      return {
+        ...state,
+        activeAccordion: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_ACTIVE_ACCORDION_VOLTA: {
+      return {
+        ...state,
+        activeAccordionVolta: action.payload
       }
     }
     default: {

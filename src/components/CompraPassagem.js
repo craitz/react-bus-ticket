@@ -55,36 +55,7 @@ export class CompraPassagem extends Component {
     this.handleResetSeats = this.handleResetSeats.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
-    this.handleClickIdaVolta = this.handleClickIdaVolta.bind(this);
     this.handleChangeTrajeto = this.handleChangeTrajeto.bind(this);
-  }
-
-  addPoltronaToSelect(current, value) {
-    return (current.length === 0) ? value.toString() : `${current},${value}`;
-  }
-
-  removePoltronaFromSelect(current, value) {
-    const count = current.match(',');
-    const maisDeUma = count && (count.length > 0);
-
-    if (maisDeUma) {
-      const array = current.split(',');
-      const index = array.findIndex((item) => {
-        return item.toString() === value.toString();
-      });
-      if (index >= 0) {
-        array.splice(index, 1);
-      }
-
-      return array.join();
-    } else {
-      return '';
-    }
-  }
-
-  handleClickIdaVolta() {
-    const { dispatch, isIdaVolta } = this.props;
-    dispatch(actions.setIdaVolta(!isIdaVolta));
   }
 
   handleChangeTrajeto(event) {
@@ -94,21 +65,24 @@ export class CompraPassagem extends Component {
     dispatch(modalTrajetoActions.setVisible(true, false, snapshot));
   }
 
-  handleClickSeat(seat) {
-    const { dispatch, poltronas, passagem } = this.props;
+  handleClickSeat(isVolta, horario, value, status) {
+    const { dispatch, horarios, horariosVolta } = this.props;
 
     // se a poltrona já está ocupada, não faz nada
-    if (seat.status === utils.PoltronaStatus.RESERVED) {
+    if (status === utils.PoltronaStatus.RESERVED) {
       return;
     }
 
-    if (seat.status === utils.PoltronaStatus.FREE) {
-      seat.status = utils.PoltronaStatus.SELECTED;
-    } else if (seat.status === utils.PoltronaStatus.SELECTED) {
-      seat.status = utils.PoltronaStatus.FREE;
+    const updatedHorarios = utils.deepCopy(isVolta ? horariosVolta : horarios);
+
+    if (status === utils.PoltronaStatus.FREE) {
+      updatedHorarios[horario][value] = utils.PoltronaStatus.SELECTED;
+    } else if (status === utils.PoltronaStatus.SELECTED) {
+      updatedHorarios[horario][value] = utils.PoltronaStatus.FREE;
     }
 
-    // dispatch(actions.setPoltronas(newPoltronas));
+    !isVolta && dispatch(actions.setHorarios(updatedHorarios));
+    isVolta && dispatch(actions.setHorariosVolta(updatedHorarios));
     // dispatch(actions.changePoltrona(newPoltronaVal));
   }
 
@@ -417,7 +391,8 @@ export class CompraPassagem extends Component {
   };
 
   render() {
-    const { horarios, horariosVolta, cidades, passagem, passagemVolta, isIdaVolta } = this.props;
+    const { horarios, horariosVolta, cidades, passagem, passagemVolta,
+      isIdaVolta, activeAccordion, activeAccordionVolta } = this.props;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -426,8 +401,6 @@ export class CompraPassagem extends Component {
     const strDestino = cidades[passagem.destino.value].label;
     const NoResultsAccordionIda = withNoResults(HorariosAccordion, horarios);
     const NoResultsAccordionVolta = withNoResults(HorariosAccordion, horariosVolta);
-
-    console.log(horarios);
 
     return (
       <div className="comprar-passagem-container">
@@ -488,7 +461,9 @@ export class CompraPassagem extends Component {
                   <NoResultsAccordionIda
                     className="accordion-ida"
                     color="green"
+                    isVolta={false}
                     horarios={horarios}
+                    active={activeAccordion}
                     onClickSeat={this.handleClickSeat} />
                 </Tab>
 
@@ -505,7 +480,9 @@ export class CompraPassagem extends Component {
                     <NoResultsAccordionVolta
                       className="accordion-volta"
                       color="red"
+                      isVolta={true}
                       horarios={horariosVolta}
+                      active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat} />
                   </Tab>
                 }
@@ -528,6 +505,8 @@ const mapStateToProps = (state) => {
     passagemVolta: state.compraPassagemState.passagemVolta,
     isIdaVolta: state.compraPassagemState.isIdaVolta,
     isFrozen: state.compraPassagemState.isFrozen,
+    activeAccordion: state.compraPassagemState.activeAccordion,
+    activeAccordionVolta: state.compraPassagemState.activeAccordionVolta,
     snapshot: state.compraPassagemState
   };
 };
