@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Label, Tabs, Tab, Button } from 'react-bootstrap';
+import { Navbar, Label, Tabs, Tab, Button, Jumbotron, Row, Col, Grid } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -21,6 +21,11 @@ import examLogo from '../styles/images/exam.svg';
 import reviewLogo from '../styles/images/review.svg';
 import idaLogo from '../styles/images/ida.svg';
 import voltaLogo from '../styles/images/volta.svg';
+import passengerGreenLogo from '../styles/images/passenger-green.svg';
+import passengerRedLogo from '../styles/images/passenger-red.svg'
+import clockGreenLogo from '../styles/images/clock-green.svg'
+import clockRedLogo from '../styles/images/clock-red.svg'
+
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -48,6 +53,51 @@ const helper = {
     });
   }
 };
+
+const ConfirmacaoPanel = () =>
+  <Jumbotron className="detalhes-container">
+    <Grid className="detalhes-info text-left">
+      <Row>
+        <FontAwesome name="location-arrow" className="origem" />
+        <span className="text-after-icon">Rio de Janeiro (RJ)</span>
+      </Row>
+      <Row>
+        <FontAwesome name="map-marker" className="destino" />
+        <span className="text-after-icon">Belo Horizonte (BH)</span>
+      </Row>
+      <Row>
+        <FontAwesome name="arrow-right" className="data-ida" />
+        <span className="text-after-icon">18/09/1974</span>
+      </Row>
+      <Row>
+        {/*<img src={clockGreenLogo} width="14" height="32" alt="" className="icon-clock" />*/}
+        <FontAwesome name="clock-o" className="hora-ida" />
+        <span className="text-after-icon">08:39</span>
+      </Row>
+      <Row>
+        <img src={passengerGreenLogo} height="20" alt="" className="icon-passenger" />
+        <span className="text-after-icon">41 42 43</span>
+      </Row>
+      <Row>
+        <FontAwesome name="arrow-left" className="data-volta" />
+        <span className="text-after-icon">23/11/2017</span>
+      </Row>
+      <Row>
+        <FontAwesome name="clock-o" className="hora-volta" />
+        <span className="text-after-icon">21:45</span>
+      </Row>
+      <Row>
+        <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
+        <span className="text-after-icon"></span>
+      </Row>
+      <Row>
+        <Button className="btn-google-yellow btn-block btn-continuar">
+          <FontAwesome name="check" className="icon-continuar" />
+          <span className="text-after-icon">Continuar</span>
+        </Button>
+      </Row>
+    </Grid>
+  </Jumbotron>
 
 export class CompraPassagem extends Component {
   constructor(props) {
@@ -438,7 +488,7 @@ export class CompraPassagem extends Component {
                 defaultActiveKey={1}
                 id="tab-horarios"
                 className={isIdaVolta ? "tab-control" : "tab-control-only-ida"}
-                animation={true}>
+                animation={false}>
                 <Tab eventKey={1} title={
                   <span className="tab-left">
                     <img src={idaLogo} alt="" className="icon-ida" />
@@ -452,6 +502,7 @@ export class CompraPassagem extends Component {
                     horarios={horarios}
                     active={activeAccordion}
                     onClickSeat={this.handleClickSeat} />
+                  <ConfirmacaoPanel />
                 </Tab>
 
                 {isIdaVolta &&
@@ -468,15 +519,16 @@ export class CompraPassagem extends Component {
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat} />
+                    <ConfirmacaoPanel />
                   </Tab>
                 }
               </Tabs>
-              <Button type="button" className="btn-google-yellow btn-revisar btn-block">
+              {/*<Button type="button" className="btn-google-yellow btn-revisar btn-block">
                 <img src={reviewLogo} alt="" className="icon-review" />
                 <span className="finalizar-text">
                   Revise e finalize a sua reserva!
                 </span>
-              </Button>
+              </Button>*/}
 
             </div>
           </DivAnimated>

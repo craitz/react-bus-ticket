@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono');
 $size: 550px;
-$tabSize: 600px;
+$tabSize: 841px;
 $widthAccordion: 552px;
 $heightAccordion: 500px;
 $tabColor: rgba(black,
@@ -25,7 +25,8 @@ monospace;
 
 @mixin collapseTrigger($width) {
     // font-family: 'Carrois Gothic', sans-serif;
-    font-family: $fontNumeros;
+    font-family: 'Roboto Mono';
+    // font-family: $fontNumeros;
     font-weight: 100;
     font-size: 1.5rem;
     width: $width !important;
@@ -73,7 +74,6 @@ monospace;
                 outline: none;
                 border-color: transparent;
                 color: rgba(darkslategrey, .2);
-                // font-family: 'Days One';
                 position: relative;
                 height: 42px;
                 font-family: $fontNumeros;
@@ -87,13 +87,9 @@ monospace;
                     font-family: 'Days One';
                     font-weight: bold;
                     font-size: 1.7rem;
-                    line-height: 20px;
                     .icon-ida {
-                        position: absolute;
-                        top: 0;
-                        left: 15px;
-                        width: 40px;
-                        height: 40px;
+                        width: 40px !important;
+                        height: 40px !important;
                     }
                 }
             }
@@ -101,9 +97,9 @@ monospace;
             &:not(.active)>a:active,
             &:not(.active)>a:hover,
             &:not(.active)>a:focus {
+                padding: 0;
                 height: 39px;
                 border: 1px solid rgba(black, .06);
-                // border-bottom: red;
                 background-color: rgba(black, .03);
                 border-radius: 4px;
                 .label {
@@ -121,6 +117,7 @@ monospace;
             &.active>a:active,
             &.active>a:hover,
             &.active>a:focus {
+                padding: 3px 0 0 0;
                 background-color: $tabColor;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
@@ -130,27 +127,24 @@ monospace;
                 border-bottom: none;
             }
             &.active>a#tab-horarios-tab-1 {
-                padding-top: 8px;
                 width: calc(100% - 3px);
                 color: rgba($googleGreen, .7) !important;
             }
             &:not(.active)>a#tab-horarios-tab-1 {
                 width: calc(100% - 3px);
-                padding-top: 8px;
             }
             &.active>a#tab-horarios-tab-2 {
-                padding-top: 9px;
                 color: rgba($googleRed, .7) !important;
             }
-            &:not(.active)>a#tab-horarios-tab-2 {
-                padding-top: 8px;
-            }
+            &:not(.active)>a#tab-horarios-tab-2 {}
         }
     }
     &.tab-control-only-ida .nav-tabs li.active {
         width: calc(100% + 3px);
     }
     .tab-content {
+        min-height: 285px;
+        position: relative;
         background-color: $tabColor;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -167,6 +161,55 @@ monospace;
         .accordion-volta {
             @include accordion(rgba($googleRed, .3)) {
                 @include busSelect(rgba($googleRed, .8));
+            }
+        }
+        .detalhes-container {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 220px;
+            height: 252px;
+            // height: calc(100% - 37px);
+            background-color: white;
+            @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
+            .detalhes-info {
+                font-family: 'Roboto Mono';
+                font-size: 1.4rem;
+                .data-ida,
+                .hora-ida {
+                    color: #4CAF50;
+                }
+                .data-volta,
+                .hora-volta {
+                    color: #F44336;
+                }
+                // .hora {
+                //     color: #304FFE;
+                // }
+                .origem,
+                .destino {
+                    color: #FF9800;
+                }
+                .label-poltrona-ida {
+                    background-color: #4CAF50;
+                    margin-left: 3px;
+                }
+                .label-nenhuma-ida {
+                    color: #4CAF50;
+                }
+                .label-poltrona-volta {
+                    background-color: #F44336;
+                }
+                .label-nenhuma-volta {
+                    color: #F44336;
+                }
+                .btn-continuar {
+                    margin-top: 15px;
+                    font-family: 'Days One';
+                    .icon-continuar {
+                        font-size: 2rem;
+                    }
+                }
             }
         }
     }
@@ -328,7 +371,7 @@ monospace;
             .horarios-container {
                 position: relative;
                 width: $tabSize;
-                left: calc(50% - 300px);
+                left: calc(50% - 450px);
                 #tab-horarios {
                     @include tabControl
                 }

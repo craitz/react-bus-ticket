@@ -44,7 +44,7 @@
         @include googleButton(#304FFE, .35, 10%);
     }
     &-indigo-100 {
-        @include googleButton(rgb(124, 26, 204), .35, 10%);
+        @include googleButton(rgb(124, 26, 204), .35, 10%, rgba(white, .7));
         // @include googleButton(#1A6ACC, .35, 10%);
     }
     &-red {
