@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Changa+One|Ubuntu+Mono|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -110,10 +110,290 @@
     border: 1px solid rgba(128, 128, 128, 0.1);
     border-left: 10px solid rgba(128, 128, 128, 0.1); }
 
+@keyframes busfade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes buslide {
+  0% {
+    width: 0; }
+  100% {
+    width: 100%; } }
+
+@keyframes busGrad {
+  0% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.05) 78%, rgba(0, 0, 0, 0.05) 100%); }
+  12% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05) 100%); }
+  25% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 29%, transparent 29%, transparent 71%, rgba(0, 0, 0, 0.05) 71%, rgba(0, 0, 0, 0.05) 100%); }
+  37% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 32%, transparent 32%, transparent 68%, rgba(0, 0, 0, 0.05) 68%, rgba(0, 0, 0, 0.05) 100%); }
+  50% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 36%, transparent 36%, transparent 64%, rgba(0, 0, 0, 0.05) 64%, rgba(0, 0, 0, 0.05) 100%); }
+  62% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 40%, transparent 40%, transparent 60%, rgba(0, 0, 0, 0.05) 60%, rgba(0, 0, 0, 0.05) 100%); }
+  75% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 43%, transparent 43%, transparent 57%, rgba(0, 0, 0, 0.05) 57%, rgba(0, 0, 0, 0.05) 100%); }
+  88% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 47%, transparent 47%, transparent 53%, rgba(0, 0, 0, 0.05) 53%, rgba(0, 0, 0, 0.05) 100%); }
+  100% {
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 50%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 100%); } }
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.btn-trigger-purple {
+  color: white !important;
+  background-color: #6e17b5 !important;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-trigger-purple:focus, .btn-trigger-purple:hover, .btn-trigger-purple:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #6e17b5 !important; }
+  .btn-trigger-purple:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 50%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: busGrad 300ms;
+    -moz-animation: busGrad 300ms;
+    -o-animation: busGrad 300ms;
+    animation: busGrad 300ms; }
+  .btn-trigger-purple:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-trigger-purple::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background: -webkit-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -moz-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -o-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.05) 78%, rgba(0, 0, 0, 0.05) 100%); }
+
+.btn-trigger-dark {
+  color: white !important;
+  background-color: #757575 !important;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-trigger-dark:focus, .btn-trigger-dark:hover, .btn-trigger-dark:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #757575 !important; }
+  .btn-trigger-dark:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 50%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: busGrad 300ms;
+    -moz-animation: busGrad 300ms;
+    -o-animation: busGrad 300ms;
+    animation: busGrad 300ms; }
+  .btn-trigger-dark:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-trigger-dark::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background: -webkit-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -moz-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -o-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.05) 78%, rgba(0, 0, 0, 0.05) 100%); }
+
+.btn-glass-blue {
+  color: white !important;
+  background-color: #2a75f3 !important;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: 'Days One', Arial, sans-serif !important;
+  font-weight: 100;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-glass-blue span.fa {
+    position: absolute;
+    left: 15px;
+    top: 9px; }
+  .btn-glass-blue:focus, .btn-glass-blue:hover, .btn-glass-blue:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #2a75f3 !important; }
+  .btn-glass-blue:focus {
+    background-color: #041f4c; }
+  .btn-glass-blue:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: buslide 500ms;
+    -moz-animation: buslide 500ms;
+    -o-animation: buslide 500ms;
+    animation: buslide 500ms; }
+  .btn-glass-blue:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-glass-blue::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+
+.btn-glass-yellow {
+  color: rgba(0, 0, 0, 0.6) !important;
+  background-color: #FFCC3E !important;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: 'Days One', Arial, sans-serif !important;
+  font-weight: 100;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-glass-yellow span.fa {
+    position: absolute;
+    left: 15px;
+    top: 9px; }
+  .btn-glass-yellow:focus, .btn-glass-yellow:hover, .btn-glass-yellow:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #FFCC3E !important; }
+  .btn-glass-yellow:focus {
+    background-color: #715300; }
+  .btn-glass-yellow:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: buslide 500ms;
+    -moz-animation: buslide 500ms;
+    -o-animation: buslide 500ms;
+    animation: buslide 500ms; }
+  .btn-glass-yellow:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-glass-yellow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+
+.btn-glass-transparent {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: 'Days One', Arial, sans-serif !important;
+  font-weight: 100;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-glass-transparent span.fa {
+    position: absolute;
+    left: 15px;
+    top: 9px; }
+  .btn-glass-transparent:focus, .btn-glass-transparent:hover, .btn-glass-transparent:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: rgba(0, 0, 0, 0.2) !important; }
+  .btn-glass-transparent:focus {
+    background-color: rgba(0, 0, 0, 0.2); }
+  .btn-glass-transparent:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: buslide 500ms;
+    -moz-animation: buslide 500ms;
+    -o-animation: buslide 500ms;
+    animation: buslide 500ms; }
+  .btn-glass-transparent:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-glass-transparent::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+
 .btn-google-grey {
   color: rgba(0, 0, 0, 0.8) !important;
   background-color: #9E9E9E;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -122,18 +402,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-grey:focus {
-    border: none;
-    background-color: #858585 !important;
+    background-color: #9E9E9E !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-grey:hover {
     border: none;
-    background-color: #858585 !important;
+    background-color: #9E9E9E !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-grey:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-grey:active {
     border: none;
-    background-color: #858585 !important;
+    background-color: #9E9E9E !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -142,6 +432,7 @@
   color: white !important;
   background-color: #4285f4;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -150,18 +441,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-blue:focus {
-    border: none;
-    background-color: #1266f1 !important;
+    background-color: #4285f4 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-blue:hover {
     border: none;
-    background-color: #1266f1 !important;
+    background-color: #4285f4 !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-blue:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-blue:active {
     border: none;
-    background-color: #1266f1 !important;
+    background-color: #4285f4 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -170,6 +471,7 @@
   color: white !important;
   background-color: purple;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -178,18 +480,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-purple:focus {
-    border: none;
-    background-color: #6c006c !important;
+    background-color: purple !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-purple:hover {
     border: none;
-    background-color: #6c006c !important;
+    background-color: purple !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-purple:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-purple:active {
     border: none;
-    background-color: #6c006c !important;
+    background-color: purple !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
     text-decoration: none;
     outline: none !important; }
@@ -198,6 +510,7 @@
   color: white !important;
   background-color: #304FFE;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -206,18 +519,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-indigo:focus {
-    border: none;
-    background-color: #0127fa !important;
+    background-color: #304FFE !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-indigo:hover {
     border: none;
-    background-color: #0127fa !important;
+    background-color: #304FFE !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-indigo:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-indigo:active {
     border: none;
-    background-color: #0127fa !important;
+    background-color: #304FFE !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -226,6 +549,7 @@
   color: rgba(255, 255, 255, 0.7) !important;
   background-color: #7c1acc;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -234,18 +558,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-indigo-100:focus {
-    border: none;
-    background-color: #61149f !important;
+    background-color: #7c1acc !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-indigo-100:hover {
     border: none;
-    background-color: #61149f !important;
+    background-color: #7c1acc !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-indigo-100:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-indigo-100:active {
     border: none;
-    background-color: #61149f !important;
+    background-color: #7c1acc !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -254,6 +588,7 @@
   color: white !important;
   background-color: #FF6C3E;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -262,18 +597,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-red:focus {
-    border: none;
-    background-color: #ff450b !important;
+    background-color: #FF6C3E !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-red:hover {
     border: none;
-    background-color: #ff450b !important;
+    background-color: #FF6C3E !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-red:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-red:active {
     border: none;
-    background-color: #ff450b !important;
+    background-color: #FF6C3E !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -282,6 +627,7 @@
   color: white !important;
   background-color: #ff450b;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -290,18 +636,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-reder:focus {
-    border: none;
-    background-color: #d73300 !important;
+    background-color: #ff450b !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-reder:hover {
     border: none;
-    background-color: #d73300 !important;
+    background-color: #ff450b !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-reder:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-reder:active {
     border: none;
-    background-color: #d73300 !important;
+    background-color: #ff450b !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -310,6 +666,7 @@
   color: white !important;
   background-color: #78B21B;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -318,18 +675,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-green:focus {
-    border: none;
-    background-color: #5a8614 !important;
+    background-color: #78B21B !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-green:hover {
     border: none;
-    background-color: #5a8614 !important;
+    background-color: #78B21B !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-green:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-green:active {
     border: none;
-    background-color: #5a8614 !important;
+    background-color: #78B21B !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -338,6 +705,7 @@
   color: white !important;
   background-color: #5a8614;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -346,18 +714,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-greener:focus {
-    border: none;
-    background-color: #3c590e !important;
+    background-color: #5a8614 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-greener:hover {
     border: none;
-    background-color: #3c590e !important;
+    background-color: #5a8614 !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-greener:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-greener:active {
     border: none;
-    background-color: #3c590e !important;
+    background-color: #5a8614 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -366,6 +744,7 @@
   color: darkslategrey !important;
   background-color: white;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -374,18 +753,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-white:focus {
-    border: none;
-    background-color: #e6e6e6 !important;
+    background-color: white !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-white:hover {
     border: none;
-    background-color: #e6e6e6 !important;
+    background-color: white !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-white:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-white:active {
     border: none;
-    background-color: #e6e6e6 !important;
+    background-color: white !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -394,6 +783,7 @@
   color: white !important;
   background-color: #FFB300;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -402,18 +792,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-orange:focus {
-    border: none;
-    background-color: #cc8f00 !important;
+    background-color: #FFB300 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-orange:hover {
     border: none;
-    background-color: #cc8f00 !important;
+    background-color: #FFB300 !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-orange:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-orange:active {
     border: none;
-    background-color: #cc8f00 !important;
+    background-color: #FFB300 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -422,6 +822,7 @@
   color: rgba(0, 0, 0, 0.5) !important;
   background-color: #FFCC3E;
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -430,18 +831,28 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-yellow:focus {
-    border: none;
-    background-color: #ffbf0b !important;
+    background-color: #FFCC3E !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-yellow:hover {
     border: none;
-    background-color: #ffbf0b !important;
+    background-color: #FFCC3E !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-yellow:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-yellow:active {
     border: none;
-    background-color: #ffbf0b !important;
+    background-color: #FFCC3E !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -450,6 +861,7 @@
   color: white !important;
   background-color: rgba(0, 0, 0, 0.15);
   background-image: none;
+  position: relative;
   border: none;
   font-family: 'Gruppo', Arial, sans-serif;
   font-weight: bold;
@@ -458,7 +870,6 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-glass:focus {
-    border: none;
     background-color: rgba(0, 0, 0, 0.15) !important;
     text-decoration: none;
     outline: none !important; }
@@ -467,10 +878,99 @@
     background-color: rgba(0, 0, 0, 0.15) !important;
     text-decoration: none;
     outline: none !important; }
+    .btn-google-glass:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
   .btn-google-glass:active {
     border: none;
     background-color: rgba(0, 0, 0, 0.15) !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    text-decoration: none;
+    outline: none !important; }
+
+.btn-google-glass-dark {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-image: none;
+  position: relative;
+  border: none;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-glass-dark:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-glass-dark:hover {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    text-decoration: none;
+    outline: none !important; }
+    .btn-google-glass-dark:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
+  .btn-google-glass-dark:active {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    text-decoration: none;
+    outline: none !important; }
+
+.btn-google-glass-grey {
+  color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(38, 50, 56, 0.6);
+  background-image: none;
+  position: relative;
+  border: none;
+  font-family: 'Gruppo', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-google-glass-grey:focus {
+    background-color: rgba(38, 50, 56, 0.6) !important;
+    text-decoration: none;
+    outline: none !important; }
+  .btn-google-glass-grey:hover {
+    border: none;
+    background-color: rgba(38, 50, 56, 0.6) !important;
+    text-decoration: none;
+    outline: none !important; }
+    .btn-google-glass-grey:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      animation: buslide 500ms; }
+  .btn-google-glass-grey:active {
+    border: none;
+    background-color: rgba(38, 50, 56, 0.6) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
 
@@ -755,10 +1255,10 @@
           opacity: .5; }
       .comprar-passagem-container .form-passagem-container .form-centered .horarios-container {
         position: relative;
-        width: 841px;
-        left: calc(50% - 450px); }
+        width: 600px;
+        left: calc(50% - 175px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios {
-          width: 836px; }
+          width: 595px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs {
             border: none; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li {
@@ -844,7 +1344,6 @@
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios.tab-control-only-ida .nav-tabs li.active {
             width: calc(100% + 3px); }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content {
-            min-height: 285px;
             position: relative;
             background-color: rgba(0, 0, 0, 0.1);
             border-bottom-left-radius: 5px;
@@ -857,7 +1356,7 @@
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida {
               width: 552px !important;
               margin-bottom: 6px;
-              background-color: white;
+              background-color: transparent;
               border: 1px solid rgba(0, 0, 0, 0.25);
               border-radius: 5px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-open .collapse-trigger-button {
@@ -881,6 +1380,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida__trigger.is-closed .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select {
+                background-color: rgba(255, 255, 255, 0.8);
                 position: relative;
                 width: 550px !important;
                 height: 180px !important;
@@ -943,7 +1443,7 @@
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta {
               width: 552px !important;
               margin-bottom: 6px;
-              background-color: white;
+              background-color: transparent;
               border: 1px solid rgba(0, 0, 0, 0.25);
               border-radius: 5px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-open .collapse-trigger-button {
@@ -967,6 +1467,7 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta__trigger.is-closed .collapse-trigger-button .icon {
                   line-height: 19px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select {
+                background-color: rgba(255, 255, 255, 0.8);
                 position: relative;
                 width: 550px !important;
                 height: 180px !important;
@@ -1026,42 +1527,40 @@
                 margin-bottom: 0;
                 height: 100% !important;
                 padding: 8px 15px 5px 30px; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container {
-              position: absolute;
-              top: 18px;
-              right: 20px;
-              width: 220px;
-              height: 252px;
-              background-color: white;
-              -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35);
-              -moz-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35);
-              box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35); }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info {
-                font-family: 'Roboto Mono';
-                font-size: 1.4rem; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .data-ida,
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .hora-ida {
-                  color: #4CAF50; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .data-volta,
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .hora-volta {
-                  color: #F44336; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .origem,
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .destino {
-                  color: #FF9800; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .label-poltrona-ida {
-                  background-color: #4CAF50;
-                  margin-left: 3px; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .label-nenhuma-ida {
-                  color: #4CAF50; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .label-poltrona-volta {
-                  background-color: #F44336; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .label-nenhuma-volta {
-                  color: #F44336; }
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .btn-continuar {
-                  margin-top: 15px;
-                  font-family: 'Days One'; }
-                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .detalhes-container .detalhes-info .btn-continuar .icon-continuar {
-                    font-size: 2rem; }
+        .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container {
+          background: url(./styles/images/ticket.svg) no-repeat center #fff;
+          float: left;
+          position: absolute;
+          top: 0;
+          left: -250px;
+          width: 230px;
+          height: 255px;
+          border: 1px solid rgba(0, 0, 0, 0.1) !important; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info {
+            font-family: 'Ubuntu Mono';
+            font-size: 1.5rem; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .data-ida,
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .hora-ida {
+              color: #4CAF50; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .data-volta,
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .hora-volta {
+              color: #F44336; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .origem,
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .destino {
+              color: #FF9800; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-poltrona-ida {
+              background-color: #4CAF50;
+              margin-left: 3px; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-nenhuma-ida {
+              color: #4CAF50; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-poltrona-volta {
+              background-color: #F44336; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-nenhuma-volta {
+              color: #F44336; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar {
+              margin-top: 15px;
+              font-family: 'Days One';
+              position: relative; }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);

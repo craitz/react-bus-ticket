@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Changa+One|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Changa+One|Ubuntu+Mono|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono');
 $size: 550px;
-$tabSize: 841px;
+$tabSize: 600px;
 $widthAccordion: 552px;
 $heightAccordion: 500px;
 $tabColor: rgba(black,
@@ -40,7 +40,7 @@ monospace;
 @mixin accordion($borderColor) {
     width: $widthAccordion !important;
     margin-bottom: 6px;
-    background-color: rgba(white, 1);
+    background-color: transparent;
     border: 1px solid rgba(black, .25);
     border-radius: 5px;
     &__trigger.is-open {
@@ -143,7 +143,7 @@ monospace;
         width: calc(100% + 3px);
     }
     .tab-content {
-        min-height: 285px;
+        // min-height: 285px;
         position: relative;
         background-color: $tabColor;
         border-bottom-left-radius: 5px;
@@ -163,60 +163,12 @@ monospace;
                 @include busSelect(rgba($googleRed, .8));
             }
         }
-        .detalhes-container {
-            position: absolute;
-            top: 18px;
-            right: 20px;
-            width: 220px;
-            height: 252px;
-            // height: calc(100% - 37px);
-            background-color: white;
-            @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
-            .detalhes-info {
-                font-family: 'Roboto Mono';
-                font-size: 1.4rem;
-                .data-ida,
-                .hora-ida {
-                    color: #4CAF50;
-                }
-                .data-volta,
-                .hora-volta {
-                    color: #F44336;
-                }
-                // .hora {
-                //     color: #304FFE;
-                // }
-                .origem,
-                .destino {
-                    color: #FF9800;
-                }
-                .label-poltrona-ida {
-                    background-color: #4CAF50;
-                    margin-left: 3px;
-                }
-                .label-nenhuma-ida {
-                    color: #4CAF50;
-                }
-                .label-poltrona-volta {
-                    background-color: #F44336;
-                }
-                .label-nenhuma-volta {
-                    color: #F44336;
-                }
-                .btn-continuar {
-                    margin-top: 15px;
-                    font-family: 'Days One';
-                    .icon-continuar {
-                        font-size: 2rem;
-                    }
-                }
-            }
-        }
     }
 }
 
 @mixin busSelect($seatColor) {
     .bus-seat-select {
+        background-color: rgba(white, .8);
         position: relative;
         width: $size !important;
         height: 180px !important;
@@ -341,6 +293,67 @@ monospace;
     }
 }
 
+@mixin detalhes {
+    // background-color: rgba(black, .1);
+    background: url(./styles/images/ticket.svg) no-repeat center #fff;
+    // background-size: 230px 200px;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: -250px;
+    width: 230px;
+    height: 255px;
+    // height: calc(100% - 37px);
+    // background-color: white !important;
+    // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
+    border: 1px solid rgba(black, .1) !important;
+    .detalhes-info {
+        font-family: 'Ubuntu Mono';
+        // font-weight: bold;
+        font-size: 1.5rem;
+        .data-ida,
+        .hora-ida {
+            color: #4CAF50;
+        }
+        .data-volta,
+        .hora-volta {
+            color: #F44336;
+        }
+        // .hora {
+        //     color: #304FFE;
+        // }
+        .origem,
+        .destino {
+            color: #FF9800;
+        }
+        .label-poltrona-ida {
+            background-color: #4CAF50;
+            margin-left: 3px;
+        }
+        .label-nenhuma-ida {
+            color: #4CAF50;
+        }
+        .label-poltrona-volta {
+            background-color: #F44336;
+        }
+        .label-nenhuma-volta {
+            color: #F44336;
+        }
+        .btn-continuar {
+            // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
+            margin-top: 15px;
+            font-family: 'Days One';
+            position: relative;
+            // .icon-continuar {
+            //     font-size: 2rem;
+            // }
+            &:hover {
+                .text-confirmar {}
+            }
+        }
+    }
+}
+
 .comprar-passagem-container {
     @include containerHeight;
     .navbar-trajeto {
@@ -371,9 +384,12 @@ monospace;
             .horarios-container {
                 position: relative;
                 width: $tabSize;
-                left: calc(50% - 450px);
+                left: calc(50% - 175px);
                 #tab-horarios {
-                    @include tabControl
+                    @include tabControl;
+                }
+                .detalhes-container {
+                    @include detalhes;
                 }
             }
         }

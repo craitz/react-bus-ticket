@@ -10,7 +10,7 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions';
 class HorariosAccordion extends Component {
   constructor(props) {
     super(props);
-    this.triggerClass = `btn-google-${this.props.color} btn-block collapse-trigger-button`;
+    this.triggerClass = `btn-trigger-${this.props.color} btn-block collapse-trigger-button`;
     this.onClickTrigger = this.onClickTrigger.bind(this);
   }
 

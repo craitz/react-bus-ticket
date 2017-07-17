@@ -320,7 +320,7 @@ export class ModalTrajeto extends Component {
           <Modal.Footer>
             <ButtonIcon
               type="submit"
-              className="btn-block btn-google-glass"
+              className="btn-block btn-glass-transparent"
               label={getButtonLabel()}
               icon={getButtonIcon()} />
           </Modal.Footer>

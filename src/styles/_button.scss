@@ -1,7 +1,200 @@
+@keyframes busfade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes buslide {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes busGrad {
+    0% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 22%, transparent 22%, transparent 78%, rgba(black, .05) 78%, rgba(black, .05) 100%);
+    }
+    12% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 25%, transparent 25%, transparent 75%, rgba(black, .05) 75%, rgba(black, .05) 100%);
+    }
+    25% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 29%, transparent 29%, transparent 71%, rgba(black, .05) 71%, rgba(black, .05) 100%);
+    }
+    37% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 32%, transparent 32%, transparent 68%, rgba(black, .05) 68%, rgba(black, .05) 100%);
+    }
+    50% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 36%, transparent 36%, transparent 64%, rgba(black, .05) 64%, rgba(black, .05) 100%);
+    }
+    62% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 40%, transparent 40%, transparent 60%, rgba(black, .05) 60%, rgba(black, .05) 100%);
+    }
+    75% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 43%, transparent 43%, transparent 57%, rgba(black, .05) 57%, rgba(black, .05) 100%);
+    }
+    88% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 47%, transparent 47%, transparent 53%, rgba(black, .05) 53%, rgba(black, .05) 100%);
+    }
+    100% {
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 50%, transparent 50%, transparent 50%, rgba(black, .05) 50%, rgba(black, .05) 100%);
+    }
+}
+
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@mixin buttonGradient($color, $dim, $size) {
+    background: repeating-linear-gradient( 135deg, $color, darken($color, $dim) $size);
+}
+
+@mixin buttonBackground($color, $dim: 3%, $size: 50px) {
+    $isGradient: false;
+    @if ($isGradient) {
+        @include buttonGradient($color, $dim, $size);
+    }
+    @else {
+        background-color: $color !important;
+    }
+}
+
+@mixin animate($nome, $duration) {
+    -webkit-animation: $nome $duration;
+    -moz-animation: $nome $duration;
+    -o-animation: $nome $duration;
+    animation: $nome $duration;
+}
+
+@mixin triggerButton($bkColor, $insetAlpha, $darken, $fgColor: white) {
+    $border: 1px solid rgba(black, .08);
+    color: $fgColor !important;
+    @include buttonBackground($bkColor);
+    position: relative;
+    border: $border;
+    padding: 6px 20px;
+    transition: color .15s cubic-bezier(.4, 0, .2, 1), background-color .15s cubic-bezier(.4, 0, .2, 1);
+    will-change: background-color;
+    &:focus,
+    &:hover,
+    &:active {
+        border: $border !important;
+        text-decoration: none;
+        outline: none !important;
+        @include buttonBackground($bkColor);
+    }
+    &:hover {
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .1) 50%, transparent 50%, transparent 50%, rgba(black, .1) 50%, rgba(black, .1) 100%);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+            @include animate(busGrad, 300ms);
+        }
+    }
+    &:active {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, $insetAlpha) !important;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        background: -webkit-linear-gradient(120deg, rgba(black, .1) 0%, rgba(black, .1) 22%, transparent 22%, transparent 78%, rgba(black, .1) 78%, rgba(black, .1) 100%);
+        background: -moz-linear-gradient(120deg, rgba(black, .1) 0%, rgba(black, .1) 22%, transparent 22%, transparent 78%, rgba(black, .1) 78%, rgba(black, .1) 100%);
+        background: -o-linear-gradient(120deg, rgba(black, .1) 0%, rgba(black, .1) 22%, transparent 22%, transparent 78%, rgba(black, .1) 78%, rgba(black, .1) 100%);
+        background: linear-gradient(120deg, rgba(black, .05) 0%, rgba(black, .05) 22%, transparent 22%, transparent 78%, rgba(black, .05) 78%, rgba(black, .05) 100%);
+    }
+}
+
+@mixin glassButton($bkColor, $insetAlpha, $darken, $fgColor: white) {
+    $border: 1px solid rgba(black, .08);
+    color: $fgColor !important;
+    @include buttonBackground($bkColor);
+    // background-color: $bkColor;
+    // background-image: none;
+    position: relative;
+    width: 100%;
+    border: $border;
+    font-family: 'Days One', Arial, sans-serif !important;
+    font-weight: 100;
+    letter-spacing: .7px;
+    padding: 6px 20px;
+    transition: color .15s cubic-bezier(.4, 0, .2, 1), background-color .15s cubic-bezier(.4, 0, .2, 1);
+    will-change: background-color;
+    span.fa {
+        position: absolute;
+        left: 15px;
+        top: 9px;
+    }
+    &:focus,
+    &:hover,
+    &:active {
+        border: $border !important;
+        text-decoration: none;
+        outline: none !important;
+        @include buttonBackground($bkColor);
+    }
+    &:focus {
+        // @include gradiente(darken($bkColor, 10%), 3%, 50px);
+        background-color: darken($bkColor, 40%);
+    }
+    &:hover {
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(white, .1);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+            @include animate(buslide, 500ms)
+        }
+    }
+    &:active {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, $insetAlpha) !important;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(black, .1);
+        width: 40px;
+        height: 100%;
+        overflow: hidden;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+}
+
 @mixin googleButton($bkColor, $insetAlpha, $darken, $fgColor: white) {
     color: $fgColor !important;
     background-color: $bkColor;
     background-image: none;
+    position: relative;
     border: none;
     font-family: 'Gruppo', Arial, sans-serif;
     font-weight: bold;
@@ -10,23 +203,61 @@
     transition: color .15s cubic-bezier(.4, 0, .2, 1), background-color .15s cubic-bezier(.4, 0, .2, 1);
     will-change: background-color;
     &:focus {
-        border: none;
-        background-color: darken($bkColor, $darken) !important;
+        background-color: $bkColor !important;
         text-decoration: none;
         outline: none !important;
     }
     &:hover {
+        // span {
+        //     animation: busfade 1s;
+        // }
         border: none;
-        background-color: darken($bkColor, $darken) !important;
+        // background-color: darken($bkColor, $darken) !important;
+        background-color: $bkColor !important;
         text-decoration: none;
         outline: none !important;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            // background: linear-gradient(to right, rgba(white, .2), transparent);
+            background-color: rgba(white, .05);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+            animation: buslide 500ms;
+        }
     }
     &:active {
         border: none;
-        background-color: darken($bkColor, $darken) !important;
+        // background-color: darken($bkColor, $darken) !important;
+        background-color: $bkColor !important;
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, $insetAlpha) !important;
         text-decoration: none;
         outline: none !important;
+    }
+}
+
+.btn-trigger {
+    &-purple {
+        @include triggerButton(darken(rgb(124, 26, 204), 5%), .2, 10%);
+    }
+    &-dark {
+        @include triggerButton(#757575, .2, 10%);
+    }
+}
+
+.btn-glass {
+    &-blue {
+        @include glassButton(darken($googleBlue, 5%), .2, 10%);
+    }
+    &-yellow {
+        @include glassButton(#FFCC3E, .2, 10%, rgba(black, .6));
+    }
+    &-transparent {
+        @include glassButton(rgba(black, .2), .2, 10%);
     }
 }
 
@@ -70,5 +301,11 @@
     }
     &-glass {
         @include googleButton(rgba(black, .15), .35, 10%);
+    }
+    &-glass-dark {
+        @include googleButton(rgba(black, .3), .35, 10%);
+    }
+    &-glass-grey {
+        @include googleButton(rgba(#263238, .6), .2, 10%, rgba(white, .7));
     }
 }

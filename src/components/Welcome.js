@@ -12,8 +12,8 @@ export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-center welcome-button">
     <ButtonIconFit
       type="button"
-      className="btn btn-google-blue"
-      labelAll="Compre agora sua passagem"
+      className="btn btn-glass-blue"
+      labelAll="Compre agora sua passagem!"
       labelXs="Comprar passagens"
       icon="shopping-cart"
       onClick={handleComprar} />

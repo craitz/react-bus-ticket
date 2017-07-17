@@ -25,7 +25,7 @@ import passengerGreenLogo from '../styles/images/passenger-green.svg';
 import passengerRedLogo from '../styles/images/passenger-red.svg'
 import clockGreenLogo from '../styles/images/clock-green.svg'
 import clockRedLogo from '../styles/images/clock-red.svg'
-
+import Ink from 'react-ink';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -91,9 +91,9 @@ const ConfirmacaoPanel = () =>
         <span className="text-after-icon"></span>
       </Row>
       <Row>
-        <Button className="btn-google-yellow btn-block btn-continuar">
+        <Button className="btn-glass-yellow btn-block btn-continuar">
           <FontAwesome name="check" className="icon-continuar" />
-          <span className="text-after-icon">Continuar</span>
+          <span className="text-after-icon text-confirmar">Continuar</span>
         </Button>
       </Row>
     </Grid>
@@ -484,6 +484,7 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
+              <ConfirmacaoPanel />
               <Tabs
                 defaultActiveKey={1}
                 id="tab-horarios"
@@ -497,12 +498,12 @@ export class CompraPassagem extends Component {
                 }>
                   <NoResultsAccordionIda
                     className="accordion-ida"
-                    color="indigo-100"
+                    color="dark"
                     isVolta={false}
                     horarios={horarios}
                     active={activeAccordion}
                     onClickSeat={this.handleClickSeat} />
-                  <ConfirmacaoPanel />
+                  {/*<ConfirmacaoPanel />*/}
                 </Tab>
 
                 {isIdaVolta &&
@@ -514,12 +515,12 @@ export class CompraPassagem extends Component {
                   }>
                     <NoResultsAccordionVolta
                       className="accordion-volta"
-                      color="indigo-100"
+                      color="dark"
                       isVolta={true}
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat} />
-                    <ConfirmacaoPanel />
+                    {/*<ConfirmacaoPanel />*/}
                   </Tab>
                 }
               </Tabs>

@@ -17,7 +17,7 @@ export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup>
     <ButtonIcon
       type="button"
-      className="btn-block btn-google-blue btn-login"
+      className="btn-block btn-glass-blue btn-login"
       label="Entrar"
       icon="sign-in"
       onClick={handleLogin} />
