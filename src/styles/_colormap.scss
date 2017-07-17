@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Patua+One');
+// DEFAULT COLORS
+$googleBlue: rgb(66,
+133,
+244);
+$googleRed: #FF6C3E;
+$googleGreen: #78B21B;
+$busOrange: rgb(246,
+149,
+45);
+$busPink: rgb(226,
+7,
+106);
+$fontPadrao: "Patua One";
+// MAIN NAVBAR
+$colorNavbarPrincipal: rgb(20,
+08,
+102);
+$brandNavbarPrincipal: $busOrange;
+$textNavbarPrincipal: rgba(white,
+.7);
+// PAGE HEADER
+$colorNavbarHeader: rgb(27,
+0,
+136);
+$textNavbarHeader: rgba(white,
+.8);
+$fontNavbarHeader: $fontPadrao;
+$sizeFontNavbarHeader: 5rem;
+// NAVBAR TRAJETO
+$colorNavbarCompras: white;
+$textNavbarCompras: rgba(black,
+.7);
+$iconNavbarCompras: rgba(black,
+.7);
+$fontNavbarCompras: $fontPadrao;
+// TABCONTROL HORARIOS
+$colorTabHorarios: white;
+$borderTabHorarios: rgba(black,
+.15);
+// DETALHES
+$colorDetalhesPanel: rgb(234,
+242,
+252);
+// BUTTONS
+$fontButton: $fontPadrao;

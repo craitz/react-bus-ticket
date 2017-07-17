@@ -3,29 +3,31 @@
         &::after {
             @include afterShadow;
         }
-        background-color: #2d2d2d;
+        background-color: $colorNavbarHeader !important;
         margin-bottom: 0;
         border: none;
         padding: 0;
         text-align: left;
         .navbar-nav {
-            margin-left: 0px;
+            margin-left: 0;
             .page-title,
             .icon-title {
                 color: rgb(233, 233, 233);
             }
             .page-title {
                 font: {
-                    family: "Gruppo";
-                    size: 2rem;
-                    weight: bold;
+                    family: $fontNavbarHeader;
+                    size: $sizeFontNavbarHeader !important;
+                    // weight: bold;
                 }
+                color: $textNavbarHeader !important;
+                @include textShadow(.8);
             }
             .icon-title.links {
                 font-size: 2rem;
-                color: rgb(157, 157, 157);
+                color: $textNavbarHeader !important;
                 &:hover {
-                    color: white;
+                    color: white !important;
                 }
             }
             .resultados {

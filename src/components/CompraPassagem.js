@@ -91,7 +91,7 @@ const ConfirmacaoPanel = () =>
         <span className="text-after-icon"></span>
       </Row>
       <Row>
-        <Button className="btn-glass-yellow btn-block btn-continuar">
+        <Button className="btn-glass-pink btn-block btn-continuar">
           <FontAwesome name="check" className="icon-continuar" />
           <span className="text-after-icon text-confirmar">Continuar</span>
         </Button>
@@ -475,7 +475,7 @@ export class CompraPassagem extends Component {
           <Navbar.Text pullRight className="text-config">
             <ButtonIcon
               type="button"
-              className="btn-google-glass"
+              className="btn-glass-orange btn-alterar-trajeto"
               label="Alterar"
               icon="cog"
               onClick={this.handleChangeTrajeto} />

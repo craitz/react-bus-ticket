@@ -3,12 +3,6 @@ $size: 550px;
 $tabSize: 600px;
 $widthAccordion: 552px;
 $heightAccordion: 500px;
-$tabColor: rgba(black,
-.1);
-$tabBorderColor: rgba(black,
-.1);
-$tabBorderColorEx: rgba(black,
-.2);
 $fontNumeros: 'Acme',
 monospace;
 @mixin labelData {
@@ -40,7 +34,7 @@ monospace;
 @mixin accordion($borderColor) {
     width: $widthAccordion !important;
     margin-bottom: 6px;
-    background-color: transparent;
+    // background-color: transparent;
     border: 1px solid rgba(black, .25);
     border-radius: 5px;
     &__trigger.is-open {
@@ -62,8 +56,9 @@ monospace;
     width: $tabSize - 5px;
     .nav-tabs {
         border: none;
+        border-bottom: 1px solid $borderTabHorarios !important;
         li {
-            height: 43px;
+            height: 43px !important;
             width: 50%;
             &>a,
             &>a:active,
@@ -75,7 +70,7 @@ monospace;
                 border-color: transparent;
                 color: rgba(darkslategrey, .2);
                 position: relative;
-                height: 42px;
+                // height: 42px;
                 font-family: $fontNumeros;
                 font-weight: 900;
                 font-size: 1.8rem;
@@ -84,9 +79,9 @@ monospace;
                 }
                 .tab-left {
                     color: rgba(black, .45);
-                    font-family: 'Days One';
+                    font-family: "Patua One";
                     font-weight: bold;
-                    font-size: 1.7rem;
+                    font-size: 2rem;
                     .icon-ida {
                         width: 40px !important;
                         height: 40px !important;
@@ -100,7 +95,8 @@ monospace;
                 padding: 0;
                 height: 39px;
                 border: 1px solid rgba(black, .06);
-                background-color: rgba(black, .03);
+                // background-color: rgba(black, .03);
+                background-color: transparent;
                 border-radius: 4px;
                 .label {
                     background-color: transparent;
@@ -118,12 +114,12 @@ monospace;
             &.active>a:hover,
             &.active>a:focus {
                 padding: 3px 0 0 0;
-                background-color: $tabColor;
+                background-color: $colorTabHorarios;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
-                border-top: 1px solid $tabBorderColor;
-                border-right: 1px solid $tabBorderColor;
-                border-left: 1px solid $tabBorderColor;
+                border-top: 1px solid $borderTabHorarios;
+                border-right: 1px solid $borderTabHorarios;
+                border-left: 1px solid $borderTabHorarios;
                 border-bottom: none;
             }
             &.active>a#tab-horarios-tab-1 {
@@ -136,7 +132,6 @@ monospace;
             &.active>a#tab-horarios-tab-2 {
                 color: rgba($googleRed, .7) !important;
             }
-            &:not(.active)>a#tab-horarios-tab-2 {}
         }
     }
     &.tab-control-only-ida .nav-tabs li.active {
@@ -145,13 +140,13 @@ monospace;
     .tab-content {
         // min-height: 285px;
         position: relative;
-        background-color: $tabColor;
+        background-color: $colorTabHorarios;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         padding: 19px 20px 13px 21px;
-        border-bottom: 1px solid $tabBorderColor;
-        border-right: 1px solid $tabBorderColor;
-        border-left: 1px solid $tabBorderColor;
+        border-bottom: 1px solid $borderTabHorarios;
+        border-right: 1px solid $borderTabHorarios;
+        border-left: 1px solid $borderTabHorarios;
         border-top: none;
         .accordion-ida {
             @include accordion(rgba($googleGreen, .3)) {
@@ -168,7 +163,7 @@ monospace;
 
 @mixin busSelect($seatColor) {
     .bus-seat-select {
-        background-color: rgba(white, .8);
+        background-color: white;
         position: relative;
         width: $size !important;
         height: 180px !important;
@@ -176,9 +171,6 @@ monospace;
         padding: 10px;
         .bus-row {
             padding: 0 10px 0 22px;
-            $colorFree: rgb(51, 180, 255);
-            $colorSelected: #FFCC3E;
-            $colorReserved: black;
             .label {
                 font-family: $fontNumeros;
                 text-shadow: 1px 1px rgba(black, .3);
@@ -238,7 +230,7 @@ monospace;
         padding-bottom: 0;
     }
     .jumbotron {
-        background: url(./styles/images/seats.svg);
+        background: url(./styles/images/seats2.svg) no-repeat center white;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         margin-bottom: 0;
@@ -248,36 +240,24 @@ monospace;
 }
 
 @mixin navbarTrajeto {
-    background-color: #FFCC3E;
-    font-family: 'Days One', sans-serif;
+    background-color: $colorNavbarCompras;
+    font-family: $fontNavbarCompras, sans-serif;
     font-size: 1.7rem;
+    font-weight: 100 !important;
     .text-trajeto {
+        margin-left: 20px;
         @include noSelection;
         line-height: 50px;
-        color: rgba(black, .5);
+        // color: rgba(black, .5);
+        color: $textNavbarCompras;
+        @include textShadow(0);
         margin-top: 0;
         margin-bottom: 0;
         .text-trajeto-cidades-icondestino {
             margin-left: 20px;
         }
-        .text-trajeto-data {
-            &-ida {
-                background-color: $googleGreen;
-                @include labelData;
-            }
-            &-volta {
-                background-color: $googleRed;
-                margin-left: 10px;
-                @include labelData;
-            }
-        }
         .icon {
-            color: rgba(black, .3);
-        }
-        .delimiter {
-            margin-left: 25px;
-            margin-right: 25px;
-            color: rgba(black, .3);
+            color: $iconNavbarCompras;
         }
     }
     .text-config {
@@ -287,6 +267,7 @@ monospace;
         margin-top: 0;
         margin-bottom: 0;
         margin-right: 0;
+        width: 150px;
     }
     &::after {
         @include afterShadow;
@@ -295,7 +276,7 @@ monospace;
 
 @mixin detalhes {
     // background-color: rgba(black, .1);
-    background: url(./styles/images/ticket.svg) no-repeat center #fff;
+    background: url(./styles/images/check2.svg) no-repeat center $colorDetalhesPanel;
     // background-size: 230px 200px;
     float: left;
     position: absolute;
@@ -306,7 +287,7 @@ monospace;
     // height: calc(100% - 37px);
     // background-color: white !important;
     // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
-    border: 1px solid rgba(black, .1) !important;
+    border: 1px solid rgba(black, .15) !important;
     .detalhes-info {
         font-family: 'Ubuntu Mono';
         // font-weight: bold;
@@ -324,7 +305,7 @@ monospace;
         // }
         .origem,
         .destino {
-            color: #FF9800;
+            color: rgb(246, 149, 45);
         }
         .label-poltrona-ida {
             background-color: #4CAF50;
@@ -355,6 +336,7 @@ monospace;
 }
 
 .comprar-passagem-container {
+    background-color: darken(rgb(246, 247, 248), 3%);
     @include containerHeight;
     .navbar-trajeto {
         @include navbarTrajeto;

@@ -1,6 +1,3 @@
-$googleBlue: rgb(66, 133, 244);
-$googleRed: #FF6C3E;
-$googleGreen: #78B21B;
 @font-face {
     font-family: 'Roboto';
     src: url(./styles/fonts/Roboto-Regular.ttf) format('trueType');
@@ -14,6 +11,10 @@ $googleGreen: #78B21B;
 @font-face {
     font-family: 'Days One';
     src: url(./styles/fonts/DaysOne-Regular.ttf) format('trueType');
+}
+
+@mixin textShadow($alpha) {
+    text-shadow: 1px 1px 0 rgba(black, $alpha);
 }
 
 @mixin formHeader {

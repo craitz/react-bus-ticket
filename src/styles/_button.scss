@@ -135,8 +135,9 @@
     // background-image: none;
     position: relative;
     width: 100%;
+    height: 34px !important;
     border: $border;
-    font-family: 'Days One', Arial, sans-serif !important;
+    font-family: $fontButton, Arial, sans-serif !important;
     font-weight: 100;
     letter-spacing: .7px;
     padding: 6px 20px;
@@ -147,6 +148,9 @@
         left: 15px;
         top: 9px;
     }
+    // span.text-after-icon {
+    //     position: absolute;
+    // }
     &:focus,
     &:hover,
     &:active {
@@ -245,7 +249,7 @@
         @include triggerButton(darken(rgb(124, 26, 204), 5%), .2, 10%);
     }
     &-dark {
-        @include triggerButton(#757575, .2, 10%);
+        @include triggerButton(#3F51B5, .2, 10%);
     }
 }
 
@@ -255,6 +259,12 @@
     }
     &-yellow {
         @include glassButton(#FFCC3E, .2, 10%, rgba(black, .6));
+    }
+    &-pink {
+        @include glassButton(rgb(226, 7, 106), .2, 10%);
+    }
+    &-orange {
+        @include glassButton(rgb(246, 149, 45), .2, 10%);
     }
     &-transparent {
         @include glassButton(rgba(black, .2), .2, 10%);
