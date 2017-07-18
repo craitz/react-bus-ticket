@@ -22,11 +22,12 @@ import reviewLogo from '../styles/images/review.svg';
 import idaLogo from '../styles/images/ida.svg';
 import voltaLogo from '../styles/images/volta.svg';
 import passengerGreenLogo from '../styles/images/passenger-green.svg';
-import passengerRedLogo from '../styles/images/passenger-red.svg'
-import clockGreenLogo from '../styles/images/clock-green.svg'
-import clockRedLogo from '../styles/images/clock-red.svg'
+import passengerRedLogo from '../styles/images/passenger-red.svg';
+import clockGreenLogo from '../styles/images/clock-green.svg';
+import clockRedLogo from '../styles/images/clock-red.svg';
+import editLogo from '../styles/images/edit.svg';
 import Ink from 'react-ink';
-
+import TooltipOverlay from '../shared/TooltipOverlay';
 const helper = {
   mapPassagemToFirebase(passagem) {
     return {
@@ -54,55 +55,65 @@ const helper = {
   }
 };
 
-const ConfirmacaoPanel = () =>
-  <Jumbotron className="detalhes-container">
-    <Grid className="detalhes-info text-left">
-      <Row>
-        <FontAwesome name="location-arrow" className="origem" />
-        <span className="text-after-icon">Rio de Janeiro (RJ)</span>
-      </Row>
-      <Row>
-        <FontAwesome name="map-marker" className="destino" />
-        <span className="text-after-icon">Belo Horizonte (BH)</span>
-      </Row>
-      <Row>
-        <FontAwesome name="arrow-right" className="data-ida" />
-        <span className="text-after-icon">18/09/1974</span>
-      </Row>
-      <Row>
-        {/*<img src={clockGreenLogo} width="14" height="32" alt="" className="icon-clock" />*/}
-        <FontAwesome name="clock-o" className="hora-ida" />
-        <span className="text-after-icon">08:39</span>
-      </Row>
-      <Row>
-        <img src={passengerGreenLogo} height="20" alt="" className="icon-passenger" />
-        <span className="text-after-icon">41 42 43</span>
-      </Row>
-      <Row>
-        <FontAwesome name="arrow-left" className="data-volta" />
-        <span className="text-after-icon">23/11/2017</span>
-      </Row>
-      <Row>
-        <FontAwesome name="clock-o" className="hora-volta" />
-        <span className="text-after-icon">21:45</span>
-      </Row>
-      <Row>
-        <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
-        <span className="text-after-icon"></span>
-      </Row>
-      <Row>
-        <Button className="btn-glass-pink btn-block btn-continuar">
-          <FontAwesome name="check" className="icon-continuar" />
-          <span className="text-after-icon text-confirmar">Continuar</span>
-        </Button>
-      </Row>
-    </Grid>
-  </Jumbotron>
+const ConfirmacaoPanel = ({ onChangeTrajeto, props }) => {
+  return (
+    <Jumbotron className="detalhes-container">
+      <TooltipOverlay text="Configurar" position="top">
+        <img src={editLogo} className="icon-edit" onClick={onChangeTrajeto} />
+      </TooltipOverlay>
+      <Grid className="detalhes-info text-left">
+        <Row>
+          <FontAwesome name="location-arrow" className="origem" />
+          <span className="text-after-icon">{props.origem}</span>
+        </Row>
+        <Row>
+          <FontAwesome name="map-marker" className="destino" />
+          <span className="text-after-icon">{props.destino}</span>
+        </Row>
+        <hr />
+        <Row>
+          <FontAwesome name="arrow-right" className="data-ida" />
+          <span className="text-after-icon">{props.daiaIda}</span>
+        </Row>
+        <Row>
+          {/*<img src={clockGreenLogo} width="14" height="32" alt="" className="icon-clock" />*/}
+          <FontAwesome name="clock-o" className="hora-ida" />
+          <span className="text-after-icon">08:39</span>
+        </Row>
+        <Row>
+          <img src={passengerGreenLogo} height="20" alt="" className="icon-passenger" />
+          <span className="text-after-icon">41 42 43</span>
+        </Row>
+        <hr />
+        <Row>
+          <FontAwesome name="arrow-left" className="data-volta" />
+          <span className="text-after-icon">{props.dataVolta}</span>
+        </Row>
+        <Row>
+          <FontAwesome name="clock-o" className="hora-volta" />
+          <span className="text-after-icon">21:45</span>
+        </Row>
+        <Row>
+          <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
+          <span className="text-after-icon"></span>
+        </Row>
+        <hr />
+        <Row>
+          <Button className="btn-glass-orange btn-block btn-continuar">
+            <FontAwesome name="check" className="icon-continuar" />
+            <span className="text-after-icon text-confirmar">Continuar</span>
+          </Button>
+        </Row>
+      </Grid>
+    </Jumbotron>
+  );
+}
 
 export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;
+    this.activeTab = 1;
     this.handleReset = this.handleReset.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
@@ -111,10 +122,15 @@ export class CompraPassagem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
     this.handleChangeTrajeto = this.handleChangeTrajeto.bind(this);
+    this.handleSelectTab = this.handleSelectTab.bind(this);
+  }
+
+  handleSelectTab(event) {
+    this.props.dispatch(actions.setActiveTab(event));
   }
 
   handleChangeTrajeto(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const { dispatch, snapshot } = this.props;
     dispatch(actions.SetFrozen(true));
     dispatch(modalTrajetoActions.setVisible(true, false, snapshot));
@@ -447,7 +463,7 @@ export class CompraPassagem extends Component {
 
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta,
-      isIdaVolta, activeAccordion, activeAccordionVolta } = this.props;
+      isIdaVolta, activeAccordion, activeAccordionVolta, activeTab } = this.props;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -457,13 +473,20 @@ export class CompraPassagem extends Component {
     const NoResultsAccordionIda = withNoResults(HorariosAccordion, horarios);
     const NoResultsAccordionVolta = withNoResults(HorariosAccordion, horariosVolta);
 
+    const confirmacaoPanelProps = {
+      origem: strOrigem,
+      destino: strDestino,
+      daiaIda: strDataIda,
+      dataVolta: strDataVolta
+    }
+
     return (
       <div className="comprar-passagem-container">
-        <PageHeader title="Compre sua passagem">
+        <PageHeader title="Compre sua passagem" className="header-comprar">
           <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
           <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
         </PageHeader>
-        <Navbar className="navbar-trajeto">
+        {/*<Navbar className="navbar-trajeto">
           <Navbar.Text className="text-trajeto">
             <span className="text-trajeto-cidades">
               <FontAwesome name="location-arrow" className="icon" />
@@ -480,16 +503,20 @@ export class CompraPassagem extends Component {
               icon="cog"
               onClick={this.handleChangeTrajeto} />
           </Navbar.Text>
-        </Navbar>
+        </Navbar>*/}
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              <ConfirmacaoPanel />
+              <ConfirmacaoPanel
+                onChangeTrajeto={this.handleChangeTrajeto}
+                props={confirmacaoPanelProps} />
               <Tabs
                 defaultActiveKey={1}
+                activeKey={isIdaVolta ? activeTab : 1}
                 id="tab-horarios"
                 className={isIdaVolta ? "tab-control" : "tab-control-only-ida"}
-                animation={false}>
+                animation={false}
+                onSelect={this.handleSelectTab}>
                 <Tab eventKey={1} title={
                   <span className="tab-left">
                     <img src={idaLogo} alt="" className="icon-ida" />
@@ -520,17 +547,9 @@ export class CompraPassagem extends Component {
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat} />
-                    {/*<ConfirmacaoPanel />*/}
                   </Tab>
                 }
               </Tabs>
-              {/*<Button type="button" className="btn-google-yellow btn-revisar btn-block">
-                <img src={reviewLogo} alt="" className="icon-review" />
-                <span className="finalizar-text">
-                  Revise e finalize a sua reserva!
-                </span>
-              </Button>*/}
-
             </div>
           </DivAnimated>
         </div>
@@ -551,6 +570,7 @@ const mapStateToProps = (state) => {
     isFrozen: state.compraPassagemState.isFrozen,
     activeAccordion: state.compraPassagemState.activeAccordion,
     activeAccordionVolta: state.compraPassagemState.activeAccordionVolta,
+    activeTab: state.compraPassagemState.activeTab,
     snapshot: state.compraPassagemState
   };
 };

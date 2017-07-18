@@ -11,9 +11,9 @@ export const PageHeaderItem = ({ tooltip, glyph, onClick }) =>
     </TooltipOverlay>
   </NavItem>
 
-export const PageHeader = ({ title, children }) =>
+export const PageHeader = ({ title, className, children }) =>
   <div className="navheader-container">
-    <Navbar>
+    <Navbar className={className}>
       <NavHeader label={title} glyph="user"></NavHeader>
       <Nav pullRight className="hidden-xs">
         {children}

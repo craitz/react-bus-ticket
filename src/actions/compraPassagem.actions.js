@@ -60,6 +60,13 @@ export const setActiveAccordionVolta = (position) => {
   }
 };
 
+export const setActiveTab = (tab) => {
+  return {
+    type: CompraPassagemActionType.SET_ACTIVE_TAB,
+    payload: tab
+  }
+};
+
 // export const changePoltronaStatus = (status) => {
 //   return {
 //     type: CompraPassagemActionType.CHANGE_POLTRONA_STATUS,

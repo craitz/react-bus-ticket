@@ -15,6 +15,10 @@
   font-family: 'Patua One';
   src: url(./styles/fonts/PatuaOne-Regular.ttf) format("trueType"); }
 
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url(./styles/fonts/RobotoSlab-Regular.ttf) format("trueType"); }
+
 .tooltip > .tooltip-inner {
   background-color: #424242; }
 
@@ -152,6 +156,50 @@
   to {
     transform: rotate(360deg); } }
 
+.btn-trigger-blue {
+  color: white !important;
+  background-color: #2a75f3 !important;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-trigger-blue:focus, .btn-trigger-blue:hover, .btn-trigger-blue:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #2a75f3 !important; }
+  .btn-trigger-blue:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 50%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: busGrad 300ms;
+    -moz-animation: busGrad 300ms;
+    -o-animation: busGrad 300ms;
+    animation: busGrad 300ms; }
+  .btn-trigger-blue:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-trigger-blue::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background: -webkit-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -moz-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: -o-linear-gradient(120deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.1) 78%, rgba(0, 0, 0, 0.1) 100%);
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 22%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.05) 78%, rgba(0, 0, 0, 0.05) 100%); }
+
 .btn-trigger-purple {
   color: white !important;
   background-color: #6e17b5 !important;
@@ -198,7 +246,7 @@
 
 .btn-trigger-dark {
   color: white !important;
-  background-color: #3F51B5 !important;
+  background-color: #2a75f3 !important;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 6px 20px;
@@ -208,7 +256,7 @@
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
     outline: none !important;
-    background-color: #3F51B5 !important; }
+    background-color: #2a75f3 !important; }
   .btn-trigger-dark:hover::after {
     content: "";
     position: absolute;
@@ -245,10 +293,10 @@
   background-color: #2a75f3 !important;
   position: relative;
   width: 100%;
-  height: 34px !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-family: "Patua One", Arial, sans-serif !important;
   font-weight: 100;
+  font-size: 1.7rem;
   letter-spacing: .7px;
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -297,10 +345,10 @@
   background-color: #FFCC3E !important;
   position: relative;
   width: 100%;
-  height: 34px !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-family: "Patua One", Arial, sans-serif !important;
   font-weight: 100;
+  font-size: 1.7rem;
   letter-spacing: .7px;
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -349,10 +397,10 @@
   background-color: #e2076a !important;
   position: relative;
   width: 100%;
-  height: 34px !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-family: "Patua One", Arial, sans-serif !important;
   font-weight: 100;
+  font-size: 1.7rem;
   letter-spacing: .7px;
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -398,13 +446,13 @@
 
 .btn-glass-orange {
   color: white !important;
-  background-color: #f6952d !important;
+  background-color: #FFA400 !important;
   position: relative;
   width: 100%;
-  height: 34px !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-family: "Patua One", Arial, sans-serif !important;
   font-weight: 100;
+  font-size: 1.7rem;
   letter-spacing: .7px;
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -417,9 +465,9 @@
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
     outline: none !important;
-    background-color: #f6952d !important; }
+    background-color: #FFA400 !important; }
   .btn-glass-orange:focus {
-    background-color: #532d04; }
+    background-color: #332100; }
   .btn-glass-orange:hover::after {
     content: "";
     position: absolute;
@@ -453,10 +501,10 @@
   background-color: rgba(0, 0, 0, 0.2) !important;
   position: relative;
   width: 100%;
-  height: 34px !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-family: "Patua One", Arial, sans-serif !important;
   font-weight: 100;
+  font-size: 1.7rem;
   letter-spacing: .7px;
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -541,7 +589,7 @@
 
 .btn-google-blue {
   color: white !important;
-  background-color: #4285f4;
+  background-color: #4285F4;
   background-image: none;
   position: relative;
   border: none;
@@ -552,12 +600,12 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-blue:focus {
-    background-color: #4285f4 !important;
+    background-color: #4285F4 !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-blue:hover {
     border: none;
-    background-color: #4285f4 !important;
+    background-color: #4285F4 !important;
     text-decoration: none;
     outline: none !important; }
     .btn-google-blue:hover::after {
@@ -573,7 +621,7 @@
       animation: buslide 500ms; }
   .btn-google-blue:active {
     border: none;
-    background-color: #4285f4 !important;
+    background-color: #4285F4 !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -1088,8 +1136,20 @@
 .App {
   text-align: center; }
 
+.navbar .container {
+  width: 1000px !important;
+  margin-left: calc(50% - 500px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+  .navbar .container .navbar-nav {
+    margin-left: 0 !important; }
+    .navbar .container .navbar-nav.navbar-right {
+      margin-right: 0 !important; }
+      .navbar .container .navbar-nav.navbar-right li:last-child a {
+        padding-right: 0; }
+
 .navheader-container .navbar {
-  background-color: #1b0088 !important;
+  background-color: #1B0088 !important;
   margin-bottom: 0;
   border: none;
   padding: 0;
@@ -1107,8 +1167,11 @@
     box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
     will-change: opacity;
     transition: opacity 0.4s; }
+  .navheader-container .navbar .navheader-nav a {
+    padding-left: 0; }
   .navheader-container .navbar .navbar-nav {
-    margin-left: 0; }
+    margin-left: 0;
+    padding-right: 0 !important; }
     .navheader-container .navbar .navbar-nav .page-title,
     .navheader-container .navbar .navbar-nav .icon-title {
       color: #e9e9e9; }
@@ -1141,16 +1204,19 @@
     margin-left: 0;
     margin-right: 0;
     width: 100%; }
-    .App .navbar .container .navbar-collapse.collapse.in {
-      text-align: left; }
+    .App .navbar .container .navbar-collapse.collapse {
+      padding-left: 0;
+      padding-right: 0; }
+      .App .navbar .container .navbar-collapse.collapse.in {
+        text-align: left; }
     .App .navbar .container .header-title {
-      color: #f6952d;
+      color: #F6952D;
       margin-left: 15px;
       font-size: 2.5rem;
       font-family: "Gruppo";
       font-weight: bold; }
     .App .navbar .container .App-logo {
-      color: #f6952d; }
+      color: #F6952D; }
     .App .navbar .container .navbar-nav {
       margin-left: 20px; }
       .App .navbar .container .navbar-nav span {
@@ -1278,16 +1344,16 @@
       margin-left: 15px; }
 
 .comprar-passagem-container {
-  background-color: #edeff1;
+  background-color: #e6e6e6;
   overflow: auto;
   height: calc(100vh - 50px); }
   .comprar-passagem-container .navbar-trajeto {
-    background-color: white;
+    background-color: #EDEFF1;
     font-family: "Patua One", sans-serif;
     font-size: 1.7rem;
     font-weight: 100 !important; }
     .comprar-passagem-container .navbar-trajeto .text-trajeto {
-      margin-left: 20px;
+      margin-left: 0 !important;
       -moz-user-select: -moz-none !important;
       -khtml-user-select: none !important;
       -webkit-user-select: none !important;
@@ -1328,8 +1394,18 @@
       will-change: opacity;
       transition: opacity 0.4s; }
   .comprar-passagem-container .form-passagem-container {
-    margin-top: 15px; }
+    min-height: 600px;
+    width: 1000px;
+    margin: 0 !important;
+    margin-top: 20px !important;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    margin-left: calc(50% - 500px) !important;
+    background-color: transparent;
+    border: none; }
     .comprar-passagem-container .form-passagem-container .form-centered {
+      width: inherit;
       width: inherit; }
       .comprar-passagem-container .form-passagem-container .form-centered .btn-revisar {
         width: calc(100% - 5px);
@@ -1349,11 +1425,13 @@
           height: 32px;
           opacity: .5; }
       .comprar-passagem-container .form-passagem-container .form-centered .horarios-container {
-        position: relative;
-        width: 600px;
+        width: 100%;
         left: calc(50% - 175px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios {
-          width: 595px; }
+          width: 595px;
+          position: absolute;
+          right: 0;
+          top: 0; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs {
             border: none;
             border-bottom: 1px solid rgba(0, 0, 0, 0.15) !important; }
@@ -1490,7 +1568,7 @@
                     -webkit-user-select: none !important;
                     -ms-user-select: none !important;
                     user-select: none !important;
-                    background: url(./styles/images/busseat-green-2.svg);
+                    background: url(./styles/images/busseat-yellow.svg);
                     background-size: 100% 100%;
                     background-repeat: no-repeat;
                     color: white;
@@ -1507,7 +1585,7 @@
                       background: url(./styles/images/busseat-reserved.svg);
                       color: rgba(0, 0, 0, 0.3); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label.selected {
-                      background: url(./styles/images/busseat-selected.svg); }
+                      background: url(./styles/images/busseat-selected2.svg); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row .label.legenda {
                       cursor: default; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-ida .bus-seat-select .bus-row.corredor-acima {
@@ -1576,7 +1654,7 @@
                     -webkit-user-select: none !important;
                     -ms-user-select: none !important;
                     user-select: none !important;
-                    background: url(./styles/images/busseat-green-2.svg);
+                    background: url(./styles/images/busseat-yellow.svg);
                     background-size: 100% 100%;
                     background-repeat: no-repeat;
                     color: white;
@@ -1593,7 +1671,7 @@
                       background: url(./styles/images/busseat-reserved.svg);
                       color: rgba(0, 0, 0, 0.3); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label.selected {
-                      background: url(./styles/images/busseat-selected.svg); }
+                      background: url(./styles/images/busseat-selected2.svg); }
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row .label.legenda {
                       cursor: default; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .accordion-volta .bus-seat-select .bus-row.corredor-acima {
@@ -1621,17 +1699,23 @@
                 height: 100% !important;
                 padding: 8px 15px 5px 30px; }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container {
-          background: url(./styles/images/check2.svg) no-repeat center #eaf2fc;
+          background: url(./styles/images/ticket.svg) no-repeat center white;
           float: left;
           position: absolute;
           top: 0;
-          left: -250px;
-          width: 230px;
-          height: 255px;
+          left: 0;
+          width: calc(100% - 610px);
+          height: 410px;
           border: 1px solid rgba(0, 0, 0, 0.15) !important; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .icon-edit {
+            position: absolute;
+            width: 45px;
+            top: 20px;
+            right: 30px;
+            cursor: pointer; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info {
-            font-family: 'Ubuntu Mono';
-            font-size: 1.5rem; }
+            font-family: "Roboto Slab";
+            font-size: 1.7rem; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .data-ida,
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .hora-ida {
               color: #4CAF50; }
@@ -1652,8 +1736,10 @@
               color: #F44336; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar {
               margin-top: 15px;
-              font-family: 'Days One';
-              position: relative; }
+              position: relative;
+              font-size: 2rem; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar::after {
+                width: 45px; }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
@@ -1716,7 +1802,7 @@
       margin-left: 15px;
       margin-right: 15px; }
     .pesquisar-passagens-container .jumbotron .icon-table.data {
-      color: #4285f4;
+      color: #4285F4;
       margin-right: 6px; }
     .pesquisar-passagens-container .jumbotron .icon-table.horario {
       color: goldenrod;
@@ -1942,11 +2028,11 @@ html {
   .page-title {
     font-size: 3rem !important; }
   .navheader-container .navbar {
-    padding: 50px;
+    padding: 0;
     padding-left: 0;
     padding-right: 0; }
     .navheader-container .navbar .container {
-      padding: 0; }
+      padding: 50px; }
   .navheader-container .nav.navbar-nav {
     margin-left: 10px; }
   .navheader-container .navbar-right {

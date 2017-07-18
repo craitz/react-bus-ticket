@@ -18,6 +18,11 @@
     src: url(./styles/fonts/PatuaOne-Regular.ttf) format('trueType');
 }
 
+@font-face {
+    font-family: 'Roboto Slab';
+    src: url(./styles/fonts/RobotoSlab-Regular.ttf) format('trueType');
+}
+
 @mixin textShadow($alpha) {
     text-shadow: 1px 1px 0 rgba(black, $alpha);
 }

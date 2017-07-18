@@ -70,11 +70,11 @@ html {
     }
     .navheader-container {
         .navbar {
-            padding: 50px;
+            padding: 0;
             padding-left: 0;
             padding-right: 0;
             .container {
-                padding: 0;
+                padding: 50px;
             }
         }
         .nav.navbar-nav {

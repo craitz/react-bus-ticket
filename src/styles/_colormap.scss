@@ -1,28 +1,34 @@
+// DEFAULT VARS
+$contentWidth: 1000px;
+$contentLeft: calc(50% - 500px);
 // DEFAULT COLORS
-$googleBlue: rgb(66, 133, 244);
+$googleBlue: #4285F4;
 $googleRed: #FF6C3E;
 $googleGreen: #78B21B;
-$busOrange: rgb(246, 149, 45);
-$busPink: rgb(226, 7, 106);
+$busOrange: #F6952D;
+$busPink: #E2076A;
+$lightBlue: #EAF2FC;
 $fontPadrao: "Patua One";
 // MAIN NAVBAR
-$colorNavbarPrincipal: rgb(20, 08, 102);
+$colorNavbarPrincipal: #140866;
 $brandNavbarPrincipal: $busOrange;
 $textNavbarPrincipal: rgba(white, .7);
 // PAGE HEADER
-$colorNavbarHeader: rgb(27, 0, 136);
+$colorNavbarHeader: #1B0088;
 $textNavbarHeader: rgba(white, .8);
 $fontNavbarHeader: $fontPadrao;
 $sizeFontNavbarHeader: 5rem;
 // NAVBAR TRAJETO
-$colorNavbarCompras: white;
+$colorNavbarCompras: #EDEFF1;
 $textNavbarCompras: rgba(black, .7);
 $iconNavbarCompras: rgba(black, .7);
 $fontNavbarCompras: $fontPadrao;
 // TABCONTROL HORARIOS
-$colorTabHorarios: white;
+$colorTabHorarios: rgba(white, 1);
 $borderTabHorarios: rgba(black, .15);
 // DETALHES
-$colorDetalhesPanel: rgb(234, 242, 252);
+$colorDetalhesPanel: rgba(white, 1);
+$fontDetalhesPanel: "Roboto Slab";
+$sizeFontDetalhesPanel: 1.7rem;
 // BUTTONS
 $fontButton: $fontPadrao;

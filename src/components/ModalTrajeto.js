@@ -247,7 +247,7 @@ export class ModalTrajeto extends Component {
 
     const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
-    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirma e fechar';
+    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirmar e fechar';
     const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');

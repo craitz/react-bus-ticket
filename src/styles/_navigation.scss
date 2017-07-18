@@ -9,8 +9,12 @@
             margin-left: 0;
             margin-right: 0;
             width: 100%;
-            .navbar-collapse.collapse.in {
-                text-align: left;
+            .navbar-collapse.collapse {
+                padding-left: 0;
+                padding-right: 0;
+                &.in {
+                    text-align: left;
+                }
             }
             .header-title {
                 color: $brandNavbarPrincipal;

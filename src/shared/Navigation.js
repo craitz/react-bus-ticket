@@ -22,15 +22,15 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
     <Nav>
       <NavItem href="#" onClick={onHome}>
         <FontAwesome name="home"></FontAwesome>
-        <span className="text-after-icon hidden-sm">Página inicial</span>
+        <span className="text-after-icon hidden-sm">Home</span>
       </NavItem>
       <NavItem href="#" onClick={onComprarPassagem}>
         <FontAwesome name="shopping-cart"></FontAwesome>
-        <span className="text-after-icon hidden-sm">Comprar passagens</span>
+        <span className="text-after-icon hidden-sm">Comprar</span>
       </NavItem>
       <NavItem href="#" onClick={onPesquisarPassagens}>
         <FontAwesome name="history"></FontAwesome>
-        <span className="text-after-icon hidden-sm">Histórico de compras</span>
+        <span className="text-after-icon hidden-sm">Histórico</span>
       </NavItem>
     </Nav>
     <Navbar.Text className="nav-fontes">

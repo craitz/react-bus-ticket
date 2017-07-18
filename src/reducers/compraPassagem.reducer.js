@@ -45,6 +45,7 @@ export const initialState = Immutable({
   isFrozen: false,
   activeAccordion: -1,
   activeAccordionVolta: -1,
+  activeTab: 1,
   passagem: { ...passagemInitialState },
   passagemVolta: { ...passagemInitialState }
 });
@@ -411,6 +412,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         activeAccordionVolta: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_ACTIVE_TAB: {
+      return {
+        ...state,
+        activeTab: action.payload
       }
     }
     default: {
