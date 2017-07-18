@@ -55,11 +55,12 @@ const helper = {
   }
 };
 
-const ConfirmacaoPanel = ({ onChangeTrajeto, props }) => {
+const ConfirmacaoPanel = ({ props }) => {
+  const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container';
   return (
-    <Jumbotron className="detalhes-container">
+    <Jumbotron className={buildClassName}>
       <TooltipOverlay text="Configurar" position="top">
-        <img src={editLogo} className="icon-edit" onClick={onChangeTrajeto} />
+        <img src={editLogo} className="icon-edit" onClick={props.onChangeTrajeto} />
       </TooltipOverlay>
       <Grid className="detalhes-info text-left">
         <Row>
@@ -76,7 +77,6 @@ const ConfirmacaoPanel = ({ onChangeTrajeto, props }) => {
           <span className="text-after-icon">{props.daiaIda}</span>
         </Row>
         <Row>
-          {/*<img src={clockGreenLogo} width="14" height="32" alt="" className="icon-clock" />*/}
           <FontAwesome name="clock-o" className="hora-ida" />
           <span className="text-after-icon">08:39</span>
         </Row>
@@ -84,19 +84,22 @@ const ConfirmacaoPanel = ({ onChangeTrajeto, props }) => {
           <img src={passengerGreenLogo} height="20" alt="" className="icon-passenger" />
           <span className="text-after-icon">41 42 43</span>
         </Row>
-        <hr />
-        <Row>
-          <FontAwesome name="arrow-left" className="data-volta" />
-          <span className="text-after-icon">{props.dataVolta}</span>
-        </Row>
-        <Row>
-          <FontAwesome name="clock-o" className="hora-volta" />
-          <span className="text-after-icon">21:45</span>
-        </Row>
-        <Row>
-          <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
-          <span className="text-after-icon"></span>
-        </Row>
+        {props.isIdaVolta &&
+          <div>
+            <hr />
+            <Row>
+              <FontAwesome name="arrow-left" className="data-volta" />
+              <span className="text-after-icon">{props.dataVolta}</span>
+            </Row>
+            <Row>
+              <FontAwesome name="clock-o" className="hora-volta" />
+              <span className="text-after-icon">21:45</span>
+            </Row>
+            <Row>
+              <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
+              <span className="text-after-icon"></span>
+            </Row>
+          </div>}
         <hr />
         <Row>
           <Button className="btn-glass-orange btn-block btn-continuar">
@@ -474,10 +477,12 @@ export class CompraPassagem extends Component {
     const NoResultsAccordionVolta = withNoResults(HorariosAccordion, horariosVolta);
 
     const confirmacaoPanelProps = {
+      isIdaVolta,
       origem: strOrigem,
       destino: strDestino,
       daiaIda: strDataIda,
-      dataVolta: strDataVolta
+      dataVolta: strDataVolta,
+      onChangeTrajeto: this.handleChangeTrajeto
     }
 
     return (
@@ -507,9 +512,7 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              <ConfirmacaoPanel
-                onChangeTrajeto={this.handleChangeTrajeto}
-                props={confirmacaoPanelProps} />
+              <ConfirmacaoPanel props={confirmacaoPanelProps} />
               <Tabs
                 defaultActiveKey={1}
                 activeKey={isIdaVolta ? activeTab : 1}

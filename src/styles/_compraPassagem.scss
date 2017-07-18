@@ -179,7 +179,7 @@ monospace;
                 text-shadow: 1px 1px rgba(black, .3);
                 @include noSelection();
                 // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                background: url(./styles/images/busseat-yellow.svg);
+                background: url(./styles/images/busseat-green-3.svg);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 //   background-size: cover;
@@ -197,7 +197,7 @@ monospace;
                     text-shadow: none;
                     background: url(./styles/images/busseat-reserved.svg);
                     // background-color: rgba($colorReserved, .15);
-                    color: rgba(black, .3);
+                    color: rgba(black, .2);
                 }
                 &.selected {
                     // background-color: $colorSelected;
@@ -286,11 +286,15 @@ monospace;
     top: 0;
     left: 0;
     width: calc(100% - 610px);
-    height: 410px;
+    height: 297px;
+    &.idavolta {
+        height: 410px;
+    }
     // height: calc(100% - 37px);
     // background-color: white !important;
     // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
-    border: 1px solid rgba(black, .15) !important;
+    border: 1px solid rgba(black,
+    .15) !important;
     .icon-edit {
         position: absolute;
         width: 45px;
