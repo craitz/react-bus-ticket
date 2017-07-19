@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as utils from '../shared/Utils';
-import { Button } from 'react-bootstrap';
+import { Button, Panel, Accordion, ProgressBar } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import Accordion from 'react-responsive-accordion';
+// import Accordion from 'react-responsive-accordion';
 import BusSelect from './BusSelect';
 import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
@@ -10,59 +10,85 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions';
 class HorariosAccordion extends Component {
   constructor(props) {
     super(props);
-    this.triggerClass = `btn-trigger-${this.props.color} btn-block collapse-trigger-button`;
-    this.onClickTrigger = this.onClickTrigger.bind(this);
+    this.onClickPanel = this.onClickPanel.bind(this);
   }
 
-  getIconLotacao(ocupadas, size) {
+  getLotacao(ocupadas, size) {
     const breakpoint = size / 3;
     if (ocupadas === 0) {
-      return 'battery-0';
+      return {
+        status: 'info',
+        icon: 'battery-0'
+      }
     } else if (ocupadas < breakpoint) {
-      return 'battery-1';
+      return {
+        status: 'success',
+        icon: 'battery-1'
+      }
     } else if (ocupadas < breakpoint * 2) {
-      return 'battery-2';
+      return {
+        status: '',
+        icon: 'battery-2'
+      }
     } else if (ocupadas < breakpoint * 3) {
-      return 'battery-3';
+      return {
+        status: 'warning',
+        icon: 'battery-3'
+      }
     } else {
-      return 'battery-4';
+      return {
+        status: 'danger',
+        icon: 'battery-4'
+      }
     }
   }
 
-  onClickTrigger(position) {
+  onClickPanel(selected) {
     const { isVolta } = this.props;
-    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(position));
-    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(position));
+    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(selected));
+    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(selected));
   }
 
   buildCollapsibles() {
     const { horarios, onClickSeat, isVolta } = this.props;
     const collapsibles = [];
-    let count = 0;
+    let count = 1;
     for (let horario in horarios) {
       const poltronas = horarios[horario];
       const allSize = Object.keys(poltronas).length - 1;
       const ocupadasSize = [...Object.keys(poltronas)]
         .filter(item => poltronas[item] === utils.PoltronaStatus.RESERVED).length;
+      const percentLotacao = parseInt((ocupadasSize / allSize) * 100, 10);
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
       const position = count;
+      const lotacao = this.getLotacao(ocupadasSize, allSize);
+
+
+      // bsStyle={lotacao.status}
+      // {/*label={<span className="progress-text">{strLotacao}</span>} />*/}
       collapsibles.push(
-        <div
+        <Panel
           key={horario}
-          data-trigger={
-            <Button type="button" className={this.triggerClass} onClick={() => this.onClickTrigger(position)}>
-              <span className="trigger-left pull-left">
+          eventKey={position}
+          onSelect={(selected) => this.onClickPanel(selected)}
+          bsStyle="info"
+          header={
+            <div>
+              <span className="trigger-left">
                 <FontAwesome name="clock-o" className="icon" />
                 {(strHorario.length > 0) && <span className="text-after-icon">{strHorario}</span>}
               </span>
-              <span className="pull-right">
-                <FontAwesome name={this.getIconLotacao(ocupadasSize, allSize)} className="icon" />
-                <span className="trigger-right text-after-icon">{strLotacao}</span>
+              <span className="trigger-right">
+                <ProgressBar
+                  className={percentLotacao ? "full" : "empty"}
+                  bsStyle="danger"
+                  now={percentLotacao} />
               </span>
-            </Button>}>
-          <BusSelect isVolta={isVolta} horario={horario} seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
-        </div>);
+            </div>}>
+          < BusSelect isVolta={isVolta} horario={horario} seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
+        </Panel >
+      );
       count++;
     }
 
@@ -77,11 +103,7 @@ class HorariosAccordion extends Component {
     }
 
     return (
-      <Accordion
-        transitionTime={2000}
-        easing="liner"
-        startPosition={active}
-        classParentString={className}>
+      <Accordion activeKey={active}>
         {this.buildCollapsibles()}
       </Accordion>
     );
@@ -89,20 +111,4 @@ class HorariosAccordion extends Component {
 }
 
 export default HorariosAccordion;
-
-// const mapStateToProps = (state) => {
-//   const { horarios, horariosVolta } = state.compraPassagemState;
-
-//   return {
-//     horarios,
-//     horariosVolta
-//   }
-// }
-
-//   //   className="accordion-volta"
-//   // color="red"
-//   // icon="arrow-left"
-
-
-// export default connect(mapStateToProps)(HorariosAccordion);
 

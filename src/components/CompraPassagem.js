@@ -157,7 +157,6 @@ export class CompraPassagem extends Component {
 
     !isVolta && dispatch(actions.setHorarios(updatedHorarios));
     isVolta && dispatch(actions.setHorariosVolta(updatedHorarios));
-    // dispatch(actions.changePoltrona(newPoltronaVal));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
