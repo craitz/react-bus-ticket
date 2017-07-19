@@ -10,7 +10,7 @@ import { Tabs, Tab, Button, Jumbotron, Row, Grid } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
-import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import { PageHeader } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import HorariosAccordion from './HorariosAccordion';
@@ -24,8 +24,8 @@ import arrowVoltaLogo from '../styles/images/arrow-volta.svg';
 import editLogo from '../styles/images/edit4.svg';
 import markerLogo from '../styles/images/marker.svg';
 import locationLogo from '../styles/images/location.svg';
-
 import TooltipOverlay from '../shared/TooltipOverlay';
+
 const helper = {
   mapPassagemToFirebase(passagem) {
     return {
@@ -63,18 +63,15 @@ const ConfirmacaoPanel = ({ props }) => {
       <Grid className="detalhes-info text-left">
         <Row>
           <img src={locationLogo} height="15" alt="" className="origem" />
-          {/*<FontAwesome name="location-arrow" className="origem" />*/}
           <span className="text-after-icon">{props.origem}</span>
         </Row>
         <Row>
           <img src={markerLogo} height="20" alt="" className="destino" />
-          {/*<FontAwesome name="map-marker" className="destino" />*/}
           <span className="text-after-icon">{props.destino}</span>
         </Row>
         <hr />
         <Row>
           <img src={arrowIdaLogo} height="15" alt="" className="data-ida" />
-          {/*<FontAwesome name="arrow-right" className="data-ida" />*/}
           <span className="text-after-icon">{props.daiaIda}</span>
         </Row>
         <Row>
@@ -164,9 +161,16 @@ export class CompraPassagem extends Component {
     return !this.props.isFrozen;
   }
 
-  handleResetSeats() {
-    const isPristine = this.props.passagem.poltrona.isPristine;
-    !isPristine && this.handleChangePoltrona('');
+  handleResetSeats(isVolta, horario) {
+    const { dispatch, horarios, horariosVolta, horariosBackup, horariosVoltaBackup } = this.props;
+
+    if (isVolta) {
+      horariosVolta[horario] = horariosVoltaBackup[horario];
+      dispatch(actions.setHorariosVolta(horariosVolta));
+    } else {
+      horarios[horario] = horariosBackup[horario];
+      dispatch(actions.setHorarios(horarios));
+    }
   }
 
   initLoadingDialog() {
@@ -488,27 +492,7 @@ export class CompraPassagem extends Component {
     return (
       <div className="comprar-passagem-container">
         <PageHeader title="Compre sua passagem" className="header-comprar">
-          {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
-          <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />*/}
         </PageHeader>
-        {/*<Navbar className="navbar-trajeto">
-          <Navbar.Text className="text-trajeto">
-            <span className="text-trajeto-cidades">
-              <FontAwesome name="location-arrow" className="icon" />
-              <span className="text-after-icon">{strOrigem}</span>
-              <FontAwesome name="map-marker" className="text-trajeto-cidades-icondestino icon" />
-              <span className="text-after-icon">{strDestino}</span>
-            </span>
-          </Navbar.Text>
-          <Navbar.Text pullRight className="text-config">
-            <ButtonIcon
-              type="button"
-              className="btn-glass-orange btn-alterar-trajeto"
-              label="Alterar"
-              icon="cog"
-              onClick={this.handleChangeTrajeto} />
-          </Navbar.Text>
-        </Navbar>*/}
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
@@ -522,7 +506,6 @@ export class CompraPassagem extends Component {
                 onSelect={this.handleSelectTab}>
                 <Tab eventKey={1} title={
                   <span className="tab-left">
-                    {/*<img src={idaLogo} alt="" className="icon-ida" />*/}
                     <img src={idaLogo} alt="" className="icon-ida" />
                     <span className="title-after-icon">{strDataIda}</span>
                   </span>
@@ -533,15 +516,14 @@ export class CompraPassagem extends Component {
                     isVolta={false}
                     horarios={horarios}
                     active={activeAccordion}
-                    onClickSeat={this.handleClickSeat} />
-                  {/*<ConfirmacaoPanel />*/}
+                    onClickSeat={this.handleClickSeat}
+                    onResetSeats={this.handleResetSeats} />
                 </Tab>
 
                 {isIdaVolta &&
                   <Tab eventKey={2} className="tab-volta" title={
                     <span className="tab-left">
                       <img src={voltaLogo} alt="" className="icon-volta" />
-                      {/*<img src={voltaLogo} alt="" className="icon-ida" />*/}
                       <span className="title-after-icon">{strDataVolta}</span>
                     </span>
                   }>
@@ -551,7 +533,8 @@ export class CompraPassagem extends Component {
                       isVolta={true}
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
-                      onClickSeat={this.handleClickSeat} />
+                      onClickSeat={this.handleClickSeat}
+                      onResetSeats={this.handleResetSeats} />
                   </Tab>
                 }
               </Tabs>
@@ -568,6 +551,8 @@ const mapStateToProps = (state) => {
     cidades: state.compraPassagemState.cidades,
     horarios: state.compraPassagemState.horarios,
     horariosVolta: state.compraPassagemState.horariosVolta,
+    horariosBackup: state.compraPassagemState.horariosBackup,
+    horariosVoltaBackup: state.compraPassagemState.horariosVoltaBackup,
     poltronas: state.compraPassagemState.poltronas,
     passagem: state.compraPassagemState.passagem,
     passagemVolta: state.compraPassagemState.passagemVolta,

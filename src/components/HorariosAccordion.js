@@ -54,7 +54,7 @@ class HorariosAccordion extends Component {
   }
 
   buildCollapsibles() {
-    const { horarios, onClickSeat, isVolta } = this.props;
+    const { horarios, onClickSeat, onResetSeats, isVolta } = this.props;
     const collapsibles = [];
     let count = 1;
     for (let horario in horarios) {
@@ -76,33 +76,61 @@ class HorariosAccordion extends Component {
           header={
             <div>
               <span className="trigger-left">
-                <img src={clockLogo} height="30" alt="" className="horario-icon" />
-                {(strHorario.length > 0) && <span className="text-after-icon text-horario">{strHorario}</span>}
+                <img
+                  src={clockLogo}
+                  height="30"
+                  alt=""
+                  className="horario-icon"
+                />
+                {
+                  (strHorario.length > 0) &&
+                  <span className="text-after-icon text-horario">{strHorario}</span>
+                }
               </span>
               <span className="trigger-right">
-                {/*<img src={saveAllLogo} height="18" alt="" className="icon-saveall" />
-                <img src={removeAllLogo} height="18" alt="" className="icon-saveall" />*/}
-                <TooltipOverlay text="Desmarcar todas" position="top">
-                  <img src={removeLogo} height="15" alt="" className="icon-remove" />
+                <TooltipOverlay
+                  text="Desmarcar todas"
+                  position="top">
+                  <img
+                    src={removeLogo}
+                    height="15"
+                    alt=""
+                    className="icon-remove"
+                    onClick={() => onResetSeats(isVolta, horario)}
+                  />
                 </TooltipOverlay>
-                <TooltipOverlay text="Salvar seleção" position="top">
-                  <img src={checkLogo} height="15" alt="" className="icon-save icon-after-text" />
+                <TooltipOverlay
+                  text="Salvar seleção"
+                  position="top">
+                  <img
+                    src={checkLogo}
+                    height="15"
+                    alt=""
+                    className="icon-save icon-after-text"
+                  />
                 </TooltipOverlay>
-                {/*<ButtonIcon
-                  type="button"
-                  className="btn-google-red btn-salvar-poltronas"
-                  label="Marcar poltronas"
-                  icon="check" />*/}
-                <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
-                {/*<FontAwesome name="ticket" className="poltronas-icon" />*/}
-                <span className="text-after-icon poltronas-text">{strLotacao}</span>
+                <img
+                  src={passengerRedLogo}
+                  height="16"
+                  alt=""
+                  className="icon-passenger"
+                />
+                <span className="text-after-icon poltronas-text">
+                  {strLotacao}
+                </span>
                 <ProgressBar
                   className={percentLotacao ? "full" : "empty"}
                   bsStyle="success"
-                  now={percentLotacao} />
+                  now={percentLotacao}
+                />
               </span>
             </div>}>
-          < BusSelect isVolta={isVolta} horario={horario} seats={poltronas} onClickSeat={onClickSeat} onResetSeats={this.handleResetSeats} />
+          < BusSelect
+            isVolta={isVolta}
+            horario={horario}
+            seats={poltronas}
+            onClickSeat={onClickSeat}
+          />
         </Panel >
       );
       count++;

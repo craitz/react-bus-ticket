@@ -41,6 +41,8 @@ export const initialState = Immutable({
   cidades: [],
   horarios: {},
   horariosVolta: {},
+  horariosBackup: {},
+  horariosVoltaBackup: {},
   isIdaVolta: false,
   isFrozen: false,
   activeAccordion: -1,
@@ -62,6 +64,14 @@ const reducer = (state = initialState, action = {}) => {
 
     case CompraPassagemActionType.SET_HORARIOS_VOLTA: {
       return { ...state, horariosVolta: action.payload };
+    }
+
+    case CompraPassagemActionType.SET_HORARIOS_BACKUP: {
+      return { ...state, horariosBackup: action.payload };
+    }
+
+    case CompraPassagemActionType.SET_HORARIOS_VOLTA_BACKUP: {
+      return { ...state, horariosVoltaBackup: action.payload };
     }
 
     case CompraPassagemActionType.SET_POLTRONAS: {

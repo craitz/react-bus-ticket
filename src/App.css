@@ -126,9 +126,31 @@
 
 @keyframes buslide {
   0% {
-    width: 0; }
+    background-color: white;
+    left: 50%;
+    right: 50%;
+    width: 0;
+    opacity: 0; }
   100% {
-    width: 100%; } }
+    background-color: initial;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 1; } }
+
+@keyframes buslideInverse {
+  0% {
+    background-color: initial;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: .5; }
+  100% {
+    background-color: white;
+    left: 50%;
+    right: 50%;
+    width: 0;
+    opacity: 0; } }
 
 @keyframes busGrad {
   0% {
@@ -171,6 +193,18 @@
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-360deg); }
+  100% {
+    transform: rotate(-360deg); } }
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(-360deg); }
+  100% {
+    -webkit-transform: rotate(-360deg); } }
 
 .btn-trigger-blue {
   color: white !important;
@@ -268,7 +302,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -279,6 +313,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-blue span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-blue:focus, .btn-glass-blue:hover, .btn-glass-blue:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -286,16 +322,15 @@
     background-color: #2a75f3 !important; }
   .btn-glass-blue:focus {
     background-color: #041f4c; }
-  .btn-glass-blue:hover::after {
+  .btn-glass-blue.hover span.text-after-icon, .btn-glass-blue:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-blue.hover::after, .btn-glass-blue:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -305,14 +340,13 @@
   .btn-glass-blue::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-glass-red {
   color: white !important;
@@ -320,7 +354,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -331,6 +365,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-red span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-red:focus, .btn-glass-red:hover, .btn-glass-red:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -338,16 +374,15 @@
     background-color: #f32c1e !important; }
   .btn-glass-red:focus {
     background-color: #410804; }
-  .btn-glass-red:hover::after {
+  .btn-glass-red.hover span.text-after-icon, .btn-glass-red:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-red.hover::after, .btn-glass-red:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -357,14 +392,13 @@
   .btn-glass-red::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-glass-yellow {
   color: rgba(0, 0, 0, 0.6) !important;
@@ -372,7 +406,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -383,6 +417,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-yellow span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-yellow:focus, .btn-glass-yellow:hover, .btn-glass-yellow:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -390,16 +426,15 @@
     background-color: #FFCC3E !important; }
   .btn-glass-yellow:focus {
     background-color: #715300; }
-  .btn-glass-yellow:hover::after {
+  .btn-glass-yellow.hover span.text-after-icon, .btn-glass-yellow:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-yellow.hover::after, .btn-glass-yellow:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -409,14 +444,13 @@
   .btn-glass-yellow::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-glass-pink {
   color: white !important;
@@ -424,7 +458,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -435,6 +469,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-pink span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-pink:focus, .btn-glass-pink:hover, .btn-glass-pink:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -442,16 +478,15 @@
     background-color: #e2076a !important; }
   .btn-glass-pink:focus {
     background-color: #1c010d; }
-  .btn-glass-pink:hover::after {
+  .btn-glass-pink.hover span.text-after-icon, .btn-glass-pink:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-pink.hover::after, .btn-glass-pink:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -461,14 +496,13 @@
   .btn-glass-pink::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-glass-orange {
   color: white !important;
@@ -476,7 +510,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -487,6 +521,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-orange span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-orange:focus, .btn-glass-orange:hover, .btn-glass-orange:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -494,16 +530,15 @@
     background-color: #FFA400 !important; }
   .btn-glass-orange:focus {
     background-color: #332100; }
-  .btn-glass-orange:hover::after {
+  .btn-glass-orange.hover span.text-after-icon, .btn-glass-orange:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-orange.hover::after, .btn-glass-orange:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -513,14 +548,13 @@
   .btn-glass-orange::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-glass-transparent {
   color: white !important;
@@ -528,7 +562,7 @@
   position: relative;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  font-family: "Patua One", Arial, sans-serif !important;
+  font-family: "Days One", Arial, sans-serif !important;
   font-weight: 100;
   font-size: 1.7rem;
   letter-spacing: .7px;
@@ -539,6 +573,8 @@
     position: absolute;
     left: 15px;
     top: 9px; }
+  .btn-glass-transparent span.text-after-icon {
+    letter-spacing: initial; }
   .btn-glass-transparent:focus, .btn-glass-transparent:hover, .btn-glass-transparent:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -546,16 +582,15 @@
     background-color: rgba(0, 0, 0, 0.2) !important; }
   .btn-glass-transparent:focus {
     background-color: rgba(0, 0, 0, 0.2); }
-  .btn-glass-transparent:hover::after {
+  .btn-glass-transparent.hover span.text-after-icon, .btn-glass-transparent:hover span.text-after-icon {
+    letter-spacing: .2px; }
+  .btn-glass-transparent.hover::after, .btn-glass-transparent:hover::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 4px;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     -webkit-animation: buslide 500ms;
     -moz-animation: buslide 500ms;
     -o-animation: buslide 500ms;
@@ -565,14 +600,13 @@
   .btn-glass-transparent::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%;
-    overflow: hidden;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    -webkit-animation: buslideInverse 500ms;
+    -moz-animation: buslideInverse 500ms;
+    -o-animation: buslideInverse 500ms;
+    animation: buslideInverse 500ms; }
 
 .btn-google-grey {
   color: rgba(0, 0, 0, 0.8) !important;
@@ -1202,7 +1236,7 @@
     .navheader-container .navbar .navbar-nav .icon-title {
       color: #e9e9e9; }
     .navheader-container .navbar .navbar-nav .page-title {
-      font-family: "Patua One";
+      font-family: "Days One";
       font-size: 5rem !important;
       color: rgba(255, 255, 255, 0.8) !important;
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8); }

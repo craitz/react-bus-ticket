@@ -169,8 +169,10 @@ export class ModalTrajeto extends Component {
     !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
-  transformHorarios(snap) {
+  transformHorarios(snap, isVolta) {
+    const { dispatch } = this.props;
     const horarios = snap.val();
+
     for (let horario in horarios) {
       const poltronas = horarios[horario];
       for (let i = 0; i < 44; i++) {
@@ -179,6 +181,12 @@ export class ModalTrajeto extends Component {
           ? utils.PoltronaStatus.RESERVED : utils.PoltronaStatus.FREE;
       }
     }
+
+    dispatch(
+      isVolta
+        ? compraPassagemActions.setHorariosVoltaBackup(horarios)
+        : compraPassagemActions.setHorariosBackup(horarios)
+    );
 
     return horarios;
   }
@@ -195,10 +203,10 @@ export class ModalTrajeto extends Component {
 
       firebaseHelper.fetchSnapshot(refIda)
         .then(snapIda => {
-          dispatch(compraPassagemActions.setHorarios(this.transformHorarios(snapIda)));
+          dispatch(compraPassagemActions.setHorarios(this.transformHorarios(snapIda, false)));
           firebaseHelper.fetchSnapshot(refVolta)
             .then(snapVolta => {
-              dispatch(compraPassagemActions.setHorariosVolta(this.transformHorarios(snapVolta)));
+              dispatch(compraPassagemActions.setHorariosVolta(this.transformHorarios(snapVolta, true)));
               resolve();
             });
         });

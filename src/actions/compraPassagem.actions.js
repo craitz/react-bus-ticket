@@ -28,6 +28,20 @@ export const setHorariosVolta = (horarios) => {
   }
 };
 
+export const setHorariosBackup = (horarios) => {
+  return {
+    type: CompraPassagemActionType.SET_HORARIOS_BACKUP,
+    payload: horarios
+  }
+};
+
+export const setHorariosVoltaBackup = (horarios) => {
+  return {
+    type: CompraPassagemActionType.SET_HORARIOS_VOLTA_BACKUP,
+    payload: horarios
+  }
+};
+
 export const setPoltronas = (poltronas) => {
   return {
     type: CompraPassagemActionType.SET_POLTRONAS,
