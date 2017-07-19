@@ -1,7 +1,5 @@
 import React from 'react';
 import { Row, Jumbotron, Label } from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
-import * as utils from '../shared/Utils';
 
 const Seat = ({ className, onClickSeat, isVolta, horario, value, status }) => {
   return (

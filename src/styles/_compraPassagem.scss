@@ -21,35 +21,53 @@ monospace;
     .panel-group {
         .panel-heading {
             padding: 0;
-            background-color: transparent;
+            // background-color: transparent;
             .panel-title {
                 a {
-                    font-family: 'Days One';
+                    font-family: 'Ubuntu Mono';
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
                     position: relative;
                     display: block;
-                    height: 32px;
+                    height: 40px;
                     line-height: 34px;
                     text-decoration: none;
                     cursor: pointer;
                     .trigger-left {
                         position: absolute;
                         left: 10px;
+                        .text-horario {
+                            position: absolute;
+                            top: 4px;
+                            left: 30px;
+                            font-family: 'Days One';
+                            margin-left: 15px;
+                            font-size: 2rem;
+                        }
+                        .horario-icon {
+                            color: #F44336;
+                            position: absolute;
+                            top: 6px;
+                        }
                     }
                     .trigger-right {
-                        display: inline-block;
+                        text-align: right;
                         width: 360px;
                         position: absolute;
                         right: 10px;
                         height: 20px;
+                        .poltronas-icon {
+                            color: #F6952D;
+                        }
                         .progress {
+                            width: 100px;
+                            display: inline-block;
                             height: 10px;
-                            margin-top: 12px;
+                            margin-left: 10px;
+                            margin-top: 16px;
                             margin-bottom: 0;
                             box-shadow: none;
                             border: 1px solid rgba(black, .2);
-                            // background-color: white;
                             .progress-bar {
                                 .progress-text {
                                     font-family: 'Roboto Mono' !important;
@@ -58,21 +76,24 @@ monospace;
                                     font-size: 1.3rem;
                                 }
                             }
-                            &.empty {
-                                .progress-bar {
-                                    .progress-text {
-                                        display: block;
-                                        // color: rgba(black, .4) !important;
-                                        padding-left: 15px !important;
-                                        @include textShadow(0);
-                                    }
-                                }
-                            }
+                        }
+                        .icon-save,
+                        .icon-remove {
+                            display: none;
                         }
                     }
-                    // &[aria-expanded="true"] {
-                    //     background-color: darken(#D9EDF7, 10%);
-                    // }
+                    &[aria-expanded="true"] {
+                        .icon-passenger,
+                        .poltronas-text,
+                        .progress {
+                            display: none;
+                        }
+                        .icon-save,
+                        .icon-remove {
+                            display: initial;
+                            margin-top: 7px;
+                        }
+                    }
                 }
             }
         }
@@ -107,7 +128,7 @@ monospace;
                 color: rgba(darkslategrey, .2);
                 position: relative;
                 // height: 42px;
-                font-family: $fontNumeros;
+                font-family: 'Days One';
                 font-weight: 900;
                 font-size: 1.8rem;
                 .icon-group-before {
@@ -115,10 +136,10 @@ monospace;
                 }
                 .tab-left {
                     color: rgba(black, .45);
-                    font-family: "Patua One";
-                    font-weight: bold;
+                    font-family: 'Days One';
                     font-size: 2rem;
-                    .icon-ida {
+                    .icon-ida,
+                    .icon-volta {
                         width: 40px !important;
                         height: 40px !important;
                     }
@@ -140,7 +161,8 @@ monospace;
                 }
                 .tab-left {
                     color: rgba(black, .15);
-                    .icon-ida {
+                    .icon-ida,
+                    .icon-volta {
                         opacity: .2;
                     }
                 }

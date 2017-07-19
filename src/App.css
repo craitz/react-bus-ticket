@@ -291,7 +291,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -303,6 +303,58 @@
   .btn-glass-blue:active {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
   .btn-glass-blue::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+
+.btn-glass-red {
+  color: white !important;
+  background-color: #f32c1e !important;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: "Patua One", Arial, sans-serif !important;
+  font-weight: 100;
+  font-size: 1.7rem;
+  letter-spacing: .7px;
+  padding: 6px 20px;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color; }
+  .btn-glass-red span.fa {
+    position: absolute;
+    left: 15px;
+    top: 9px; }
+  .btn-glass-red:focus, .btn-glass-red:hover, .btn-glass-red:active {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    text-decoration: none;
+    outline: none !important;
+    background-color: #f32c1e !important; }
+  .btn-glass-red:focus {
+    background-color: #410804; }
+  .btn-glass-red:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-animation: buslide 500ms;
+    -moz-animation: buslide 500ms;
+    -o-animation: buslide 500ms;
+    animation: buslide 500ms; }
+  .btn-glass-red:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important; }
+  .btn-glass-red::after {
     content: "";
     position: absolute;
     left: 0;
@@ -343,7 +395,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -395,7 +447,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -447,7 +499,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -499,7 +551,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -524,7 +576,7 @@
 
 .btn-google-grey {
   color: rgba(0, 0, 0, 0.8) !important;
-  background-color: #9E9E9E;
+  background-color: #C6DDEA;
   background-image: none;
   position: relative;
   border: none;
@@ -535,12 +587,12 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-grey:focus {
-    background-color: #9E9E9E !important;
+    background-color: #C6DDEA !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-grey:hover {
     border: none;
-    background-color: #9E9E9E !important;
+    background-color: #C6DDEA !important;
     text-decoration: none;
     outline: none !important; }
     .btn-google-grey:hover::after {
@@ -548,7 +600,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -556,7 +608,7 @@
       animation: buslide 500ms; }
   .btn-google-grey:active {
     border: none;
-    background-color: #9E9E9E !important;
+    background-color: #C6DDEA !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     text-decoration: none;
     outline: none !important; }
@@ -587,7 +639,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -626,7 +678,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -665,7 +717,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -704,7 +756,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -719,7 +771,7 @@
 
 .btn-google-red {
   color: white !important;
-  background-color: #FF6C3E;
+  background-color: #D9534F;
   background-image: none;
   position: relative;
   border: none;
@@ -730,12 +782,12 @@
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
   .btn-google-red:focus {
-    background-color: #FF6C3E !important;
+    background-color: #D9534F !important;
     text-decoration: none;
     outline: none !important; }
   .btn-google-red:hover {
     border: none;
-    background-color: #FF6C3E !important;
+    background-color: #D9534F !important;
     text-decoration: none;
     outline: none !important; }
     .btn-google-red:hover::after {
@@ -743,7 +795,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -751,7 +803,7 @@
       animation: buslide 500ms; }
   .btn-google-red:active {
     border: none;
-    background-color: #FF6C3E !important;
+    background-color: #D9534F !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     text-decoration: none;
     outline: none !important; }
@@ -782,7 +834,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -821,7 +873,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -860,7 +912,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -899,7 +951,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -938,7 +990,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -977,7 +1029,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -1016,7 +1068,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -1055,7 +1107,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -1094,7 +1146,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.15);
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -1422,7 +1474,7 @@
                 border-color: transparent;
                 color: rgba(47, 79, 79, 0.2);
                 position: relative;
-                font-family: "Acme", monospace;
+                font-family: 'Days One';
                 font-weight: 900;
                 font-size: 1.8rem; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .icon-group-before,
@@ -1435,13 +1487,16 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-left,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left {
                   color: rgba(0, 0, 0, 0.45);
-                  font-family: "Patua One";
-                  font-weight: bold;
+                  font-family: 'Days One';
                   font-size: 2rem; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a .tab-left .icon-volta,
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:active .tab-left .icon-volta,
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-left .icon-ida,
-                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left .icon-ida {
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:hover .tab-left .icon-volta,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li > a:focus .tab-left .icon-volta {
                     width: 40px !important;
                     height: 40px !important; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a,
@@ -1465,9 +1520,13 @@
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:focus .tab-left {
                   color: rgba(0, 0, 0, 0.15); }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a .tab-left .icon-volta,
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:active .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:active .tab-left .icon-volta,
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:hover .tab-left .icon-ida,
-                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:focus .tab-left .icon-ida {
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:hover .tab-left .icon-volta,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:focus .tab-left .icon-ida,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:focus .tab-left .icon-volta {
                     opacity: .2; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a,
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li.active > a:active,
@@ -1501,30 +1560,45 @@
             border-left: 1px solid rgba(0, 0, 0, 0.15);
             border-top: none; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading {
-              padding: 0;
-              background-color: transparent; }
+              padding: 0; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a {
-                font-family: 'Days One';
+                font-family: 'Ubuntu Mono';
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
                 position: relative;
                 display: block;
-                height: 32px;
+                height: 40px;
                 line-height: 34px;
                 text-decoration: none;
                 cursor: pointer; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-left {
                   position: absolute;
                   left: 10px; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-left .text-horario {
+                    position: absolute;
+                    top: 4px;
+                    left: 30px;
+                    font-family: 'Days One';
+                    margin-left: 15px;
+                    font-size: 2rem; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-left .horario-icon {
+                    color: #F44336;
+                    position: absolute;
+                    top: 6px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right {
-                  display: inline-block;
+                  text-align: right;
                   width: 360px;
                   position: absolute;
                   right: 10px;
                   height: 20px; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .poltronas-icon {
+                    color: #F6952D; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .progress {
+                    width: 100px;
+                    display: inline-block;
                     height: 10px;
-                    margin-top: 12px;
+                    margin-left: 10px;
+                    margin-top: 16px;
                     margin-bottom: 0;
                     box-shadow: none;
                     border: 1px solid rgba(0, 0, 0, 0.2); }
@@ -1533,10 +1607,17 @@
                       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
                       font-weight: 100;
                       font-size: 1.3rem; }
-                    .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .progress.empty .progress-bar .progress-text {
-                      display: block;
-                      padding-left: 15px !important;
-                      text-shadow: 1px 1px 0 transparent; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .icon-save,
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .icon-remove {
+                    display: none; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-passenger,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .poltronas-text,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .progress {
+                  display: none; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove {
+                  display: initial;
+                  margin-top: 7px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body {
               padding: 5px 0 5px 0; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body .bus-seat-select {

@@ -194,7 +194,7 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            background-color: rgba(white, .1);
+            background-color: rgba(white, .15);
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -251,7 +251,7 @@
             left: 0;
             bottom: 0;
             // background: linear-gradient(to right, rgba(white, .2), transparent);
-            background-color: rgba(white, .05);
+            background-color: rgba(white, .15);
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -287,6 +287,9 @@
     &-blue {
         @include glassButton(darken($googleBlue, 5%), .2, 10%);
     }
+    &-red {
+        @include glassButton(darken(#F44336, 5%), .2, 10%);
+    }
     &-yellow {
         @include glassButton(#FFCC3E, .2, 10%, rgba(black, .6));
     }
@@ -302,8 +305,11 @@
 }
 
 .btn-google {
+    // &-grey {
+    //     @include glassButton(darken(#C6DDEA, 5%), .2, 10%);
+    // }
     &-grey {
-        @include googleButton(#9E9E9E, .2, 10%, rgba(black, .8));
+        @include googleButton(#C6DDEA, .2, 10%, rgba(black, .8));
     }
     &-blue {
         @include googleButton($googleBlue, .2, 10%);
@@ -319,7 +325,7 @@
         // @include googleButton(#1A6ACC, .35, 10%);
     }
     &-red {
-        @include googleButton($googleRed, .35, 10%);
+        @include googleButton(#D9534F, .35, 10%);
     }
     &-reder {
         @include googleButton(darken($googleRed, 10%), .35, 10%);

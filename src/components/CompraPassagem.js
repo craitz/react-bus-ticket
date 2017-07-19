@@ -6,27 +6,25 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Navbar, Label, Tabs, Tab, Button, Jumbotron, Row, Col, Grid } from 'react-bootstrap';
+import { Tabs, Tab, Button, Jumbotron, Row, Grid } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
-import { ButtonIcon } from '../shared/ButtonIcon';
 import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
-import seatLogo from '../styles/images/seat2.svg';
-import examLogo from '../styles/images/exam.svg';
-import reviewLogo from '../styles/images/review.svg';
-import idaLogo from '../styles/images/ida.svg';
-import voltaLogo from '../styles/images/volta.svg';
+import idaLogo from '../styles/images/arrow-ida2.svg';
+import voltaLogo from '../styles/images/arrow-volta2.svg';
 import passengerGreenLogo from '../styles/images/passenger-green.svg';
 import passengerRedLogo from '../styles/images/passenger-red.svg';
-import clockGreenLogo from '../styles/images/clock-green.svg';
-import clockRedLogo from '../styles/images/clock-red.svg';
-import editLogo from '../styles/images/edit.svg';
-import Ink from 'react-ink';
+import arrowIdaLogo from '../styles/images/arrow-ida.svg';
+import arrowVoltaLogo from '../styles/images/arrow-volta.svg';
+import editLogo from '../styles/images/edit4.svg';
+import markerLogo from '../styles/images/marker.svg';
+import locationLogo from '../styles/images/location.svg';
+
 import TooltipOverlay from '../shared/TooltipOverlay';
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -59,21 +57,24 @@ const ConfirmacaoPanel = ({ props }) => {
   const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container';
   return (
     <Jumbotron className={buildClassName}>
-      <TooltipOverlay text="Configurar" position="top">
-        <img src={editLogo} className="icon-edit" onClick={props.onChangeTrajeto} />
+      <TooltipOverlay text="Alterar" position="top">
+        <img src={editLogo} alt="Alterar" className="icon-edit" onClick={props.onChangeTrajeto} />
       </TooltipOverlay>
       <Grid className="detalhes-info text-left">
         <Row>
-          <FontAwesome name="location-arrow" className="origem" />
+          <img src={locationLogo} height="15" alt="" className="origem" />
+          {/*<FontAwesome name="location-arrow" className="origem" />*/}
           <span className="text-after-icon">{props.origem}</span>
         </Row>
         <Row>
-          <FontAwesome name="map-marker" className="destino" />
+          <img src={markerLogo} height="20" alt="" className="destino" />
+          {/*<FontAwesome name="map-marker" className="destino" />*/}
           <span className="text-after-icon">{props.destino}</span>
         </Row>
         <hr />
         <Row>
-          <FontAwesome name="arrow-right" className="data-ida" />
+          <img src={arrowIdaLogo} height="15" alt="" className="data-ida" />
+          {/*<FontAwesome name="arrow-right" className="data-ida" />*/}
           <span className="text-after-icon">{props.daiaIda}</span>
         </Row>
         <Row>
@@ -81,14 +82,14 @@ const ConfirmacaoPanel = ({ props }) => {
           <span className="text-after-icon">08:39</span>
         </Row>
         <Row>
-          <img src={passengerGreenLogo} height="20" alt="" className="icon-passenger" />
+          <img src={passengerGreenLogo} height="16" alt="" className="icon-passenger" />
           <span className="text-after-icon">41 42 43</span>
         </Row>
         {props.isIdaVolta &&
           <div>
             <hr />
             <Row>
-              <FontAwesome name="arrow-left" className="data-volta" />
+              <img src={arrowVoltaLogo} height="15" alt="" className="data-volta" />
               <span className="text-after-icon">{props.dataVolta}</span>
             </Row>
             <Row>
@@ -96,7 +97,7 @@ const ConfirmacaoPanel = ({ props }) => {
               <span className="text-after-icon">21:45</span>
             </Row>
             <Row>
-              <img src={passengerRedLogo} height="20" alt="" className="icon-passenger" />
+              <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
               <span className="text-after-icon"></span>
             </Row>
           </div>}
@@ -487,8 +488,8 @@ export class CompraPassagem extends Component {
     return (
       <div className="comprar-passagem-container">
         <PageHeader title="Compre sua passagem" className="header-comprar">
-          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
-          <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />
+          {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
+          <PageHeaderItem tooltip="Limpar campos" glyph="eraser" onClick={this.handleReset} />*/}
         </PageHeader>
         {/*<Navbar className="navbar-trajeto">
           <Navbar.Text className="text-trajeto">
@@ -521,6 +522,7 @@ export class CompraPassagem extends Component {
                 onSelect={this.handleSelectTab}>
                 <Tab eventKey={1} title={
                   <span className="tab-left">
+                    {/*<img src={idaLogo} alt="" className="icon-ida" />*/}
                     <img src={idaLogo} alt="" className="icon-ida" />
                     <span className="title-after-icon">{strDataIda}</span>
                   </span>
@@ -538,7 +540,8 @@ export class CompraPassagem extends Component {
                 {isIdaVolta &&
                   <Tab eventKey={2} className="tab-volta" title={
                     <span className="tab-left">
-                      <img src={voltaLogo} alt="" className="icon-ida" />
+                      <img src={voltaLogo} alt="" className="icon-volta" />
+                      {/*<img src={voltaLogo} alt="" className="icon-ida" />*/}
                       <span className="title-after-icon">{strDataVolta}</span>
                     </span>
                   }>

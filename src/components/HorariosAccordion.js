@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import * as utils from '../shared/Utils';
-import { Button, Panel, Accordion, ProgressBar } from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
-// import Accordion from 'react-responsive-accordion';
+import { Panel, Accordion, ProgressBar } from 'react-bootstrap';
 import BusSelect from './BusSelect';
 import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
+import passengerRedLogo from '../styles/images/passenger-red.svg';
+import checkLogo from '../styles/images/check3.svg';
+import removeLogo from '../styles/images/remove.svg';
+import clockLogo from '../styles/images/clock2.svg';
+import TooltipOverlay from '../shared/TooltipOverlay';
+
 
 class HorariosAccordion extends Component {
   constructor(props) {
@@ -62,11 +66,7 @@ class HorariosAccordion extends Component {
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
       const position = count;
-      const lotacao = this.getLotacao(ocupadasSize, allSize);
 
-
-      // bsStyle={lotacao.status}
-      // {/*label={<span className="progress-text">{strLotacao}</span>} />*/}
       collapsibles.push(
         <Panel
           key={horario}
@@ -76,13 +76,29 @@ class HorariosAccordion extends Component {
           header={
             <div>
               <span className="trigger-left">
-                <FontAwesome name="clock-o" className="icon" />
-                {(strHorario.length > 0) && <span className="text-after-icon">{strHorario}</span>}
+                <img src={clockLogo} height="30" alt="" className="horario-icon" />
+                {(strHorario.length > 0) && <span className="text-after-icon text-horario">{strHorario}</span>}
               </span>
               <span className="trigger-right">
+                {/*<img src={saveAllLogo} height="18" alt="" className="icon-saveall" />
+                <img src={removeAllLogo} height="18" alt="" className="icon-saveall" />*/}
+                <TooltipOverlay text="Desmarcar todas" position="top">
+                  <img src={removeLogo} height="15" alt="" className="icon-remove" />
+                </TooltipOverlay>
+                <TooltipOverlay text="Salvar seleção" position="top">
+                  <img src={checkLogo} height="15" alt="" className="icon-save icon-after-text" />
+                </TooltipOverlay>
+                {/*<ButtonIcon
+                  type="button"
+                  className="btn-google-red btn-salvar-poltronas"
+                  label="Marcar poltronas"
+                  icon="check" />*/}
+                <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
+                {/*<FontAwesome name="ticket" className="poltronas-icon" />*/}
+                <span className="text-after-icon poltronas-text">{strLotacao}</span>
                 <ProgressBar
                   className={percentLotacao ? "full" : "empty"}
-                  bsStyle="danger"
+                  bsStyle="success"
                   now={percentLotacao} />
               </span>
             </div>}>
@@ -96,7 +112,7 @@ class HorariosAccordion extends Component {
   }
 
   render() {
-    const { horarios, className, active } = this.props;
+    const { horarios, active } = this.props;
 
     if ((!horarios) || (horarios.length === 0)) {
       return null;
