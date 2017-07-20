@@ -314,7 +314,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-blue span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-blue:focus, .btn-glass-blue:hover, .btn-glass-blue:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -323,7 +325,8 @@
   .btn-glass-blue:focus {
     background-color: #041f4c; }
   .btn-glass-blue.hover span.text-after-icon, .btn-glass-blue:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-blue.hover::after, .btn-glass-blue:hover::after {
     content: "";
     position: absolute;
@@ -366,7 +369,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-red span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-red:focus, .btn-glass-red:hover, .btn-glass-red:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -375,7 +380,8 @@
   .btn-glass-red:focus {
     background-color: #410804; }
   .btn-glass-red.hover span.text-after-icon, .btn-glass-red:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-red.hover::after, .btn-glass-red:hover::after {
     content: "";
     position: absolute;
@@ -418,7 +424,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-yellow span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-yellow:focus, .btn-glass-yellow:hover, .btn-glass-yellow:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -427,7 +435,8 @@
   .btn-glass-yellow:focus {
     background-color: #715300; }
   .btn-glass-yellow.hover span.text-after-icon, .btn-glass-yellow:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-yellow.hover::after, .btn-glass-yellow:hover::after {
     content: "";
     position: absolute;
@@ -470,7 +479,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-pink span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-pink:focus, .btn-glass-pink:hover, .btn-glass-pink:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -479,7 +490,8 @@
   .btn-glass-pink:focus {
     background-color: #1c010d; }
   .btn-glass-pink.hover span.text-after-icon, .btn-glass-pink:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-pink.hover::after, .btn-glass-pink:hover::after {
     content: "";
     position: absolute;
@@ -522,7 +534,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-orange span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-orange:focus, .btn-glass-orange:hover, .btn-glass-orange:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -531,7 +545,8 @@
   .btn-glass-orange:focus {
     background-color: #332100; }
   .btn-glass-orange.hover span.text-after-icon, .btn-glass-orange:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-orange.hover::after, .btn-glass-orange:hover::after {
     content: "";
     position: absolute;
@@ -574,7 +589,9 @@
     left: 15px;
     top: 9px; }
   .btn-glass-transparent span.text-after-icon {
-    letter-spacing: initial; }
+    display: inline-block;
+    transform: scale(1);
+    transition: 500ms; }
   .btn-glass-transparent:focus, .btn-glass-transparent:hover, .btn-glass-transparent:active {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     text-decoration: none;
@@ -583,7 +600,8 @@
   .btn-glass-transparent:focus {
     background-color: rgba(0, 0, 0, 0.2); }
   .btn-glass-transparent.hover span.text-after-icon, .btn-glass-transparent:hover span.text-after-icon {
-    letter-spacing: .2px; }
+    transform: scale(1.02);
+    transition: 500ms; }
   .btn-glass-transparent.hover::after, .btn-glass-transparent:hover::after {
     content: "";
     position: absolute;
@@ -1728,9 +1746,21 @@
             height: 410px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .icon-edit {
             position: absolute;
-            width: 45px;
+            width: 40px;
             top: 20px;
             right: 30px;
+            cursor: pointer; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .icon-limpar-ida {
+            position: absolute;
+            width: 50px;
+            top: 110px;
+            right: 36px;
+            cursor: pointer; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .icon-limpar-volta {
+            position: absolute;
+            width: 50px;
+            top: 215px;
+            right: 36px;
             cursor: pointer; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info {
             font-family: "Days One";

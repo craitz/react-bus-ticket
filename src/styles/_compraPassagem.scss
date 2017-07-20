@@ -345,9 +345,23 @@ monospace;
     .15) !important;
     .icon-edit {
         position: absolute;
-        width: 45px;
+        width: 40px;
         top: 20px;
         right: 30px;
+        cursor: pointer;
+    }
+    .icon-limpar-ida {
+        position: absolute;
+        width: 50px;
+        top: 110px;
+        right: 36px;
+        cursor: pointer;
+    }
+    .icon-limpar-volta {
+        position: absolute;
+        width: 50px;
+        top: 215px;
+        right: 36px;
         cursor: pointer;
     }
     .detalhes-info {

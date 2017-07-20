@@ -21,19 +21,14 @@ export const passagemInitialState = Immutable({
     validation: ValidationStatus.NONE,
     message: ''
   },
-  poltrona: {
-    value: '',
-  },
+  poltrona: [],
   data: {
     value: DateNowBr,
     isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   },
-  horario: {
-    val: 0,
-    text: '',
-  },
+  horario: '',
   dataCompra: DateNowBr
 });
 
@@ -273,10 +268,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         passagem: {
           ...state.passagem,
-          poltrona: {
-            ...state.passagem.poltrona,
-            value: action.payload
-          }
+          poltrona: action.payload
         }
       };
     }
@@ -285,10 +277,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         passagemVolta: {
           ...state.passagemVolta,
-          poltrona: {
-            ...state.passagemVolta.poltrona,
-            value: action.payload
-          }
+          poltrona: action.payload
         }
       };
     }

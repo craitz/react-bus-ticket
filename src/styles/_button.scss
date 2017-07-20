@@ -222,7 +222,9 @@
         top: 9px;
     }
     span.text-after-icon {
-        letter-spacing: initial;
+        display: inline-block;
+        transform: scale(1);
+        transition: 500ms;
     }
     &:focus,
     &:hover,
@@ -238,7 +240,8 @@
     &.hover,
     &:hover {
         span.text-after-icon {
-            letter-spacing: .2px;
+            transform: scale(1.02);
+            transition: 500ms;
         }
         &::after {
             content: "";

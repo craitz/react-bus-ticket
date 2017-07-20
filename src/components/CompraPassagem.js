@@ -24,6 +24,7 @@ import arrowVoltaLogo from '../styles/images/arrow-volta.svg';
 import editLogo from '../styles/images/edit4.svg';
 import markerLogo from '../styles/images/marker.svg';
 import locationLogo from '../styles/images/location.svg';
+import clearLogo from '../styles/images/clear.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
 
 const helper = {
@@ -55,11 +56,34 @@ const helper = {
 
 const ConfirmacaoPanel = ({ props }) => {
   const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container';
+  const strHorarioIda = (props.horarioIda.length > 0) ? utils.firebaseToTime(props.horarioIda) : '';
+  const strHorarioVolta = (props.horarioVolta.length > 0) ? utils.firebaseToTime(props.horarioVolta) : '';
+
+  // const poltronas = utils.deepCopy(props.poltronasIda);
+  // console.log(poltronas);
+  // poltronas.sort();
+  // console.log(poltronas);
+
+  const sortPoltronas = (poltronas) => {
+    const poltronasTemp = utils.deepCopy(poltronas);
+    poltronasTemp.sort();
+    return poltronasTemp.join(' | ');
+  }
+
   return (
     <Jumbotron className={buildClassName}>
       <TooltipOverlay text="Alterar" position="top">
         <img src={editLogo} alt="Alterar" className="icon-edit" onClick={props.onChangeTrajeto} />
       </TooltipOverlay>
+      <TooltipOverlay text="Limpar" position="top">
+        <img src={clearLogo} alt="Limpar" className="icon-limpar-ida" onClick={props.onLimpaIda} />
+      </TooltipOverlay>
+      {
+        props.isIdaVolta &&
+        <TooltipOverlay text="Limpar" position="top">
+          <img src={clearLogo} alt="Limpar" className="icon-limpar-volta" onClick={props.onLimpaVolta} />
+        </TooltipOverlay>
+      }
       <Grid className="detalhes-info text-left">
         <Row>
           <img src={locationLogo} height="15" alt="" className="origem" />
@@ -72,15 +96,15 @@ const ConfirmacaoPanel = ({ props }) => {
         <hr />
         <Row>
           <img src={arrowIdaLogo} height="15" alt="" className="data-ida" />
-          <span className="text-after-icon">{props.daiaIda}</span>
+          <span className="text-after-icon">{props.dataIda}</span>
         </Row>
         <Row>
           <FontAwesome name="clock-o" className="hora-ida" />
-          <span className="text-after-icon">08:39</span>
+          <span className="text-after-icon">{strHorarioIda}</span>
         </Row>
         <Row>
           <img src={passengerGreenLogo} height="16" alt="" className="icon-passenger" />
-          <span className="text-after-icon">41 42 43</span>
+          <span className="text-after-icon">{sortPoltronas(props.poltronasIda)}</span>
         </Row>
         {props.isIdaVolta &&
           <div>
@@ -91,11 +115,11 @@ const ConfirmacaoPanel = ({ props }) => {
             </Row>
             <Row>
               <FontAwesome name="clock-o" className="hora-volta" />
-              <span className="text-after-icon">21:45</span>
+              <span className="text-after-icon">{strHorarioVolta}</span>
             </Row>
             <Row>
               <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
-              <span className="text-after-icon"></span>
+              <span className="text-after-icon">{sortPoltronas(props.poltronasVolta)}</span>
             </Row>
           </div>}
         <hr />
@@ -120,9 +144,12 @@ export class CompraPassagem extends Component {
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleClickSeat = this.handleClickSeat.bind(this);
     this.handleResetSeats = this.handleResetSeats.bind(this);
+    this.handleSaveSeats = this.handleSaveSeats.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
     this.handleChangeTrajeto = this.handleChangeTrajeto.bind(this);
+    this.handleLimpaIda = this.handleLimpaIda.bind(this);
+    this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
     this.handleSelectTab = this.handleSelectTab.bind(this);
   }
 
@@ -135,6 +162,32 @@ export class CompraPassagem extends Component {
     const { dispatch, snapshot } = this.props;
     dispatch(actions.SetFrozen(true));
     dispatch(modalTrajetoActions.setVisible(true, false, snapshot));
+  }
+
+  handleLimpaIda() {
+    const { dispatch, passagem, horarios, horariosBackup } = this.props;
+    const { horario } = passagem;
+    const horariosTemp = utils.deepCopy(horarios);
+
+    if (horario.length > 0) {
+      horariosTemp[horario] = horariosBackup[horario];
+      dispatch(actions.setHorarios(horariosTemp));
+      dispatch(actions.changePoltrona([]));
+      dispatch(actions.changeHorario(''));
+    }
+  }
+
+  handleLimpaVolta() {
+    const { dispatch, passagemVolta, horariosVolta, horariosVoltaBackup } = this.props;
+    const { horario } = passagemVolta;
+    const horariosTemp = utils.deepCopy(horariosVolta);
+
+    if (horario.length > 0) {
+      horariosTemp[horario] = horariosVoltaBackup[horario];
+      dispatch(actions.setHorariosVolta(horariosTemp));
+      dispatch(actions.changePoltronaVolta([]));
+      dispatch(actions.changeHorarioVolta(''));
+    }
   }
 
   handleClickSeat(isVolta, horario, value, status) {
@@ -163,13 +216,35 @@ export class CompraPassagem extends Component {
 
   handleResetSeats(isVolta, horario) {
     const { dispatch, horarios, horariosVolta, horariosBackup, horariosVoltaBackup } = this.props;
+    const horariosTemp = utils.deepCopy(horarios);
+    const horariosVoltaTemp = utils.deepCopy(horariosVolta);
+    // const horariosBackupTemp = utils.deepCopy(horariosBackup);
+    // const horariosVoltaBackupTemp = utils.deepCopy(horariosVoltaBackup);
 
     if (isVolta) {
-      horariosVolta[horario] = horariosVoltaBackup[horario];
-      dispatch(actions.setHorariosVolta(horariosVolta));
+      horariosVoltaTemp[horario] = horariosVoltaBackup[horario];
+      dispatch(actions.setHorariosVolta(horariosVoltaTemp));
     } else {
-      horarios[horario] = horariosBackup[horario];
-      dispatch(actions.setHorarios(horarios));
+      horariosTemp[horario] = horariosBackup[horario];
+      dispatch(actions.setHorarios(horariosTemp));
+    }
+  }
+
+  handleSaveSeats(isVolta, horario) {
+    const { dispatch, horarios, horariosVolta } = this.props;
+    const horarioSelected = isVolta ? horariosVolta[horario] : horarios[horario];
+    const poltronasSelected = Object.keys(horarioSelected).filter(
+      item => horarioSelected[item] === utils.PoltronaStatus.SELECTED
+    );
+
+    if (poltronasSelected.length > 0) {
+      if (isVolta) {
+        dispatch(actions.changeHorarioVolta(horario));
+        dispatch(actions.changePoltronaVolta(poltronasSelected));
+      } else {
+        dispatch(actions.changeHorario(horario));
+        dispatch(actions.changePoltrona(poltronasSelected));
+      }
     }
   }
 
@@ -484,14 +559,22 @@ export class CompraPassagem extends Component {
       isIdaVolta,
       origem: strOrigem,
       destino: strDestino,
-      daiaIda: strDataIda,
+      dataIda: strDataIda,
       dataVolta: strDataVolta,
-      onChangeTrajeto: this.handleChangeTrajeto
+      horarioIda: passagem.horario,
+      horarioVolta: passagemVolta.horario,
+      poltronasIda: passagem.poltrona,
+      poltronasVolta: passagemVolta.poltrona,
+      onChangeTrajeto: this.handleChangeTrajeto,
+      onLimpaIda: this.handleLimpaIda,
+      onLimpaVolta: this.handleLimpaVolta
     }
 
     return (
       <div className="comprar-passagem-container">
-        <PageHeader title="Compre sua passagem" className="header-comprar">
+        <PageHeader
+          title="Compre sua passagem"
+          className="header-comprar">
         </PageHeader>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
@@ -504,12 +587,14 @@ export class CompraPassagem extends Component {
                 className={isIdaVolta ? "tab-control" : "tab-control-only-ida"}
                 animation={false}
                 onSelect={this.handleSelectTab}>
-                <Tab eventKey={1} title={
-                  <span className="tab-left">
-                    <img src={idaLogo} alt="" className="icon-ida" />
-                    <span className="title-after-icon">{strDataIda}</span>
-                  </span>
-                }>
+                <Tab
+                  eventKey={1}
+                  title={
+                    <span className="tab-left">
+                      <img src={idaLogo} alt="" className="icon-ida" />
+                      <span className="title-after-icon">{strDataIda}</span>
+                    </span>
+                  }>
                   <NoResultsAccordionIda
                     className="accordion-ida"
                     color="dark"
@@ -517,16 +602,25 @@ export class CompraPassagem extends Component {
                     horarios={horarios}
                     active={activeAccordion}
                     onClickSeat={this.handleClickSeat}
-                    onResetSeats={this.handleResetSeats} />
+                    onResetSeats={this.handleResetSeats}
+                    onSaveSeats={this.handleSaveSeats}
+                  />
                 </Tab>
-
-                {isIdaVolta &&
-                  <Tab eventKey={2} className="tab-volta" title={
-                    <span className="tab-left">
-                      <img src={voltaLogo} alt="" className="icon-volta" />
-                      <span className="title-after-icon">{strDataVolta}</span>
-                    </span>
-                  }>
+                {
+                  isIdaVolta &&
+                  <Tab
+                    eventKey={2}
+                    className="tab-volta"
+                    title={
+                      <span className="tab-left">
+                        <img
+                          src={voltaLogo}
+                          alt=""
+                          className="icon-volta"
+                        />
+                        <span className="title-after-icon">{strDataVolta}</span>
+                      </span>
+                    }>
                     <NoResultsAccordionVolta
                       className="accordion-volta"
                       color="dark"
@@ -534,7 +628,9 @@ export class CompraPassagem extends Component {
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat}
-                      onResetSeats={this.handleResetSeats} />
+                      onResetSeats={this.handleResetSeats}
+                      onSaveSeats={this.handleSaveSeats}
+                    />
                   </Tab>
                 }
               </Tabs>

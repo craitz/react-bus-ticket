@@ -54,7 +54,7 @@ class HorariosAccordion extends Component {
   }
 
   buildCollapsibles() {
-    const { horarios, onClickSeat, onResetSeats, isVolta } = this.props;
+    const { horarios, onClickSeat, onResetSeats, onSaveSeats, isVolta } = this.props;
     const collapsibles = [];
     let count = 1;
     for (let horario in horarios) {
@@ -89,7 +89,7 @@ class HorariosAccordion extends Component {
               </span>
               <span className="trigger-right">
                 <TooltipOverlay
-                  text="Desmarcar todas"
+                  text="Limpar seleção"
                   position="top">
                   <img
                     src={removeLogo}
@@ -107,6 +107,7 @@ class HorariosAccordion extends Component {
                     height="15"
                     alt=""
                     className="icon-save icon-after-text"
+                    onClick={() => onSaveSeats(isVolta, horario)}
                   />
                 </TooltipOverlay>
                 <img
