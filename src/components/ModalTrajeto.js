@@ -182,11 +182,15 @@ export class ModalTrajeto extends Component {
       }
     }
 
-    dispatch(
-      isVolta
-        ? compraPassagemActions.setHorariosVoltaBackup(horarios)
-        : compraPassagemActions.setHorariosBackup(horarios)
-    );
+    if (isVolta) {
+      dispatch(compraPassagemActions.setHorariosVoltaBackup(horarios));
+      dispatch(compraPassagemActions.changePoltronaVolta([]));
+      dispatch(compraPassagemActions.changeHorarioVolta(''));
+    } else {
+      dispatch(compraPassagemActions.setHorariosBackup(horarios));
+      dispatch(compraPassagemActions.changePoltrona([]));
+      dispatch(compraPassagemActions.changeHorario(''));
+    }
 
     return horarios;
   }
@@ -212,21 +216,6 @@ export class ModalTrajeto extends Component {
         });
     });
   }
-
-  // updatePoltronas(horariosIda, horariosVolta) {
-  //   const arrayIda = Object.keys(horariosIda);
-  //   const arrayVolta = Object.keys(horariosVolta);
-  //   // console.log(arrayIda, arrayVolta);
-  //   // console.log(arrayIda[0], arrayVolta[0]);
-
-  //   const horarios = arrayIda.map(item => {
-  //     const arr = Object.keys(horariosIda[item]);
-  //     arr.unshift(item);
-  //     return arr;
-  //   });
-
-  //   console.log(horarios);
-  // }
 
   handleSubmit(event) {
     event.preventDefault();

@@ -23,6 +23,48 @@
     src: url(./styles/fonts/RobotoSlab-Regular.ttf) format('trueType');
 }
 
+// @mixin aside($width, $height, $bgColor, $fgColor) {
+//     .aside {
+//         // $position: ($width/2) - ($height/2);
+//         position: absolute;
+//         padding-top: 10px;
+//         padding-left: ($height/4);
+//         width: $height;
+//         height: 100%;
+//         background-color: $bgColor;
+//         // transform: rotate(-90deg);
+//         left: 0;
+//         top: 0;
+//         border-top-left-radius: 5px;
+//         border-top-right-radius: 5px;
+//         p {
+//             color: $fgColor;
+//             font-family: 'Days One';
+//             font-size: 1.3rem;
+//             letter-spacing: -5px;
+//             writing-mode: vertical-lr;
+//             text-orientation: upright;
+//         }
+//     }
+// }
+@mixin aside($width, $height, $bgColor, $fgColor) {
+    .aside {
+        color: $fgColor;
+        font-family: 'Days One';
+        $position: ($width/2) - ($height/2);
+        position: absolute;
+        padding-top: ($height/4);
+        width: $width;
+        height: $height;
+        background-color: $bgColor;
+        transform: rotate(90deg);
+        left: -$position;
+        top: $position;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}
+
 @mixin textShadow($alpha) {
     text-shadow: 1px 1px 0 rgba(black, $alpha);
 }

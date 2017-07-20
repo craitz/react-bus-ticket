@@ -10,6 +10,39 @@ import removeLogo from '../styles/images/remove.svg';
 import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
 
+const Timespan = ({ className, children }) => {
+  const arrText = children.split(':');
+
+  return (
+    <span className={className}>
+      <span className="text-left timespace">{arrText[0]}</span>
+      <span>:</span>
+      <span className="text-right timespace">{arrText[1]}</span>
+    </span>
+  );
+}
+
+const Monospan = ({ className, children }) => {
+  const arrText = children.split('');
+
+  const getPositioning = (text, index) => {
+    return ((text === '1') && index === (arrText.length - 1))
+      ? 'monospace text-right'
+      : 'monospace text-center';
+  }
+
+  return (
+    <span className={className}>
+      {
+        arrText.map((item, index) => {
+          return (
+            <span className={getPositioning(item, index)} key={index}>{item}</span>
+          );
+        })
+      }
+    </span>
+  );
+}
 
 class HorariosAccordion extends Component {
   constructor(props) {
@@ -66,6 +99,9 @@ class HorariosAccordion extends Component {
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
       const position = count;
+      {/*<ddd className="text-after-icon text-horario">{strHorario}</ddd>*/ }
+      // <span className="text-after-icon text-horario">{strHorario}</span>
+      {/*<Monospan className="text-after-icon text-horario">{strHorario}</Monospan>*/ }
 
       collapsibles.push(
         <Panel
@@ -84,7 +120,7 @@ class HorariosAccordion extends Component {
                 />
                 {
                   (strHorario.length > 0) &&
-                  <span className="text-after-icon text-horario">{strHorario}</span>
+                  <span className="text-after-icon text-horario text-right">{strHorario}</span>
                 }
               </span>
               <span className="trigger-right">

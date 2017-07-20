@@ -24,7 +24,7 @@ monospace;
             // background-color: transparent;
             .panel-title {
                 a {
-                    font-family: 'Ubuntu Mono';
+                    font-family: 'Days One';
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
                     position: relative;
@@ -34,15 +34,25 @@ monospace;
                     text-decoration: none;
                     cursor: pointer;
                     .trigger-left {
+                        letter-spacing: .2rem;
                         position: absolute;
                         left: 10px;
                         .text-horario {
                             position: absolute;
-                            top: 4px;
+                            display: inline-block;
+                            width: 63px;
+                            top: 5px;
                             left: 30px;
-                            font-family: 'Days One';
                             margin-left: 15px;
-                            font-size: 2rem;
+                            font-size: 1.7rem;
+                            // .monospace {
+                            //     display: inline-block;
+                            //     width: 1.7rem;
+                            // }
+                            // .timespace {
+                            //     display: inline-block;
+                            //     width: 3.5rem;
+                            // }
                         }
                         .horario-icon {
                             color: #F44336;
@@ -51,6 +61,8 @@ monospace;
                         }
                     }
                     .trigger-right {
+                        font-size: 1.2rem;
+                        letter-spacing: .2rem;
                         text-align: right;
                         width: 360px;
                         position: absolute;
@@ -68,14 +80,6 @@ monospace;
                             margin-bottom: 0;
                             box-shadow: none;
                             border: 1px solid rgba(black, .2);
-                            .progress-bar {
-                                .progress-text {
-                                    font-family: 'Roboto Mono' !important;
-                                    @include textShadow(.4);
-                                    font-weight: 100;
-                                    font-size: 1.3rem;
-                                }
-                            }
                         }
                         .icon-save,
                         .icon-remove {
@@ -92,6 +96,9 @@ monospace;
                         .icon-remove {
                             display: initial;
                             margin-top: 7px;
+                        }
+                        .icon-save {
+                            margin-left: 20px;
                         }
                     }
                 }
@@ -326,23 +333,32 @@ monospace;
 }
 
 @mixin detalhes {
+    $colorTheme: rgb(217, 237, 247);
     // background-color: rgba(black, .1);
     background: url(./styles/images/ticket.svg) no-repeat center $colorDetalhesPanel;
-    // background-size: 230px 200px;
+    border: 1px solid rgba(rgb(49, 112, 143), .5) !important;
     float: left;
     position: absolute;
     top: 0;
     left: 0;
     width: calc(100% - 610px);
-    height: 297px;
-    &.idavolta {
-        height: 410px;
+    .row {
+        padding-left: 40px;
     }
-    // height: calc(100% - 37px);
-    // background-color: white !important;
-    // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
-    border: 1px solid rgba(black,
-    .15) !important;
+    &.soida {
+        height: 270px;
+        @include aside(268px,
+        40px,
+        $colorTheme,
+        rgb(49, 112, 143));
+    }
+    &.idavolta {
+        height: 372px;
+        @include aside(370px,
+        40px,
+        $colorTheme,
+        rgb(49, 112, 143));
+    }
     .icon-edit {
         position: absolute;
         width: 40px;
@@ -370,6 +386,7 @@ monospace;
         color: $colorFontDetalhesPanel;
         .text-after-icon {
             margin-left: 20px;
+            letter-spacing: .1rem;
         }
         .data-ida,
         .hora-ida {
@@ -379,12 +396,10 @@ monospace;
         .hora-volta {
             color: #F44336;
         }
-        // .hora {
-        //     color: #304FFE;
-        // }
         .origem,
         .destino {
-            color: rgb(246, 149, 45);
+            color: $googleBlue;
+            // color: rgb(246, 149, 45);
         }
         .label-poltrona-ida {
             background-color: #4CAF50;
@@ -400,13 +415,8 @@ monospace;
             color: #F44336;
         }
         .btn-continuar {
-            // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.35));
-            margin-top: 15px;
             position: relative;
             font-size: 2rem;
-            // .icon-continuar {
-            //     font-size: 2rem;
-            // }
             &:hover {
                 .text-confirmar {}
             }

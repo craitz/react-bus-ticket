@@ -55,15 +55,9 @@ const helper = {
 };
 
 const ConfirmacaoPanel = ({ props }) => {
-  const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container';
+  const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container soida';
   const strHorarioIda = (props.horarioIda.length > 0) ? utils.firebaseToTime(props.horarioIda) : '';
   const strHorarioVolta = (props.horarioVolta.length > 0) ? utils.firebaseToTime(props.horarioVolta) : '';
-
-  // const poltronas = utils.deepCopy(props.poltronasIda);
-  // console.log(poltronas);
-  // poltronas.sort();
-  // console.log(poltronas);
-
   const sortPoltronas = (poltronas) => {
     const poltronasTemp = utils.deepCopy(poltronas);
     poltronasTemp.sort();
@@ -72,6 +66,7 @@ const ConfirmacaoPanel = ({ props }) => {
 
   return (
     <Jumbotron className={buildClassName}>
+      <div className="aside">DETALHES DA PASSAGEM</div>
       <TooltipOverlay text="Alterar" position="top">
         <img src={editLogo} alt="Alterar" className="icon-edit" onClick={props.onChangeTrajeto} />
       </TooltipOverlay>
@@ -86,16 +81,19 @@ const ConfirmacaoPanel = ({ props }) => {
       }
       <Grid className="detalhes-info text-left">
         <Row>
-          <img src={locationLogo} height="15" alt="" className="origem" />
+          <FontAwesome name="location-arrow" className="origem" />
+          {/*<img src={locationLogo} height="15" alt="" className="origem" />*/}
           <span className="text-after-icon">{props.origem}</span>
         </Row>
         <Row>
-          <img src={markerLogo} height="20" alt="" className="destino" />
+          <FontAwesome name="map-marker" className="destino" />
+          {/*<img src={markerLogo} height="20" alt="" className="destino" />*/}
           <span className="text-after-icon">{props.destino}</span>
         </Row>
         <hr />
         <Row>
-          <img src={arrowIdaLogo} height="15" alt="" className="data-ida" />
+          <FontAwesome name="arrow-right" className="data-ida" />
+          {/*<img src={arrowIdaLogo} height="15" alt="" className="data-ida" />*/}
           <span className="text-after-icon">{props.dataIda}</span>
         </Row>
         <Row>
@@ -110,7 +108,8 @@ const ConfirmacaoPanel = ({ props }) => {
           <div>
             <hr />
             <Row>
-              <img src={arrowVoltaLogo} height="15" alt="" className="data-volta" />
+              <FontAwesome name="arrow-left" className="data-volta" />
+              {/*<img src={arrowVoltaLogo} height="15" alt="" className="data-volta" />*/}
               <span className="text-after-icon">{props.dataVolta}</span>
             </Row>
             <Row>
