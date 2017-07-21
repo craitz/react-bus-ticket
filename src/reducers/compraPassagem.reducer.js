@@ -40,6 +40,7 @@ export const initialState = Immutable({
   horariosVoltaBackup: {},
   isIdaVolta: false,
   isFrozen: false,
+  isSavingPoltronas: false,
   activeAccordion: -1,
   activeAccordionVolta: -1,
   activeTab: 1,
@@ -417,6 +418,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         activeTab: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_SAVING_POLTRONAS: {
+      return {
+        ...state,
+        isSavingPoltronas: action.payload
       }
     }
     default: {

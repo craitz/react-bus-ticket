@@ -17,6 +17,15 @@ monospace;
     }
 }
 
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(3600deg);
+    }
+}
+
 @mixin accordion {
     .panel-group {
         .panel-heading {
@@ -82,7 +91,8 @@ monospace;
                             border: 1px solid rgba(black, .2);
                         }
                         .icon-save,
-                        .icon-remove {
+                        .icon-remove,
+                        .icon-spin {
                             display: none;
                         }
                     }
@@ -93,12 +103,22 @@ monospace;
                             display: none;
                         }
                         .icon-save,
+                        .icon-remove,
+                        .icon-spin {
+                            display: inline-block;
+                        }
                         .icon-remove {
-                            display: initial;
                             margin-top: 7px;
+                            margin-left: 20px;
                         }
                         .icon-save {
-                            margin-left: 20px;
+                            // animation: rotation 10s infinite;
+                            margin-top: 7px;
+                        }
+                        .icon-spin {
+                            // margin-left: 21px;
+                            animation: rotation 10s infinite;
+                            margin-top: 11px;
                         }
                     }
                 }

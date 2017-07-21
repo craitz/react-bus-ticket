@@ -237,13 +237,17 @@ export class CompraPassagem extends Component {
     );
 
     if (poltronasSelected.length > 0) {
-      if (isVolta) {
-        dispatch(actions.changeHorarioVolta(horario));
-        dispatch(actions.changePoltronaVolta(poltronasSelected));
-      } else {
-        dispatch(actions.changeHorario(horario));
-        dispatch(actions.changePoltrona(poltronasSelected));
-      }
+      dispatch(actions.setSavingPoltronas(true)); // liga spinning
+      setTimeout(function () {
+        dispatch(actions.setSavingPoltronas(false)); // desliga spinning
+        if (isVolta) {
+          dispatch(actions.changeHorarioVolta(horario));
+          dispatch(actions.changePoltronaVolta(poltronasSelected));
+        } else {
+          dispatch(actions.changeHorario(horario));
+          dispatch(actions.changePoltrona(poltronasSelected));
+        }
+      }, 1000);
     }
   }
 
@@ -544,7 +548,8 @@ export class CompraPassagem extends Component {
 
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta,
-      isIdaVolta, activeAccordion, activeAccordionVolta, activeTab } = this.props;
+      isIdaVolta, activeAccordion, activeAccordionVolta, activeTab,
+      isSavingPoltronas } = this.props;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -598,6 +603,7 @@ export class CompraPassagem extends Component {
                     className="accordion-ida"
                     color="dark"
                     isVolta={false}
+                    isSavingPoltronas={isSavingPoltronas}
                     horarios={horarios}
                     active={activeAccordion}
                     onClickSeat={this.handleClickSeat}
@@ -624,6 +630,7 @@ export class CompraPassagem extends Component {
                       className="accordion-volta"
                       color="dark"
                       isVolta={true}
+                      isSavingPoltronas={isSavingPoltronas}
                       horarios={horariosVolta}
                       active={activeAccordionVolta}
                       onClickSeat={this.handleClickSeat}
@@ -653,6 +660,7 @@ const mapStateToProps = (state) => {
     passagemVolta: state.compraPassagemState.passagemVolta,
     isIdaVolta: state.compraPassagemState.isIdaVolta,
     isFrozen: state.compraPassagemState.isFrozen,
+    isSavingPoltronas: state.compraPassagemState.isSavingPoltronas,
     activeAccordion: state.compraPassagemState.activeAccordion,
     activeAccordionVolta: state.compraPassagemState.activeAccordionVolta,
     activeTab: state.compraPassagemState.activeTab,

@@ -258,3 +258,10 @@ export const SetFrozen = (isFrozen) => {
     payload: isFrozen
   }
 };
+
+export const setSavingPoltronas = (isSavingPoltronas) => {
+  return {
+    type: CompraPassagemActionType.SET_SAVING_POLTRONAS,
+    payload: isSavingPoltronas
+  }
+};
