@@ -44,6 +44,8 @@ export const initialState = Immutable({
   activeAccordion: -1,
   activeAccordionVolta: -1,
   activeTab: 1,
+  hasErroSalvandoIda: false,
+  hasErroSalvandoVolta: false,
   passagem: { ...passagemInitialState },
   passagemVolta: { ...passagemInitialState }
 });
@@ -424,6 +426,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isSavingPoltronas: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_ERRO_SALVANDO_IDA: {
+      return {
+        ...state,
+        hasErroSalvandoIda: action.payload
+      }
+    }
+    case CompraPassagemActionType.SET_ERRO_SALVANDO_VOLTA: {
+      return {
+        ...state,
+        hasErroSalvandoVolta: action.payload
       }
     }
     default: {

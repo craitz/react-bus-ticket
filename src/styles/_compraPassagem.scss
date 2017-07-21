@@ -366,15 +366,15 @@ monospace;
         padding-left: 40px;
     }
     &.soida {
-        height: 270px;
-        @include aside(268px,
+        height: 305px;
+        @include aside(303px,
         40px,
         $colorTheme,
         rgb(49, 112, 143));
     }
     &.idavolta {
-        height: 372px;
-        @include aside(370px,
+        height: 407px;
+        @include aside(405px,
         40px,
         $colorTheme,
         rgb(49, 112, 143));
@@ -434,6 +434,30 @@ monospace;
         .label-nenhuma-volta {
             color: #F44336;
         }
+        .label-erro {
+            padding-left: 10px;
+            margin-left: 22px;
+            font-family: 'Source Code Pro';
+            position: relative;
+            background-color: $colorHasError;
+            color: rgba(white, .8);
+            .label-erro-text {
+                margin-left: 8px;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                left: -12px;
+                top: 5px;
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-left: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-right: 7px solid $colorHasError;
+                clear: both;
+            }
+        }
         .btn-continuar {
             position: relative;
             font-size: 2rem;
@@ -443,6 +467,20 @@ monospace;
             &::after {
                 width: 45px;
             }
+            .icon-finalizar {
+                height: 25px;
+                position: absolute;
+                left: 15px;
+                top: 8px;
+            }
+        }
+        .detalhes-warning {
+            font-family: 'Days One';
+            display: inline-block;
+            margin-top: 10px;
+            color: rgba(black, .35);
+            font-style: italic;
+            line-height: 1.2rem !important;
         }
     }
 }

@@ -51,6 +51,7 @@
     .aside {
         color: $fgColor;
         font-family: 'Days One';
+        font-size: 1.5rem;
         $position: ($width/2) - ($height/2);
         position: absolute;
         padding-top: ($height/4);

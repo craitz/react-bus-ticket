@@ -184,24 +184,6 @@
     }
 }
 
-@keyframes rotate {
-    0% {
-        transform: rotate(-360deg);
-    }
-    100% {
-        transform: rotate(-360deg);
-    }
-}
-
-@-webkit-keyframes rotate {
-    0% {
-        -webkit-transform: rotate(-360deg);
-    }
-    100% {
-        -webkit-transform: rotate(-360deg);
-    }
-}
-
 @mixin glassButton($bkColor, $insetAlpha, $darken, $fgColor: white) {
     $border: 1px solid rgba(black, .08);
     color: $fgColor !important;
@@ -216,6 +198,11 @@
     padding: 6px 20px;
     transition: color .15s cubic-bezier(.4, 0, .2, 1), background-color .15s cubic-bezier(.4, 0, .2, 1);
     will-change: background-color;
+    img {
+        position: absolute;
+        left: 15px;
+        top: 13px;
+    }
     span.fa {
         position: absolute;
         left: 15px;

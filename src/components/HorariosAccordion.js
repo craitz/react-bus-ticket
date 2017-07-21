@@ -89,11 +89,15 @@ class HorariosAccordion extends Component {
   }
 
   buildCollapsibles() {
-    const { horarios, onClickSeat, onResetSeats, onSaveSeats, isVolta,
-      isSavingPoltronas } = this.props;
+    const { horarios, onClickSeat, onResetSeats, onSaveSeats, isVolta, isSavingPoltronas } = this.props;
     const collapsibles = [];
-    let count = 1;
-    for (let horario in horarios) {
+
+    // sort horários
+    const arr = Object.keys(horarios);
+    arr.sort();
+
+    // itera no array e cria os collapsibles
+    arr.map((horario, index) => {
       const poltronas = horarios[horario];
       const allSize = Object.keys(poltronas).length - 1;
       const ocupadasSize = [...Object.keys(poltronas)]
@@ -101,10 +105,7 @@ class HorariosAccordion extends Component {
       const percentLotacao = parseInt((ocupadasSize / allSize) * 100, 10);
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
-      const position = count;
-      {/*<ddd className="text-after-icon text-horario">{strHorario}</ddd>*/ }
-      // <span className="text-after-icon text-horario">{strHorario}</span>
-      {/*<Monospan className="text-after-icon text-horario">{strHorario}</Monospan>*/ }
+      const position = (index + 1);
 
       collapsibles.push(
         <Panel
@@ -185,8 +186,7 @@ class HorariosAccordion extends Component {
           />
         </Panel >
       );
-      count++;
-    }
+    });
 
     return collapsibles;
   }

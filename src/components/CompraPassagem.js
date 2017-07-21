@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Tabs, Tab, Button, Jumbotron, Row, Grid } from 'react-bootstrap';
+import { Tabs, Tab, Button, Jumbotron, Row, Grid, Label } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -15,6 +15,7 @@ import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
+import TooltipOverlay from '../shared/TooltipOverlay';
 import idaLogo from '../styles/images/arrow-ida2.svg';
 import voltaLogo from '../styles/images/arrow-volta2.svg';
 import passengerGreenLogo from '../styles/images/passenger-green.svg';
@@ -25,7 +26,7 @@ import editLogo from '../styles/images/edit4.svg';
 import markerLogo from '../styles/images/marker.svg';
 import locationLogo from '../styles/images/location.svg';
 import clearLogo from '../styles/images/clear.svg';
-import TooltipOverlay from '../shared/TooltipOverlay';
+import comprarLogo from '../styles/images/comprar.svg';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -63,6 +64,13 @@ const ConfirmacaoPanel = ({ props }) => {
     poltronasTemp.sort();
     return poltronasTemp.join(' | ');
   }
+
+  const labelErro = (
+    <Label bsStyle="danger" className="label-erro">
+      <FontAwesome name="exclamation-triangle" />
+      <span className="label-erro-text">Selecione uma poltrona</span>
+    </Label>
+  );
 
   return (
     <Jumbotron className={buildClassName}>
@@ -102,7 +110,11 @@ const ConfirmacaoPanel = ({ props }) => {
         </Row>
         <Row>
           <img src={passengerGreenLogo} height="16" alt="" className="icon-passenger" />
-          <span className="text-after-icon">{sortPoltronas(props.poltronasIda)}</span>
+          {
+            !props.hasErroSalvandoIda &&
+            <span className="text-after-icon">{sortPoltronas(props.poltronasIda)}</span>
+          }
+          {props.hasErroSalvandoIda && labelErro}
         </Row>
         {props.isIdaVolta &&
           <div>
@@ -118,15 +130,22 @@ const ConfirmacaoPanel = ({ props }) => {
             </Row>
             <Row>
               <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
-              <span className="text-after-icon">{sortPoltronas(props.poltronasVolta)}</span>
+              {
+                !props.hasErroSalvandoVolta &&
+                <span className="text-after-icon">{sortPoltronas(props.poltronasVolta)}</span>
+              }
+              {props.hasErroSalvandoIda && labelErro}
             </Row>
           </div>}
         <hr />
         <Row>
-          <Button className="btn-glass-orange btn-block btn-continuar">
-            <FontAwesome name="check" className="icon-continuar" />
-            <span className="text-after-icon text-confirmar">Continuar</span>
+          <Button
+            className="btn-glass-orange btn-block btn-continuar"
+            onClick={props.onContinua}>
+            <img src={comprarLogo} height="16" alt="" className="icon-finalizar" />
+            <span className="text-after-icon text-confirmar">Finalizar pedido</span>
           </Button>
+          <small className="detalhes-warning">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
         </Row>
       </Grid>
     </Jumbotron>
@@ -150,6 +169,7 @@ export class CompraPassagem extends Component {
     this.handleLimpaIda = this.handleLimpaIda.bind(this);
     this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
     this.handleSelectTab = this.handleSelectTab.bind(this);
+
   }
 
   handleSelectTab(event) {
@@ -473,28 +493,30 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     const { dispatch, passagem, history } = this.props;
 
-    dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
+    console.log('Continuou!!!');
 
-    if (this.formCanBeSaved()) {
-      this.savePassagem(passagem)
-        .then((obj) => {
-          setTimeout(function () {
-            dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-            history.push({
-              pathname: `/passagem/${obj.key}`,
-              state: {
-                novaPassagem: obj.novaPassagem,
-                key: obj.key
-              }
-            });
-          }, 1000);
-        })
-        .catch((error) => {
-          dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-        });
-    } else {
-      dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-    }
+    // dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
+
+    // if (this.formCanBeSaved()) {
+    //   this.savePassagem(passagem)
+    //     .then((obj) => {
+    //       setTimeout(function () {
+    //         dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+    //         history.push({
+    //           pathname: `/passagem/${obj.key}`,
+    //           state: {
+    //             novaPassagem: obj.novaPassagem,
+    //             key: obj.key
+    //           }
+    //         });
+    //       }, 1000);
+    //     })
+    //     .catch((error) => {
+    //       dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+    //     });
+    // } else {
+    //   dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+    // }
   }
 
   handleReset(event) {
@@ -549,7 +571,7 @@ export class CompraPassagem extends Component {
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta,
       isIdaVolta, activeAccordion, activeAccordionVolta, activeTab,
-      isSavingPoltronas } = this.props;
+      isSavingPoltronas, hasErroSalvandoIda, hasErroSalvandoVolta } = this.props;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -561,6 +583,8 @@ export class CompraPassagem extends Component {
 
     const confirmacaoPanelProps = {
       isIdaVolta,
+      hasErroSalvandoIda,
+      hasErroSalvandoVolta,
       origem: strOrigem,
       destino: strDestino,
       dataIda: strDataIda,
@@ -571,7 +595,8 @@ export class CompraPassagem extends Component {
       poltronasVolta: passagemVolta.poltrona,
       onChangeTrajeto: this.handleChangeTrajeto,
       onLimpaIda: this.handleLimpaIda,
-      onLimpaVolta: this.handleLimpaVolta
+      onLimpaVolta: this.handleLimpaVolta,
+      onContinua: this.handleSubmit
     }
 
     return (
@@ -664,6 +689,8 @@ const mapStateToProps = (state) => {
     activeAccordion: state.compraPassagemState.activeAccordion,
     activeAccordionVolta: state.compraPassagemState.activeAccordionVolta,
     activeTab: state.compraPassagemState.activeTab,
+    hasErroSalvandoIda: state.compraPassagemState.hasErroSalvandoIda,
+    hasErroSalvandoVolta: state.compraPassagemState.hasErroSalvandoVolta,
     snapshot: state.compraPassagemState
   };
 };

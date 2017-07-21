@@ -17,7 +17,8 @@
 html {
     height: 100%;
     body {
-        // background-color: rgb(234, 235, 240);
+        // Aumente para testar as fontes em diversas resoluções
+        // font-size: 30px !important; 
         height: inherit;
         #root {
             height: inherit;

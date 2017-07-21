@@ -265,3 +265,17 @@ export const setSavingPoltronas = (isSavingPoltronas) => {
     payload: isSavingPoltronas
   }
 };
+
+export const setErroSalvandoIda = (hasErroSalvandoIda) => {
+  return {
+    type: CompraPassagemActionType.SET_ERRO_SALVANDO_IDA,
+    payload: hasErroSalvandoIda
+  }
+};
+
+export const setErroSalvandoVolta = (hasErroSalvandoVolta) => {
+  return {
+    type: CompraPassagemActionType.SET_ERRO_SALVANDO_VOLTA,
+    payload: hasErroSalvandoVolta
+  }
+};

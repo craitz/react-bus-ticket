@@ -194,18 +194,6 @@
   to {
     transform: rotate(360deg); } }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(-360deg); }
-  100% {
-    transform: rotate(-360deg); } }
-
-@-webkit-keyframes rotate {
-  0% {
-    -webkit-transform: rotate(-360deg); }
-  100% {
-    -webkit-transform: rotate(-360deg); } }
-
 .btn-trigger-blue {
   color: white !important;
   background-color: #2a75f3 !important;
@@ -309,6 +297,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-blue img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-blue span.fa {
     position: absolute;
     left: 15px;
@@ -364,6 +356,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-red img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-red span.fa {
     position: absolute;
     left: 15px;
@@ -419,6 +415,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-yellow img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-yellow span.fa {
     position: absolute;
     left: 15px;
@@ -474,6 +474,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-pink img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-pink span.fa {
     position: absolute;
     left: 15px;
@@ -529,6 +533,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-orange img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-orange span.fa {
     position: absolute;
     left: 15px;
@@ -584,6 +592,10 @@
   padding: 6px 20px;
   transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color; }
+  .btn-glass-transparent img {
+    position: absolute;
+    left: 15px;
+    top: 13px; }
   .btn-glass-transparent span.fa {
     position: absolute;
     left: 15px;
@@ -1758,33 +1770,35 @@
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .row {
             padding-left: 40px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container.soida {
-            height: 270px; }
+            height: 305px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container.soida .aside {
               color: #31708f;
               font-family: 'Days One';
+              font-size: 1.5rem;
               position: absolute;
               padding-top: 10px;
-              width: 268px;
+              width: 303px;
               height: 40px;
               background-color: #d9edf7;
               transform: rotate(-90deg);
-              left: -114px;
-              top: 114px;
+              left: -131.5px;
+              top: 131.5px;
               border-top-left-radius: 5px;
               border-top-right-radius: 5px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container.idavolta {
-            height: 372px; }
+            height: 407px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container.idavolta .aside {
               color: #31708f;
               font-family: 'Days One';
+              font-size: 1.5rem;
               position: absolute;
               padding-top: 10px;
-              width: 370px;
+              width: 405px;
               height: 40px;
               background-color: #d9edf7;
               transform: rotate(-90deg);
-              left: -165px;
-              top: 165px;
+              left: -182.5px;
+              top: 182.5px;
               border-top-left-radius: 5px;
               border-top-right-radius: 5px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .icon-edit {
@@ -1830,11 +1844,44 @@
               background-color: #F44336; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-nenhuma-volta {
               color: #F44336; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-erro {
+              padding-left: 10px;
+              margin-left: 22px;
+              font-family: 'Source Code Pro';
+              position: relative;
+              background-color: #e71d36;
+              color: rgba(255, 255, 255, 0.8); }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-erro .label-erro-text {
+                margin-left: 8px; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .label-erro::before {
+                content: '';
+                position: absolute;
+                left: -12px;
+                top: 5px;
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-left: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-right: 7px solid #e71d36;
+                clear: both; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar {
               position: relative;
               font-size: 2rem; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar::after {
                 width: 45px; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar .icon-finalizar {
+                height: 25px;
+                position: absolute;
+                left: 15px;
+                top: 8px; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .detalhes-warning {
+              font-family: 'Days One';
+              display: inline-block;
+              margin-top: 10px;
+              color: rgba(0, 0, 0, 0.35);
+              font-style: italic;
+              line-height: 1.2rem !important; }
   .comprar-passagem-container::after {
     content: "";
     background: url(./styles/images/tree.jpg);
