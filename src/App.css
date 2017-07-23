@@ -1439,6 +1439,12 @@
   100% {
     transform: rotate(3600deg); } }
 
+@keyframes rotation2 {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .comprar-passagem-container {
   background-color: #ededed;
   overflow: auto;
@@ -2155,11 +2161,11 @@ html {
             html body #root .App .App-container .App-container__row .App-container__col {
               height: 100%; }
     html body .title-after-icon {
-      margin-left: 12px; }
+      margin-left: 2rem; }
     html body .text-after-icon {
-      margin-left: 8px; }
+      margin-left: .8rem; }
     html body .icon-after-text {
-      margin-left: 8px; }
+      margin-left: .8rem; }
     html body .jumbotron {
       padding: 20px;
       border-radius: 6px;

@@ -142,30 +142,30 @@
 // Media Queries - Mobile First
 @mixin retina {
     @media screen and (min-width: 320px) {
-        @content
+        @content;
     }
 }
 
 @mixin xs {
     @media screen and (min-width: 480px) {
-        @content
+        @content;
     }
 }
 
 @mixin sm {
     @media screen and (min-width: 768px) {
-        @content
+        @content;
     }
 }
 
 @mixin md {
     @media screen and (min-width: 992px) {
-        @content
+        @content;
     }
 }
 
 @mixin lg {
     @media screen and (min-width: 1200px) {
-        @content
+        @content;
     }
 }

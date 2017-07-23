@@ -7,6 +7,7 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import passengerRedLogo from '../styles/images/passenger-red.svg';
 import checkLogo from '../styles/images/check3.svg';
 import spinLogo from '../styles/images/spinner3.svg';
+import spinnerLogo from '../styles/images/spinner4.svg';
 import removeLogo from '../styles/images/remove.svg';
 import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
@@ -82,12 +83,16 @@ class HorariosAccordion extends Component {
     }
   }
 
-  onClickPanel(selected, isDisabled) {
-    if (isDisabled) {
+  onClickPanel(selected, event, isDisabled) {
+    const className = event.target.className;
+    const saveOrRemoveClicked = className.includes('icon-save') || className.includes('icon-remove');
+
+    // se o panel está desabilitado, não faz nada
+    // se clicou no ícone de salvar ou remover, também não faz nada
+    // pois o panel não deve ser fechado nessas operações
+    if (isDisabled || saveOrRemoveClicked) {
       return;
     }
-
-    console.log('AQUI!!!');
 
     const { isVolta, active } = this.props;
     const selectedAccordion = (active === selected) ? -1 : selected;
@@ -122,7 +127,7 @@ class HorariosAccordion extends Component {
           className={className}
           key={horario}
           eventKey={position}
-          onSelect={(selected) => this.onClickPanel(selected, poltronas.isDisabled)}
+          onSelect={(selected, e) => this.onClickPanel(selected, e, poltronas.isDisabled)}
           bsStyle="info"
           header={
             <div>
@@ -189,12 +194,17 @@ class HorariosAccordion extends Component {
                 />
               </span>
             </div>}>
-          < BusSelect
+          <img
+            src={spinnerLogo}
+            alt=""
+            className="icon-spin-tab icon-after-text"
+          />
+          {/*< BusSelect
             isVolta={isVolta}
             horario={horario}
             seats={poltronas}
             onClickSeat={onClickSeat}
-          />
+          />*/}
         </Panel >
       );
     });
