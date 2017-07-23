@@ -47,6 +47,17 @@
 //         }
 //     }
 // }
+@mixin loader($width, $height) {
+    .loader {
+        width: $width !important;
+        height: $height !important;
+        position: relative;
+        .spinner {
+            color: red !important;
+        }
+    }
+}
+
 @mixin aside($width, $height, $bgColor, $fgColor) {
     .aside {
         color: $fgColor;

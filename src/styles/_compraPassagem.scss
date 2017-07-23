@@ -239,12 +239,15 @@ monospace;
 }
 
 @mixin busSelect($seatColor) {
-    // .icon-spin-tab {
-    //     margin: 0 !important;
-    //     width: 170px !important;
-    //     height: 170px !important;
-    //     animation: rotation2 500ms infinite;
+    // .icon-loading {
+    //     width: 550px !important;
+    //     height: 180px !important;
+    //     &>div {
+    //         height: inherit !important;
+    //     }
     // }
+    @include loader(550px,
+    180px);
     .bus-seat-select {
         background-color: white;
         position: relative;

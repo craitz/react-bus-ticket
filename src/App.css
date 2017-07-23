@@ -1712,6 +1712,12 @@
               cursor: not-allowed !important; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body {
               padding: 5px 0 5px 0; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body .loader {
+                width: 550px !important;
+                height: 180px !important;
+                position: relative; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body .loader .spinner {
+                  color: red !important; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-collapse .panel-body .bus-seat-select {
                 background-color: white;
                 position: relative;

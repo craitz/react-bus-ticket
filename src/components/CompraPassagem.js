@@ -270,43 +270,58 @@ export class CompraPassagem extends Component {
     }
   }
 
+  checkNotAllowed(isVolta, horarioCompare) {
+    const { dispatch, horarios, horariosVolta, passagem, passagemVolta, isIdaVolta } = this.props;
+    console.log(isIdaVolta, (passagem.data.value !== passagemVolta.data.value));
+    if (!isIdaVolta || (passagem.data.value !== passagemVolta.data.value)) {
+      return;
+    }
+
+    const tempHorarios = utils.deepCopy(isVolta ? horariosVolta : horarios);
+    if (isVolta) {
+      for (const horario in tempHorarios) {
+        if (horario <= horarioCompare) {
+          tempHorarios[horario].isDisabled = true;
+        }
+      }
+      dispatch(actions.setActiveAccordionVolta(-1));
+      dispatch(actions.setHorariosVolta(tempHorarios));
+    } else {
+      for (const horario in tempHorarios) {
+        if (horario >= horarioCompare) {
+          tempHorarios[horario].isDisabled = true;
+        }
+      }
+      dispatch(actions.setActiveAccordion(-1));
+      dispatch(actions.setHorarios(tempHorarios));
+    }
+  }
+
   handleSaveSeats(event, isVolta, horario) {
     event.preventDefault();
 
-    const { dispatch, horarios, horariosVolta } = this.props;
+    const { dispatch, horarios, horariosVolta, passagem, passagemVolta, isIdaVolta } = this.props;
     const horarioSelected = isVolta ? horariosVolta[horario] : horarios[horario];
     const poltronasSelected = Object.keys(horarioSelected).filter(
       item => horarioSelected[item] === utils.PoltronaStatus.SELECTED
     );
 
+    console.log(passagem.data.value);
+
     if (poltronasSelected.length > 0) {
       dispatch(actions.setSavingPoltronas(true)); // liga spinning
-      setTimeout(function () {
-        dispatch(actions.setSavingPoltronas(false)); // desliga spinning
+      setTimeout(() => {
         if (isVolta) {
-          const tempHorarios = utils.deepCopy(horarios);
-          for (const horarioIda in tempHorarios) {
-            if (horarioIda >= horario) {
-              tempHorarios[horarioIda].isDisabled = true;
-            }
-          }
-          dispatch(actions.setActiveAccordion(-1));
-          dispatch(actions.setHorarios(tempHorarios));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
         } else {
-          const tempHorariosVolta = utils.deepCopy(horariosVolta);
-          for (const horarioVolta in tempHorariosVolta) {
-            if (horarioVolta <= horario) {
-              tempHorariosVolta[horarioVolta].isDisabled = true;
-            }
-          }
-          dispatch(actions.setActiveAccordionVolta(-1));
-          dispatch(actions.setHorariosVolta(tempHorariosVolta));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
         }
-      }, 500);
+
+        this.checkNotAllowed(!isVolta, horario);
+        dispatch(actions.setSavingPoltronas(false)); // desliga spinning
+      }, 1000);
     }
   }
 

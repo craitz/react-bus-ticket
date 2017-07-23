@@ -12,6 +12,8 @@ import removeLogo from '../styles/images/remove.svg';
 import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import FontAwesome from 'react-fontawesome';
+import Loading from 'react-loading-animation';
+import Spinner from 'react-spinner-children';
 
 const Timespan = ({ className, children }) => {
   const arrText = children.split(':');
@@ -109,6 +111,11 @@ class HorariosAccordion extends Component {
     const arr = Object.keys(horarios);
     arr.sort();
 
+    const customSpinConfig = {
+      lines: 10,
+      rotate: 17
+    }; 
+
     // itera no array e cria os collapsibles
     arr.map((horario, index) => {
       const poltronas = horarios[horario];
@@ -144,29 +151,17 @@ class HorariosAccordion extends Component {
                 }
               </span>
               <span className="trigger-right">
-                {
-                  !isSavingPoltronas &&
-                  <TooltipOverlay
-                    text="Salvar seleção"
-                    position="top">
-                    <img
-                      src={checkLogo}
-                      height="15"
-                      alt=""
-                      className="icon-save icon-after-text"
-                      onClick={(event) => onSaveSeats(event, isVolta, horario)}
-                    />
-                  </TooltipOverlay>
-                }
-                {
-                  isSavingPoltronas &&
+                <TooltipOverlay
+                  text="Salvar seleção"
+                  position="top">
                   <img
-                    src={spinLogo}
-                    height="16"
+                    src={checkLogo}
+                    height="15"
                     alt=""
-                    className="icon-spin icon-after-text"
+                    className="icon-save icon-after-text"
+                    onClick={(event) => onSaveSeats(event, isVolta, horario)}
                   />
-                }
+                </TooltipOverlay>
                 <TooltipOverlay
                   text="Limpar seleção"
                   position="top">
@@ -194,23 +189,32 @@ class HorariosAccordion extends Component {
                 />
               </span>
             </div>}>
-          <img
-            src={spinnerLogo}
-            alt=""
-            className="icon-spin-tab icon-after-text"
-          />
-          {/*< BusSelect
-            isVolta={isVolta}
-            horario={horario}
-            seats={poltronas}
-            onClickSeat={onClickSeat}
-          />*/}
+          {
+            isSavingPoltronas &&
+            <Spinner config={customSpinConfig}>
+              <span>This content will be show when isLoaded === true</span>
+            </Spinner>
+          }
+          {
+            !isSavingPoltronas &&
+            < BusSelect
+              isVolta={isVolta}
+              horario={horario}
+              seats={poltronas}
+              onClickSeat={onClickSeat}
+            />
+          }
         </Panel >
       );
     });
 
     return collapsibles;
   }
+
+
+            // <div className="icon-loading">
+            //   <Loading />
+            // </div>
 
   render() {
     const { horarios, active } = this.props;
