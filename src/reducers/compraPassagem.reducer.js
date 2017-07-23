@@ -55,31 +55,24 @@ const reducer = (state = initialState, action = {}) => {
     case CompraPassagemActionType.SET_CIDADES: {
       return { ...state, cidades: action.payload };
     }
-
     case CompraPassagemActionType.SET_HORARIOS: {
       return { ...state, horarios: action.payload };
     }
-
     case CompraPassagemActionType.SET_HORARIOS_VOLTA: {
       return { ...state, horariosVolta: action.payload };
     }
-
     case CompraPassagemActionType.SET_HORARIOS_BACKUP: {
       return { ...state, horariosBackup: action.payload };
     }
-
     case CompraPassagemActionType.SET_HORARIOS_VOLTA_BACKUP: {
       return { ...state, horariosVoltaBackup: action.payload };
     }
-
     case CompraPassagemActionType.SET_POLTRONAS: {
       return { ...state, poltronas: action.payload };
     }
-
     case CompraPassagemActionType.SET_IDA_VOLTA: {
       return { ...state, isIdaVolta: action.payload };
     }
-
     case CompraPassagemActionType.RESET_FORM_PASSAGEM: {
       return {
         ...state,
@@ -87,7 +80,6 @@ const reducer = (state = initialState, action = {}) => {
         passagemVolta: { ...passagemInitialState }
       }
     }
-
     case CompraPassagemActionType.CHANGE_NOME: {
       return {
         ...state,

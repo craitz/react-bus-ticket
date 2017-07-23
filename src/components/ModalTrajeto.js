@@ -175,6 +175,7 @@ export class ModalTrajeto extends Component {
 
     for (let horario in horarios) {
       const poltronas = horarios[horario];
+      poltronas.isDisabled = false;
       for (let i = 0; i < 44; i++) {
         const strValue = (i + 1).toString().padStart(2, '0');
         poltronas[strValue] = (poltronas.hasOwnProperty(strValue))

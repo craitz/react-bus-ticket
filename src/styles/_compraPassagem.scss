@@ -30,9 +30,9 @@ monospace;
     .panel-group {
         .panel-heading {
             padding: 0;
-            // background-color: transparent;
             .panel-title {
                 a {
+                    @include noSelection;
                     font-family: 'Days One';
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
@@ -112,17 +112,19 @@ monospace;
                             margin-left: 20px;
                         }
                         .icon-save {
-                            // animation: rotation 10s infinite;
                             margin-top: 7px;
                         }
                         .icon-spin {
-                            // margin-left: 21px;
                             animation: rotation 10s infinite;
                             margin-top: 11px;
                         }
                     }
                 }
             }
+        }
+        .not-allowed a {
+            opacity: .2;
+            cursor: not-allowed !important;
         }
         .panel-collapse {
             .panel-body {

@@ -82,10 +82,18 @@ class HorariosAccordion extends Component {
     }
   }
 
-  onClickPanel(selected) {
-    const { isVolta } = this.props;
-    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(selected));
-    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(selected));
+  onClickPanel(selected, isDisabled) {
+    if (isDisabled) {
+      return;
+    }
+
+    console.log('AQUI!!!');
+
+    const { isVolta, active } = this.props;
+    const selectedAccordion = (active === selected) ? -1 : selected;
+
+    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(selectedAccordion));
+    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(selectedAccordion));
   }
 
   buildCollapsibles() {
@@ -106,12 +114,15 @@ class HorariosAccordion extends Component {
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTime(horario);
       const position = (index + 1);
+      const className = poltronas.isDisabled ? "not-allowed" : "allowed";
 
+      //  eventKey={poltronas.isDisabled ? -1 : position}
       collapsibles.push(
         <Panel
+          className={className}
           key={horario}
           eventKey={position}
-          onSelect={(selected) => this.onClickPanel(selected)}
+          onSelect={(selected) => this.onClickPanel(selected, poltronas.isDisabled)}
           bsStyle="info"
           header={
             <div>
@@ -138,7 +149,7 @@ class HorariosAccordion extends Component {
                       height="15"
                       alt=""
                       className="icon-save icon-after-text"
-                      onClick={() => onSaveSeats(isVolta, horario)}
+                      onClick={(event) => onSaveSeats(event, isVolta, horario)}
                     />
                   </TooltipOverlay>
                 }

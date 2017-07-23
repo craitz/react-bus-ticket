@@ -183,8 +183,27 @@ export class CompraPassagem extends Component {
     dispatch(modalTrajetoActions.setVisible(true, false, snapshot));
   }
 
+  enableAllHorarios(isVolta) {
+    const { dispatch, horarios, horariosVolta } = this.props;
+
+    if (isVolta) {
+      const temp = utils.deepCopy(horariosVolta)
+      for (let horario in temp) {
+        temp[horario].isDisabled = false;
+      }
+      dispatch(actions.setHorariosVolta(temp));
+
+    } else {
+      const temp = utils.deepCopy(horarios)
+      for (let horario in temp) {
+        temp[horario].isDisabled = false;
+      }
+      dispatch(actions.setHorarios(temp));
+    }
+  }
+
   handleLimpaIda() {
-    const { dispatch, passagem, horarios, horariosBackup } = this.props;
+    const { dispatch, passagem, horarios, horariosVolta, horariosBackup } = this.props;
     const { horario } = passagem;
     const horariosTemp = utils.deepCopy(horarios);
 
@@ -193,11 +212,12 @@ export class CompraPassagem extends Component {
       dispatch(actions.setHorarios(horariosTemp));
       dispatch(actions.changePoltrona([]));
       dispatch(actions.changeHorario(''));
+      this.enableAllHorarios(true);
     }
   }
 
   handleLimpaVolta() {
-    const { dispatch, passagemVolta, horariosVolta, horariosVoltaBackup } = this.props;
+    const { dispatch, passagemVolta, horarios, horariosVolta, horariosVoltaBackup } = this.props;
     const { horario } = passagemVolta;
     const horariosTemp = utils.deepCopy(horariosVolta);
 
@@ -206,6 +226,7 @@ export class CompraPassagem extends Component {
       dispatch(actions.setHorariosVolta(horariosTemp));
       dispatch(actions.changePoltronaVolta([]));
       dispatch(actions.changeHorarioVolta(''));
+      this.enableAllHorarios(false);
     }
   }
 
@@ -249,7 +270,9 @@ export class CompraPassagem extends Component {
     }
   }
 
-  handleSaveSeats(isVolta, horario) {
+  handleSaveSeats(event, isVolta, horario) {
+    event.preventDefault();
+
     const { dispatch, horarios, horariosVolta } = this.props;
     const horarioSelected = isVolta ? horariosVolta[horario] : horarios[horario];
     const poltronasSelected = Object.keys(horarioSelected).filter(
@@ -261,13 +284,29 @@ export class CompraPassagem extends Component {
       setTimeout(function () {
         dispatch(actions.setSavingPoltronas(false)); // desliga spinning
         if (isVolta) {
+          const tempHorarios = utils.deepCopy(horarios);
+          for (const horarioIda in tempHorarios) {
+            if (horarioIda >= horario) {
+              tempHorarios[horarioIda].isDisabled = true;
+            }
+          }
+          dispatch(actions.setActiveAccordion(-1));
+          dispatch(actions.setHorarios(tempHorarios));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
         } else {
+          const tempHorariosVolta = utils.deepCopy(horariosVolta);
+          for (const horarioVolta in tempHorariosVolta) {
+            if (horarioVolta <= horario) {
+              tempHorariosVolta[horarioVolta].isDisabled = true;
+            }
+          }
+          dispatch(actions.setActiveAccordionVolta(-1));
+          dispatch(actions.setHorariosVolta(tempHorariosVolta));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
         }
-      }, 1000);
+      }, 500);
     }
   }
 
