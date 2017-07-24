@@ -4,6 +4,7 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import { Button } from 'muicss/react';
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav className="navheader-nav">
@@ -39,7 +40,7 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
         <span className="text-after-icon hidden-sm">Código-fonte</span>
       </Navbar.Link>
     </Navbar.Text>
-    <Nav pullRight>
+    <Nav pullRight className="nav-user">
       <NavItem href="#" onClick={onPerfilUsuario}>
         <FontAwesome name="user"></FontAwesome>
         <span className="text-after-icon hidden-sm hidden-md">{email}</span>
@@ -50,6 +51,16 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
       </NavItem>
     </Nav>
   </Navbar.Collapse>
+
+// <Button
+//   color="danger"
+//   variant="fab"
+//   onClick={onLgout}
+//   className="btn-logout">
+//   <FontAwesome name="power-off"></FontAwesome>
+// </Button>
+
+
 
 NavbarCollapse.PropTypes = {
   email: PropTypes.string.isRequired,
@@ -95,10 +106,11 @@ class Navigation extends Component {
   }
 
   render() {
+    const navBrandClass = firebaseHelper.isLoggedIn() ? 'navbrand-login' : 'navbrand-logout';
     return (
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
-          <Navbar.Brand>
+          <Navbar.Brand className={navBrandClass}>
             <FontAwesome name="bus" className="App-logo"></FontAwesome>
             <span className="header-title">BusTicket</span>
           </Navbar.Brand>

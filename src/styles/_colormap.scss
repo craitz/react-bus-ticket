@@ -3,13 +3,13 @@ $contentWidth: 1000px;
 $contentLeft: calc(50% - 500px);
 // DEFAULT COLORS
 $googleBlue: #4285F4;
-$googleRed: #FF6C3E;
-$googleGreen: #78B21B;
+$googleRed: #F44336;
+$googleGreen: #4CAF50;
 $busOrange: #F6952D;
 $busPink: #E2076A;
 $lightBlue: #EAF2FC;
 $lilas: #7C1ACC;
-$fontPadrao: "Patua One";
+$fontPadrao: "Days One";
 // MAIN NAVBAR
 $colorNavbarPrincipal: #140866;
 $brandNavbarPrincipal: $busOrange;
@@ -17,7 +17,7 @@ $textNavbarPrincipal: rgba(white, .7);
 // PAGE HEADER
 $colorNavbarHeader: #1B0088;
 $textNavbarHeader: rgba(white, .8);
-$fontNavbarHeader: 'Days One';
+$fontNavbarHeader: $fontPadrao;
 $sizeFontNavbarHeader: 5rem;
 // NAVBAR TRAJETO
 $colorNavbarCompras: #EDEFF1;
@@ -29,8 +29,8 @@ $colorTabHorarios: rgba(white, 1);
 $borderTabHorarios: rgba(black, .15);
 // DETALHES
 $colorDetalhesPanel: rgba(white, 1);
-$fontDetalhesPanel: "Days One";
+$fontDetalhesPanel: $fontPadrao;
 $sizeFontDetalhesPanel: 1.5rem;
 $colorFontDetalhesPanel: rgba(black, .6);
 // BUTTONS
-$fontButton: 'Days One';
+$fontButton: $fontPadrao;

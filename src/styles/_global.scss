@@ -1,52 +1,100 @@
-@font-face {
-    font-family: 'Roboto';
-    src: url(./styles/fonts/Roboto-Regular.ttf) format('trueType');
+@keyframes busGrad {
+    0% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 22%, transparent 22%, transparent 78%, rgba(black, .05) 78%, rgba(black, .05) 100%);
+    }
+    6% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 25%, transparent 25%, transparent 75%, rgba(black, .05) 75%, rgba(black, .05) 100%);
+    }
+    12% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 29%, transparent 29%, transparent 71%, rgba(black, .05) 71%, rgba(black, .05) 100%);
+    }
+    19% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 32%, transparent 32%, transparent 68%, rgba(black, .05) 68%, rgba(black, .05) 100%);
+    }
+    25% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 36%, transparent 36%, transparent 64%, rgba(black, .05) 64%, rgba(black, .05) 100%);
+    }
+    31% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 40%, transparent 40%, transparent 60%, rgba(black, .05) 60%, rgba(black, .05) 100%);
+    }
+    38% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 43%, transparent 43%, transparent 57%, rgba(black, .05) 57%, rgba(black, .05) 100%);
+    }
+    44% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 47%, transparent 47%, transparent 53%, rgba(black, .05) 53%, rgba(black, .05) 100%);
+    }
+    50% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 50%, transparent 50%, transparent 50%, rgba(black, .05) 50%, rgba(black, .05) 100%);
+    }
+    56% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 47%, transparent 47%, transparent 53%, rgba(black, .05) 53%, rgba(black, .05) 100%);
+    }
+    62% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 43%, transparent 43%, transparent 57%, rgba(black, .05) 57%, rgba(black, .05) 100%);
+    }
+    69% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 40%, transparent 40%, transparent 60%, rgba(black, .05) 60%, rgba(black, .05) 100%);
+    }
+    75% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 36%, transparent 36%, transparent 64%, rgba(black, .05) 64%, rgba(black, .05) 100%);
+    }
+    81% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 32%, transparent 32%, transparent 68%, rgba(black, .05) 68%, rgba(black, .05) 100%);
+    }
+    88% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 29%, transparent 29%, transparent 71%, rgba(black, .05) 71%, rgba(black, .05) 100%);
+    }
+    94% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 25%, transparent 25%, transparent 75%, rgba(black, .05) 75%, rgba(black, .05) 100%);
+    }
+    100% {
+        background: linear-gradient(90deg, rgba(black, .05) 0%, rgba(black, .05) 22%, transparent 22%, transparent 78%, rgba(black, .05) 78%, rgba(black, .05) 100%);
+    }
 }
 
-@font-face {
-    font-family: 'Gruppo';
-    src: url(./styles/fonts/Gruppo-Regular.ttf) format('trueType');
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-@font-face {
-    font-family: 'Days One';
-    src: url(./styles/fonts/DaysOne-Regular.ttf) format('trueType');
+@keyframes buslide {
+    0% {
+        background-color: rgba(white, 1);
+        left: 50%;
+        right: 50%;
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        background-color: initial;
+        left: 0;
+        right: 0;
+        width: 100%;
+        opacity: 1;
+    }
 }
 
-@font-face {
-    font-family: 'Patua One';
-    src: url(./styles/fonts/PatuaOne-Regular.ttf) format('trueType');
+@keyframes buslideInverse {
+    0% {
+        background-color: initial;
+        left: 0;
+        right: 0;
+        width: 100%;
+        opacity: .5;
+    }
+    100% {
+        background-color: rgba(white, 1);
+        left: 50%;
+        right: 50%;
+        width: 0;
+        opacity: 0;
+    }
 }
 
-@font-face {
-    font-family: 'Roboto Slab';
-    src: url(./styles/fonts/RobotoSlab-Regular.ttf) format('trueType');
-}
-
-// @mixin aside($width, $height, $bgColor, $fgColor) {
-//     .aside {
-//         // $position: ($width/2) - ($height/2);
-//         position: absolute;
-//         padding-top: 10px;
-//         padding-left: ($height/4);
-//         width: $height;
-//         height: 100%;
-//         background-color: $bgColor;
-//         // transform: rotate(-90deg);
-//         left: 0;
-//         top: 0;
-//         border-top-left-radius: 5px;
-//         border-top-right-radius: 5px;
-//         p {
-//             color: $fgColor;
-//             font-family: 'Days One';
-//             font-size: 1.3rem;
-//             letter-spacing: -5px;
-//             writing-mode: vertical-lr;
-//             text-orientation: upright;
-//         }
-//     }
-// }
 @mixin loader($width, $height) {
     .loader {
         width: $width !important;
@@ -61,7 +109,7 @@
 @mixin aside($width, $height, $bgColor, $fgColor) {
     .aside {
         color: $fgColor;
-        font-family: 'Days One';
+        font-family: $fontPadrao;
         font-size: 1.5rem;
         $position: ($width/2) - ($height/2);
         position: absolute;
@@ -75,6 +123,13 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
+}
+
+@mixin animate($nome, $duration) {
+    -webkit-animation: $nome $duration;
+    -moz-animation: $nome $duration;
+    -o-animation: $nome $duration;
+    animation: $nome $duration;
 }
 
 @mixin textShadow($alpha) {

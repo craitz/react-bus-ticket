@@ -1,17 +1,27 @@
 .welcome-container {
     @include containerHeight();
     .info-container {
-        margin-top: 50px;
+        width: $contentWidth;
+        margin: 50px 0 0 $contentLeft !important;
+        text-align: left;
         h1 {
-            font-family: "Gruppo";
-            font-weight: bold;
+            font-family: $fontPadrao;
+            color: rgba(black, .65);
+            margin-top: 50px;
         }
-        .jumbotron {}
+        .jumbotron {
+            background-color: white;
+            border-radius: 4px;
+        }
         .welcome-button {
+            margin-top: 50px;
             margin-bottom: 50px;
+            .bt-mui-text {
+                margin-left: 30px;
+            }
         }
     }
-    &::after {
-        @include bkgImage();
-    }
+    // &::after {
+    //     @include bkgImage();
+    // }
 }

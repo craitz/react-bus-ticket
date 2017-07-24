@@ -10,27 +10,41 @@
             margin-right: 0;
             width: 100%;
             .navbar-collapse.collapse {
+                position: relative;
                 padding-left: 0;
                 padding-right: 0;
                 &.in {
                     text-align: left;
                 }
             }
-            .header-title {
-                color: $brandNavbarPrincipal;
-                margin-left: 15px;
-                font-size: 2.5rem;
-                font-family: "Gruppo";
-                font-weight: bold;
+            .navbrand-login,
+            .navbrand-logout {
+                padding-top: 12px;
+                margin-right: 20px;
+                .header-title {
+                    color: $brandNavbarPrincipal;
+                    margin-left: 15px;
+                    font-size: 2.2rem;
+                    font-family: $fontPadrao;
+                    font-weight: bold;
+                }
+                .App-logo {
+                    color: $brandNavbarPrincipal;
+                    font-size: 2.5rem;
+                }
             }
-            .App-logo {
-                color: $brandNavbarPrincipal;
+            .navbrand-logout {
+                position: absolute;
+                left: calc(50% - 9rem);
             }
             .navbar-nav {
                 margin-left: 20px;
                 span {
                     color: $textNavbarPrincipal;
                 }
+                // &.nav-user {
+                //     padding-right: 80px;
+                // }
             }
             .navbar-text {
                 a {

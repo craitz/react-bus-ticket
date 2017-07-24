@@ -12,15 +12,18 @@ import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
+import { Button, Input } from 'muicss/react';
 
 export const ButtonLogin = ({ handleLogin }) =>
-  <FormGroup>
-    <ButtonIcon
-      type="button"
-      className="btn-block btn-glass-blue btn-login"
-      label="Entrar"
-      icon="sign-in"
-      onClick={handleLogin} />
+  <FormGroup className="last">
+    <Button
+      color="primary"
+      variant="raised"
+      onClick={handleLogin}
+      className="btn-block">
+      <FontAwesome name="sign-in bt-mui-icon" />
+      <span className="bt-mui-text">Entrar</span>
+    </Button>
   </FormGroup>
 
 export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
@@ -173,20 +176,43 @@ export class Login extends Component {
     } else {
       return (
         <div className="login-container">
-          <DivAnimated className="login-box">
+          <DivAnimated className="login-box mui--z2">
             <div className="login-header">
               <div className="login-header--title">
                 <div className="login-header--title-main">Login</div>
-                <div className="login-header--title-sub text-muted">
+                {/*<div className="login-header--title-sub text-muted">
                   <span>Informe o usuário e a senha</span>
-                </div>
+                </div>*/}
               </div>
               <div className="login-header--icon text-right">
                 <Glyphicon glyph="lock" className="main-icon" />
               </div>
             </div>
             <form>
-              <LoginInputGroup
+              <Input
+                label="E-mail"
+                type="email"
+                floatingLabel={true}
+                required={true}
+                autoComplete="off"
+                value={email.text}
+                onChange={this.handleChangeEmail}
+              />
+              {/*<small className="help-block">{email.message}</small>*/}
+              <Input
+                label="Senha"
+                type="password"
+                floatingLabel={true}
+                required={true}
+                autoComplete="off"
+                value={senha.text}
+                onChange={this.handleChangeSenha}
+              />
+              {/*<HelpBlock>{senha.message}</HelpBlock>*/}
+
+              {/*<Input label="Input 1" floatingLabel={true} />
+              <Input label="Input 1" floatingLabel={true} />*/}
+              {/*<LoginInputGroup
                 id="email"
                 type="text"
                 field={email}
@@ -201,7 +227,7 @@ export class Login extends Component {
                 glyph="key"
                 placeholder="Senha"
                 onChange={this.handleChangeSenha}
-              />
+              />*/}
               <ButtonLogin handleLogin={this.handleLogin} />
             </form>
           </DivAnimated>

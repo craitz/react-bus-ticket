@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Tabs, Tab, Button, Jumbotron, Row, Grid, Label } from 'react-bootstrap';
+import { Tabs, Tab, Jumbotron, Row, Grid, Label } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -27,6 +27,7 @@ import markerLogo from '../styles/images/marker.svg';
 import locationLogo from '../styles/images/location.svg';
 import clearLogo from '../styles/images/clear.svg';
 import comprarLogo from '../styles/images/comprar.svg';
+import { Button } from 'muicss/react';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -56,7 +57,8 @@ const helper = {
 };
 
 const ConfirmacaoPanel = ({ props }) => {
-  const buildClassName = props.isIdaVolta ? 'detalhes-container idavolta' : 'detalhes-container soida';
+  const classDefault = 'detalhes-container mui--z2';
+  const buildClassName = props.isIdaVolta ? `${classDefault} idavolta` : `${classDefault} soida`;
   const strHorarioIda = (props.horarioIda.length > 0) ? utils.firebaseToTime(props.horarioIda) : '';
   const strHorarioVolta = (props.horarioVolta.length > 0) ? utils.firebaseToTime(props.horarioVolta) : '';
   const sortPoltronas = (poltronas) => {
@@ -139,13 +141,15 @@ const ConfirmacaoPanel = ({ props }) => {
           </div>}
         <hr />
         <Row>
-          <Button
-            className="btn-glass-orange btn-block btn-continuar"
-            onClick={props.onContinua}>
-            <img src={comprarLogo} height="16" alt="" className="icon-finalizar" />
-            <span className="text-after-icon text-confirmar">Finalizar pedido</span>
-          </Button>
           <small className="detalhes-warning">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
+          <Button
+            color="accent"
+            variant="raised"
+            onClick={props.onContinua}
+            className="btn-block">
+            <FontAwesome name="check-circle bt-mui-icon" />
+            <span className="bt-mui-text">Finalizar pedido</span>
+          </Button>
         </Row>
       </Grid>
     </Jumbotron>

@@ -7,16 +7,25 @@ import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import store from '../store';
 import * as actions from '../actions/modalTrajeto.actions';
 import { ButtonIconFit } from '../shared/ButtonIcon';
+import FontAwesome from 'react-fontawesome';
+import { Button } from 'muicss/react';
 
 export const ButtonComprar = ({ handleComprar }) =>
-  <div className="text-center welcome-button">
-    <ButtonIconFit
+  <div className="text-right welcome-button">
+    <Button
+      color="accent"
+      variant="raised"
+      onClick={handleComprar}>
+      <FontAwesome name="shopping-cart bt-mui-icon" />
+      <span className="bt-mui-text">Compre agora sua passagem !</span>
+    </Button>
+    {/*<ButtonIconFit
       type="button"
       className="btn btn-glass-blue"
       labelAll="Compre agora sua passagem!"
       labelXs="Comprar passagens"
       icon="shopping-cart"
-      onClick={handleComprar} />
+      onClick={handleComprar} />*/}
   </div>
 
 class Welcome extends Component {
@@ -40,23 +49,22 @@ class Welcome extends Component {
     return (
       <div className="welcome-container">
         <PageHeader title="Seja bem-vindo !">
-          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
+          {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />*/}
         </PageHeader>
-        <DivAnimated className="text-center info-container">
-          <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-left">
-            <h1>Introdução</h1>
-            <article className="text-left">
-              O BusTicket é uma SPA (Single Page Application) totalmente responsiva
+        <DivAnimated className="info-container">
+          <h1>Introdução</h1>
+          <article>
+            O BusTicket é uma SPA (Single Page Application) totalmente responsiva
               que utiliza o conceito Mobile First para se adaptar e responder adequadamante
               a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
               um guichê virtual para compra de passagens de ônibus (sem os valores
-              envolvidos na transação) para viagens entre as capitais de Brasil.
+              envolvidos na transação) para viagens entre algumas capitais do Brasil.
           </article>
-            <hr />
-            <h1>Algumas das tecnologias utilizadas:</h1>
-            <article className="text-left tech">
-              <Jumbotron>
-                React,
+          <hr />
+          <h1>Algumas das tecnologias utilizadas</h1>
+          <article>
+            <Jumbotron className="mui--z1">
+              React,
                 Redux,
                 JSX,
                 Javascript (ES5,ES6,ES7),
@@ -67,7 +75,7 @@ class Welcome extends Component {
                 Node.js, Node Package Manager,
                 Webpack,
                 Babel,
-                Boostrap, Responsive Web Design,
+                Boostrap, Material Design, Responsive Web Design,
                 Mobile First,
                 JSON,
                 Git,
@@ -76,10 +84,9 @@ class Welcome extends Component {
                 HTML5,
                 Visual Studio 2017.
               </Jumbotron>
-            </article>
-            <hr />
-            <ButtonComprar handleComprar={this.handleComprarPassagem} />
-          </Col>
+          </article>
+          <hr />
+          <ButtonComprar handleComprar={this.handleComprarPassagem} />
         </DivAnimated>
       </div >
     );

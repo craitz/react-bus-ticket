@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FontAwesome from 'react-fontawesome';
 import { Row, Col, Modal, FormGroup, InputGroup, Label } from 'react-bootstrap';
 import Select from 'react-select';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
@@ -12,10 +11,12 @@ import InputDate from '../shared/InputDate';
 import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
+import FontAwesome from 'react-fontawesome';
+import { Button, Dropdown, DropdownItem } from 'muicss/react';
 
-const AddOn = ({ tooltip, icon }) =>
+const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
-    <InputGroup.Addon>
+    <InputGroup.Addon className={className}>
       <FontAwesome name={icon} />
     </InputGroup.Addon>
   </TooltipOverlay>
@@ -36,8 +37,20 @@ const ErrorBlock = ({ message }) => {
 }
 
 const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip }) =>
+  // <Dropdown color="primary" label={value}>
+  //   {
+  //     list.map((item, index) => {
+  //       return <DropdownItem
+  //         key={index}
+  //         value={value}
+  //         onChange={onChange}>
+  //         {item.label}
+  //       </DropdownItem>
+  //     })
+  //   }
+  // </Dropdown>
   <InputGroup>
-    <AddOn tooltip={tooltip} icon={icon} />
+    <AddOn tooltip={tooltip} icon={icon} className="addon-blue" />
     <Select
       simpleValue
       searchable={true}
@@ -245,7 +258,7 @@ export class ModalTrajeto extends Component {
 
     const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
-    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirmar e fechar';
+    const getButtonLabel = () => isFromWelcome ? 'Buscar' : 'Confirmar e fechar';
     const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
@@ -288,7 +301,7 @@ export class ModalTrajeto extends Component {
               <Col xs={isIdaVolta ? 6 : 12} className="col-ida">
                 <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
-                    <AddOn tooltip="Data de ida" icon="arrow-right" />
+                    <AddOn tooltip="Data de ida" icon="arrow-right" className="addon-green" />
                     <InputDate
                       value={data.value}
                       placeholder="Dia da ida"
@@ -302,7 +315,7 @@ export class ModalTrajeto extends Component {
                 <Col xs={6} className="col-volta">
                   <FormGroup controlId="data-volta" validationState={dataVolta.validation}>
                     <InputGroup>
-                      <AddOn tooltip="Data de volta" icon="arrow-left" />
+                      <AddOn tooltip="Data de volta" icon="arrow-left" className="addon-red" />
                       <InputDate
                         value={dataVolta.value}
                         placeholder="Dia da volta"
@@ -316,11 +329,19 @@ export class ModalTrajeto extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <ButtonIcon
+            <Button
+              type="submit"
+              color="primary"
+              variant="raised"
+              className="btn-block">
+              <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
+              <span className="bt-mui-text">{getButtonLabel()}</span>
+            </Button>
+            {/*<ButtonIcon
               type="submit"
               className="btn-block btn-glass-transparent"
               label={getButtonLabel()}
-              icon={getButtonIcon()} />
+              icon={getButtonIcon()} />*/}
           </Modal.Footer>
         </form>
       </Modal >

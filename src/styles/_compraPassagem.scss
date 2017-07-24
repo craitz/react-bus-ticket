@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Changa+One|Ubuntu+Mono|Share+Tech+Mono|Oswald|Share|Acme|Source+Code+Pro|Roboto+Mono');
 $size: 550px;
 $tabSize: 600px;
 $widthAccordion: 552px;
@@ -30,7 +29,7 @@ monospace;
             .panel-title {
                 a {
                     @include noSelection;
-                    font-family: 'Days One';
+                    font-family: $fontPadrao;
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
                     position: relative;
@@ -137,6 +136,7 @@ monospace;
     position: absolute;
     right: 0;
     top: 0;
+    border-radius: 5px;
     .nav-tabs {
         border: none;
         border-bottom: 1px solid $borderTabHorarios !important;
@@ -154,16 +154,16 @@ monospace;
                 color: rgba(darkslategrey, .2);
                 position: relative;
                 // height: 42px;
-                font-family: 'Days One';
+                font-family: $fontPadrao;
                 font-weight: 900;
-                font-size: 1.8rem;
+                font-size: 1.7rem;
                 .icon-group-before {
                     margin-right: 8px;
                 }
                 .tab-left {
                     color: rgba(black, .45);
-                    font-family: 'Days One';
-                    font-size: 2rem;
+                    font-family: $fontPadrao;
+                    font-size: 1.7rem;
                     .icon-ida,
                     .icon-volta {
                         width: 40px !important;
@@ -178,7 +178,6 @@ monospace;
                 padding: 0;
                 height: 39px;
                 border: 1px solid rgba(black, .06);
-                // background-color: rgba(black, .03);
                 background-color: transparent;
                 border-radius: 4px;
                 .label {
@@ -246,8 +245,7 @@ monospace;
     //         height: inherit !important;
     //     }
     // }
-    @include loader(550px,
-    180px);
+    @include loader(550px, 180px);
     .bus-seat-select {
         background-color: white;
         position: relative;
@@ -375,17 +373,11 @@ monospace;
     }
     &.soida {
         height: 305px;
-        @include aside(303px,
-        40px,
-        $colorTheme,
-        rgb(49, 112, 143));
+        @include aside(303px, 40px, $colorTheme, rgb(49, 112, 143));
     }
     &.idavolta {
         height: 407px;
-        @include aside(405px,
-        40px,
-        $colorTheme,
-        rgb(49, 112, 143));
+        @include aside(405px, 40px, $colorTheme, rgb(49, 112, 143));
     }
     .icon-edit {
         position: absolute;
@@ -483,7 +475,7 @@ monospace;
             }
         }
         .detalhes-warning {
-            font-family: 'Days One';
+            font-family: $fontPadrao;
             display: inline-block;
             margin-top: 10px;
             color: rgba(black, .35);
@@ -494,7 +486,7 @@ monospace;
 }
 
 .comprar-passagem-container {
-    background-color: darken(#f5f5f5, 3%);
+    // background-color: darken(#f5f5f5, 3%);
     // background-color: darken(rgb(246, 247, 248), 3%);
     // background-color: aliceblue;
     @include containerHeight;
@@ -502,18 +494,11 @@ monospace;
         @include navbarTrajeto;
     }
     .form-passagem-container {
-        min-height: 600px;
-        width: $contentWidth;
-        margin: 0 !important;
-        margin-top: 20px !important;
-        padding-top: 30px;
-        padding-bottom: 30px;
         position: relative;
-        margin-left: $contentLeft !important;
-        // background-color: rgba(white, 1);
-        // border: 1px solid rgba(black, .2);
         background-color: transparent;
         border: none;
+        width: $contentWidth;
+        margin: 20px 0 0 $contentLeft !important;
         .form-centered {
             width: inherit;
             .btn-revisar {
@@ -524,7 +509,7 @@ monospace;
                 font-weight: 100;
                 margin-top: 20px;
                 font-size: 2.2rem;
-                font-family: 'Days One';
+                font-family: $fontPadrao;
                 .finalizar-text {
                     margin-left: 15px;
                 }
@@ -550,9 +535,9 @@ monospace;
             }
         }
     }
-    &::after {
-        @include bkgImage;
-    }
+    // &::after {
+    //     @include bkgImage;
+    // }
     @include sm {
         .form-passagem-container {
             margin-top: 50px;

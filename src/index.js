@@ -16,6 +16,7 @@ import ModalTrajeto from './components/ModalTrajeto';
 import 'moment/locale/pt-br';
 import 'animate.css/animate.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/mui.css'
 import 'react-datetime/css/react-datetime.css';
 import 'react-select/dist/react-select.css';
 import './App.css';
