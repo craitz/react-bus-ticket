@@ -7,7 +7,8 @@
             "BUTTON",
             "DATE_PICKER",
             "PROGRESS_BAR",
-            "INPUT"
+            "INPUT",
+            "AUTOCOMPLETE"
         ],
         "customProperties": {
             "animation-duration": "0.3s",

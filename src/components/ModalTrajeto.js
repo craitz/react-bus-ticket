@@ -15,6 +15,7 @@ import FontAwesome from 'react-fontawesome';
 import { Dropdown, DropdownItem } from 'muicss/react';
 import Button from 'react-toolbox/lib/button/Button';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
+import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">

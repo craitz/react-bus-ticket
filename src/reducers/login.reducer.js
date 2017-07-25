@@ -4,14 +4,14 @@ import Immutable from 'seamless-immutable';
 
 export const initialState = Immutable({
   email: {
-    text: '',
-    isPristine: true,
+    text: 'guest@busticket.com',
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   },
   senha: {
-    text: '',
-    isPristine: true,
+    text: '#guest#',
+    isPristine: false,
     validation: ValidationStatus.NONE,
     message: ''
   }
@@ -20,7 +20,7 @@ export const initialState = Immutable({
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case LoginActionType.RESET_LOGIN: {
-      return initialState;
+      return { ...initialState };
     }
     case LoginActionType.CHANGE_LOGIN_EMAIL: {
       return {

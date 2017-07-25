@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router';
-import { FormControl, FormGroup, InputGroup, Glyphicon, HelpBlock } from 'react-bootstrap';
+import { FormControl, FormGroup, InputGroup, Glyphicon, Row, HelpBlock } from 'react-bootstrap';
 import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -14,10 +14,18 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
 // import { Input } from 'muicss/react';
 import Button from 'react-toolbox/lib/button/Button';
+import IconButton from 'react-toolbox/lib/button/IconButton';
 import Input from 'react-toolbox/lib/input/Input';
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup className="last">
+    {/*<Button
+      className="btn-login-float mui--z3"
+      icon={<FontAwesome name="sign-in" />}
+      floating
+      accent
+      onClick={handleLogin}
+    />*/}
     <Button
       raised
       primary
@@ -71,7 +79,6 @@ export class Login extends Component {
   }
 
   handleChangeEmail(event) {
-    console.log(event);
     const { email, dispatch } = this.props;
     const isPristine = email.isPristine;
     const text = event;
@@ -93,6 +100,7 @@ export class Login extends Component {
   }
 
   handleChangeSenha(event) {
+    console.log(event);
     const { senha, dispatch } = this.props;
     const isPristine = senha.isPristine;
     const text = event;
