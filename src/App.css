@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono|Share+Tech+Mono|Acme|Source+Code+Pro|Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu|Oxygen|Roboto+Condensed|Open+Sans|Ubuntu+Mono|Share+Tech+Mono|Acme|Source+Code+Pro|Roboto+Mono");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -219,6 +219,9 @@
   width: 0;
   height: 0; }
 
+button {
+  font-family: "Ubuntu" !important; }
+
 .App {
   text-align: center; }
 
@@ -373,7 +376,7 @@
       border-top-right-radius: 4px;
       color: rgba(0, 0, 0, 0.75);
       padding: 0 20px 0 20px;
-      border-bottom-color: rgba(0, 0, 0, 0.2);
+      border-bottom-color: rgba(0, 0, 0, 0.05);
       font-family: "Days One";
       font-size: 2rem;
       line-height: 51px; }
@@ -442,7 +445,7 @@
             border-bottom: 6px solid #e71d36;
             clear: both; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
-      border-top-color: rgba(0, 0, 0, 0.2);
+      border-top-color: rgba(0, 0, 0, 0.05);
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px; }
     .modal-trajeto-container .modal-dialog .modal-content .loading-text-after-icon {
@@ -896,15 +899,7 @@
                 border-right: 7px solid #e71d36;
                 clear: both; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar {
-              position: relative;
-              font-size: 2rem; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar::after {
-                width: 45px; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .btn-continuar .icon-finalizar {
-                height: 25px;
-                position: absolute;
-                left: 15px;
-                top: 8px; }
+              position: relative; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .detalhes-container .detalhes-info .detalhes-warning {
               font-family: "Days One";
               display: inline-block;
@@ -1033,6 +1028,7 @@
     border-radius: 4px;
     padding: 15px 20px 5px 20px; }
     .login-container .login-box .form-group.last {
+      margin-top: 20px;
       margin-bottom: 8px; }
     .login-container .login-box .login-header {
       height: 40px;
@@ -1041,7 +1037,7 @@
       left: 0;
       width: 100%;
       height: 50px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; }
       .login-container .login-box .login-header .login-header--title {
         position: absolute;
         left: 0;
@@ -1097,7 +1093,7 @@
     width: 1000px;
     margin: 50px 0 0 calc(50% - 500px) !important;
     text-align: left; }
-    .welcome-container .info-container h1 {
+    .welcome-container .info-container h2 {
       font-family: "Days One";
       color: rgba(0, 0, 0, 0.65);
       margin-top: 50px; }
@@ -1107,8 +1103,6 @@
     .welcome-container .info-container .welcome-button {
       margin-top: 50px;
       margin-bottom: 50px; }
-      .welcome-container .info-container .welcome-button .bt-mui-text {
-        margin-left: 30px; }
 
 .perfil-usuario-container {
   overflow: auto;
@@ -1191,6 +1185,8 @@ html {
         border-color: rgba(0, 0, 0, 0.1); }
     html body .modal.fade.in {
       background-color: rgba(0, 0, 0, 0.3); }
+    html body button .text-after-icon {
+      margin-left: 1.6rem; }
 
 @media screen and (min-width: 320px) {
   .page-title {
@@ -1224,3 +1220,18 @@ html {
   -webkit-user-select: none !important;
   -ms-user-select: none !important;
   user-select: none !important; }
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  -webkit-text-fill-color: initial !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s !important; }

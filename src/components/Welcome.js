@@ -8,24 +8,17 @@ import store from '../store';
 import * as actions from '../actions/modalTrajeto.actions';
 import { ButtonIconFit } from '../shared/ButtonIcon';
 import FontAwesome from 'react-fontawesome';
-import { Button } from 'muicss/react';
+import Button from 'react-toolbox/lib/button/Button';
 
 export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-right welcome-button">
     <Button
-      color="accent"
-      variant="raised"
+      raised
+      accent
       onClick={handleComprar}>
       <FontAwesome name="shopping-cart bt-mui-icon" />
-      <span className="bt-mui-text">Compre agora sua passagem !</span>
+      <span className="text-after-icon bt-mui-text">Compre agora sua passagem</span>
     </Button>
-    {/*<ButtonIconFit
-      type="button"
-      className="btn btn-glass-blue"
-      labelAll="Compre agora sua passagem!"
-      labelXs="Comprar passagens"
-      icon="shopping-cart"
-      onClick={handleComprar} />*/}
   </div>
 
 class Welcome extends Component {
@@ -52,7 +45,7 @@ class Welcome extends Component {
           {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />*/}
         </PageHeader>
         <DivAnimated className="info-container">
-          <h1>Introdução</h1>
+          <h2>Introdução</h2>
           <article>
             O BusTicket é uma SPA (Single Page Application) totalmente responsiva
               que utiliza o conceito Mobile First para se adaptar e responder adequadamante
@@ -61,7 +54,7 @@ class Welcome extends Component {
               envolvidos na transação) para viagens entre algumas capitais do Brasil.
           </article>
           <hr />
-          <h1>Algumas das tecnologias utilizadas</h1>
+          <h2>Algumas das tecnologias utilizadas</h2>
           <article>
             <Jumbotron className="mui--z1">
               React,

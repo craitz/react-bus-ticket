@@ -27,7 +27,7 @@ import markerLogo from '../styles/images/marker.svg';
 import locationLogo from '../styles/images/location.svg';
 import clearLogo from '../styles/images/clear.svg';
 import comprarLogo from '../styles/images/comprar.svg';
-import { Button } from 'muicss/react';
+import Button from 'react-toolbox/lib/button/Button';
 
 const helper = {
   mapPassagemToFirebase(passagem) {
@@ -141,15 +141,15 @@ const ConfirmacaoPanel = ({ props }) => {
           </div>}
         <hr />
         <Row>
-          <small className="detalhes-warning">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
           <Button
-            color="accent"
-            variant="raised"
-            onClick={props.onContinua}
-            className="btn-block">
-            <FontAwesome name="check-circle bt-mui-icon" />
-            <span className="bt-mui-text">Finalizar pedido</span>
+            raised
+            accent
+            className="btn-block btn-continuar"
+            onClick={props.onContinua}>
+            <FontAwesome name="check bt-mui-icon" />
+            <span className="text-after-icon bt-mui-text">Finalizar compra</span>
           </Button>
+          <small className="detalhes-warning">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
         </Row>
       </Grid>
     </Jumbotron>

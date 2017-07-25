@@ -12,17 +12,19 @@ import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'
 import { ButtonIcon } from '../shared/ButtonIcon';
-import { Button, Input } from 'muicss/react';
+// import { Input } from 'muicss/react';
+import Button from 'react-toolbox/lib/button/Button';
+import Input from 'react-toolbox/lib/input/Input';
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup className="last">
     <Button
-      color="primary"
-      variant="raised"
-      onClick={handleLogin}
-      className="btn-block">
+      raised
+      primary
+      className="btn-block"
+      onClick={handleLogin}>
       <FontAwesome name="sign-in bt-mui-icon" />
-      <span className="bt-mui-text">Entrar</span>
+      <span className="text-after-icon bt-mui-text">Entrar</span>
     </Button>
   </FormGroup>
 
@@ -69,9 +71,10 @@ export class Login extends Component {
   }
 
   handleChangeEmail(event) {
+    console.log(event);
     const { email, dispatch } = this.props;
     const isPristine = email.isPristine;
-    const text = event.target.value;
+    const text = event;
 
     dispatch(actions.changeLoginEmail(text));
     isPristine && dispatch(actions.setLoginEmailDirty());
@@ -92,7 +95,7 @@ export class Login extends Component {
   handleChangeSenha(event) {
     const { senha, dispatch } = this.props;
     const isPristine = senha.isPristine;
-    const text = event.target.value;
+    const text = event;
     dispatch(actions.changeLoginSenha(text));
     isPristine && dispatch(actions.setLoginSenhaDirty());
 
@@ -190,44 +193,23 @@ export class Login extends Component {
             </div>
             <form>
               <Input
-                label="E-mail"
-                type="email"
-                floatingLabel={true}
-                required={true}
-                autoComplete="off"
+                type='email'
+                label='E-mail'
+                icon={<FontAwesome name="envelope" />}
                 value={email.text}
-                onChange={this.handleChangeEmail}
-              />
-              {/*<small className="help-block">{email.message}</small>*/}
-              <Input
-                label="Senha"
-                type="password"
-                floatingLabel={true}
-                required={true}
                 autoComplete="off"
-                value={senha.text}
-                onChange={this.handleChangeSenha}
-              />
-              {/*<HelpBlock>{senha.message}</HelpBlock>*/}
-
-              {/*<Input label="Input 1" floatingLabel={true} />
-              <Input label="Input 1" floatingLabel={true} />*/}
-              {/*<LoginInputGroup
-                id="email"
-                type="text"
-                field={email}
-                glyph="user"
-                placeholder="E-mail"
+                error={email.message}
                 onChange={this.handleChangeEmail}
               />
-              <LoginInputGroup
-                id="senha"
-                type="password"
-                field={senha}
-                glyph="key"
-                placeholder="Senha"
+              <Input
+                type='password'
+                label='Senha'
+                icon={<FontAwesome name="key" />}
+                value={senha.text}
+                autoComplete="off"
+                error={senha.message}
                 onChange={this.handleChangeSenha}
-              />*/}
+              />
               <ButtonLogin handleLogin={this.handleLogin} />
             </form>
           </DivAnimated>

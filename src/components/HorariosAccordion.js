@@ -114,7 +114,7 @@ class HorariosAccordion extends Component {
     const customSpinConfig = {
       lines: 10,
       rotate: 17
-    }; 
+    };
 
     // itera no array e cria os collapsibles
     arr.map((horario, index) => {
@@ -212,9 +212,9 @@ class HorariosAccordion extends Component {
   }
 
 
-            // <div className="icon-loading">
-            //   <Loading />
-            // </div>
+  // <div className="icon-loading">
+  //   <Loading />
+  // </div>
 
   render() {
     const { horarios, active } = this.props;

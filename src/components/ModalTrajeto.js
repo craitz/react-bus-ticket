@@ -12,7 +12,9 @@ import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
-import { Button, Dropdown, DropdownItem } from 'muicss/react';
+import { Dropdown, DropdownItem } from 'muicss/react';
+import Button from 'react-toolbox/lib/button/Button';
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -302,13 +304,20 @@ export class ModalTrajeto extends Component {
                 <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
                     <AddOn tooltip="Data de ida" icon="arrow-right" className="addon-green" />
+                    {/*<DatePicker
+                    label='Formatted date'
+                    sundayFirstDayOfWeek
+                    inputFormat={(value) => `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`}
+                    onChange={this.handleChangeDataIda}
+                    className="datepicker-ida"
+                    value={data.value} />*/}
                     <InputDate
                       value={data.value}
                       placeholder="Dia da ida"
                       isValidDate={valid}
                       onChange={this.handleChangeDataIda} />
                   </InputGroup>
-                  <ErrorBlock message={data.message} />
+                  {/*<ErrorBlock message={data.message} />*/}
                 </FormGroup>
               </Col>
               {isIdaVolta &&
@@ -330,18 +339,13 @@ export class ModalTrajeto extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button
+              raised
+              primary
               type="submit"
-              color="primary"
-              variant="raised"
               className="btn-block">
               <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
-              <span className="bt-mui-text">{getButtonLabel()}</span>
+              <span className="text-after-icon bt-mui-text">{getButtonLabel()}</span>
             </Button>
-            {/*<ButtonIcon
-              type="submit"
-              className="btn-block btn-glass-transparent"
-              label={getButtonLabel()}
-              icon={getButtonIcon()} />*/}
           </Modal.Footer>
         </form>
       </Modal >

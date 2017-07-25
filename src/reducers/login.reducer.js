@@ -4,14 +4,14 @@ import Immutable from 'seamless-immutable';
 
 export const initialState = Immutable({
   email: {
-    text: 'guest@busticket.com',
-    isPristine: false,
+    text: '',
+    isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   },
   senha: {
-    text: '#guest#',
-    isPristine: false,
+    text: '',
+    isPristine: true,
     validation: ValidationStatus.NONE,
     message: ''
   }

@@ -4,7 +4,7 @@
         width: $contentWidth;
         margin: 50px 0 0 $contentLeft !important;
         text-align: left;
-        h1 {
+        h2 {
             font-family: $fontPadrao;
             color: rgba(black, .65);
             margin-top: 50px;
@@ -16,9 +16,6 @@
         .welcome-button {
             margin-top: 50px;
             margin-bottom: 50px;
-            .bt-mui-text {
-                margin-left: 30px;
-            }
         }
     }
     // &::after {

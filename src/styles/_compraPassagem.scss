@@ -460,18 +460,18 @@ monospace;
         }
         .btn-continuar {
             position: relative;
-            font-size: 2rem;
+            // font-size: 2rem;
             &:hover {
                 .text-confirmar {}
             }
-            &::after {
-                width: 45px;
-            }
+            // &::after {
+            //     width: 45px;
+            // }
             .icon-finalizar {
-                height: 25px;
-                position: absolute;
-                left: 15px;
-                top: 8px;
+                // height: 25px;
+                // position: absolute;
+                // left: 15px;
+                // top: 8px;
             }
         }
         .detalhes-warning {
