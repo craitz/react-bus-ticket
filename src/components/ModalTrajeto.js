@@ -15,7 +15,6 @@ import FontAwesome from 'react-fontawesome';
 import { Dropdown, DropdownItem } from 'muicss/react';
 import Button from 'react-toolbox/lib/button/Button';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
-import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -185,13 +184,16 @@ export class ModalTrajeto extends Component {
     !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
-  transformHorarios(snap, isVolta) {
+  transformHorarios(snap, data, isVolta) {
     const { dispatch } = this.props;
     const horarios = snap.val();
 
     for (let horario in horarios) {
       const poltronas = horarios[horario];
-      poltronas.isDisabled = false;
+
+      // se o horário já passou, desabilita o accordion
+      poltronas.isDisabled = utils.checkHorario(data, horario);
+
       for (let i = 0; i < 44; i++) {
         const strValue = (i + 1).toString().padStart(2, '0');
         poltronas[strValue] = (poltronas.hasOwnProperty(strValue))
@@ -224,10 +226,10 @@ export class ModalTrajeto extends Component {
 
       firebaseHelper.fetchSnapshot(refIda)
         .then(snapIda => {
-          dispatch(compraPassagemActions.setHorarios(this.transformHorarios(snapIda, false)));
+          dispatch(compraPassagemActions.setHorarios(this.transformHorarios(snapIda, strData, false)));
           firebaseHelper.fetchSnapshot(refVolta)
             .then(snapVolta => {
-              dispatch(compraPassagemActions.setHorariosVolta(this.transformHorarios(snapVolta, true)));
+              dispatch(compraPassagemActions.setHorariosVolta(this.transformHorarios(snapVolta, strDataVolta, true)));
               resolve();
             });
         });
@@ -236,7 +238,7 @@ export class ModalTrajeto extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { history, dispatch, validation } = this.props;
+    const { history, dispatch, validation, origem, destino } = this.props;
 
     // se alguma validação falhou, retorna sem fazer nada
     if (!validation.all) {
@@ -248,21 +250,26 @@ export class ModalTrajeto extends Component {
       dispatch(actions.setVisible(false)); // fecha o modal
 
       setTimeout(() => {
-        // altera um estado qualquer, apenas para forçar o render no form CompraPassagem
-        dispatch(compraPassagemActions.setOrigemDirty());
+        // seta o trajeto da volta
+        dispatch(compraPassagemActions.changeOrigemVolta(destino.value)); // muda o destino
+        dispatch(compraPassagemActions.changeDestinoVolta(origem.value)); // muda o destino
+
+        // reseta os erros
+        dispatch(compraPassagemActions.setErroSalvandoIda(false));
+        dispatch(compraPassagemActions.setErroSalvandoVolta(false));
+        history.push('/comprar'); // retorna ao form CompraPassagem
       }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
 
-      history.push('/comprar'); // retorna ao form CompraPassagem
     });
   };
 
   render() {
     const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome, data, dataVolta } = this.props;
 
-    const getIcon = () => isIdaVolta ? 'exchange' : 'long-arrow-right';
+    const getIcon = () => isIdaVolta ? 'exchange fa-fw' : 'long-arrow-right fa-fw';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
     const getButtonLabel = () => isFromWelcome ? 'Buscar' : 'Confirmar e fechar';
-    const getButtonIcon = () => isFromWelcome ? 'search' : 'check';
+    const getButtonIcon = () => isFromWelcome ? 'search fa-fw' : 'check fa-fw';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
     const futureDay = moment().add(30, 'days');
@@ -284,27 +291,31 @@ export class ModalTrajeto extends Component {
                 value={origem.value}
                 placeholder="Escolha a origem"
                 onChange={this.handleChangeOrigem}
-                icon="location-arrow"
+                icon="location-arrow fa-fw"
                 tooltip="Origem"
               />
               <ErrorBlock message={origem.message} />
             </FormGroup>
-            <FormGroup controlId="destino" validationState={destino.validation}>
-              <SelectTrajeto
-                list={cidades}
-                value={destino.value}
-                placeholder="Escolha o destino"
-                onChange={this.handleChangeDestino}
-                icon="map-marker"
-                tooltip="Destino"
-              />
-              <ErrorBlock message={destino.message} />
-            </FormGroup>
             <Row>
-              <Col xs={isIdaVolta ? 6 : 12} className="col-ida">
+              <Col xs={12}>
+                <FormGroup controlId="destino" validationState={destino.validation}>
+                  <SelectTrajeto
+                    list={cidades}
+                    value={destino.value}
+                    placeholder="Escolha o destino"
+                    onChange={this.handleChangeDestino}
+                    icon="map-marker fa-fw"
+                    tooltip="Destino"
+                  />
+                  {/*<ErrorBlock message={destino.message} />*/}
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={isIdaVolta ? 6 : 12} className={isIdaVolta ? "col-ida-com-volta" : "col-ida"}>
                 <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
-                    <AddOn tooltip="Data de ida" icon="arrow-right" className="addon-green" />
+                    <AddOn tooltip="Data de ida" icon="arrow-right fa-fw" className="addon-green" />
                     {/*<DatePicker
                     label='Formatted date'
                     sundayFirstDayOfWeek
@@ -322,10 +333,10 @@ export class ModalTrajeto extends Component {
                 </FormGroup>
               </Col>
               {isIdaVolta &&
-                <Col xs={6} className="col-volta">
+                <Col xs={6} className={isIdaVolta ? "col-volta-com-volta" : "col-volta"}>
                   <FormGroup controlId="data-volta" validationState={dataVolta.validation}>
                     <InputGroup>
-                      <AddOn tooltip="Data de volta" icon="arrow-left" className="addon-red" />
+                      <AddOn tooltip="Data de volta" icon="arrow-left fa-fw" className="addon-red" />
                       <InputDate
                         value={dataVolta.value}
                         placeholder="Dia da volta"
@@ -364,8 +375,8 @@ const mapStateToProps = (state) => {
     snapshot: state.modalTrajetoState.snapshot,
     origem: passagem.origem,
     destino: passagem.destino,
-    origemVolta: passagemVolta.origem,
-    destinoVolta: passagemVolta.destino,
+    // origemVolta: passagemVolta.origem,
+    // destinoVolta: passagemVolta.destino,
     data: passagem.data,
     dataVolta: passagemVolta.data,
     cidades: state.compraPassagemState.cidades,

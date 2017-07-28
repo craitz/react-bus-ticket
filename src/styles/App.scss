@@ -1,6 +1,7 @@
 @import "fonts";
 @import "colormap";
 @import "global";
+@import "snackbar";
 @import "tooltip";
 @import "multiselect";
 @import "button";
@@ -80,7 +81,7 @@ html {
             padding-left: 0;
             padding-right: 0;
             .container {
-                padding: 50px;
+                padding: 50px 0 50px 0;
             }
         }
         .nav.navbar-nav {

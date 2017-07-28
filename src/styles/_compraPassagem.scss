@@ -221,7 +221,7 @@ monospace;
         width: calc(100% + 3px);
     }
     .tab-content {
-        // min-height: 285px;
+        min-height: 50px;
         position: relative;
         background-color: $colorTabHorarios;
         border-bottom-left-radius: 5px;
@@ -231,6 +231,11 @@ monospace;
         border-right: 1px solid $borderTabHorarios;
         border-left: 1px solid $borderTabHorarios;
         border-top: none;
+        .text-nenhum-resultado {
+            position: absolute;
+            left: 50px;
+            top: 15px;
+        }
         @include accordion {
             @include busSelect(rgba($googleGreen, .8));
         }
@@ -439,7 +444,7 @@ monospace;
             margin-left: 22px;
             font-family: 'Source Code Pro';
             position: relative;
-            background-color: $colorHasError;
+            background-color: rgba($colorHasError, .8);
             color: rgba(white, .8);
             .label-erro-text {
                 margin-left: 8px;

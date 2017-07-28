@@ -16,16 +16,90 @@ import { ButtonIcon } from '../shared/ButtonIcon';
 import Button from 'react-toolbox/lib/button/Button';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Input from 'react-toolbox/lib/input/Input';
+import * as utils from '../shared/Utils';
+import moment from 'moment';
+
+const fakeDataOptions = {
+  days: 5,
+  startHour: 10,
+  endHour: 18,
+  reservedPercentage: 0.2, // 20%
+  horariosPercentage: 0.3, // 20%
+  email: 'guest@busticket.com',
+}
+
+const fakeGenerator = (() => {
+  const getFutureDay = daysAhead => moment().add(daysAhead, 'days').format('DD/MM/YYYY');
+  const randomMinute = () => Math.floor((Math.random() * 59));
+  const randomBoolean = () => !!Math.floor(Math.random() * 2);
+  const randomPercent = percent => (Math.random() < percent);
+  const randomPoltronas = () => {
+    const master = Math.random();
+
+    if (master < 0.1) {
+      return (Math.random() < 0.9);
+    }
+
+    if (master < 0.2) {
+      return (Math.random() < 0.6);
+    }
+
+    if (master < 0.3) {
+      return (Math.random() < 0.3);
+    }
+
+    return (Math.random() < 0.1);
+  }
+
+  const generate = (cidades, options) => {
+    const { days, startHour, endHour, horariosPercentage, email } = options;
+
+    for (let o = 0; o < cidades.length; o++) {
+      for (let d = 0; d < cidades.length; d++) {
+        const origem = cidades[o];
+        const destino = cidades[d];
+
+        if (o !== d) { // só entre cidades diferentes!
+
+          for (let i = 0; i <= days; i++) { // número de dias a serem gerados
+            const data = utils.dateToFirebase(getFutureDay(i));
+
+            for (let j = startHour; j <= endHour; j++) { // período válido para o horário
+              if (randomPercent(horariosPercentage)) {
+                const horario = j.toString().padStart(2, '0') + randomMinute().toString().padStart(2, '0');
+
+                if (randomBoolean()) {
+                  const refHora = `saidas/${origem}/${destino}/${data}/${horario}/`;
+                  firebaseHelper.set({ status: utils.BusStatus.OCUPADO }, refHora);
+                  for (let k = 1; k <= 44; k++) { // poltronas
+                    if (randomPoltronas()) {
+                      const poltrona = k.toString().padStart(2, '0');
+                      const ref = `saidas/${origem}/${destino}/${data}/${horario}/${poltrona}`;
+                      firebaseHelper.set({ user: email }, ref).then(() => {
+                        console.log(ref);
+                      });
+                    }
+                  }
+                } else {
+                  const ref = `saidas/${origem}/${destino}/${data}/${horario}/`;
+                  firebaseHelper.set({ status: utils.BusStatus.VAZIO }, ref).then(() => {
+                    // console.log(ref);
+                  });
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  };
+
+  return { generate };
+})();
 
 export const ButtonLogin = ({ handleLogin }) =>
   <FormGroup className="last">
-    {/*<Button
-      className="btn-login-float mui--z3"
-      icon={<FontAwesome name="sign-in" />}
-      floating
-      accent
-      onClick={handleLogin}
-    />*/}
     <Button
       raised
       primary
@@ -53,7 +127,25 @@ export class Login extends Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeSenha = this.handleChangeSenha.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleGenerateFakeData = this.handleGenerateFakeData.bind(this);
+    this.handleClearFakeData = this.handleClearFakeData.bind(this);
     props.dispatch(actions.resetLogin());
+  }
+
+  handleGenerateFakeData() {
+    console.log('Apagando saídas...');
+    firebaseHelper.delete('saidas/').then(() => {
+      console.log('Saídas apagadas com sucesso!');
+      console.log('Apagando passagens...');
+      firebaseHelper.delete('passagens/').then(() => {
+        console.log('Passagens apagadas com sucesso!');
+        fakeGenerator.generate(globals.getCidadesRaw(), fakeDataOptions); // generate fake data
+      });
+    });
+  }
+
+  handleClearFakeData() {
+    firebaseHelper.delete('saidas/').then(() => { });
   }
 
   componentDidMount() {
@@ -190,10 +282,26 @@ export class Login extends Component {
           <DivAnimated className="login-box mui--z2">
             <div className="login-header">
               <div className="login-header--title">
-                <div className="login-header--title-main">Login</div>
-                {/*<div className="login-header--title-sub text-muted">
-                  <span>Informe o usuário e a senha</span>
-                </div>*/}
+                <div className="login-header--title-main">
+                  Login
+                  <Button
+                    floating
+                    primary
+                    mini
+                    className="text-after-icon"
+                    onClick={this.handleGenerateFakeData}
+                    icon={<FontAwesome name="database" />}
+                  />
+                  <Button
+                    floating
+                    accent
+                    mini
+                    className="text-after-icon"
+                    onClick={this.handleClearFakeData}
+                    icon={<FontAwesome name="eraser" />}
+                  />
+
+                </div>
               </div>
               <div className="login-header--icon text-right">
                 <Glyphicon glyph="lock" className="main-icon" />

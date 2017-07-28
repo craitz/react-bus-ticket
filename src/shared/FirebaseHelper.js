@@ -183,6 +183,19 @@ class FirebaseHelper {
     });
   };
 
+  delete(refPath) {
+    const db = firebase.database();
+    return new Promise((resolve, reject) => {
+      db.ref(refPath).remove()
+        .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
   setUserOnFirebase(user) {
     const db = firebase.database();
     return new Promise((resolve, reject) => {

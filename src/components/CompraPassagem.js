@@ -13,6 +13,7 @@ import moment from 'moment';
 import { PageHeader } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
+import * as snackbarActions from '../actions/snackbar.actions'
 import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
 import TooltipOverlay from '../shared/TooltipOverlay';
@@ -28,39 +29,14 @@ import locationLogo from '../styles/images/location.svg';
 import clearLogo from '../styles/images/clear.svg';
 import comprarLogo from '../styles/images/comprar.svg';
 import Button from 'react-toolbox/lib/button/Button';
-
-const helper = {
-  mapPassagemToFirebase(passagem) {
-    return {
-      ...passagem,
-      nome: firebaseHelper.getUserName(),
-      cpf: firebaseHelper.getUserCpf(),
-      email: firebaseHelper.getUserEmail(),
-      origem: passagem.origem.text,
-      destino: passagem.destino.text,
-      horario: passagem.horario.text,
-      poltrona: passagem.poltrona.value,
-      dataCompra: utils.DateNowBr
-    };
-  },
-  poltronaToFirebase(poltrona) {
-    return new Promise((resolve) => {
-      const todasPoltronas = globals.getPoltronas();
-      const array = poltrona.split(',');
-      const padArray = array.map(item => (todasPoltronas[item].label).padStart(2, '0'));
-      padArray.sort();
-      const padString = padArray.join();
-      const formatted = padString.replace(/,/g, ' - ');
-      resolve(formatted);
-    });
-  }
-};
+import Snackbar from '../shared/Snackbar';
 
 const ConfirmacaoPanel = ({ props }) => {
   const classDefault = 'detalhes-container mui--z2';
   const buildClassName = props.isIdaVolta ? `${classDefault} idavolta` : `${classDefault} soida`;
   const strHorarioIda = (props.horarioIda.length > 0) ? utils.firebaseToTime(props.horarioIda) : '';
   const strHorarioVolta = (props.horarioVolta.length > 0) ? utils.firebaseToTime(props.horarioVolta) : '';
+
   const sortPoltronas = (poltronas) => {
     const poltronasTemp = utils.deepCopy(poltronas);
     poltronasTemp.sort();
@@ -91,27 +67,27 @@ const ConfirmacaoPanel = ({ props }) => {
       }
       <Grid className="detalhes-info text-left">
         <Row>
-          <FontAwesome name="location-arrow" className="origem" />
+          <FontAwesome name="location-arrow fa-fw" className="origem" />
           {/*<img src={locationLogo} height="15" alt="" className="origem" />*/}
           <span className="text-after-icon">{props.origem}</span>
         </Row>
         <Row>
-          <FontAwesome name="map-marker" className="destino" />
+          <FontAwesome name="map-marker fa-fw" className="destino" />
           {/*<img src={markerLogo} height="20" alt="" className="destino" />*/}
           <span className="text-after-icon">{props.destino}</span>
         </Row>
         <hr />
         <Row>
-          <FontAwesome name="arrow-right" className="data-ida" />
+          <FontAwesome name="arrow-right fa-fw" className="data-ida" />
           {/*<img src={arrowIdaLogo} height="15" alt="" className="data-ida" />*/}
           <span className="text-after-icon">{props.dataIda}</span>
         </Row>
         <Row>
-          <FontAwesome name="clock-o" className="hora-ida" />
+          <FontAwesome name="clock-o fa-fw" className="hora-ida" />
           <span className="text-after-icon">{strHorarioIda}</span>
         </Row>
         <Row>
-          <img src={passengerGreenLogo} height="16" alt="" className="icon-passenger" />
+          <img src={passengerGreenLogo} height="16" width="20" alt="" className="icon-passenger" />
           {
             !props.hasErroSalvandoIda &&
             <span className="text-after-icon">{sortPoltronas(props.poltronasIda)}</span>
@@ -122,28 +98,28 @@ const ConfirmacaoPanel = ({ props }) => {
           <div>
             <hr />
             <Row>
-              <FontAwesome name="arrow-left" className="data-volta" />
+              <FontAwesome name="arrow-left fa-fw" className="data-volta" />
               {/*<img src={arrowVoltaLogo} height="15" alt="" className="data-volta" />*/}
               <span className="text-after-icon">{props.dataVolta}</span>
             </Row>
             <Row>
-              <FontAwesome name="clock-o" className="hora-volta" />
+              <FontAwesome name="clock-o fa-fw" className="hora-volta" />
               <span className="text-after-icon">{strHorarioVolta}</span>
             </Row>
             <Row>
-              <img src={passengerRedLogo} height="16" alt="" className="icon-passenger" />
+              <img src={passengerRedLogo} height="16" width="20" alt="" className="icon-passenger" />
               {
                 !props.hasErroSalvandoVolta &&
                 <span className="text-after-icon">{sortPoltronas(props.poltronasVolta)}</span>
               }
-              {props.hasErroSalvandoIda && labelErro}
+              {props.hasErroSalvandoVolta && labelErro}
             </Row>
           </div>}
         <hr />
         <Row>
           <Button
             raised
-            accent
+            primary
             className="btn-block btn-continuar"
             onClick={props.onContinua}>
             <FontAwesome name="check bt-mui-icon" />
@@ -173,7 +149,6 @@ export class CompraPassagem extends Component {
     this.handleLimpaIda = this.handleLimpaIda.bind(this);
     this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
     this.handleSelectTab = this.handleSelectTab.bind(this);
-
   }
 
   handleSelectTab(event) {
@@ -188,19 +163,23 @@ export class CompraPassagem extends Component {
   }
 
   enableAllHorarios(isVolta) {
-    const { dispatch, horarios, horariosVolta } = this.props;
+    const { dispatch, cidades, horarios, horariosVolta, passagem, passagemVolta } = this.props;
 
     if (isVolta) {
       const temp = utils.deepCopy(horariosVolta)
       for (let horario in temp) {
-        temp[horario].isDisabled = false;
+        // Habilita todos, menos os horários que já passaram.
+        const strData = utils.dateToFirebase(passagemVolta.data.value);
+        temp[horario].isDisabled = !utils.checkHorario(strData, horario);
       }
       dispatch(actions.setHorariosVolta(temp));
 
     } else {
       const temp = utils.deepCopy(horarios)
       for (let horario in temp) {
-        temp[horario].isDisabled = false;
+        // Habilita todos, menos os horários que já passaram.
+        const strData = utils.dateToFirebase(passagem.data.value);
+        temp[horario].isDisabled = !utils.checkHorario(strData, horario);
       }
       dispatch(actions.setHorarios(temp));
     }
@@ -211,6 +190,7 @@ export class CompraPassagem extends Component {
     const { horario } = passagem;
     const horariosTemp = utils.deepCopy(horarios);
 
+    dispatch(actions.setErroSalvandoIda(false));
     if (horario.length > 0) {
       horariosTemp[horario] = horariosBackup[horario];
       dispatch(actions.setHorarios(horariosTemp));
@@ -225,6 +205,7 @@ export class CompraPassagem extends Component {
     const { horario } = passagemVolta;
     const horariosTemp = utils.deepCopy(horariosVolta);
 
+    dispatch(actions.setErroSalvandoVolta(false));
     if (horario.length > 0) {
       horariosTemp[horario] = horariosVoltaBackup[horario];
       dispatch(actions.setHorariosVolta(horariosTemp));
@@ -276,7 +257,6 @@ export class CompraPassagem extends Component {
 
   checkNotAllowed(isVolta, horarioCompare) {
     const { dispatch, horarios, horariosVolta, passagem, passagemVolta, isIdaVolta } = this.props;
-    console.log(isIdaVolta, (passagem.data.value !== passagemVolta.data.value));
     if (!isIdaVolta || (passagem.data.value !== passagemVolta.data.value)) {
       return;
     }
@@ -310,17 +290,21 @@ export class CompraPassagem extends Component {
       item => horarioSelected[item] === utils.PoltronaStatus.SELECTED
     );
 
-    console.log(passagem.data.value);
+    const snackType = utils.SnackbarTypes.SUCCESS;
 
     if (poltronasSelected.length > 0) {
       dispatch(actions.setSavingPoltronas(true)); // liga spinning
       setTimeout(() => {
         if (isVolta) {
+          dispatch(actions.setErroSalvandoVolta(false));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
+          dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
         } else {
+          dispatch(actions.setErroSalvandoIda(false));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
+          dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
         }
 
         this.checkNotAllowed(!isVolta, horario);
@@ -524,57 +508,148 @@ export class CompraPassagem extends Component {
   }
 
   formCanBeSaved() {
-    const { dispatch, passagem, horarios } = this.props;
-    const { poltrona } = passagem;
-    let failed = false;
+    const { dispatch, passagem, passagemVolta, isIdaVolta } = this.props;
+    const snackType = utils.SnackbarTypes.ERROR;
 
-    if (horarios.length === 0) {
-      failed = true;
-    }
-
-    // if POLTRONA is pristine, form cannot be saved
-    if (poltrona.isPristine) {
-      failed = true;
-      const hasSelection = (poltrona.value.length > 0);
-      dispatch(actions.setPoltronaDirty());
-      this.updatePoltronaValidation(hasSelection);
-    }
-
-    if ((failed) || (poltrona.validation !== utils.ValidationStatus.NONE)) {
-      return false;
+    if (isIdaVolta) {
+      if ((passagem.horario.length === 0) && (passagemVolta.horario.length === 0)) {
+        dispatch(actions.setErroSalvandoIda(true));
+        dispatch(actions.setErroSalvandoVolta(true));
+        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona!'));
+        return false
+      }
+      if (passagem.horario.length === 0) {
+        dispatch(actions.setErroSalvandoIda(true));
+        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona para a ida!'));
+        return false
+      }
+      if (passagemVolta.horario.length === 0) {
+        dispatch(actions.setErroSalvandoVolta(true));
+        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona para a volta!'));
+        return false
+      }
+    } else {
+      if (passagem.horario.length === 0) {
+        dispatch(actions.setErroSalvandoIda(true));
+        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona!'));
+        return false
+      }
     }
 
     return true;
   }
 
+  mapPassagemToFirebase(passagem) {
+    const { cidades } = this.props;
+
+    return {
+      ...passagem,
+      nome: firebaseHelper.getUserName(),
+      cpf: firebaseHelper.getUserCpf(),
+      email: firebaseHelper.getUserEmail(),
+      origem: cidades[passagem.origem.value].label,
+      destino: cidades[passagem.destino.value].label,
+      horario: utils.firebaseToTime(passagem.horario),
+      dataCompra: utils.DateNowBr,
+      data: passagem.data.value,
+      poltrona: (() => {
+        passagem.poltrona.sort();
+        return passagem.poltrona.join(' - ')
+      })()
+    };
+  }
+
+  poltronaToFirebase(poltrona) {
+    return new Promise((resolve) => {
+      const todasPoltronas = globals.getPoltronas();
+      const array = poltrona.split(',');
+      const padArray = array.map(item => (todasPoltronas[item].label).padStart(2, '0'));
+      padArray.sort();
+      const padString = padArray.join();
+      const formatted = padString.replace(/,/g, ' - ');
+      resolve(formatted);
+    });
+  }
+
+
+  savePassagem(passagem) {
+    return new Promise((resolve, reject) => {
+      const novaPassagem = this.mapPassagemToFirebase(passagem);
+      const { nome, email, cpf, origem, destino, data, horario, dataCompra } = novaPassagem;
+      const firebaseDate = utils.dateToFirebase(data);
+      const firebaseHorario = passagem.horario;
+      const firebaseEmail = utils.emailToFirebaseKey(email);
+      const newPassgemRef = `passagens/${firebaseEmail}`;
+      const poltronasSelecionadas = passagem.poltrona;
+
+      // salva passagem numa lista global
+      firebaseHelper.save(novaPassagem, newPassgemRef)
+        .then((key) => {
+          const refHorario = `saidas/${origem}/${destino}/${firebaseDate}/${firebaseHorario}/`;
+
+          // muda o status do ônibus para ocupado
+          firebaseHelper.set(utils.BusStatus.OCUPADO, `${refHorario}status`);
+
+          // percorre as poltronas selecionada e salva uma por uma
+          poltronasSelecionadas.forEach((val, index, arr) => {
+            const refPoltrona = `${refHorario}/${val}/`;
+            firebaseHelper.set({ user: email }, refPoltrona)
+              .then(() => {
+                if (index === (arr.length - 1)) {
+                  resolve({ novaPassagem, key });
+                }
+              });
+          });
+        });
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    const { dispatch, passagem, history } = this.props;
+    const { dispatch, passagem, passagemVolta, isIdaVolta, history } = this.props;
 
-    console.log('Continuou!!!');
+    dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
 
-    // dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
-
-    // if (this.formCanBeSaved()) {
-    //   this.savePassagem(passagem)
-    //     .then((obj) => {
-    //       setTimeout(function () {
-    //         dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-    //         history.push({
-    //           pathname: `/passagem/${obj.key}`,
-    //           state: {
-    //             novaPassagem: obj.novaPassagem,
-    //             key: obj.key
-    //           }
-    //         });
-    //       }, 1000);
-    //     })
-    //     .catch((error) => {
-    //       dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-    //     });
-    // } else {
-    //   dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-    // }
+    if (this.formCanBeSaved()) {
+      this.savePassagem(passagem)
+        .then((objIda) => {
+          if (isIdaVolta) {
+            this.savePassagem(passagemVolta)
+              .then((objVolta) => {
+                setTimeout(() => {
+                  dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+                  console.log('ida e volta salvos com sucesso!');
+                  // history.push({
+                  //   pathname: `/passagem/${objIda.key}`,
+                  //   state: {
+                  //     novaPassagemIda: objIda.novaPassagem,
+                  //     novaPassagemVolta: objVolta.novaPassagem,
+                  //     keyIda: objIda.key,
+                  //     keyVolta: objVolta.key
+                  //   }
+                  // });
+                }, 1000);
+              });
+          } else {
+            setTimeout(() => {
+              dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+              console.log('ida salva com sucesso!');
+              // history.push({
+              //   pathname: `/passagem/${objIda.key}`,
+              //   state: {
+              //     novaPassagem: objIda.novaPassagem,
+              //     key: objIda.key
+              //   }
+              // });
+            }, 1000);
+          }
+        })
+        .catch((error) => {
+          dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+        });
+    } else {
+      dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+    }
   }
 
   handleReset(event) {
@@ -592,39 +667,6 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     this.props.history.push('/passagens');
   }
-
-  savePassagem(passagem) {
-    return new Promise((resolve, reject) => {
-      const novaPassagem = helper.mapPassagemToFirebase(passagem);
-      const { nome, email, cpf, origem, destino, data, horario, dataCompra } = novaPassagem;
-
-      helper.poltronaToFirebase(novaPassagem.poltrona)
-        .then((poltronasFormatadas) => {
-          novaPassagem.poltrona = poltronasFormatadas;
-          const dataFormatted = utils.dateToFirebase(data);
-          const horarioFormatted = utils.timeToFirebase(horario);
-          const emailFirebase = utils.emailToFirebaseKey(email);
-          const newPassgemRef = `passagens/${emailFirebase}`;
-          const poltronasSelecionadas = novaPassagem.poltrona.split(' - ');
-
-          // salva passagem numa lista global
-          firebaseHelper.save(novaPassagem, newPassgemRef)
-            .then((key) => {
-
-              // percorre as poltronas selecionada e salva uma por uma
-              poltronasSelecionadas.forEach((val, index, arr) => {
-                firebaseHelper.set({ nome, email, cpf, dataCompra },
-                  `saidas/${origem}/${destino}/${dataFormatted}/${horarioFormatted}/${val}/`)
-                  .then(() => {
-                    if (index === (arr.length - 1)) {
-                      resolve({ novaPassagem, key });
-                    }
-                  });
-              });
-            });
-        });
-    });
-  };
 
   render() {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta,
@@ -726,10 +768,12 @@ export class CompraPassagem extends Component {
             </div>
           </DivAnimated>
         </div>
+        <Snackbar />
       </div >
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {
@@ -749,7 +793,13 @@ const mapStateToProps = (state) => {
     activeTab: state.compraPassagemState.activeTab,
     hasErroSalvandoIda: state.compraPassagemState.hasErroSalvandoIda,
     hasErroSalvandoVolta: state.compraPassagemState.hasErroSalvandoVolta,
-    snapshot: state.compraPassagemState
+    // snackbar: state.compraPassagemState.snackbar,
+    snapshot: state.compraPassagemState,
+    snackbar: {
+      visible: state.snackbarState.visible,
+      message: state.snackbarState.message,
+      type: state.snackbarState.type
+    }
   };
 };
 

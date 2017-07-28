@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Row } from 'react-bootstrap';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { Button } from 'muicss/react';
+import Input from 'react-toolbox/lib/input/Input';
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav className="navheader-nav">
     <NavItem>
-      <span className="page-title">{label}</span>
+      <Row className="title-row">
+        <span className="page-title">{label}</span>
+      </Row>
     </NavItem>
   </Nav>
 

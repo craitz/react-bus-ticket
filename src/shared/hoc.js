@@ -23,7 +23,7 @@ export const withNoResults = (WrappedComponent, array) => {
     render() {
       if (!array || array.length === 0) {
         return (
-          <span className="text-muted"><em>Nenhum resultado encontrado</em></span>
+          <span className="text-muted text-nenhum-resultado"><em>Nenhum resultado encontrado</em></span>
         );
       } else {
         return (

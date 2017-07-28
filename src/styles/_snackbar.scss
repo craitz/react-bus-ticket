@@ -1,0 +1,18 @@
+.snackbar {
+    border-radius: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 45rem;
+    span {
+        font-size: 1.5rem !important;
+    }
+    &.error {
+        background-color: rgba($colorHasError, .8) !important;
+    }
+    &.success {
+        background-color: rgba($googleGreen, .8) !important;
+    }
+    &.warning {
+        background-color: rgba($busYellow, .8) !important;
+    }
+}

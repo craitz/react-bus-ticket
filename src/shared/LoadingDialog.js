@@ -4,24 +4,6 @@ import { SavingStatus } from './Utils';
 import FontAwesome from 'react-fontawesome';
 import { Modal } from 'react-bootstrap';
 
-// export const loadingHelper = {
-//   setLoadingMessage: (dispatch, message) => {
-//     dispatch(actions.setLoadingMessage(message));
-//   },
-//   setLoadingIcon: (dispatch, icon) => {
-//     dispatch(actions.setLoadingIcon(icon));
-//   },
-//   setDoneMessage: (dispatch, message) => {
-//     dispatch(actions.setDoneMessage(message));
-//   },
-//   setDoneIcon: (dispatch, icon) => {
-//     dispatch(actions.setDoneIcon(icon));
-//   },
-//   setStatus: (dispatch, status) => {
-//     dispatch(actions.setStatus(status));
-//   }
-// };
-
 class LoadingDialog extends Component {
   render() {
     const { status, doneIcon, doneMessage, loadingIcon, loadingMessage } = this.props;
@@ -59,8 +41,5 @@ const mapStateToProps = (state) => {
     doneIcon: state.loadingDialogState.doneIcon
   }
 }
-
-// LoadingDialog.PropTypes = {}
-// LoadingDialog.defaultProps = {}
 
 export default connect(mapStateToProps)(LoadingDialog);

@@ -5,6 +5,7 @@ import loginState from './login.reducer';
 import perfilUsuarioState from './perfilUsuario.reducer';
 import loadingDialogState from './loadingDialog.reducer';
 import modalTrajetoState from './modalTrajeto.reducer';
+import snackbarState from './snackbar.reducer';
 
 export default combineReducers({
   compraPassagemState,
@@ -12,5 +13,6 @@ export default combineReducers({
   loginState,
   perfilUsuarioState,
   loadingDialogState,
-  modalTrajetoState
+  modalTrajetoState,
+  snackbarState
 });

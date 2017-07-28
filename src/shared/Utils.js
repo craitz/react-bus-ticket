@@ -1,5 +1,17 @@
 import * as moment from 'moment';
 
+export const SnackbarTypes = {
+  SUCCESS: 'snackbar success',
+  WARNING: 'snackbar warning',
+  ERROR: 'snackbar error'
+};
+
+export const BusStatus = {
+  VAZIO: 'VAZIO',
+  OCUPADO: 'OCUPADO',
+  CHEIO: 'CHEIO'
+};
+
 export const ValidationStatus = {
   SUCCESS: 'success',
   WARNING: 'warning',
@@ -59,6 +71,12 @@ export const timeToFirebase = (text) => text.replace(/:/gi, '');
 export const firebaseToTime = (text) => {
   const momentTime = moment(text, 'HHmm');
   return momentTime.format('HH:mm');
+}
+
+export const checkHorario = (data, horario) => {
+  const strNow = moment().format('YYYYMMDDHHmm');
+  const strData = `${data}${horario}`;
+  return (strData <= strNow);
 }
 
 export const buildIsoDate = (data, hora) => {
