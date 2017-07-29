@@ -6,6 +6,8 @@ import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import passengerRedLogo from '../styles/images/passenger-red.svg';
 import checkLogo from '../styles/images/check3.svg';
+import caretUpLogo from '../styles/images/caret-up.svg';
+import caretDownLogo from '../styles/images/caret-down2.svg';
 import spinLogo from '../styles/images/spinner3.svg';
 import spinnerLogo from '../styles/images/spinner4.svg';
 import removeLogo from '../styles/images/remove.svg';
@@ -88,6 +90,7 @@ class HorariosAccordion extends Component {
   onClickPanel(selected, event, isDisabled) {
     const className = event.target.className;
     const saveOrRemoveClicked = className.includes('icon-save') || className.includes('icon-remove');
+    const arrowClicked = className.includes('icon-arrow');
 
     // se o panel está desabilitado, não faz nada
     // se clicou no ícone de salvar ou remover, também não faz nada
@@ -96,15 +99,18 @@ class HorariosAccordion extends Component {
       return;
     }
 
-    const { isVolta, active } = this.props;
-    const selectedAccordion = (active === selected) ? -1 : selected;
+    if (arrowClicked) {
+      const { isVolta, active } = this.props;
+      const selectedAccordion = (active === selected) ? -1 : selected;
 
-    !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(selectedAccordion));
-    isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(selectedAccordion));
+      !isVolta && store.dispatch(compraPassagemActions.setActiveAccordion(selectedAccordion));
+      isVolta && store.dispatch(compraPassagemActions.setActiveAccordionVolta(selectedAccordion));
+    }
   }
 
   buildCollapsibles() {
-    const { horarios, onClickSeat, onResetSeats, onSaveSeats, isVolta, isSavingPoltronas } = this.props;
+    const { horarios, onClickSeat, onResetSeats, onSaveSeats, isVolta, isSavingPoltronas,
+      active } = this.props;
     const collapsibles = [];
 
     // sort horários
@@ -127,6 +133,8 @@ class HorariosAccordion extends Component {
       const strHorario = utils.firebaseToTime(horario);
       const position = (index + 1);
       const className = poltronas.isDisabled ? "not-allowed" : "allowed";
+      const isActive = (position === active);
+
 
       //  eventKey={poltronas.isDisabled ? -1 : position}
       collapsibles.push(
@@ -141,7 +149,7 @@ class HorariosAccordion extends Component {
               <span className="trigger-left">
                 <img
                   src={clockLogo}
-                  height="30"
+                  height="24"
                   alt=""
                   className="horario-icon"
                 />
@@ -186,6 +194,12 @@ class HorariosAccordion extends Component {
                   className={percentLotacao ? "full" : "empty"}
                   bsStyle="success"
                   now={percentLotacao}
+                />
+                <img
+                  src={isActive ? caretUpLogo : caretDownLogo}
+                  height="20"
+                  alt=""
+                  className="icon-arrow icon-after-text"
                 />
               </span>
             </div>}>

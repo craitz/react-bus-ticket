@@ -75,8 +75,10 @@ export const firebaseToTime = (text) => {
 
 export const checkHorario = (data, horario) => {
   const strNow = moment().format('YYYYMMDDHHmm');
+  console.log(strNow);
   const strData = `${data}${horario}`;
-  return (strData <= strNow);
+  console.log(strData);
+  return (strData > strNow);
 }
 
 export const buildIsoDate = (data, hora) => {

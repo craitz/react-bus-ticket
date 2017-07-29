@@ -119,13 +119,13 @@ const ConfirmacaoPanel = ({ props }) => {
         <Row>
           <Button
             raised
-            primary
+            accent
             className="btn-block btn-continuar"
             onClick={props.onContinua}>
             <FontAwesome name="check bt-mui-icon" />
             <span className="text-after-icon bt-mui-text">Finalizar compra</span>
           </Button>
-          <small className="detalhes-warning">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
+          <small className="detalhes-warning text-center">* Por favor, verifique os dados com atenção antes de finalizar o seu pedido.</small>
         </Row>
       </Grid>
     </Jumbotron>
@@ -299,12 +299,12 @@ export class CompraPassagem extends Component {
           dispatch(actions.setErroSalvandoVolta(false));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
-          dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
+          dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
         } else {
           dispatch(actions.setErroSalvandoIda(false));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
-          dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
+          dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
         }
 
         this.checkNotAllowed(!isVolta, horario);

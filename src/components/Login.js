@@ -21,8 +21,8 @@ import moment from 'moment';
 
 const fakeDataOptions = {
   days: 5,
-  startHour: 10,
-  endHour: 18,
+  startHour: 6,
+  endHour: 22,
   reservedPercentage: 0.2, // 20%
   horariosPercentage: 0.3, // 20%
   email: 'guest@busticket.com',
@@ -292,14 +292,14 @@ export class Login extends Component {
                     onClick={this.handleGenerateFakeData}
                     icon={<FontAwesome name="database" />}
                   />
-                  <Button
+                  {/*<Button
                     floating
                     accent
                     mini
                     className="text-after-icon"
                     onClick={this.handleClearFakeData}
                     icon={<FontAwesome name="eraser" />}
-                  />
+                  />*/}
 
                 </div>
               </div>

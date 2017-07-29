@@ -97,11 +97,11 @@
   .snackbar span {
     font-size: 1.5rem !important; }
   .snackbar.error {
-    background-color: rgba(231, 29, 54, 0.8) !important; }
+    background-color: rgba(231, 29, 54, 0.9) !important; }
   .snackbar.success {
-    background-color: rgba(76, 175, 80, 0.8) !important; }
+    background-color: rgba(76, 175, 80, 0.9) !important; }
   .snackbar.warning {
-    background-color: rgba(255, 204, 62, 0.8) !important; }
+    background-color: rgba(255, 204, 62, 0.9) !important; }
 
 .tooltip > .tooltip-inner {
   background-color: #424242; }
@@ -705,8 +705,7 @@ button {
                     font-size: 1.7rem; }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-left .horario-icon {
                     color: #F44336;
-                    position: absolute;
-                    top: 6px; }
+                    margin-top: .5rem; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right {
                   font-size: 1.2rem;
                   letter-spacing: .2rem;
@@ -730,18 +729,25 @@ button {
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .icon-remove,
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .icon-spin {
                     display: none; }
+                  .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a .trigger-right .icon-arrow {
+                    display: inline-block;
+                    margin-left: 2rem;
+                    margin-top: -4px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-passenger,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .poltronas-text,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .progress {
                   display: none; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove,
-                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-spin {
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-spin,
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
                   display: inline-block; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove {
                   margin-top: 7px;
                   margin-left: 20px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save {
+                  margin-top: 7px; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
                   margin-top: 7px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .tab-content .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-spin {
                   animation: rotation 10s infinite;

@@ -61,8 +61,7 @@ monospace;
                         }
                         .horario-icon {
                             color: #F44336;
-                            position: absolute;
-                            top: 6px;
+                            margin-top: .5rem;
                         }
                     }
                     .trigger-right {
@@ -91,6 +90,11 @@ monospace;
                         .icon-spin {
                             display: none;
                         }
+                        .icon-arrow {
+                            display: inline-block;
+                            margin-left: 2rem;
+                            margin-top: -4px;
+                        }
                     }
                     &[aria-expanded="true"] {
                         .icon-passenger,
@@ -100,7 +104,8 @@ monospace;
                         }
                         .icon-save,
                         .icon-remove,
-                        .icon-spin {
+                        .icon-spin,
+                        .icon-arrow {
                             display: inline-block;
                         }
                         .icon-remove {
@@ -108,6 +113,9 @@ monospace;
                             margin-left: 20px;
                         }
                         .icon-save {
+                            margin-top: 7px;
+                        }
+                        .icon-arrow {
                             margin-top: 7px;
                         }
                         .icon-spin {

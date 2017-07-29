@@ -192,7 +192,7 @@ export class ModalTrajeto extends Component {
       const poltronas = horarios[horario];
 
       // se o horário já passou, desabilita o accordion
-      poltronas.isDisabled = utils.checkHorario(data, horario);
+      poltronas.isDisabled = !utils.checkHorario(data, horario);
 
       for (let i = 0; i < 44; i++) {
         const strValue = (i + 1).toString().padStart(2, '0');

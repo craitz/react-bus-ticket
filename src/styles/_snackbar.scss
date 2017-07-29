@@ -7,12 +7,12 @@
         font-size: 1.5rem !important;
     }
     &.error {
-        background-color: rgba($colorHasError, .8) !important;
+        background-color: rgba($colorHasError, .9) !important;
     }
     &.success {
-        background-color: rgba($googleGreen, .8) !important;
+        background-color: rgba($googleGreen, .9) !important;
     }
     &.warning {
-        background-color: rgba($busYellow, .8) !important;
+        background-color: rgba($busYellow, .9) !important;
     }
 }
