@@ -284,14 +284,14 @@ export class Login extends Component {
               <div className="login-header--title">
                 <div className="login-header--title-main">
                   Login
-                  <Button
+                  {/*<Button
                     floating
                     primary
                     mini
                     className="text-after-icon"
                     onClick={this.handleGenerateFakeData}
                     icon={<FontAwesome name="database" />}
-                  />
+                  />*/}
                   {/*<Button
                     floating
                     accent

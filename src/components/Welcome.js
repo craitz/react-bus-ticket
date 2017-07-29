@@ -45,18 +45,19 @@ class Welcome extends Component {
           {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />*/}
         </PageHeader>
         <DivAnimated className="info-container">
-          <h2>Introdução</h2>
-          <article>
-            O BusTicket é uma SPA (Single Page Application) totalmente responsiva
+          <Jumbotron className="jumbo-painel mui--z3">
+            <h2>Introdução</h2>
+            <article>
+              O BusTicket é uma SPA (Single Page Application) totalmente responsiva
               que utiliza o conceito Mobile First para se adaptar e responder adequadamante
               a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
               um guichê virtual para compra de passagens de ônibus (sem os valores
               envolvidos na transação) para viagens entre algumas capitais do Brasil.
           </article>
-          <hr />
-          <h2>Algumas das tecnologias utilizadas</h2>
-          <article>
-            <Jumbotron className="mui--z1">
+            <hr />
+            <h2>Algumas das tecnologias utilizadas</h2>
+            <article>
+              {/*<Jumbotron className="mui--z1">*/}
               React,
                 Redux,
                 JSX,
@@ -76,10 +77,11 @@ class Welcome extends Component {
                 SASS,
                 HTML5,
                 Visual Studio 2017.
-              </Jumbotron>
-          </article>
-          <hr />
-          <ButtonComprar handleComprar={this.handleComprarPassagem} />
+              {/*</Jumbotron>*/}
+            </article>
+            <hr />
+            <ButtonComprar handleComprar={this.handleComprarPassagem} />
+          </Jumbotron>
         </DivAnimated>
       </div >
     );

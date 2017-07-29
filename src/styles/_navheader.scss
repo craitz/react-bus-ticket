@@ -29,11 +29,11 @@
         text-align: left;
         .navheader-nav {
             a {
-                padding-left: 0;
+                padding-left: 20px !important;
             }
         }
         .navbar-nav {
-            margin-left: 0;
+            margin-left: 20px;
             padding-right: 0 !important;
             .page-title,
             .icon-title {

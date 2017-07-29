@@ -193,16 +193,27 @@
 }
 
 @mixin bkgImage {
+    $blur: 10px;
     content: "";
-    background: url(./styles/images/tree.jpg);
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
     background-size: cover;
-    opacity: .2;
+    opacity: 1;
     z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
+    @include blur(5px)
+}
+
+@mixin blur($size) {
+    -webkit-filter: blur($size);
+    -moz-filter: blur($size);
+    -o-filter: blur($size);
+    -ms-filter: blur($size);
+    filter: blur($size);
 }
 
 // Media Queries - Mobile First

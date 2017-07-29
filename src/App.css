@@ -234,7 +234,8 @@
   height: 0; }
 
 button {
-  font-family: "Ubuntu" !important; }
+  font-family: "Ubuntu" !important;
+  font-weight: bold !important; }
 
 .App {
   text-align: center; }
@@ -271,9 +272,9 @@ button {
     will-change: opacity;
     transition: opacity 0.4s; }
   .navheader-container .navbar .navheader-nav a {
-    padding-left: 0; }
+    padding-left: 20px !important; }
   .navheader-container .navbar .navbar-nav {
-    margin-left: 0;
+    margin-left: 20px;
     padding-right: 0 !important; }
     .navheader-container .navbar .navbar-nav .page-title,
     .navheader-container .navbar .navbar-nav .icon-title {
@@ -617,6 +618,7 @@ button {
                 height: 39px;
                 border: 1px solid rgba(0, 0, 0, 0.06);
                 background-color: transparent;
+                background-color: white;
                 border-radius: 4px; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a .label,
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container #tab-horarios .nav-tabs li:not(.active) > a:active .label,
@@ -939,6 +941,23 @@ button {
               color: rgba(0, 0, 0, 0.35);
               font-style: italic;
               line-height: 1.2rem !important; }
+  .comprar-passagem-container::after {
+    content: "";
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
   @media screen and (min-width: 768px) {
     .comprar-passagem-container .form-passagem-container {
       margin-top: 50px; } }
@@ -963,15 +982,21 @@ button {
         margin-bottom: 0; }
   .confirmacao-passagem::after {
     content: "";
-    background: url(./styles/images/tree.jpg);
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
     background-size: cover;
-    opacity: .2;
+    opacity: 1;
     z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    position: absolute; }
+    position: absolute;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
   @media screen and (min-width: 480px) {
     .confirmacao-passagem .localizador {
       font-size: 3rem !important;
@@ -1032,15 +1057,21 @@ button {
     color: white; }
   .pesquisar-passagens-container::after {
     content: "";
-    background: url(./styles/images/tree.jpg);
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
     background-size: cover;
-    opacity: .2;
+    opacity: 1;
     z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    position: absolute; }
+    position: absolute;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -1108,7 +1139,7 @@ button {
       margin-top: 60px; }
   .login-container::after {
     content: "";
-    background: url(./styles/images/tree3.jpg) no-repeat center center fixed;
+    background: url(./styles/images/tree3.jpg) no-repeat center fixed;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1117,7 +1148,12 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1; }
+    z-index: -1;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
   @media screen and (min-width: 480px) {
     .login-container .login-box {
       width: 360px; }
@@ -1131,16 +1167,32 @@ button {
     width: 1000px;
     margin: 50px 0 0 calc(50% - 500px) !important;
     text-align: left; }
+    .welcome-container .info-container .jumbo-painel {
+      background-color: rgba(255, 255, 255, 0.9) !important; }
     .welcome-container .info-container h2 {
       font-family: "Days One";
-      color: rgba(0, 0, 0, 0.65);
-      margin-top: 50px; }
-    .welcome-container .info-container .jumbotron {
-      background-color: white;
-      border-radius: 4px; }
+      color: rgba(0, 0, 0, 0.65); }
     .welcome-container .info-container .welcome-button {
-      margin-top: 50px;
-      margin-bottom: 50px; }
+      margin-top: 50px; }
+    .welcome-container .info-container hr {
+      display: none; }
+  .welcome-container::after {
+    content: "";
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
 
 .perfil-usuario-container {
   overflow: auto;
@@ -1180,15 +1232,21 @@ button {
       margin-left: 10px; }
   .perfil-usuario-container::after {
     content: "";
-    background: url(./styles/images/tree.jpg);
+    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background-attachment: scroll;
     background-size: cover;
-    opacity: .2;
+    opacity: 1;
     z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    position: absolute; }
+    position: absolute;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px); }
   @media screen and (min-width: 768px) {
     .perfil-usuario-container .jumbotron {
       margin-top: 50px; } }

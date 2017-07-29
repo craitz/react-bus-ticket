@@ -25,7 +25,7 @@ class ConfirmaPassagem extends Component {
   }
 
   render() {
-    const { novaPassagem, key } = this.props.location.state;
+    const { novaPassagem, novaPassagemVolta, key, keyVolta } = this.props.location.state;
     return (
       <div className="confirmacao-passagem">
         <PageHeader title="Compra finalizada !">
@@ -63,7 +63,9 @@ class ConfirmaPassagem extends Component {
 
 ConfirmaPassagem.PropTypes = {
   novaPassagem: PropTypes.object.isRequired,
+  novaPassagemVolta: PropTypes.object.isRequired,
   key: PropTypes.string.isRequired,
+  keyVolta: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {

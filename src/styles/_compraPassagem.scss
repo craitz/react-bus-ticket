@@ -187,6 +187,7 @@ monospace;
                 height: 39px;
                 border: 1px solid rgba(black, .06);
                 background-color: transparent;
+                background-color: white;
                 border-radius: 4px;
                 .label {
                     background-color: transparent;
@@ -548,9 +549,9 @@ monospace;
             }
         }
     }
-    // &::after {
-    //     @include bkgImage;
-    // }
+    &::after {
+        @include bkgImage;
+    }
     @include sm {
         .form-passagem-container {
             margin-top: 50px;

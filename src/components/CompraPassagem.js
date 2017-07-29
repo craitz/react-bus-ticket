@@ -619,28 +619,30 @@ export class CompraPassagem extends Component {
                 setTimeout(() => {
                   dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
                   console.log('ida e volta salvos com sucesso!');
-                  // history.push({
-                  //   pathname: `/passagem/${objIda.key}`,
-                  //   state: {
-                  //     novaPassagemIda: objIda.novaPassagem,
-                  //     novaPassagemVolta: objVolta.novaPassagem,
-                  //     keyIda: objIda.key,
-                  //     keyVolta: objVolta.key
-                  //   }
-                  // });
+                  history.push({
+                    pathname: `/passagem/${objIda.key}`,
+                    state: {
+                      novaPassagem: objIda.novaPassagem,
+                      novaPassagemVolta: objVolta.novaPassagem,
+                      key: objIda.key,
+                      keyVolta: objVolta.key,
+                      isIdaVolta
+                    }
+                  });
                 }, 1000);
               });
           } else {
             setTimeout(() => {
               dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
               console.log('ida salva com sucesso!');
-              // history.push({
-              //   pathname: `/passagem/${objIda.key}`,
-              //   state: {
-              //     novaPassagem: objIda.novaPassagem,
-              //     key: objIda.key
-              //   }
-              // });
+              history.push({
+                pathname: `/passagem/${objIda.key}`,
+                state: {
+                  novaPassagem: objIda.novaPassagem,
+                  key: objIda.key,
+                  isIdaVolta
+                }
+              });
             }, 1000);
           }
         })
