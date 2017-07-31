@@ -43,7 +43,7 @@ export const initialState = Immutable({
   isSavingPoltronas: false,
   activeAccordion: -1,
   activeAccordionVolta: -1,
-  activeTab: 1,
+  activeTab: 0,
   hasErroSalvandoIda: false,
   hasErroSalvandoVolta: false,
   passagem: { ...passagemInitialState },

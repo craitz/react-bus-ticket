@@ -1,5 +1,5 @@
 .App {
-    .navbar {
+    .navbar.nav-app {
         background: $colorNavbarPrincipal;
         text-align: left;
         margin-bottom: 0;
@@ -63,7 +63,7 @@
         }
     }
     @include sm {
-        .navbar .container .nav-fontes {
+        .navbar.nav-app .container .nav-fontes {
             margin: 15px 0 15px 13px;
         }
     }

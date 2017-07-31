@@ -192,10 +192,10 @@
     height: calc(100vh - 50px);
 }
 
-@mixin bkgImage {
+@mixin bkgImage($file: 'tree5.jpg') {
     $blur: 10px;
     content: "";
-    background: url(./styles/images/tree4.jpg) no-repeat center fixed;
+    background: url(./styles/images/#{$file}) no-repeat center fixed;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -205,7 +205,7 @@
     bottom: 0;
     right: 0;
     position: absolute;
-    @include blur(5px)
+    @include blur(0px)
 }
 
 @mixin blur($size) {

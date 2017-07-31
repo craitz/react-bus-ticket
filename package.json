@@ -9,7 +9,9 @@
             "PROGRESS_BAR",
             "INPUT",
             "AUTOCOMPLETE",
-            "SNACKBAR"
+            "SNACKBAR",
+            "TABS",
+            "DROPDOWN"
         ],
         "customProperties": {
             "animation-duration": "0.3s",

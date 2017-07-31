@@ -140,114 +140,27 @@ monospace;
 }
 
 @mixin tabControl {
-    width: $tabSize - 5px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    border-radius: 5px;
-    .nav-tabs {
-        border: none;
-        border-bottom: 1px solid $borderTabHorarios !important;
-        li {
-            height: 43px !important;
-            width: 50%;
-            &>a,
-            &>a:active,
-            &>a:hover,
-            &>a:focus {
-                margin-right: 0;
-                background-color: transparent;
-                outline: none;
-                border-color: transparent;
-                color: rgba(darkslategrey, .2);
-                position: relative;
-                // height: 42px;
-                font-family: $fontPadrao;
-                font-weight: 900;
-                font-size: 1.7rem;
-                .icon-group-before {
-                    margin-right: 8px;
-                }
-                .tab-left {
-                    color: rgba(black, .45);
-                    font-family: $fontPadrao;
-                    font-size: 1.7rem;
-                    .icon-ida,
-                    .icon-volta {
-                        width: 40px !important;
-                        height: 40px !important;
-                    }
-                }
-            }
-            &:not(.active)>a,
-            &:not(.active)>a:active,
-            &:not(.active)>a:hover,
-            &:not(.active)>a:focus {
-                padding: 0;
-                height: 39px;
-                border: 1px solid rgba(black, .06);
-                background-color: transparent;
-                background-color: white;
-                border-radius: 4px;
-                .label {
-                    background-color: transparent;
-                    color: rgba(darkslategrey, .2);
-                }
-                .tab-left {
-                    color: rgba(black, .15);
-                    .icon-ida,
-                    .icon-volta {
-                        opacity: .2;
-                    }
-                }
-            }
-            &.active>a,
-            &.active>a:active,
-            &.active>a:hover,
-            &.active>a:focus {
-                padding: 3px 0 0 0;
-                background-color: $colorTabHorarios;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-                border-top: 1px solid $borderTabHorarios;
-                border-right: 1px solid $borderTabHorarios;
-                border-left: 1px solid $borderTabHorarios;
-                border-bottom: none;
-            }
-            &.active>a#tab-horarios-tab-1 {
-                width: calc(100% - 3px);
-                color: rgba($googleGreen, .7) !important;
-            }
-            &:not(.active)>a#tab-horarios-tab-1 {
-                width: calc(100% - 3px);
-            }
-            &.active>a#tab-horarios-tab-2 {
-                color: rgba($googleRed, .7) !important;
-            }
+    // border: 1px solid rgba($materialPrimary, .3);
+    background-color: white;
+    margin-top: 50px;
+    opacity: .95;
+    nav {
+        // font-family: "Ubuntu";
+        .tab-row {
+            margin-bottom: 6px;
+            text-transform: none;
         }
     }
-    &.tab-control-only-ida .nav-tabs li.active {
-        width: calc(100% + 3px);
+    .panel-group {
+        margin-bottom: 0;
     }
-    .tab-content {
-        min-height: 50px;
-        position: relative;
-        background-color: $colorTabHorarios;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        padding: 19px 20px 0 21px;
-        border-bottom: 1px solid $borderTabHorarios;
-        border-right: 1px solid $borderTabHorarios;
-        border-left: 1px solid $borderTabHorarios;
-        border-top: none;
-        .text-nenhum-resultado {
-            position: absolute;
-            left: 50px;
-            top: 15px;
-        }
-        @include accordion {
-            @include busSelect(rgba($googleGreen, .8));
-        }
+    .text-nenhum-resultado {
+        position: absolute;
+        left: 50px;
+        top: 15px;
+    }
+    @include accordion {
+        @include busSelect(rgba($googleGreen, .8));
     }
 }
 
@@ -338,34 +251,17 @@ monospace;
 }
 
 @mixin navbarTrajeto {
-    background-color: $colorNavbarCompras;
-    font-family: $fontNavbarCompras, sans-serif;
-    font-size: 1.7rem;
-    font-weight: 100 !important;
-    .text-trajeto {
-        margin-left: 0 !important;
-        @include noSelection;
-        line-height: 50px;
-        // color: rgba(black, .5);
-        color: $textNavbarCompras;
-        @include textShadow(0);
-        margin-top: 0;
-        margin-bottom: 0;
-        .text-trajeto-cidades-icondestino {
-            margin-left: 20px;
+    background-color: white;
+    font-size: 1.2rem !important;
+    .input-group {
+        width: 180px;
+        .input-group-addon {
+            padding: 0 6px 0 6px;
         }
-        .icon {
-            color: $iconNavbarCompras;
+        .Select-control {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
-    }
-    .text-config {
-        @include noSelection;
-        line-height: 47px;
-        color: rgba(black, .5);
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-right: 0;
-        width: 150px;
     }
     &::after {
         @include afterShadow;
@@ -500,6 +396,20 @@ monospace;
 }
 
 .comprar-passagem-container {
+    position: relative;
+    .button-finaliza {
+        position: absolute;
+        right: 10px;
+        top: -28px;
+        z-index: 9999;
+    }
+    .button-edit {
+        position: absolute;
+        right: 76px;
+        top: -20px;
+        z-index: 9999;
+        background-color: #2196F3 !important;
+    }
     // background-color: darken(#f5f5f5, 3%);
     // background-color: darken(rgb(246, 247, 248), 3%);
     // background-color: aliceblue;
@@ -512,9 +422,14 @@ monospace;
         background-color: transparent;
         border: none;
         width: $contentWidth;
-        margin: 20px 0 0 $contentLeft !important;
+        width: 578px;
+        $left: calc(50% - 279px);
+        margin: 20px 0 0 $left !important;
         .form-centered {
             width: inherit;
+            .jumbo-comprar {
+                background-color: rgba(white, .6);
+            }
             .btn-revisar {
                 width: calc(100% - 5px);
                 height: 60px;
@@ -540,7 +455,7 @@ monospace;
                 width: 100%;
                 // left: 0;
                 left: calc(50% - 175px);
-                #tab-horarios {
+                .tab-horarios {
                     @include tabControl;
                 }
                 .detalhes-container {
@@ -550,7 +465,7 @@ monospace;
         }
     }
     &::after {
-        @include bkgImage;
+        @include bkgImage('tree2.jpg');
     }
     @include sm {
         .form-passagem-container {

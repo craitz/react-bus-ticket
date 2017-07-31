@@ -143,7 +143,7 @@ class HorariosAccordion extends Component {
           key={horario}
           eventKey={position}
           onSelect={(selected, e) => this.onClickPanel(selected, e, poltronas.isDisabled)}
-          bsStyle="info"
+          bsStyle="default"
           header={
             <div>
               <span className="trigger-left">

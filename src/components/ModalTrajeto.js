@@ -72,7 +72,6 @@ export class ModalTrajeto extends Component {
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeIdaVolta = this.handleChangeIdaVolta.bind(this);
     this.handleExited = this.handleExited.bind(this);
     this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
@@ -316,13 +315,6 @@ export class ModalTrajeto extends Component {
                 <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
                     <AddOn tooltip="Data de ida" icon="arrow-right fa-fw" className="addon-green" />
-                    {/*<DatePicker
-                    label='Formatted date'
-                    sundayFirstDayOfWeek
-                    inputFormat={(value) => `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`}
-                    onChange={this.handleChangeDataIda}
-                    className="datepicker-ida"
-                    value={data.value} />*/}
                     <InputDate
                       value={data.value}
                       placeholder="Dia da ida"

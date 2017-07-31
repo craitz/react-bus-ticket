@@ -111,7 +111,7 @@ class Navigation extends Component {
   render() {
     const navBrandClass = firebaseHelper.isLoggedIn() ? 'navbrand-login' : 'navbrand-logout';
     return (
-      <Navbar inverse collapseOnSelect>
+      <Navbar inverse collapseOnSelect className="nav-app">
         <Navbar.Header>
           <Navbar.Brand className={navBrandClass}>
             <FontAwesome name="bus" className="App-logo"></FontAwesome>

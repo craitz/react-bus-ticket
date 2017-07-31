@@ -6,7 +6,7 @@ import { globals } from '../shared/Globals';
 import { withAuth } from '../shared/hoc';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
-import { Tabs, Tab, Jumbotron, Row, Grid, Label } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Jumbotron, Row, Grid, Label, InputGroup } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated'
 import moment from 'moment';
@@ -29,19 +29,32 @@ import locationLogo from '../styles/images/location.svg';
 import clearLogo from '../styles/images/clear.svg';
 import comprarLogo from '../styles/images/comprar.svg';
 import Button from 'react-toolbox/lib/button/Button';
+import Tab from 'react-toolbox/lib/tabs/Tab';
+import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import Snackbar from '../shared/Snackbar';
+import Input from 'react-toolbox/lib/input/Input';
+import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import Select from 'react-select';
+
+const sortPoltronas = (poltronas) => {
+  const poltronasTemp = utils.deepCopy(poltronas);
+  poltronasTemp.sort();
+  return poltronasTemp.join(' | ');
+}
+
+const AddOn = ({ tooltip, icon, className }) =>
+  <TooltipOverlay text={tooltip} position="top">
+    <InputGroup.Addon className={className}>
+      <FontAwesome name={icon} />
+    </InputGroup.Addon>
+  </TooltipOverlay>
+
 
 const ConfirmacaoPanel = ({ props }) => {
   const classDefault = 'detalhes-container mui--z2';
   const buildClassName = props.isIdaVolta ? `${classDefault} idavolta` : `${classDefault} soida`;
   const strHorarioIda = (props.horarioIda.length > 0) ? utils.firebaseToTime(props.horarioIda) : '';
   const strHorarioVolta = (props.horarioVolta.length > 0) ? utils.firebaseToTime(props.horarioVolta) : '';
-
-  const sortPoltronas = (poltronas) => {
-    const poltronasTemp = utils.deepCopy(poltronas);
-    poltronasTemp.sort();
-    return poltronasTemp.join(' | ');
-  }
 
   const labelErro = (
     <Label bsStyle="danger" className="label-erro">
@@ -136,7 +149,6 @@ export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;
-    this.activeTab = 1;
     this.handleReset = this.handleReset.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
@@ -149,6 +161,50 @@ export class CompraPassagem extends Component {
     this.handleLimpaIda = this.handleLimpaIda.bind(this);
     this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
     this.handleSelectTab = this.handleSelectTab.bind(this);
+    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
+    this.handleChangeDestino = this.handleChangeDestino.bind(this);
+  }
+
+  handleChangeOrigem(value) {
+    // Se limpou o input origem, cancela o evento e retorna sem fazer nada
+    // Ou seja, o input nunca pode ficar vazio
+    if (!value || value.length === 0) {
+      return;
+    }
+
+    const { dispatch, passagem } = this.props;
+    const isPristine = passagem.origem.isPristine;
+    dispatch(actions.changeOrigem(value)); // muda a origem
+    isPristine && dispatch(actions.setOrigemDirty()); // seta dirty
+
+    // Se a origem é a mesma do destino, muda o destino
+    const origemVal = parseInt(value, 10);
+    const destinoVal = parseInt(passagem.destino.value, 10);
+    if (origemVal === destinoVal) {
+      const newIndexDestino = (destinoVal === 0) ? (destinoVal + 1) : (destinoVal - 1);
+      dispatch(actions.changeDestino(newIndexDestino.toString()));
+    };
+  }
+
+  handleChangeDestino(value) {
+    // Se limpou o input destino, cancela o evento e retorna sem fazer nada
+    // Ou seja, o input nunca pode ficar vazio
+    if (!value || value.length === 0) {
+      return;
+    }
+
+    const { dispatch, passagem } = this.props;
+    const isPristine = passagem.destino.isPristine;
+    dispatch(actions.changeDestino(value)); // muda o destino
+    isPristine && dispatch(actions.setDestinoDirty()); // seta dirty
+
+    // Se o destino é o mesmo da origem, muda a origem
+    const origemVal = parseInt(passagem.origem.value, 10);
+    const destinoVal = parseInt(value, 10);
+    if (origemVal === destinoVal) {
+      const newIndexOrigem = (origemVal === 0) ? (origemVal + 1) : (origemVal - 1);
+      dispatch(actions.changeOrigem(newIndexOrigem.toString()));
+    };
   }
 
   handleSelectTab(event) {
@@ -701,31 +757,123 @@ export class CompraPassagem extends Component {
       onContinua: this.handleSubmit
     }
 
+    const HeaderTab = ({ isVolta }) => {
+      // const strTrajeto = isVolta ? `${strDestino} - ${strOrigem}` : `${strOrigem} - ${strDestino}`;
+
+      const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
+      const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
+
+      const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
+      const poltronasFormatted = strPoltronas.length > 0 ? sortPoltronas(strPoltronas) : '';
+
+      const trajeto = (
+        <section>
+          <section className="tab-row">
+            <FontAwesome name="location-arrow fa-fw" />
+            <span className="text-after-icon">{isVolta ? strDestino : strOrigem}</span>
+            {/*<FontAwesome name="long-arrow-right" className="text-after-icon" />*/}
+          </section>
+          <section className="tab-row">
+            <FontAwesome name="map-marker fa-fw" />
+            <span className="text-after-icon">{isVolta ? strOrigem : strDestino}</span>
+          </section>
+          <section className="tab-row">
+            <FontAwesome name="calendar fa-fw" />
+            <span className="text-after-icon">{isVolta ? strDataVolta : strDataIda}</span>
+          </section>
+          <section className="tab-row">
+            <FontAwesome name="clock-o fa-fw" />
+            <span className="text-after-icon">{horarioFormatted}</span>
+          </section>
+          <section className="tab-row">
+            <FontAwesome name="bookmark fa-fw" />
+            <span className="text-after-icon">{poltronasFormatted}</span>
+          </section>
+        </section>
+      );
+
+      return (
+        <section className="text-left">
+          {trajeto}
+        </section>
+      );
+    }
+
     return (
       <div className="comprar-passagem-container">
         <PageHeader
           title="Compre sua passagem"
           className="header-comprar">
         </PageHeader>
+        {/*<Navbar className="navbar-trajeto">
+          <Nav className="text-left">
+            <NavItem>
+              <InputGroup>
+                <AddOn tooltip="Origem" icon="location-arrow fw" />
+                <Select
+                  simpleValue
+                  searchable={true}
+                  clearable={false}
+                  disabled={false}
+                  placeholder="Origem..."
+                  value={passagem.origem.value}
+                  options={cidades}
+                  onChange={this.handleChangeOrigem}
+                  noResultsText="Nenhum resultado"
+                  className="select-origem"
+                />
+              </InputGroup>
+            </NavItem>
+            <NavItem>
+              <InputGroup>
+                <AddOn tooltip="Destino" icon="map-marker fw" />
+                <Select
+                  simpleValue
+                  searchable={true}
+                  clearable={false}
+                  disabled={false}
+                  placeholder="Destino..."
+                  value={passagem.destino.value}
+                  options={cidades}
+                  onChange={this.handleChangeDestino}
+                  noResultsText="Nenhum resultado"
+                  className="select-destino"
+                />
+              </InputGroup>
+            </NavItem>
+          </Nav>
+        </Navbar>*/}
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
+            <Button
+              floating
+              accent
+              className="button-finaliza mui--z2"
+              onClick={this.handleSubmit}
+              icon={<FontAwesome name="check" />}
+            />
+            <Button
+              floating
+              primary
+              mini
+              className="button-edit mui--z2"
+              onClick={this.handleChangeTrajeto}
+              icon={<FontAwesome name="edit" />}
+            />
             <div className="horarios-container">
-              <ConfirmacaoPanel props={confirmacaoPanelProps} />
+              {/*<ConfirmacaoPanel props={confirmacaoPanelProps} />*/}
+              {/*<Jumbotron className="jumbo-comprar mui--z3">*/}
               <Tabs
-                defaultActiveKey={1}
-                activeKey={isIdaVolta ? activeTab : 1}
-                id="tab-horarios"
-                className={isIdaVolta ? "tab-control" : "tab-control-only-ida"}
-                animation={false}
-                onSelect={this.handleSelectTab}>
+                index={isIdaVolta ? activeTab : 0}
+                fixed
+                inverse
+                onChange={this.handleSelectTab}
+                className="tab-horarios mui--z3"
+              >
                 <Tab
-                  eventKey={1}
-                  title={
-                    <span className="tab-left">
-                      <img src={idaLogo} alt="" className="icon-ida" />
-                      <span className="title-after-icon">{strDataIda}</span>
-                    </span>
-                  }>
+                  label={<HeaderTab isVolta={false} />}
+                  className="tab-ida"
+                >
                   <NoResultsAccordionIda
                     className="accordion-ida"
                     color="dark"
@@ -738,21 +886,11 @@ export class CompraPassagem extends Component {
                     onSaveSeats={this.handleSaveSeats}
                   />
                 </Tab>
-                {
-                  isIdaVolta &&
+                {isIdaVolta &&
                   <Tab
-                    eventKey={2}
+                    label={<HeaderTab isVolta={true} />}
                     className="tab-volta"
-                    title={
-                      <span className="tab-left">
-                        <img
-                          src={voltaLogo}
-                          alt=""
-                          className="icon-volta"
-                        />
-                        <span className="title-after-icon">{strDataVolta}</span>
-                      </span>
-                    }>
+                  >
                     <NoResultsAccordionVolta
                       className="accordion-volta"
                       color="dark"
@@ -767,6 +905,7 @@ export class CompraPassagem extends Component {
                   </Tab>
                 }
               </Tabs>
+              {/*</Jumbotron>*/}
             </div>
           </DivAnimated>
         </div>
