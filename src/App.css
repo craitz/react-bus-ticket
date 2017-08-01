@@ -241,6 +241,7 @@ button {
   text-align: center; }
 
 .navheader-container .navbar {
+  border-radius: 0;
   background-color: #1B0088 !important;
   margin-bottom: 0;
   border: none;
@@ -260,7 +261,7 @@ button {
     will-change: opacity;
     transition: opacity 0.4s; }
   .navheader-container .navbar .navheader-nav a {
-    padding-left: 20px !important; }
+    padding-left: 0 !important; }
   .navheader-container .navbar .navbar-nav {
     margin-left: 20px;
     padding-right: 0 !important; }
@@ -269,8 +270,9 @@ button {
       color: #e9e9e9; }
     .navheader-container .navbar .navbar-nav .page-title {
       font-family: "Days One";
-      font-size: 5rem !important;
+      font-size: 3rem !important;
       color: rgba(255, 255, 255, 0.9) !important;
+      padding-left: 0;
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8); }
     .navheader-container .navbar .navbar-nav .icon-title.links {
       font-size: 2rem;
@@ -286,17 +288,16 @@ button {
       .navheader-container .navbar .navbar-nav .resultados .icon {
         font-size: 2rem; }
 
+@media screen and (min-width: 768px) {
+  .navheader-container .navbar .navheader-nav a {
+    padding-left: 20px !important; }
+  .navheader-container .navbar .navbar-nav .page-title {
+    font-family: "Days One";
+    font-size: 5rem !important;
+    padding-left: 30px; } }
+
 .navbar .container {
-  width: 1000px !important;
-  margin-left: calc(50% - 500px) !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important; }
-  .navbar .container .navbar-nav {
-    margin-left: 0 !important; }
-    .navbar .container .navbar-nav.navbar-right {
-      margin-right: 0 !important; }
-      .navbar .container .navbar-nav.navbar-right li:last-child a {
-        padding-right: 0; }
+  margin-left: 0 !important; }
 
 .App .navbar.nav-app {
   background: #140866;
@@ -331,9 +332,6 @@ button {
       .App .navbar.nav-app .container .navbrand-logout .App-logo {
         color: #F6952D;
         font-size: 2.5rem; }
-    .App .navbar.nav-app .container .navbrand-logout {
-      position: absolute;
-      left: calc(50% - 9rem); }
     .App .navbar.nav-app .container .navbar-nav {
       margin-left: 20px; }
       .App .navbar.nav-app .container .navbar-nav span {
@@ -491,12 +489,12 @@ button {
   height: calc(100vh - 50px); }
   .comprar-passagem-container .button-finaliza {
     position: absolute;
-    left: calc(50% + 500px - 66px);
+    right: 20px;
     bottom: -28px;
     z-index: 9999; }
   .comprar-passagem-container .button-edit {
     position: absolute;
-    left: calc(50% + 500px - 122px);
+    right: 90px;
     bottom: -20px;
     z-index: 9999; }
   .comprar-passagem-container .button-limpar-ida {
@@ -552,7 +550,7 @@ button {
     border: none;
     width: 1000px;
     width: 578px;
-    margin: 30px 0 0 calc(50% - 279px) !important; }
+    margin: 50px 0 0 calc(50% - 279px) !important; }
     .comprar-passagem-container .form-passagem-container .form-centered {
       width: inherit;
       width: inherit; }
@@ -590,6 +588,14 @@ button {
             position: absolute;
             left: 50px;
             top: 15px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-ida {
+            background: url(./styles/images/tab-ida.svg) no-repeat center fixed;
+            background-attachment: scroll;
+            background-size: cover; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-volta {
+            background: url(./styles/images/tab-volta.svg) no-repeat center fixed;
+            background-attachment: scroll;
+            background-size: cover; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading {
             padding: 0; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a {
@@ -1069,8 +1075,7 @@ button {
   overflow: auto;
   height: calc(100vh - 50px); }
   .welcome-container .info-container {
-    width: 1000px;
-    margin: 50px 0 0 calc(50% - 500px) !important;
+    margin-top: 15px;
     text-align: left; }
     .welcome-container .info-container .jumbo-painel {
       background-color: rgba(255, 255, 255, 0.8) !important; }
@@ -1098,6 +1103,10 @@ button {
     -o-filter: blur(0);
     -ms-filter: blur(0);
     filter: blur(0); }
+
+@media screen and (min-width: 768px) {
+  .welcome-container .info-container {
+    margin-top: 50px; } }
 
 .perfil-usuario-container {
   overflow: auto;

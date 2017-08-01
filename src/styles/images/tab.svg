@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 289 139" xmlns="http://www.w3.org/2000/svg">
+  <rect style="fill: rgb(216, 216, 216); visibility: hidden;" transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)"/>
+  <rect style="fill: rgb(216, 216, 216); visibility: hidden;" transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)"/>
+  <rect transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)" style="fill: rgb(255, 0, 0); visibility: hidden;"/>
+  <rect x="-4.292" y="-2.146" width="297.747" height="144.85" style="fill: rgb(63, 81, 181);"/>
+  <g transform="matrix(0.49076905038062724, 0, 0, 0.49076905038062724, 109.9785385131836, 37.459697511432374)">
+    <g id="1" transform="matrix(.0065968 0 0 .0065968 .50676 .50676)">
+      <path id="2" style="stroke-linejoin: round; fill-rule: evenodd; stroke: rgb(35, 40, 43); stroke-linecap: round; stroke-width: 153.64px; fill: rgb(255, 255, 255); stroke-opacity: 0; fill-opacity: 0.05;" d="m0 14522h14135v5267.7l8911-9966.5-8911-9823.5v5125.3h-14135z"/>
+    </g>
+  </g>
+</svg>

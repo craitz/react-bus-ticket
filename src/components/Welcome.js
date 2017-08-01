@@ -45,43 +45,43 @@ class Welcome extends Component {
           {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />*/}
         </PageHeader>
         <DivAnimated className="info-container">
-          <Jumbotron className="jumbo-painel mui--z3">
-            <h2>Introdução</h2>
-            <article>
-              O BusTicket é uma SPA (Single Page Application) totalmente responsiva
-              que utiliza o conceito Mobile First para se adaptar e responder adequadamante
-              a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
-              um guichê virtual para compra de passagens de ônibus (sem os valores
-              envolvidos na transação) para viagens entre algumas capitais do Brasil.
-          </article>
-            <hr />
-            <h2>Algumas das tecnologias utilizadas</h2>
-            <article>
-              {/*<Jumbotron className="mui--z1">*/}
-              React,
-                Redux,
-                JSX,
-                Javascript (ES5,ES6,ES7),
-                Firebase,
-                Jest,
-                Enzyme,
-                TDD, DRY, SOLID, KISS,
-                Node.js, Node Package Manager,
-                Webpack,
-                Babel,
-                Boostrap, Material Design, Responsive Web Design,
-                Mobile First,
-                JSON,
-                Git,
-                CSS3,
-                SASS,
-                HTML5,
-                Visual Studio 2017.
-              {/*</Jumbotron>*/}
-            </article>
-            <hr />
-            <ButtonComprar handleComprar={this.handleComprarPassagem} />
-          </Jumbotron>
+          <Col sm={8} smOffset={2}>
+            <Jumbotron className="jumbo-painel mui--z3">
+              <h2>Introdução</h2>
+              <article>
+                O BusTicket é uma SPA (Single Page Application) totalmente responsiva
+                que utiliza o conceito Mobile First para se adaptar e responder adequadamante
+                a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
+                um guichê virtual para compra de passagens de ônibus (sem os valores
+                envolvidos na transação) para viagens entre algumas capitais do Brasil.
+              </article>
+              <hr />
+              <h2>Algumas das tecnologias utilizadas</h2>
+              <article>
+                React,
+                  Redux,
+                  JSX,
+                  Javascript (ES5,ES6,ES7),
+                  Firebase,
+                  Jest,
+                  Enzyme,
+                  TDD, DRY, SOLID, KISS,
+                  Node.js, Node Package Manager,
+                  Webpack,
+                  Babel,
+                  Boostrap, Material Design, Responsive Web Design,
+                  Mobile First,
+                  JSON,
+                  Git,
+                  CSS3,
+                  SASS,
+                  HTML5,
+                  Visual Studio 2017.
+              </article>
+              <hr />
+              <ButtonComprar handleComprar={this.handleComprarPassagem} />
+            </Jumbotron>
+          </Col> 
         </DivAnimated>
       </div >
     );
