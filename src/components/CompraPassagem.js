@@ -854,11 +854,18 @@ export class CompraPassagem extends Component {
             />
             <Button
               floating
-              primary
+              accent
               mini
               className="button-edit mui--z2"
               onClick={this.handleChangeTrajeto}
               icon={<FontAwesome name="edit" />}
+            />
+            <Button
+              floating
+              accent
+              mini
+              className="button-limpar mui--z2"
+              icon={<FontAwesome name="eraser" />}
             />
             <div className="horarios-container">
               {/*<ConfirmacaoPanel props={confirmacaoPanelProps} />*/}

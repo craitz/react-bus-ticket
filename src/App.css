@@ -93,7 +93,7 @@
   border-radius: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  width: 45rem; }
+  width: 50rem; }
   .snackbar span {
     font-size: 1.5rem !important; }
   .snackbar.error {
@@ -491,15 +491,19 @@ button {
   height: calc(100vh - 50px); }
   .comprar-passagem-container .button-finaliza {
     position: absolute;
-    right: 10px;
+    right: -28px;
     top: -28px;
     z-index: 9999; }
   .comprar-passagem-container .button-edit {
     position: absolute;
-    right: 76px;
-    top: -20px;
-    z-index: 9999;
-    background-color: #2196F3 !important; }
+    right: -20px;
+    top: 38px;
+    z-index: 9999; }
+  .comprar-passagem-container .button-limpar {
+    position: absolute;
+    right: -20px;
+    top: 88px;
+    z-index: 9999; }
   .comprar-passagem-container .navbar-trajeto {
     background-color: white;
     font-size: 1.2rem !important; }
@@ -557,8 +561,7 @@ button {
         left: calc(50% - 175px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios {
           background-color: white;
-          margin-top: 50px;
-          opacity: .95; }
+          margin-top: 50px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav .tab-row {
             margin-bottom: 6px;
             text-transform: none; }
