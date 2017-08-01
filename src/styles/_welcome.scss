@@ -1,8 +1,9 @@
 .welcome-container {
     @include containerHeight();
     .info-container {
-        width: $contentWidth;
-        margin: 50px 0 0 $contentLeft !important;
+        // width: $contentWidth;
+        // margin: 50px 0 0 $contentLeft !important;
+        margin-top: 15px;
         text-align: left;
         .jumbo-painel {
             background-color: rgba(white, .8) !important;
@@ -22,5 +23,13 @@
     }
     &::after {
         @include bkgImage();
+    }
+}
+
+@include sm {
+    .welcome-container {
+        .info-container {
+            margin-top: 50px;
+        }
     }
 }

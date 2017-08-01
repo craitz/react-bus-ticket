@@ -15,7 +15,7 @@ export const PageHeader = ({ title, className, children }) =>
   <div className="navheader-container">
     <Navbar className={className}>
       <NavHeader label={title} glyph="user"></NavHeader>
-      <Nav pullRight className="hidden-xs">
+      <Nav pullRight>
         {children}
       </Nav>
     </Navbar>
