@@ -19,13 +19,6 @@
         background-color: $boxBgColor;
         border-radius: 4px;
         padding: 15px 20px 5px 20px;
-        .btn-login-float {
-            width: 80px;
-            height: 80px;
-            position: absolute;
-            bottom: -40px;
-            right: 10px;
-        }
         .form-group.last {
             margin-top: 20px;
             margin-bottom: 8px;
@@ -48,16 +41,10 @@
                 padding-left: 20px;
                 .login-header--title-main {
                     color: $materialPrimary;
-                    // color: rgba($headerTitleMainColor, .5);
                     line-height: $headerTitleMainLineHeight;
                     font-size: $headerTitleMainFontSize;
                     font-weight: bold;
                     font-family: $fontPadrao;
-                }
-                .login-header--title-sub {
-                    color: $materialPrimary;
-                    margin-top: 6px;
-                    // color: rgba($headerTitleMainColor, .5);
                 }
             }
             .login-header--icon {
@@ -80,18 +67,7 @@
         }
     }
     &::after {
-        content: "";
-        background: url(./styles/images/tree3.jpg) no-repeat center fixed;
-        background-attachment: scroll;
-        background-size: cover;
-        opacity: 1;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: -1;
-        @include blur(0px);
+        @include bkgImage('tree3.jpg');
     }
     @include xs {
         .login-box {

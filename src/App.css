@@ -240,18 +240,6 @@ button {
 .App {
   text-align: center; }
 
-.navbar .container {
-  width: 1000px !important;
-  margin-left: calc(50% - 500px) !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important; }
-  .navbar .container .navbar-nav {
-    margin-left: 0 !important; }
-    .navbar .container .navbar-nav.navbar-right {
-      margin-right: 0 !important; }
-      .navbar .container .navbar-nav.navbar-right li:last-child a {
-        padding-right: 0; }
-
 .navheader-container .navbar {
   background-color: #1B0088 !important;
   margin-bottom: 0;
@@ -297,6 +285,18 @@ button {
         color: #777777 !important; }
       .navheader-container .navbar .navbar-nav .resultados .icon {
         font-size: 2rem; }
+
+.navbar .container {
+  width: 1000px !important;
+  margin-left: calc(50% - 500px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+  .navbar .container .navbar-nav {
+    margin-left: 0 !important; }
+    .navbar .container .navbar-nav.navbar-right {
+      margin-right: 0 !important; }
+      .navbar .container .navbar-nav.navbar-right li:last-child a {
+        padding-right: 0; }
 
 .App .navbar.nav-app {
   background: #140866;
@@ -491,19 +491,38 @@ button {
   height: calc(100vh - 50px); }
   .comprar-passagem-container .button-finaliza {
     position: absolute;
-    right: -28px;
-    top: -28px;
+    left: calc(50% + 500px - 66px);
+    bottom: -28px;
     z-index: 9999; }
   .comprar-passagem-container .button-edit {
     position: absolute;
-    right: -20px;
-    top: 38px;
+    left: calc(50% + 500px - 122px);
+    bottom: -20px;
     z-index: 9999; }
-  .comprar-passagem-container .button-limpar {
+  .comprar-passagem-container .button-limpar-ida {
+    position: absolute;
+    left: -20px;
+    top: 47px;
+    z-index: 9999; }
+  .comprar-passagem-container .button-limpar-volta {
     position: absolute;
     right: -20px;
-    top: 88px;
+    top: 47px;
     z-index: 9999; }
+  .comprar-passagem-container .floating-ida {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 137px;
+    background-color: #3849a2; }
+  .comprar-passagem-container .floating-volta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 137px;
+    background-color: #3849a2; }
   .comprar-passagem-container .navbar-trajeto {
     background-color: white;
     font-size: 1.2rem !important; }
@@ -533,7 +552,7 @@ button {
     border: none;
     width: 1000px;
     width: 578px;
-    margin: 20px 0 0 calc(50% - 279px) !important; }
+    margin: 30px 0 0 calc(50% - 279px) !important; }
     .comprar-passagem-container .form-passagem-container .form-centered {
       width: inherit;
       width: inherit; }
@@ -561,7 +580,7 @@ button {
         left: calc(50% - 175px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios {
           background-color: white;
-          margin-top: 50px; }
+          margin-top: 0; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav .tab-row {
             margin-bottom: 6px;
             text-transform: none; }
@@ -848,11 +867,11 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
   @media screen and (min-width: 768px) {
     .comprar-passagem-container .form-passagem-container {
       margin-top: 50px; } }
@@ -887,11 +906,11 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
   @media screen and (min-width: 480px) {
     .confirmacao-passagem .localizador {
       font-size: 3rem !important;
@@ -962,11 +981,11 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -985,12 +1004,6 @@ button {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 4px;
     padding: 15px 20px 5px 20px; }
-    .login-container .login-box .btn-login-float {
-      width: 80px;
-      height: 80px;
-      position: absolute;
-      bottom: -40px;
-      right: 10px; }
     .login-container .login-box .form-group.last {
       margin-top: 20px;
       margin-bottom: 8px; }
@@ -1016,9 +1029,6 @@ button {
           font-size: 2.5rem;
           font-weight: bold;
           font-family: "Days One"; }
-        .login-container .login-box .login-header .login-header--title .login-header--title-sub {
-          color: #3f51b5;
-          margin-top: 6px; }
       .login-container .login-box .login-header .login-header--icon {
         position: absolute;
         right: 0;
@@ -1038,17 +1048,17 @@ button {
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
+    z-index: -1;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
   @media screen and (min-width: 480px) {
     .login-container .login-box {
       width: 360px; }
@@ -1083,11 +1093,11 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
 
 .perfil-usuario-container {
   overflow: auto;
@@ -1137,11 +1147,11 @@ button {
     bottom: 0;
     right: 0;
     position: absolute;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px); }
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
   @media screen and (min-width: 768px) {
     .perfil-usuario-container .jumbotron {
       margin-top: 50px; } }

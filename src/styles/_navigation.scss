@@ -1,3 +1,21 @@
+.navbar {
+    .container {
+        width: $contentWidth !important;
+        margin-left: $contentLeft !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        .navbar-nav {
+            margin-left: 0 !important;
+            &.navbar-right {
+                margin-right: 0!important;
+                li:last-child a {
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}
+
 .App {
     .navbar.nav-app {
         background: $colorNavbarPrincipal;

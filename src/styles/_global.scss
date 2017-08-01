@@ -205,7 +205,7 @@
     bottom: 0;
     right: 0;
     position: absolute;
-    @include blur(0px)
+    @include blur(0)
 }
 
 @mixin blur($size) {
