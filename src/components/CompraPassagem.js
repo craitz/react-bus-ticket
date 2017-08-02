@@ -826,7 +826,14 @@ export class CompraPassagem extends Component {
       <div className="comprar-passagem-container">
         <PageHeader
           title="Compre sua passagem"
-          className="header-comprar"
+          className="header-comprar hidden-xs"
+        >
+          <ButtonFinalizar />
+          <ButtonEditar />
+        </PageHeader>
+        <PageHeader
+          title="Compre já!"
+          className="header-comprar hidden-sm hidden-md hidden-lg"
         >
           <ButtonFinalizar />
           <ButtonEditar />

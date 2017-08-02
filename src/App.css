@@ -263,6 +263,7 @@ button {
   .navheader-container .navbar .navheader-nav a {
     padding-left: 0 !important; }
   .navheader-container .navbar .navbar-nav {
+    display: inline-block;
     margin-left: 20px;
     padding-right: 0 !important; }
     .navheader-container .navbar .navbar-nav .page-title,
@@ -487,16 +488,16 @@ button {
   position: relative;
   overflow: auto;
   height: calc(100vh - 50px); }
-  .comprar-passagem-container .button-finaliza {
-    position: absolute;
-    right: 20px;
-    bottom: -28px;
-    z-index: 9; }
+  .comprar-passagem-container .button-finaliza,
   .comprar-passagem-container .button-edit {
     position: absolute;
-    right: 90px;
-    bottom: -20px;
     z-index: 9; }
+  .comprar-passagem-container .button-finaliza {
+    right: 20px;
+    bottom: -28px; }
+  .comprar-passagem-container .button-edit {
+    right: 90px;
+    bottom: -20px; }
   .comprar-passagem-container .form-passagem-container {
     position: relative;
     background-color: transparent;
@@ -717,16 +718,15 @@ button {
                 -ms-transform: rotate(-90deg);
                 -o-transform: rotate(-90deg);
                 transform: rotate(-90deg); }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-ida {
-            position: absolute;
-            left: -20px;
-            top: 47px;
-            z-index: 9; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-ida,
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-volta {
             position: absolute;
-            right: -20px;
-            top: 47px;
-            z-index: 9; }
+            z-index: 9;
+            top: 47px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-ida {
+            left: -20px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-volta {
+            right: -20px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav .tab-row {
             margin-bottom: 6px;
             text-transform: none; }

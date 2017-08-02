@@ -199,19 +199,17 @@ monospace;
             @include busSelectMini(rgba($googleGreen, .8));
         }
     }
-    .button-limpar-ida {
-        position: absolute;
-        left: -20px;
-        top: 57px - 10px;
-        z-index: 9;
-        // background-color: #F44336 !important;
-    }
+    .button-limpar-ida,
     .button-limpar-volta {
         position: absolute;
-        right: -20px;
-        top: 57px - 10px;
         z-index: 9;
-        // background-color: #F44336 !important;
+        top: 57px - 10px;
+    }
+    .button-limpar-ida {
+        left: -20px;
+    }
+    .button-limpar-volta {
+        right: -20px;
     }
     nav {
         // font-family: "Ubuntu";
@@ -353,17 +351,18 @@ monospace;
 
 .comprar-passagem-container {
     position: relative;
-    .button-finaliza {
-        position: absolute;
-        right: 20px;
-        bottom: -28px;
-        z-index: 9;
-    }
+    .button-finaliza,
     .button-edit {
         position: absolute;
+        z-index: 9;
+    }
+    .button-finaliza {
+        right: 20px;
+        bottom: -28px;
+    }
+    .button-edit {
         right: 90px;
         bottom: -20px;
-        z-index: 9;
     }
     @include containerHeight;
     .form-passagem-container {
