@@ -185,13 +185,13 @@ class HorariosAccordion extends Component {
                   src={passengerRedLogo}
                   height="16"
                   alt=""
-                  className="icon-passenger"
+                  className="icon-passenger hidden-xs"
                 />
-                <span className="text-after-icon poltronas-text">
+                <span className="text-after-icon poltronas-text hidden-xs">
                   {strLotacao}
                 </span>
                 <ProgressBar
-                  className={percentLotacao ? "full" : "empty"}
+                  className={percentLotacao ? "full hidden-xs" : "empty hidden-xs"}
                   bsStyle="success"
                   now={percentLotacao}
                 />

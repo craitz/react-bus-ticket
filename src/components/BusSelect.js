@@ -8,7 +8,7 @@ const Seat = ({ className, onClickSeat, isVolta, horario, value, status }) => {
       bsStyle="default"
       className={className}
       onClick={() => onClickSeat(isVolta, horario, value, status)}>
-      {value}
+      <span>{value}</span>
     </Label>
   );
 }
