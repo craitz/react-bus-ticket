@@ -719,6 +719,106 @@ export class CompraPassagem extends Component {
         />
       </TooltipOverlay>
 
+    const TabsLarge = () =>
+      <Tabs
+        index={isIdaVolta ? activeTab : 0}
+        fixed
+        inverse
+        onChange={this.handleSelectTab}
+        className="tab-horarios mui--z3 hidden-xs"
+      >
+        <Tab
+          label={<HeaderTab isVolta={false} />}
+          className="tab-ida"
+        >
+          {/*<section className="floating-ida"></section>*/}
+          <ButtonLimpar isVolta={false}/>
+          <NoResultsAccordionIda
+            className="accordion-ida"
+            color="dark"
+            isVolta={false}
+            isSavingPoltronas={isSavingPoltronas}
+            horarios={horarios}
+            active={activeAccordion}
+            onClickSeat={this.handleClickSeat}
+            onResetSeats={this.handleResetSeats}
+            onSaveSeats={this.handleSaveSeats}
+          />
+        </Tab>
+        {isIdaVolta &&
+          <Tab
+            label={<HeaderTab isVolta={true} />}
+            className="tab-volta"
+          >
+            {/*<section className="floating-volta"></section>*/}
+          <ButtonLimpar isVolta={true}/>
+            <NoResultsAccordionVolta
+              className="accordion-volta"
+              color="dark"
+              isVolta={true}
+              isSavingPoltronas={isSavingPoltronas}
+              horarios={horariosVolta}
+              active={activeAccordionVolta}
+              onClickSeat={this.handleClickSeat}
+              onResetSeats={this.handleResetSeats}
+              onSaveSeats={this.handleSaveSeats}
+            />
+          </Tab>
+        }
+      </Tabs>    
+
+    const TabsMini = () =>
+      <section className="hidden-sm hidden-md hidden-lg">
+        <Tabs
+          index={0}
+          fixed
+          inverse
+          className="tab-horarios mini-ida mui--z3"
+        >
+          <Tab
+            label={<HeaderTab isVolta={false} />}
+            className="tab-ida-mini"
+          >
+            <ButtonLimpar isVolta={false}/>
+            <NoResultsAccordionIda
+              className="accordion-ida"
+              color="dark"
+              isVolta={false}
+              isSavingPoltronas={isSavingPoltronas}
+              horarios={horarios}
+              active={activeAccordion}
+              onClickSeat={this.handleClickSeat}
+              onResetSeats={this.handleResetSeats}
+              onSaveSeats={this.handleSaveSeats}
+            />
+          </Tab>
+        </Tabs>    
+        <Tabs
+          index={0}
+          fixed
+          inverse
+          className="tab-horarios mini-volta mui--z3"
+        >
+          <Tab
+            label={<HeaderTab isVolta={true} />}
+            className="tab-volta-mini"
+          >
+          <ButtonLimpar isVolta={true}/>
+            <NoResultsAccordionVolta
+              className="accordion-volta"
+              color="dark"
+              isVolta={true}
+              isSavingPoltronas={isSavingPoltronas}
+              horarios={horariosVolta}
+              active={activeAccordionVolta}
+              onClickSeat={this.handleClickSeat}
+              onResetSeats={this.handleResetSeats}
+              onSaveSeats={this.handleSaveSeats}
+            />
+          </Tab>
+        </Tabs>    
+     </section>
+    
     return (
       <div className="comprar-passagem-container">
         <PageHeader
@@ -731,55 +831,8 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              {/*<ConfirmacaoPanel props={confirmacaoPanelProps} />*/}
-              {/*<Jumbotron className="jumbo-comprar mui--z3">*/}
-              <Tabs
-                index={isIdaVolta ? activeTab : 0}
-                fixed
-                inverse
-                onChange={this.handleSelectTab}
-                className="tab-horarios mui--z3"
-              >
-                <Tab
-                  label={<HeaderTab isVolta={false} />}
-                  className="tab-ida"
-                >
-                  {/*<section className="floating-ida"></section>*/}
-                  <ButtonLimpar isVolta={false}/>
-                  <NoResultsAccordionIda
-                    className="accordion-ida"
-                    color="dark"
-                    isVolta={false}
-                    isSavingPoltronas={isSavingPoltronas}
-                    horarios={horarios}
-                    active={activeAccordion}
-                    onClickSeat={this.handleClickSeat}
-                    onResetSeats={this.handleResetSeats}
-                    onSaveSeats={this.handleSaveSeats}
-                  />
-                </Tab>
-                {isIdaVolta &&
-                  <Tab
-                    label={<HeaderTab isVolta={true} />}
-                    className="tab-volta"
-                  >
-                    {/*<section className="floating-volta"></section>*/}
-                  <ButtonLimpar isVolta={true}/>
-                    <NoResultsAccordionVolta
-                      className="accordion-volta"
-                      color="dark"
-                      isVolta={true}
-                      isSavingPoltronas={isSavingPoltronas}
-                      horarios={horariosVolta}
-                      active={activeAccordionVolta}
-                      onClickSeat={this.handleClickSeat}
-                      onResetSeats={this.handleResetSeats}
-                      onSaveSeats={this.handleSaveSeats}
-                    />
-                  </Tab>
-                }
-              </Tabs>
-              {/*</Jumbotron>*/}
+              <TabsLarge/>
+              <TabsMini/>
             </div>
           </DivAnimated>
         </div>
