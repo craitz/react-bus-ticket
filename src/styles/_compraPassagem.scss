@@ -29,7 +29,8 @@ monospace;
             .panel-title {
                 a {
                     @include noSelection;
-                    font-family: $fontPadrao;
+                    font-family: 'Share Tech Mono';
+                    font-weight: bold;
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
                     position: relative;
@@ -39,25 +40,17 @@ monospace;
                     text-decoration: none;
                     cursor: pointer;
                     .trigger-left {
-                        letter-spacing: .2rem;
                         position: absolute;
                         left: 10px;
                         .text-horario {
                             position: absolute;
                             display: inline-block;
-                            width: 63px;
+                            color: rgba(black, .6);
+                            width: 100px;
                             top: 5px;
                             left: 30px;
-                            margin-left: 15px;
+                            margin-left: 10px;
                             font-size: 1.7rem;
-                            // .monospace {
-                            //     display: inline-block;
-                            //     width: 1.7rem;
-                            // }
-                            // .timespace {
-                            //     display: inline-block;
-                            //     width: 3.5rem;
-                            // }
                         }
                         .horario-icon {
                             color: #F44336;
@@ -65,13 +58,14 @@ monospace;
                         }
                     }
                     .trigger-right {
-                        font-size: 1.2rem;
+                        font-size: 1.4rem;
                         letter-spacing: .2rem;
                         text-align: right;
                         width: 360px;
                         position: absolute;
                         right: 10px;
                         height: 20px;
+                        font-weight: normal;
                         .poltronas-icon {
                             color: #F6952D;
                         }
@@ -142,117 +136,45 @@ monospace;
 @mixin accordionMini {
     .panel-group {
         .panel-heading {
-            padding: 0;
             .panel-title {
                 a {
-                    @include noSelection;
-                    font-family: $fontPadrao;
-                    border-top-left-radius: 4px;
-                    border-top-right-radius: 4px;
-                    position: relative;
-                    display: block;
-                    height: 40px;
-                    line-height: 34px;
-                    text-decoration: none;
-                    cursor: pointer;
                     .trigger-left {
-                        letter-spacing: .2rem;
-                        position: absolute;
-                        left: 10px;
-                        .text-horario {
-                            position: absolute;
-                            display: inline-block;
-                            width: 63px;
-                            top: 5px;
-                            left: 30px;
-                            margin-left: 15px;
-                            font-size: 1.7rem;
-                            // .monospace {
-                            //     display: inline-block;
-                            //     width: 1.7rem;
-                            // }
-                            // .timespace {
-                            //     display: inline-block;
-                            //     width: 3.5rem;
-                            // }
-                        }
-                        .horario-icon {
-                            color: #F44336;
-                            margin-top: .5rem;
-                        }
+                        .text-horario {}
+                        .horario-icon {}
                     }
                     .trigger-right {
-                        font-size: 1.2rem;
-                        letter-spacing: .2rem;
-                        text-align: right;
-                        width: 360px;
-                        position: absolute;
-                        right: 10px;
-                        height: 20px;
-                        .poltronas-icon {
-                            color: #F6952D;
-                        }
-                        .progress {
-                            width: 100px;
-                            display: inline-block;
-                            height: 10px;
-                            margin-left: 10px;
-                            margin-top: 16px;
-                            margin-bottom: 0;
-                            box-shadow: none;
-                            border: 1px solid rgba(black, .2);
-                        }
+                        width: 120px;
+                        .poltronas-icon {}
+                        .progress {}
                         .icon-save,
                         .icon-remove,
-                        .icon-spin {
-                            display: none;
-                        }
+                        .icon-spin {}
                         .icon-arrow {
-                            display: inline-block;
-                            margin-left: 2rem;
-                            margin-top: -4px;
+                            margin-top: 7px;
                         }
                     }
                     &[aria-expanded="true"] {
                         .icon-passenger,
                         .poltronas-text,
-                        .progress {
-                            display: none;
-                        }
+                        .progress {}
                         .icon-save,
                         .icon-remove,
                         .icon-spin,
-                        .icon-arrow {
-                            display: inline-block;
-                        }
-                        .icon-remove {
-                            margin-top: 7px;
-                            margin-left: 20px;
-                        }
-                        .icon-save {
-                            margin-top: 7px;
-                        }
-                        .icon-arrow {
-                            margin-top: 7px;
-                        }
-                        .icon-spin {
-                            animation: rotation 10s infinite;
-                            margin-top: 11px;
-                        }
+                        .icon-arrow {}
+                        .icon-remove {}
+                        .icon-save {}
+                        .icon-arrow {}
+                        .icon-spin {}
                     }
                 }
             }
         }
-        .not-allowed a {
-            opacity: .2;
-            cursor: not-allowed !important;
-        }
+        .not-allowed a {}
         .panel-collapse {
             &.collapse.in {
                 height: 560px;
             }
             .panel-body {
-                padding: 5px 0 5px 0;
                 @content;
             }
         }
@@ -318,93 +240,6 @@ monospace;
     .tab-volta-mini {
         background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
         background-attachment: scroll;
-    }
-}
-
-@mixin busSelectMini($seatColor) {
-    @include loader(280px, 560px);
-    position: relative;
-    .bus-seat-select {
-        @include transform(rotate(90deg));
-        background-color: white;
-        position: absolute;
-        left: -135px;
-        top: 190px;
-        width: $size !important;
-        height: 180px !important;
-        border-radius: 4px;
-        padding: 10px;
-        .bus-row {
-            padding: 0 10px 0 22px;
-            .label {
-                span {
-                    display: inline-block;
-                    @include transform(rotate(-90deg));
-                }
-                font-family: $fontNumeros;
-                text-shadow: 1px 1px rgba(black, .3);
-                @include noSelection();
-                // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                background: url(./styles/images/busseat-green-3.svg);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-                //   background-size: cover;
-                color: white;
-                // background-color: $seatColor;
-                margin-right: 8px;
-                padding: 8px 3px 0 0;
-                font-size: 1.5rem;
-                float: left;
-                height: 32px !important;
-                width: 32px !important;
-                cursor: pointer;
-                &.reserved {
-                    cursor: not-allowed;
-                    text-shadow: none;
-                    background: url(./styles/images/busseat-reserved.svg);
-                    // background-color: rgba($colorReserved, .15);
-                    color: rgba(black, .2);
-                }
-                &.selected {
-                    // background-color: $colorSelected;
-                    background: url(./styles/images/busseat-selected2.svg);
-                }
-                &.legenda {
-                    cursor: default;
-                }
-            }
-            &.corredor-acima {
-                padding-top: 0;
-                padding-bottom: 8px;
-            }
-            &.corredor-abaixo {
-                padding-top: 8px;
-                padding-bottom: 0;
-            }
-            &.bus-row-legenda {
-                padding-left: 0;
-                padding-right: 15px;
-            }
-            &.bus-row.row {
-                padding-left: 56px;
-            }
-        }
-    }
-    hr {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    .clean-bus {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-    .jumbotron {
-        background: url(./styles/images/seats2.svg) no-repeat center white;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        margin-bottom: 0;
-        height: 100% !important;
-        padding: 8px 15px 5px 30px;
     }
 }
 
@@ -485,6 +320,35 @@ monospace;
         height: 100% !important;
         padding: 8px 15px 5px 30px;
     }
+}
+
+@mixin busSelectMini($seatColor) {
+    @include loader(280px, 560px);
+    position: relative;
+    .bus-seat-select {
+        @include transform(rotate(90deg));
+        position: absolute;
+        left: -135px;
+        top: 190px;
+        .bus-row {
+            .label {
+                span {
+                    display: inline-block;
+                    @include transform(rotate(-90deg));
+                }
+                &.reserved {}
+                &.selected {}
+                &.legenda {}
+            }
+            &.corredor-acima {}
+            &.corredor-abaixo {}
+            &.bus-row-legenda {}
+            &.bus-row.row {}
+        }
+    }
+    hr {}
+    .clean-bus {}
+    .jumbotron {}
 }
 
 .comprar-passagem-container {

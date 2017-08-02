@@ -130,7 +130,7 @@ class HorariosAccordion extends Component {
         .filter(item => poltronas[item] === utils.PoltronaStatus.RESERVED).length;
       const percentLotacao = parseInt((ocupadasSize / allSize) * 100, 10);
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
-      const strHorario = utils.firebaseToTime(horario);
+      const strHorario = utils.firebaseToTimeExt(horario);
       const position = (index + 1);
       const className = poltronas.isDisabled ? "not-allowed" : "allowed";
       const isActive = (position === active);
@@ -155,7 +155,7 @@ class HorariosAccordion extends Component {
                 />
                 {
                   (strHorario.length > 0) &&
-                  <span className="text-after-icon text-horario text-right">{strHorario}</span>
+                  <span className="text-after-icon text-horario text-left">{strHorario}</span>
                 }
               </span>
               <span className="trigger-right">
