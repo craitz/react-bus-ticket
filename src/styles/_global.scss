@@ -192,6 +192,14 @@
     height: calc(100vh - 50px);
 }
 
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+
 @mixin bkgImage($file: 'tree5.jpg') {
     $blur: 10px;
     content: "";
