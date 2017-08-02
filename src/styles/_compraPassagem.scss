@@ -144,6 +144,24 @@ monospace;
     background-color: white;
     margin-top: 0;
     // opacity: .95;
+    &.mini-volta {
+        margin-top: 15px;
+        position: relative;
+    }
+    .button-limpar-ida {
+        position: absolute;
+        left: -20px;
+        top: 57px - 10px;
+        z-index: 9;
+        // background-color: #F44336 !important;
+    }
+    .button-limpar-volta {
+        position: absolute;
+        right: -20px;
+        top: 57px - 10px;
+        z-index: 9;
+        // background-color: #F44336 !important;
+    }
     nav {
         // font-family: "Ubuntu";
         .tab-row {
@@ -159,16 +177,30 @@ monospace;
         left: 50px;
         top: 15px;
     }
-    .tab-ida {
-        background: url(./styles/images/tab-ida.svg) no-repeat center fixed;
+    .tab-ida,
+    .tab-ida-mini {
+        background: url(./styles/images/tab-ida.svg) no-repeat fixed;
         background-attachment: scroll;
-        background-size: cover;
     }
     .tab-volta {
-        background: url(./styles/images/tab-volta.svg) no-repeat center fixed;
+        background: url(./styles/images/tab-volta.svg) no-repeat fixed;
         background-attachment: scroll;
-        background-size: cover;
     }
+    .tab-volta-mini {
+        background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
+        background-attachment: scroll;
+    }
+    // &.mini-volta {
+    //     margin-top: 15px;
+    //     position: relative;
+    //     .button-limpar-volta {
+    //         position: absolute;
+    //         right: -20px;
+    //         top: 57px - 10px;
+    //         z-index: 9;
+    //         // background-color: #F44336 !important;
+    //     }
+    // }
     @include accordion {
         @include busSelect(rgba($googleGreen, .8));
     }
@@ -260,202 +292,21 @@ monospace;
     }
 }
 
-@mixin navbarTrajeto {
-    background-color: white;
-    font-size: 1.2rem !important;
-    .input-group {
-        width: 180px;
-        .input-group-addon {
-            padding: 0 6px 0 6px;
-        }
-        .Select-control {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
-    &::after {
-        @include afterShadow;
-    }
-}
-
-@mixin detalhes {
-    $colorTheme: rgb(217, 237, 247);
-    // background-color: rgba(black, .1);
-    background: url(./styles/images/ticket.svg) no-repeat center $colorDetalhesPanel;
-    border: 1px solid rgba(rgb(49, 112, 143), .5) !important;
-    float: left;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 610px);
-    .row {
-        padding-left: 40px;
-    }
-    &.soida {
-        height: 305px;
-        @include aside(303px, 40px, $colorTheme, rgb(49, 112, 143));
-    }
-    &.idavolta {
-        height: 407px;
-        @include aside(405px, 40px, $colorTheme, rgb(49, 112, 143));
-    }
-    .icon-edit {
-        position: absolute;
-        width: 40px;
-        top: 20px;
-        right: 30px;
-        cursor: pointer;
-    }
-    .icon-limpar-ida {
-        position: absolute;
-        width: 50px;
-        top: 110px;
-        right: 36px;
-        cursor: pointer;
-    }
-    .icon-limpar-volta {
-        position: absolute;
-        width: 50px;
-        top: 215px;
-        right: 36px;
-        cursor: pointer;
-    }
-    .detalhes-info {
-        font-family: $fontDetalhesPanel;
-        font-size: $sizeFontDetalhesPanel;
-        color: $colorFontDetalhesPanel;
-        .text-after-icon {
-            margin-left: 20px;
-            letter-spacing: .1rem;
-        }
-        .data-ida,
-        .hora-ida {
-            color: #4CAF50;
-        }
-        .data-volta,
-        .hora-volta {
-            color: #F44336;
-        }
-        .origem,
-        .destino {
-            color: $googleBlue;
-            // color: rgb(246, 149, 45);
-        }
-        .label-poltrona-ida {
-            background-color: #4CAF50;
-            margin-left: 3px;
-        }
-        .label-nenhuma-ida {
-            color: #4CAF50;
-        }
-        .label-poltrona-volta {
-            background-color: #F44336;
-        }
-        .label-nenhuma-volta {
-            color: #F44336;
-        }
-        .label-erro {
-            padding-left: 10px;
-            margin-left: 22px;
-            font-family: 'Source Code Pro';
-            position: relative;
-            background-color: rgba($colorHasError, .8);
-            color: rgba(white, .8);
-            .label-erro-text {
-                margin-left: 8px;
-            }
-            &::before {
-                content: '';
-                position: absolute;
-                left: -12px;
-                top: 5px;
-                width: 0;
-                height: 0;
-                border-top: 5px solid transparent;
-                border-left: 5px solid transparent;
-                border-bottom: 5px solid transparent;
-                border-right: 7px solid $colorHasError;
-                clear: both;
-            }
-        }
-        .btn-continuar {
-            position: relative;
-            // font-size: 2rem;
-            &:hover {
-                .text-confirmar {}
-            }
-            // &::after {
-            //     width: 45px;
-            // }
-            .icon-finalizar {
-                // height: 25px;
-                // position: absolute;
-                // left: 15px;
-                // top: 8px;
-            }
-        }
-        .detalhes-warning {
-            font-family: $fontPadrao;
-            display: inline-block;
-            margin-top: 10px;
-            color: rgba(black, .35);
-            font-style: italic;
-            line-height: 1.2rem !important;
-        }
-    }
-}
-
 .comprar-passagem-container {
     position: relative;
     .button-finaliza {
         position: absolute;
         right: 20px;
         bottom: -28px;
-        z-index: 9999;
+        z-index: 9;
     }
     .button-edit {
         position: absolute;
         right: 90px;
         bottom: -20px;
-        z-index: 9999;
+        z-index: 9;
     }
-    .button-limpar-ida {
-        position: absolute;
-        left: -20px;
-        top: 57px - 10px;
-        z-index: 9999;
-        // background-color: #F44336 !important;
-    }
-    .button-limpar-volta {
-        position: absolute;
-        right: -20px;
-        top: 57px - 10px;
-        z-index: 9999;
-        // background-color: #F44336 !important;
-    }
-    .floating-ida {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 40px;
-        height: 137px;
-        background-color: darken($materialPrimary, 5%);
-    }
-    .floating-volta {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40px;
-        height: 137px;
-        background-color: darken($materialPrimary, 5%);
-    }
-    // background-color: darken(#f5f5f5, 3%);
-    // background-color: darken(rgb(246, 247, 248), 3%);
-    // background-color: aliceblue;
     @include containerHeight;
-    .navbar-trajeto {
-        @include navbarTrajeto;
-    }
     .form-passagem-container {
         position: relative;
         background-color: transparent;
@@ -496,9 +347,6 @@ monospace;
                 left: calc(50% - 175px);
                 .tab-horarios {
                     @include tabControl;
-                }
-                .detalhes-container {
-                    @include detalhes;
                 }
             }
         }
