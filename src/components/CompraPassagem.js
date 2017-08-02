@@ -792,31 +792,34 @@ export class CompraPassagem extends Component {
               onSaveSeats={this.handleSaveSeats}
             />
           </Tab>
-        </Tabs>    
-        <Tabs
-          index={0}
-          fixed
-          inverse
-          className="tab-horarios mini-volta mui--z3"
-        >
-          <Tab
-            label={<HeaderTab isVolta={true} />}
-            className="tab-volta-mini"
+        </Tabs>
+        {
+          isIdaVolta &&
+          <Tabs
+            index={0}
+            fixed
+            inverse
+            className="tab-horarios mini-volta mui--z3"
           >
-          <ButtonLimpar isVolta={true}/>
-            <NoResultsAccordionVolta
-              className="accordion-volta"
-              color="dark"
-              isVolta={true}
-              isSavingPoltronas={isSavingPoltronas}
-              horarios={horariosVolta}
-              active={activeAccordionVolta}
-              onClickSeat={this.handleClickSeat}
-              onResetSeats={this.handleResetSeats}
-              onSaveSeats={this.handleSaveSeats}
-            />
-          </Tab>
-        </Tabs>    
+            <Tab
+              label={<HeaderTab isVolta={true} />}
+              className="tab-volta-mini"
+            >
+            <ButtonLimpar isVolta={true}/>
+              <NoResultsAccordionVolta
+                className="accordion-volta"
+                color="dark"
+                isVolta={true}
+                isSavingPoltronas={isSavingPoltronas}
+                horarios={horariosVolta}
+                active={activeAccordionVolta}
+                onClickSeat={this.handleClickSeat}
+                onResetSeats={this.handleResetSeats}
+                onSaveSeats={this.handleSaveSeats}
+              />
+            </Tab>
+          </Tabs>   
+        }    
      </section>
     
     return (

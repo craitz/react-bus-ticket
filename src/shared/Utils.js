@@ -73,6 +73,12 @@ export const firebaseToTime = (text) => {
   return momentTime.format('HH:mm');
 }
 
+export const firebaseToTimeExt = (text) => {
+  const hora = text.slice(0,2);
+  const min = text.slice(2);
+  return `${hora}h ${min}m`;
+}
+
 export const checkHorario = (data, horario) => {
   const strNow = moment().format('YYYYMMDDHHmm');
   const strData = `${data}${horario}`;
