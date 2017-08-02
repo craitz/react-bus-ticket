@@ -591,8 +591,12 @@ button {
                   display: none; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right .icon-arrow {
                   display: inline-block;
-                  margin-left: 2rem;
-                  margin-top: -4px; }
+                  margin-left: 4rem;
+                  margin-top: -4px;
+                  font-size: 1.8rem;
+                  color: rgba(0, 0, 0, 0.6) !important; }
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right .icon-passenger {
+                  color: #F44336; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-passenger,
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .poltronas-text,
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .progress {
@@ -603,12 +607,9 @@ button {
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
                 display: inline-block; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove {
-                margin-top: 7px;
                 margin-left: 20px; }
-              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save {
-                margin-top: 7px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
-                margin-top: 7px; }
+                line-height: 48px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-spin {
                 animation: rotation 10s infinite;
                 margin-top: 11px; }
@@ -691,7 +692,9 @@ button {
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-heading .panel-title a .trigger-right, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-heading .panel-title a .trigger-right {
             width: 120px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-heading .panel-title a .trigger-right .icon-arrow, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-heading .panel-title a .trigger-right .icon-arrow {
-              margin-top: 7px; }
+              margin-top: 11px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
+            margin-top: -4px !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-collapse.collapse.in, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-collapse.collapse.in {
             height: 560px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-collapse .panel-body, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-collapse .panel-body {

@@ -86,8 +86,13 @@ monospace;
                         }
                         .icon-arrow {
                             display: inline-block;
-                            margin-left: 2rem;
+                            margin-left: 4rem;
                             margin-top: -4px;
+                            font-size: 1.8rem;
+                            color: rgba(black, .6) !important;
+                        }
+                        .icon-passenger {
+                            color: $googleRed;
                         }
                     }
                     &[aria-expanded="true"] {
@@ -103,14 +108,11 @@ monospace;
                             display: inline-block;
                         }
                         .icon-remove {
-                            margin-top: 7px;
                             margin-left: 20px;
                         }
-                        .icon-save {
-                            margin-top: 7px;
-                        }
+                        .icon-save {}
                         .icon-arrow {
-                            margin-top: 7px;
+                            line-height: 48px;
                         }
                         .icon-spin {
                             animation: rotation 10s infinite;
@@ -150,7 +152,7 @@ monospace;
                         .icon-remove,
                         .icon-spin {}
                         .icon-arrow {
-                            margin-top: 7px;
+                            margin-top: 11px;
                         }
                     }
                     &[aria-expanded="true"] {
@@ -163,7 +165,9 @@ monospace;
                         .icon-arrow {}
                         .icon-remove {}
                         .icon-save {}
-                        .icon-arrow {}
+                        .icon-arrow {
+                            margin-top: -4px !important;
+                        }
                         .icon-spin {}
                     }
                 }

@@ -181,12 +181,7 @@ class HorariosAccordion extends Component {
                     onClick={() => onResetSeats(isVolta, horario)}
                   />
                 </TooltipOverlay>
-                <img
-                  src={passengerRedLogo}
-                  height="16"
-                  alt=""
-                  className="icon-passenger hidden-xs"
-                />
+                <FontAwesome name="bookmark" className="icon-passenger hidden-xs"/>
                 <span className="text-after-icon poltronas-text hidden-xs">
                   {strLotacao}
                 </span>
@@ -195,12 +190,7 @@ class HorariosAccordion extends Component {
                   bsStyle="success"
                   now={percentLotacao}
                 />
-                <img
-                  src={isActive ? caretUpLogo : caretDownLogo}
-                  height="20"
-                  alt=""
-                  className="icon-arrow icon-after-text"
-                />
+                <FontAwesome name={isActive ? "chevron-circle-up" : "chevron-circle-down"} className="icon-arrow"/>
               </span>
             </div>}>
           {
