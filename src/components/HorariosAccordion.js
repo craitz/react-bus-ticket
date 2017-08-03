@@ -4,52 +4,12 @@ import { Panel, Accordion, ProgressBar } from 'react-bootstrap';
 import BusSelect from './BusSelect';
 import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
-import passengerRedLogo from '../styles/images/passenger-red.svg';
 import checkLogo from '../styles/images/check3.svg';
-import caretUpLogo from '../styles/images/caret-up.svg';
-import caretDownLogo from '../styles/images/caret-down2.svg';
-import spinLogo from '../styles/images/spinner3.svg';
-import spinnerLogo from '../styles/images/spinner4.svg';
 import removeLogo from '../styles/images/remove.svg';
 import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import FontAwesome from 'react-fontawesome';
-import Loading from 'react-loading-animation';
 import Spinner from 'react-spinner-children';
-
-const Timespan = ({ className, children }) => {
-  const arrText = children.split(':');
-
-  return (
-    <span className={className}>
-      <span className="text-left timespace">{arrText[0]}</span>
-      <span>:</span>
-      <span className="text-right timespace">{arrText[1]}</span>
-    </span>
-  );
-}
-
-const Monospan = ({ className, children }) => {
-  const arrText = children.split('');
-
-  const getPositioning = (text, index) => {
-    return ((text === '1') && index === (arrText.length - 1))
-      ? 'monospace text-right'
-      : 'monospace text-center';
-  }
-
-  return (
-    <span className={className}>
-      {
-        arrText.map((item, index) => {
-          return (
-            <span className={getPositioning(item, index)} key={index}>{item}</span>
-          );
-        })
-      }
-    </span>
-  );
-}
 
 class HorariosAccordion extends Component {
   constructor(props) {
@@ -181,7 +141,7 @@ class HorariosAccordion extends Component {
                     onClick={() => onResetSeats(isVolta, horario)}
                   />
                 </TooltipOverlay>
-                <FontAwesome name="bookmark" className="icon-passenger hidden-xs"/>
+                <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
                 <span className="text-after-icon poltronas-text hidden-xs">
                   {strLotacao}
                 </span>
@@ -190,7 +150,7 @@ class HorariosAccordion extends Component {
                   bsStyle="success"
                   now={percentLotacao}
                 />
-                <FontAwesome name={isActive ? "chevron-circle-up" : "chevron-circle-down"} className="icon-arrow"/>
+                <FontAwesome name={isActive ? "chevron-circle-up" : "chevron-circle-down"} className="icon-arrow" />
               </span>
             </div>}>
           {
@@ -210,6 +170,8 @@ class HorariosAccordion extends Component {
           }
         </Panel >
       );
+
+      return null;
     });
 
     return collapsibles;

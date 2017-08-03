@@ -3,10 +3,9 @@ import { withRouter } from 'react-router-dom'
 import { withAuth } from '../shared/hoc';
 import { Col, Jumbotron } from 'react-bootstrap';
 import DivAnimated from '../shared/DivAnimated'
-import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import { PageHeader } from '../shared/PageHeader';
 import store from '../store';
 import * as actions from '../actions/modalTrajeto.actions';
-import { ButtonIconFit } from '../shared/ButtonIcon';
 import FontAwesome from 'react-fontawesome';
 import Button from 'react-toolbox/lib/button/Button';
 
@@ -81,7 +80,7 @@ class Welcome extends Component {
               <hr />
               <ButtonComprar handleComprar={this.handleComprarPassagem} />
             </Jumbotron>
-          </Col> 
+          </Col>
         </DivAnimated>
       </div >
     );

@@ -752,10 +752,6 @@ button {
             text-transform: none; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group {
             margin-bottom: 0; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .text-nenhum-resultado {
-            position: absolute;
-            left: 50px;
-            top: 15px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-ida,
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-ida-mini {
             background: url(./styles/images/tab-ida.svg) no-repeat fixed;

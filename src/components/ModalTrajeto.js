@@ -6,15 +6,12 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
 import { withRouter } from 'react-router-dom'
-import { ButtonIcon } from '../shared/ButtonIcon';
 import InputDate from '../shared/InputDate';
 import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
-import { Dropdown, DropdownItem } from 'muicss/react';
 import Button from 'react-toolbox/lib/button/Button';
-import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -341,8 +338,8 @@ export class ModalTrajeto extends Component {
                     <ErrorBlock message={dataVolta.message} />
                   </FormGroup>
                 </Col>
-            </Row>
-          }
+              </Row>
+            }
           </Modal.Body>
           <Modal.Footer>
             <Button
