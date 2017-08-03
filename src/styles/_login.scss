@@ -1,7 +1,7 @@
 .login-container {
     height: calc(100% - 150px) !important;
     $boxWidth: 320px;
-    $boxBgColor: rgba(white, .9);
+    $boxBgColor: rgba(whitesmoke, 1);
     $headerHeight: 40px;
     $headerTitleWidth: 220px;
     $headerTitleMainColor: black;
@@ -12,12 +12,12 @@
     $inputBorderColor: rgba(255, 255, 255, .7);
     @include centralizeContent();
     .login-box {
+        opacity: .95;
         text-align: left;
         position: relative;
         width: $boxWidth;
-        border: 1px solid rgba(0, 0, 0, .1);
+        border: none;
         background-color: $boxBgColor;
-        border-radius: 4px;
         padding: 15px 20px 5px 20px;
         .form-group.last {
             margin-top: 20px;
@@ -30,7 +30,8 @@
             left: 0;
             width: 100%;
             height: 50px;
-            border-bottom: 1px solid rgba(black, .05) !important;
+            border-bottom: 2px solid $materialAccent !important;
+            background-color: $materialPrimary;
             .login-header--title {
                 position: absolute;
                 left: 0;
@@ -40,7 +41,7 @@
                 padding-top: 10px;
                 padding-left: 20px;
                 .login-header--title-main {
-                    color: $materialPrimary;
+                    color: rgba(white, .8);
                     line-height: $headerTitleMainLineHeight;
                     font-size: $headerTitleMainFontSize;
                     font-weight: bold;
@@ -56,7 +57,7 @@
                 height: inherit;
                 .main-icon {
                     font-size: $headerIconFontSize;
-                    color: $materialPrimary;
+                    color: rgba(white, .8);
                     // color: rgba($headerTitleMainColor, .5);
                     margin-right: 5px;
                 }

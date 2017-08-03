@@ -6,7 +6,8 @@
         margin-top: 15px;
         text-align: left;
         .jumbo-painel {
-            background-color: rgba(white, .8) !important;
+            // opacity: .9;
+            background-color: rgba(white, .95) !important;
         }
         h2 {
             font-family: $fontPadrao;
@@ -22,7 +23,7 @@
         }
     }
     &::after {
-        @include bkgImage();
+        @include bkgImage('tree6.jpg');
     }
 }
 

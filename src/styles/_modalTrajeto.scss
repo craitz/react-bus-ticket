@@ -17,22 +17,25 @@ $arrowSize: 6px;
         color: initial;
     }
     .modal-dialog {
+        opacity: .95;
         input#data {
             background-color: white;
         }
-        width: 360px;
+        width: 300px;
         // color: white;
         border-radius: 6px;
         .modal-content {
-            background-color: #f5f5f5;
+            background-color: whitesmoke;
             .modal-header {
+                background-color: $materialPrimary;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
                 // background-color: $colorNavbarHeader;
-                color: $materialPrimary;
+                // color: $materialPrimary;
+                color: rgba(white, .8);
                 // color: rgba(black, .75);
                 padding: 0 20px 0 20px;
-                border-bottom-color: rgba(black, .05);
+                border-bottom: 2px solid $materialAccent;
                 font-family: $fontPadrao;
                 // font-weight: bold;
                 // font-weight: bold;
@@ -90,10 +93,10 @@ $arrowSize: 6px;
                     padding-left: 15px;
                 }
                 .col-ida-com-volta {
-                    padding-right: 10px;
+                    // padding-right: 10px;
                 }
                 .col-volta-com-volta {
-                    padding-left: 10px;
+                    // padding-left: 10px;
                 }
                 .has-error {
                     .Select-control {
@@ -127,7 +130,6 @@ $arrowSize: 6px;
                 border-top-color: rgba(black, .05);
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
-                // padding-top: 0;
             }
             // background-color: rgba(#FFCC3E, .9);
             @include noSelection();
