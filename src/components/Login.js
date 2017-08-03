@@ -22,7 +22,7 @@ const fakeDataOptions = {
   endHour: 22,
   reservedPercentage: 0.2, // 20%
   horariosPercentage: 0.3, // 20%
-  email: 'guest@busticket.com',
+  email: 'fake@busticket.com',
 }
 
 const fakeGenerator = (() => {

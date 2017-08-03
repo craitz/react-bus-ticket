@@ -4,8 +4,6 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
-import { Button } from 'muicss/react';
-import Input from 'react-toolbox/lib/input/Input';
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav className="navheader-nav">

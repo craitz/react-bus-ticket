@@ -225,11 +225,7 @@ monospace;
     .panel-group {
         margin-bottom: 0;
     }
-    .text-nenhum-resultado {
-        position: absolute;
-        left: 50px;
-        top: 15px;
-    }
+    .text-nenhum-resultado {}
     .tab-ida,
     .tab-ida-mini {
         background: url(./styles/images/tab-ida.svg) no-repeat fixed;
