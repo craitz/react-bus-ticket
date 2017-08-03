@@ -235,7 +235,8 @@
 
 button {
   font-family: "Ubuntu" !important;
-  font-weight: bold !important; }
+  font-weight: bold !important;
+  color: rgba(255, 255, 255, 0.9) !important; }
 
 .App {
   text-align: center; }
@@ -376,12 +377,13 @@ button {
   color: initial; }
 
 .modal-trajeto-container .modal-dialog {
-  width: 360px;
+  opacity: .95;
+  width: 300px;
   border-radius: 6px; }
   .modal-trajeto-container .modal-dialog input#data {
     background-color: white; }
   .modal-trajeto-container .modal-dialog .modal-content {
-    background-color: #f5f5f5;
+    background-color: whitesmoke;
     -moz-user-select: -moz-none !important;
     -khtml-user-select: none !important;
     -webkit-user-select: none !important;
@@ -389,11 +391,12 @@ button {
     user-select: none !important;
     font-size: 1.5rem; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-header {
+      background-color: #3f51b5;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
-      color: #3f51b5;
+      color: rgba(255, 255, 255, 0.8);
       padding: 0 20px 0 20px;
-      border-bottom-color: rgba(0, 0, 0, 0.05);
+      border-bottom: 2px solid #FF4081;
       font-family: "Days One";
       font-size: 2rem;
       line-height: 51px; }
@@ -432,10 +435,6 @@ button {
         padding-right: 15px; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-volta {
         padding-left: 15px; }
-      .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-ida-com-volta {
-        padding-right: 10px; }
-      .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-volta-com-volta {
-        padding-left: 10px; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .Select-control {
         border: 1px solid #e71d36; }
         .modal-trajeto-container .modal-dialog .modal-content .modal-body .has-error .Select-control .Select-arrow {
@@ -485,9 +484,26 @@ button {
     transform: rotate(360deg); } }
 
 .comprar-passagem-container {
-  position: relative;
   overflow: auto;
   height: calc(100vh - 50px); }
+  .comprar-passagem-container::after {
+    content: "";
+    background: url(./styles/images/tree2.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute;
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0); }
   .comprar-passagem-container .button-finaliza,
   .comprar-passagem-container .button-edit {
     position: absolute;
@@ -500,7 +516,7 @@ button {
     bottom: -20px; }
   .comprar-passagem-container .form-passagem-container {
     position: relative;
-    background-color: transparent;
+    background-color: transpareredt;
     border: none;
     width: 300px;
     margin: 50px 0 0 calc(50% - 150px) !important; }
@@ -531,7 +547,8 @@ button {
         left: calc(50% - 175px); }
         .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios {
           background-color: white;
-          margin-top: 0; }
+          margin-top: 0;
+          margin-bottom: 30px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading {
             padding: 0; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a {
@@ -687,7 +704,7 @@ button {
               padding: 8px 15px 5px 30px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta {
             margin-top: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-ida .panel-group .panel-heading .panel-title a .trigger-right, .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios.mini-volta .panel-group .panel-heading .panel-title a .trigger-right {
             width: 120px; }
@@ -774,7 +791,7 @@ button {
         margin-bottom: 0; }
   .confirmacao-passagem::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center fixed;
+    background: url(./styles/images/tree5.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -783,6 +800,7 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
     position: absolute;
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
@@ -849,7 +867,7 @@ button {
     color: white; }
   .pesquisar-passagens-container::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center fixed;
+    background: url(./styles/images/tree5.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -858,6 +876,7 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
     position: absolute;
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
@@ -875,12 +894,12 @@ button {
   margin-top: 0;
   padding-top: 0; }
   .login-container .login-box {
+    opacity: .95;
     text-align: left;
     position: relative;
     width: 320px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
+    border: none;
+    background-color: whitesmoke;
     padding: 15px 20px 5px 20px; }
     .login-container .login-box .form-group.last {
       margin-top: 20px;
@@ -892,7 +911,8 @@ button {
       left: 0;
       width: 100%;
       height: 50px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; }
+      border-bottom: 2px solid #FF4081 !important;
+      background-color: #3f51b5; }
       .login-container .login-box .login-header .login-header--title {
         position: absolute;
         left: 0;
@@ -902,7 +922,7 @@ button {
         padding-top: 10px;
         padding-left: 20px; }
         .login-container .login-box .login-header .login-header--title .login-header--title-main {
-          color: #3f51b5;
+          color: rgba(255, 255, 255, 0.8);
           line-height: 30px;
           font-size: 2.5rem;
           font-weight: bold;
@@ -916,13 +936,13 @@ button {
         height: inherit; }
         .login-container .login-box .login-header .login-header--icon .main-icon {
           font-size: 2.5rem;
-          color: #3f51b5;
+          color: rgba(255, 255, 255, 0.8);
           margin-right: 5px; }
     .login-container .login-box form {
       margin-top: 60px; }
   .login-container::after {
     content: "";
-    background: url(./styles/images/tree3.jpg) no-repeat center fixed;
+    background: url(./styles/images/tree3.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -931,6 +951,7 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
     position: absolute;
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
@@ -950,7 +971,7 @@ button {
     margin-top: 15px;
     text-align: left; }
     .welcome-container .info-container .jumbo-painel {
-      background-color: rgba(255, 255, 255, 0.8) !important; }
+      background-color: rgba(255, 255, 255, 0.95) !important; }
     .welcome-container .info-container h2 {
       font-family: "Days One";
       color: rgba(0, 0, 0, 0.65); }
@@ -960,7 +981,7 @@ button {
       display: none; }
   .welcome-container::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center fixed;
+    background: url(./styles/images/tree6.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -969,6 +990,7 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
     position: absolute;
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
@@ -1018,7 +1040,7 @@ button {
       margin-left: 10px; }
   .perfil-usuario-container::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center fixed;
+    background: url(./styles/images/tree5.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1027,6 +1049,7 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100%;
     position: absolute;
     -webkit-filter: blur(0);
     -moz-filter: blur(0);
@@ -1040,23 +1063,8 @@ button {
 html {
   height: 100%; }
   html body {
-    content: "";
-    background: url(./styles/images/tree2.jpg) no-repeat center fixed;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0);
-    height: inherit; }
+    height: inherit;
+    position: relative; }
     html body #root {
       height: inherit; }
       html body #root .App {

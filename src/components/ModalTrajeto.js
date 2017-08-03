@@ -311,7 +311,7 @@ export class ModalTrajeto extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={isIdaVolta ? 6 : 12} className={isIdaVolta ? "col-ida-com-volta" : "col-ida"}>
+              <Col xs={12} className={isIdaVolta ? "col-ida-com-volta" : "col-ida"}>
                 <FormGroup controlId="data-ida" validationState={data.validation}>
                   <InputGroup>
                     <AddOn tooltip="Data de ida" icon="arrow-right fa-fw" className="addon-green" />
@@ -324,8 +324,11 @@ export class ModalTrajeto extends Component {
                   {/*<ErrorBlock message={data.message} />*/}
                 </FormGroup>
               </Col>
-              {isIdaVolta &&
-                <Col xs={6} className={isIdaVolta ? "col-volta-com-volta" : "col-volta"}>
+            </Row>
+
+            {isIdaVolta &&
+              <Row>
+                <Col xs={12} className={isIdaVolta ? "col-volta-com-volta" : "col-volta"}>
                   <FormGroup controlId="data-volta" validationState={dataVolta.validation}>
                     <InputGroup>
                       <AddOn tooltip="Data de volta" icon="arrow-left fa-fw" className="addon-red" />
@@ -338,8 +341,8 @@ export class ModalTrajeto extends Component {
                     <ErrorBlock message={dataVolta.message} />
                   </FormGroup>
                 </Col>
-              }
             </Row>
+          }
           </Modal.Body>
           <Modal.Footer>
             <Button

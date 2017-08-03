@@ -191,10 +191,10 @@ monospace;
     }
     background-color: white;
     margin-top: 0;
-    // opacity: .95;
+    margin-bottom: 30px;
     &.mini-volta {
         margin-top: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         position: relative;
     }
     &.mini-ida,
@@ -354,7 +354,10 @@ monospace;
 }
 
 .comprar-passagem-container {
-    position: relative;
+    &::after {
+        @include bkgImage('tree2.jpg');
+    }
+    // background-color: red;
     .button-finaliza,
     .button-edit {
         position: absolute;
@@ -371,7 +374,7 @@ monospace;
     @include containerHeight;
     .form-passagem-container {
         position: relative;
-        background-color: transparent;
+        background-color: transpareredt;
         border: none;
         // width: $contentWidth;
         width: 300px; // SM
@@ -412,9 +415,6 @@ monospace;
                 }
             }
         }
-    }
-    &::after {
-        // @include bkgImage('tree2.jpg');
     }
     @include sm {
         .form-passagem-container {
