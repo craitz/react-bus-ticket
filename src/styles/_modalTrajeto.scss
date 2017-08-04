@@ -22,23 +22,15 @@ $arrowSize: 6px;
             background-color: white;
         }
         width: 300px;
-        // color: white;
-        border-radius: 6px;
         .modal-content {
+            border-radius: 0;
             background-color: whitesmoke;
             .modal-header {
                 background-color: $materialPrimary;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                // background-color: $colorNavbarHeader;
-                // color: $materialPrimary;
                 color: rgba(white, .8);
-                // color: rgba(black, .75);
                 padding: 0 20px 0 20px;
                 border-bottom: 2px solid $materialAccent;
                 font-family: $fontPadrao;
-                // font-weight: bold;
-                // font-weight: bold;
                 font-size: 2rem;
                 line-height: 51px;
                 .ida-volta {
@@ -49,7 +41,6 @@ $arrowSize: 6px;
                 .icon-ida-volta {}
             }
             .modal-body {
-                // background-color: #f5f5f5;
                 padding: 20px;
                 padding-bottom: 3px;
                 .Select-control {
@@ -70,8 +61,6 @@ $arrowSize: 6px;
                 .input-group-addon {
                     border-top-left-radius: 6px;
                     border-bottom-left-radius: 6px;
-                    // background-color: $materialPrimary;
-                    // color: white !important;
                     &.addon-blue span {
                         color: $busOrange;
                     }
@@ -92,12 +81,8 @@ $arrowSize: 6px;
                 .col-volta {
                     padding-left: 15px;
                 }
-                .col-ida-com-volta {
-                    // padding-right: 10px;
-                }
-                .col-volta-com-volta {
-                    // padding-left: 10px;
-                }
+                .col-ida-com-volta {}
+                .col-volta-com-volta {}
                 .has-error {
                     .Select-control {
                         border: 1px solid $colorHasError;
@@ -126,12 +111,8 @@ $arrowSize: 6px;
                 }
             }
             .modal-footer {
-                // background-color: #f5f5f5;
                 border-top-color: rgba(black, .05);
-                border-bottom-left-radius: 4px;
-                border-bottom-right-radius: 4px;
             }
-            // background-color: rgba(#FFCC3E, .9);
             @include noSelection();
             font-size: 1.5rem;
             .loading-text-after-icon {
