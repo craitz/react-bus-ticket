@@ -45,6 +45,7 @@ export class CompraPassagem extends Component {
     this.handleSelectTab = this.handleSelectTab.bind(this);
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
+    this.handleExcluiVolta = this.handleExcluiVolta.bind(this);
   }
 
   initializeValues() {
@@ -66,6 +67,11 @@ export class CompraPassagem extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !this.props.isFrozen;
+  }
+
+  handleExcluiVolta() {
+    this.props.dispatch(actions.setIdaVolta(false));
+    this.props.dispatch(actions.setActiveTab(0));
   }
 
   handleChangeOrigem(value) {
@@ -621,7 +627,6 @@ export class CompraPassagem extends Component {
 
       const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
       const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
-
       const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
       const poltronasFormatted = strPoltronas.length > 0 ? sortPoltronas(strPoltronas) : '';
 
@@ -708,13 +713,24 @@ export class CompraPassagem extends Component {
       </TooltipOverlay>
 
     const ButtonLimpar = ({ isVolta }) =>
-      <TooltipOverlay text="Limpar dados" position="top">
+      <TooltipOverlay text="Limpar poltronas" position="bottom">
         <Button
           floating
-          accent
+          primary
           mini
           className={isVolta ? "button-limpar-volta mui--z2" : "button-limpar-ida mui--z2"}
           onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
+          icon={<FontAwesome name="minus" />}
+        />
+      </TooltipOverlay>
+
+    const ButtonExcluirVolta = () =>
+      <TooltipOverlay text="Excluir passagem de volta" position="top">
+        <Button
+          floating
+          accent
+          className="button-excluir-volta mui--z2"
+          onClick={this.handleExcluiVolta}
           icon={<FontAwesome name="times" />}
         />
       </TooltipOverlay>
@@ -732,7 +748,7 @@ export class CompraPassagem extends Component {
           className="tab-ida"
         >
           {/*<section className="floating-ida"></section>*/}
-          <ButtonLimpar isVolta={false}/>
+          <ButtonLimpar isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
             color="dark"
@@ -751,7 +767,8 @@ export class CompraPassagem extends Component {
             className="tab-volta"
           >
             {/*<section className="floating-volta"></section>*/}
-          <ButtonLimpar isVolta={true}/>
+            <ButtonLimpar isVolta={true} />
+            <ButtonExcluirVolta />
             <NoResultsAccordionVolta
               className="accordion-volta"
               color="dark"
@@ -765,7 +782,7 @@ export class CompraPassagem extends Component {
             />
           </Tab>
         }
-      </Tabs>    
+      </Tabs>
 
     const TabsMini = () =>
       <section className="hidden-sm hidden-md hidden-lg">
@@ -779,7 +796,7 @@ export class CompraPassagem extends Component {
             label={<HeaderTab isVolta={false} />}
             className="tab-ida-mini"
           >
-            <ButtonLimpar isVolta={false}/>
+            <ButtonLimpar isVolta={false} />
             <NoResultsAccordionIda
               className="accordion-ida"
               color="dark"
@@ -805,7 +822,8 @@ export class CompraPassagem extends Component {
               label={<HeaderTab isVolta={true} />}
               className="tab-volta-mini"
             >
-            <ButtonLimpar isVolta={true}/>
+              <ButtonLimpar isVolta={true} />
+              <ButtonExcluirVolta />
               <NoResultsAccordionVolta
                 className="accordion-volta"
                 color="dark"
@@ -818,10 +836,10 @@ export class CompraPassagem extends Component {
                 onSaveSeats={this.handleSaveSeats}
               />
             </Tab>
-          </Tabs>   
-        }    
-     </section>
-    
+          </Tabs>
+        }
+      </section>
+
     return (
       <div className="comprar-passagem-container">
         <PageHeader
@@ -841,8 +859,8 @@ export class CompraPassagem extends Component {
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
             <div className="horarios-container">
-              <TabsLarge/>
-              <TabsMini/>
+              <TabsLarge />
+              <TabsMini />
             </div>
           </DivAnimated>
         </div>

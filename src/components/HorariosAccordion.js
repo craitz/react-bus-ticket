@@ -122,24 +122,26 @@ class HorariosAccordion extends Component {
                 <TooltipOverlay
                   text="Salvar seleção"
                   position="top">
-                  <img
+                  <FontAwesome name="check" className="icon-save icon-after-text" />
+                  {/*<img
                     src={checkLogo}
                     height="15"
                     alt=""
                     className="icon-save icon-after-text"
                     onClick={(event) => onSaveSeats(event, isVolta, horario)}
-                  />
+                  />*/}
                 </TooltipOverlay>
                 <TooltipOverlay
                   text="Limpar seleção"
                   position="top">
-                  <img
+                  <FontAwesome name="times" className="icon-remove" />
+                  {/*<img
                     src={removeLogo}
                     height="15"
                     alt=""
                     className="icon-remove"
                     onClick={() => onResetSeats(isVolta, horario)}
-                  />
+                  />*/}
                 </TooltipOverlay>
                 <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
                 <span className="text-after-icon poltronas-text hidden-xs">
@@ -150,7 +152,7 @@ class HorariosAccordion extends Component {
                   bsStyle="success"
                   now={percentLotacao}
                 />
-                <FontAwesome name={isActive ? "chevron-circle-up" : "chevron-circle-down"} className="icon-arrow" />
+                <FontAwesome name={isActive ? "chevron-up" : "chevron-down"} className="icon-arrow" />
               </span>
             </div>}>
           {

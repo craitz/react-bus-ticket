@@ -36,18 +36,6 @@ const ErrorBlock = ({ message }) => {
 }
 
 const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip }) =>
-  // <Dropdown color="primary" label={value}>
-  //   {
-  //     list.map((item, index) => {
-  //       return <DropdownItem
-  //         key={index}
-  //         value={value}
-  //         onChange={onChange}>
-  //         {item.label}
-  //       </DropdownItem>
-  //     })
-  //   }
-  // </Dropdown>
   <InputGroup>
     <AddOn tooltip={tooltip} icon={icon} className="addon-blue" />
     <Select

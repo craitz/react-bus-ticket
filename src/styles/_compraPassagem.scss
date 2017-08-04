@@ -72,9 +72,9 @@ monospace;
                         .progress {
                             width: 100px;
                             display: inline-block;
-                            height: 10px;
+                            height: 6px;
                             margin-left: 10px;
-                            margin-top: 16px;
+                            margin-top: 20px;
                             margin-bottom: 0;
                             box-shadow: none;
                             border: 1px solid rgba(black, .2);
@@ -87,8 +87,7 @@ monospace;
                         .icon-arrow {
                             display: inline-block;
                             margin-left: 4rem;
-                            margin-top: -4px;
-                            font-size: 1.8rem;
+                            // font-size: 1.8rem;
                             color: rgba(black, .6) !important;
                         }
                         .icon-passenger {
@@ -108,11 +107,14 @@ monospace;
                             display: inline-block;
                         }
                         .icon-remove {
+                            color: $googleRed;
                             margin-left: 20px;
                         }
-                        .icon-save {}
+                        .icon-save {
+                            color: $googleGreen;
+                        }
                         .icon-arrow {
-                            line-height: 48px;
+                            line-height: 42px;
                         }
                         .icon-spin {
                             animation: rotation 10s infinite;
@@ -152,7 +154,7 @@ monospace;
                         .icon-remove,
                         .icon-spin {}
                         .icon-arrow {
-                            margin-top: 11px;
+                            line-height: 42px;
                         }
                     }
                     &[aria-expanded="true"] {
@@ -166,7 +168,7 @@ monospace;
                         .icon-remove {}
                         .icon-save {}
                         .icon-arrow {
-                            margin-top: -4px !important;
+                            // margin-top: -4px !important;
                         }
                         .icon-spin {}
                     }
@@ -203,17 +205,26 @@ monospace;
             @include busSelectMini(rgba($googleGreen, .8));
         }
     }
-    .button-limpar-ida,
-    .button-limpar-volta {
+    .button-limpar-ida {
         position: absolute;
         z-index: 9;
         top: 57px - 10px;
-    }
-    .button-limpar-ida {
         left: -20px;
+        background-color: lighten($materialPrimary, 10%) !important;
+    }
+    .button-excluir-volta {
+        position: absolute;
+        z-index: 9;
+        top: 13px;
+        right: -28px;
+        background-color: lighten($materialPrimary, 10%) !important;
     }
     .button-limpar-volta {
+        position: absolute;
+        z-index: 9;
         right: -20px;
+        top: 75px;
+        background-color: lighten($materialPrimary, 10%) !important;
     }
     nav {
         // font-family: "Ubuntu";
@@ -228,11 +239,11 @@ monospace;
     .text-nenhum-resultado {}
     .tab-ida,
     .tab-ida-mini {
-        background: url(./styles/images/tab-ida.svg) no-repeat fixed;
+        background: url(./styles/images/tab-ida.svg) no-repeat left fixed;
         background-attachment: scroll;
     }
     .tab-volta {
-        background: url(./styles/images/tab-volta.svg) no-repeat fixed;
+        background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
         background-attachment: scroll;
     }
     .tab-volta-mini {
