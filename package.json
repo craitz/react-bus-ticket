@@ -8,10 +8,9 @@
             "DATE_PICKER",
             "PROGRESS_BAR",
             "INPUT",
-            "AUTOCOMPLETE",
             "SNACKBAR",
             "TABS",
-            "DROPDOWN"
+            "MENU"
         ],
         "customProperties": {
             "animation-duration": "0.3s",

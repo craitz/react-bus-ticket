@@ -6,7 +6,7 @@
   <rect x="-4.292" y="-2.146" width="297.747" height="144.85" style="fill: rgb(63, 81, 181);"/>
   <g transform="matrix(0.490769, 0, 0, 0.490769, 33.978539, 37.459698)">
     <g id="1" transform="matrix(.0065968 0 0 .0065968 .50676 .50676)">
-      <path id="2" style="stroke-linejoin: round; fill-rule: evenodd; stroke: rgb(35, 40, 43); stroke-linecap: round; stroke-width: 153.64px; fill: rgb(255, 255, 255); stroke-opacity: 0; fill-opacity: 0.05;" d="M 3088.8 14522 L 17223.797 14522 L 17223.797 19789.699 L 26134.789 9823.2 L 17223.797 -0.3 L 17223.797 5125 L 3088.8 5125 Z"/>
+      <path id="2" style="stroke-linejoin: round; fill-rule: evenodd; stroke: rgb(35, 40, 43); stroke-linecap: round; stroke-width: 153.64px; fill: rgb(255, 255, 255); stroke-opacity: 0; fill-opacity: 0.03;" d="M 3088.8 14522 L 17223.797 14522 L 17223.797 19789.699 L 26134.789 9823.2 L 17223.797 -0.3 L 17223.797 5125 L 3088.8 5125 Z"/>
     </g>
   </g>
 </svg>

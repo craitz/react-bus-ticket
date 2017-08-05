@@ -20,11 +20,39 @@ import Button from 'react-toolbox/lib/button/Button';
 import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import Snackbar from '../shared/Snackbar';
+import Menu from 'react-toolbox/lib/menu/Menu';
+import MenuItem from 'react-toolbox/lib/menu/MenuItem';
+import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
 
 const sortPoltronas = (poltronas) => {
   const poltronasTemp = utils.deepCopy(poltronas);
   poltronasTemp.sort();
   return poltronasTemp.join(' | ');
+}
+
+class ButtonMenu extends React.Component {
+  state = { active: false };
+  handleButtonClick = () => this.setState({ active: !this.state.active });
+  handleMenuHide = () => this.setState({ active: false });
+  render() {
+    return (
+      <div className="tab-menu">
+        <TooltipOverlay text="Opções" position="top">
+          <Button
+            accent
+            floating
+            mini
+            onClick={this.handleButtonClick}
+            icon={<FontAwesome name="bars" />}
+            className="mui--z2"
+          />
+        </TooltipOverlay>
+        <Menu position="topRight" active={this.state.active} onHide={this.handleMenuHide}>
+          {this.props.children}
+        </Menu>
+      </div>
+    );
+  }
 }
 
 export class CompraPassagem extends Component {
@@ -713,10 +741,10 @@ export class CompraPassagem extends Component {
       </TooltipOverlay>
 
     const ButtonLimpar = ({ isVolta }) =>
-      <TooltipOverlay text="Limpar poltronas" position="bottom">
+      <TooltipOverlay text="Limpar poltronas" position="top">
         <Button
           floating
-          primary
+          accent
           mini
           className={isVolta ? "button-limpar-volta mui--z2" : "button-limpar-ida mui--z2"}
           onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
@@ -724,16 +752,22 @@ export class CompraPassagem extends Component {
         />
       </TooltipOverlay>
 
-    const ButtonExcluirVolta = () =>
-      <TooltipOverlay text="Excluir passagem de volta" position="top">
-        <Button
-          floating
-          accent
-          className="button-excluir-volta mui--z2"
-          onClick={this.handleExcluiVolta}
-          icon={<FontAwesome name="times" />}
+    const TabMenu = () =>
+      <ButtonMenu>
+        <MenuItem
+          value='limpa-poltronas'
+          icon={<FontAwesome name="minus" />}
+          caption='Limpar poltronas'
+          onClick={this.handleLimpaVolta}
         />
-      </TooltipOverlay>
+        <MenuItem
+          value='delete-passagem'
+          icon={<FontAwesome name="times" />}
+          caption='Excluir passagem'
+          onClick={this.handleExcluiVolta}
+        />
+      </ButtonMenu>
+
 
     const TabsLarge = () =>
       <Tabs
@@ -767,8 +801,8 @@ export class CompraPassagem extends Component {
             className="tab-volta"
           >
             {/*<section className="floating-volta"></section>*/}
-            <ButtonLimpar isVolta={true} />
-            <ButtonExcluirVolta />
+            {/*<ButtonLimpar isVolta={true} />*/}
+            <TabMenu />
             <NoResultsAccordionVolta
               className="accordion-volta"
               color="dark"
@@ -822,8 +856,7 @@ export class CompraPassagem extends Component {
               label={<HeaderTab isVolta={true} />}
               className="tab-volta-mini"
             >
-              <ButtonLimpar isVolta={true} />
-              <ButtonExcluirVolta />
+              <TabMenu />
               <NoResultsAccordionVolta
                 className="accordion-volta"
                 color="dark"

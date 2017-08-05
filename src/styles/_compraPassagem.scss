@@ -29,7 +29,7 @@ monospace;
             .panel-title {
                 a {
                     @include noSelection;
-                    font-family: 'Share Tech Mono';
+                    font-family: 'Droid Sans Mono';
                     font-weight: bold;
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
@@ -107,7 +107,7 @@ monospace;
                             display: inline-block;
                         }
                         .icon-remove {
-                            color: $googleRed;
+                            color: $googleRed !important;
                             margin-left: 20px;
                         }
                         .icon-save {
@@ -210,21 +210,32 @@ monospace;
         z-index: 9;
         top: 57px - 10px;
         left: -20px;
-        background-color: lighten($materialPrimary, 10%) !important;
+        // background-color: lighten($materialPrimary, 10%) !important;
+    }
+    .tab-menu {
+        position: absolute;
+        z-index: 9;
+        right: -20px;
+        top: 57px - 10px;
+        button {
+            // background-color: lighten($materialPrimary, 10%) !important;
+        }
     }
     .button-excluir-volta {
+        display: none;
         position: absolute;
         z-index: 9;
         top: 13px;
         right: -28px;
-        background-color: lighten($materialPrimary, 10%) !important;
+        // background-color: lighten($materialPrimary, 10%) !important;
     }
     .button-limpar-volta {
+        display: none;
         position: absolute;
         z-index: 9;
         right: -20px;
         top: 75px;
-        background-color: lighten($materialPrimary, 10%) !important;
+        // background-color: lighten($materialPrimary, 10%) !important;
     }
     nav {
         // font-family: "Ubuntu";

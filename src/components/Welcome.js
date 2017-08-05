@@ -13,7 +13,7 @@ export const ButtonComprar = ({ handleComprar }) =>
   <div className="text-right welcome-button">
     <Button
       raised
-      accent
+      primary
       onClick={handleComprar}>
       <FontAwesome name="shopping-cart bt-mui-icon" />
       <span className="text-after-icon bt-mui-text">Compre agora sua passagem</span>

@@ -91,10 +91,10 @@ class HorariosAccordion extends Component {
       const percentLotacao = parseInt((ocupadasSize / allSize) * 100, 10);
       const strLotacao = `${ocupadasSize.toString().padStart(2, '0')}/${allSize}`;
       const strHorario = utils.firebaseToTimeExt(horario);
+      const elemHorario = utils.firebaseToTimeElement(horario);
       const position = (index + 1);
       const className = poltronas.isDisabled ? "not-allowed" : "allowed";
       const isActive = (position === active);
-
 
       //  eventKey={poltronas.isDisabled ? -1 : position}
       collapsibles.push(
@@ -113,37 +113,26 @@ class HorariosAccordion extends Component {
                   alt=""
                   className="horario-icon"
                 />
-                {
-                  (strHorario.length > 0) &&
-                  <span className="text-after-icon text-horario text-left">{strHorario}</span>
-                }
+                {(strHorario.length > 0) && elemHorario}
               </span>
               <span className="trigger-right">
-                <TooltipOverlay
-                  text="Salvar seleção"
-                  position="top">
-                  <FontAwesome name="check" className="icon-save icon-after-text" />
-                  {/*<img
-                    src={checkLogo}
-                    height="15"
-                    alt=""
+                <TooltipOverlay text="Adicionar poltronas selecionadas" position="top">
+                  <FontAwesome
+                    name="check"
                     className="icon-save icon-after-text"
                     onClick={(event) => onSaveSeats(event, isVolta, horario)}
-                  />*/}
+                  />
                 </TooltipOverlay>
-                <TooltipOverlay
-                  text="Limpar seleção"
-                  position="top">
-                  <FontAwesome name="times" className="icon-remove" />
-                  {/*<img
-                    src={removeLogo}
-                    height="15"
-                    alt=""
+                <TooltipOverlay text="Limpar seleção" position="top">
+                  <FontAwesome
+                    name="times"
                     className="icon-remove"
                     onClick={() => onResetSeats(isVolta, horario)}
-                  />*/}
+                  />
                 </TooltipOverlay>
-                <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
+                <TooltipOverlay text="Poltronas ocupadas" position="top">
+                  <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
+                </TooltipOverlay>
                 <span className="text-after-icon poltronas-text hidden-xs">
                   {strLotacao}
                 </span>
