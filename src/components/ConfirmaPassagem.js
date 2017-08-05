@@ -35,23 +35,28 @@ class ConfirmaPassagem extends Component {
         <DivAnimated className="form-centered">
           <Grid>
             <Row>
-              <Col md={6} mdOffset={3} className="text-left">
-                <div className="label-localizador">Seu código localizador é:</div>
-                <Label bsStyle="success" className="localizador">{key}</Label>
-                <div className="detalhes">
-                  <span>Dados da passagem:</span>
-                  <Jumbotron>
-                    <div><strong>Nome:</strong> {novaPassagem.nome}</div>
-                    <div><strong>CPF:</strong> {novaPassagem.cpf}</div>
-                    <div><strong>Origem:</strong> {novaPassagem.origem}</div>
-                    <div><strong>Destino:</strong> {novaPassagem.destino}</div>
-                    <div><strong>Data:</strong> {novaPassagem.data}</div>
-                    <div><strong>Saída:</strong> {novaPassagem.horario}</div>
-                    <div><strong>Poltrona(s):</strong> {novaPassagem.poltrona}</div>
-                  </Jumbotron>
-                </div>
-                <div>Parabéns pela sua compra e tenha uma boa viagem!</div>
-                <div>Um e-mail foi enviado para <strong>{novaPassagem.email}</strong> com mais detalhes.</div>
+              <Col md={6} mdOffset={3} className="text-center">
+                <Jumbotron className="jumbo-detalhes">
+                  <div className="label-localizador">Seu código localizador é:</div>
+                  <div className="localizador">{key}</div>
+                  <div className="detalhes text-left">
+                    <Jumbotron className="jumbo-ida mui--z1">
+                      <header className="header"></header>
+                      <body className="body">
+                        <div><strong>Nome:</strong> {novaPassagem.nome}</div>
+                        <div><strong>CPF:</strong> {novaPassagem.cpf}</div>
+                        <div><strong>Origem:</strong> {novaPassagem.origem}</div>
+                        <div><strong>Destino:</strong> {novaPassagem.destino}</div>
+                        <div><strong>Data:</strong> {novaPassagem.data}</div>
+                        <div><strong>Saída:</strong> {novaPassagem.horario}</div>
+                        <div><strong>Poltrona(s):</strong> {novaPassagem.poltrona}</div>
+                      </body>
+                      <footer className="footer"></footer>
+                    </Jumbotron>
+                  </div>
+                  <div>Parabéns pela sua compra e tenha uma boa viagem!</div>
+                  <div>Um e-mail foi enviado para <strong>{novaPassagem.email}</strong> com mais detalhes.</div>
+                </Jumbotron>
               </Col>
             </Row>
           </Grid>

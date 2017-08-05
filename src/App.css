@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Oswald|Ubuntu|Oxygen|Roboto+Condensed|Open+Sans|Ubuntu+Mono|Share+Tech+Mono|Acme|Source+Code+Pro|Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Oswald|Ubuntu|Droid+Sans+Mono|Roboto+Condensed|Open+Sans|Cutive+Mono|Ubuntu+Mono|Share+Tech+Mono|Acme|Source+Code+Pro|Roboto+Mono");
 @font-face {
   font-family: 'Roboto';
   src: url(./styles/fonts/Roboto-Regular.ttf) format("trueType"); }
@@ -88,6 +88,9 @@
     right: 50%;
     width: 0;
     opacity: 0; } }
+
+.font-awesome-tooltip a {
+  opacity: 1 !important; }
 
 .snackbar {
   border-radius: 0;
@@ -384,6 +387,7 @@ button {
   .modal-trajeto-container .modal-dialog .modal-content {
     border-radius: 0;
     background-color: whitesmoke;
+    border: none;
     -moz-user-select: -moz-none !important;
     -khtml-user-select: none !important;
     -webkit-user-select: none !important;
@@ -553,7 +557,7 @@ button {
               -webkit-user-select: none !important;
               -ms-user-select: none !important;
               user-select: none !important;
-              font-family: 'Share Tech Mono';
+              font-family: 'Droid Sans Mono';
               font-weight: bold;
               border-top-left-radius: 4px;
               border-top-right-radius: 4px;
@@ -618,7 +622,7 @@ button {
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
                 display: inline-block; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove {
-                color: #F44336;
+                color: #F44336 !important;
                 margin-left: 20px; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save {
                 color: #4CAF50; }
@@ -737,20 +741,24 @@ button {
             position: absolute;
             z-index: 9;
             top: 47px;
-            left: -20px;
-            background-color: #606fc7 !important; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-excluir-volta {
-            position: absolute;
-            z-index: 9;
-            top: 13px;
-            right: -28px;
-            background-color: #606fc7 !important; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-volta {
+            left: -20px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-menu {
             position: absolute;
             z-index: 9;
             right: -20px;
-            top: 75px;
-            background-color: #606fc7 !important; }
+            top: 47px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-excluir-volta {
+            display: none;
+            position: absolute;
+            z-index: 9;
+            top: 13px;
+            right: -28px; }
+          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-volta {
+            display: none;
+            position: absolute;
+            z-index: 9;
+            right: -20px;
+            top: 75px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav .tab-row {
             margin-bottom: 6px;
             text-transform: none; }
@@ -777,18 +785,34 @@ button {
   .confirmacao-passagem .form-centered {
     width: inherit;
     margin-top: 15px; }
-    .confirmacao-passagem .form-centered .label-localizador {
-      margin-bottom: 10px; }
-    .confirmacao-passagem .form-centered .localizador {
-      font-family: "Gruppo";
-      font-size: 2rem;
-      font-weight: bold; }
-    .confirmacao-passagem .form-centered .detalhes {
-      margin-top: 60px;
-      margin-bottom: 30px; }
-      .confirmacao-passagem .form-centered .detalhes .jumbotron {
-        margin-top: 5px;
-        margin-bottom: 0; }
+    .confirmacao-passagem .form-centered .jumbo-detalhes {
+      background-color: rgba(245, 245, 245, 0.9); }
+      .confirmacao-passagem .form-centered .jumbo-detalhes .localizador {
+        display: block;
+        font-family: "Roboto Mono";
+        font-size: 2rem;
+        font-weight: bold; }
+      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida {
+        padding: 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .header {
+          display: block;
+          height: 50px;
+          background-color: #3f51b5;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          border-bottom: 2px solid #FF4081 !important; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .body {
+          padding: 20px; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .footer {
+          border-top: 2px solid #FF4081 !important;
+          display: block;
+          height: 50px;
+          background-color: #3f51b5;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px; }
   .confirmacao-passagem::after {
     content: "";
     background: url(./styles/images/tree5.jpg) no-repeat center center;

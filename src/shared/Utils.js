@@ -1,3 +1,4 @@
+import React from 'react';
 import * as moment from 'moment';
 
 export const SnackbarTypes = {
@@ -74,9 +75,22 @@ export const firebaseToTime = (text) => {
 }
 
 export const firebaseToTimeExt = (text) => {
-  const hora = text.slice(0,2);
+  const hora = text.slice(0, 2);
   const min = text.slice(2);
   return `${hora}h ${min}m`;
+}
+
+export const firebaseToTimeElement = (text) => {
+  const hora = text.slice(0, 2);
+  const min = text.slice(2);
+  return (
+    <section className="text-horario text-left">
+      <span>{hora}</span>
+      <small>h</small>
+      <span>{min}</span>
+      <small>m</small>
+    </section >
+  );
 }
 
 export const checkHorario = (data, horario) => {
