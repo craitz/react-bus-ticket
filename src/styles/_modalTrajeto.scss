@@ -17,20 +17,26 @@ $arrowSize: 6px;
         color: initial;
     }
     .modal-dialog {
-        opacity: .95;
+        opacity: .9;
+        border-radius: 4px !important;
         input#data {
             background-color: white;
         }
         width: 300px;
         .modal-content {
-            border-radius: 0;
-            background-color: whitesmoke;
+            // border-radius: 0;
+            // background-color: whitesmoke;
+            background-color: white;
             border: none;
             .modal-header {
-                background-color: $materialPrimary;
-                color: rgba(white, .8);
+                // background-color: $materialPrimary;
+                background-color: white;
+                // color: rgba(white, .8);
+                border-radius: 4px !important;
+                color: rgba($materialPrimary, 1);
                 padding: 0 20px 0 20px;
-                border-bottom: 2px solid $materialAccent;
+                // border-bottom: 2px solid $materialAccent;
+                border-bottom: none;
                 font-family: $fontPadrao;
                 font-size: 2rem;
                 line-height: 51px;
@@ -112,7 +118,8 @@ $arrowSize: 6px;
                 }
             }
             .modal-footer {
-                border-top-color: rgba(black, .05);
+                border-top: none;
+                // border-top-color: rgba(black, .05);
             }
             @include noSelection();
             font-size: 1.5rem;

@@ -5,7 +5,7 @@
         // margin: 50px 0 0 $contentLeft !important;
         margin-top: 15px;
         text-align: left;
-        color: rgba(white, .8);
+        color: rgba($materialPrimary, 1);
         .intro,
         .tech {
             text-align: justify;
@@ -14,18 +14,18 @@
         }
         .jumbo-painel {
             // opacity: .9;
-            background-color: rgba(white, .95) !important;
-            background-color: rgba(black, .2) !important;
-            background-color: transparent !important;
+            background-color: rgba(white, .9) !important;
+            padding-left: 40px;
+            padding-right: 40px;
         }
         h2 {
             font-family: $fontPadrao;
-            color: rgba(white, .8);
+            color: rgba($materialPrimary, 1);
             // margin-top: 80px;
         }
         .welcome-button {
             margin-top: 50px;
-            // margin-bottom: 50px;
+            margin-bottom: 20px;
         }
         hr {
             display: none;

@@ -53,16 +53,6 @@ const NavbarCollapse = ({ email, onLgout, onComprarPassagem, onPesquisarPassagen
     </Nav>
   </Navbar.Collapse>
 
-// <Button
-//   color="danger"
-//   variant="fab"
-//   onClick={onLgout}
-//   className="btn-logout">
-//   <FontAwesome name="power-off"></FontAwesome>
-// </Button>
-
-
-
 NavbarCollapse.PropTypes = {
   email: PropTypes.string.isRequired,
   onLgout: PropTypes.func
@@ -80,8 +70,12 @@ class Navigation extends Component {
 
   handleLogout(event) {
     event.preventDefault();
+
+    console.log('Logout!!!');
+
     firebaseHelper.signOut()
       .then(() => {
+        console.log('Logout 2 !!!');
         this.props.history.push('/login');
       });
   }

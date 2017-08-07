@@ -187,6 +187,10 @@ monospace;
     }
 }
 
+._3uJ__ ._1dY3Q {
+    color: rgba(255, 255, 255, .2);
+}
+
 @mixin tabControl {
     @include accordion {
         @include busSelect(rgba($googleGreen, .8));
@@ -194,6 +198,7 @@ monospace;
     background-color: white;
     margin-top: 0;
     margin-bottom: 30px;
+    border-radius: 4px !important;
     &.mini-volta {
         margin-top: 15px;
         margin-bottom: 30px;
@@ -239,6 +244,8 @@ monospace;
     }
     nav {
         // font-family: "Ubuntu";
+        border-top-left-radius: 4px !important;
+        border-top-right-radius: 4px !important;
         .tab-row {
             margin-bottom: 6px;
             text-transform: none;
@@ -373,7 +380,7 @@ monospace;
 
 .comprar-passagem-container {
     &::after {
-        @include bkgImage('tree38.jpg');
+        @include bkgImage('tree32.jpg');
     }
     // background-color: red;
     .button-finaliza,

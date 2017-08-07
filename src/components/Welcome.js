@@ -45,18 +45,19 @@ class Welcome extends Component {
         </PageHeader>
         <DivAnimated className="info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
-            <h2>Introdução</h2>
-            <article className="intro">
-              O BusTicket é uma SPA (Single Page Application) totalmente responsiva
+            <Jumbotron className="jumbo-painel">
+              <h2>Introdução</h2>
+              <article className="intro">
+                O BusTicket é uma SPA (Single Page Application) totalmente responsiva
               que utiliza o conceito Mobile First para se adaptar e responder adequadamante
               a qualquer tipo ou tamanho de tela. O objetivo da aplicação é simular
               um guichê virtual para compra de passagens de ônibus (sem os valores
               envolvidos na transação) para viagens entre algumas capitais do Brasil.
             </article>
-            <hr />
-            <h2>Algumas das tecnologias utilizadas</h2>
-            <article className="tech">
-              React,
+              <hr />
+              <h2>Algumas das tecnologias utilizadas</h2>
+              <article className="tech">
+                React,
               Redux,
               JSX,
               Javascript (ES5,ES6,ES7),
@@ -76,7 +77,8 @@ class Welcome extends Component {
               HTML5,
               Visual Studio 2017.
             </article>
-            <ButtonComprar handleComprar={this.handleComprarPassagem} />
+              <ButtonComprar handleComprar={this.handleComprarPassagem} />
+            </Jumbotron>
           </Col>
         </DivAnimated>
       </div >
