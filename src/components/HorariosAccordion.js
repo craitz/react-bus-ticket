@@ -138,7 +138,7 @@ class HorariosAccordion extends Component {
                 </span>
                 <ProgressBar
                   className={percentLotacao ? "full hidden-xs" : "empty hidden-xs"}
-                  bsStyle="success"
+                  bsStyle="warning"
                   now={percentLotacao}
                 />
                 <FontAwesome name={isActive ? "chevron-up" : "chevron-down"} className="icon-arrow" />

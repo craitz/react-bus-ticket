@@ -1,7 +1,7 @@
 .login-container {
     height: calc(100% - 150px) !important;
     $boxWidth: 320px;
-    $boxBgColor: rgba(whitesmoke, 1);
+    $boxBgColor: rgba(white, .95);
     $headerHeight: 40px;
     $headerTitleWidth: 220px;
     $headerTitleMainColor: black;
@@ -12,13 +12,14 @@
     $inputBorderColor: rgba(255, 255, 255, .7);
     @include centralizeContent();
     .login-box {
-        opacity: .95;
+        // opacity: .9;
         text-align: left;
         position: relative;
         width: $boxWidth;
         border: none;
         background-color: $boxBgColor;
         padding: 15px 20px 5px 20px;
+        border-radius: 4px;
         .form-group.last {
             margin-top: 20px;
             margin-bottom: 8px;
@@ -30,8 +31,8 @@
             left: 0;
             width: 100%;
             height: 50px;
-            border-bottom: 2px solid $materialAccent !important;
-            background-color: $materialPrimary;
+            // border-bottom: 2px solid $materialAccent !important;
+            // background-color: $materialPrimary;
             .login-header--title {
                 position: absolute;
                 left: 0;
@@ -41,7 +42,8 @@
                 padding-top: 10px;
                 padding-left: 20px;
                 .login-header--title-main {
-                    color: rgba(white, .8);
+                    // color: rgba(white, .8);
+                    color: rgba($materialPrimary, 1);
                     line-height: $headerTitleMainLineHeight;
                     font-size: $headerTitleMainFontSize;
                     font-weight: bold;
@@ -57,7 +59,8 @@
                 height: inherit;
                 .main-icon {
                     font-size: $headerIconFontSize;
-                    color: rgba(white, .8);
+                    // color: rgba(white, .8);
+                    color: rgba($materialPrimary, 1);
                     // color: rgba($headerTitleMainColor, .5);
                     margin-right: 5px;
                 }
@@ -68,7 +71,7 @@
         }
     }
     &::after {
-        @include bkgImage('tree37.jpg');
+        @include bkgImage('login3.jpg');
     }
     @include xs {
         .login-box {

@@ -1,6 +1,6 @@
 @mixin afterIda {
     content: "";
-    background: url(./styles/images/ticket-header-ida.svg) no-repeat center left;
+    background: url(./styles/images/compra-ida.svg) no-repeat center left;
     background-attachment: scroll;
     opacity: 1;
     top: 0;
@@ -13,7 +13,7 @@
 
 @mixin afterVolta {
     content: "";
-    background: url(./styles/images/ticket-header-volta.svg) no-repeat center right;
+    background: url(./styles/images/compra-volta.svg) no-repeat center right;
     background-attachment: scroll;
     opacity: 1;
     top: 0;
@@ -23,80 +23,100 @@
     position: absolute;
 }
 
-$fontColor: rgba(white, .8);
+$fontColor: rgba($materialPrimary, 1);
 .confirmacao-passagem {
     @include containerHeight();
     .form-centered {
         width: inherit;
         margin-top: 15px;
-        // .jumbo-detalhes {
-        // background-color: rgba(whitesmoke, .3);
-        .label-localizador {
-            color: $fontColor;
-        }
-        .localizador {
-            display: block;
-            color: $fontColor;
-            font: {
-                family: "Oswald";
-                size: 2rem;
-                weight: bold;
+        .jumbo-detalhes {
+            background-color: rgba(white, .9);
+            padding: 40px;
+            position: relative;
+            .label-localizador {
+                color: $fontColor;
             }
-        }
-        .detalhes {
-            .jumbo-ida,
-            .jumbo-volta {
-                padding: 0;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                border-radius: 10px;
-                .header {
-                    position: relative;
-                    display: block;
-                    height: 50px;
-                    background-color: $materialPrimary;
-                    border-top-left-radius: 10px;
-                    border-top-right-radius: 10px;
-                    border-bottom: 2px solid $materialAccent !important;
-                }
-                .body {
-                    padding: 20px;
-                }
-                .footer {
-                    position: relative;
-                    border-top: 2px solid $materialAccent !important;
-                    display: block;
-                    height: 50px;
-                    background-color: $materialPrimary;
-                    border-bottom-left-radius: 10px;
-                    border-bottom-right-radius: 10px;
+            .localizador {
+                display: block;
+                color: $fontColor;
+                font: {
+                    family: "Oswald";
+                    size: 2rem;
+                    weight: bold;
                 }
             }
-            .jumbo-ida {
-                .header::after,
-                .footer::after {
-                    @include afterIda;
+            .detalhes {
+                .jumbo-ida,
+                .jumbo-volta {
+                    padding: 0;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    border-radius: 4px;
+                    color: rgba(white, .8) !important;
+                    .header {
+                        border-top-left-radius: 4px !important;
+                        border-top-right-radius: 4px !important;
+                        position: relative;
+                        display: block;
+                        height: 50px;
+                        // background-color: $materialPrimary;
+                        // border-bottom: 2px solid $materialAccent !important;
+                    }
+                    .body {
+                        padding: 20px;
+                    }
+                    .footer {
+                        border-bottom-left-radius: 4px !important;
+                        border-bottom-right-radius: 4px !important;
+                        position: relative;
+                        // border-top: 2px solid $materialAccent !important;
+                        display: block;
+                        height: 50px;
+                        // background-color: $materialPrimary;
+                    }
                 }
-            }
-            .jumbo-volta {
-                .header::after,
-                .footer::after {
-                    @include afterVolta;
+                .jumbo-ida {
+                    // background-color: $googleGreen !important;
+                    background-color: $materialPrimary !important;
+                    &::after {
+                        @include afterIda;
+                    }
                 }
+                .jumbo-volta {
+                    // background-color: $googleRed !important;
+                    background-color: $materialPrimary !important;
+                    &::after {
+                        @include afterVolta;
+                    }
+                }
+                // .jumbo-ida {
+                //     .header::after,
+                //     .footer::after {
+                //         @include afterIda;
+                //     }
+                // }
+            }
+            .paragrafo-parabens {
+                color: $fontColor;
+            }
+            .paragrafo-email {
+                margin-bottom: 10px;
+                color: $fontColor;
+            }
+            .button-continuar-comprando {
+                position: absolute;
+                right: 40px;
+                bottom: -28px;
+            }
+            .button-home {
+                position: absolute;
+                right: 110px;
+                bottom: -20px;
             }
         }
-        .paragrafo-parabens {
-            color: $fontColor;
-            margin-bottom: 50px;
-        }
-        .paragrafo-email {
-            margin-bottom: 10px;
-            color: $fontColor;
-        }
-        // }
     }
     &::after {
-        @include bkgImage('tree10.jpg');
+        @include bkgImage('login2.jpg');
     }
     @include xs {
         .localizador {
