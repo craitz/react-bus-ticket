@@ -5,13 +5,22 @@
         // margin: 50px 0 0 $contentLeft !important;
         margin-top: 15px;
         text-align: left;
+        color: rgba(white, .8);
+        .intro,
+        .tech {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 30px;
+        }
         .jumbo-painel {
             // opacity: .9;
             background-color: rgba(white, .95) !important;
+            background-color: rgba(black, .2) !important;
+            background-color: transparent !important;
         }
         h2 {
             font-family: $fontPadrao;
-            color: rgba(black, .65);
+            color: rgba(white, .8);
             // margin-top: 80px;
         }
         .welcome-button {
@@ -23,7 +32,7 @@
         }
     }
     &::after {
-        @include bkgImage('tree6.jpg');
+        @include bkgImage('tree36.jpg');
     }
 }
 

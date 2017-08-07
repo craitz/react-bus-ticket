@@ -488,7 +488,7 @@ button {
   height: calc(100vh - 50px); }
   .comprar-passagem-container::after {
     content: "";
-    background: url(./styles/images/tree2.jpg) no-repeat center center;
+    background: url(./styles/images/tree38.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -785,37 +785,73 @@ button {
   .confirmacao-passagem .form-centered {
     width: inherit;
     margin-top: 15px; }
-    .confirmacao-passagem .form-centered .jumbo-detalhes {
-      background-color: rgba(245, 245, 245, 0.9); }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .localizador {
+    .confirmacao-passagem .form-centered .label-localizador {
+      color: rgba(255, 255, 255, 0.8); }
+    .confirmacao-passagem .form-centered .localizador {
+      display: block;
+      color: rgba(255, 255, 255, 0.8);
+      font-family: "Oswald";
+      font-size: 2rem;
+      font-weight: bold; }
+    .confirmacao-passagem .form-centered .detalhes .jumbo-ida,
+    .confirmacao-passagem .form-centered .detalhes .jumbo-volta {
+      padding: 0;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px; }
+      .confirmacao-passagem .form-centered .detalhes .jumbo-ida .header,
+      .confirmacao-passagem .form-centered .detalhes .jumbo-volta .header {
+        position: relative;
         display: block;
-        font-family: "Roboto Mono";
-        font-size: 2rem;
-        font-weight: bold; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida {
-        padding: 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border-radius: 10px; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .header {
-          display: block;
-          height: 50px;
-          background-color: #3f51b5;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          border-bottom: 2px solid #FF4081 !important; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .body {
-          padding: 20px; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .footer {
-          border-top: 2px solid #FF4081 !important;
-          display: block;
-          height: 50px;
-          background-color: #3f51b5;
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px; }
+        height: 50px;
+        background-color: #3f51b5;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom: 2px solid #FF4081 !important; }
+      .confirmacao-passagem .form-centered .detalhes .jumbo-ida .body,
+      .confirmacao-passagem .form-centered .detalhes .jumbo-volta .body {
+        padding: 20px; }
+      .confirmacao-passagem .form-centered .detalhes .jumbo-ida .footer,
+      .confirmacao-passagem .form-centered .detalhes .jumbo-volta .footer {
+        position: relative;
+        border-top: 2px solid #FF4081 !important;
+        display: block;
+        height: 50px;
+        background-color: #3f51b5;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px; }
+    .confirmacao-passagem .form-centered .detalhes .jumbo-ida .header::after,
+    .confirmacao-passagem .form-centered .detalhes .jumbo-ida .footer::after {
+      content: "";
+      background: url(./styles/images/ticket-header-ida.svg) no-repeat center left;
+      background-attachment: scroll;
+      opacity: 1;
+      top: 0;
+      left: 10px;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      position: absolute; }
+    .confirmacao-passagem .form-centered .detalhes .jumbo-volta .header::after,
+    .confirmacao-passagem .form-centered .detalhes .jumbo-volta .footer::after {
+      content: "";
+      background: url(./styles/images/ticket-header-volta.svg) no-repeat center right;
+      background-attachment: scroll;
+      opacity: 1;
+      top: 0;
+      bottom: 0;
+      right: 10px;
+      width: 100%;
+      position: absolute; }
+    .confirmacao-passagem .form-centered .paragrafo-parabens {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 50px; }
+    .confirmacao-passagem .form-centered .paragrafo-email {
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.8); }
   .confirmacao-passagem::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center center;
+    background: url(./styles/images/tree10.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -966,7 +1002,7 @@ button {
       margin-top: 60px; }
   .login-container::after {
     content: "";
-    background: url(./styles/images/tree3.jpg) no-repeat center center;
+    background: url(./styles/images/tree37.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -993,19 +1029,27 @@ button {
   height: calc(100vh - 50px); }
   .welcome-container .info-container {
     margin-top: 15px;
-    text-align: left; }
+    text-align: left;
+    color: rgba(255, 255, 255, 0.8); }
+    .welcome-container .info-container .intro,
+    .welcome-container .info-container .tech {
+      text-align: justify;
+      text-justify: inter-word;
+      margin-bottom: 30px; }
     .welcome-container .info-container .jumbo-painel {
-      background-color: rgba(255, 255, 255, 0.95) !important; }
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      background-color: transparent !important; }
     .welcome-container .info-container h2 {
       font-family: "Days One";
-      color: rgba(0, 0, 0, 0.65); }
+      color: rgba(255, 255, 255, 0.8); }
     .welcome-container .info-container .welcome-button {
       margin-top: 50px; }
     .welcome-container .info-container hr {
       display: none; }
   .welcome-container::after {
     content: "";
-    background: url(./styles/images/tree6.jpg) no-repeat center center;
+    background: url(./styles/images/tree36.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
