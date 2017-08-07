@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-0.16320037841796875 -0.16319656372070312 99 48" xmlns="http://www.w3.org/2000/svg">
+  <rect style="fill: rgb(216, 216, 216); visibility: hidden;" transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)"/>
+  <rect style="fill: rgb(216, 216, 216); visibility: hidden;" transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)"/>
+  <rect transform="matrix(NaN, NaN, NaN, NaN, NaN, NaN)" style="fill: rgb(255, 0, 0); visibility: hidden;"/>
+  <rect x="-1.962" y="-2.146" width="103.751" height="51.957" style="fill: rgb(63, 81, 181);"/>
+  <g transform="matrix(0.277151, 0, 0, 0.240246, 36.481548, 7.77984)" style="visibility: hidden;">
+    <g id="1" transform="matrix(.0065968 0 0 .0065968 .50676 .50676)">
+      <path id="2" style="stroke-linejoin: round; fill-rule: evenodd; stroke: rgb(35, 40, 43); stroke-linecap: round; stroke-width: 153.64px; fill: rgb(255, 255, 255); stroke-opacity: 0; fill-opacity: 0.3;" d="M 3088.8 14522 L 17223.797 14522 L 17223.797 19789.699 L 26134.789 9823.2 L 17223.797 -0.3 L 17223.797 5125 L 3088.8 5125 Z"/>
+    </g>
+  </g>
+  <g transform="matrix(0, 0.703619, -0.731463, 0, 804.792236, -11.256421)" style="visibility: hidden;">
+    <path d="m 16,997.36221 0,23.99999 25,-23.99999 0,40.99999 18,0 0,-40.99999 25,23.99999 0,-23.99999 -34.0171,-31.00005 z" stroke="none" style="fill: rgb(255, 255, 255); fill-opacity: 0.15;"/>
+  </g>
+  <g transform="matrix(1.078285, 0, 0, 0.606172, -5.022834, -6.302218)">
+    <polygon points="95,49.931 62.76,17.964 62.76,31.529 38.716,31.663 38.853,68.47 62.895,68.47 62.895,82.036  " style="fill: rgb(255, 255, 255); fill-opacity: 0.15;"/>
+    <polygon points="5,31.663 5,68.47 13.867,68.47 13.73,31.663  " style="fill: rgb(255, 255, 255); fill-opacity: 0.15;"/>
+    <rect x="20.446" y="31.663" width="11.689" height="36.807" style="fill: rgb(255, 255, 255); fill-opacity: 0.15;"/>
+  </g>
+</svg>

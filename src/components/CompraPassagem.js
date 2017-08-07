@@ -763,7 +763,7 @@ export class CompraPassagem extends Component {
         <MenuItem
           value='delete-passagem'
           icon={<FontAwesome name="times" />}
-          caption='Excluir passagem'
+          caption='Excluir volta'
           onClick={this.handleExcluiVolta}
         />
       </ButtonMenu>

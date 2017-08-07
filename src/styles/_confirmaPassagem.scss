@@ -1,50 +1,102 @@
+@mixin afterIda {
+    content: "";
+    background: url(./styles/images/ticket-header-ida.svg) no-repeat center left;
+    background-attachment: scroll;
+    opacity: 1;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute;
+}
+
+@mixin afterVolta {
+    content: "";
+    background: url(./styles/images/ticket-header-volta.svg) no-repeat center right;
+    background-attachment: scroll;
+    opacity: 1;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    width: 100%;
+    position: absolute;
+}
+
+$fontColor: rgba(white, .8);
 .confirmacao-passagem {
     @include containerHeight();
     .form-centered {
         width: inherit;
         margin-top: 15px;
-        .jumbo-detalhes {
-            background-color: rgba(whitesmoke, .9);
-            .label-localizador {}
-            .localizador {
-                display: block;
-                font: {
-                    family: "Roboto Mono";
-                    size: 2rem;
-                    weight: bold;
+        // .jumbo-detalhes {
+        // background-color: rgba(whitesmoke, .3);
+        .label-localizador {
+            color: $fontColor;
+        }
+        .localizador {
+            display: block;
+            color: $fontColor;
+            font: {
+                family: "Oswald";
+                size: 2rem;
+                weight: bold;
+            }
+        }
+        .detalhes {
+            .jumbo-ida,
+            .jumbo-volta {
+                padding: 0;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                .header {
+                    position: relative;
+                    display: block;
+                    height: 50px;
+                    background-color: $materialPrimary;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom: 2px solid $materialAccent !important;
+                }
+                .body {
+                    padding: 20px;
+                }
+                .footer {
+                    position: relative;
+                    border-top: 2px solid $materialAccent !important;
+                    display: block;
+                    height: 50px;
+                    background-color: $materialPrimary;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
                 }
             }
-            .detalhes {
-                .jumbo-ida {
-                    padding: 0;
-                    margin-top: 20px;
-                    margin-bottom: 20px;
-                    border-radius: 10px;
-                    .header {
-                        display: block;
-                        height: 50px;
-                        background-color: $materialPrimary;
-                        border-top-left-radius: 10px;
-                        border-top-right-radius: 10px;
-                        border-bottom: 2px solid $materialAccent !important;
-                    }
-                    .body {
-                        padding: 20px;
-                    }
-                    .footer {
-                        border-top: 2px solid $materialAccent !important;
-                        display: block;
-                        height: 50px;
-                        background-color: $materialPrimary;
-                        border-bottom-left-radius: 10px;
-                        border-bottom-right-radius: 10px;
-                    }
+            .jumbo-ida {
+                .header::after,
+                .footer::after {
+                    @include afterIda;
+                }
+            }
+            .jumbo-volta {
+                .header::after,
+                .footer::after {
+                    @include afterVolta;
                 }
             }
         }
+        .paragrafo-parabens {
+            color: $fontColor;
+            margin-bottom: 50px;
+        }
+        .paragrafo-email {
+            margin-bottom: 10px;
+            color: $fontColor;
+        }
+        // }
     }
     &::after {
-        @include bkgImage();
+        @include bkgImage('tree10.jpg');
     }
     @include xs {
         .localizador {
