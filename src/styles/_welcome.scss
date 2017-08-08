@@ -1,8 +1,6 @@
 .welcome-container {
     @include containerHeight();
     .info-container {
-        // width: $contentWidth;
-        // margin: 50px 0 0 $contentLeft !important;
         margin-top: 15px;
         text-align: left;
         color: rgba($materialPrimary, 1);
@@ -10,22 +8,44 @@
         .tech {
             text-align: justify;
             text-justify: inter-word;
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
         }
         .jumbo-painel {
             // opacity: .9;
             background-color: rgba(white, .9) !important;
-            padding-left: 40px;
-            padding-right: 40px;
+            padding: 0;
+            position: relative;
+            border-radius: 4px 4px 20px 30px;
+            .main-section,
+            .footer-section {
+                margin: 0;
+                padding: 40px;
+            }
+            .footer-section {
+                padding: 0 0 0 40px;
+                background-color: $materialPrimary;
+                height: 80px;
+                border-radius: 0 0 4px 4px;
+                span {
+                    color: rgba(white, .8);
+                    font-size: 2rem;
+                    line-height: 80px;
+                    font-family: "Days One"
+                }
+            }
+            .welcome-button {
+                position: absolute;
+                right: 20px;
+                bottom: -28px;
+            }
         }
         h2 {
             font-family: $fontPadrao;
             color: rgba($materialPrimary, 1);
-            // margin-top: 80px;
+            margin-top: 30px;
         }
-        .welcome-button {
-            margin-top: 50px;
-            margin-bottom: 20px;
+        .title-intro {
+            margin-top: 0;
         }
         hr {
             display: none;
