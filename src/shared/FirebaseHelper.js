@@ -55,7 +55,8 @@ class FirebaseHelper {
               this.setUser({
                 email: user.email,
                 nome: fetchedUser.nome,
-                cpf: fetchedUser.cpf
+                cpf: fetchedUser.cpf,
+                dataNascimento: fetchedUser.dataNascimento
               });
               resolve();
             })
