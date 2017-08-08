@@ -10,14 +10,14 @@ import FontAwesome from 'react-fontawesome';
 import Button from 'react-toolbox/lib/button/Button';
 
 export const ButtonComprar = ({ handleComprar }) =>
-  <div className="text-center welcome-button">
-    <Button
-      floating
-      accent
-      onClick={handleComprar}>
-      <FontAwesome name="shopping-cart bt-mui-icon" />
-    </Button>
-  </div>
+  <Button
+    floating
+    accent
+    onClick={handleComprar}
+    className="welcome-button mui--z2"
+  >
+    <FontAwesome name="shopping-cart bt-mui-icon" />
+  </Button>
 
 class Welcome extends Component {
   constructor(props) {

@@ -13,13 +13,13 @@ import { PageHeader } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
 import * as snackbarActions from '../actions/snackbar.actions'
+import Snackbar from '../shared/Snackbar';
 import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
 import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
-import Snackbar from '../shared/Snackbar';
 import Menu from 'react-toolbox/lib/menu/Menu';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
@@ -911,7 +911,6 @@ const mapStateToProps = (state) => {
     activeTab: state.compraPassagemState.activeTab,
     hasErroSalvandoIda: state.compraPassagemState.hasErroSalvandoIda,
     hasErroSalvandoVolta: state.compraPassagemState.hasErroSalvandoVolta,
-    // snackbar: state.compraPassagemState.snackbar,
     snapshot: state.compraPassagemState,
     snackbar: {
       visible: state.snackbarState.visible,

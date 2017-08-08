@@ -56,7 +56,7 @@ class Snackbar extends Component {
         className={type}
         active={visible}
         action={<FontAwesome name="times-circle" />}
-        timeout={2500}
+        timeout={3500}
         label={<SnackContent type={type} message={message} />}
         type='cancel'
         onClick={this.handleSnackbarClick}

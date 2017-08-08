@@ -342,7 +342,7 @@ export class ModalTrajeto extends Component {
             floating
             accent
             type="submit"
-            className="btn-block btn-buscar">
+            className="mui--z2 btn-buscar">
             <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
           </Button>
         </form>
