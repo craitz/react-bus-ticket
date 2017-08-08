@@ -36,6 +36,24 @@ export const setCpfValidation = (validation, message) => {
   }
 };
 
+export const changeDataNascimento = (data) => {
+  return {
+    type: PerfilUsuarioActionType.CHANGE_DATANASC,
+    payload: data
+  }
+};
+
+export const setDataNascimentoDirty = () => {
+  return { type: PerfilUsuarioActionType.SET_DATANASC_DIRTY }
+};
+
+export const setDataNascimentoValidation = (validation, message) => {
+  return {
+    type: PerfilUsuarioActionType.SET_DATANASC_VALIDATION,
+    payload: { validation, message }
+  }
+};
+
 export const resetPerfil = () => {
   return { type: PerfilUsuarioActionType.RESET_PERFIL }
 };

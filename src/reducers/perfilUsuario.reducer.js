@@ -15,6 +15,12 @@ const initialState = Immutable({
       isPristine: true,
       validation: ValidationStatus.NONE,
       message: ''
+    },
+    dataNascimento: {
+      text: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     }
   },
   edicaoHabilitada: false
@@ -90,6 +96,43 @@ const reducer = (state = initialState, action = {}) => {
           ...state.user,
           cpf: {
             ...state.user.cpf,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.CHANGE_DATANASC: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          dataNascimento: {
+            ...state.user.dataNascimento,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_DATANASC_DIRTY: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          dataNascimento: {
+            ...state.user.dataNascimento,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_DATANASC_VALIDATION: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          dataNascimento: {
+            ...state.user.dataNascimento,
             validation: action.payload.validation,
             message: action.payload.message
           }
