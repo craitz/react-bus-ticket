@@ -130,7 +130,7 @@ class HorariosAccordion extends Component {
                     onClick={() => onResetSeats(isVolta, horario)}
                   />
                 </TooltipOverlay>
-                <TooltipOverlay text="Poltronas ocupadas" position="top">
+                <TooltipOverlay text="Ocupação" position="top">
                   <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
                 </TooltipOverlay>
                 <span className="text-after-icon poltronas-text hidden-xs">
