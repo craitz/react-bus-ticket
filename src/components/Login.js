@@ -101,7 +101,7 @@ export const ButtonLogin = ({ handleLogin }) =>
     accent
     className="btn-block btn-login mui--z2"
     onClick={handleLogin}>
-    <FontAwesome name="unlock bt-mui-icon" />
+    <FontAwesome name="sign-in bt-mui-icon" />
   </Button>
 
 export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>

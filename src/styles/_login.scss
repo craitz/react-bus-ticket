@@ -15,10 +15,10 @@
         // opacity: .9;
         text-align: left;
         position: relative;
+        padding: 0;
         width: $boxWidth;
         border: none;
         background-color: $boxBgColor;
-        padding: 0;
         border-radius: 4px 4px 20px 30px;
         form {
             .main-section,
@@ -44,7 +44,7 @@
             .btn-login {
                 position: absolute;
                 right: 20px;
-                bottom: -28px;
+                bottom: -20px;
             }
         }
     }

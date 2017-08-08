@@ -1,50 +1,39 @@
 .perfil-usuario-container {
     @include containerHeight();
-    .form-header {
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-        margin: 0;
-        margin-top: 50px;
-        padding: 10px;
-        padding-left: 20px;
-        padding-left: -15px !important;
-        background-color: rgba(black, .05);
-        border: none;
-        .form-title {
-            font-family: "Gruppo";
-            font-size: 2rem;
-            line-height: 40px;
-        }
-        .btn.edicao {
-            font-size: 2rem;
-            background-color: transparent;
-            color: black !important;
-            &:hover,
-            &:active,
-            &:focus {
-                background-color: rgba(black, .1) !important;
-                color: black !important;
-            }
-        }
-    }
     .jumbotron {
         margin-top: 15px;
-        .text-left.row.first {
-            padding-top: 50px;
+        position: relative;
+        padding: 0;
+        background-color: rgba(white, 1);
+        .main-section,
+        .footer-section {
+            margin: 0;
+            padding: 40px;
+            text-align: left;
         }
-        .static-label {
-            font-size: 3rem;
-            font-family: 'Gruppo';
-            margin-left: 20px;
+        .main-section {
+            padding: 40px;
         }
-        .static-value {
-            font-size: 3rem;
-            font-family: 'Gruppo';
-            margin-left: 10px;
+        .footer-section {
+            padding: 0 0 0 40px;
+            background-color: $materialPrimary;
+            height: 60px;
+            border-radius: 0 0 4px 4px;
+            span {
+                color: rgba(white, .8);
+                font-size: 2rem;
+                line-height: 60px;
+                font-family: "Days One"
+            }
+        }
+        .btn-salvar {
+            position: absolute;
+            right: 20px;
+            bottom: -20px;
         }
     }
     &::after {
-        @include bkgImage();
+        @include bkgImage('login4.jpg');
     }
     @include sm {
         .jumbotron {

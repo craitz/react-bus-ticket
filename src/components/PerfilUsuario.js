@@ -4,7 +4,7 @@ import { withAuth } from '../shared/hoc';
 import { connect } from 'react-redux';
 import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
-import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Row, Col, Jumbotron } from 'react-bootstrap';
 import { BaseField, withInput, withInputMask } from '../shared/FormFields';
 import FontAwesome from 'react-fontawesome';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -12,64 +12,56 @@ import * as actions from '../actions/perfilUsuario.actions'
 import * as loadingActions from '../actions/loadingDialog.actions'
 import * as utils from '../shared/Utils';
 import TooltipOverlay from '../shared/TooltipOverlay';
+import Button from 'react-toolbox/lib/button/Button';
+import Input from 'react-toolbox/lib/input/Input';
 // import PropTypes from 'prop-types';
 
 const ButtonAtualizar = () =>
-  <Button type="submit" bsStyle="primary" className="btn-google-blue">
-    <FontAwesome name="check" />
-    <span className="text-after-icon hidden-xs">Salvar alterações</span>
-    <span className="text-after-icon hidden-sm hidden-md hidden-lg">Atualizar</span>
+  <Button
+    type="submit"
+    floating
+    accent
+    className="btn-salvar mui--z2">
+    <FontAwesome name="check fa-fw" />
   </Button>
-
 
 const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, user, edicaoHabilitada }) => {
   const { nome, cpf } = user;
 
   return (
     <form onSubmit={onSubmit}>
-      <Row className="text-left first">
-        <Col xs={12}>
-          {edicaoHabilitada &&
-            <InputField
-              id="nome"
-              label="Nome*"
-              type="text"
+      <Row className="main-section">
+        <Row className="text-left">
+          <Col xs={12}>
+            <Input
+              type='text'
+              label='Nome*'
+              icon={<FontAwesome name="user" />}
               value={nome.text}
+              autoComplete="off"
+              error={nome.message}
               onChange={onChangeNome}
-              validation={nome.validation}
-              message={nome.message} />}
-          {!edicaoHabilitada &&
-            <div>
-              <span className="static-label"><strong>Nome:</strong></span>
-              <span className="static-value">{nome.text}</span>
-            </div>}
-        </Col>
-      </Row>
-      <Row className="text-left">
-        <Col xs={12}>
-          {edicaoHabilitada &&
-            <InputMaskField
-              id="cpf"
-              label="CPF*"
-              mask="111.111.111-11"
+            />
+          </Col>
+        </Row>
+        <Row className="text-left">
+          <Col xs={12}>
+            <Input
+              type='text'
+              label='CPF*'
+              icon={<FontAwesome name="id-card-o" />}
               value={cpf.text}
+              autoComplete="off"
+              error={cpf.message}
               onChange={onChangeCpf}
-              validation={cpf.validation}
-              message={cpf.message} />}
-          {!edicaoHabilitada &&
-            <div>
-              <span className="static-label"><strong>CPF:</strong></span>
-              <span className="static-value">{cpf.text}</span>
-            </div>}
-        </Col>
+            />
+          </Col>
+        </Row>
       </Row>
-      {edicaoHabilitada &&
-        <div>
-          <hr />
-          <div className="text-right">
-            <ButtonAtualizar />
-          </div>
-        </div>}
+      <Row className="footer-section">
+        <span>Salvar alterações</span>
+      </Row>
+      <ButtonAtualizar />
     </form>
   );
 }
@@ -80,12 +72,9 @@ const InputMaskField = withInputMask(BaseField);
 class PerfilUsuario extends Component {
   constructor(props) {
     super(props);
-    this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
-    this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
     this.handleChangeNome = this.handleChangeNome.bind(this);
     this.handleChangeCpf = this.handleChangeCpf.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleHabilitarEdicao = this.handleHabilitarEdicao.bind(this);
   }
 
   componentDidMount() {
@@ -110,26 +99,10 @@ class PerfilUsuario extends Component {
     dispatch(loadingActions.setDoneIcon('check'));
   }
 
-  handleHabilitarEdicao() {
-    const { dispatch } = this.props;
-    dispatch(actions.setEdicaoHabilitada(!this.props.edicaoHabilitada));
-  }
-
-  handleComprarPassagem(event) {
-    event.preventDefault();
-    this.props.history.push('/comprar');
-  }
-
-  handlePesquisarPassagens(event) {
-    event.preventDefault();
-    this.props.history.push('/passagens');
-  }
-
   handleChangeNome(event) {
-    event.preventDefault();
     const { dispatch, user } = this.props;
     const isPristine = user.nome.isPristine;
-    const text = event.target.value;
+    const text = event;
 
     dispatch(actions.changeNome(text));
     isPristine && dispatch(actions.setNomeDirty());
@@ -138,10 +111,9 @@ class PerfilUsuario extends Component {
   }
 
   handleChangeCpf(event) {
-    event.preventDefault();
     const { dispatch, user } = this.props;
     const isPristine = user.cpf.isPristine;
-    const text = event.target.value;
+    const text = event;
 
     dispatch(actions.changeCpf(text));
     isPristine && dispatch(actions.setCpfDirty());
@@ -247,28 +219,9 @@ class PerfilUsuario extends Component {
     return (
       <div className="perfil-usuario-container">
         <PageHeader title="Perfil do usuário">
-          <PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />
-          <PageHeaderItem tooltip="Comprar passagens" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
         </PageHeader>
         <DivAnimated className="text-center">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-center">
-            <Col xs={12} className="form-header text-left">
-              <span className="form-title">Informações pessoais</span>
-              {!this.props.edicaoHabilitada &&
-                <TooltipOverlay text="Edição desabilitada" position="top">
-                  <Button className='pull-right btn-google-blue edicao' onClick={this.handleHabilitarEdicao}>
-                    <FontAwesome name="lock" />
-                    {/*<span className="text-after-icon">Habilitar edição</span>*/}
-                  </Button>
-                </TooltipOverlay>}
-              {this.props.edicaoHabilitada &&
-                <TooltipOverlay text="Edição habilitada" position="top">
-                  <Button className="pull-right btn-google-red edicao" onClick={this.handleHabilitarEdicao}>
-                    <FontAwesome name="unlock" />
-                    {/*<span className="text-after-icon">Desabilitar edição</span>*/}
-                  </Button>
-                </TooltipOverlay>}
-            </Col>
             <Jumbotron>
               <FormPerfil {...formProps} />
             </Jumbotron>
