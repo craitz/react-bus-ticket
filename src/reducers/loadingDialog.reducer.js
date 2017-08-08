@@ -5,7 +5,7 @@ import { LoadingDialogActionType } from '../actions/actionTypes';
 const initialState = Immutable({
   status: SavingStatus.DONE,
   loadingMessage: '',
-  loadingIcon: '',
+  loadingIcon: 'spinner',
   doneMessage: '',
   doneIcon: ''
 });
@@ -40,6 +40,19 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loadingMessage: action.payload
+      }
+    }
+    case LoadingDialogActionType.SET_LOADING: {
+      return {
+        ...state,
+        loadingMessage: action.payload,
+        status: SavingStatus.SAVING
+      }
+    }
+    case LoadingDialogActionType.SET_DONE: {
+      return {
+        ...state,
+        status: SavingStatus.DONE
       }
     }
     default: {

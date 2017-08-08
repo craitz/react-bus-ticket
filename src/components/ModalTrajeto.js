@@ -12,6 +12,7 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
 import Button from 'react-toolbox/lib/button/Button';
+import * as loadingActions from '../actions/loadingDialog.actions'
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -229,21 +230,26 @@ export class ModalTrajeto extends Component {
       return;
     }
 
+    dispatch(loadingActions.setLoading('Procurando passagens...'));
+
     this.updateHorarios().then(() => {
-      dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
-      dispatch(actions.setVisible(false)); // fecha o modal
-
       setTimeout(() => {
-        // seta o trajeto da volta
-        dispatch(compraPassagemActions.changeOrigemVolta(destino.value)); // muda o destino
-        dispatch(compraPassagemActions.changeDestinoVolta(origem.value)); // muda o destino
+        dispatch(loadingActions.setDone()); // esconde o loading
+        dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
+        dispatch(actions.setVisible(false)); // fecha o modal
 
-        // reseta os erros
-        dispatch(compraPassagemActions.setErroSalvandoIda(false));
-        dispatch(compraPassagemActions.setErroSalvandoVolta(false));
-        history.push('/comprar'); // retorna ao form CompraPassagem
-      }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
+        setTimeout(() => {
+          // seta o trajeto da volta
+          dispatch(compraPassagemActions.changeOrigemVolta(destino.value)); // muda o destino
+          dispatch(compraPassagemActions.changeDestinoVolta(origem.value)); // muda o destino
 
+          // reseta os erros
+          dispatch(compraPassagemActions.setErroSalvandoIda(false));
+          dispatch(compraPassagemActions.setErroSalvandoVolta(false));
+
+          history.push('/comprar'); // retorna ao form CompraPassagem
+        }, 100); // 100ms para o form CompraPassagem ter tempo de descongelar
+      }, 1000);
     });
   };
 

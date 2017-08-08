@@ -83,16 +83,6 @@ export class CompraPassagem extends Component {
     this.updatePoltronas(cidades[0], cidades[1], utils.DateNowBr, newHorario);
   }
 
-  initLoadingDialog() {
-    const { dispatch } = this.props;
-    dispatch(loadingActions.setLoadingMessage('Salvando dados...'));
-    dispatch(loadingActions.setLoadingIcon('spinner'));
-  }
-
-  componentDidMount() {
-    this.initLoadingDialog();
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     return !this.props.isFrozen;
   }
@@ -576,7 +566,7 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     const { dispatch, passagem, passagemVolta, isIdaVolta, history } = this.props;
 
-    dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
+    dispatch(loadingActions.setLoading('Finalizando compra...'));
 
     if (this.formCanBeSaved()) {
       this.savePassagem(passagem)
@@ -585,8 +575,7 @@ export class CompraPassagem extends Component {
             this.savePassagem(passagemVolta)
               .then((objVolta) => {
                 setTimeout(() => {
-                  dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-                  console.log('ida e volta salvos com sucesso!');
+                  dispatch(loadingActions.setDone());
                   history.push({
                     pathname: `/passagem/${objIda.key}`,
                     state: {
@@ -601,7 +590,7 @@ export class CompraPassagem extends Component {
               });
           } else {
             setTimeout(() => {
-              dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+              dispatch(loadingActions.setDone());
               console.log('ida salva com sucesso!');
               history.push({
                 pathname: `/passagem/${objIda.key}`,
@@ -615,10 +604,10 @@ export class CompraPassagem extends Component {
           }
         })
         .catch((error) => {
-          dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+          dispatch(loadingActions.setDone());
         });
     } else {
-      dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+      dispatch(loadingActions.setDone());
     }
   }
 

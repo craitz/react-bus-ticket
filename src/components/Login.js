@@ -142,16 +142,6 @@ export class Login extends Component {
     firebaseHelper.delete('saidas/').then(() => { });
   }
 
-  componentDidMount() {
-    this.initLoadingDialog();
-  }
-
-  initLoadingDialog() {
-    const { dispatch } = this.props;
-    dispatch(loadingActions.setLoadingMessage('Autenticando usuário...'));
-    dispatch(loadingActions.setLoadingIcon('spinner'));
-  }
-
   updateEmailValidation(text) {
     const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -237,14 +227,14 @@ export class Login extends Component {
     event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
 
-    dispatch(loadingActions.setStatus(SavingStatus.SAVING));
+    dispatch(loadingActions.setLoading('Autenticando usuário...'));
 
     if (this.isLoginFormOK()) {
       firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
           this.getStaticListCidades()
             .then(() => {
-              dispatch(loadingActions.setStatus(SavingStatus.DONE));
+              dispatch(loadingActions.setDone());
               history.push({
                 pathname: '/',
                 state: {}
@@ -257,10 +247,10 @@ export class Login extends Component {
           } else { // SENHA
             dispatch(actions.setLoginSenhaValidation(ValidationStatus.ERROR, error.text));
           }
-          dispatch(loadingActions.setStatus(SavingStatus.DONE));
+          dispatch(loadingActions.setDone());
         });
     } else {
-      dispatch(loadingActions.setStatus(SavingStatus.DONE));
+      dispatch(loadingActions.setDone());
     }
   }
 
