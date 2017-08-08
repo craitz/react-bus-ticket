@@ -19,7 +19,7 @@
         border: none;
         background-color: $boxBgColor;
         padding: 0;
-        border-radius: 4px;
+        border-radius: 4px 4px 20px 30px;
         form {
             .main-section,
             .footer-section {
@@ -33,6 +33,7 @@
                 padding: 0 0 0 40px;
                 background-color: $materialPrimary;
                 height: 60px;
+                border-radius: 0 0 4px 4px;
                 span {
                     color: rgba(white, .8);
                     font-size: 2rem;
