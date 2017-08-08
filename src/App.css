@@ -379,9 +379,8 @@ button {
   color: initial; }
 
 .modal-trajeto-container .modal-dialog {
-  opacity: .9;
-  border-radius: 4px !important;
-  width: 300px; }
+  border-radius: 4px 4px 20px 20px;
+  width: 340px; }
   .modal-trajeto-container .modal-dialog input#data {
     background-color: white; }
   .modal-trajeto-container .modal-dialog .modal-content {
@@ -397,7 +396,7 @@ button {
       background-color: white;
       border-radius: 4px !important;
       color: #424242;
-      padding: 0 20px 0 20px;
+      padding: 20px 40px 10px 40px !important;
       border-bottom: none;
       font-family: "Days One";
       font-size: 2rem;
@@ -407,8 +406,7 @@ button {
         line-height: 51px !important;
         cursor: pointer; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-body {
-      padding: 20px;
-      padding-bottom: 3px; }
+      padding: 10px 40px 20px 40px !important; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .Select-control {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0; }
@@ -467,7 +465,21 @@ button {
             border-bottom: 6px solid #e71d36;
             clear: both; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
-      border-top: none; }
+      border-top: none;
+      background-color: #424242;
+      text-align: left;
+      padding: 0 0 0 40px;
+      height: 70px !important;
+      border-radius: 0 0 4px 4px; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-footer span {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 2rem;
+        line-height: 70px;
+        font-family: "Days One"; }
+    .modal-trajeto-container .modal-dialog .modal-content .btn-buscar {
+      position: absolute;
+      right: 20px;
+      bottom: -28px; }
     .modal-trajeto-container .modal-dialog .modal-content .loading-text-after-icon {
       margin-left: 15px; }
 

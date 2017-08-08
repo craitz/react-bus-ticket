@@ -252,7 +252,7 @@ export class ModalTrajeto extends Component {
 
     const getIcon = () => isIdaVolta ? 'exchange fa-fw' : 'long-arrow-right fa-fw';
     const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
-    const getButtonLabel = () => isFromWelcome ? 'Buscar' : 'Confirmar e fechar';
+    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirmar e fechar';
     const getButtonIcon = () => isFromWelcome ? 'search fa-fw' : 'check fa-fw';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
@@ -330,15 +330,15 @@ export class ModalTrajeto extends Component {
             }
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              raised
-              primary
-              type="submit"
-              className="btn-block">
-              <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
-              <span className="text-after-icon bt-mui-text">{getButtonLabel()}</span>
-            </Button>
+            <span>{getButtonLabel()}</span>
           </Modal.Footer>
+          <Button
+            floating
+            accent
+            type="submit"
+            className="btn-block btn-buscar">
+            <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
+          </Button>
         </form>
       </Modal >
     );

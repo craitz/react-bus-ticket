@@ -17,25 +17,19 @@ $arrowSize: 6px;
         color: initial;
     }
     .modal-dialog {
-        opacity: .9;
-        border-radius: 4px !important;
+        border-radius: 4px 4px 20px 20px;
         input#data {
             background-color: white;
         }
-        width: 300px;
+        width: 340px;
         .modal-content {
-            // border-radius: 0;
-            // background-color: whitesmoke;
             background-color: white;
             border: none;
             .modal-header {
-                // background-color: $materialPrimary;
                 background-color: white;
-                // color: rgba(white, .8);
                 border-radius: 4px !important;
                 color: rgba($materialPrimary, 1);
-                padding: 0 20px 0 20px;
-                // border-bottom: 2px solid $materialAccent;
+                padding: 20px 40px 10px 40px !important;
                 border-bottom: none;
                 font-family: $fontPadrao;
                 font-size: 2rem;
@@ -48,8 +42,7 @@ $arrowSize: 6px;
                 .icon-ida-volta {}
             }
             .modal-body {
-                padding: 20px;
-                padding-bottom: 3px;
+                padding: 10px 40px 20px 40px !important;
                 .Select-control {
                     border-top-left-radius: 0;
                     border-bottom-left-radius: 0;
@@ -119,7 +112,22 @@ $arrowSize: 6px;
             }
             .modal-footer {
                 border-top: none;
-                // border-top-color: rgba(black, .05);
+                background-color: $materialPrimary;
+                text-align: left;
+                padding: 0 0 0 40px;
+                height: 70px !important;
+                border-radius: 0 0 4px 4px;
+                span {
+                    color: rgba(white, .8);
+                    font-size: 2rem;
+                    line-height: 70px;
+                    font-family: "Days One";
+                }
+            }
+            .btn-buscar {
+                position: absolute;
+                right: 20px;
+                bottom: -28px;
             }
             @include noSelection();
             font-size: 1.5rem;
