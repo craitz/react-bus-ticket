@@ -2,12 +2,8 @@
     cursor: wait;
     .modal-dialog {
         width: 300px;
-        // height: 52px;
-        // position: fixed;
-        // top: calc(50% - 52px/2);
-        // left: calc(50% - 300px/2);
         .modal-content {
-            background-color: rgba(#FF9800, .9);
+            background-color: lighten($materialPrimary, 10%);
             color: white;
             border-radius: 6px;
             @include noSelection();

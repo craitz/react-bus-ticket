@@ -356,7 +356,7 @@ button {
   .loading-dialog-container .modal-dialog {
     width: 300px; }
     .loading-dialog-container .modal-dialog .modal-content {
-      background-color: rgba(255, 152, 0, 0.9);
+      background-color: #5c5c5c;
       color: white;
       border-radius: 6px;
       -moz-user-select: -moz-none !important;

@@ -39,7 +39,9 @@ export const LoadingDialogActionType = {
   SET_LOADING_ICON: 'SET_LOADING_ICON',
   SET_DONE_MESSAGE: 'SET_DONE_MESSAGE',
   SET_DONE_ICON: 'SET_DONE_ICON',
-  SET_STATUS: 'SET_STATUS'
+  SET_STATUS: 'SET_STATUS',
+  SET_LOADING: 'SET_DIALOG_LOADING',
+  SET_DONE: 'SET_DIALOG_DONE'
 }
 
 export const ModalTrajetoActionType = {

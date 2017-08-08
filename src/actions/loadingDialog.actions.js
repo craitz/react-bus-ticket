@@ -34,3 +34,16 @@ export const setDoneIcon = (icon) => {
     payload: icon
   }
 };
+
+export const setLoading = (message) => {
+  return {
+    type: LoadingDialogActionType.SET_LOADING,
+    payload: message
+  }
+};
+
+export const setDone = () => {
+  return {
+    type: LoadingDialogActionType.SET_DONE
+  }
+};
