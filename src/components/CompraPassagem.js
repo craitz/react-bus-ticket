@@ -285,12 +285,12 @@ export class CompraPassagem extends Component {
           dispatch(actions.setErroSalvandoVolta(false));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
-          dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
+          // dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
         } else {
           dispatch(actions.setErroSalvandoIda(false));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
-          dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
+          // dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
         }
 
         this.checkNotAllowed(!isVolta, horario);

@@ -71,7 +71,7 @@
         }
     }
     &::after {
-        @include bkgImage('login3.jpg');
+        @include bkgImage('login4.jpg');
     }
     @include xs {
         .login-box {
