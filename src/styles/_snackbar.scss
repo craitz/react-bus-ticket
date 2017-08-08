@@ -2,7 +2,7 @@
     border-radius: 0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    width: 300px;
+    // width: 330px;
     span {
         font-size: 1.5rem !important;
     }
@@ -14,5 +14,11 @@
     }
     &.warning {
         background-color: rgba($busYellow, .9) !important;
+    }
+}
+
+@include sm {
+    .snackbar {
+        // width: 400px;
     }
 }

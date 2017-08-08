@@ -95,8 +95,7 @@
 .snackbar {
   border-radius: 0;
   border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  width: 300px; }
+  border-top-right-radius: 5px; }
   .snackbar span {
     font-size: 1.5rem !important; }
   .snackbar.error {
@@ -794,44 +793,36 @@ button {
     width: inherit;
     margin-top: 15px; }
     .confirmacao-passagem .form-centered .jumbo-detalhes {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      position: relative; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .label-localizador {
-        color: #424242; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .localizador {
-        display: block;
-        color: #424242;
-        font-family: "Oswald";
-        font-size: 2rem;
-        font-weight: bold; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida,
-      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta {
-        padding: 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border-radius: 4px;
-        color: rgba(255, 255, 255, 0.8) !important; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .header,
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta .header {
-          border-top-left-radius: 4px !important;
-          border-top-right-radius: 4px !important;
-          position: relative;
+      background-color: white;
+      padding: 0;
+      position: relative;
+      border-radius: 4px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px; }
+      .confirmacao-passagem .form-centered .jumbo-detalhes .main-body {
+        margin: 0;
+        padding: 40px 40px 20px 40px; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .label-localizador {
+          color: #424242; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .localizador {
           display: block;
-          height: 50px; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .body,
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta .body {
-          padding: 20px; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida .footer,
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta .footer {
-          border-bottom-left-radius: 4px !important;
-          border-bottom-right-radius: 4px !important;
-          position: relative;
-          display: block;
-          height: 50px; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida {
-        background-color: #424242 !important; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-ida::after {
+          color: #424242;
+          font-family: "Oswald";
+          font-size: 2rem;
+          font-weight: bold; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida,
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta {
+          border: 1px solid rgba(66, 66, 66, 0.2);
+          padding: 0;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          border-radius: 4px;
+          color: #424242 !important;
+          background-color: white !important; }
+          .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida .body,
+          .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body {
+            padding: 20px; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida::after {
           content: "";
           background: url(./styles/images/compra-ida.svg) no-repeat center left;
           background-attachment: scroll;
@@ -842,9 +833,7 @@ button {
           right: 0;
           width: 100%;
           position: absolute; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta {
-        background-color: #424242 !important; }
-        .confirmacao-passagem .form-centered .jumbo-detalhes .detalhes .jumbo-volta::after {
+        .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta::after {
           content: "";
           background: url(./styles/images/compra-volta.svg) no-repeat center right;
           background-attachment: scroll;
@@ -854,11 +843,17 @@ button {
           right: 10px;
           width: 100%;
           position: absolute; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .paragrafo-parabens {
-        color: #424242; }
-      .confirmacao-passagem .form-centered .jumbo-detalhes .paragrafo-email {
-        margin-bottom: 10px;
-        color: #424242; }
+      .confirmacao-passagem .form-centered .jumbo-detalhes .bottom-strip {
+        margin: 0;
+        background-color: #424242;
+        padding: 40px;
+        border-bottom-left-radius: 4px !important;
+        border-bottom-right-radius: 4px !important; }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .bottom-strip .paragrafo-parabens {
+          color: rgba(255, 255, 255, 0.8); }
+        .confirmacao-passagem .form-centered .jumbo-detalhes .bottom-strip .paragrafo-email {
+          margin-bottom: 10px;
+          color: rgba(255, 255, 255, 0.8); }
       .confirmacao-passagem .form-centered .jumbo-detalhes .button-continuar-comprando {
         position: absolute;
         right: 40px;
@@ -1018,7 +1013,7 @@ button {
       margin-top: 60px; }
   .login-container::after {
     content: "";
-    background: url(./styles/images/login3.jpg) no-repeat center center;
+    background: url(./styles/images/login4.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
