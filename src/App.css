@@ -406,7 +406,7 @@ button {
         line-height: 51px !important;
         cursor: pointer; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-body {
-      padding: 10px 40px 20px 40px !important; }
+      padding: 10px 40px 30px 40px !important; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .Select-control {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0; }
@@ -469,12 +469,12 @@ button {
       background-color: #424242;
       text-align: left;
       padding: 0 0 0 40px;
-      height: 70px !important;
+      height: 60px !important;
       border-radius: 0 0 4px 4px; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-footer span {
         color: rgba(255, 255, 255, 0.8);
         font-size: 2rem;
-        line-height: 70px;
+        line-height: 60px;
         font-family: "Days One"; }
     .modal-trajeto-container .modal-dialog .modal-content .btn-buscar {
       position: absolute;
@@ -627,7 +627,7 @@ button {
                   margin-left: 4rem;
                   color: rgba(0, 0, 0, 0.6) !important; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right .icon-passenger {
-                  color: #F44336; }
+                  color: rgba(66, 66, 66, 0.8); }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-passenger,
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .poltronas-text,
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .progress {
@@ -675,7 +675,7 @@ button {
                   -webkit-user-select: none !important;
                   -ms-user-select: none !important;
                   user-select: none !important;
-                  background: url(./styles/images/busseat-green-3.svg);
+                  background: url(./styles/images/busseat-green-4.svg);
                   background-size: 100% 100%;
                   background-repeat: no-repeat;
                   color: white;
@@ -692,7 +692,7 @@ button {
                     background: url(./styles/images/busseat-reserved.svg);
                     color: rgba(0, 0, 0, 0.2); }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-collapse .panel-body .bus-seat-select .bus-row .label.selected {
-                    background: url(./styles/images/busseat-selected2.svg); }
+                    background: url(./styles/images/busseat-red.svg); }
                   .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-collapse .panel-body .bus-seat-select .bus-row .label.legenda {
                     cursor: default; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-collapse .panel-body .bus-seat-select .bus-row.corredor-acima {
@@ -1008,7 +1008,7 @@ button {
       bottom: -28px; }
   .login-container::after {
     content: "";
-    background: url(./styles/images/login4.jpg) no-repeat center center;
+    background: url(./styles/images/login3.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1051,12 +1051,12 @@ button {
       .welcome-container .info-container .jumbo-painel .footer-section {
         padding: 0 0 0 40px;
         background-color: #424242;
-        height: 80px;
+        height: 60px;
         border-radius: 0 0 4px 4px; }
         .welcome-container .info-container .jumbo-painel .footer-section span {
           color: rgba(255, 255, 255, 0.8);
           font-size: 2rem;
-          line-height: 80px;
+          line-height: 60px;
           font-family: "Days One"; }
       .welcome-container .info-container .jumbo-painel .welcome-button {
         position: absolute;

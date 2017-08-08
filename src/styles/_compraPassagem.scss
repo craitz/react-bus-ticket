@@ -91,7 +91,7 @@ monospace;
                             color: rgba(black, .6) !important;
                         }
                         .icon-passenger {
-                            color: $googleRed;
+                            color: rgba($materialPrimary, .8);
                         }
                     }
                     &[aria-expanded="true"] {
@@ -286,7 +286,7 @@ monospace;
                 text-shadow: 1px 1px rgba(black, .3);
                 @include noSelection();
                 // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                background: url(./styles/images/busseat-green-3.svg);
+                background: url(./styles/images/busseat-green-4.svg);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 //   background-size: cover;
@@ -308,7 +308,7 @@ monospace;
                 }
                 &.selected {
                     // background-color: $colorSelected;
-                    background: url(./styles/images/busseat-selected2.svg);
+                    background: url(./styles/images/busseat-red.svg);
                 }
                 &.legenda {
                     cursor: default;

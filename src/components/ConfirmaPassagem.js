@@ -9,10 +9,21 @@ import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
 import FontAwesome from 'react-fontawesome';
+import * as actions from '../actions/modalTrajeto.actions';
 
 class ConfirmaPassagem extends Component {
   constructor(props) {
     super(props);
+    this.handleComprarPassagem = this.handleComprarPassagem.bind(this);
+    this.handleHome = this.handleHome.bind(this);
+  }
+
+  handleComprarPassagem() {
+    this.props.dispatch(actions.setVisible(true, true));
+  }
+
+  handleHome() {
+    this.props.history.push('/');
   }
 
   render() {
@@ -24,7 +35,7 @@ class ConfirmaPassagem extends Component {
           floating
           accent
           className="button-continuar-comprando"
-          //onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
+          onClick={this.handleComprarPassagem}
           icon={<FontAwesome name="shopping-cart" />}
         />
       </TooltipOverlay>
@@ -36,7 +47,7 @@ class ConfirmaPassagem extends Component {
           accent
           mini
           className="button-home"
-          //onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
+          onClick={this.handleHome}
           icon={<FontAwesome name="home" />}
         />
       </TooltipOverlay>
