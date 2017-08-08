@@ -36,6 +36,42 @@ export const setCpfValidation = (validation, message) => {
   }
 };
 
+export const changeTelefone = (telefone) => {
+  return {
+    type: PerfilUsuarioActionType.CHANGE_TELEFONE,
+    payload: telefone
+  }
+};
+
+export const setTelefoneDirty = () => {
+  return { type: PerfilUsuarioActionType.SET_TELEFONE_DIRTY }
+};
+
+export const setTelefoneValidation = (validation, message) => {
+  return {
+    type: PerfilUsuarioActionType.SET_TELEFONE_VALIDATION,
+    payload: { validation, message }
+  }
+};
+
+export const changeCelular = (celular) => {
+  return {
+    type: PerfilUsuarioActionType.CHANGE_CELULAR,
+    payload: celular
+  }
+};
+
+export const setCelularDirty = () => {
+  return { type: PerfilUsuarioActionType.SET_CELULAR_DIRTY }
+};
+
+export const setCelularValidation = (validation, message) => {
+  return {
+    type: PerfilUsuarioActionType.SET_CELULAR_VALIDATION,
+    payload: { validation, message }
+  }
+};
+
 export const changeDataNascimento = (data) => {
   return {
     type: PerfilUsuarioActionType.CHANGE_DATANASC,

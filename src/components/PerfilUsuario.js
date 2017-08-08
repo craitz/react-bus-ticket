@@ -15,6 +15,8 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
 import Input from 'react-toolbox/lib/input/Input';
 import VMasker from 'vanilla-masker';
+import * as snackbarActions from '../actions/snackbar.actions'
+import Snackbar from '../shared/Snackbar';
 // import PropTypes from 'prop-types';
 
 const ButtonAtualizar = () =>
@@ -26,8 +28,9 @@ const ButtonAtualizar = () =>
     <FontAwesome name="check fa-fw" />
   </Button>
 
-const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNascimento, user, edicaoHabilitada }) => {
-  const { nome, cpf, dataNascimento } = user;
+const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNascimento,
+  onChangeTelefone, onChangeCelular, user, edicaoHabilitada }) => {
+  const { nome, cpf, dataNascimento, telefone, celular } = user;
 
   return (
     <form onSubmit={onSubmit}>
@@ -71,6 +74,32 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             />
           </Col>
         </Row>
+        <Row className="text-left">
+          <Col xs={12}>
+            <Input
+              type='text'
+              label='Telefone*'
+              icon={<FontAwesome name="phone" />}
+              value={telefone.text}
+              autoComplete="off"
+              error={telefone.message}
+              onChange={onChangeTelefone}
+            />
+          </Col>
+        </Row>
+        <Row className="text-left">
+          <Col xs={12}>
+            <Input
+              type='text'
+              label='Celular*'
+              icon={<FontAwesome name="mobile" />}
+              value={celular.text}
+              autoComplete="off"
+              error={celular.message}
+              onChange={onChangeCelular}
+            />
+          </Col>
+        </Row>
       </Row>
       <Row className="footer-section">
         <span>Salvar alterações</span>
@@ -80,21 +109,19 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
   );
 }
 
-const InputField = withInput(BaseField);
-const InputMaskField = withInputMask(BaseField);
-
 class PerfilUsuario extends Component {
   constructor(props) {
     super(props);
     this.handleChangeNome = this.handleChangeNome.bind(this);
     this.handleChangeCpf = this.handleChangeCpf.bind(this);
     this.handleChangeDataNascimento = this.handleChangeDataNascimento.bind(this);
+    this.handleChangeTelefone = this.handleChangeTelefone.bind(this);
+    this.handleChangeCelular = this.handleChangeCelular.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.initForm();
-    this.initLoadingDialog();
   }
 
   initForm() {
@@ -106,14 +133,10 @@ class PerfilUsuario extends Component {
     dispatch(actions.setCpfDirty());
     dispatch(actions.changeDataNascimento(user.dataNascimento));
     dispatch(actions.setDataNascimentoDirty());
-  }
-
-  initLoadingDialog() {
-    const { dispatch } = this.props;
-    dispatch(loadingActions.setLoadingMessage('Salvando alterações...'));
-    dispatch(loadingActions.setLoadingIcon('spinner'));
-    dispatch(loadingActions.setDoneMessage('Perfil salvo com sucesso !'));
-    dispatch(loadingActions.setDoneIcon('check'));
+    dispatch(actions.changeTelefone(user.telefone));
+    dispatch(actions.setTelefoneDirty());
+    dispatch(actions.changeCelular(user.celular));
+    dispatch(actions.setCelularDirty());
   }
 
   handleChangeNome(event) {
@@ -147,6 +170,54 @@ class PerfilUsuario extends Component {
     isPristine && dispatch(actions.setDataNascimentoDirty());
 
     this.updateDataNascimentoValidation(text);
+  }
+
+  handleChangeTelefone(event) {
+    const { dispatch, user } = this.props;
+    const isPristine = user.telefone.isPristine;
+    const text = VMasker.toPattern(event, '(99) 9999-9999');
+
+    dispatch(actions.changeTelefone(text));
+    isPristine && dispatch(actions.setTelefoneDirty());
+
+    this.updateTelefoneValidation(text);
+  }
+
+  handleChangeCelular(event) {
+    const { dispatch, user } = this.props;
+    const isPristine = user.celular.isPristine;
+    const text = VMasker.toPattern(event, '(99) 99999-9999');
+
+    dispatch(actions.changeCelular(text));
+    isPristine && dispatch(actions.setCelularDirty());
+
+    this.updateCelularValidation(text);
+  }
+
+  updateCelularValidation(text) {
+    const { dispatch } = this.props;
+    const regexp = /^(\([0-9]{2}\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/;
+
+    if (text.length === 0) { // EMPTY
+      dispatch(actions.setCelularValidation(utils.ValidationStatus.ERROR, 'Informe o celular'));
+    } else if (!regexp.test(text)) { // BAD FORMAT
+      dispatch(actions.setCelularValidation(utils.ValidationStatus.ERROR, 'celular inválido'));
+    } else { // OK
+      dispatch(actions.setCelularValidation(utils.ValidationStatus.NONE, ''));
+    }
+  }
+
+  updateTelefoneValidation(text) {
+    const { dispatch } = this.props;
+    const regexp = /^(\([0-9]{2}\) [0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/;
+
+    if (text.length === 0) { // EMPTY
+      dispatch(actions.setTelefoneValidation(utils.ValidationStatus.ERROR, 'Informe o telefone'));
+    } else if (!regexp.test(text)) { // BAD FORMAT
+      dispatch(actions.setTelefoneValidation(utils.ValidationStatus.ERROR, 'telefone inválido'));
+    } else { // OK
+      dispatch(actions.setTelefoneValidation(utils.ValidationStatus.NONE, ''));
+    }
   }
 
   updateDataNascimentoValidation(text) {
@@ -191,8 +262,8 @@ class PerfilUsuario extends Component {
 
 
   formCanBeSaved() {
-    const { dispatch, user, dataNascimento } = this.props;
-    const { nome, cpf } = user;
+    const { dispatch, user } = this.props;
+    const { nome, cpf, dataNascimento, telefone, celular } = user;
     let failed = false;
 
     // if NOME is pristine, form cannot be saved
@@ -216,9 +287,25 @@ class PerfilUsuario extends Component {
       this.updateDataNascimentoValidation(dataNascimento.text);
     }
 
+    // if TELEFONE is pristine, form cannot be saved
+    if (telefone.isPristine) {
+      failed = true;
+      dispatch(actions.setTelefoneDirty());
+      this.updateTelefoneValidation(telefone.text);
+    }
+
+    // if CELULAR is pristine, form cannot be saved
+    if (celular.isPristine) {
+      failed = true;
+      dispatch(actions.setCelularDirty());
+      this.updateCelularValidation(celular.text);
+    }
+
     if ((failed) ||
       (nome.validation !== utils.ValidationStatus.NONE) ||
       (cpf.validation !== utils.ValidationStatus.NONE) ||
+      (telefone.validation !== utils.ValidationStatus.NONE) ||
+      (celular.validation !== utils.ValidationStatus.NONE) ||
       (dataNascimento.validation !== utils.ValidationStatus.NONE)) {
       return false;
     }
@@ -231,29 +318,29 @@ class PerfilUsuario extends Component {
     event.preventDefault();
     const { dispatch, user } = this.props;
 
-    dispatch(loadingActions.setStatus(utils.SavingStatus.SAVING));
+    dispatch(loadingActions.setLoading('Saalvando alterações...'));
     if (this.formCanBeSaved()) {
 
       const newUser = {
         nome: user.nome.text,
-        cpf: user.cpf.text
+        cpf: user.cpf.text,
+        dataNascimento: user.dataNascimento.text,
+        telefone: user.telefone.text,
+        celular: user.celular.text
       };
 
       setTimeout(() => {
         firebaseHelper.setUserOnFirebase(newUser)
           .then(() => {
-            dispatch(loadingActions.setStatus(utils.SavingStatus.FEEDBACK));
-            setTimeout(() => {
-              dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
-              dispatch(actions.setEdicaoHabilitada(false));
-            }, 1000);
+            dispatch(loadingActions.setDone());
+            dispatch(snackbarActions.show(utils.SnackbarTypes.SUCCESS, 'Perfil salvo com sucesso!'));
           })
           .catch((error) => {
-            dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+            dispatch(loadingActions.setDone());
           });
       }, 1000);
     } else {
-      dispatch(loadingActions.setStatus(utils.SavingStatus.DONE));
+      dispatch(loadingActions.setDone());
     }
   }
 
@@ -264,6 +351,8 @@ class PerfilUsuario extends Component {
       onChangeNome: this.handleChangeNome,
       onChangeCpf: this.handleChangeCpf,
       onChangeDataNascimento: this.handleChangeDataNascimento,
+      onChangeTelefone: this.handleChangeTelefone,
+      onChangeCelular: this.handleChangeCelular,
       onSubmit: this.handleSubmit
     }
 
@@ -278,6 +367,7 @@ class PerfilUsuario extends Component {
             </Jumbotron>
           </Col>
         </DivAnimated>
+        <Snackbar />
       </div>
     );
   }

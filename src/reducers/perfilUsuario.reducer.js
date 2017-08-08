@@ -21,6 +21,18 @@ const initialState = Immutable({
       isPristine: true,
       validation: ValidationStatus.NONE,
       message: ''
+    },
+    telefone: {
+      text: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
+    },
+    celular: {
+      text: '',
+      isPristine: true,
+      validation: ValidationStatus.NONE,
+      message: ''
     }
   },
   edicaoHabilitada: false
@@ -139,6 +151,84 @@ const reducer = (state = initialState, action = {}) => {
         }
       };
     }
+
+
+    case PerfilUsuarioActionType.CHANGE_TELEFONE: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          telefone: {
+            ...state.user.telefone,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_TELEFONE_DIRTY: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          telefone: {
+            ...state.user.telefone,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_TELEFONE_VALIDATION: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          telefone: {
+            ...state.user.telefone,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
+      };
+    }
+
+    case PerfilUsuarioActionType.CHANGE_CELULAR: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          celular: {
+            ...state.user.celular,
+            text: action.payload
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_CELULAR_DIRTY: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          celular: {
+            ...state.user.celular,
+            isPristine: false
+          }
+        }
+      };
+    }
+    case PerfilUsuarioActionType.SET_CELULAR_VALIDATION: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          celular: {
+            ...state.user.celular,
+            validation: action.payload.validation,
+            message: action.payload.message
+          }
+        }
+      };
+    }
+
     case PerfilUsuarioActionType.SET_EDICAO_HABILITADA: {
       return {
         ...state,
