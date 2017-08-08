@@ -93,13 +93,14 @@ $fontColor: rgba($materialPrimary, 1);
             }
             .button-continuar-comprando {
                 position: absolute;
-                right: 40px;
-                bottom: -28px;
+                right: 20px;
+                bottom: -20px;
             }
             .button-home {
                 position: absolute;
-                right: 110px;
-                bottom: -20px;
+                right: 90px;
+                bottom: -14px;
+                background-color: lighten($materialPrimary, 10%);
             }
         }
     }

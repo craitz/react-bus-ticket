@@ -226,22 +226,6 @@ monospace;
             // background-color: lighten($materialPrimary, 10%) !important;
         }
     }
-    .button-excluir-volta {
-        display: none;
-        position: absolute;
-        z-index: 9;
-        top: 13px;
-        right: -28px;
-        // background-color: lighten($materialPrimary, 10%) !important;
-    }
-    .button-limpar-volta {
-        display: none;
-        position: absolute;
-        z-index: 9;
-        right: -20px;
-        top: 75px;
-        // background-color: lighten($materialPrimary, 10%) !important;
-    }
     nav {
         // font-family: "Ubuntu";
         border-top-left-radius: 4px !important;
@@ -390,11 +374,11 @@ monospace;
     }
     .button-finaliza {
         right: 20px;
-        bottom: -28px;
+        bottom: -20px;
     }
     .button-edit {
         right: 90px;
-        bottom: -20px;
+        bottom: -14px;
     }
     @include containerHeight;
     .form-passagem-container {

@@ -479,7 +479,7 @@ button {
     .modal-trajeto-container .modal-dialog .modal-content .btn-buscar {
       position: absolute;
       right: 20px;
-      bottom: -28px; }
+      bottom: -20px; }
     .modal-trajeto-container .modal-dialog .modal-content .loading-text-after-icon {
       margin-left: 15px; }
 
@@ -525,10 +525,10 @@ button {
     z-index: 9; }
   .comprar-passagem-container .button-finaliza {
     right: 20px;
-    bottom: -28px; }
+    bottom: -20px; }
   .comprar-passagem-container .button-edit {
     right: 90px;
-    bottom: -20px; }
+    bottom: -14px; }
   .comprar-passagem-container .form-passagem-container {
     position: relative;
     background-color: transpareredt;
@@ -763,18 +763,6 @@ button {
             z-index: 9;
             right: -20px;
             top: 47px; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-excluir-volta {
-            display: none;
-            position: absolute;
-            z-index: 9;
-            top: 13px;
-            right: -28px; }
-          .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-volta {
-            display: none;
-            position: absolute;
-            z-index: 9;
-            right: -20px;
-            top: 75px; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav {
             border-top-left-radius: 4px !important;
             border-top-right-radius: 4px !important; }
@@ -868,12 +856,13 @@ button {
           color: rgba(255, 255, 255, 0.8); }
       .confirmacao-passagem .form-centered .jumbo-detalhes .button-continuar-comprando {
         position: absolute;
-        right: 40px;
-        bottom: -28px; }
+        right: 20px;
+        bottom: -20px; }
       .confirmacao-passagem .form-centered .jumbo-detalhes .button-home {
         position: absolute;
-        right: 110px;
-        bottom: -20px; }
+        right: 90px;
+        bottom: -14px;
+        background-color: #5c5c5c; }
   .confirmacao-passagem::after {
     content: "";
     background: url(./styles/images/login2.jpg) no-repeat center center;
@@ -981,10 +970,10 @@ button {
   .login-container .login-box {
     text-align: left;
     position: relative;
+    padding: 0;
     width: 320px;
     border: none;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 0;
     border-radius: 4px 4px 20px 30px; }
     .login-container .login-box form .main-section,
     .login-container .login-box form .footer-section {
@@ -1005,7 +994,7 @@ button {
     .login-container .login-box form .btn-login {
       position: absolute;
       right: 20px;
-      bottom: -28px; }
+      bottom: -20px; }
   .login-container::after {
     content: "";
     background: url(./styles/images/login3.jpg) no-repeat center center;
@@ -1061,7 +1050,7 @@ button {
       .welcome-container .info-container .jumbo-painel .welcome-button {
         position: absolute;
         right: 20px;
-        bottom: -28px; }
+        bottom: -20px; }
     .welcome-container .info-container h2 {
       font-family: "Days One";
       color: #424242;
@@ -1096,42 +1085,35 @@ button {
 .perfil-usuario-container {
   overflow: auto;
   height: calc(100vh - 50px); }
-  .perfil-usuario-container .form-header {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    margin: 0;
-    margin-top: 50px;
-    padding: 10px;
-    padding-left: 20px;
-    padding-left: -15px !important;
-    background-color: rgba(0, 0, 0, 0.05);
-    border: none; }
-    .perfil-usuario-container .form-header .form-title {
-      font-family: "Gruppo";
-      font-size: 2rem;
-      line-height: 40px; }
-    .perfil-usuario-container .form-header .btn.edicao {
-      font-size: 2rem;
-      background-color: transparent;
-      color: black !important; }
-      .perfil-usuario-container .form-header .btn.edicao:hover, .perfil-usuario-container .form-header .btn.edicao:active, .perfil-usuario-container .form-header .btn.edicao:focus {
-        background-color: rgba(0, 0, 0, 0.1) !important;
-        color: black !important; }
   .perfil-usuario-container .jumbotron {
-    margin-top: 15px; }
-    .perfil-usuario-container .jumbotron .text-left.row.first {
-      padding-top: 50px; }
-    .perfil-usuario-container .jumbotron .static-label {
-      font-size: 3rem;
-      font-family: 'Gruppo';
-      margin-left: 20px; }
-    .perfil-usuario-container .jumbotron .static-value {
-      font-size: 3rem;
-      font-family: 'Gruppo';
-      margin-left: 10px; }
+    margin-top: 15px;
+    position: relative;
+    padding: 0;
+    background-color: white; }
+    .perfil-usuario-container .jumbotron .main-section,
+    .perfil-usuario-container .jumbotron .footer-section {
+      margin: 0;
+      padding: 40px;
+      text-align: left; }
+    .perfil-usuario-container .jumbotron .main-section {
+      padding: 40px; }
+    .perfil-usuario-container .jumbotron .footer-section {
+      padding: 0 0 0 40px;
+      background-color: #424242;
+      height: 60px;
+      border-radius: 0 0 4px 4px; }
+      .perfil-usuario-container .jumbotron .footer-section span {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 2rem;
+        line-height: 60px;
+        font-family: "Days One"; }
+    .perfil-usuario-container .jumbotron .btn-salvar {
+      position: absolute;
+      right: 20px;
+      bottom: -20px; }
   .perfil-usuario-container::after {
     content: "";
-    background: url(./styles/images/tree5.jpg) no-repeat center center;
+    background: url(./styles/images/login4.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
