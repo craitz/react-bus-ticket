@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router';
-import { FormControl, FormGroup, InputGroup, Glyphicon, HelpBlock } from 'react-bootstrap';
+import { FormControl, FormGroup, Row, InputGroup, Glyphicon, HelpBlock } from 'react-bootstrap';
 import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -96,16 +96,13 @@ const fakeGenerator = (() => {
 })();
 
 export const ButtonLogin = ({ handleLogin }) =>
-  <FormGroup className="last">
-    <Button
-      raised
-      primary
-      className="btn-block"
-      onClick={handleLogin}>
-      <FontAwesome name="sign-in bt-mui-icon" />
-      <span className="text-after-icon bt-mui-text">Entrar</span>
-    </Button>
-  </FormGroup>
+  <Button
+    floating
+    accent
+    className="btn-block btn-login mui--z2"
+    onClick={handleLogin}>
+    <FontAwesome name="unlock bt-mui-icon" />
+  </Button>
 
 export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
   <FormGroup controlId={id} validationState={field.validation}>
@@ -277,52 +274,30 @@ export class Login extends Component {
       return (
         <div className="login-container">
           <DivAnimated className="login-box mui--z2">
-            <div className="login-header">
-              <div className="login-header--title">
-                <div className="login-header--title-main">
-                  Login
-                  {/*<Button
-                    floating
-                    primary
-                    mini
-                    className="text-after-icon"
-                    onClick={this.handleGenerateFakeData}
-                    icon={<FontAwesome name="database" />}
-                  />*/}
-                  {/*<Button
-                    floating
-                    accent
-                    mini
-                    className="text-after-icon"
-                    onClick={this.handleClearFakeData}
-                    icon={<FontAwesome name="eraser" />}
-                  />*/}
-
-                </div>
-              </div>
-              <div className="login-header--icon text-right">
-                <Glyphicon glyph="lock" className="main-icon" />
-              </div>
-            </div>
             <form>
-              <Input
-                type='email'
-                label='E-mail'
-                icon={<FontAwesome name="envelope" />}
-                value={email.text}
-                autoComplete="off"
-                error={email.message}
-                onChange={this.handleChangeEmail}
-              />
-              <Input
-                type='password'
-                label='Senha'
-                icon={<FontAwesome name="key" />}
-                value={senha.text}
-                autoComplete="off"
-                error={senha.message}
-                onChange={this.handleChangeSenha}
-              />
+              <Row className="main-section">
+                <Input
+                  type='email'
+                  label='E-mail'
+                  icon={<FontAwesome name="envelope" />}
+                  value={email.text}
+                  autoComplete="off"
+                  error={email.message}
+                  onChange={this.handleChangeEmail}
+                />
+                <Input
+                  type='password'
+                  label='Senha'
+                  icon={<FontAwesome name="key" />}
+                  value={senha.text}
+                  autoComplete="off"
+                  error={senha.message}
+                  onChange={this.handleChangeSenha}
+                />
+              </Row>
+              <Row className="footer-section">
+                <span className="bt-mui-text">Login no sistema</span>
+              </Row>
               <ButtonLogin handleLogin={this.handleLogin} />
             </form>
           </DivAnimated>

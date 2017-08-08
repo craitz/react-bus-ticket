@@ -972,45 +972,27 @@ button {
     width: 320px;
     border: none;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 15px 20px 5px 20px;
+    padding: 0;
     border-radius: 4px; }
-    .login-container .login-box .form-group.last {
-      margin-top: 20px;
-      margin-bottom: 8px; }
-    .login-container .login-box .login-header {
-      height: 40px;
+    .login-container .login-box form .main-section,
+    .login-container .login-box form .footer-section {
+      margin: 0;
+      padding: 40px; }
+    .login-container .login-box form .main-section {
+      padding: 40px; }
+    .login-container .login-box form .footer-section {
+      padding: 0 0 0 40px;
+      background-color: #424242;
+      height: 60px; }
+      .login-container .login-box form .footer-section span {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 2rem;
+        line-height: 60px;
+        font-family: "Days One"; }
+    .login-container .login-box form .btn-login {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50px; }
-      .login-container .login-box .login-header .login-header--title {
-        position: absolute;
-        left: 0;
-        display: inline;
-        width: 220px;
-        height: inherit;
-        padding-top: 10px;
-        padding-left: 20px; }
-        .login-container .login-box .login-header .login-header--title .login-header--title-main {
-          color: #424242;
-          line-height: 30px;
-          font-size: 2.5rem;
-          font-weight: bold;
-          font-family: "Days One"; }
-      .login-container .login-box .login-header .login-header--icon {
-        position: absolute;
-        right: 0;
-        top: 10px;
-        display: inline;
-        width: 85px;
-        height: inherit; }
-        .login-container .login-box .login-header .login-header--icon .main-icon {
-          font-size: 2.5rem;
-          color: #424242;
-          margin-right: 5px; }
-    .login-container .login-box form {
-      margin-top: 60px; }
+      right: 20px;
+      bottom: -28px; }
   .login-container::after {
     content: "";
     background: url(./styles/images/login4.jpg) no-repeat center center;
@@ -1031,9 +1013,7 @@ button {
     filter: blur(0); }
   @media screen and (min-width: 480px) {
     .login-container .login-box {
-      width: 360px; }
-      .login-container .login-box .login-header--icon {
-        left: 260px !important; } }
+      width: 360px; } }
 
 .welcome-container {
   overflow: auto;
