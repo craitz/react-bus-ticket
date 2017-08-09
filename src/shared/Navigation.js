@@ -4,6 +4,8 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import * as actions from '../actions/modalTrajeto.actions';
+import store from '../store';
 
 export const NavHeader = ({ label, glyph }) =>
   <Nav className="navheader-nav">
@@ -71,8 +73,6 @@ class Navigation extends Component {
   handleLogout(event) {
     event.preventDefault();
 
-    console.log('Logout!!!');
-
     firebaseHelper.signOut()
       .then(() => {
         console.log('Logout 2 !!!');
@@ -87,7 +87,7 @@ class Navigation extends Component {
 
   handleComprarPassagem(event) {
     event.preventDefault();
-    this.props.history.push('/comprar');
+    store.dispatch(actions.setVisible(true, true));
   }
 
   handlePesquisarPassagens(event) {

@@ -104,17 +104,6 @@ export const ButtonLogin = ({ handleLogin }) =>
     <FontAwesome name="sign-in bt-mui-icon" />
   </Button>
 
-export const LoginInputGroup = ({ id, type, field, glyph, placeholder, onChange }) =>
-  <FormGroup controlId={id} validationState={field.validation}>
-    <InputGroup>
-      <InputGroup.Addon>
-        <FontAwesome name={glyph} className="addon-icon"></FontAwesome>
-      </InputGroup.Addon>
-      <FormControl type={type} placeholder={placeholder} value={field.text} onChange={onChange} />
-    </InputGroup>
-    <HelpBlock>{field.message}</HelpBlock>
-  </FormGroup>
-
 export class Login extends Component {
   constructor(props) {
     super(props);

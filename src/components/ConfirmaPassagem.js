@@ -138,7 +138,7 @@ class ConfirmaPassagem extends Component {
                     <div className="paragrafo-parabens">Agradecemos a sua preferência e tenha uma ótima viagem!</div>
                   </Row>
                   <ButtonContinuarComprando />
-                  <ButtonHome />
+                  {/*<ButtonHome />*/}
                 </Jumbotron>
               </Col>
             </Row>

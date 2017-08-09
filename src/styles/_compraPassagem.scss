@@ -198,7 +198,43 @@ monospace;
     background-color: white;
     margin-top: 0;
     margin-bottom: 30px;
-    border-radius: 4px !important;
+    border-radius: 4px 4px 20px 20px !important;
+    outline: none !important;
+    section {
+        outline: none !important;
+        @include sm {
+            padding-bottom: 0;
+        }
+    }
+    .footer-section {
+        border-radius: 0 0 4px 4px !important;
+        background-color: $materialPrimary;
+        height: 60px;
+        position: relative;
+        text-align: left;
+        padding-left: 40px;
+        margin: 15px -12px 0 -12px;
+        .button-finaliza,
+        .button-edit {
+            position: absolute;
+            z-index: 9;
+        }
+        .button-finaliza {
+            right: 20px;
+            bottom: -20px;
+        }
+        .button-edit {
+            right: 90px;
+            bottom: -14px;
+            background-color: $materialPrimaryLight;
+        }
+        &>span {
+            color: rgba(white, .8);
+            font-size: 2rem;
+            line-height: 60px;
+            font-family: "Days One"
+        }
+    }
     &.mini-volta {
         margin-top: 15px;
         margin-bottom: 30px;
@@ -214,16 +250,16 @@ monospace;
         position: absolute;
         z-index: 9;
         top: 57px - 10px;
-        left: -20px;
-        // background-color: lighten($materialPrimary, 10%) !important;
+        left: -14px;
+        background-color: $materialPrimaryLight !important;
     }
     .tab-menu {
         position: absolute;
         z-index: 9;
-        right: -20px;
+        right: -14px;
         top: 57px - 10px;
         button {
-            // background-color: lighten($materialPrimary, 10%) !important;
+            background-color: $materialPrimaryLight !important;
         }
     }
     nav {
@@ -366,29 +402,23 @@ monospace;
     &::after {
         @include bkgImage('tree32.jpg');
     }
-    // background-color: red;
-    .button-finaliza,
-    .button-edit {
+    .opcoes-menu {
         position: absolute;
         z-index: 9;
-    }
-    .button-finaliza {
         right: 20px;
         bottom: -20px;
-    }
-    .button-edit {
-        right: 90px;
-        bottom: -14px;
+        button {
+            background-color: $materialPrimaryLight !important;
+        }
     }
     @include containerHeight;
     .form-passagem-container {
         position: relative;
-        background-color: transpareredt;
+        background-color: transparent;
         border: none;
-        // width: $contentWidth;
         width: 300px; // SM
         $left: calc(50% - 150px); // SM
-        margin: 50px 0 0 $left !important; // SM 
+        margin: 30px 0 0 $left !important; // SM 
         .form-centered {
             width: inherit;
             .jumbo-comprar {
@@ -429,7 +459,7 @@ monospace;
         .form-passagem-container {
             width: 578px; // SM
             $left: calc(50% - 289px); // SM
-            margin: 50px 0 0 $left !important; // SM 
+            margin: 30px 0 0 $left !important; // SM 
         }
     }
 }

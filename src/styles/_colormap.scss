@@ -12,6 +12,7 @@ $lightBlue: #EAF2FC;
 $lilas: #7C1ACC;
 // $materialPrimary: #3f51b5;
 $materialPrimary: #424242;
+$materialPrimaryLight: lighten($materialPrimary, 15%);
 // $materialAccent: #FF4081;
 $materialAccent: #F44336;
 $materialPrimaryDark: #303F9F;

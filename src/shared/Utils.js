@@ -134,4 +134,10 @@ export const validateRequired = (field) => {
   }
 }
 
+export const sortPoltronas = (poltronas) => {
+  const poltronasTemp = deepCopy(poltronas);
+  poltronasTemp.sort();
+  return poltronasTemp.join(' | ');
+}
+
 

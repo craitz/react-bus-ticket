@@ -42,3 +42,20 @@ button {
     font-weight: bold !important;
     color: rgba(white, .9) !important;
 }
+
+// REVISAR e CONSERTAR ------------------------------
+// enjambração horrorosa devido a um bug
+// no componente menu do react-toolbox
+.open-menu-opcoes {
+    left: -176px;
+    top: 32px !important;
+    width: 0 !important;
+}
+
+.open-menu-opcoes-mini {
+    left: -174px;
+    top: 24px !important;
+    width: 0 !important;
+}
+
+// ---------------------------------------------------

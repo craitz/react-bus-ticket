@@ -20,40 +20,10 @@ import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
 import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
-import Menu from 'react-toolbox/lib/menu/Menu';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
-
-const sortPoltronas = (poltronas) => {
-  const poltronasTemp = utils.deepCopy(poltronas);
-  poltronasTemp.sort();
-  return poltronasTemp.join(' | ');
-}
-
-class ButtonMenu extends React.Component {
-  state = { active: false };
-  handleButtonClick = () => this.setState({ active: !this.state.active });
-  handleMenuHide = () => this.setState({ active: false });
-  render() {
-    return (
-      <div className="tab-menu">
-        <TooltipOverlay text="Opções" position="top">
-          <Button
-            accent
-            floating
-            mini
-            onClick={this.handleButtonClick}
-            icon={<FontAwesome name="bars" />}
-            className="mui--z2"
-          />
-        </TooltipOverlay>
-        <Menu position="topRight" active={this.state.active} onHide={this.handleMenuHide}>
-          {this.props.children}
-        </Menu>
-      </div>
-    );
-  }
-}
+import { Row } from 'react-bootstrap';
+import ButtonMenu from '../shared/ButtonMenu';
 
 export class CompraPassagem extends Component {
   constructor(props) {
@@ -74,6 +44,8 @@ export class CompraPassagem extends Component {
     this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
     this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleExcluiVolta = this.handleExcluiVolta.bind(this);
+    this.handleHome = this.handleHome.bind(this);
+    this.handlePesquisa = this.handlePesquisa.bind(this);
   }
 
   initializeValues() {
@@ -85,6 +57,14 @@ export class CompraPassagem extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !this.props.isFrozen;
+  }
+
+  handleHome() {
+    this.props.history.push('/');
+  }
+
+  handlePesquisa() {
+    this.props.history.push('/passagens');
   }
 
   handleExcluiVolta() {
@@ -266,8 +246,6 @@ export class CompraPassagem extends Component {
       item => horarioSelected[item] === utils.PoltronaStatus.SELECTED
     );
 
-    const snackType = utils.SnackbarTypes.SUCCESS;
-
     if (poltronasSelected.length > 0) {
       dispatch(actions.setSavingPoltronas(true)); // liga spinning
       setTimeout(() => {
@@ -275,12 +253,10 @@ export class CompraPassagem extends Component {
           dispatch(actions.setErroSalvandoVolta(false));
           dispatch(actions.changeHorarioVolta(horario));
           dispatch(actions.changePoltronaVolta(poltronasSelected));
-          // dispatch(snackbarActions.show(snackType, 'Poltronas de VOLTA salvas com sucesso.'));
         } else {
           dispatch(actions.setErroSalvandoIda(false));
           dispatch(actions.changeHorario(horario));
           dispatch(actions.changePoltrona(poltronasSelected));
-          // dispatch(snackbarActions.show(snackType, 'Poltronas de IDA salvas com sucesso.'));
         }
 
         this.checkNotAllowed(!isVolta, horario);
@@ -645,7 +621,7 @@ export class CompraPassagem extends Component {
       const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
       const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
       const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
-      const poltronasFormatted = strPoltronas.length > 0 ? sortPoltronas(strPoltronas) : '';
+      const poltronasFormatted = strPoltronas.length > 0 ? utils.sortPoltronas(strPoltronas) : '';
 
       const trajetoIda = (
         <section className="text-right">
@@ -707,27 +683,48 @@ export class CompraPassagem extends Component {
     }
 
     const ButtonFinalizar = () =>
-      <TooltipOverlay text="Finalizar compra" position="top">
-        <Button
-          floating
-          accent
-          className="button-finaliza mui--z2"
-          onClick={this.handleSubmit}
-          icon={<FontAwesome name="check" />}
-        />
-      </TooltipOverlay>
+      // <TooltipOverlay text="Finalizar compra" position="top">
+      <Button
+        floating
+        accent
+        className="button-finaliza mui--z2"
+        onClick={this.handleSubmit}
+        icon={<FontAwesome name="check" />}
+      />
+    // </TooltipOverlay>
 
-    const ButtonEditar = () =>
-      <TooltipOverlay text="Alterar passagem" position="top">
-        <Button
-          floating
-          primary
-          mini
-          className="button-edit mui--z2"
-          onClick={this.handleChangeTrajeto}
+    const OpcoesMenu = () =>
+      <ButtonMenu
+        tooltip="Mais opções"
+        className="opcoes-menu"
+        icon="ellipsis-v"
+      >
+        <MenuItem
+          value='altera-passagem'
           icon={<FontAwesome name="edit" />}
+          caption='Alterar passagem'
+          onClick={this.handleChangeTrajeto}
         />
-      </TooltipOverlay>
+        <MenuDivider />
+        <MenuItem
+          value='finalizar'
+          icon={<FontAwesome name="check" />}
+          caption='Finalizar compra'
+          onClick={this.handleSubmit}
+        />
+        {/*<MenuItem
+          value='home'
+          icon={<FontAwesome name="home" />}
+          caption='Página inicial'
+          onClick={this.handleHome}
+        />
+        <MenuItem
+          value='pesquisa'
+          icon={<FontAwesome name="search" />}
+          caption='Histórico de compras'
+          onClick={this.handlePesquisa}
+        />*/}
+      </ButtonMenu>
 
     const ButtonLimpar = ({ isVolta }) =>
       <TooltipOverlay text="Limpar poltronas" position="top">
@@ -742,7 +739,13 @@ export class CompraPassagem extends Component {
       </TooltipOverlay>
 
     const TabMenu = () =>
-      <ButtonMenu>
+      <ButtonMenu
+        tooltip="Opções"
+        className="tab-menu"
+        icon="bars"
+        mini={true}
+        tooltipPosition="top"
+      >
         <MenuItem
           value='limpa-poltronas'
           icon={<FontAwesome name="minus" />}
@@ -757,6 +760,11 @@ export class CompraPassagem extends Component {
         />
       </ButtonMenu>
 
+    const ButtonSection = () =>
+      <Row className="footer-section">
+        <span>Finalizar compra</span>
+        <ButtonFinalizar />
+      </Row>
 
     const TabsLarge = () =>
       <Tabs
@@ -770,7 +778,6 @@ export class CompraPassagem extends Component {
           label={<HeaderTab isVolta={false} />}
           className="tab-ida"
         >
-          {/*<section className="floating-ida"></section>*/}
           <ButtonLimpar isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -783,14 +790,13 @@ export class CompraPassagem extends Component {
             onResetSeats={this.handleResetSeats}
             onSaveSeats={this.handleSaveSeats}
           />
+          <ButtonSection />
         </Tab>
         {isIdaVolta &&
           <Tab
             label={<HeaderTab isVolta={true} />}
             className="tab-volta"
           >
-            {/*<section className="floating-volta"></section>*/}
-            {/*<ButtonLimpar isVolta={true} />*/}
             <TabMenu />
             <NoResultsAccordionVolta
               className="accordion-volta"
@@ -803,6 +809,7 @@ export class CompraPassagem extends Component {
               onResetSeats={this.handleResetSeats}
               onSaveSeats={this.handleSaveSeats}
             />
+            <ButtonSection />
           </Tab>
         }
       </Tabs>
@@ -868,15 +875,13 @@ export class CompraPassagem extends Component {
           title="Compre sua passagem"
           className="header-comprar hidden-xs"
         >
-          <ButtonFinalizar />
-          <ButtonEditar />
+          <OpcoesMenu />
         </PageHeader>
         <PageHeader
           title="Compre já!"
           className="header-comprar hidden-sm hidden-md hidden-lg"
         >
-          <ButtonFinalizar />
-          <ButtonEditar />
+          <OpcoesMenu />
         </PageHeader>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
