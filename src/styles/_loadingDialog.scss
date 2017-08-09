@@ -3,9 +3,9 @@
     .modal-dialog {
         width: 300px;
         .modal-content {
-            background-color: lighten($materialPrimary, 10%);
+            background-color: $materialPrimaryLight;
             color: white;
-            border-radius: 6px;
+            border-radius: 4px;
             @include noSelection();
             font-size: 1.5rem;
             font-weight: bold;

@@ -100,7 +100,7 @@ $fontColor: rgba($materialPrimary, 1);
                 position: absolute;
                 right: 90px;
                 bottom: -14px;
-                background-color: lighten($materialPrimary, 10%);
+                background-color: $materialPrimaryLight;
             }
         }
     }
