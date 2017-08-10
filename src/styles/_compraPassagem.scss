@@ -198,7 +198,10 @@ monospace;
     background-color: white;
     margin-top: 0;
     margin-bottom: 30px;
-    border-radius: 4px 4px 20px 20px !important;
+    border-radius: 4px !important;
+    @include sm {
+        border-radius: 4px 4px 20px 20px !important;
+    }
     outline: none !important;
     section {
         outline: none !important;
@@ -214,19 +217,11 @@ monospace;
         text-align: left;
         padding-left: 40px;
         margin: 15px -12px 0 -12px;
-        .button-finaliza,
-        .button-edit {
+        .button-finaliza {
             position: absolute;
             z-index: 9;
-        }
-        .button-finaliza {
             right: 20px;
             bottom: -20px;
-        }
-        .button-edit {
-            right: 90px;
-            bottom: -14px;
-            background-color: $materialPrimaryLight;
         }
         &>span {
             color: rgba(white, .8);
@@ -249,15 +244,15 @@ monospace;
     .button-limpar-ida {
         position: absolute;
         z-index: 9;
-        top: 57px - 10px;
-        left: -14px;
+        top: 56px - 15px;
+        left: -28px;
         background-color: $materialPrimaryLight !important;
     }
     .tab-menu {
         position: absolute;
         z-index: 9;
-        right: -14px;
-        top: 57px - 10px;
+        right: -28px;
+        top: 56px - 15px;
         button {
             background-color: $materialPrimaryLight !important;
         }
@@ -399,17 +394,18 @@ monospace;
 }
 
 .comprar-passagem-container {
-    &::after {
-        @include bkgImage('tree32.jpg');
-    }
     .opcoes-menu {
         position: absolute;
         z-index: 9;
         right: 20px;
         bottom: -20px;
-        button {
-            background-color: $materialPrimaryLight !important;
-        }
+    }
+    .button-editar {
+        position: absolute;
+        z-index: 9;
+        right: 20px;
+        bottom: -20px;
+        background-color: $materialPrimaryLight !important;
     }
     @include containerHeight;
     .form-passagem-container {
@@ -455,7 +451,16 @@ monospace;
             }
         }
     }
-    @include sm {
+    &::after {
+        @include bkgImage('tree27.jpg');
+    }
+}
+
+@include sm {
+    .comprar-passagem-container {
+        &::after {
+            @include bkgImage('login3.jpg');
+        }
         .form-passagem-container {
             width: 578px; // SM
             $left: calc(50% - 289px); // SM

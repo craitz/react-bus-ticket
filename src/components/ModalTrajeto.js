@@ -257,9 +257,6 @@ export class ModalTrajeto extends Component {
     const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome, data, dataVolta } = this.props;
 
     const getIcon = () => isIdaVolta ? 'exchange fa-fw' : 'long-arrow-right fa-fw';
-    const getTitle = () => isFromWelcome ? 'Defina o trajeto' : 'Mude o trajeto';
-    const getButtonLabel = () => isFromWelcome ? 'Buscar passagens' : 'Confirmar e fechar';
-    const getButtonIcon = () => isFromWelcome ? 'search fa-fw' : 'check fa-fw';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
     const yesterday = moment().subtract(1, 'day');
     const futureDay = moment().add(30, 'days');
@@ -268,7 +265,7 @@ export class ModalTrajeto extends Component {
     return (
       <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited}>
         <Modal.Header>
-          <span>{getTitle()}</span>
+          <span>Defina o trajeto</span>
           <TooltipOverlay text={getTooltip()} position="right">
             <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
           </TooltipOverlay>
@@ -336,14 +333,14 @@ export class ModalTrajeto extends Component {
             }
           </Modal.Body>
           <Modal.Footer>
-            <span>{getButtonLabel()}</span>
+            <span>Buscar passagens</span>
           </Modal.Footer>
           <Button
             floating
             accent
             type="submit"
             className="mui--z2 btn-buscar">
-            <FontAwesome name={getButtonIcon()} className="bt-mui-icon" />
+            <FontAwesome name="search" className="bt-mui-icon" />
           </Button>
         </form>
       </Modal >

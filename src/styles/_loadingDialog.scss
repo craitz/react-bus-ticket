@@ -2,6 +2,7 @@
     cursor: wait;
     .modal-dialog {
         width: 300px;
+        margin-left: calc(50% - 150px);
         .modal-content {
             background-color: $materialPrimaryLight;
             color: white;

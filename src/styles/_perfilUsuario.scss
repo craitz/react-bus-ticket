@@ -33,9 +33,15 @@
         }
     }
     &::after {
-        @include bkgImage('login4.jpg');
+        @include bkgImage('tree27.jpg');
     }
-    @include sm {
+}
+
+@include sm {
+    .perfil-usuario-container {
+        &::after {
+            @include bkgImage('login3.jpg');
+        }
         .jumbotron {
             margin-top: 50px;
         }

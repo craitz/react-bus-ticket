@@ -12,7 +12,7 @@
         }
         .jumbo-painel {
             // opacity: .9;
-            background-color: rgba(white, .9) !important;
+            background-color: rgba(white, 1) !important;
             padding: 0;
             position: relative;
             border-radius: 4px 4px 20px 30px;
@@ -52,12 +52,15 @@
         }
     }
     &::after {
-        @include bkgImage('tree36.jpg');
+        @include bkgImage('tree27.jpg');
     }
 }
 
 @include sm {
     .welcome-container {
+        &::after {
+            @include bkgImage('login3.jpg');
+        }
         .info-container {
             margin-top: 50px;
         }

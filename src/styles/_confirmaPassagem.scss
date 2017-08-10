@@ -105,17 +105,15 @@ $fontColor: rgba($materialPrimary, 1);
         }
     }
     &::after {
-        @include bkgImage('login2.jpg');
+        @include bkgImage('tree27.jpg');
     }
-    @include xs {
-        .localizador {
-            font: {
-                size: 3rem !important;
-                weight: bold;
-            }
+}
+
+@include sm {
+    .confirmacao-passagem {
+        &::after {
+            @include bkgImage('login3.jpg');
         }
-    }
-    @include sm {
         .form-centered {
             margin-top: 50px;
         }

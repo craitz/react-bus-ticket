@@ -362,7 +362,7 @@ class PerfilUsuario extends Component {
         </PageHeader>
         <DivAnimated className="text-center">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4} className="text-center">
-            <Jumbotron>
+            <Jumbotron className="mui--z2">
               <FormPerfil {...formProps} />
             </Jumbotron>
           </Col>

@@ -1,7 +1,7 @@
 .login-container {
     height: calc(100% - 150px) !important;
     $boxWidth: 320px;
-    $boxBgColor: rgba(white, .95);
+    $boxBgColor: rgba(white, 1);
     $headerHeight: 40px;
     $headerTitleWidth: 220px;
     $headerTitleMainColor: black;
@@ -49,9 +49,15 @@
         }
     }
     &::after {
-        @include bkgImage('login3.jpg');
+        @include bkgImage('tree27.jpg');
     }
-    @include xs {
+}
+
+@include sm {
+    .login-container {
+        &::after {
+            @include bkgImage('login3.jpg');
+        }
         .login-box {
             width: 360px;
         }

@@ -693,15 +693,26 @@ export class CompraPassagem extends Component {
       />
     // </TooltipOverlay>
 
+    const ButtonEditar = () =>
+      <TooltipOverlay text="Alterar passagem">
+        <Button
+          floating
+          primary
+          className="button-editar hidden-xs mui--z2"
+          onClick={this.handleChangeTrajeto}
+          icon={<FontAwesome name="pencil" />}
+        />
+      </TooltipOverlay>
+
     const OpcoesMenu = () =>
       <ButtonMenu
         tooltip="Mais opções"
-        className="opcoes-menu"
-        icon="ellipsis-v"
+        className="opcoes-menu visible-xs"
+        label="+"
       >
         <MenuItem
           value='altera-passagem'
-          icon={<FontAwesome name="edit" />}
+          icon={<FontAwesome name="pencil" />}
           caption='Alterar passagem'
           onClick={this.handleChangeTrajeto}
         />
@@ -712,18 +723,6 @@ export class CompraPassagem extends Component {
           caption='Finalizar compra'
           onClick={this.handleSubmit}
         />
-        {/*<MenuItem
-          value='home'
-          icon={<FontAwesome name="home" />}
-          caption='Página inicial'
-          onClick={this.handleHome}
-        />
-        <MenuItem
-          value='pesquisa'
-          icon={<FontAwesome name="search" />}
-          caption='Histórico de compras'
-          onClick={this.handlePesquisa}
-        />*/}
       </ButtonMenu>
 
     const ButtonLimpar = ({ isVolta }) =>
@@ -731,7 +730,6 @@ export class CompraPassagem extends Component {
         <Button
           floating
           accent
-          mini
           className={isVolta ? "button-limpar-volta mui--z2" : "button-limpar-ida mui--z2"}
           onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
           icon={<FontAwesome name="minus" />}
@@ -742,8 +740,8 @@ export class CompraPassagem extends Component {
       <ButtonMenu
         tooltip="Opções"
         className="tab-menu"
-        icon="bars"
-        mini={true}
+        label="+"
+        mini={false}
         tooltipPosition="top"
       >
         <MenuItem
@@ -772,7 +770,7 @@ export class CompraPassagem extends Component {
         fixed
         inverse
         onChange={this.handleSelectTab}
-        className="tab-horarios mui--z3 hidden-xs"
+        className="tab-horarios mui--z2 hidden-xs"
       >
         <Tab
           label={<HeaderTab isVolta={false} />}
@@ -820,7 +818,7 @@ export class CompraPassagem extends Component {
           index={0}
           fixed
           inverse
-          className="tab-horarios mini-ida mui--z3"
+          className="tab-horarios mini-ida mui--z2"
         >
           <Tab
             label={<HeaderTab isVolta={false} />}
@@ -846,7 +844,7 @@ export class CompraPassagem extends Component {
             index={0}
             fixed
             inverse
-            className="tab-horarios mini-volta mui--z3"
+            className="tab-horarios mini-volta mui--z2"
           >
             <Tab
               label={<HeaderTab isVolta={true} />}
@@ -876,12 +874,14 @@ export class CompraPassagem extends Component {
           className="header-comprar hidden-xs"
         >
           <OpcoesMenu />
+          <ButtonEditar />
         </PageHeader>
         <PageHeader
           title="Compre já!"
           className="header-comprar hidden-sm hidden-md hidden-lg"
         >
           <OpcoesMenu />
+          <ButtonEditar />
         </PageHeader>
         <div className="form-passagem-container">
           <DivAnimated className="form-centered">
