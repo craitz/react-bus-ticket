@@ -22,6 +22,7 @@ $arrowSize: 6px;
             background-color: white;
         }
         width: 340px;
+        margin-left: calc(50% - 170px); // SM
         .modal-content {
             background-color: white;
             border: none;

@@ -98,12 +98,6 @@
   border-top-right-radius: 5px; }
   .snackbar span {
     font-size: 1.5rem !important; }
-  .snackbar.error {
-    background-color: rgba(231, 29, 54, 0.8) !important; }
-  .snackbar.success {
-    background-color: rgba(76, 175, 80, 0.8) !important; }
-  .snackbar.warning {
-    background-color: rgba(255, 204, 62, 0.8) !important; }
 
 .tooltip > .tooltip-inner {
   background-color: rgba(0, 0, 0, 0.9); }
@@ -238,7 +232,10 @@
 button {
   font-family: "Ubuntu" !important;
   font-weight: bold !important;
-  color: rgba(255, 255, 255, 0.9) !important; }
+  color: rgba(255, 255, 255, 0.95) !important; }
+
+[data-react-toolbox="button"] {
+  font-size: 1.7rem; }
 
 .open-menu-opcoes {
   left: -176px;
@@ -370,7 +367,8 @@ button {
 .loading-dialog-container {
   cursor: wait; }
   .loading-dialog-container .modal-dialog {
-    width: 300px; }
+    width: 300px;
+    margin-left: calc(50% - 150px); }
     .loading-dialog-container .modal-dialog .modal-content {
       background-color: #686868;
       color: white;
@@ -396,7 +394,8 @@ button {
 
 .modal-trajeto-container .modal-dialog {
   border-radius: 4px 4px 20px 20px;
-  width: 340px; }
+  width: 340px;
+  margin-left: calc(50% - 170px); }
   .modal-trajeto-container .modal-dialog input#data {
     background-color: white; }
   .modal-trajeto-container .modal-dialog .modal-content {
@@ -517,31 +516,17 @@ button {
 .comprar-passagem-container {
   overflow: auto;
   height: calc(100vh - 50px); }
-  .comprar-passagem-container::after {
-    content: "";
-    background: url(./styles/images/tree32.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
   .comprar-passagem-container .opcoes-menu {
     position: absolute;
     z-index: 9;
     right: 20px;
     bottom: -20px; }
-    .comprar-passagem-container .opcoes-menu button {
-      background-color: #686868 !important; }
+  .comprar-passagem-container .button-editar {
+    position: absolute;
+    z-index: 9;
+    right: 20px;
+    bottom: -20px;
+    background-color: #686868 !important; }
   .comprar-passagem-container .form-passagem-container {
     position: relative;
     background-color: transparent;
@@ -577,7 +562,7 @@ button {
           background-color: white;
           margin-top: 0;
           margin-bottom: 30px;
-          border-radius: 4px 4px 20px 20px !important;
+          border-radius: 4px !important;
           outline: none !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading {
             padding: 0; }
@@ -733,6 +718,9 @@ button {
               margin-bottom: 0;
               height: 100% !important;
               padding: 8px 15px 5px 30px; }
+          @media screen and (min-width: 768px) {
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios {
+              border-radius: 4px 4px 20px 20px !important; } }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios section {
             outline: none !important; }
             @media screen and (min-width: 768px) {
@@ -746,17 +734,11 @@ button {
             text-align: left;
             padding-left: 40px;
             margin: 15px -12px 0 -12px; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .button-finaliza,
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .button-edit {
-              position: absolute;
-              z-index: 9; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .button-finaliza {
+              position: absolute;
+              z-index: 9;
               right: 20px;
               bottom: -20px; }
-            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .button-edit {
-              right: 90px;
-              bottom: -14px;
-              background-color: #686868; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section > span {
               color: rgba(255, 255, 255, 0.8);
               font-size: 2rem;
@@ -799,14 +781,14 @@ button {
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .button-limpar-ida {
             position: absolute;
             z-index: 9;
-            top: 47px;
-            left: -14px;
+            top: 41px;
+            left: -28px;
             background-color: #686868 !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-menu {
             position: absolute;
             z-index: 9;
-            right: -14px;
-            top: 47px; }
+            right: -28px;
+            top: 41px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-menu button {
               background-color: #686868 !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav {
@@ -827,10 +809,37 @@ button {
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-volta-mini {
             background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
             background-attachment: scroll; }
-  @media screen and (min-width: 768px) {
-    .comprar-passagem-container .form-passagem-container {
-      width: 578px;
-      margin: 30px 0 0 calc(50% - 289px) !important; } }
+  .comprar-passagem-container::after {
+    content: "";
+    background: url(./styles/images/tree27.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
+
+@media screen and (min-width: 768px) {
+  .comprar-passagem-container::after {
+    content: "";
+    background: url(./styles/images/login3.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
+  .comprar-passagem-container .form-passagem-container {
+    width: 578px;
+    margin: 30px 0 0 calc(50% - 289px) !important; } }
 
 .confirmacao-passagem {
   overflow: auto;
@@ -911,7 +920,7 @@ button {
         background-color: #686868; }
   .confirmacao-passagem::after {
     content: "";
-    background: url(./styles/images/login2.jpg) no-repeat center center;
+    background: url(./styles/images/tree27.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -921,19 +930,24 @@ button {
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
-  @media screen and (min-width: 480px) {
-    .confirmacao-passagem .localizador {
-      font-size: 3rem !important;
-      font-weight: bold; } }
-  @media screen and (min-width: 768px) {
-    .confirmacao-passagem .form-centered {
-      margin-top: 50px; } }
+    position: absolute; }
+
+@media screen and (min-width: 768px) {
+  .confirmacao-passagem::after {
+    content: "";
+    background: url(./styles/images/login3.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
+  .confirmacao-passagem .form-centered {
+    margin-top: 50px; } }
 
 .pesquisar-passagens-container {
   overflow: auto;
@@ -997,12 +1011,7 @@ button {
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
+    position: absolute; }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -1019,7 +1028,7 @@ button {
     padding: 0;
     width: 320px;
     border: none;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: white;
     border-radius: 4px 4px 20px 30px; }
     .login-container .login-box form .main-section,
     .login-container .login-box form .footer-section {
@@ -1043,6 +1052,21 @@ button {
       bottom: -20px; }
   .login-container::after {
     content: "";
+    background: url(./styles/images/tree27.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
+
+@media screen and (min-width: 768px) {
+  .login-container::after {
+    content: "";
     background: url(./styles/images/login3.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
@@ -1053,15 +1077,9 @@ button {
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
-  @media screen and (min-width: 480px) {
-    .login-container .login-box {
-      width: 360px; } }
+    position: absolute; }
+  .login-container .login-box {
+    width: 360px; } }
 
 .welcome-container {
   overflow: auto;
@@ -1075,7 +1093,7 @@ button {
       text-align: justify;
       text-justify: inter-word; }
     .welcome-container .info-container .jumbo-painel {
-      background-color: rgba(255, 255, 255, 0.9) !important;
+      background-color: white !important;
       padding: 0;
       position: relative;
       border-radius: 4px 4px 20px 30px; }
@@ -1107,7 +1125,7 @@ button {
       display: none; }
   .welcome-container::after {
     content: "";
-    background: url(./styles/images/tree36.jpg) no-repeat center center;
+    background: url(./styles/images/tree27.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1117,14 +1135,22 @@ button {
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
+    position: absolute; }
 
 @media screen and (min-width: 768px) {
+  .welcome-container::after {
+    content: "";
+    background: url(./styles/images/login3.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
   .welcome-container .info-container {
     margin-top: 50px; } }
 
@@ -1159,7 +1185,7 @@ button {
       bottom: -20px; }
   .perfil-usuario-container::after {
     content: "";
-    background: url(./styles/images/login4.jpg) no-repeat center center;
+    background: url(./styles/images/tree27.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1169,15 +1195,24 @@ button {
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute;
-    -webkit-filter: blur(0);
-    -moz-filter: blur(0);
-    -o-filter: blur(0);
-    -ms-filter: blur(0);
-    filter: blur(0); }
-  @media screen and (min-width: 768px) {
-    .perfil-usuario-container .jumbotron {
-      margin-top: 50px; } }
+    position: absolute; }
+
+@media screen and (min-width: 768px) {
+  .perfil-usuario-container::after {
+    content: "";
+    background: url(./styles/images/login3.jpg) no-repeat center center;
+    background-attachment: scroll;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    position: absolute; }
+  .perfil-usuario-container .jumbotron {
+    margin-top: 50px; } }
 
 html {
   height: 100%; }

@@ -60,7 +60,7 @@ class ConfirmaPassagem extends Component {
           <Grid>
             <Row>
               <Col md={10} mdOffset={1} lg={8} lgOffset={2} className="text-left">
-                <Jumbotron className="jumbo-detalhes">
+                <Jumbotron className="jumbo-detalhes mui--z2">
                   <Row className="main-body">
                     <div className="label-localizador">
                       Seu código localizador é:

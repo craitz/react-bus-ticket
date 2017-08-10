@@ -33,7 +33,7 @@ class ButtonMenu extends Component {
   }
 
   render() {
-    const { tooltip, className, icon, mini = false, tooltipPosition = "bottom" } = this.props;
+    const { tooltip, className, label, icon, mini = false, tooltipPosition = "bottom" } = this.props;
     const buttonClass = mini ? 'open-menu-opcoes-mini' : 'open-menu-opcoes';
 
     return (
@@ -45,6 +45,7 @@ class ButtonMenu extends Component {
             mini={mini}
             onClick={this.handleButtonClick}
             icon={<FontAwesome name={icon} />}
+            label={label}
             className="mui--z2"
           />
         </TooltipOverlay>

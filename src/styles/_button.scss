@@ -40,7 +40,11 @@
 button {
     font-family: "Ubuntu" !important;
     font-weight: bold !important;
-    color: rgba(white, .9) !important;
+    color: rgba(white, .95) !important;
+}
+
+[data-react-toolbox="button"] {
+    font-size: 1.7rem;
 }
 
 // REVISAR e CONSERTAR ------------------------------

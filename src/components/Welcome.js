@@ -44,7 +44,7 @@ class Welcome extends Component {
         </PageHeader>
         <DivAnimated className="info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={6} lgOffset={3}>
-            <Jumbotron className="jumbo-painel">
+            <Jumbotron className="jumbo-painel mui--z2">
               <Row className="main-section">
                 <h2 className="title-intro">Introdução</h2>
                 <article className="intro">
