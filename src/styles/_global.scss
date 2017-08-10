@@ -200,7 +200,7 @@
     transform: $value;
 }
 
-@mixin bkgImage($file: 'tree5.jpg', $blur: 0) {
+@mixin bkgImage($file: 'login3.jpg', $blur: 0) {
     content: "";
     background: url(./styles/images/#{$file}) no-repeat center center;
     background-attachment: scroll;
@@ -215,7 +215,7 @@
     position: absolute;
 }
 
-@mixin bkgImageMini($file: 'tree5.jpg', $blur: 0) {
+@mixin bkgImageMini($file: 'login3.jpg', $blur: 0) {
     content: "";
     background: url(./styles/images/#{$file}) center center;
     background-attachment: scroll;
