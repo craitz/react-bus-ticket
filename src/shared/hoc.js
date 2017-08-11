@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { firebaseHelper } from './FirebaseHelper';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 
 export const withAuth = (WrappedComponent) => {
   return class PageWithAuth extends Component {
@@ -33,5 +34,31 @@ export const withNoResults = (WrappedComponent, array) => {
     }
   }
 }
+
+export const withSpinner = (WrappedComponent) => {
+  const Spinner = () =>
+    <div className="with-spinner">
+      <ProgressBar
+        type="circular"
+        mode="indeterminate"
+        value={100}
+        className="spinner-progress"
+      />
+    </div>
+
+  return class extends Component {
+    render() {
+      if (this.props.active) {
+        return (
+          <Spinner />
+        );
+      } else {
+        return (
+          <WrappedComponent {...this.props}></WrappedComponent>
+        );
+      }
+    }
+  }
+};
 
 

@@ -92,12 +92,14 @@
 .font-awesome-tooltip a {
   opacity: 1 !important; }
 
-.snackbar {
-  border-radius: 0;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px; }
-  .snackbar span {
-    font-size: 1.5rem !important; }
+.snackbar button {
+  text-transform: lowercase !important; }
+
+[data-react-toolbox="snackbar"] {
+  border-radius: 4px 4px 0 0; }
+  [data-react-toolbox="snackbar"] button {
+    text-transform: lowercase !important;
+    font-family: "Days One" !important; }
 
 .tooltip > .tooltip-inner {
   background-color: black; }
@@ -230,12 +232,26 @@
   height: 0; }
 
 button {
-  font-family: "Ubuntu" !important;
-  font-weight: bold !important;
-  color: rgba(255, 255, 255, 0.95) !important; }
+  font-family: "Roboto Condensed" !important; }
 
 [data-react-toolbox="button"] {
   font-size: 1.7rem; }
+
+.spinner-button .with-spinner {
+  position: relative;
+  width: 56px;
+  height: 56px; }
+  .spinner-button .with-spinner .spinner-progress {
+    position: absolute;
+    top: -2px;
+    left: -2px; }
+    .spinner-button .with-spinner .spinner-progress svg circle {
+      stroke: white;
+      stroke-width: 4;
+      r: 16; }
+
+.spinner-button:disabled {
+  background-color: #F44336 !important; }
 
 .open-menu-opcoes {
   left: -176px;

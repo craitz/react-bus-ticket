@@ -1,10 +1,7 @@
 .snackbar {
-    border-radius: 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     // width: 330px;
     span {
-        font-size: 1.5rem !important;
+        // font-size: 1.5rem !important;
     }
     &.error {
         // background-color: rgba($colorHasError, .8) !important;
@@ -14,6 +11,17 @@
     }
     &.warning {
         // background-color: rgba($busYellow, .8) !important;
+    }
+    button {
+        text-transform: lowercase !important;
+    }
+}
+
+[data-react-toolbox="snackbar"] {
+    border-radius: 4px 4px 0 0;
+    button {
+        text-transform: lowercase !important;
+        font-family: "Days One" !important;
     }
 }
 
