@@ -694,7 +694,7 @@ export class CompraPassagem extends Component {
     // </TooltipOverlay>
 
     const ButtonEditar = () =>
-      <TooltipOverlay text="Alterar passagem">
+      <TooltipOverlay text="Alterar passagem" position="top">
         <Button
           floating
           primary

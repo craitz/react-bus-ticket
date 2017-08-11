@@ -8,6 +8,7 @@ import * as actions from '../actions/login.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
 import DivAnimated from '../shared/DivAnimated';
+import { PageHeader } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'

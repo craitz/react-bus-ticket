@@ -200,9 +200,10 @@
     transform: $value;
 }
 
-@mixin bkgImage($file: 'login3.jpg', $blur: 0) {
+@mixin bkgImage($file: 'login3.jpg') {
     content: "";
-    background: url(./styles/images/#{$file}) no-repeat center center;
+    // background: url(./styles/images/#{$file}) no-repeat center center;
+    background: url(./styles/images/tree22.jpg) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -213,28 +214,6 @@
     right: 0;
     width: 100%;
     position: absolute;
-}
-
-@mixin bkgImageMini($file: 'login3.jpg', $blur: 0) {
-    content: "";
-    background: url(./styles/images/#{$file}) center center;
-    background-attachment: scroll;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute;
-}
-
-@mixin blur($size) {
-    -webkit-filter: blur($size);
-    -moz-filter: blur($size);
-    -o-filter: blur($size);
-    -ms-filter: blur($size);
-    filter: blur($size);
 }
 
 // Media Queries - Mobile First

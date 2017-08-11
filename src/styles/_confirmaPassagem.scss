@@ -28,7 +28,7 @@ $fontColor: rgba($materialPrimary, 1);
     @include containerHeight();
     .form-centered {
         width: inherit;
-        margin-top: 15px;
+        margin-top: 76px;
         .jumbo-detalhes {
             background-color: rgba(white, 1);
             padding: 0;
@@ -105,17 +105,17 @@ $fontColor: rgba($materialPrimary, 1);
         }
     }
     &::after {
-        @include bkgImage('tree27.jpg');
+        @include bkgImage('tree22.jpg');
     }
 }
 
 @include sm {
     .confirmacao-passagem {
         &::after {
-            @include bkgImage('login3.jpg');
+            @include bkgImage('tree22.jpg');
         }
         .form-centered {
-            margin-top: 50px;
+            margin-top: 213px;
         }
     }
 }

@@ -1,7 +1,7 @@
 .welcome-container {
     @include containerHeight();
     .info-container {
-        margin-top: 15px;
+        margin-top: 76px;
         text-align: left;
         color: rgba($materialPrimary, 1);
         .intro,
@@ -12,14 +12,19 @@
         }
         .jumbo-painel {
             // opacity: .9;
-            background-color: rgba(white, 1) !important;
+            background-color: transparent !important;
             padding: 0;
             position: relative;
-            border-radius: 4px 4px 20px 30px;
+            border-radius: 4px;
             .main-section,
             .footer-section {
                 margin: 0;
                 padding: 40px;
+            }
+            .main-section {
+                background-color: white;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
             }
             .footer-section {
                 padding: 0 0 0 40px;
@@ -52,17 +57,17 @@
         }
     }
     &::after {
-        @include bkgImage('tree27.jpg');
+        @include bkgImage('tree22.jpg');
     }
 }
 
 @include sm {
     .welcome-container {
         &::after {
-            @include bkgImage('login3.jpg');
+            @include bkgImage('tree22.jpg');
         }
         .info-container {
-            margin-top: 50px;
+            margin-top: 213px;
         }
     }
 }

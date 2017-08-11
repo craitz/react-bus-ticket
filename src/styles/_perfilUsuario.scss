@@ -1,7 +1,7 @@
 .perfil-usuario-container {
     @include containerHeight();
     .jumbotron {
-        margin-top: 15px;
+        margin-top: 76px;
         position: relative;
         padding: 0;
         background-color: rgba(white, 1);
@@ -33,17 +33,17 @@
         }
     }
     &::after {
-        @include bkgImage('tree27.jpg');
+        @include bkgImage('tree22.jpg');
     }
 }
 
 @include sm {
     .perfil-usuario-container {
         &::after {
-            @include bkgImage('login3.jpg');
+            @include bkgImage('tree22.jpg');
         }
         .jumbotron {
-            margin-top: 50px;
+            margin-top: 213px;
         }
     }
 }
