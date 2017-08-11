@@ -1,15 +1,20 @@
 .navheader-container {
     .navbar {
-        @include boxShadow(inset 0 -1px 0 0 rgba(white, .1));
+        // @include boxShadow(inset 0 -1px 0 0 rgba(white, .1));
         &::after {
             @include afterShadow;
         }
-        background-color: $colorNavbarHeader !important;
+        background-color: rgba($colorNavbarHeader, .8) !important;
+        background-color: rgba(white, .1) !important;
         border-radius: 0;
         margin-bottom: 0;
         border: none;
         padding: 0;
         text-align: left;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+        opacity: 1;
         .navheader-nav {
             a {
                 padding-left: 0 !important; // SM

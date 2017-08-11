@@ -198,9 +198,10 @@ monospace;
     background-color: white;
     margin-top: 0;
     margin-bottom: 30px;
-    border-radius: 4px !important;
+    border-radius: 7px 7px 4px 4px !important;
+    position: relative;
     @include sm {
-        border-radius: 4px 4px 20px 20px !important;
+        border-radius: 7px 7px 20px 20px !important;
     }
     outline: none !important;
     section {
@@ -258,9 +259,9 @@ monospace;
         }
     }
     nav {
-        // font-family: "Ubuntu";
         border-top-left-radius: 4px !important;
         border-top-right-radius: 4px !important;
+        background-color: $materialPrimary;
         .tab-row {
             margin-bottom: 6px;
             text-transform: none;
@@ -414,7 +415,7 @@ monospace;
         border: none;
         width: 300px; // SM
         $left: calc(50% - 150px); // SM
-        margin: 30px 0 0 $left !important; // SM 
+        margin: 76px 0 0 $left !important; // SM 
         .form-centered {
             width: inherit;
             .jumbo-comprar {
@@ -452,19 +453,19 @@ monospace;
         }
     }
     &::after {
-        @include bkgImage('tree27.jpg');
+        @include bkgImage('tree22.jpg');
     }
 }
 
 @include sm {
     .comprar-passagem-container {
         &::after {
-            @include bkgImage('login3.jpg');
+            @include bkgImage('tree22.jpg');
         }
         .form-passagem-container {
             width: 578px; // SM
             $left: calc(50% - 289px); // SM
-            margin: 30px 0 0 $left !important; // SM 
+            margin: 213px 0 0 $left !important; // SM 
         }
     }
 }

@@ -49,14 +49,14 @@
         }
     }
     &::after {
-        @include bkgImage('tree27.jpg');
+        @include bkgImage('tree22.jpg');
     }
 }
 
 @include sm {
     .login-container {
         &::after {
-            @include bkgImage('login3.jpg');
+            @include bkgImage('tree22.jpg');
         }
         .login-box {
             width: 360px;
