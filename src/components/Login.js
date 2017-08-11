@@ -7,15 +7,16 @@ import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
 import * as actions from '../actions/login.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
+import Button from 'react-toolbox/lib/button/Button';
 import DivAnimated from '../shared/DivAnimated';
 import { PageHeader } from '../shared/PageHeader';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import { globals } from '../shared/Globals';
 import * as compraPassagemActions from '../actions/compraPassagem.actions'
-import Button from 'react-toolbox/lib/button/Button';
 import Input from 'react-toolbox/lib/input/Input';
 import * as utils from '../shared/Utils';
 import moment from 'moment';
+import SpinnerButton from "../shared/SpinnerButton";
 
 const fakeDataOptions = {
   days: 5,
@@ -96,15 +97,6 @@ const fakeGenerator = (() => {
   return { generate };
 })();
 
-export const ButtonLogin = ({ handleLogin }) =>
-  <Button
-    floating
-    accent
-    className="btn-block btn-login mui--z2"
-    onClick={handleLogin}>
-    <FontAwesome name="sign-in bt-mui-icon" />
-  </Button>
-
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -114,6 +106,9 @@ export class Login extends Component {
     this.handleGenerateFakeData = this.handleGenerateFakeData.bind(this);
     this.handleClearFakeData = this.handleClearFakeData.bind(this);
     props.dispatch(actions.resetLogin());
+    this.state = {
+      autenticando: false
+    };
   }
 
   handleGenerateFakeData() {
@@ -217,18 +212,30 @@ export class Login extends Component {
     event.preventDefault();
     const { email, senha, history, dispatch } = this.props;
 
-    dispatch(loadingActions.setLoading('Autenticando usuário...'));
+    const showSpinner = () =>
+      this.setState({
+        autenticando: true
+      });
+
+    const hideSpinner = () =>
+      this.setState({
+        autenticando: false
+      });
+
+    showSpinner();
 
     if (this.isLoginFormOK()) {
       firebaseHelper.signIn(email.text, senha.text)
         .then(() => {
           this.getStaticListCidades()
             .then(() => {
-              dispatch(loadingActions.setDone());
-              history.push({
-                pathname: '/',
-                state: {}
-              });
+              setTimeout(() => {
+                hideSpinner();
+                history.push({
+                  pathname: '/',
+                  state: {}
+                });
+              }, 1000);
             });
         })
         .catch((error) => {
@@ -237,10 +244,10 @@ export class Login extends Component {
           } else { // SENHA
             dispatch(actions.setLoginSenhaValidation(ValidationStatus.ERROR, error.text));
           }
-          dispatch(loadingActions.setDone());
+          hideSpinner();
         });
     } else {
-      dispatch(loadingActions.setDone());
+      hideSpinner();
     }
   }
 
@@ -278,7 +285,12 @@ export class Login extends Component {
               <Row className="footer-section">
                 <span className="bt-mui-text">Login no sistema</span>
               </Row>
-              <ButtonLogin handleLogin={this.handleLogin} />
+              <SpinnerButton
+                className="btn-login mui--z2"
+                icon="unlock"
+                spinning={this.state.autenticando}
+                onClick={this.handleLogin}
+              />
             </form>
           </DivAnimated>
         </div>

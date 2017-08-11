@@ -17,19 +17,19 @@ import Input from 'react-toolbox/lib/input/Input';
 import VMasker from 'vanilla-masker';
 import * as snackbarActions from '../actions/snackbar.actions'
 import Snackbar from '../shared/Snackbar';
+import SpinnerButton from "../shared/SpinnerButton";
 // import PropTypes from 'prop-types';
 
-const ButtonAtualizar = () =>
-  <Button
+const ButtonAtualizar = ({ spinning }) =>
+  <SpinnerButton
     type="submit"
-    floating
-    accent
-    className="btn-salvar mui--z2">
-    <FontAwesome name="check fa-fw" />
-  </Button>
+    className="btn-salvar mui--z2"
+    icon="check"
+    spinning={spinning}
+  />
 
 const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNascimento,
-  onChangeTelefone, onChangeCelular, user, edicaoHabilitada }) => {
+  onChangeTelefone, onChangeCelular, user, edicaoHabilitada, spinning }) => {
   const { nome, cpf, dataNascimento, telefone, celular } = user;
 
   return (
@@ -104,7 +104,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
       <Row className="footer-section">
         <span>Salvar alterações</span>
       </Row>
-      <ButtonAtualizar />
+      <ButtonAtualizar spinning={spinning} />
     </form>
   );
 }
@@ -118,6 +118,9 @@ class PerfilUsuario extends Component {
     this.handleChangeTelefone = this.handleChangeTelefone.bind(this);
     this.handleChangeCelular = this.handleChangeCelular.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      autenticando: false
+    };
   }
 
   componentDidMount() {
@@ -313,12 +316,22 @@ class PerfilUsuario extends Component {
     return true;
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
     const { dispatch, user } = this.props;
 
-    dispatch(loadingActions.setLoading('Saalvando alterações...'));
+    const showSpinner = () =>
+      this.setState({
+        autenticando: true
+      });
+
+    const hideSpinner = () =>
+      this.setState({
+        autenticando: false
+      });
+
+    showSpinner();
+
     if (this.formCanBeSaved()) {
 
       const newUser = {
@@ -332,15 +345,15 @@ class PerfilUsuario extends Component {
       setTimeout(() => {
         firebaseHelper.setUserOnFirebase(newUser)
           .then(() => {
-            dispatch(loadingActions.setDone());
+            hideSpinner();
             dispatch(snackbarActions.show(utils.SnackbarTypes.SUCCESS, 'Perfil salvo com sucesso!'));
           })
           .catch((error) => {
-            dispatch(loadingActions.setDone());
+            hideSpinner();
           });
       }, 1000);
     } else {
-      dispatch(loadingActions.setDone());
+      hideSpinner();
     }
   }
 
@@ -353,7 +366,8 @@ class PerfilUsuario extends Component {
       onChangeDataNascimento: this.handleChangeDataNascimento,
       onChangeTelefone: this.handleChangeTelefone,
       onChangeCelular: this.handleChangeCelular,
-      onSubmit: this.handleSubmit
+      onSubmit: this.handleSubmit,
+      spinning: this.state.autenticando
     }
 
     return (
@@ -367,7 +381,7 @@ class PerfilUsuario extends Component {
             </Jumbotron>
           </Col>
         </DivAnimated>
-        <Snackbar />
+        <Snackbar type={utils.SnackbarTypes.SUCCESS} />
       </div>
     );
   }

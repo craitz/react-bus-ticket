@@ -11,13 +11,13 @@ const SnackContent = ({ type, message }) => {
   const getIcon = (type) => {
     switch (type) {
       case utils.SnackbarTypes.SUCCESS: {
-        return 'check';
+        return '';
       }
       case utils.SnackbarTypes.ERROR: {
-        return 'times';
+        return 'exclamation-triangle';
       }
       case utils.SnackbarTypes.WARNING: {
-        return 'exclamation';
+        return '';
       }
       default: {
         return '';
@@ -51,14 +51,48 @@ class Snackbar extends Component {
   render() {
     const { visible, message, type } = this.props;
 
+    const getType = () => {
+      switch (type) {
+        case utils.SnackbarTypes.SUCCESS: {
+          return 'accept';
+        }
+        case utils.SnackbarTypes.ERROR: {
+          return 'cancel';
+        }
+        case utils.SnackbarTypes.WARNING: {
+          return 'warning';
+        }
+        default: {
+          return '';
+        }
+      }
+    }
+
+    const getAction = () => {
+      switch (type) {
+        case utils.SnackbarTypes.SUCCESS: {
+          return <FontAwesome name="check" />;
+        }
+        case utils.SnackbarTypes.ERROR: {
+          return 'x';
+        }
+        case utils.SnackbarTypes.WARNING: {
+          return 'exclamation-triangle';
+        }
+        default: {
+          return '';
+        }
+      }
+    }
+
     return (
       <SnackbarTB
-        className={type}
+        //className={type}
         active={visible}
-        action={<FontAwesome name="times-circle" />}
+        action={getAction()}
         timeout={3500}
         label={<SnackContent type={type} message={message} />}
-        type='cancel'
+        type={getType()}
         onClick={this.handleSnackbarClick}
         onTimeout={this.handleSnackbarTimeout}
       />

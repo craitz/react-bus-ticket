@@ -38,13 +38,34 @@
 }
 
 button {
-    font-family: "Ubuntu" !important;
-    font-weight: bold !important;
-    color: rgba(white, .95) !important;
+    font-family: "Roboto Condensed" !important;
+    // font-weight: bold !important;
+    // color: rgba(white, .95) !important;
 }
 
 [data-react-toolbox="button"] {
     font-size: 1.7rem;
+}
+
+.spinner-button {
+    .with-spinner {
+        position: relative;
+        width: 56px;
+        height: 56px;
+        .spinner-progress {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            svg circle {
+                stroke: rgba(white, 1);
+                stroke-width: 4;
+                r: 16;
+            }
+        }
+    }
+    &:disabled {
+        background-color: $materialAccent !important;
+    }
 }
 
 // REVISAR e CONSERTAR ------------------------------

@@ -13,6 +13,7 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import FontAwesome from 'react-fontawesome';
 import Button from 'react-toolbox/lib/button/Button';
 import * as loadingActions from '../actions/loadingDialog.actions'
+import SpinnerButton from "../shared/SpinnerButton";
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
@@ -63,6 +64,10 @@ export class ModalTrajeto extends Component {
     this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
     this.handleChangeDataIda = this.handleChangeDataIda.bind(this);
     this.handleChangeDataVolta = this.handleChangeDataVolta.bind(this);
+    this.state = {
+      autenticando: false
+    };
+
   }
 
   handleChangeDataIda(momentValue) {
@@ -230,13 +235,25 @@ export class ModalTrajeto extends Component {
       return;
     }
 
-    dispatch(loadingActions.setLoading('Procurando passagens...'));
+    const showSpinner = () =>
+      this.setState({
+        autenticando: true
+      });
+
+    const hideSpinner = () =>
+      this.setState({
+        autenticando: false
+      });
+
+    showSpinner();
+    // dispatch(loadingActions.setLoading('Procurando passagens...'));
 
     this.updateHorarios().then(() => {
       setTimeout(() => {
-        dispatch(loadingActions.setDone()); // esconde o loading
+        // dispatch(loadingActions.setDone()); // esconde o loading
         dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
         dispatch(actions.setVisible(false)); // fecha o modal
+        hideSpinner();
 
         setTimeout(() => {
           // seta o trajeto da volta
@@ -335,13 +352,12 @@ export class ModalTrajeto extends Component {
           <Modal.Footer>
             <span>Buscar passagens</span>
           </Modal.Footer>
-          <Button
-            floating
-            accent
+          <SpinnerButton
             type="submit"
-            className="mui--z2 btn-buscar">
-            <FontAwesome name="search" className="bt-mui-icon" />
-          </Button>
+            className="mui--z2 btn-buscar"
+            icon="search"
+            spinning={this.state.autenticando}
+          />
         </form>
       </Modal >
     );

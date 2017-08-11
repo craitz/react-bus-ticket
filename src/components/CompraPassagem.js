@@ -24,6 +24,7 @@ import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
 import { Row } from 'react-bootstrap';
 import ButtonMenu from '../shared/ButtonMenu';
+import SpinnerButton from "../shared/SpinnerButton";
 
 export class CompraPassagem extends Component {
   constructor(props) {
@@ -46,6 +47,9 @@ export class CompraPassagem extends Component {
     this.handleExcluiVolta = this.handleExcluiVolta.bind(this);
     this.handleHome = this.handleHome.bind(this);
     this.handlePesquisa = this.handlePesquisa.bind(this);
+    this.state = {
+      autenticando: false
+    };
   }
 
   initializeValues() {
@@ -542,7 +546,19 @@ export class CompraPassagem extends Component {
     event.preventDefault();
     const { dispatch, passagem, passagemVolta, isIdaVolta, history } = this.props;
 
-    dispatch(loadingActions.setLoading('Finalizando compra...'));
+    const showSpinner = () =>
+      this.setState({
+        autenticando: true
+      });
+
+    const hideSpinner = () =>
+      this.setState({
+        autenticando: false
+      });
+
+
+    showSpinner();
+    // dispatch(loadingActions.setLoading('Finalizando compra...'));
 
     if (this.formCanBeSaved()) {
       this.savePassagem(passagem)
@@ -551,7 +567,8 @@ export class CompraPassagem extends Component {
             this.savePassagem(passagemVolta)
               .then((objVolta) => {
                 setTimeout(() => {
-                  dispatch(loadingActions.setDone());
+                  hideSpinner();
+                  // dispatch(loadingActions.setDone());
                   history.push({
                     pathname: `/passagem/${objIda.key}`,
                     state: {
@@ -566,7 +583,8 @@ export class CompraPassagem extends Component {
               });
           } else {
             setTimeout(() => {
-              dispatch(loadingActions.setDone());
+              hideSpinner();
+              // dispatch(loadingActions.setDone());
               console.log('ida salva com sucesso!');
               history.push({
                 pathname: `/passagem/${objIda.key}`,
@@ -580,10 +598,12 @@ export class CompraPassagem extends Component {
           }
         })
         .catch((error) => {
-          dispatch(loadingActions.setDone());
+          hideSpinner();
+          // dispatch(loadingActions.setDone());
         });
     } else {
-      dispatch(loadingActions.setDone());
+      hideSpinner();
+      // dispatch(loadingActions.setDone());
     }
   }
 
@@ -683,15 +703,12 @@ export class CompraPassagem extends Component {
     }
 
     const ButtonFinalizar = () =>
-      // <TooltipOverlay text="Finalizar compra" position="top">
-      <Button
-        floating
-        accent
+      <SpinnerButton
         className="button-finaliza mui--z2"
         onClick={this.handleSubmit}
-        icon={<FontAwesome name="check" />}
+        icon="check"
+        spinning={this.state.autenticando}
       />
-    // </TooltipOverlay>
 
     const ButtonEditar = () =>
       <TooltipOverlay text="Alterar passagem" position="top">
