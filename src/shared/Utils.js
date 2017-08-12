@@ -84,12 +84,12 @@ export const firebaseToTimeElement = (text) => {
   const hora = text.slice(0, 2);
   const min = text.slice(2);
   return (
-    <section className="text-horario text-left">
+    <div className="text-horario text-left">
       <span>{hora}</span>
       <small>h</small>
       <span>{min}</span>
       <small>m</small>
-    </section >
+    </div >
   );
 }
 
