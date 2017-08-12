@@ -198,17 +198,34 @@ monospace;
     background-color: white;
     margin-top: 0;
     margin-bottom: 30px;
-    border-radius: 7px 7px 4px 4px !important;
+    border-radius: 7px !important;
     position: relative;
     @include sm {
-        border-radius: 7px 7px 20px 20px !important;
+        // border-radius: 7px 7px 20px 20px !important;
+    }
+    &.tab-xs {
+        @include accordionMini {
+            @include busSelectMini(rgba($googleGreen, .8));
+        }
     }
     outline: none !important;
     section {
         outline: none !important;
+        padding-bottom: 0;
+        padding-top: 5px;
         @include sm {
-            padding-bottom: 0;
+            &._1Mp2k._3YHoU {
+                padding-top: 10px;
+            }
         }
+    }
+    .jumbo-info {
+        // border: 1px solid rgba(black, .2);
+        font-family: "Days One";
+        color: rgba($materialPrimary, .7) !important;
+        margin-bottom: 6px;
+        background-color: white;
+        padding: 0 5px 5px 5px;
     }
     .footer-section {
         border-radius: 0 0 4px 4px !important;
@@ -217,7 +234,7 @@ monospace;
         position: relative;
         text-align: left;
         padding-left: 40px;
-        margin: 15px -12px 0 -12px;
+        margin: 12px -12px 0 -12px;
         .button-finaliza {
             position: absolute;
             z-index: 9;
@@ -231,23 +248,38 @@ monospace;
             font-family: "Days One"
         }
     }
-    &.mini-volta {
-        margin-top: 15px;
-        margin-bottom: 30px;
-        position: relative;
-    }
-    &.mini-ida,
-    &.mini-volta {
-        @include accordionMini {
-            @include busSelectMini(rgba($googleGreen, .8));
-        }
-    }
+    // &.mini-volta {
+    //     margin-top: 15px;
+    //     margin-bottom: 30px;
+    //     position: relative;
+    // }
+    // &.mini-ida,
+    // &.mini-volta {
+    //     @include accordionMini {
+    //         @include busSelectMini(rgba($googleGreen, .8));
+    //     }
+    // }
     .button-limpar-ida {
         position: absolute;
         z-index: 9;
-        top: 56px - 15px;
-        left: -28px;
+        top: 75px;
+        right: -20px;
         background-color: $materialPrimaryLight !important;
+        @include sm {
+            top: 56px - 15px;
+            left: -28px;
+        }
+    }
+    .button-limpar-volta {
+        position: absolute;
+        z-index: 9;
+        top: 75px;
+        left: -20px;
+        background-color: $materialPrimaryLight !important;
+        @include sm {
+            top: 56px - 15px;
+            left: -28px;
+        }
     }
     .tab-menu {
         position: absolute;
@@ -259,6 +291,7 @@ monospace;
         }
     }
     nav {
+        font-family: "Days One";
         border-top-left-radius: 4px !important;
         border-top-right-radius: 4px !important;
         background-color: $materialPrimary;
@@ -271,16 +304,11 @@ monospace;
         margin-bottom: 0;
     }
     .text-nenhum-resultado {}
-    .tab-ida,
-    .tab-ida-mini {
+    .tab-ida {
         background: url(./styles/images/tab-ida.svg) no-repeat left fixed;
         background-attachment: scroll;
     }
     .tab-volta {
-        background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
-        background-attachment: scroll;
-    }
-    .tab-volta-mini {
         background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
         background-attachment: scroll;
     }
@@ -415,7 +443,7 @@ monospace;
         border: none;
         width: 300px; // SM
         $left: calc(50% - 150px); // SM
-        margin: 76px 0 0 $left !important; // SM 
+        margin: 106px 0 0 $left !important; // SM 
         .form-centered {
             width: inherit;
             .jumbo-comprar {

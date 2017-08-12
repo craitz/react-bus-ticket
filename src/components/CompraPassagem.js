@@ -22,7 +22,7 @@ import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
-import { Row } from 'react-bootstrap';
+import { Jumbotron, Row } from 'react-bootstrap';
 import ButtonMenu from '../shared/ButtonMenu';
 import SpinnerButton from "../shared/SpinnerButton";
 
@@ -644,54 +644,118 @@ export class CompraPassagem extends Component {
       const poltronasFormatted = strPoltronas.length > 0 ? utils.sortPoltronas(strPoltronas) : '';
 
       const trajetoIda = (
-        <section className="text-right">
-          <section className="tab-row">
+        <div className="text-right">
+          <div className="tab-row">
             <span>{isVolta ? strDestino : strOrigem}</span>
             <FontAwesome name="location-arrow fa-fw" className="text-after-icon" />
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <span>{isVolta ? strOrigem : strDestino}</span>
             <FontAwesome name="map-marker fa-fw" className="text-after-icon" />
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <span>{isVolta ? strDataVolta : strDataIda}</span>
             <FontAwesome name="calendar fa-fw" className="text-after-icon" />
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <span>{horarioFormatted}</span>
             <FontAwesome name="clock-o fa-fw" className="text-after-icon" />
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <span>{poltronasFormatted}</span>
             <FontAwesome name="bookmark fa-fw" className="text-after-icon" />
-          </section>
-        </section>
+          </div>
+        </div>
       );
 
       const trajetoVolta = (
-        <section>
-          <section className="tab-row">
+        <div>
+          <div className="tab-row">
             <FontAwesome name="location-arrow fa-fw" />
             <span className="text-after-icon">{isVolta ? strDestino : strOrigem}</span>
             {/*<FontAwesome name="long-arrow-right" className="text-after-icon" />*/}
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <FontAwesome name="map-marker fa-fw" />
             <span className="text-after-icon">{isVolta ? strOrigem : strDestino}</span>
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <FontAwesome name="calendar fa-fw" />
             <span className="text-after-icon">{isVolta ? strDataVolta : strDataIda}</span>
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <FontAwesome name="clock-o fa-fw" />
             <span className="text-after-icon">{horarioFormatted}</span>
-          </section>
-          <section className="tab-row">
+          </div>
+          <div className="tab-row">
             <FontAwesome name="bookmark fa-fw" />
             <span className="text-after-icon">{poltronasFormatted}</span>
-          </section>
+          </div>
+        </div>
+      );
+
+      return (
+        <section className="text-left">
+          {!isVolta && trajetoIda}
+          {isVolta && trajetoVolta}
         </section>
+      );
+    }
+
+    const HeaderTabXs = ({ isVolta }) => {
+      const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
+      const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
+      const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
+      const poltronasFormatted = strPoltronas.length > 0 ? utils.sortPoltronas(strPoltronas) : '';
+
+      const trajetoIda = (
+        <Jumbotron className="jumbo-info">
+          <div className="tab-row">
+            <FontAwesome name="location-arrow fa-fw" />
+            <span className="text-after-icon">{isVolta ? strDestino : strOrigem}</span>
+          </div>
+          <div className="tab-row">
+            <FontAwesome name="map-marker fa-fw" />
+            <span className="text-after-icon">{isVolta ? strOrigem : strDestino}</span>
+          </div>
+          <div className="tab-row">
+            <FontAwesome name="calendar fa-fw" />
+            <span className="text-after-icon">{isVolta ? strDataVolta : strDataIda}</span>
+          </div>
+          <div className="tab-row">
+            <FontAwesome name="clock-o fa-fw" />
+            <span className="text-after-icon">{horarioFormatted}</span>
+          </div>
+          <div className="tab-row">
+            <FontAwesome name="bookmark fa-fw" />
+            <span className="text-after-icon">{poltronasFormatted}</span>
+          </div>
+        </Jumbotron>
+      );
+
+      const trajetoVolta = (
+        <Jumbotron className="jumbo-info text-right">
+          <div className="tab-row">
+            <span>{isVolta ? strDestino : strOrigem}</span>
+            <FontAwesome name="location-arrow fa-fw" className="text-after-icon" />
+          </div>
+          <div className="tab-row">
+            <span>{isVolta ? strOrigem : strDestino}</span>
+            <FontAwesome name="map-marker fa-fw" className="text-after-icon" />
+          </div>
+          <div className="tab-row">
+            <span>{isVolta ? strDataVolta : strDataIda}</span>
+            <FontAwesome name="calendar fa-fw" className="text-after-icon" />
+          </div>
+          <div className="tab-row">
+            <span>{horarioFormatted}</span>
+            <FontAwesome name="clock-o fa-fw" className="text-after-icon" />
+          </div>
+          <div className="tab-row">
+            <span>{poltronasFormatted}</span>
+            <FontAwesome name="bookmark fa-fw" className="text-after-icon" />
+          </div>
+        </Jumbotron>
       );
 
       return (
@@ -715,7 +779,7 @@ export class CompraPassagem extends Component {
         <Button
           floating
           primary
-          className="button-editar hidden-xs mui--z2"
+          className="button-editar mui--z2"
           onClick={this.handleChangeTrajeto}
           icon={<FontAwesome name="pencil" />}
         />
@@ -749,7 +813,7 @@ export class CompraPassagem extends Component {
           accent
           className={isVolta ? "button-limpar-volta mui--z2" : "button-limpar-ida mui--z2"}
           onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
-          icon={<FontAwesome name="minus" />}
+          icon={<FontAwesome name="times" />}
         />
       </TooltipOverlay>
 
@@ -777,9 +841,13 @@ export class CompraPassagem extends Component {
 
     const ButtonSection = () =>
       <Row className="footer-section">
-        <span>Finalizar compra</span>
+        <span className="hidden-xs">Finalizar compra</span>
+        <span className="visible-xs">Finalizar</span>
         <ButtonFinalizar />
       </Row>
+
+    const InfoPassagem = ({ isVolta }) =>
+      <HeaderTabXs isVolta={isVolta} />
 
     const TabsLarge = () =>
       <Tabs
@@ -830,59 +898,112 @@ export class CompraPassagem extends Component {
       </Tabs>
 
     const TabsMini = () =>
-      <section className="hidden-sm hidden-md hidden-lg">
-        <Tabs
-          index={0}
-          fixed
-          inverse
-          className="tab-horarios mini-ida mui--z2"
+      <Tabs
+        index={isIdaVolta ? activeTab : 0}
+        fixed
+        inverse
+        onChange={this.handleSelectTab}
+        className="tab-horarios tab-xs mui--z2 visible-xs"
+      >
+        <Tab
+          //label={<HeaderTab isVolta={false} />}
+          label="IDA"
+          className="tab-ida-mini"
         >
+          <ButtonLimpar isVolta={false} />
+          <InfoPassagem isVolta={false} />
+          <NoResultsAccordionIda
+            className="accordion-ida"
+            color="dark"
+            isVolta={false}
+            isSavingPoltronas={isSavingPoltronas}
+            horarios={horarios}
+            active={activeAccordion}
+            onClickSeat={this.handleClickSeat}
+            onResetSeats={this.handleResetSeats}
+            onSaveSeats={this.handleSaveSeats}
+          />
+          <ButtonSection />
+        </Tab>
+        {isIdaVolta &&
           <Tab
-            label={<HeaderTab isVolta={false} />}
-            className="tab-ida-mini"
+            //label={<HeaderTab isVolta={true} />}
+            label="VOLTA"
+            className="tab-volta-mini"
           >
-            <ButtonLimpar isVolta={false} />
-            <NoResultsAccordionIda
-              className="accordion-ida"
+            {/*<TabMenu />*/}
+            <ButtonLimpar isVolta={true} />
+            <InfoPassagem isVolta={true} />
+            <NoResultsAccordionVolta
+              className="accordion-volta"
               color="dark"
-              isVolta={false}
+              isVolta={true}
               isSavingPoltronas={isSavingPoltronas}
-              horarios={horarios}
-              active={activeAccordion}
+              horarios={horariosVolta}
+              active={activeAccordionVolta}
               onClickSeat={this.handleClickSeat}
               onResetSeats={this.handleResetSeats}
               onSaveSeats={this.handleSaveSeats}
             />
+            <ButtonSection />
           </Tab>
-        </Tabs>
-        {
-          isIdaVolta &&
-          <Tabs
-            index={0}
-            fixed
-            inverse
-            className="tab-horarios mini-volta mui--z2"
-          >
-            <Tab
-              label={<HeaderTab isVolta={true} />}
-              className="tab-volta-mini"
-            >
-              <TabMenu />
-              <NoResultsAccordionVolta
-                className="accordion-volta"
-                color="dark"
-                isVolta={true}
-                isSavingPoltronas={isSavingPoltronas}
-                horarios={horariosVolta}
-                active={activeAccordionVolta}
-                onClickSeat={this.handleClickSeat}
-                onResetSeats={this.handleResetSeats}
-                onSaveSeats={this.handleSaveSeats}
-              />
-            </Tab>
-          </Tabs>
         }
-      </section>
+      </Tabs>
+
+    // const TabsMini = () =>
+    //   <section className="hidden-sm hidden-md hidden-lg">
+    //     <Tabs
+    //       index={0}
+    //       fixed
+    //       inverse
+    //       className="tab-horarios mini-ida mui--z2"
+    //     >
+    //       <Tab
+    //         label={<HeaderTab isVolta={false} />}
+    //         className="tab-ida-mini"
+    //       >
+    //         <ButtonLimpar isVolta={false} />
+    //         <NoResultsAccordionIda
+    //           className="accordion-ida"
+    //           color="dark"
+    //           isVolta={false}
+    //           isSavingPoltronas={isSavingPoltronas}
+    //           horarios={horarios}
+    //           active={activeAccordion}
+    //           onClickSeat={this.handleClickSeat}
+    //           onResetSeats={this.handleResetSeats}
+    //           onSaveSeats={this.handleSaveSeats}
+    //         />
+    //       </Tab>
+    //     </Tabs>
+    //     {
+    //       isIdaVolta &&
+    //       <Tabs
+    //         index={0}
+    //         fixed
+    //         inverse
+    //         className="tab-horarios mini-volta mui--z2"
+    //       >
+    //         <Tab
+    //           label={<HeaderTab isVolta={true} />}
+    //           className="tab-volta-mini"
+    //         >
+    //           <TabMenu />
+    //           <NoResultsAccordionVolta
+    //             className="accordion-volta"
+    //             color="dark"
+    //             isVolta={true}
+    //             isSavingPoltronas={isSavingPoltronas}
+    //             horarios={horariosVolta}
+    //             active={activeAccordionVolta}
+    //             onClickSeat={this.handleClickSeat}
+    //             onResetSeats={this.handleResetSeats}
+    //             onSaveSeats={this.handleSaveSeats}
+    //           />
+    //         </Tab>
+    //       </Tabs>
+    //     }
+    //   </section>
 
     return (
       <div className="comprar-passagem-container">
@@ -890,14 +1011,14 @@ export class CompraPassagem extends Component {
           title="Compre sua passagem"
           className="header-comprar hidden-xs"
         >
-          <OpcoesMenu />
+          {/*<OpcoesMenu />*/}
           <ButtonEditar />
         </PageHeader>
         <PageHeader
           title="Compre já!"
           className="header-comprar hidden-sm hidden-md hidden-lg"
         >
-          <OpcoesMenu />
+          {/*<OpcoesMenu />*/}
           <ButtonEditar />
         </PageHeader>
         <div className="form-passagem-container">
