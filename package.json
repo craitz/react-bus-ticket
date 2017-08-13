@@ -11,6 +11,7 @@
             "SNACKBAR",
             "TABS",
             "MENU"
+
         ],
         "customProperties": {
             "color-primary": "#424242",

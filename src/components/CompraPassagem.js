@@ -18,6 +18,7 @@ import HorariosAccordion from './HorariosAccordion';
 import { withNoResults } from '../shared/hoc';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
+import IconButton from 'react-toolbox/lib/button/IconButton';
 import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
@@ -25,6 +26,12 @@ import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
 import { Jumbotron, Row } from 'react-bootstrap';
 import ButtonMenu from '../shared/ButtonMenu';
 import SpinnerButton from "../shared/SpinnerButton";
+import exchange from '../styles/images/exchange.svg';
+import exchangeXs from '../styles/images/exchange-xs.svg';
+import erase from '../styles/images/erase.svg';
+import eraseXs from '../styles/images/erase-xs.svg';
+import trash from '../styles/images/trash.svg';
+import trashXs from '../styles/images/trash-xs.svg';
 
 export class CompraPassagem extends Component {
   constructor(props) {
@@ -155,6 +162,8 @@ export class CompraPassagem extends Component {
     const { dispatch, passagem, horarios, horariosBackup } = this.props;
     const { horario } = passagem;
     const horariosTemp = utils.deepCopy(horarios);
+
+    console.log('opa!!');
 
     dispatch(actions.setErroSalvandoIda(false));
     if (horario.length > 0) {
@@ -785,60 +794,6 @@ export class CompraPassagem extends Component {
         />
       </TooltipOverlay>
 
-    const OpcoesMenu = () =>
-      <ButtonMenu
-        tooltip="Mais opções"
-        className="opcoes-menu visible-xs"
-        label="+"
-      >
-        <MenuItem
-          value='altera-passagem'
-          icon={<FontAwesome name="pencil" />}
-          caption='Alterar passagem'
-          onClick={this.handleChangeTrajeto}
-        />
-        <MenuDivider />
-        <MenuItem
-          value='finalizar'
-          icon={<FontAwesome name="check" />}
-          caption='Finalizar compra'
-          onClick={this.handleSubmit}
-        />
-      </ButtonMenu>
-
-    const ButtonLimpar = ({ isVolta }) =>
-      <TooltipOverlay text="Limpar poltronas" position="top">
-        <Button
-          floating
-          accent
-          className={isVolta ? "button-limpar-volta mui--z2" : "button-limpar-ida mui--z2"}
-          onClick={isVolta ? this.handleLimpaVolta : this.handleLimpaIda}
-          icon={<FontAwesome name="times" />}
-        />
-      </TooltipOverlay>
-
-    const TabMenu = () =>
-      <ButtonMenu
-        tooltip="Opções"
-        className="tab-menu"
-        label="+"
-        mini={false}
-        tooltipPosition="top"
-      >
-        <MenuItem
-          value='limpa-poltronas'
-          icon={<FontAwesome name="minus" />}
-          caption='Limpar poltronas'
-          onClick={this.handleLimpaVolta}
-        />
-        <MenuItem
-          value='delete-passagem'
-          icon={<FontAwesome name="times" />}
-          caption='Excluir volta'
-          onClick={this.handleExcluiVolta}
-        />
-      </ButtonMenu>
-
     const ButtonSection = () =>
       <Row className="footer-section">
         <span className="hidden-xs">Finalizar compra</span>
@@ -848,6 +803,50 @@ export class CompraPassagem extends Component {
 
     const InfoPassagem = ({ isVolta }) =>
       <HeaderTabXs isVolta={isVolta} />
+
+    const IconButtonSvg = ({ icon, tooltip, tooltipPosition, className, onClick }) =>
+      <TooltipOverlay text={tooltip} position={tooltipPosition}>
+        <IconButton icon={<img src={icon} alt="" />} className={className} onClick={onClick} />
+      </TooltipOverlay>
+
+    const SidebarIda = ({ small }) => {
+      const position = small ? "right" : "left";
+      return (
+        <div className="sidebar-ida">
+          <IconButtonSvg
+            icon={small ? exchangeXs : exchange}
+            tooltip="Inverter passagem"
+            tooltipPosition={position} />
+          <IconButtonSvg
+            icon={small ? eraseXs : erase}
+            tooltip="Limpar poltronas"
+            tooltipPosition={position}
+            onClick={this.handleLimpaIda} />
+        </div>
+      );
+    }
+
+    const SidebarVolta = ({ small }) => {
+      const position = small ? "left" : "right";
+      return (
+        <div className="sidebar-volta">
+          <IconButtonSvg
+            icon={small ? exchangeXs : exchange}
+            tooltip="Inverter passagem"
+            tooltipPosition={position} />
+          <IconButtonSvg
+            icon={small ? eraseXs : erase}
+            tooltip="Limpar poltronas"
+            tooltipPosition={position}
+            onClick={this.handleLimpaVolta} />
+          <IconButtonSvg
+            icon={small ? trashXs : trash}
+            tooltip="Excluir volta"
+            tooltipPosition="right"
+            onClick={this.handleExcluiVolta} />
+        </div>
+      );
+    }
 
     const TabsLarge = () =>
       <Tabs
@@ -861,7 +860,7 @@ export class CompraPassagem extends Component {
           label={<HeaderTab isVolta={false} />}
           className="tab-ida"
         >
-          <ButtonLimpar isVolta={false} />
+          <SidebarIda small={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
             color="dark"
@@ -880,7 +879,7 @@ export class CompraPassagem extends Component {
             label={<HeaderTab isVolta={true} />}
             className="tab-volta"
           >
-            <TabMenu />
+            <SidebarVolta small={false} />
             <NoResultsAccordionVolta
               className="accordion-volta"
               color="dark"
@@ -906,11 +905,10 @@ export class CompraPassagem extends Component {
         className="tab-horarios tab-xs mui--z2 visible-xs"
       >
         <Tab
-          //label={<HeaderTab isVolta={false} />}
           label="IDA"
           className="tab-ida-mini"
         >
-          <ButtonLimpar isVolta={false} />
+          <SidebarIda small={true} />
           <InfoPassagem isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -927,12 +925,10 @@ export class CompraPassagem extends Component {
         </Tab>
         {isIdaVolta &&
           <Tab
-            //label={<HeaderTab isVolta={true} />}
             label="VOLTA"
             className="tab-volta-mini"
           >
-            {/*<TabMenu />*/}
-            <ButtonLimpar isVolta={true} />
+            <SidebarVolta small={true} />
             <InfoPassagem isVolta={true} />
             <NoResultsAccordionVolta
               className="accordion-volta"
@@ -950,60 +946,6 @@ export class CompraPassagem extends Component {
         }
       </Tabs>
 
-    // const TabsMini = () =>
-    //   <section className="hidden-sm hidden-md hidden-lg">
-    //     <Tabs
-    //       index={0}
-    //       fixed
-    //       inverse
-    //       className="tab-horarios mini-ida mui--z2"
-    //     >
-    //       <Tab
-    //         label={<HeaderTab isVolta={false} />}
-    //         className="tab-ida-mini"
-    //       >
-    //         <ButtonLimpar isVolta={false} />
-    //         <NoResultsAccordionIda
-    //           className="accordion-ida"
-    //           color="dark"
-    //           isVolta={false}
-    //           isSavingPoltronas={isSavingPoltronas}
-    //           horarios={horarios}
-    //           active={activeAccordion}
-    //           onClickSeat={this.handleClickSeat}
-    //           onResetSeats={this.handleResetSeats}
-    //           onSaveSeats={this.handleSaveSeats}
-    //         />
-    //       </Tab>
-    //     </Tabs>
-    //     {
-    //       isIdaVolta &&
-    //       <Tabs
-    //         index={0}
-    //         fixed
-    //         inverse
-    //         className="tab-horarios mini-volta mui--z2"
-    //       >
-    //         <Tab
-    //           label={<HeaderTab isVolta={true} />}
-    //           className="tab-volta-mini"
-    //         >
-    //           <TabMenu />
-    //           <NoResultsAccordionVolta
-    //             className="accordion-volta"
-    //             color="dark"
-    //             isVolta={true}
-    //             isSavingPoltronas={isSavingPoltronas}
-    //             horarios={horariosVolta}
-    //             active={activeAccordionVolta}
-    //             onClickSeat={this.handleClickSeat}
-    //             onResetSeats={this.handleResetSeats}
-    //             onSaveSeats={this.handleSaveSeats}
-    //           />
-    //         </Tab>
-    //       </Tabs>
-    //     }
-    //   </section>
 
     return (
       <div className="comprar-passagem-container">
@@ -1011,14 +953,12 @@ export class CompraPassagem extends Component {
           title="Compre sua passagem"
           className="header-comprar hidden-xs"
         >
-          {/*<OpcoesMenu />*/}
           <ButtonEditar />
         </PageHeader>
         <PageHeader
           title="Compre já!"
           className="header-comprar hidden-sm hidden-md hidden-lg"
         >
-          {/*<OpcoesMenu />*/}
           <ButtonEditar />
         </PageHeader>
         <div className="form-passagem-container">
