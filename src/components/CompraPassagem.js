@@ -816,11 +816,11 @@ export class CompraPassagem extends Component {
         position={small ? "topRight" : "topLeft"}
         menuRipple
       >
-        <MenuItem
+        {/*<MenuItem
           value='inverter-passagem'
           icon={<img src={exchangeXs} alt="" />}
           caption='Inverter trajeto'
-        />
+        />*/}
         <MenuItem
           value='limpar-poltronas'
           icon={<img src={eraseXs} alt="" />}
@@ -835,18 +835,18 @@ export class CompraPassagem extends Component {
         position={small ? "topLeft" : "topRight"}
         menuRipple
       >
-        <MenuItem
+        {/*<MenuItem
           value='inverter-passagem'
           icon={<img src={exchangeXs} alt="" />}
           caption='Inverter trajeto'
-        />
+        />*/}
         <MenuItem
           value='limpar-poltronas'
           icon={<img src={eraseXs} alt="" />}
           caption='Limpar poltronas'
           onClick={this.handleLimpaVolta}
         />
-        <MenuDivider />
+        {/*<MenuDivider />*/}
         <MenuItem
           value='excluir-volta'
           icon={<img src={trashXs} alt="" />}
@@ -882,11 +882,12 @@ export class CompraPassagem extends Component {
         className="tab-horarios mui--z2 hidden-xs"
       >
         <Tab
-          label={<HeaderTab isVolta={false} />}
+          label="IDA"
+          //label={<HeaderTab isVolta={false} />}
           className="tab-ida"
         >
-          <FontAwesome name="arrow-circle-up" className="tab-arrow" />
-          <SidebarIda small={false} />
+          <SidebarIda small={true} />
+          <InfoPassagem isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
             color="dark"
@@ -902,10 +903,12 @@ export class CompraPassagem extends Component {
         </Tab>
         {isIdaVolta &&
           <Tab
-            label={<HeaderTab isVolta={true} />}
+            label="VOLTA"
+            //label={<HeaderTab isVolta={true} />}
             className="tab-volta"
           >
-            <SidebarVolta small={false} />
+            <SidebarVolta small={true} />
+            <InfoPassagem isVolta={true} />
             <NoResultsAccordionVolta
               className="accordion-volta"
               color="dark"
@@ -1020,11 +1023,6 @@ const mapStateToProps = (state) => {
     hasErroSalvandoIda: state.compraPassagemState.hasErroSalvandoIda,
     hasErroSalvandoVolta: state.compraPassagemState.hasErroSalvandoVolta,
     snapshot: state.compraPassagemState,
-    snackbar: {
-      visible: state.snackbarState.visible,
-      message: state.snackbarState.message,
-      type: state.snackbarState.type
-    }
   };
 };
 
