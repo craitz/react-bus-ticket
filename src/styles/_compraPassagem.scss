@@ -220,7 +220,6 @@ monospace;
         }
     }
     .jumbo-info {
-        // border: 1px solid rgba(black, .2);
         font-family: "Days One";
         color: rgba($materialPrimary, .7) !important;
         margin-bottom: 6px;
@@ -248,37 +247,37 @@ monospace;
             font-family: "Days One"
         }
     }
-    // &.mini-volta {
-    //     margin-top: 15px;
-    //     margin-bottom: 30px;
-    //     position: relative;
-    // }
-    // &.mini-ida,
-    // &.mini-volta {
-    //     @include accordionMini {
-    //         @include busSelectMini(rgba($googleGreen, .8));
-    //     }
-    // }
-    .button-limpar-ida {
+    .sidebar-ida,
+    .sidebar-volta {
         position: absolute;
-        z-index: 9;
-        top: 75px;
-        right: -20px;
-        background-color: $materialPrimaryLight !important;
-        @include sm {
-            top: 56px - 15px;
-            left: -28px;
+        top: 38px;
+        width: 44px;
+        height: 117px;
+        &:first-child {
+            margin-top: 10px;
+        }
+        button {
+            color: $materialPrimary !important;
+            @include sm {
+                color: white !important;
+            }
         }
     }
-    .button-limpar-volta {
-        position: absolute;
-        z-index: 9;
-        top: 75px;
-        left: -20px;
-        background-color: $materialPrimaryLight !important;
+    .sidebar-ida {
+        right: 0;
         @include sm {
-            top: 56px - 15px;
-            left: -28px;
+            top: 0;
+            left: 0;
+            height: 127px;
+        }
+    }
+    .sidebar-volta {
+        left: 0;
+        @include sm {
+            top: 0;
+            left: initial;
+            right: 0;
+            height: 127px;
         }
     }
     .tab-menu {
@@ -303,15 +302,15 @@ monospace;
     .panel-group {
         margin-bottom: 0;
     }
-    .text-nenhum-resultado {}
-    .tab-ida {
-        background: url(./styles/images/tab-ida.svg) no-repeat left fixed;
-        background-attachment: scroll;
-    }
-    .tab-volta {
-        background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
-        background-attachment: scroll;
-    }
+    // .text-nenhum-resultado {}
+    // .tab-ida {
+    //     background: url(./styles/images/tab-ida.svg) no-repeat left fixed;
+    //     background-attachment: scroll;
+    // }
+    // .tab-volta {
+    //     background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
+    //     background-attachment: scroll;
+    // }
 }
 
 @mixin busSelect($seatColor) {
