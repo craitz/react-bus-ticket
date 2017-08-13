@@ -257,11 +257,18 @@ monospace;
             margin-top: 10px;
         }
         button {
-            color: $materialPrimary !important;
+            color: rgba($materialPrimary, .8) !important;
             @include sm {
                 color: white !important;
             }
         }
+    }
+    .tab-arrow {
+        position: absolute;
+        font-size: 3rem;
+        top: 100px;
+        color: rgba(white, .05);
+        left: 10px;
     }
     .sidebar-ida {
         right: 0;

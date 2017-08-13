@@ -23,6 +23,7 @@ import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
 import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
+import IconMenu from 'react-toolbox/lib/menu/IconMenu';
 import { Jumbotron, Row } from 'react-bootstrap';
 import ButtonMenu from '../shared/ButtonMenu';
 import SpinnerButton from "../shared/SpinnerButton";
@@ -809,19 +810,56 @@ export class CompraPassagem extends Component {
         <IconButton icon={<img src={icon} alt="" />} className={className} onClick={onClick} />
       </TooltipOverlay>
 
+    const MenuIda = ({ small }) =>
+      <IconMenu
+        icon={<FontAwesome name="ellipsis-v" />}
+        position={small ? "topRight" : "topLeft"}
+        menuRipple
+      >
+        <MenuItem
+          value='inverter-passagem'
+          icon={<img src={exchangeXs} alt="" />}
+          caption='Inverter trajeto'
+        />
+        <MenuItem
+          value='limpar-poltronas'
+          icon={<img src={eraseXs} alt="" />}
+          caption='Limpar poltronas'
+          onClick={this.handleLimpaIda}
+        />
+      </IconMenu>
+
+    const MenuVolta = ({ small }) =>
+      <IconMenu
+        icon={<FontAwesome name="ellipsis-v" />}
+        position={small ? "topLeft" : "topRight"}
+        menuRipple
+      >
+        <MenuItem
+          value='inverter-passagem'
+          icon={<img src={exchangeXs} alt="" />}
+          caption='Inverter trajeto'
+        />
+        <MenuItem
+          value='limpar-poltronas'
+          icon={<img src={eraseXs} alt="" />}
+          caption='Limpar poltronas'
+          onClick={this.handleLimpaVolta}
+        />
+        <MenuDivider />
+        <MenuItem
+          value='excluir-volta'
+          icon={<img src={trashXs} alt="" />}
+          caption='Excluir volta'
+          onClick={this.handleExcluiVolta}
+        />
+      </IconMenu>
+
     const SidebarIda = ({ small }) => {
       const position = small ? "right" : "left";
       return (
         <div className="sidebar-ida">
-          <IconButtonSvg
-            icon={small ? exchangeXs : exchange}
-            tooltip="Inverter passagem"
-            tooltipPosition={position} />
-          <IconButtonSvg
-            icon={small ? eraseXs : erase}
-            tooltip="Limpar poltronas"
-            tooltipPosition={position}
-            onClick={this.handleLimpaIda} />
+          <MenuIda small={small} />
         </div>
       );
     }
@@ -830,20 +868,7 @@ export class CompraPassagem extends Component {
       const position = small ? "left" : "right";
       return (
         <div className="sidebar-volta">
-          <IconButtonSvg
-            icon={small ? exchangeXs : exchange}
-            tooltip="Inverter passagem"
-            tooltipPosition={position} />
-          <IconButtonSvg
-            icon={small ? eraseXs : erase}
-            tooltip="Limpar poltronas"
-            tooltipPosition={position}
-            onClick={this.handleLimpaVolta} />
-          <IconButtonSvg
-            icon={small ? trashXs : trash}
-            tooltip="Excluir volta"
-            tooltipPosition="right"
-            onClick={this.handleExcluiVolta} />
+          <MenuVolta small={small} />
         </div>
       );
     }
@@ -860,6 +885,7 @@ export class CompraPassagem extends Component {
           label={<HeaderTab isVolta={false} />}
           className="tab-ida"
         >
+          <FontAwesome name="arrow-circle-up" className="tab-arrow" />
           <SidebarIda small={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -945,7 +971,6 @@ export class CompraPassagem extends Component {
           </Tab>
         }
       </Tabs>
-
 
     return (
       <div className="comprar-passagem-container">
