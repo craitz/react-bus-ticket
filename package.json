@@ -18,7 +18,7 @@
             "color-accent": "#F44336",
             "input-text-highlight-color": "#F0AD4E",
             "animation-duration": "0.3s",
-            "snackbar-background-color": "rgba(0,0,0,.8)",
+            "snackbar-background-color": "rgba(0,0,0,.7)",
             "snackbar-border-radius": "4px"
         },
         "output": "src/styles/react-toolbox"

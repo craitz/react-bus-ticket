@@ -254,13 +254,13 @@ monospace;
         width: 44px;
         height: 117px;
         &:first-child {
-            margin-top: 10px;
+            margin-top: 12px;
         }
         button {
             color: rgba($materialPrimary, .8) !important;
-            @include sm {
-                color: white !important;
-            }
+            // @include sm {
+            //     color: white !important;
+            // }
         }
     }
     .tab-arrow {
@@ -272,20 +272,20 @@ monospace;
     }
     .sidebar-ida {
         right: 0;
-        @include sm {
-            top: 0;
-            left: 0;
-            height: 127px;
-        }
+        // @include sm {
+        //     top: 0;
+        //     left: 0;
+        //     height: 127px;
+        // }
     }
     .sidebar-volta {
         left: 0;
-        @include sm {
-            top: 0;
-            left: initial;
-            right: 0;
-            height: 127px;
-        }
+        // @include sm {
+        //     top: 0;
+        //     left: initial;
+        //     right: 0;
+        //     height: 127px;
+        // }
     }
     .tab-menu {
         position: absolute;
