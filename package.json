@@ -10,8 +10,8 @@
             "INPUT",
             "SNACKBAR",
             "TABS",
-            "MENU"
-
+            "MENU",
+            "DROPDOWN"
         ],
         "customProperties": {
             "color-primary": "#424242",
@@ -27,6 +27,7 @@
         "animate.css": "^3.5.2",
         "bootstrap": "^3.3.7",
         "firebase": "^4.1.3",
+        "material-design-icons": "^3.0.1",
         "moment": "^2.18.1",
         "muicss": "^0.9.20",
         "prop-types": "^15.5.10",

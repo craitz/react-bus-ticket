@@ -22,6 +22,7 @@ import './styles/react-toolbox/theme.css';
 import './styles/mui.css'
 import 'react-datetime/css/react-datetime.css';
 import 'react-select/dist/react-select.css';
+import 'material-design-icons/iconfont/material-icons.css';
 import './App.css';
 
 const runApp = () => {

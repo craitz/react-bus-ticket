@@ -65,6 +65,19 @@ export const dateToFirebase = (text) => {
   return momentDate.format('YYYYMMDD');
 }
 
+export const brStringToDate = (text) => {
+  const _moment = moment(text, 'DD/MM/YYYY');
+  return new Date(_moment.toISOString());
+}
+
+export const formatDate = (value) => {
+  const dia = value.getDate().toString().padStart(2, '0');
+  const mes = (value.getMonth() + 1).toString().padStart(2, '0');
+  const ano = value.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+}
+
+
 export const isObject = obj => (obj === Object(obj));
 
 export const timeToFirebase = (text) => text.replace(/:/gi, '');

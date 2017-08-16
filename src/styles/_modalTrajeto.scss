@@ -12,6 +12,11 @@ $arrowSize: 6px;
     clear: both;
 }
 
+// material date picker
+._3niLM {
+    z-index: 9999;
+}
+
 .modal-trajeto-container {
     .rdtDays {
         color: initial;
@@ -36,79 +41,29 @@ $arrowSize: 6px;
                 font-size: 2rem;
                 line-height: 51px;
                 .ida-volta {
-                    font-size: 2rem;
-                    line-height: 51px !important;
-                    cursor: pointer;
+                    span {
+                        font-size: 2.4rem;
+                    }
+                    margin-top: 7px;
                 }
-                .icon-ida-volta {}
             }
             .modal-body {
-                padding: 10px 40px 30px 40px !important;
-                .Select-control {
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
-                .Select-menu-outer {
-                    z-index: 101;
-                }
-                .input-date input {
-                    background-color: white !important;
-                    color: black !important;
-                    border-radius: 4px !important;
-                    border-top-left-radius: 0 !important;
-                    border-bottom-left-radius: 0 !important;
-                    z-index: 100;
-                }
-                .input-group-addon {
-                    border-top-left-radius: 6px;
-                    border-bottom-left-radius: 6px;
-                    &.addon-blue span {
-                        color: $busOrange;
-                    }
-                    &.addon-green span {
-                        color: $googleGreen;
-                    }
-                    &.addon-red span {
-                        color: $googleRed;
-                    }
-                }
-                .rdtPicker {
-                    margin-top: 35px;
-                    left: -37px;
-                }
-                .col-ida {
+                padding: 10px 40px 30px 30px !important;
+                .col-ida,
+                .col-volta {
                     padding-right: 15px;
                 }
-                .col-volta {
-                    padding-left: 15px;
+                // dropdown li
+                ._2_qrE>* {
+                    cursor: pointer !important;
+                    &:hover {
+                        background-color: rgba(black, .05);
+                    }
                 }
-                .col-ida-com-volta {}
-                .col-volta-com-volta {}
-                .has-error {
-                    .Select-control {
-                        border: 1px solid $colorHasError;
-                        .Select-arrow {
-                            border-color: $colorHasError rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)
-                        }
-                        .Select-value-label {
-                            color: $colorHasError;
-                        }
-                    }
-                    .bloco-ajuda {
-                        margin-top: 7px;
-                        position: relative;
-                        .label {
-                            @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
-                            font-size: 1.1rem;
-                            background-color: $colorHasError;
-                            color: white;
-                            padding: 5px 10px 5px 10px;
-                            border-radius: 3px;
-                            &::before {
-                                @include arrowUp;
-                            }
-                        }
-                    }
+                // dropdown selected
+                ._2u-08 {
+                    color: #F0AD4E !important;
+                    font-weight: bold;
                 }
             }
             .modal-footer {
@@ -138,3 +93,22 @@ $arrowSize: 6px;
         }
     }
 }
+
+// .sliding-middle-out {
+//     // display: inline-block;
+//     position: relative;
+//     padding-bottom: 3px;
+// }
+// .sliding-middle-out:after {
+//     content: '';
+//     display: block;
+//     margin: auto;
+//     height: 3px;
+//     width: 0px;
+//     background: transparent;
+//     transition: width .5s ease, background-color .5s ease;
+// }
+// .sliding-middle-out:focus:after {
+//     width: 100%;
+//     background: blue;
+// }

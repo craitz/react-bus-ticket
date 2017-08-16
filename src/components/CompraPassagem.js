@@ -657,7 +657,8 @@ export class CompraPassagem extends Component {
         <div className="text-right">
           <div className="tab-row">
             <span>{isVolta ? strDestino : strOrigem}</span>
-            <FontAwesome name="location-arrow fa-fw" className="text-after-icon" />
+            <i className="material-icons text-after-icon">my_location</i>
+            {/*<FontAwesome name="location-arrow fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{isVolta ? strOrigem : strDestino}</span>
@@ -719,52 +720,95 @@ export class CompraPassagem extends Component {
       const poltronasFormatted = strPoltronas.length > 0 ? utils.sortPoltronas(strPoltronas) : '';
 
       const trajetoIda = (
-        <Jumbotron className="jumbo-info">
+        <Jumbotron className="jumbo-info ida">
           <div className="tab-row">
-            <FontAwesome name="location-arrow fa-fw" />
-            <span className="text-after-icon">{isVolta ? strDestino : strOrigem}</span>
+            {/*<FontAwesome name="location-arrow fa-fw" />*/}
+            <i className="material-icons">my_location</i>
+            <span>{isVolta ? strDestino : strOrigem}</span>
           </div>
           <div className="tab-row">
-            <FontAwesome name="map-marker fa-fw" />
-            <span className="text-after-icon">{isVolta ? strOrigem : strDestino}</span>
+            {/*<FontAwesome name="map-marker fa-fw" />*/}
+            <i className="material-icons">place</i>
+            <span>{isVolta ? strOrigem : strDestino}</span>
           </div>
           <div className="tab-row">
-            <FontAwesome name="calendar fa-fw" />
-            <span className="text-after-icon">{isVolta ? strDataVolta : strDataIda}</span>
+            <i className="material-icons">today</i>
+            {/*<FontAwesome name="calendar fa-fw" />*/}
+            <span>{isVolta ? strDataVolta : strDataIda}</span>
           </div>
           <div className="tab-row">
-            <FontAwesome name="clock-o fa-fw" />
-            <span className="text-after-icon">{horarioFormatted}</span>
+            <i className="material-icons">alarm</i>
+            {/*<FontAwesome name="clock-o fa-fw" />*/}
+            <span>{horarioFormatted}</span>
           </div>
           <div className="tab-row">
-            <FontAwesome name="bookmark fa-fw" />
-            <span className="text-after-icon">{poltronasFormatted}</span>
+            <i className="material-icons">airline_seat_recline_extra</i>
+            {/*<FontAwesome name="bookmark fa-fw" />*/}
+            <span>{poltronasFormatted}</span>
           </div>
+          <IconMenu
+            icon="more_vert"
+            position="topRight"
+            menuRipple
+            className="menu-ida"
+          >
+            <MenuItem
+              value='limpar-poltronas'
+              icon="layers_clear"
+              caption="Limpar poltronas"
+              onClick={this.handleLimpaIda}
+            />
+          </IconMenu>
         </Jumbotron>
       );
 
       const trajetoVolta = (
-        <Jumbotron className="jumbo-info text-right">
+        <Jumbotron className="jumbo-info volta">
           <div className="tab-row">
             <span>{isVolta ? strDestino : strOrigem}</span>
-            <FontAwesome name="location-arrow fa-fw" className="text-after-icon" />
+            <i className="material-icons">place</i>
+            {/*<FontAwesome name="location-arrow fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{isVolta ? strOrigem : strDestino}</span>
-            <FontAwesome name="map-marker fa-fw" className="text-after-icon" />
+            <i className="material-icons">my_location</i>
+            {/*<FontAwesome name="map-marker fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{isVolta ? strDataVolta : strDataIda}</span>
-            <FontAwesome name="calendar fa-fw" className="text-after-icon" />
+            <i className="material-icons">event</i>
+            {/*<FontAwesome name="calendar fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{horarioFormatted}</span>
-            <FontAwesome name="clock-o fa-fw" className="text-after-icon" />
+            <i className="material-icons">alarm</i>
+            {/*<FontAwesome name="clock-o fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{poltronasFormatted}</span>
-            <FontAwesome name="bookmark fa-fw" className="text-after-icon" />
+            <i className="material-icons">airline_seat_recline_extra</i>
+            {/*<FontAwesome name="bookmark fa-fw" className="text-after-icon" />*/}
           </div>
+          <IconMenu
+            icon="more_vert"
+            position="topLeft"
+            menuRipple
+            className="menu-volta"
+          >
+            <MenuItem
+              value='limpar-poltronas'
+              icon="layers_clear"
+              caption="Limpar poltronas"
+              onClick={this.handleLimpaVolta}
+            />
+            <MenuItem
+              value='excluir-volta'
+              icon="delete_forever"
+              caption='Excluir volta'
+              onClick={this.handleExcluiVolta}
+            />
+
+          </IconMenu>
         </Jumbotron>
       );
 
@@ -791,7 +835,7 @@ export class CompraPassagem extends Component {
           primary
           className="button-editar mui--z2"
           onClick={this.handleChangeTrajeto}
-          icon={<FontAwesome name="pencil" />}
+          icon="mode_edit"
         />
       </TooltipOverlay>
 
@@ -810,69 +854,6 @@ export class CompraPassagem extends Component {
         <IconButton icon={<img src={icon} alt="" />} className={className} onClick={onClick} />
       </TooltipOverlay>
 
-    const MenuIda = ({ small }) =>
-      <IconMenu
-        icon={<FontAwesome name="ellipsis-v" />}
-        position={small ? "topRight" : "topLeft"}
-        menuRipple
-      >
-        {/*<MenuItem
-          value='inverter-passagem'
-          icon={<img src={exchangeXs} alt="" />}
-          caption='Inverter trajeto'
-        />*/}
-        <MenuItem
-          value='limpar-poltronas'
-          icon={<img src={eraseXs} alt="" />}
-          caption='Limpar poltronas'
-          onClick={this.handleLimpaIda}
-        />
-      </IconMenu>
-
-    const MenuVolta = ({ small }) =>
-      <IconMenu
-        icon={<FontAwesome name="ellipsis-v" />}
-        position={small ? "topLeft" : "topRight"}
-        menuRipple
-      >
-        {/*<MenuItem
-          value='inverter-passagem'
-          icon={<img src={exchangeXs} alt="" />}
-          caption='Inverter trajeto'
-        />*/}
-        <MenuItem
-          value='limpar-poltronas'
-          icon={<img src={eraseXs} alt="" />}
-          caption='Limpar poltronas'
-          onClick={this.handleLimpaVolta}
-        />
-        {/*<MenuDivider />*/}
-        <MenuItem
-          value='excluir-volta'
-          icon={<img src={trashXs} alt="" />}
-          caption='Excluir volta'
-          onClick={this.handleExcluiVolta}
-        />
-      </IconMenu>
-
-    const SidebarIda = ({ small }) => {
-      const position = small ? "right" : "left";
-      return (
-        <div className="sidebar-ida">
-          <MenuIda small={small} />
-        </div>
-      );
-    }
-
-    const SidebarVolta = ({ small }) => {
-      const position = small ? "left" : "right";
-      return (
-        <div className="sidebar-volta">
-          <MenuVolta small={small} />
-        </div>
-      );
-    }
-
     const TabsLarge = () =>
       <Tabs
         index={isIdaVolta ? activeTab : 0}
@@ -881,12 +862,7 @@ export class CompraPassagem extends Component {
         onChange={this.handleSelectTab}
         className="tab-horarios mui--z2 hidden-xs"
       >
-        <Tab
-          label="IDA"
-          //label={<HeaderTab isVolta={false} />}
-          className="tab-ida"
-        >
-          <SidebarIda small={true} />
+        <Tab label="IDA" className="tab-ida">
           <InfoPassagem isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -902,12 +878,7 @@ export class CompraPassagem extends Component {
           <ButtonSection />
         </Tab>
         {isIdaVolta &&
-          <Tab
-            label="VOLTA"
-            //label={<HeaderTab isVolta={true} />}
-            className="tab-volta"
-          >
-            <SidebarVolta small={true} />
+          <Tab label="VOLTA" className="tab-volta">
             <InfoPassagem isVolta={true} />
             <NoResultsAccordionVolta
               className="accordion-volta"
@@ -937,7 +908,7 @@ export class CompraPassagem extends Component {
           label="IDA"
           className="tab-ida-mini"
         >
-          <SidebarIda small={true} />
+          {/*<SidebarIda small={true} />*/}
           <InfoPassagem isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -957,7 +928,7 @@ export class CompraPassagem extends Component {
             label="VOLTA"
             className="tab-volta-mini"
           >
-            <SidebarVolta small={true} />
+            {/*<SidebarVolta small={true} />*/}
             <InfoPassagem isVolta={true} />
             <NoResultsAccordionVolta
               className="accordion-volta"

@@ -38,16 +38,20 @@
 }
 
 button {
-    font-family: "Roboto Condensed" !important;
+    // font-family: "Roboto Condensed" !important;
     // font-weight: bold !important;
     // color: rgba(white, .95) !important;
 }
 
 [data-react-toolbox="button"] {
-    font-size: 1.7rem;
+    // font-size: 1.7rem;
 }
 
 .spinner-button {
+    i {
+        margin-top: 10px;
+        margin-left: 2px;
+    }
     .with-spinner {
         position: relative;
         width: 56px;
@@ -55,7 +59,7 @@ button {
         .spinner-progress {
             position: absolute;
             top: -2px;
-            left: -2px;
+            left: -1px;
             svg circle {
                 stroke: rgba(white, .5);
                 stroke-width: 4;

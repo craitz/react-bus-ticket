@@ -14,11 +14,14 @@ import FontAwesome from 'react-fontawesome';
 import Button from 'react-toolbox/lib/button/Button';
 import * as loadingActions from '../actions/loadingDialog.actions'
 import SpinnerButton from "../shared/SpinnerButton";
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
+import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import IconButton from 'react-toolbox/lib/button/IconButton';
 
 const AddOn = ({ tooltip, icon, className }) =>
   <TooltipOverlay text={tooltip} position="top">
     <InputGroup.Addon className={className}>
-      <FontAwesome name={icon} />
+      <i className="material-icons">{icon}</i>
     </InputGroup.Addon>
   </TooltipOverlay>
 
@@ -37,10 +40,11 @@ const ErrorBlock = ({ message }) => {
   );
 }
 
-const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip }) =>
+const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip, onFocus }) =>
   <InputGroup>
     <AddOn tooltip={tooltip} icon={icon} className="addon-blue" />
     <Select
+      //className="sliding-middle-out"
       simpleValue
       searchable={true}
       clearable={false}
@@ -49,6 +53,7 @@ const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip }) =>
       value={value}
       options={list}
       onChange={onChange}
+      onFocus={onFocus}
       noResultsText="Nenhum resultado"
     />
   </InputGroup>
@@ -64,13 +69,57 @@ export class ModalTrajeto extends Component {
     this.handleDatetimeKeyDown = this.handleDatetimeKeyDown.bind(this);
     this.handleChangeDataIda = this.handleChangeDataIda.bind(this);
     this.handleChangeDataVolta = this.handleChangeDataVolta.bind(this);
+    this.handleFocusIda = this.handleFocusIda.bind(this);
+    this.handleFocusVolta = this.handleFocusVolta.bind(this);
+    this.handleFocusOrigem = this.handleFocusOrigem.bind(this);
+    this.handleFocusDestino = this.handleFocusDestino.bind(this);
     this.state = {
-      autenticando: false
+      autenticando: false,
+      origemActive: false,
+      destinoActive: false,
+      idaActive: false,
+      voltaActive: false
     };
-
   }
 
-  handleChangeDataIda(momentValue) {
+  handleFocusDestino() {
+    this.setState({
+      origemActive: false,
+      destinoActive: true,
+      idaActive: false,
+      voltaActive: false
+    });
+  }
+
+  handleFocusOrigem() {
+    this.setState({
+      origemActive: true,
+      destinoActive: false,
+      idaActive: false,
+      voltaActive: false
+    });
+  }
+
+  handleFocusIda() {
+    this.setState({
+      origemActive: false,
+      destinoActive: false,
+      idaActive: true,
+      voltaActive: false
+    });
+  }
+
+  handleFocusVolta() {
+    this.setState({
+      origemActive: false,
+      destinoActive: false,
+      idaActive: false,
+      voltaActive: true
+    });
+  }
+
+  handleChangeDataIda(value) {
+    const momentValue = moment(value);
     const { dispatch, data } = this.props;
     const isPristine = data.isPristine;
     const strData = momentValue.format('DD/MM/YYYY');
@@ -92,7 +141,8 @@ export class ModalTrajeto extends Component {
     }
   }
 
-  handleChangeDataVolta(momentValue) {
+  handleChangeDataVolta(value) {
+    const momentValue = moment(value);
     const { dispatch, dataVolta } = this.props;
     const isPristine = dataVolta.isPristine;
     const strData = momentValue.format('DD/MM/YYYY');
@@ -273,60 +323,102 @@ export class ModalTrajeto extends Component {
   render() {
     const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome, data, dataVolta } = this.props;
 
-    const getIcon = () => isIdaVolta ? 'exchange fa-fw' : 'long-arrow-right fa-fw';
+    const getIcon = () => isIdaVolta ? 'swap_horiz' : 'trending_flat';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
-    const yesterday = moment().subtract(1, 'day');
     const futureDay = moment().add(30, 'days');
     const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
+    const datetimeIda = utils.brStringToDate(data.value);
+    const datetimeVolta = utils.brStringToDate(dataVolta.value);
+
+
+    const yesterday = moment().subtract(1, 'day');
+
+    const txt = moment().format('DD/MM/YYYY');
+    const datetimeMin = utils.brStringToDate(txt);
+
+    const txtMax = futureDay.format('DD/MM/YYYY');
+    const datetimeMax = utils.brStringToDate(txtMax);
 
     return (
       <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited}>
         <Modal.Header>
           <span>Defina o trajeto</span>
           <TooltipOverlay text={getTooltip()} position="right">
-            <FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />
+            <IconButton className="pull-right ida-volta" icon={getIcon()} primary onClick={this.handleChangeIdaVolta} />
+            {/*<i className="material-icons pull-right ida-volta" onClick={this.handleChangeIdaVolta}>{getIcon()}</i>*/}
+            {/*<FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />*/}
           </TooltipOverlay>
         </Modal.Header>
         <form onSubmit={this.handleSubmit}>
           <Modal.Body>
-            <FormGroup controlId="origem" validationState={origem.validation}>
-              <SelectTrajeto
+            <FormGroup
+              className={this.state.origemActive ? "active form-trajeto-origem" : "form-trajeto-origem"}
+              controlId="origem"
+              validationState={origem.validation}
+            >
+              <Dropdown
+                auto
+                onChange={this.handleChangeOrigem}
+                source={cidades}
+                value={origem.value}
+                icon="my_location"
+                label="De"
+              />
+              {/*<SelectTrajeto
                 list={cidades}
                 value={origem.value}
                 placeholder="Escolha a origem"
                 onChange={this.handleChangeOrigem}
-                icon="location-arrow fa-fw"
+                icon="my_location"
                 tooltip="Origem"
-              />
-              <ErrorBlock message={origem.message} />
+                onFocus={this.handleFocusOrigem}
+              />*/}
             </FormGroup>
             <Row>
               <Col xs={12}>
-                <FormGroup controlId="destino" validationState={destino.validation}>
-                  <SelectTrajeto
+                <FormGroup
+                  className={this.state.destinoActive ? "active form-trajeto-destino" : "form-trajeto-destino"}
+                  controlId="destino"
+                  validationState={destino.validation}
+                >
+                  <Dropdown
+                    auto
+                    onChange={this.handleChangeDestino}
+                    source={cidades}
+                    value={destino.value}
+                    icon="place"
+                    label="Para"
+                  />
+                  {/*<SelectTrajeto
                     list={cidades}
                     value={destino.value}
                     placeholder="Escolha o destino"
                     onChange={this.handleChangeDestino}
-                    icon="map-marker fa-fw"
+                    icon="location_on"
                     tooltip="Destino"
-                  />
-                  {/*<ErrorBlock message={destino.message} />*/}
+                    onFocus={this.handleFocusDestino}
+                  />*/}
                 </FormGroup>
               </Col>
             </Row>
             <Row>
               <Col xs={12} className={isIdaVolta ? "col-ida-com-volta" : "col-ida"}>
-                <FormGroup controlId="data-ida" validationState={data.validation}>
-                  <InputGroup>
-                    <AddOn tooltip="Data de ida" icon="arrow-right fa-fw" className="addon-green" />
-                    <InputDate
-                      value={data.value}
-                      placeholder="Dia da ida"
-                      isValidDate={valid}
-                      onChange={this.handleChangeDataIda} />
-                  </InputGroup>
-                  {/*<ErrorBlock message={data.message} />*/}
+                <FormGroup
+                  className={this.state.idaActive ? "active form-date" : "form-date"}
+                  controlId="data-ida"
+                  validationState={data.validation}
+                >
+                  <DatePicker
+                    label='Ida'
+                    icon="today"
+                    locale="pt"
+                    onChange={this.handleChangeDataIda}
+                    value={datetimeIda}
+                    cancelLabel="Cancelar"
+                    inputFormat={(value) => utils.formatDate(value)}
+                    minDate={datetimeMin}
+                    maxDate={datetimeMax}
+                  />
                 </FormGroup>
               </Col>
             </Row>
@@ -334,16 +426,22 @@ export class ModalTrajeto extends Component {
             {isIdaVolta &&
               <Row>
                 <Col xs={12} className={isIdaVolta ? "col-volta-com-volta" : "col-volta"}>
-                  <FormGroup controlId="data-volta" validationState={dataVolta.validation}>
-                    <InputGroup>
-                      <AddOn tooltip="Data de volta" icon="arrow-left fa-fw" className="addon-red" />
-                      <InputDate
-                        value={dataVolta.value}
-                        placeholder="Dia da volta"
-                        isValidDate={valid}
-                        onChange={this.handleChangeDataVolta} />
-                    </InputGroup>
-                    <ErrorBlock message={dataVolta.message} />
+                  <FormGroup
+                    className={this.state.voltaActive ? "active form-date" : "form-date"}
+                    controlId="data-volta"
+                    validationState={dataVolta.validation}
+                  >
+                    <DatePicker
+                      label='Volta'
+                      icon="event"
+                      locale="pt"
+                      onChange={this.handleChangeDataVolta}
+                      value={datetimeVolta}
+                      cancelLabel="Cancelar"
+                      inputFormat={(value) => utils.formatDate(value)}
+                      minDate={datetimeMin}
+                      maxDate={datetimeMax}
+                    />
                   </FormGroup>
                 </Col>
               </Row>

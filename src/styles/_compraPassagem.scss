@@ -47,35 +47,36 @@ monospace;
                             display: inline-block;
                             color: rgba(black, .6);
                             width: 100px;
-                            top: 5px;
+                            top: 4px;
                             left: 30px;
                             margin-left: 10px;
                             font-size: 1.7rem;
                         }
                         .horario-icon {
-                            color: #F44336;
-                            margin-top: .5rem;
+                            margin-top: 8px;
+                            color: rgba($materialPrimary, .8);
                         }
                     }
                     .trigger-right {
                         font-size: 1.4rem;
                         letter-spacing: .2rem;
                         text-align: right;
-                        width: 360px;
+                        width: 260px;
                         position: absolute;
                         right: 10px;
                         height: 20px;
                         font-weight: normal;
-                        .poltronas-icon {
-                            color: #F6952D;
+                        .poltronas-text {
+                            position: absolute;
+                            left: 20px;
+                            top: 4px;
                         }
                         .progress {
                             width: 100px;
-                            display: inline-block;
                             height: 6px;
-                            margin-left: 10px;
-                            margin-top: 20px;
-                            margin-bottom: 0;
+                            position: absolute;
+                            left: 80px;
+                            top: 18px;
                             box-shadow: none;
                             border: 1px solid rgba(black, .2);
                         }
@@ -85,13 +86,17 @@ monospace;
                             display: none;
                         }
                         .icon-arrow {
-                            display: inline-block;
-                            margin-left: 4rem;
-                            // font-size: 1.8rem;
-                            color: rgba(black, .6) !important;
+                            position: absolute;
+                            top: 2px;
+                            right: 0;
+                            color: rgba($materialPrimary, .8);
                         }
                         .icon-passenger {
                             color: rgba($materialPrimary, .8);
+                            font-size: 2rem;
+                            position: absolute;
+                            left: -10px;
+                            top: 11px;
                         }
                     }
                     &[aria-expanded="true"] {
@@ -107,14 +112,18 @@ monospace;
                             display: inline-block;
                         }
                         .icon-remove {
-                            color: $googleRed !important;
-                            margin-left: 20px;
+                            // color: $googleRed !important;
+                            color: rgba($materialPrimary, .8);
+                            position: absolute;
+                            top: 2px;
+                            right: 40px;
                         }
                         .icon-save {
-                            color: $googleGreen;
-                        }
-                        .icon-arrow {
-                            line-height: 42px;
+                            color: rgba($materialPrimary, .8);
+                            // color: $googleGreen;
+                            position: absolute;
+                            top: 2px;
+                            right: 70px;
                         }
                         .icon-spin {
                             animation: rotation 10s infinite;
@@ -225,6 +234,58 @@ monospace;
         margin-bottom: 6px;
         background-color: white;
         padding: 0 5px 5px 5px;
+        &.ida {
+            position: relative;
+            .menu-ida {
+                position: absolute;
+                right: 0;
+                top: -8px;
+            }
+            .tab-row {
+                position: relative;
+                width: 100%;
+                height: 20px;
+                i {
+                    font-size: 1.7rem;
+                    position: absolute;
+                    top: 2px;
+                    left: 0;
+                    color: rgba($materialPrimary, .8) !important;
+                }
+                span {
+                    position: absolute;
+                    top: 0;
+                    left: 30px;
+                    color: rgba($materialPrimary, .8) !important;
+                }
+            }
+        }
+        &.volta {
+            position: relative;
+            .menu-volta {
+                position: absolute;
+                left: 0;
+                top: -8px;
+            }
+            .tab-row {
+                position: relative;
+                width: 100%;
+                height: 20px;
+                i {
+                    font-size: 1.7rem;
+                    position: absolute;
+                    top: 2px;
+                    right: 0;
+                    color: rgba($materialPrimary, .8) !important;
+                }
+                span {
+                    position: absolute;
+                    top: 0;
+                    right: 30px;
+                    color: rgba($materialPrimary, .8) !important;
+                }
+            }
+        }
     }
     .footer-section {
         border-radius: 0 0 4px 4px !important;
@@ -247,45 +308,12 @@ monospace;
             font-family: "Days One"
         }
     }
-    .sidebar-ida,
-    .sidebar-volta {
-        position: absolute;
-        top: 38px;
-        width: 44px;
-        height: 117px;
-        &:first-child {
-            margin-top: 12px;
-        }
-        button {
-            color: rgba($materialPrimary, .8) !important;
-            // @include sm {
-            //     color: white !important;
-            // }
-        }
-    }
     .tab-arrow {
         position: absolute;
         font-size: 3rem;
         top: 100px;
         color: rgba(white, .05);
         left: 10px;
-    }
-    .sidebar-ida {
-        right: 0;
-        // @include sm {
-        //     top: 0;
-        //     left: 0;
-        //     height: 127px;
-        // }
-    }
-    .sidebar-volta {
-        left: 0;
-        // @include sm {
-        //     top: 0;
-        //     left: initial;
-        //     right: 0;
-        //     height: 127px;
-        // }
     }
     .tab-menu {
         position: absolute;
@@ -301,10 +329,6 @@ monospace;
         border-top-left-radius: 4px !important;
         border-top-right-radius: 4px !important;
         background-color: $materialPrimary;
-        .tab-row {
-            margin-bottom: 6px;
-            text-transform: none;
-        }
     }
     .panel-group {
         margin-bottom: 0;

@@ -266,7 +266,7 @@ export class Login extends Component {
                 <Input
                   type='email'
                   label='E-mail'
-                  icon={<FontAwesome name="envelope" />}
+                  icon="email"
                   value={email.text}
                   autoComplete="off"
                   error={email.message}
@@ -275,7 +275,7 @@ export class Login extends Component {
                 <Input
                   type='password'
                   label='Senha'
-                  icon={<FontAwesome name="key" />}
+                  icon="vpn_key"
                   value={senha.text}
                   autoComplete="off"
                   error={senha.message}
@@ -287,9 +287,10 @@ export class Login extends Component {
               </Row>
               <SpinnerButton
                 className="btn-login mui--z2"
-                icon="unlock"
+                icon="forward"
                 spinning={this.state.autenticando}
                 onClick={this.handleLogin}
+              //onClick={this.handleGenerateFakeData}
               />
             </form>
           </DivAnimated>

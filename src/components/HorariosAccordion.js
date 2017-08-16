@@ -10,41 +10,12 @@ import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import FontAwesome from 'react-fontawesome';
 import Spinner from 'react-spinner-children';
+import IconButton from 'react-toolbox/lib/button/IconButton';
 
 class HorariosAccordion extends Component {
   constructor(props) {
     super(props);
     this.onClickPanel = this.onClickPanel.bind(this);
-  }
-
-  getLotacao(ocupadas, size) {
-    const breakpoint = size / 3;
-    if (ocupadas === 0) {
-      return {
-        status: 'info',
-        icon: 'battery-0'
-      }
-    } else if (ocupadas < breakpoint) {
-      return {
-        status: 'success',
-        icon: 'battery-1'
-      }
-    } else if (ocupadas < breakpoint * 2) {
-      return {
-        status: '',
-        icon: 'battery-2'
-      }
-    } else if (ocupadas < breakpoint * 3) {
-      return {
-        status: 'warning',
-        icon: 'battery-3'
-      }
-    } else {
-      return {
-        status: 'danger',
-        icon: 'battery-4'
-      }
-    }
   }
 
   onClickPanel(selected, event, isDisabled) {
@@ -107,33 +78,32 @@ class HorariosAccordion extends Component {
           header={
             <div>
               <span className="trigger-left">
-                <img
-                  src={clockLogo}
-                  height="24"
-                  alt=""
-                  className="horario-icon"
-                />
+                <TooltipOverlay text="Horário" position="top">
+                  <i className="material-icons horario-icon">alarm</i>
+                </TooltipOverlay>
                 {(strHorario.length > 0) && elemHorario}
               </span>
               <span className="trigger-right">
+                <TooltipOverlay text="Ocupação" position="top">
+                  <i className="material-icons icon-passenger hidden-xs">airline_seat_recline_extra</i>
+                </TooltipOverlay>
                 <TooltipOverlay text="Adicionar poltronas selecionadas" position="top">
-                  <FontAwesome
-                    name="check"
-                    className="icon-save icon-after-text"
+                  <IconButton
+                    className="icon-save"
+                    icon="playlist_add"
+                    primary
                     onClick={(event) => onSaveSeats(event, isVolta, horario)}
                   />
                 </TooltipOverlay>
                 <TooltipOverlay text="Limpar seleção" position="top">
-                  <FontAwesome
-                    name="times"
+                  <IconButton
                     className="icon-remove"
+                    icon="clear_all"
+                    primary
                     onClick={() => onResetSeats(isVolta, horario)}
                   />
                 </TooltipOverlay>
-                <TooltipOverlay text="Ocupação" position="top">
-                  <FontAwesome name="bookmark" className="icon-passenger hidden-xs" />
-                </TooltipOverlay>
-                <span className="text-after-icon poltronas-text hidden-xs">
+                <span className="text poltronas-text hidden-xs">
                   {strLotacao}
                 </span>
                 <ProgressBar
@@ -141,7 +111,10 @@ class HorariosAccordion extends Component {
                   bsStyle="warning"
                   now={percentLotacao}
                 />
-                <FontAwesome name={isActive ? "chevron-up" : "chevron-down"} className="icon-arrow" />
+                <IconButton
+                  className="icon-arrow"
+                  icon={isActive ? "arrow_drop_up" : "arrow_drop_down"}
+                  primary />
               </span>
             </div>}>
           {

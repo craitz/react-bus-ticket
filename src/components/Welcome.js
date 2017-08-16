@@ -15,9 +15,8 @@ export const ButtonComprar = ({ handleComprar }) =>
     accent
     onClick={handleComprar}
     className="welcome-button mui--z2"
-  >
-    <FontAwesome name="shopping-cart bt-mui-icon" />
-  </Button>
+    icon="shopping_cart"
+  />
 
 class Welcome extends Component {
   constructor(props) {
