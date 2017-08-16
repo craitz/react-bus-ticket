@@ -1,51 +1,37 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import * as actions from '../actions/compraPassagem.actions';
-import { globals } from '../shared/Globals';
-import { withAuth } from '../shared/hoc';
-import { firebaseHelper } from '../shared/FirebaseHelper';
-import * as utils from '../shared/Utils';
-import FontAwesome from 'react-fontawesome';
-import DivAnimated from '../shared/DivAnimated'
+import { withRouter } from 'react-router-dom'
 import moment from 'moment';
-import { PageHeader } from '../shared/PageHeader';
-import * as loadingActions from '../actions/loadingDialog.actions'
-import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
-import * as snackbarActions from '../actions/snackbar.actions'
-import Snackbar from '../shared/Snackbar';
-import HorariosAccordion from './HorariosAccordion';
-import { withNoResults } from '../shared/hoc';
-import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
-import IconButton from 'react-toolbox/lib/button/IconButton';
 import Tab from 'react-toolbox/lib/tabs/Tab';
 import Tabs from 'react-toolbox/lib/tabs/Tabs';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
-import MenuDivider from 'react-toolbox/lib/menu/MenuDivider';
 import IconMenu from 'react-toolbox/lib/menu/IconMenu';
 import { Jumbotron, Row } from 'react-bootstrap';
-import ButtonMenu from '../shared/ButtonMenu';
+import { globals } from '../shared/Globals';
+import { withAuth, withNoResults } from '../shared/hoc';
+import { firebaseHelper } from '../shared/FirebaseHelper';
+import { PageHeader } from '../shared/PageHeader';
+import DivAnimated from '../shared/DivAnimated'
+import Snackbar from '../shared/Snackbar';
+import TooltipOverlay from '../shared/TooltipOverlay';
 import SpinnerButton from "../shared/SpinnerButton";
-import exchange from '../styles/images/exchange.svg';
-import exchangeXs from '../styles/images/exchange-xs.svg';
-import erase from '../styles/images/erase.svg';
-import eraseXs from '../styles/images/erase-xs.svg';
-import trash from '../styles/images/trash.svg';
-import trashXs from '../styles/images/trash-xs.svg';
+import * as utils from '../shared/Utils';
+import * as actions from '../actions/compraPassagem.actions';
+import * as modalTrajetoActions from '../actions/modalTrajeto.actions'
+import * as snackbarActions from '../actions/snackbar.actions'
+import HorariosAccordion from './HorariosAccordion';
 
 export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;
-    this.handleReset = this.handleReset.bind(this);
     this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
     this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleClickSeat = this.handleClickSeat.bind(this);
     this.handleResetSeats = this.handleResetSeats.bind(this);
     this.handleSaveSeats = this.handleSaveSeats.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePesquisarPassagens = this.handlePesquisarPassagens.bind(this);
     this.handleChangeTrajeto = this.handleChangeTrajeto.bind(this);
     this.handleLimpaIda = this.handleLimpaIda.bind(this);
     this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
@@ -56,7 +42,7 @@ export class CompraPassagem extends Component {
     this.handleHome = this.handleHome.bind(this);
     this.handlePesquisa = this.handlePesquisa.bind(this);
     this.state = {
-      autenticando: false
+      salvando: false
     };
   }
 
@@ -163,8 +149,6 @@ export class CompraPassagem extends Component {
     const { dispatch, passagem, horarios, horariosBackup } = this.props;
     const { horario } = passagem;
     const horariosTemp = utils.deepCopy(horarios);
-
-    console.log('opa!!');
 
     dispatch(actions.setErroSalvandoIda(false));
     if (horario.length > 0) {
@@ -554,21 +538,20 @@ export class CompraPassagem extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { dispatch, passagem, passagemVolta, isIdaVolta, history } = this.props;
+    const { passagem, passagemVolta, isIdaVolta, history } = this.props;
 
     const showSpinner = () =>
       this.setState({
-        autenticando: true
+        salvando: true
       });
 
     const hideSpinner = () =>
       this.setState({
-        autenticando: false
+        salvando: false
       });
 
 
     showSpinner();
-    // dispatch(loadingActions.setLoading('Finalizando compra...'));
 
     if (this.formCanBeSaved()) {
       this.savePassagem(passagem)
@@ -578,7 +561,6 @@ export class CompraPassagem extends Component {
               .then((objVolta) => {
                 setTimeout(() => {
                   hideSpinner();
-                  // dispatch(loadingActions.setDone());
                   history.push({
                     pathname: `/passagem/${objIda.key}`,
                     state: {
@@ -594,8 +576,6 @@ export class CompraPassagem extends Component {
           } else {
             setTimeout(() => {
               hideSpinner();
-              // dispatch(loadingActions.setDone());
-              console.log('ida salva com sucesso!');
               history.push({
                 pathname: `/passagem/${objIda.key}`,
                 state: {
@@ -609,28 +589,10 @@ export class CompraPassagem extends Component {
         })
         .catch((error) => {
           hideSpinner();
-          // dispatch(loadingActions.setDone());
         });
     } else {
       hideSpinner();
-      // dispatch(loadingActions.setDone());
     }
-  }
-
-  handleReset(event) {
-    event.preventDefault();
-    this.reset();
-  }
-
-  reset() {
-    const { dispatch } = this.props;
-    dispatch(actions.resetFormPassagem());
-    this.initializeValues();
-  }
-
-  handlePesquisarPassagens(event) {
-    event.preventDefault();
-    this.props.history.push('/passagens');
   }
 
   render() {
@@ -647,73 +609,6 @@ export class CompraPassagem extends Component {
     const NoResultsAccordionVolta = withNoResults(HorariosAccordion, horariosVolta);
 
     const HeaderTab = ({ isVolta }) => {
-
-      const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
-      const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
-      const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
-      const poltronasFormatted = strPoltronas.length > 0 ? utils.sortPoltronas(strPoltronas) : '';
-
-      const trajetoIda = (
-        <div className="text-right">
-          <div className="tab-row">
-            <span>{isVolta ? strDestino : strOrigem}</span>
-            <i className="material-icons text-after-icon">my_location</i>
-            {/*<FontAwesome name="location-arrow fa-fw" className="text-after-icon" />*/}
-          </div>
-          <div className="tab-row">
-            <span>{isVolta ? strOrigem : strDestino}</span>
-            <FontAwesome name="map-marker fa-fw" className="text-after-icon" />
-          </div>
-          <div className="tab-row">
-            <span>{isVolta ? strDataVolta : strDataIda}</span>
-            <FontAwesome name="calendar fa-fw" className="text-after-icon" />
-          </div>
-          <div className="tab-row">
-            <span>{horarioFormatted}</span>
-            <FontAwesome name="clock-o fa-fw" className="text-after-icon" />
-          </div>
-          <div className="tab-row">
-            <span>{poltronasFormatted}</span>
-            <FontAwesome name="bookmark fa-fw" className="text-after-icon" />
-          </div>
-        </div>
-      );
-
-      const trajetoVolta = (
-        <div>
-          <div className="tab-row">
-            <FontAwesome name="location-arrow fa-fw" />
-            <span className="text-after-icon">{isVolta ? strDestino : strOrigem}</span>
-            {/*<FontAwesome name="long-arrow-right" className="text-after-icon" />*/}
-          </div>
-          <div className="tab-row">
-            <FontAwesome name="map-marker fa-fw" />
-            <span className="text-after-icon">{isVolta ? strOrigem : strDestino}</span>
-          </div>
-          <div className="tab-row">
-            <FontAwesome name="calendar fa-fw" />
-            <span className="text-after-icon">{isVolta ? strDataVolta : strDataIda}</span>
-          </div>
-          <div className="tab-row">
-            <FontAwesome name="clock-o fa-fw" />
-            <span className="text-after-icon">{horarioFormatted}</span>
-          </div>
-          <div className="tab-row">
-            <FontAwesome name="bookmark fa-fw" />
-            <span className="text-after-icon">{poltronasFormatted}</span>
-          </div>
-        </div>
-      );
-
-      return (
-        <section className="text-left">
-          {!isVolta && trajetoIda}
-          {isVolta && trajetoVolta}
-        </section>
-      );
-    }
-
-    const HeaderTabXs = ({ isVolta }) => {
       const strHorario = isVolta ? passagemVolta.horario : passagem.horario;
       const horarioFormatted = strHorario.length > 0 ? utils.firebaseToTime(strHorario) : '';
       const strPoltronas = isVolta ? passagemVolta.poltrona : passagem.poltrona;
@@ -722,28 +617,23 @@ export class CompraPassagem extends Component {
       const trajetoIda = (
         <Jumbotron className="jumbo-info ida">
           <div className="tab-row">
-            {/*<FontAwesome name="location-arrow fa-fw" />*/}
             <i className="material-icons">my_location</i>
             <span>{isVolta ? strDestino : strOrigem}</span>
           </div>
           <div className="tab-row">
-            {/*<FontAwesome name="map-marker fa-fw" />*/}
             <i className="material-icons">place</i>
             <span>{isVolta ? strOrigem : strDestino}</span>
           </div>
           <div className="tab-row">
             <i className="material-icons">today</i>
-            {/*<FontAwesome name="calendar fa-fw" />*/}
             <span>{isVolta ? strDataVolta : strDataIda}</span>
           </div>
           <div className="tab-row">
             <i className="material-icons">alarm</i>
-            {/*<FontAwesome name="clock-o fa-fw" />*/}
             <span>{horarioFormatted}</span>
           </div>
           <div className="tab-row">
             <i className="material-icons">airline_seat_recline_extra</i>
-            {/*<FontAwesome name="bookmark fa-fw" />*/}
             <span>{poltronasFormatted}</span>
           </div>
           <IconMenu
@@ -767,27 +657,22 @@ export class CompraPassagem extends Component {
           <div className="tab-row">
             <span>{isVolta ? strDestino : strOrigem}</span>
             <i className="material-icons">place</i>
-            {/*<FontAwesome name="location-arrow fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{isVolta ? strOrigem : strDestino}</span>
             <i className="material-icons">my_location</i>
-            {/*<FontAwesome name="map-marker fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{isVolta ? strDataVolta : strDataIda}</span>
             <i className="material-icons">event</i>
-            {/*<FontAwesome name="calendar fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{horarioFormatted}</span>
             <i className="material-icons">alarm</i>
-            {/*<FontAwesome name="clock-o fa-fw" className="text-after-icon" />*/}
           </div>
           <div className="tab-row">
             <span>{poltronasFormatted}</span>
             <i className="material-icons">airline_seat_recline_extra</i>
-            {/*<FontAwesome name="bookmark fa-fw" className="text-after-icon" />*/}
           </div>
           <IconMenu
             icon="more_vert"
@@ -825,7 +710,7 @@ export class CompraPassagem extends Component {
         className="button-finaliza mui--z2"
         onClick={this.handleSubmit}
         icon="check"
-        spinning={this.state.autenticando}
+        spinning={this.state.salvando}
       />
 
     const ButtonEditar = () =>
@@ -847,12 +732,7 @@ export class CompraPassagem extends Component {
       </Row>
 
     const InfoPassagem = ({ isVolta }) =>
-      <HeaderTabXs isVolta={isVolta} />
-
-    const IconButtonSvg = ({ icon, tooltip, tooltipPosition, className, onClick }) =>
-      <TooltipOverlay text={tooltip} position={tooltipPosition}>
-        <IconButton icon={<img src={icon} alt="" />} className={className} onClick={onClick} />
-      </TooltipOverlay>
+      <HeaderTab isVolta={isVolta} />
 
     const TabsLarge = () =>
       <Tabs
@@ -908,7 +788,6 @@ export class CompraPassagem extends Component {
           label="IDA"
           className="tab-ida-mini"
         >
-          {/*<SidebarIda small={true} />*/}
           <InfoPassagem isVolta={false} />
           <NoResultsAccordionIda
             className="accordion-ida"
@@ -928,7 +807,6 @@ export class CompraPassagem extends Component {
             label="VOLTA"
             className="tab-volta-mini"
           >
-            {/*<SidebarVolta small={true} />*/}
             <InfoPassagem isVolta={true} />
             <NoResultsAccordionVolta
               className="accordion-volta"
@@ -956,7 +834,7 @@ export class CompraPassagem extends Component {
         </PageHeader>
         <PageHeader
           title="Compre já!"
-          className="header-comprar hidden-sm hidden-md hidden-lg"
+          className="header-comprar visible-xs"
         >
           <ButtonEditar />
         </PageHeader>

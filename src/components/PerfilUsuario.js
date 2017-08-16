@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { withAuth } from '../shared/hoc';
-import { connect } from 'react-redux';
-import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import { PageHeader } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
 import { Row, Col, Jumbotron } from 'react-bootstrap';
-import { BaseField, withInput, withInputMask } from '../shared/FormFields';
 import FontAwesome from 'react-fontawesome';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as actions from '../actions/perfilUsuario.actions'
-import * as loadingActions from '../actions/loadingDialog.actions'
 import * as utils from '../shared/Utils';
-import TooltipOverlay from '../shared/TooltipOverlay';
-import Button from 'react-toolbox/lib/button/Button';
 import Input from 'react-toolbox/lib/input/Input';
 import VMasker from 'vanilla-masker';
 import * as snackbarActions from '../actions/snackbar.actions'
@@ -40,7 +36,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             <Input
               type='text'
               label='Nome*'
-              icon={<FontAwesome name="user" />}
+              icon="person"
               value={nome.text}
               autoComplete="off"
               error={nome.message}
@@ -53,7 +49,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             <Input
               type='text'
               label='CPF*'
-              icon={<FontAwesome name="id-card-o" />}
+              icon="chrome_reader_mode"
               value={cpf.text}
               autoComplete="off"
               error={cpf.message}
@@ -66,7 +62,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             <Input
               type='text'
               label='Data de nascimento*'
-              icon={<FontAwesome name="birthday-cake" />}
+              icon="cake"
               value={dataNascimento.text}
               autoComplete="off"
               error={dataNascimento.message}
@@ -79,7 +75,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             <Input
               type='text'
               label='Telefone*'
-              icon={<FontAwesome name="phone" />}
+              icon="phone"
               value={telefone.text}
               autoComplete="off"
               error={telefone.message}
@@ -92,7 +88,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
             <Input
               type='text'
               label='Celular*'
-              icon={<FontAwesome name="mobile" />}
+              icon="smartphone"
               value={celular.text}
               autoComplete="off"
               error={celular.message}

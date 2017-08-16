@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
+import store from '../store';
 import { withRouter } from 'react-router-dom'
 import { withAuth } from '../shared/hoc';
 import { Row, Col, Jumbotron } from 'react-bootstrap';
+import Button from 'react-toolbox/lib/button/Button';
 import DivAnimated from '../shared/DivAnimated'
 import { PageHeader } from '../shared/PageHeader';
-import store from '../store';
 import * as actions from '../actions/modalTrajeto.actions';
-import FontAwesome from 'react-fontawesome';
-import Button from 'react-toolbox/lib/button/Button';
-
-export const ButtonComprar = ({ handleComprar }) =>
-  <Button
-    floating
-    accent
-    onClick={handleComprar}
-    className="welcome-button mui--z2"
-    icon="shopping_cart"
-  />
 
 class Welcome extends Component {
   constructor(props) {
@@ -39,7 +29,6 @@ class Welcome extends Component {
     return (
       <div className="welcome-container">
         <PageHeader title="Seja bem-vindo !">
-          {/*<PageHeaderItem tooltip="Ver histórico de compras" glyph="history" onClick={this.handlePesquisarPassagens} />*/}
         </PageHeader>
         <DivAnimated className="info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={6} lgOffset={3}>
@@ -81,7 +70,13 @@ class Welcome extends Component {
                 <span className="bt-mui-text visible-lg">Comprar agora sua passagem !</span>
                 <span className="bt-mui-text hidden-lg">Comprar passagens</span>
               </Row>
-              <ButtonComprar handleComprar={this.handleComprarPassagem} />
+              <Button
+                floating
+                accent
+                onClick={this.handleComprarPassagem}
+                className="welcome-button mui--z2"
+                icon="shopping_cart"
+              />
             </Jumbotron>
           </Col>
         </DivAnimated>

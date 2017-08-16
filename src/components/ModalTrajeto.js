@@ -1,62 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Modal, FormGroup, InputGroup, Label } from 'react-bootstrap';
-import Select from 'react-select';
+import { Row, Col, Modal, FormGroup } from 'react-bootstrap';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
 import { withRouter } from 'react-router-dom'
-import InputDate from '../shared/InputDate';
 import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
-import FontAwesome from 'react-fontawesome';
-import Button from 'react-toolbox/lib/button/Button';
-import * as loadingActions from '../actions/loadingDialog.actions'
 import SpinnerButton from "../shared/SpinnerButton";
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
 import IconButton from 'react-toolbox/lib/button/IconButton';
-
-const AddOn = ({ tooltip, icon, className }) =>
-  <TooltipOverlay text={tooltip} position="top">
-    <InputGroup.Addon className={className}>
-      <i className="material-icons">{icon}</i>
-    </InputGroup.Addon>
-  </TooltipOverlay>
-
-const ErrorBlock = ({ message }) => {
-  if (message.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="bloco-ajuda">
-      <Label>
-        <FontAwesome name="exclamation" />
-        <span className="text-after-icon">{message}</span>
-      </Label>
-    </div>
-  );
-}
-
-const SelectTrajeto = ({ list, value, placeholder, onChange, icon, tooltip, onFocus }) =>
-  <InputGroup>
-    <AddOn tooltip={tooltip} icon={icon} className="addon-blue" />
-    <Select
-      //className="sliding-middle-out"
-      simpleValue
-      searchable={true}
-      clearable={false}
-      disabled={false}
-      placeholder={placeholder}
-      value={value}
-      options={list}
-      onChange={onChange}
-      onFocus={onFocus}
-      noResultsText="Nenhum resultado"
-    />
-  </InputGroup>
 
 export class ModalTrajeto extends Component {
   constructor(props) {
@@ -321,21 +276,18 @@ export class ModalTrajeto extends Component {
   };
 
   render() {
-    const { isVisible, origem, destino, cidades, isIdaVolta, isFromWelcome, data, dataVolta } = this.props;
+    const { isVisible, origem, destino, cidades, isIdaVolta, data, dataVolta } = this.props;
 
     const getIcon = () => isIdaVolta ? 'swap_horiz' : 'trending_flat';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
-    const futureDay = moment().add(30, 'days');
-    const valid = (current) => current.isAfter(yesterday) && current.isBefore(futureDay);
+
     const datetimeIda = utils.brStringToDate(data.value);
     const datetimeVolta = utils.brStringToDate(dataVolta.value);
-
-
-    const yesterday = moment().subtract(1, 'day');
 
     const txt = moment().format('DD/MM/YYYY');
     const datetimeMin = utils.brStringToDate(txt);
 
+    const futureDay = moment().add(30, 'days');
     const txtMax = futureDay.format('DD/MM/YYYY');
     const datetimeMax = utils.brStringToDate(txtMax);
 

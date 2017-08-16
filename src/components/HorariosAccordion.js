@@ -4,11 +4,7 @@ import { Panel, Accordion, ProgressBar } from 'react-bootstrap';
 import BusSelect from './BusSelect';
 import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
-import checkLogo from '../styles/images/check3.svg';
-import removeLogo from '../styles/images/remove.svg';
-import clockLogo from '../styles/images/clock2.svg';
 import TooltipOverlay from '../shared/TooltipOverlay';
-import FontAwesome from 'react-fontawesome';
 import Spinner from 'react-spinner-children';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 

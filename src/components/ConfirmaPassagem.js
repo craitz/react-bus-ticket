@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Jumbotron, Row, Col, Grid, Label } from 'react-bootstrap';
+import { Jumbotron, Row, Col, Grid } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { withAuth } from '../shared/hoc';
 import DivAnimated from '../shared/DivAnimated'
-import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import { PageHeader } from '../shared/PageHeader';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import Button from 'react-toolbox/lib/button/Button';
 import FontAwesome from 'react-fontawesome';
@@ -27,7 +27,7 @@ class ConfirmaPassagem extends Component {
   }
 
   render() {
-    const { novaPassagem, novaPassagemVolta, key, keyVolta } = this.props.location.state;
+    const { novaPassagem, novaPassagemVolta, key, keyVolta = null } = this.props.location.state;
 
     const ButtonContinuarComprando = () =>
       <TooltipOverlay text="Continuar comprando">
@@ -37,18 +37,6 @@ class ConfirmaPassagem extends Component {
           className="button-continuar-comprando"
           onClick={this.handleComprarPassagem}
           icon={<FontAwesome name="shopping-cart" />}
-        />
-      </TooltipOverlay>
-
-    const ButtonHome = () =>
-      <TooltipOverlay text="Ir para página inicial">
-        <Button
-          floating
-          accent
-          mini
-          className="button-home"
-          onClick={this.handleHome}
-          icon={<FontAwesome name="home" />}
         />
       </TooltipOverlay>
 
@@ -68,13 +56,10 @@ class ConfirmaPassagem extends Component {
                     <div className="localizador">
                       {key}
                     </div>
-                    {/*<div><strong>Nome:</strong> {novaPassagem.nome}</div>
-                  <div><strong>CPF:</strong> {novaPassagem.cpf}</div>*/}
                     <div className="detalhes text-left">
                       <Row>
                         <Col sm={6}>
                           <Jumbotron className="jumbo-ida">
-                            {/*<div className="header" />*/}
                             <div className="body text-right">
                               <div>
                                 <span>{novaPassagem.origem}</span>
@@ -97,35 +82,32 @@ class ConfirmaPassagem extends Component {
                                 <FontAwesome name="bookmark fa-fw icon-after-text" />
                               </div>
                             </div>
-                            {/*<div className="footer" />*/}
                           </Jumbotron>
                         </Col>
                         <Col sm={6}>
                           <Jumbotron className="jumbo-volta">
-                            {/*<div className="header" />*/}
                             <div className="body">
                               <div>
                                 <FontAwesome name="location-arrow fa-fw" />
-                                <span className="text-after-icon">{novaPassagem.origem}</span>
+                                <span className="text-after-icon">{novaPassagemVolta.origem}</span>
                               </div>
                               <div>
                                 <FontAwesome name="map-marker fa-fw" />
-                                <span className="text-after-icon">{novaPassagem.destino}</span>
+                                <span className="text-after-icon">{novaPassagemVolta.destino}</span>
                               </div>
                               <div>
                                 <FontAwesome name="calendar fa-fw" />
-                                <span className="text-after-icon">{novaPassagem.data}</span>
+                                <span className="text-after-icon">{novaPassagemVolta.data}</span>
                               </div>
                               <div>
                                 <FontAwesome name="clock-o fa-fw" />
-                                <span className="text-after-icon">{novaPassagem.horario}</span>
+                                <span className="text-after-icon">{novaPassagemVolta.horario}</span>
                               </div>
                               <div>
                                 <FontAwesome name="bookmark fa-fw" />
-                                <span className="text-after-icon">{novaPassagem.poltrona}</span>
+                                <span className="text-after-icon">{novaPassagemVolta.poltrona}</span>
                               </div>
                             </div>
-                            {/*<div className="footer" />*/}
                           </Jumbotron>
                         </Col>
                       </Row>

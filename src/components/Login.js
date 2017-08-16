@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Redirect } from 'react-router';
-import { FormControl, FormGroup, Row, InputGroup, Glyphicon, HelpBlock } from 'react-bootstrap';
-import { ValidationStatus, LoginFields, SavingStatus } from '../shared/Utils';
-import * as actions from '../actions/login.actions';
-import { firebaseHelper } from '../shared/FirebaseHelper';
-import FontAwesome from 'react-fontawesome';
-import Button from 'react-toolbox/lib/button/Button';
-import DivAnimated from '../shared/DivAnimated';
-import { PageHeader } from '../shared/PageHeader';
-import * as loadingActions from '../actions/loadingDialog.actions'
-import { globals } from '../shared/Globals';
-import * as compraPassagemActions from '../actions/compraPassagem.actions'
-import Input from 'react-toolbox/lib/input/Input';
-import * as utils from '../shared/Utils';
+import { Row } from 'react-bootstrap';
 import moment from 'moment';
+import Input from 'react-toolbox/lib/input/Input';
+import { globals } from '../shared/Globals';
+import { ValidationStatus, LoginFields } from '../shared/Utils';
+import { firebaseHelper } from '../shared/FirebaseHelper';
+import DivAnimated from '../shared/DivAnimated';
 import SpinnerButton from "../shared/SpinnerButton";
+import * as actions from '../actions/login.actions';
+import * as compraPassagemActions from '../actions/compraPassagem.actions'
+import * as utils from '../shared/Utils';
 
 const fakeDataOptions = {
   days: 5,
@@ -287,7 +283,7 @@ export class Login extends Component {
               </Row>
               <SpinnerButton
                 className="btn-login mui--z2"
-                icon="forward"
+                icon="directions_run"
                 spinning={this.state.autenticando}
                 onClick={this.handleLogin}
               //onClick={this.handleGenerateFakeData}
