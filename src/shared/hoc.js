@@ -41,7 +41,7 @@ export const withSpinner = (WrappedComponent) => {
       <ProgressBar
         type="circular"
         mode="indeterminate"
-        value={100}
+//        value={100}
         className="spinner-progress"
       />
     </div>

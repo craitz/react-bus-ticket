@@ -7,7 +7,9 @@
 .App {
     .navbar.nav-app {
         background: $colorNavbarPrincipal;
-        background: rgba(white, .15);
+        @include sm {
+            background: rgba(white, .15);
+        }
         text-align: left;
         margin-bottom: 0;
         border: none;

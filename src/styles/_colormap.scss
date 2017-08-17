@@ -13,19 +13,20 @@ $lilas: #7C1ACC;
 // $materialPrimary: #3f51b5;
 $materialPrimary: #424242;
 $materialPrimaryLight: lighten($materialPrimary, 15%);
+$materialPrimaryDark: #212121;
 // $materialAccent: #FF4081;
 $materialAccent: #F44336;
-$materialPrimaryDark: #303F9F;
+// $materialPrimaryDark: #303F9F;
 $colorHasError: rgb(231, 29, 54);
 $fontPadrao: "Days One";
 // MAIN NAVBAR
 // $colorNavbarPrincipal: #140866;
-$colorNavbarPrincipal: black;
+$colorNavbarPrincipal: $materialPrimaryDark;
 $brandNavbarPrincipal: $busOrange;
 $textNavbarPrincipal: rgba(white, .9);
 // PAGE HEADER
 // $colorNavbarHeader: #1B0088;
-$colorNavbarHeader: #212121;
+$colorNavbarHeader: $materialPrimary;
 $textNavbarHeader: rgba(white, .9);
 $fontNavbarHeader: $fontPadrao;
 $sizeFontNavbarHeader: 5rem;

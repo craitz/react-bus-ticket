@@ -13,15 +13,25 @@ import Input from 'react-toolbox/lib/input/Input';
 import VMasker from 'vanilla-masker';
 import * as snackbarActions from '../actions/snackbar.actions'
 import Snackbar from '../shared/Snackbar';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import Button from 'react-toolbox/lib/button/Button';
 import SpinnerButton from "../shared/SpinnerButton";
 // import PropTypes from 'prop-types';
 
 const ButtonAtualizar = ({ spinning }) =>
-  <SpinnerButton
+  // <SpinnerButton
+  //   type="submit"
+  //   className="btn-salvar mui--z2"
+  //   icon="check"
+  //   spinning={spinning}
+  // />
+  <Button
+    floating
+    accent
     type="submit"
     className="btn-salvar mui--z2"
     icon="check"
-    spinning={spinning}
+    disabled={spinning}
   />
 
 const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNascimento,
@@ -98,6 +108,10 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
         </Row>
       </Row>
       <Row className="footer-section">
+        {
+          spinning &&
+          <ProgressBar className="footer-progress" mode="indeterminate" />
+        }
         <span>Salvar alterações</span>
       </Row>
       <ButtonAtualizar spinning={spinning} />

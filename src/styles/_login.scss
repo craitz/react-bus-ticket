@@ -1,6 +1,5 @@
 .login-container {
     height: calc(100% - 150px) !important;
-    $boxWidth: 320px;
     $boxBgColor: rgba(white, 1);
     $headerHeight: 40px;
     $headerTitleWidth: 220px;
@@ -10,13 +9,20 @@
     $headerIconWidth: 85px;
     $headerIconFontSize: 2.5rem;
     $inputBorderColor: rgba(255, 255, 255, .7);
-    @include centralizeContent();
+    padding: 50px 0 0 calc(50% - 150px);
+    @include xs {
+        padding: 0;
+        @include centralizeContent();
+    }
     .login-box {
         // opacity: .9;
         text-align: left;
         position: relative;
         padding: 0;
-        width: $boxWidth;
+        width: 300px;
+        @include xs {
+            width: 360px !important;
+        }
         border: none;
         background-color: $boxBgColor;
         border-radius: 4px 4px 20px 30px;
@@ -36,13 +42,18 @@
                 padding: 40px;
             }
             .main-section {
-                padding: 40px;
+                padding: 30px 40px 30px 30px;
+                @include xs {
+                    padding: 40px 50px 40px 40px;
+                }
             }
             .footer-section {
+                @include loadingProgress;
                 padding: 0 0 0 40px;
                 background-color: $materialPrimary;
                 height: 60px;
                 border-radius: 0 0 4px 4px;
+                position: relative;
                 span {
                     color: rgba(white, .8);
                     font-size: 2rem;
@@ -57,18 +68,15 @@
             }
         }
     }
-    &::after {
-        @include bkgImage('tree22.jpg');
-    }
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
 }
 
 @include sm {
     .login-container {
         &::after {
             @include bkgImage('tree22.jpg');
-        }
-        .login-box {
-            width: 360px;
         }
     }
 }

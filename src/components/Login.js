@@ -5,6 +5,8 @@ import { Redirect } from 'react-router';
 import { Row } from 'react-bootstrap';
 import moment from 'moment';
 import Input from 'react-toolbox/lib/input/Input';
+import Button from 'react-toolbox/lib/button/Button';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { globals } from '../shared/Globals';
 import { ValidationStatus, LoginFields } from '../shared/Utils';
 import { firebaseHelper } from '../shared/FirebaseHelper';
@@ -279,14 +281,27 @@ export class Login extends Component {
                 />
               </Row>
               <Row className="footer-section">
-                <span className="bt-mui-text">Login no sistema</span>
+                <span className="bt-mui-text hidden-xs">Login no sistema</span>
+                <span className="bt-mui-text visible-xs">Entrar</span>
+                {
+                  this.state.autenticando &&
+                  <ProgressBar className="footer-progress" mode="indeterminate" />
+                }
               </Row>
-              <SpinnerButton
+              {/*<SpinnerButton
                 className="btn-login mui--z2"
                 icon="directions_run"
                 spinning={this.state.autenticando}
                 onClick={this.handleLogin}
               //onClick={this.handleGenerateFakeData}
+              />*/}
+              <Button
+                floating
+                accent
+                className="btn-login mui--z2"
+                icon="directions_run"
+                disabled={this.state.autenticando}
+                onClick={this.handleLogin}
               />
             </form>
           </DivAnimated>

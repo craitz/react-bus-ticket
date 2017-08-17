@@ -28,7 +28,7 @@ class Welcome extends Component {
   render() {
     return (
       <div className="welcome-container">
-        <PageHeader title="Seja bem-vindo !">
+        <PageHeader title="Bem-vindo !">
         </PageHeader>
         <DivAnimated className="info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={6} lgOffset={3}>
@@ -67,8 +67,8 @@ class Welcome extends Component {
                 </article>
               </Row>
               <Row className="footer-section">
-                <span className="bt-mui-text visible-lg">Comprar agora sua passagem !</span>
-                <span className="bt-mui-text hidden-lg">Comprar passagens</span>
+                <span className="bt-mui-text hidden-xs">Comprar agora sua passagem !</span>
+                <span className="bt-mui-text visible-xs">Comprar</span>
               </Row>
               <Button
                 floating

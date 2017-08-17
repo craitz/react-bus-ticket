@@ -173,9 +173,9 @@ $fontColor: rgba($materialPrimary, 1);
             }
         }
     }
-    &::after {
-        @include bkgImage('tree22.jpg');
-    }
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
 }
 
 @include sm {

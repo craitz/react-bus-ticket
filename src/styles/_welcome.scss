@@ -56,9 +56,9 @@
             display: none;
         }
     }
-    &::after {
-        @include bkgImage('tree22.jpg');
-    }
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
 }
 
 @include sm {

@@ -14,6 +14,7 @@ import { firebaseHelper } from '../shared/FirebaseHelper';
 import { PageHeader } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
 import Snackbar from '../shared/Snackbar';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import SpinnerButton from "../shared/SpinnerButton";
 import * as utils from '../shared/Utils';
@@ -706,11 +707,19 @@ export class CompraPassagem extends Component {
     }
 
     const ButtonFinalizar = () =>
-      <SpinnerButton
+      // <SpinnerButton
+      //   className="button-finaliza mui--z2"
+      //   onClick={this.handleSubmit}
+      //   icon="check"
+      //   spinning={this.state.salvando}
+      // />
+      <Button
+        floating
+        accent
         className="button-finaliza mui--z2"
         onClick={this.handleSubmit}
         icon="check"
-        spinning={this.state.salvando}
+        disabled={this.state.salvando}
       />
 
     const ButtonEditar = () =>
@@ -726,6 +735,10 @@ export class CompraPassagem extends Component {
 
     const ButtonSection = () =>
       <Row className="footer-section">
+        {
+          this.state.salvando &&
+          <ProgressBar className="footer-progress" mode="indeterminate" />
+        }
         <span className="hidden-xs">Finalizar compra</span>
         <span className="visible-xs">Finalizar</span>
         <ButtonFinalizar />

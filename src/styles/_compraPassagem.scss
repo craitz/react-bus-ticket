@@ -209,9 +209,6 @@ monospace;
     margin-bottom: 30px;
     border-radius: 7px !important;
     position: relative;
-    @include sm {
-        // border-radius: 7px 7px 20px 20px !important;
-    }
     &.tab-xs {
         @include accordionMini {
             @include busSelectMini(rgba($googleGreen, .8));
@@ -288,6 +285,7 @@ monospace;
         }
     }
     .footer-section {
+        @include loadingProgress;
         border-radius: 0 0 4px 4px !important;
         background-color: $materialPrimary;
         height: 60px;
@@ -510,9 +508,9 @@ monospace;
             }
         }
     }
-    &::after {
-        @include bkgImage('tree22.jpg');
-    }
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
 }
 
 @include sm {

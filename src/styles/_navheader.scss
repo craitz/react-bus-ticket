@@ -4,8 +4,10 @@
         &::after {
             @include afterShadow;
         }
-        background-color: rgba($colorNavbarHeader, .8) !important;
-        background-color: rgba(white, .1) !important;
+        background-color: $colorNavbarHeader !important;
+        @include sm {
+            background-color: rgba(white, .1) !important;
+        }
         border-radius: 0;
         margin-bottom: 0;
         border: none;

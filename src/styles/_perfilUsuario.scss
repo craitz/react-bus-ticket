@@ -15,10 +15,12 @@
             padding: 40px;
         }
         .footer-section {
+            @include loadingProgress;
             padding: 0 0 0 40px;
             background-color: $materialPrimary;
             height: 60px;
             border-radius: 0 0 4px 4px;
+            position: relative;
             span {
                 color: rgba(white, .8);
                 font-size: 2rem;
@@ -32,9 +34,9 @@
             bottom: -20px;
         }
     }
-    &::after {
-        @include bkgImage('tree22.jpg');
-    }
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
 }
 
 @include sm {

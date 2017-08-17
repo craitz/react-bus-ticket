@@ -200,6 +200,18 @@
     transform: $value;
 }
 
+@mixin loadingProgress {
+    .footer-progress {
+        position: absolute;
+        left: 0;
+        top: -4px;
+        width: 100%;
+        [data-ref="value"] {
+            background-color: #F0AD4E !important;
+        }
+    }
+}
+
 @mixin bkgImage($file: 'login3.jpg') {
     content: "";
     // background: url(./styles/images/#{$file}) no-repeat center center;

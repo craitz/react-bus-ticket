@@ -200,36 +200,8 @@
     border: 1px solid rgba(128, 128, 128, 0.1);
     border-left: 10px solid rgba(128, 128, 128, 0.1); }
 
-.mui-btn {
-  position: relative; }
-  .mui-btn .bt-mui-icon {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: 15px; }
-  .mui-btn .bt-mui-text {
-    font-family: "Days One"; }
-  .mui-btn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 40px;
-    height: 100%; }
-
-.mui-btn--fab {
-  position: absolute;
-  top: 15px;
-  right: 0; }
-  .mui-btn--fab::after {
-    content: "";
-    width: 0;
-    height: 0; }
-
-.mui-dropdown .mui-btn::after {
-  content: "";
-  width: 0;
-  height: 0; }
+button:disabled {
+  display: none; }
 
 .spinner-button i {
   margin-top: 10px;
@@ -244,12 +216,9 @@
     top: -2px;
     left: -1px; }
     .spinner-button .with-spinner .spinner-progress svg circle {
-      stroke: rgba(255, 255, 255, 0.5);
+      stroke: #F0AD4E;
       stroke-width: 4;
       r: 16; }
-
-.spinner-button:disabled {
-  background-color: #F44336 !important; }
 
 .open-menu-opcoes {
   left: -176px;
@@ -265,8 +234,7 @@
   text-align: center; }
 
 .navheader-container .navbar {
-  background-color: rgba(33, 33, 33, 0.8) !important;
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: #424242 !important;
   border-radius: 0;
   margin-bottom: 0;
   border: none;
@@ -289,6 +257,9 @@
     box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
     will-change: opacity;
     transition: opacity 0.4s; }
+  @media screen and (min-width: 768px) {
+    .navheader-container .navbar {
+      background-color: rgba(255, 255, 255, 0.1) !important; } }
   .navheader-container .navbar .navheader-nav a {
     padding-left: 0 !important; }
   .navheader-container .navbar .navbar-nav {
@@ -330,12 +301,14 @@
   margin-left: 0 !important; }
 
 .App .navbar.nav-app {
-  background: black;
-  background: rgba(255, 255, 255, 0.15);
+  background: #212121;
   text-align: left;
   margin-bottom: 0;
   border: none;
   border-radius: 0; }
+  @media screen and (min-width: 768px) {
+    .App .navbar.nav-app {
+      background: rgba(255, 255, 255, 0.15); } }
   .App .navbar.nav-app .container {
     margin-left: 0;
     margin-right: 0;
@@ -411,10 +384,15 @@
 
 .modal-trajeto-container .modal-dialog {
   border-radius: 4px 4px 20px 20px;
-  width: 340px;
-  margin-left: calc(50% - 170px); }
+  width: 300px;
+  margin-left: calc(50% - 150px);
+  margin-top: 80px; }
   .modal-trajeto-container .modal-dialog input#data {
     background-color: white; }
+  @media screen and (min-width: 480px) {
+    .modal-trajeto-container .modal-dialog {
+      width: 360px;
+      margin-left: calc(50% - 180px); } }
   .modal-trajeto-container .modal-dialog .modal-content {
     background-color: white;
     border: none;
@@ -455,7 +433,15 @@
       text-align: left;
       padding: 0 0 0 40px;
       height: 60px !important;
-      border-radius: 0 0 4px 4px; }
+      border-radius: 0 0 4px 4px;
+      position: relative; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-footer .footer-progress {
+        position: absolute;
+        left: 0;
+        top: -4px;
+        width: 100%; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-footer .footer-progress [data-ref="value"] {
+          background-color: #F0AD4E !important; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-footer span {
         color: rgba(255, 255, 255, 0.8);
         font-size: 2rem;
@@ -791,6 +777,13 @@
             text-align: left;
             padding-left: 40px;
             margin: 12px -12px 0 -12px; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .footer-progress {
+              position: absolute;
+              left: 0;
+              top: -4px;
+              width: 100%; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .footer-progress [data-ref="value"] {
+                background-color: #F0AD4E !important; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .button-finaliza {
               position: absolute;
               z-index: 9;
@@ -821,19 +814,6 @@
             background-color: #424242; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group {
             margin-bottom: 0; }
-  .comprar-passagem-container::after {
-    content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
 
 @media screen and (min-width: 768px) {
   .comprar-passagem-container::after {
@@ -981,19 +961,6 @@
         right: 90px;
         bottom: -14px;
         background-color: #686868; }
-  .confirmacao-passagem::after {
-    content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
 
 @media screen and (min-width: 768px) {
   .confirmacao-passagem::after {
@@ -1078,32 +1045,50 @@
 
 .login-container {
   height: calc(100% - 150px) !important;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0;
-  padding-top: 0; }
+  padding: 50px 0 0 calc(50% - 150px); }
+  @media screen and (min-width: 480px) {
+    .login-container {
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0;
+      padding-top: 0; } }
   .login-container .login-box {
     text-align: left;
     position: relative;
     padding: 0;
-    width: 320px;
+    width: 300px;
     border: none;
     background-color: white;
     border-radius: 4px 4px 20px 30px; }
+    @media screen and (min-width: 480px) {
+      .login-container .login-box {
+        width: 360px !important; } }
     .login-container .login-box form .main-section,
     .login-container .login-box form .footer-section {
       margin: 0;
       padding: 40px; }
     .login-container .login-box form .main-section {
-      padding: 40px; }
+      padding: 30px 40px 30px 30px; }
+      @media screen and (min-width: 480px) {
+        .login-container .login-box form .main-section {
+          padding: 40px 50px 40px 40px; } }
     .login-container .login-box form .footer-section {
       padding: 0 0 0 40px;
       background-color: #424242;
       height: 60px;
-      border-radius: 0 0 4px 4px; }
+      border-radius: 0 0 4px 4px;
+      position: relative; }
+      .login-container .login-box form .footer-section .footer-progress {
+        position: absolute;
+        left: 0;
+        top: -4px;
+        width: 100%; }
+        .login-container .login-box form .footer-section .footer-progress [data-ref="value"] {
+          background-color: #F0AD4E !important; }
       .login-container .login-box form .footer-section span {
         color: rgba(255, 255, 255, 0.8);
         font-size: 2rem;
@@ -1113,19 +1098,6 @@
       position: absolute;
       right: 20px;
       bottom: -20px; }
-  .login-container::after {
-    content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
 
 @media screen and (min-width: 768px) {
   .login-container::after {
@@ -1140,9 +1112,7 @@
     bottom: 0;
     right: 0;
     width: 100%;
-    position: absolute; }
-  .login-container .login-box {
-    width: 360px; } }
+    position: absolute; } }
 
 .welcome-container {
   overflow: auto;
@@ -1190,19 +1160,6 @@
       margin-top: 0; }
     .welcome-container .info-container hr {
       display: none; }
-  .welcome-container::after {
-    content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
 
 @media screen and (min-width: 768px) {
   .welcome-container::after {
@@ -1240,7 +1197,15 @@
       padding: 0 0 0 40px;
       background-color: #424242;
       height: 60px;
-      border-radius: 0 0 4px 4px; }
+      border-radius: 0 0 4px 4px;
+      position: relative; }
+      .perfil-usuario-container .jumbotron .footer-section .footer-progress {
+        position: absolute;
+        left: 0;
+        top: -4px;
+        width: 100%; }
+        .perfil-usuario-container .jumbotron .footer-section .footer-progress [data-ref="value"] {
+          background-color: #F0AD4E !important; }
       .perfil-usuario-container .jumbotron .footer-section span {
         color: rgba(255, 255, 255, 0.8);
         font-size: 2rem;
@@ -1250,19 +1215,6 @@
       position: absolute;
       right: 20px;
       bottom: -20px; }
-  .perfil-usuario-container::after {
-    content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
 
 @media screen and (min-width: 768px) {
   .perfil-usuario-container::after {
@@ -1284,6 +1236,7 @@
 html {
   height: 100%; }
   html body {
+    background-color: #dedede;
     height: inherit;
     position: relative; }
     html body #root {

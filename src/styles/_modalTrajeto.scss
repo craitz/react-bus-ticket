@@ -26,8 +26,13 @@ $arrowSize: 6px;
         input#data {
             background-color: white;
         }
-        width: 340px;
-        margin-left: calc(50% - 170px); // SM
+        width: 300px;
+        margin-left: calc(50% - 150px);
+        margin-top: 80px;
+        @include xs {
+            width: 360px;
+            margin-left: calc(50% - 180px);
+        }
         .modal-content {
             background-color: white;
             border: none;
@@ -67,12 +72,14 @@ $arrowSize: 6px;
                 }
             }
             .modal-footer {
+                @include loadingProgress;
                 border-top: none;
                 background-color: $materialPrimary;
                 text-align: left;
                 padding: 0 0 0 40px;
                 height: 60px !important;
                 border-radius: 0 0 4px 4px;
+                position: relative;
                 span {
                     color: rgba(white, .8);
                     font-size: 2rem;

@@ -1,50 +1,7 @@
-.mui-btn {
-    position: relative;
-    .bt-mui-icon {
-        position: absolute;
-        top: calc(50% - 8px);
-        left: 15px;
-    }
-    .bt-mui-text {
-        font-family: $fontPadrao;
-        // margin-left: 30px;
-    }
-    &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(black, .1);
-        width: 40px;
-        height: 100%;
-    }
-}
-
-.mui-btn--fab {
-    position: absolute;
-    top: 15px;
-    right: 0;
-    &::after {
-        content: "";
-        width: 0;
-        height: 0;
-    }
-}
-
-.mui-dropdown .mui-btn::after {
-    content: "";
-    width: 0;
-    height: 0;
-}
-
 button {
-    // font-family: "Roboto Condensed" !important;
-    // font-weight: bold !important;
-    // color: rgba(white, .95) !important;
-}
-
-[data-react-toolbox="button"] {
-    // font-size: 1.7rem;
+    &:disabled {
+        display: none;
+    }
 }
 
 .spinner-button {
@@ -61,14 +18,11 @@ button {
             top: -2px;
             left: -1px;
             svg circle {
-                stroke: rgba(white, .5);
+                stroke: #F0AD4E;
                 stroke-width: 4;
                 r: 16;
             }
         }
-    }
-    &:disabled {
-        background-color: $materialAccent !important;
     }
 }
 

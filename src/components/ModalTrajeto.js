@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Modal, FormGroup } from 'react-bootstrap';
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
+import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
+import IconButton from 'react-toolbox/lib/button/IconButton';
+import Button from 'react-toolbox/lib/button/Button';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import * as actions from '../actions/modalTrajeto.actions';
 import * as utils from '../shared/Utils'
@@ -9,9 +14,6 @@ import * as moment from 'moment';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import SpinnerButton from "../shared/SpinnerButton";
-import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
-import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
-import IconButton from 'react-toolbox/lib/button/IconButton';
 
 export class ModalTrajeto extends Component {
   constructor(props) {
@@ -400,13 +402,26 @@ export class ModalTrajeto extends Component {
             }
           </Modal.Body>
           <Modal.Footer>
-            <span>Buscar passagens</span>
+            <span className="hidden-xs">Buscar passagens</span>
+            <span className="visible-xs">Buscar</span>
+            {
+              this.state.autenticando &&
+              <ProgressBar className="footer-progress" mode="indeterminate" />
+            }
           </Modal.Footer>
-          <SpinnerButton
+          {/*<SpinnerButton
             type="submit"
             className="mui--z2 btn-buscar"
             icon="search"
             spinning={this.state.autenticando}
+          />*/}
+          <Button
+            floating
+            accent
+            type="submit"
+            className="mui--z2 btn-buscar"
+            icon="search"
+            disabled={this.state.autenticando}
           />
         </form>
       </Modal >
