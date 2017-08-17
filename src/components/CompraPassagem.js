@@ -644,7 +644,7 @@ export class CompraPassagem extends Component {
           >
             <MenuItem
               value='limpar-poltronas'
-              icon="layers_clear"
+              icon="delete"
               caption="Limpar poltronas"
               onClick={this.handleLimpaIda}
             />
@@ -682,13 +682,13 @@ export class CompraPassagem extends Component {
           >
             <MenuItem
               value='limpar-poltronas'
-              icon="layers_clear"
+              icon="delete"
               caption="Limpar poltronas"
               onClick={this.handleLimpaVolta}
             />
             <MenuItem
               value='excluir-volta'
-              icon="delete_forever"
+              icon="event_busy"
               caption='Excluir volta'
               onClick={this.handleExcluiVolta}
             />

@@ -47,7 +47,12 @@ class ConfirmaPassagem extends Component {
         <DivAnimated className="form-centered">
           <Grid>
             <Row>
-              <Col md={10} mdOffset={1} lg={8} lgOffset={2} className="text-left">
+              <Col
+                md={keyVolta ? 10 : 8}
+                mdOffset={keyVolta ? 1 : 2}
+                lg={keyVolta ? 8 : 6}
+                lgOffset={keyVolta ? 2 : 3}
+                className="text-left">
                 <Jumbotron className="jumbo-detalhes mui--z2">
                   <Row className="main-body">
                     <div className="label-localizador">
@@ -58,58 +63,77 @@ class ConfirmaPassagem extends Component {
                     </div>
                     <div className="detalhes text-left">
                       <Row>
-                        <Col sm={6}>
+                        <Col sm={keyVolta ? 6 : 12}>
                           <Jumbotron className="jumbo-ida">
                             <div className="body text-right">
+                              <div className="side-ida">
+                                <span>IDA</span>
+                              </div>
                               <div>
                                 <span>{novaPassagem.origem}</span>
-                                <FontAwesome name="location-arrow fa-fw icon-after-text" />
+                                <i className="material-icons">my_location</i>
+                                {/*<FontAwesome name="location-arrow fa-fw icon-after-text" />*/}
                               </div>
                               <div>
                                 <span>{novaPassagem.destino}</span>
-                                <FontAwesome name="map-marker fa-fw icon-after-text" />
+                                <i className="material-icons">place</i>
+                                {/*<FontAwesome name="map-marker fa-fw icon-after-text" />*/}
                               </div>
                               <div>
                                 <span>{novaPassagem.data}</span>
-                                <FontAwesome name="calendar fa-fw icon-after-text" />
+                                <i className="material-icons">today</i>
+                                {/*<FontAwesome name="calendar fa-fw icon-after-text" />*/}
                               </div>
                               <div>
                                 <span>{novaPassagem.horario}</span>
-                                <FontAwesome name="clock-o fa-fw icon-after-text" />
+                                <i className="material-icons">alarm</i>
+                                {/*<FontAwesome name="clock-o fa-fw icon-after-text" />*/}
                               </div>
                               <div>
                                 <span>{novaPassagem.poltrona}</span>
-                                <FontAwesome name="bookmark fa-fw icon-after-text" />
+                                <i className="material-icons">airline_seat_recline_extra</i>
+                                {/*<FontAwesome name="bookmark fa-fw icon-after-text" />*/}
                               </div>
                             </div>
                           </Jumbotron>
                         </Col>
-                        <Col sm={6}>
-                          <Jumbotron className="jumbo-volta">
-                            <div className="body">
-                              <div>
-                                <FontAwesome name="location-arrow fa-fw" />
-                                <span className="text-after-icon">{novaPassagemVolta.origem}</span>
+                        {
+                          keyVolta &&
+                          <Col sm={6}>
+                            <Jumbotron className="jumbo-volta">
+                              <div className="body">
+                                <div className="side-volta">
+                                  <span>VOLTA</span>
+                                </div>
+                                <div>
+                                  <i className="material-icons">place</i>
+                                  {/*<FontAwesome name="location-arrow fa-fw" />*/}
+                                  <span className="text-after-icon">{novaPassagemVolta.origem}</span>
+                                </div>
+                                <div>
+                                  <i className="material-icons">my_location</i>
+                                  {/*<FontAwesome name="map-marker fa-fw" />*/}
+                                  <span className="text-after-icon">{novaPassagemVolta.destino}</span>
+                                </div>
+                                <div>
+                                  {/*<FontAwesome name="calendar fa-fw" />*/}
+                                  <i className="material-icons">event</i>
+                                  <span className="text-after-icon">{novaPassagemVolta.data}</span>
+                                </div>
+                                <div>
+                                  {/*<FontAwesome name="clock-o fa-fw" />*/}
+                                  <i className="material-icons">alarm</i>
+                                  <span className="text-after-icon">{novaPassagemVolta.horario}</span>
+                                </div>
+                                <div>
+                                  {/*<FontAwesome name="bookmark fa-fw" />*/}
+                                  <i className="material-icons">airline_seat_recline_extra</i>
+                                  <span className="text-after-icon">{novaPassagemVolta.poltrona}</span>
+                                </div>
                               </div>
-                              <div>
-                                <FontAwesome name="map-marker fa-fw" />
-                                <span className="text-after-icon">{novaPassagemVolta.destino}</span>
-                              </div>
-                              <div>
-                                <FontAwesome name="calendar fa-fw" />
-                                <span className="text-after-icon">{novaPassagemVolta.data}</span>
-                              </div>
-                              <div>
-                                <FontAwesome name="clock-o fa-fw" />
-                                <span className="text-after-icon">{novaPassagemVolta.horario}</span>
-                              </div>
-                              <div>
-                                <FontAwesome name="bookmark fa-fw" />
-                                <span className="text-after-icon">{novaPassagemVolta.poltrona}</span>
-                              </div>
-                            </div>
-                          </Jumbotron>
-                        </Col>
+                            </Jumbotron>
+                          </Col>
+                        }
                       </Row>
                     </div>
                   </Row>
