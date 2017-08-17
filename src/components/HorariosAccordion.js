@@ -7,6 +7,7 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import Spinner from 'react-spinner-children';
 import IconButton from 'react-toolbox/lib/button/IconButton';
+import ProgressBarTB from 'react-toolbox/lib/progress_bar/ProgressBar';
 
 class HorariosAccordion extends Component {
   constructor(props) {
@@ -112,8 +113,21 @@ class HorariosAccordion extends Component {
                   icon={isActive ? "arrow_drop_up" : "arrow_drop_down"}
                   primary />
               </span>
-            </div>}>
+            </div>
+          }>
           {
+            isSavingPoltronas &&
+            <ProgressBarTB className="footer-progress" mode="indeterminate" />
+          }
+
+          < BusSelect
+            isVolta={isVolta}
+            horario={horario}
+            seats={poltronas}
+            onClickSeat={onClickSeat}
+          />
+
+          {/*{
             isSavingPoltronas &&
             <Spinner config={customSpinConfig}>
               <span>This content will be show when isLoaded === true</span>
@@ -127,7 +141,7 @@ class HorariosAccordion extends Component {
               seats={poltronas}
               onClickSeat={onClickSeat}
             />
-          }
+          }*/}
         </Panel >
       );
 

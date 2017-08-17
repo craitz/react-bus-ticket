@@ -140,6 +140,7 @@ monospace;
         .panel-collapse {
             .panel-body {
                 padding: 5px 0 5px 0;
+                position: relative;
                 @content;
             }
         }
@@ -202,6 +203,7 @@ monospace;
 
 @mixin tabControl {
     @include accordion {
+        @include loadingProgress;
         @include busSelect(rgba($googleGreen, .8));
     }
     background-color: white;

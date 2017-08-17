@@ -9,7 +9,7 @@
     $headerIconWidth: 85px;
     $headerIconFontSize: 2.5rem;
     $inputBorderColor: rgba(255, 255, 255, .7);
-    padding: 50px 0 0 calc(50% - 150px);
+    padding: 30px 0 0 calc(50% - 150px);
     @include xs {
         padding: 0;
         @include centralizeContent();

@@ -344,24 +344,25 @@ export class PesquisaPassagens extends Component {
 
     return (
       <div className="pesquisar-passagens-container">
-        <PageHeader title="Histórico de compras">
-          <NavItem className="resultados hidden-sm" href="#">
+        <PageHeader title="Histórico de compras" className="hidden-xs" />
+        <PageHeader title="Histórico" className="visible-xs" />
+        {/*<NavItem className="resultados hidden-sm" href="#">
             <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
             <span className="text-after-icon">{passagens.length} resultados encontrados</span>
           </NavItem>
           <PageHeaderItem tooltip="Comprar passagens" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
           <PageHeaderItem tooltip="Limpar filtros" glyph="eraser" onClick={this.handleReset} />
-        </PageHeader>
-        <DivAnimated className="text-center">
+        </PageHeader>*/}
+        <DivAnimated>
           <Col md={10} mdOffset={1}>
             <Pagination
               bsSize="medium"
               items={totalPages > 1 ? totalPages : 0}
               activePage={activePage}
               onSelect={this.handleSelectPage}
-              className="pagination-pesquisa"
+              className="pagination-pesquisa mui--z2"
             />
-            <Jumbotron>
+            <Jumbotron className="mui--z2">
               <Table responsive hover>
                 <thead>
                   <tr>

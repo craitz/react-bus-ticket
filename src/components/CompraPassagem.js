@@ -260,7 +260,7 @@ export class CompraPassagem extends Component {
 
         this.checkNotAllowed(!isVolta, horario);
         dispatch(actions.setSavingPoltronas(false)); // desliga spinning
-      }, 1000);
+      }, 2000);
     }
   }
 
