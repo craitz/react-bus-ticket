@@ -2,31 +2,26 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withAuth } from '../shared/hoc';
-import {
-  Table,
-  NavItem,
-  Glyphicon,
-  Label,
-  Col,
-  FormControl,
-  Pagination,
-  Jumbotron
-} from 'react-bootstrap';
+import { Col, FormControl, Pagination } from 'react-bootstrap';
 import TooltipOverlay from '../shared/TooltipOverlay';
 import * as actions from '../actions/pesquisaPassagens.actions';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as utils from '../shared/Utils';
 import DivAnimated from '../shared/DivAnimated'
-import FontAwesome from 'react-fontawesome';
-import { PageHeader, PageHeaderItem } from '../shared/PageHeader';
+import { PageHeader } from '../shared/PageHeader';
+import TableTB from 'react-toolbox/lib/table/Table';
+import TableHead from 'react-toolbox/lib/table/TableHead';
+import TableCell from 'react-toolbox/lib/table/TableCell';
+import TableRow from 'react-toolbox/lib/table/TableRow';
 
-export const totalPageItems = 12;
+export const totalPageItems = 8;
 
-const TableHeader = ({ className, label, onClick, sortIcon }) =>
-  <th className={className}>
-    <span onClick={onClick}>{label}</span>
-    {sortIcon}
-  </th>
+const TableHeader = ({ label, icon, onClick, sortIcon }) =>
+  <div onClick={onClick}>
+    <i className="material-icons">{icon}</i>
+    <span>{label}</span>
+    <i className="material-icons text-after-icon">{sortIcon}</i>
+  </div>
 
 const TableColFilter = ({ tooltip, value, onChange }) =>
   <td>
@@ -37,14 +32,9 @@ const TableColFilter = ({ tooltip, value, onChange }) =>
 
 export const getGlyphEx = (fieldName, sort) => {
   if ((fieldName.length > 0) && (sort && (sort.field === fieldName))) {
-    return (
-      <Glyphicon
-        glyph={(sort.direction) ? "sort-by-attributes" : "sort-by-attributes-alt"}
-        className="th-icon"
-      />
-    );
+    return sort.direction ? "arrow_drop_up" : "arrow_drop_down";
   } else {
-    return null;
+    return '';
   }
 };
 
@@ -70,13 +60,33 @@ export const sortByFieldEx = (passagensBackup, sort) => {
         break;
       }
       case utils.PesquisaPassagensField.SAIDA: {
-        objA = utils.buildIsoDate(a.data, a.horario);
-        objB = utils.buildIsoDate(b.data, b.horario);
+        objA = utils.buildIsoDateTime(a.data, a.horario);
+        objB = utils.buildIsoDateTime(b.data, b.horario);
         break;
       }
       case utils.PesquisaPassagensField.COMPRA: {
         objA = a.dataCompra;
         objB = b.dataCompra;
+        break;
+      }
+      case utils.PesquisaPassagensField.ORIGEM: {
+        objA = a.origem;
+        objB = b.origem;
+        break;
+      }
+      case utils.PesquisaPassagensField.DESTINO: {
+        objA = a.destino;
+        objB = b.destino;
+        break;
+      }
+      case utils.PesquisaPassagensField.DATA: {
+        objA = utils.buildIsoDate(a.data);
+        objB = utils.buildIsoDate(b.data);
+        break;
+      }
+      case utils.PesquisaPassagensField.HORARIO: {
+        objA = a.horario;
+        objB = b.horario;
         break;
       }
       default: {
@@ -148,6 +158,10 @@ export class PesquisaPassagens extends Component {
   constructor(props) {
     super(props);
     this.handleClickDataCompra = this.handleClickDataCompra.bind(this);
+    this.handleClickOrigem = this.handleClickOrigem.bind(this);
+    this.handleClickDestino = this.handleClickDestino.bind(this);
+    this.handleClickData = this.handleClickData.bind(this);
+    this.handleClickHorario = this.handleClickHorario.bind(this);
     this.handleClickLinha = this.handleClickLinha.bind(this);
     this.handleClickSaida = this.handleClickSaida.bind(this);
     this.handleChangeFilterDataCompra = this.handleChangeFilterDataCompra.bind(this);
@@ -270,6 +284,74 @@ export class PesquisaPassagens extends Component {
     }
   }
 
+  handleClickOrigem(event) {
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
+
+    if (sort.field === utils.PesquisaPassagensField.ORIGEM) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.ORIGEM, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
+  }
+
+  handleClickDestino(event) {
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
+
+    if (sort.field === utils.PesquisaPassagensField.DESTINO) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.DESTINO, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
+  }
+
+  handleClickData(event) {
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
+
+    if (sort.field === utils.PesquisaPassagensField.DATA) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.DATA, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
+  }
+
+  handleClickHorario(event) {
+    const { consulta, dispatch } = this.props;
+    const { sort } = consulta;
+
+    if (sort.field === utils.PesquisaPassagensField.HORARIO) {
+      dispatch(actions.setSortDirectionThunk(!sort.direction))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    } else {
+      dispatch(actions.setSortThunk(utils.PesquisaPassagensField.HORARIO, true))
+        .then(() => {
+          this.aplicaPesqusia();
+        });
+    }
+  }
+
   handleClickLinha(event) {
     const { consulta, dispatch } = this.props;
     const { sort } = consulta;
@@ -341,18 +423,14 @@ export class PesquisaPassagens extends Component {
     const { filter, activePage, page } = consulta;
     const fields = utils.PesquisaPassagensField;
     const totalPages = this.getTotalPages(passagens);
+    const builSaida = (data, horario) => {
+      return `${data} - ${horario}`;
+    }
 
     return (
       <div className="pesquisar-passagens-container">
         <PageHeader title="Histórico de compras" className="hidden-xs" />
         <PageHeader title="Histórico" className="visible-xs" />
-        {/*<NavItem className="resultados hidden-sm" href="#">
-            <FontAwesome className={passagens.length > 0 ? "icon text-success" : "icon text-danger"} name={passagens.length > 0 ? "check" : "times"} />
-            <span className="text-after-icon">{passagens.length} resultados encontrados</span>
-          </NavItem>
-          <PageHeaderItem tooltip="Comprar passagens" glyph="shopping-cart" onClick={this.handleComprarPassagem} />
-          <PageHeaderItem tooltip="Limpar filtros" glyph="eraser" onClick={this.handleReset} />
-        </PageHeader>*/}
         <DivAnimated>
           <Col md={10} mdOffset={1}>
             <Pagination
@@ -362,8 +440,59 @@ export class PesquisaPassagens extends Component {
               onSelect={this.handleSelectPage}
               className="pagination-pesquisa mui--z2"
             />
-            <Jumbotron className="mui--z2">
-              <Table responsive hover>
+            <TableTB selectable={false} className="mui--z2">
+              <TableHead>
+                <TableCell>
+                  <TableHeader
+                    label="Data da compra"
+                    icon="event_available"
+                    onClick={this.handleClickDataCompra}
+                    sortIcon={this.getGlyph(fields.COMPRA)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TableHeader
+                    label="Origem"
+                    icon="my_location"
+                    onClick={this.handleClickOrigem}
+                    sortIcon={this.getGlyph(fields.ORIGEM)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TableHeader
+                    label="Destino"
+                    icon="place"
+                    onClick={this.handleClickDestino}
+                    sortIcon={this.getGlyph(fields.DESTINO)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TableHeader
+                    label="Saída"
+                    icon="today"
+                    onClick={this.handleClickSaida}
+                    sortIcon={this.getGlyph(fields.SAIDA)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <div className="header-poltronas">
+                    <i className="material-icons">airline_seat_recline_extra</i>
+                    <span>Poltrona(s)</span>
+                  </div>
+                </TableCell>
+              </TableHead>
+              {page.map((item, idx) =>
+                (
+                  <TableRow key={idx}>
+                    <TableCell>{item.dataCompra}</TableCell>
+                    <TableCell>{item.origem}</TableCell>
+                    <TableCell>{item.destino}</TableCell>
+                    <TableCell>{builSaida(item.data, item.horario)}</TableCell>
+                    <TableCell>{item.poltrona}</TableCell>
+                  </TableRow>
+                ))}
+            </TableTB>
+            {/*<Table responsive hover>
                 <thead>
                   <tr>
                     <TableHeader
@@ -434,8 +563,8 @@ export class PesquisaPassagens extends Component {
                     </tr>
                   )}
                 </tbody>
-              </Table>
-            </Jumbotron>
+              </Table>*/}
+            {/*</Jumbotron>*/}
           </Col>
         </DivAnimated>
 

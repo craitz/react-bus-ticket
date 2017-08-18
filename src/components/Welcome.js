@@ -67,7 +67,7 @@ class Welcome extends Component {
                 </article>
               </Row>
               <Row className="footer-section">
-                <span className="bt-mui-text hidden-xs">Comprar agora sua passagem !</span>
+                <span className="bt-mui-text hidden-xs">Compre agora sua passagem !</span>
                 <span className="bt-mui-text visible-xs">Comprar</span>
               </Row>
               <Button

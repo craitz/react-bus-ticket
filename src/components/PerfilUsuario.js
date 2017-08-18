@@ -5,7 +5,6 @@ import { withAuth } from '../shared/hoc';
 import { PageHeader } from '../shared/PageHeader';
 import DivAnimated from '../shared/DivAnimated'
 import { Row, Col, Jumbotron } from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
 import { firebaseHelper } from '../shared/FirebaseHelper';
 import * as actions from '../actions/perfilUsuario.actions'
 import * as utils from '../shared/Utils';

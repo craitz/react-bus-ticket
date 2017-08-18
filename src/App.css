@@ -991,52 +991,59 @@ button:disabled {
   overflow: auto;
   height: calc(100vh - 50px); }
   .pesquisar-passagens-container div.animated {
-    text-align: left; }
-    @media screen and (min-width: 480px) {
-      .pesquisar-passagens-container div.animated {
-        text-align: center; } }
-    .pesquisar-passagens-container div.animated .jumbotron {
-      background-color: white; }
-      .pesquisar-passagens-container div.animated .jumbotron .icon-table {
-        color: rgba(0, 0, 0, 0.5); }
-        .pesquisar-passagens-container div.animated .jumbotron .icon-table.arrow-trajeto {
-          color: #424242;
-          margin-left: 15px;
-          margin-right: 15px; }
-        .pesquisar-passagens-container div.animated .jumbotron .icon-table.data {
-          color: #424242;
-          margin-right: 6px; }
-        .pesquisar-passagens-container div.animated .jumbotron .icon-table.horario {
-          color: #424242;
-          margin-left: 15px;
-          margin-right: 6px; }
-      .pesquisar-passagens-container div.animated .jumbotron .label-poltrona {
-        margin-right: 4px;
-        background-color: rgba(66, 66, 66, 0.8); }
-      .pesquisar-passagens-container div.animated .jumbotron Table {
-        border: none !important;
-        margin-top: 0; }
-        .pesquisar-passagens-container div.animated .jumbotron Table th {
+    text-align: center; }
+    .pesquisar-passagens-container div.animated table {
+      border-radius: 8px 8px 4px 4px !important; }
+      .pesquisar-passagens-container div.animated table .header-poltronas {
+        cursor: default !important; }
+        .pesquisar-passagens-container div.animated table .header-poltronas:hover i,
+        .pesquisar-passagens-container div.animated table .header-poltronas:hover span {
+          color: rgba(255, 255, 255, 0.6) !important; }
+      .pesquisar-passagens-container div.animated table td {
+        border: none; }
+      .pesquisar-passagens-container div.animated table thead tr {
+        background-color: #424242;
+        border-bottom: 2px solid #F44336; }
+      .pesquisar-passagens-container div.animated table thead th {
+        -moz-user-select: -moz-none !important;
+        -khtml-user-select: none !important;
+        -webkit-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        padding-top: 20px;
+        padding-bottom: 10px !important;
+        padding-bottom: 0; }
+        .pesquisar-passagens-container div.animated table thead th:first-child {
+          padding-left: 50px;
+          border-top-left-radius: 4px !important; }
+        .pesquisar-passagens-container div.animated table thead th:last-child {
+          padding-right: 50px;
+          border-top-right-radius: 4px !important; }
+        .pesquisar-passagens-container div.animated table thead th div {
+          display: inline-flex;
+          text-justify: center;
+          align-items: center;
           cursor: pointer; }
-          .pesquisar-passagens-container div.animated .jumbotron Table th .th-icon {
+          .pesquisar-passagens-container div.animated table thead th div i,
+          .pesquisar-passagens-container div.animated table thead th div span {
+            color: rgba(255, 255, 255, 0.6); }
+          .pesquisar-passagens-container div.animated table thead th div i {
+            font-size: 1.7rem; }
+          .pesquisar-passagens-container div.animated table thead th div span {
             margin-left: 10px; }
-        .pesquisar-passagens-container div.animated .jumbotron Table tr,
-        .pesquisar-passagens-container div.animated .jumbotron Table td,
-        .pesquisar-passagens-container div.animated .jumbotron Table th {
-          border: none !important;
-          -moz-user-select: -moz-none !important;
-          -khtml-user-select: none !important;
-          -webkit-user-select: none !important;
-          -ms-user-select: none !important;
-          user-select: none !important; }
-        .pesquisar-passagens-container div.animated .jumbotron Table .th-data-compra {
-          width: 12%; }
-        .pesquisar-passagens-container div.animated .jumbotron Table .th-linha {
-          width: 40%; }
-        .pesquisar-passagens-container div.animated .jumbotron Table .th-saida {
-          width: 20%; }
-      .pesquisar-passagens-container div.animated .jumbotron .table-hover > tbody > tr:hover {
-        background-color: rgba(0, 0, 0, 0.05) !important; }
+          .pesquisar-passagens-container div.animated table thead th div:hover i,
+          .pesquisar-passagens-container div.animated table thead th div:hover span {
+            color: white; }
+      .pesquisar-passagens-container div.animated table tbody tr {
+        border-top: 1px solid rgba(66, 66, 66, 0.05); }
+        .pesquisar-passagens-container div.animated table tbody tr td:first-child {
+          padding-left: 50px; }
+        .pesquisar-passagens-container div.animated table tbody tr td:last-child {
+          padding-right: 50px; }
+        .pesquisar-passagens-container div.animated table tbody tr:first-child td {
+          padding-top: 20px; }
+        .pesquisar-passagens-container div.animated table tbody tr:last-child td {
+          padding-bottom: 30px; }
     .pesquisar-passagens-container div.animated .pagination-pesquisa {
       margin-top: 76px; }
       @media screen and (min-width: 768px) {

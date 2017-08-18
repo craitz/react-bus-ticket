@@ -5,7 +5,6 @@ import BusSelect from './BusSelect';
 import store from '../store';
 import * as compraPassagemActions from '../actions/compraPassagem.actions';
 import TooltipOverlay from '../shared/TooltipOverlay';
-import Spinner from 'react-spinner-children';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import ProgressBarTB from 'react-toolbox/lib/progress_bar/ProgressBar';
 
@@ -44,11 +43,6 @@ class HorariosAccordion extends Component {
     // sort horários
     const arr = Object.keys(horarios);
     arr.sort();
-
-    const customSpinConfig = {
-      lines: 10,
-      rotate: 17
-    };
 
     // itera no array e cria os collapsibles
     arr.map((horario, index) => {

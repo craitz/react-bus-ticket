@@ -1,64 +1,85 @@
 .pesquisar-passagens-container {
     @include containerHeight();
     div.animated {
-        text-align: left;
-        @include xs {
-            text-align: center;
-        }
-        .jumbotron {
-            background-color: white;
-            .icon-table {
-                color: rgba(black, .5);
-                &.arrow-trajeto {
-                    color: $materialPrimary;
-                    margin: {
-                        left: 15px;
-                        right: 15px;
-                    }
-                }
-                &.data {
-                    color: $materialPrimary;
-                    margin-right: 6px;
-                }
-                &.horario {
-                    color: $materialPrimary;
-                    margin: {
-                        left: 15px;
-                        right: 6px;
+        text-align: center;
+        table {
+            border-radius: 8px 8px 4px 4px !important;
+            .header-poltronas {
+                cursor: default !important;
+                &:hover {
+                    i,
+                    span {
+                        color: rgba(white, .6) !important;
                     }
                 }
             }
-            .label-poltrona {
-                margin-right: 4px;
-                background-color: rgba($materialPrimary, .8);
+            td {
+                border: none;
             }
-            Table {
-                border: none !important;
-                margin-top: 0;
+            thead {
+                tr {
+                    background-color: rgba($materialPrimary, 1);
+                    border-bottom: 2px solid $materialAccent;
+                }
                 th {
-                    cursor: pointer;
-                    .th-icon {
-                        margin-left: 10px;
+                    @include noSelection;
+                    padding-top: 20px;
+                    padding-bottom: 10px !important;
+                    &:first-child {
+                        padding-left: 50px;
+                        border-top-left-radius: 4px !important;
+                    }
+                    &:last-child {
+                        padding-right: 50px;
+                        border-top-right-radius: 4px !important;
+                    }
+                    padding-bottom: 0;
+                    div {
+                        display: inline-flex;
+                        text-justify: center;
+                        align-items: center;
+                        cursor: pointer;
+                        i,
+                        span {
+                            color: rgba(white, .6);
+                        }
+                        i {
+                            font-size: 1.7rem;
+                        }
+                        span {
+                            margin-left: 10px;
+                        }
+                        &:hover {
+                            i,
+                            span {
+                                color: rgba(white, 1);
+                            }
+                        }
                     }
                 }
-                tr,
-                td,
-                th {
-                    border: none !important;
-                    @include noSelection();
-                }
-                .th-data-compra {
-                    width: 12%;
-                }
-                .th-linha {
-                    width: 40%;
-                }
-                .th-saida {
-                    width: 20%;
-                }
             }
-            .table-hover>tbody>tr:hover {
-                background-color: rgba(black, .05) !important;
+            tbody {
+                tr {
+                    border-top: 1px solid rgba($materialPrimary, .05);
+                    td {
+                        &:first-child {
+                            padding-left: 50px;
+                        }
+                        &:last-child {
+                            padding-right: 50px;
+                        }
+                    }
+                    &:first-child {
+                        td {
+                            padding-top: 20px;
+                        }
+                    }
+                    &:last-child {
+                        td {
+                            padding-bottom: 30px;
+                        }
+                    }
+                }
             }
         }
         .pagination-pesquisa {

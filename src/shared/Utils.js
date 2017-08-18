@@ -28,9 +28,13 @@ export const SavingStatus = {
 
 export const PesquisaPassagensField = {
   NOME: 'nome',
-  COMPRA: 'compra',
+  COMPRA: 'COMPRA',
   LINHA: 'linha',
-  SAIDA: 'saida'
+  SAIDA: 'saida',
+  ORIGEM: 'ORIGEM',
+  DESTINO: 'DESTINO',
+  DATA: 'DATA',
+  HORARIO: 'HORARIO'
 }
 
 export const LoginFields = {
@@ -112,7 +116,7 @@ export const checkHorario = (data, horario) => {
   return (strData > strNow);
 }
 
-export const buildIsoDate = (data, hora) => {
+export const buildIsoDateTime = (data, hora) => {
   const day = data.slice(0, 2);
   const month = data.slice(3, 5);
   const year = data.slice(6);
@@ -120,6 +124,14 @@ export const buildIsoDate = (data, hora) => {
   const minute = hora.slice(3, 5);
 
   return `${year}-${month}-${day}T${hour}:${minute}:00.000Z`;
+};
+
+export const buildIsoDate = (data) => {
+  const day = data.slice(0, 2);
+  const month = data.slice(3, 5);
+  const year = data.slice(6);
+
+  return `${year}-${month}-${day}T00:00:00.000Z`;
 };
 
 export const objToArray = (obj) => {
