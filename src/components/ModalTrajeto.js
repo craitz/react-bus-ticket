@@ -259,6 +259,8 @@ export class ModalTrajeto extends Component {
       setTimeout(() => {
         // dispatch(loadingActions.setDone()); // esconde o loading
         dispatch(compraPassagemActions.SetFrozen(false)); // descongela o estado do form CompraPassagem
+        dispatch(compraPassagemActions.setActiveAccordion(-1)); // recolhe o panel collapsed
+        dispatch(compraPassagemActions.setActiveAccordionVolta(-1)); // recolhe o panel collapsed de volta
         dispatch(actions.setVisible(false)); // fecha o modal
         hideSpinner();
 
