@@ -1,5 +1,14 @@
 .perfil-usuario-container {
     @include containerHeight();
+    &.loading {
+        cursor: wait !important;
+        input,
+        button,
+        a,
+        .label {
+            cursor: wait !important;
+        }
+    }
     .jumbotron {
         margin-top: 76px;
         position: relative;

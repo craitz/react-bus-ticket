@@ -128,7 +128,7 @@ class PerfilUsuario extends Component {
     this.handleChangeCelular = this.handleChangeCelular.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      autenticando: false
+      salvando: false
     };
   }
 
@@ -331,12 +331,12 @@ class PerfilUsuario extends Component {
 
     const showSpinner = () =>
       this.setState({
-        autenticando: true
+        salvando: true
       });
 
     const hideSpinner = () =>
       this.setState({
-        autenticando: false
+        salvando: false
       });
 
     showSpinner();
@@ -367,6 +367,8 @@ class PerfilUsuario extends Component {
   }
 
   render() {
+    const loading = this.state.salvando;
+    const containerClass = loading ? "perfil-usuario-container loading" : "perfil-usuario-container";
     const formProps = {
       user: this.props.user,
       edicaoHabilitada: this.props.edicaoHabilitada,
@@ -376,11 +378,12 @@ class PerfilUsuario extends Component {
       onChangeTelefone: this.handleChangeTelefone,
       onChangeCelular: this.handleChangeCelular,
       onSubmit: this.handleSubmit,
-      spinning: this.state.autenticando
+      spinning: loading
     }
 
+
     return (
-      <div className="perfil-usuario-container">
+      <div className={containerClass}>
         <PageHeader title="Perfil do usuário">
         </PageHeader>
         <DivAnimated className="text-center">

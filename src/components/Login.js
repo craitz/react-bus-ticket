@@ -251,13 +251,15 @@ export class Login extends Component {
 
   render() {
     const { email, senha } = this.props;
+    const loading = this.state.autenticando;
+    const containerClass = loading ? "login-container loading" : "login-container";
     if (firebaseHelper.isLoggedIn()) {
       return (
         <Redirect to='/' />
       );
     } else {
       return (
-        <div className="login-container">
+        <div className={containerClass}>
           <DivAnimated className="login-box mui--z2">
             <form>
               <Row className="main-section">
@@ -283,24 +285,14 @@ export class Login extends Component {
               <Row className="footer-section">
                 <span className="bt-mui-text hidden-xs">Login no sistema</span>
                 <span className="bt-mui-text visible-xs">Entrar</span>
-                {
-                  this.state.autenticando &&
-                  <ProgressBar className="footer-progress" mode="indeterminate" />
-                }
+                {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
               </Row>
-              {/*<SpinnerButton
-                className="btn-login mui--z2"
-                icon="directions_run"
-                spinning={this.state.autenticando}
-                onClick={this.handleLogin}
-              //onClick={this.handleGenerateFakeData}
-              />*/}
               <Button
                 floating
                 accent
                 className="btn-login mui--z2"
                 icon="directions_run"
-                disabled={this.state.autenticando}
+                disabled={loading}
                 onClick={this.handleLogin}
               />
             </form>

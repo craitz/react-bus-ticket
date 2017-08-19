@@ -23,6 +23,9 @@
 html {
     height: 100%;
     body {
+        &::after {
+            @include bkgImage('tree22.jpg');
+        }
         // @include bkgImage('tree2.jpg');
         // Aumente para testar as fontes em diversas resoluções
         // font-size: 30px !important; 

@@ -14,6 +14,15 @@
         padding: 0;
         @include centralizeContent();
     }
+    &.loading {
+        cursor: wait !important;
+        input,
+        button,
+        a,
+        .label {
+            cursor: wait !important;
+        }
+    }
     .login-box {
         // opacity: .9;
         text-align: left;
@@ -75,8 +84,8 @@
 
 @include sm {
     .login-container {
-        &::after {
-            @include bkgImage('tree22.jpg');
-        }
+        // &::after {
+        //     @include bkgImage('tree22.jpg');
+        // }
     }
 }

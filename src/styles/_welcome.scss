@@ -64,7 +64,7 @@
 @include sm {
     .welcome-container {
         &::after {
-            @include bkgImage('tree22.jpg');
+            // @include bkgImage('tree22.jpg');
         }
         .info-container {
             margin-top: 213px;

@@ -393,6 +393,14 @@ button:disabled {
 .modal-trajeto-container .rdtDays {
   color: initial; }
 
+.modal-trajeto-container.loading {
+  cursor: wait !important; }
+  .modal-trajeto-container.loading input,
+  .modal-trajeto-container.loading button,
+  .modal-trajeto-container.loading a,
+  .modal-trajeto-container.loading .label {
+    cursor: wait !important; }
+
 .modal-trajeto-container .modal-dialog {
   border-radius: 4px 4px 20px 20px;
   width: 300px;
@@ -483,6 +491,13 @@ button:disabled {
 .comprar-passagem-container {
   overflow: auto;
   height: calc(100vh - 50px); }
+  .comprar-passagem-container.loading {
+    cursor: wait !important; }
+    .comprar-passagem-container.loading input,
+    .comprar-passagem-container.loading button,
+    .comprar-passagem-container.loading a,
+    .comprar-passagem-container.loading .label {
+      cursor: wait !important; }
   .comprar-passagem-container .opcoes-menu {
     position: absolute;
     z-index: 9;
@@ -835,19 +850,6 @@ button:disabled {
             margin-bottom: 0; }
 
 @media screen and (min-width: 768px) {
-  .comprar-passagem-container::after {
-    content: "";
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
   .comprar-passagem-container .form-passagem-container {
     width: 578px;
     margin: 213px 0 0 calc(50% - 289px) !important; } }
@@ -1096,6 +1098,13 @@ button:disabled {
       align-items: center;
       margin-top: 0;
       padding-top: 0; } }
+  .login-container.loading {
+    cursor: wait !important; }
+    .login-container.loading input,
+    .login-container.loading button,
+    .login-container.loading a,
+    .login-container.loading .label {
+      cursor: wait !important; }
   .login-container .login-box {
     text-align: left;
     position: relative;
@@ -1138,21 +1147,6 @@ button:disabled {
       position: absolute;
       right: 20px;
       bottom: -20px; }
-
-@media screen and (min-width: 768px) {
-  .login-container::after {
-    content: "";
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; } }
 
 .welcome-container {
   overflow: auto;
@@ -1202,25 +1196,19 @@ button:disabled {
       display: none; }
 
 @media screen and (min-width: 768px) {
-  .welcome-container::after {
-    content: "";
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
   .welcome-container .info-container {
     margin-top: 213px; } }
 
 .perfil-usuario-container {
   overflow: auto;
   height: calc(100vh - 50px); }
+  .perfil-usuario-container.loading {
+    cursor: wait !important; }
+    .perfil-usuario-container.loading input,
+    .perfil-usuario-container.loading button,
+    .perfil-usuario-container.loading a,
+    .perfil-usuario-container.loading .label {
+      cursor: wait !important; }
   .perfil-usuario-container .jumbotron {
     margin-top: 76px;
     position: relative;
@@ -1279,6 +1267,19 @@ html {
     background-color: #dedede;
     height: inherit;
     position: relative; }
+    html body::after {
+      content: "";
+      background: url("./styles/images/tree26.jpg") no-repeat center center;
+      background-attachment: scroll;
+      background-size: cover;
+      opacity: 1;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      position: absolute; }
     html body #root {
       height: inherit; }
       html body #root .App {

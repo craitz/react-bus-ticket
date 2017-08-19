@@ -600,6 +600,8 @@ export class CompraPassagem extends Component {
     const { horarios, horariosVolta, cidades, passagem, passagemVolta,
       isIdaVolta, activeAccordion, activeAccordionVolta, activeTab,
       isSavingPoltronas } = this.props;
+    const loading = this.state.salvando;
+    const containerClass = (loading || isSavingPoltronas) ? "comprar-passagem-container loading" : "comprar-passagem-container";
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -707,19 +709,13 @@ export class CompraPassagem extends Component {
     }
 
     const ButtonFinalizar = () =>
-      // <SpinnerButton
-      //   className="button-finaliza mui--z2"
-      //   onClick={this.handleSubmit}
-      //   icon="check"
-      //   spinning={this.state.salvando}
-      // />
       <Button
         floating
         accent
         className="button-finaliza mui--z2"
         onClick={this.handleSubmit}
         icon="check"
-        disabled={this.state.salvando}
+        disabled={loading}
       />
 
     const ButtonEditar = () =>
@@ -735,10 +731,7 @@ export class CompraPassagem extends Component {
 
     const ButtonSection = () =>
       <Row className="footer-section">
-        {
-          this.state.salvando &&
-          <ProgressBar className="footer-progress" mode="indeterminate" />
-        }
+        {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
         <span className="hidden-xs">Finalizar compra</span>
         <span className="visible-xs">Finalizar</span>
         <ButtonFinalizar />
@@ -838,7 +831,7 @@ export class CompraPassagem extends Component {
       </Tabs>
 
     return (
-      <div className="comprar-passagem-container">
+      <div className={containerClass}>
         <PageHeader
           title="Compre sua passagem"
           className="header-comprar hidden-xs"

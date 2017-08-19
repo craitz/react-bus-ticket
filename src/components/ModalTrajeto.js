@@ -31,7 +31,7 @@ export class ModalTrajeto extends Component {
     this.handleFocusOrigem = this.handleFocusOrigem.bind(this);
     this.handleFocusDestino = this.handleFocusDestino.bind(this);
     this.state = {
-      autenticando: false,
+      carregando: false,
       origemActive: false,
       destinoActive: false,
       idaActive: false,
@@ -244,12 +244,12 @@ export class ModalTrajeto extends Component {
 
     const showSpinner = () =>
       this.setState({
-        autenticando: true
+        carregando: true
       });
 
     const hideSpinner = () =>
       this.setState({
-        autenticando: false
+        carregando: false
       });
 
     showSpinner();
@@ -279,6 +279,8 @@ export class ModalTrajeto extends Component {
 
   render() {
     const { isVisible, origem, destino, cidades, isIdaVolta, data, dataVolta } = this.props;
+    const loading = this.state.carregando;
+    const containerClass = loading ? "modal-trajeto-container loading" : "modal-trajeto-container";
 
     const getIcon = () => isIdaVolta ? 'swap_horiz' : 'trending_flat';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
@@ -294,13 +296,11 @@ export class ModalTrajeto extends Component {
     const datetimeMax = utils.brStringToDate(txtMax);
 
     return (
-      <Modal show={isVisible} className="modal-trajeto-container" onHide={this.handleExited}>
+      <Modal show={isVisible} className={containerClass} onHide={this.handleExited}>
         <Modal.Header>
           <span>Defina o trajeto</span>
           <TooltipOverlay text={getTooltip()} position="right">
             <IconButton className="pull-right ida-volta" icon={getIcon()} primary onClick={this.handleChangeIdaVolta} />
-            {/*<i className="material-icons pull-right ida-volta" onClick={this.handleChangeIdaVolta}>{getIcon()}</i>*/}
-            {/*<FontAwesome name={getIcon()} className="pull-right ida-volta" onClick={this.handleChangeIdaVolta} />*/}
           </TooltipOverlay>
         </Modal.Header>
         <form onSubmit={this.handleSubmit}>
@@ -318,15 +318,6 @@ export class ModalTrajeto extends Component {
                 icon="my_location"
                 label="De"
               />
-              {/*<SelectTrajeto
-                list={cidades}
-                value={origem.value}
-                placeholder="Escolha a origem"
-                onChange={this.handleChangeOrigem}
-                icon="my_location"
-                tooltip="Origem"
-                onFocus={this.handleFocusOrigem}
-              />*/}
             </FormGroup>
             <Row>
               <Col xs={12}>
@@ -343,15 +334,6 @@ export class ModalTrajeto extends Component {
                     icon="place"
                     label="Para"
                   />
-                  {/*<SelectTrajeto
-                    list={cidades}
-                    value={destino.value}
-                    placeholder="Escolha o destino"
-                    onChange={this.handleChangeDestino}
-                    icon="location_on"
-                    tooltip="Destino"
-                    onFocus={this.handleFocusDestino}
-                  />*/}
                 </FormGroup>
               </Col>
             </Row>
@@ -404,24 +386,15 @@ export class ModalTrajeto extends Component {
           <Modal.Footer>
             <span className="hidden-xs">Buscar passagens</span>
             <span className="visible-xs">Buscar</span>
-            {
-              this.state.autenticando &&
-              <ProgressBar className="footer-progress" mode="indeterminate" />
-            }
+            {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
           </Modal.Footer>
-          {/*<SpinnerButton
-            type="submit"
-            className="mui--z2 btn-buscar"
-            icon="search"
-            spinning={this.state.autenticando}
-          />*/}
           <Button
             floating
             accent
             type="submit"
             className="mui--z2 btn-buscar"
             icon="search"
-            disabled={this.state.autenticando}
+            disabled={loading}
           />
         </form>
       </Modal >

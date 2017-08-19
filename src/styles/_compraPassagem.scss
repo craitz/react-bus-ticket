@@ -453,6 +453,15 @@ monospace;
 }
 
 .comprar-passagem-container {
+    &.loading {
+        cursor: wait !important;
+        input,
+        button,
+        a,
+        .label {
+            cursor: wait !important;
+        }
+    }
     .opcoes-menu {
         position: absolute;
         z-index: 9;
@@ -518,7 +527,7 @@ monospace;
 @include sm {
     .comprar-passagem-container {
         &::after {
-            @include bkgImage('tree22.jpg');
+            // @include bkgImage('tree22.jpg');
         }
         .form-passagem-container {
             width: 578px; // SM

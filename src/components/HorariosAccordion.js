@@ -55,13 +55,13 @@ class HorariosAccordion extends Component {
       const strHorario = utils.firebaseToTimeExt(horario);
       const elemHorario = utils.firebaseToTimeElement(horario);
       const position = (index + 1);
-      const className = poltronas.isDisabled ? "not-allowed" : "allowed";
+      const allowedClass = poltronas.isDisabled ? "not-allowed" : "allowed";
       const isActive = (position === active);
 
       //  eventKey={poltronas.isDisabled ? -1 : position}
       collapsibles.push(
         <Panel
-          className={className}
+          className={allowedClass}
           key={horario}
           eventKey={position}
           onSelect={(selected, e) => this.onClickPanel(selected, e, poltronas.isDisabled)}

@@ -21,6 +21,15 @@ $arrowSize: 6px;
     .rdtDays {
         color: initial;
     }
+    &.loading {
+        cursor: wait !important;
+        input,
+        button,
+        a,
+        .label {
+            cursor: wait !important;
+        }
+    }
     .modal-dialog {
         border-radius: 4px 4px 20px 20px;
         input#data {
