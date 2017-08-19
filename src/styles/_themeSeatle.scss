@@ -1,0 +1,11 @@
+$materialPrimary: #424242;
+$materialPrimaryLight: lighten($materialPrimary, 15%);
+$materialPrimaryDark: darken($materialPrimary, 5%);
+$materialPrimaryDarker: darken($materialPrimaryDark, 5%);
+$colorNavbarPrincipal: rgba(black, .6);
+$colorNavbarPrincipalXs: $materialPrimaryDarker;
+$colorNavbarHeader: rgba(black, .5);
+$colorNavbarHeaderXs: $materialPrimaryDark;
+$textNavbarPrincipal: rgba(white, .9);
+$textNavbarHeader: rgba(white, .9);
+$wallpaper: './styles/images/tree23.jpg';

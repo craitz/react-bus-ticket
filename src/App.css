@@ -245,7 +245,7 @@ button:disabled {
   text-align: center; }
 
 .navheader-container .navbar {
-  background-color: #424242 !important;
+  background-color: #353535 !important;
   border-radius: 0;
   margin-bottom: 0;
   border: none;
@@ -270,7 +270,7 @@ button:disabled {
     transition: opacity 0.4s; }
   @media screen and (min-width: 768px) {
     .navheader-container .navbar {
-      background-color: rgba(255, 255, 255, 0.1) !important; } }
+      background-color: rgba(41, 41, 41, 0.85) !important; } }
   .navheader-container .navbar .navheader-nav a {
     padding-left: 0 !important; }
   .navheader-container .navbar .navbar-nav {
@@ -312,14 +312,14 @@ button:disabled {
   margin-left: 0 !important; }
 
 .App .navbar.nav-app {
-  background: #212121;
+  background-color: #292929;
   text-align: left;
   margin-bottom: 0;
   border: none;
   border-radius: 0; }
   @media screen and (min-width: 768px) {
     .App .navbar.nav-app {
-      background: rgba(255, 255, 255, 0.15); } }
+      background-color: #292929; } }
   .App .navbar.nav-app .container {
     margin-left: 0;
     margin-right: 0;
@@ -837,7 +837,7 @@ button:disabled {
 @media screen and (min-width: 768px) {
   .comprar-passagem-container::after {
     content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url("./styles/images/tree26.jpg") no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -984,7 +984,7 @@ button:disabled {
 @media screen and (min-width: 768px) {
   .confirmacao-passagem::after {
     content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url("./styles/images/tree26.jpg") no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1071,7 +1071,7 @@ button:disabled {
   @media screen and (min-width: 768px) {
     .pesquisar-passagens-container::after {
       content: "";
-      background: url(./styles/images/tree22.jpg) no-repeat center center;
+      background: url("./styles/images/tree26.jpg") no-repeat center center;
       background-attachment: scroll;
       background-size: cover;
       opacity: 1;
@@ -1142,7 +1142,7 @@ button:disabled {
 @media screen and (min-width: 768px) {
   .login-container::after {
     content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url("./styles/images/tree26.jpg") no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1204,7 +1204,7 @@ button:disabled {
 @media screen and (min-width: 768px) {
   .welcome-container::after {
     content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url("./styles/images/tree26.jpg") no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
@@ -1259,7 +1259,7 @@ button:disabled {
 @media screen and (min-width: 768px) {
   .perfil-usuario-container::after {
     content: "";
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url("./styles/images/tree26.jpg") no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;

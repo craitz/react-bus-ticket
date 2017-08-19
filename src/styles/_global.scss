@@ -215,7 +215,7 @@
 @mixin bkgImage($file: 'login3.jpg') {
     content: "";
     // background: url(./styles/images/#{$file}) no-repeat center center;
-    background: url(./styles/images/tree22.jpg) no-repeat center center;
+    background: url($wallpaper) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
     opacity: 1;
