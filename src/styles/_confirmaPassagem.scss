@@ -181,7 +181,7 @@ $fontColor: rgba($materialPrimary, 1);
 @include sm {
     .confirmacao-passagem {
         &::after {
-            @include bkgImage('tree22.jpg');
+            // @include bkgImage('tree22.jpg');
         }
         .form-centered {
             margin-top: 213px;

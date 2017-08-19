@@ -101,7 +101,7 @@
     }
     @include sm {
         &::after {
-            @include bkgImage();
+            // @include bkgImage();
         }
     }
 }

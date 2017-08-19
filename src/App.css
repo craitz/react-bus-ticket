@@ -984,19 +984,6 @@ button:disabled {
         background-color: #686868; }
 
 @media screen and (min-width: 768px) {
-  .confirmacao-passagem::after {
-    content: "";
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
   .confirmacao-passagem .form-centered {
     margin-top: 213px; } }
 
@@ -1070,20 +1057,6 @@ button:disabled {
         background-color: #424242;
         border-color: #424242 !important;
         color: white; }
-  @media screen and (min-width: 768px) {
-    .pesquisar-passagens-container::after {
-      content: "";
-      background: url("./styles/images/tree26.jpg") no-repeat center center;
-      background-attachment: scroll;
-      background-size: cover;
-      opacity: 1;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      position: absolute; } }
 
 .login-container {
   height: calc(100% - 150px) !important;
@@ -1245,19 +1218,6 @@ button:disabled {
       bottom: -20px; }
 
 @media screen and (min-width: 768px) {
-  .perfil-usuario-container::after {
-    content: "";
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
-    background-attachment: scroll;
-    background-size: cover;
-    opacity: 1;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    position: absolute; }
   .perfil-usuario-container .jumbotron {
     margin-top: 213px; } }
 

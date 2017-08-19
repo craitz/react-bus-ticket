@@ -51,7 +51,7 @@
 @include sm {
     .perfil-usuario-container {
         &::after {
-            @include bkgImage('tree22.jpg');
+            // @include bkgImage('tree22.jpg');
         }
         .jumbotron {
             margin-top: 213px;
