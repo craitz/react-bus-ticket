@@ -42,8 +42,8 @@ class ConfirmaPassagem extends Component {
 
     return (
       <div className="confirmacao-passagem">
-        <PageHeader className="hidden-xs" title="Compra finalizada !" />
-        <PageHeader className="visible-xs" title="Sucesso !" />
+        <PageHeader title="Compra finalizada !" />
+        {/*<PageHeader className="visible-xs" title="Sucesso !" />*/}
         <DivAnimated className="form-centered">
           <Grid>
             <Row>

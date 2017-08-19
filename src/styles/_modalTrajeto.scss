@@ -29,6 +29,9 @@ $arrowSize: 6px;
         .label {
             cursor: wait !important;
         }
+        .modal-footer span {
+            @include loadingStyle;
+        }
     }
     .modal-dialog {
         border-radius: 4px 4px 20px 20px;
@@ -47,10 +50,10 @@ $arrowSize: 6px;
             border: none;
             .modal-header {
                 background-color: white;
-                border-radius: 4px !important;
+                border-radius: 4px 4px 0 0 !important;
                 color: rgba($materialPrimary, 1);
-                padding: 20px 40px 10px 40px !important;
-                border-bottom: none;
+                padding: 0 40px 0 40px !important;
+                border-bottom: 1px solid rgba($materialPrimary, .1);
                 font-family: $fontPadrao;
                 font-size: 2rem;
                 line-height: 51px;
@@ -59,6 +62,10 @@ $arrowSize: 6px;
                         font-size: 2.4rem;
                     }
                     margin-top: 7px;
+                }
+                @include xs {
+                    padding: 20px 40px 10px 40px !important;
+                    border-bottom: none;
                 }
             }
             .modal-body {
@@ -79,6 +86,23 @@ $arrowSize: 6px;
                     color: #F0AD4E !important;
                     font-weight: bold;
                 }
+                .form-group {
+                    margin-bottom: 0;
+                    [data-react-toolbox="input"] {
+                        padding-bottom: 0;
+                    }
+                    &.data-volta {
+                        margin-bottom: 15px;
+                    }
+                }
+                @include xs {
+                    .form-group {
+                        margin-bottom: 15px;
+                        [data-react-toolbox="input"] {
+                            padding-bottom: 20px;
+                        }
+                    }
+                }
             }
             .modal-footer {
                 @include loadingProgress;
@@ -91,9 +115,12 @@ $arrowSize: 6px;
                 position: relative;
                 span {
                     color: rgba(white, .8);
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     line-height: 60px;
                     font-family: "Days One";
+                    @include xs {
+                        font-size: 2rem;
+                    }
                 }
             }
             .btn-buscar {
@@ -109,22 +136,3 @@ $arrowSize: 6px;
         }
     }
 }
-
-// .sliding-middle-out {
-//     // display: inline-block;
-//     position: relative;
-//     padding-bottom: 3px;
-// }
-// .sliding-middle-out:after {
-//     content: '';
-//     display: block;
-//     margin: auto;
-//     height: 3px;
-//     width: 0px;
-//     background: transparent;
-//     transition: width .5s ease, background-color .5s ease;
-// }
-// .sliding-middle-out:focus:after {
-//     width: 100%;
-//     background: blue;
-// }

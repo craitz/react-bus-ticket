@@ -33,9 +33,12 @@
                 border-radius: 0 0 4px 4px;
                 span {
                     color: rgba(white, .8);
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     line-height: 60px;
-                    font-family: "Days One"
+                    font-family: "Days One";
+                    @include xs {
+                        font-size: 2rem;
+                    }
                 }
             }
             .welcome-button {

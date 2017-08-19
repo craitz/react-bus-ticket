@@ -26,6 +26,18 @@ monospace;
     .panel-group {
         .panel-heading {
             padding: 0;
+            .header-loading {
+                display: block;
+                text-align: left;
+                margin-left: 20px;
+                span {
+                    // @include loadingStyle;
+                    font-family: "Roboto" !important;
+                    font-style: italic !important;
+                    font-size: 1.5rem !important;
+                    color: rgba($materialPrimary, .3)
+                }
+            }
             .panel-title {
                 a {
                     @include noSelection;
@@ -112,7 +124,6 @@ monospace;
                             display: inline-block;
                         }
                         .icon-remove {
-                            // color: $googleRed !important;
                             color: rgba($materialPrimary, .8);
                             position: absolute;
                             top: 2px;
@@ -120,7 +131,6 @@ monospace;
                         }
                         .icon-save {
                             color: rgba($materialPrimary, .8);
-                            // color: $googleGreen;
                             position: absolute;
                             top: 2px;
                             right: 70px;
@@ -136,6 +146,11 @@ monospace;
         .not-allowed a {
             opacity: .2;
             cursor: not-allowed !important;
+        }
+        .reserving {
+            .panel-heading {
+                // background-color: $materialPrimary;
+            }
         }
         .panel-collapse {
             .panel-body {
@@ -158,29 +173,9 @@ monospace;
                     }
                     .trigger-right {
                         width: 120px;
-                        .poltronas-icon {}
-                        .progress {}
-                        .icon-save,
-                        .icon-remove,
-                        .icon-spin {}
                         .icon-arrow {
                             line-height: 42px;
                         }
-                    }
-                    &[aria-expanded="true"] {
-                        .icon-passenger,
-                        .poltronas-text,
-                        .progress {}
-                        .icon-save,
-                        .icon-remove,
-                        .icon-spin,
-                        .icon-arrow {}
-                        .icon-remove {}
-                        .icon-save {}
-                        .icon-arrow {
-                            // margin-top: -4px !important;
-                        }
-                        .icon-spin {}
                     }
                 }
             }
@@ -303,9 +298,12 @@ monospace;
         }
         &>span {
             color: rgba(white, .8);
-            font-size: 2rem;
+            font-size: 1.5rem;
             line-height: 60px;
-            font-family: "Days One"
+            font-family: "Days One";
+            @include sm {
+                font-size: 2rem;
+            }
         }
     }
     .tab-arrow {
@@ -333,15 +331,6 @@ monospace;
     .panel-group {
         margin-bottom: 0;
     }
-    // .text-nenhum-resultado {}
-    // .tab-ida {
-    //     background: url(./styles/images/tab-ida.svg) no-repeat left fixed;
-    //     background-attachment: scroll;
-    // }
-    // .tab-volta {
-    //     background: url(./styles/images/tab-volta.svg) no-repeat right fixed;
-    //     background-attachment: scroll;
-    // }
 }
 
 @mixin busSelect($seatColor) {
@@ -359,13 +348,10 @@ monospace;
                 font-family: $fontNumeros;
                 text-shadow: 1px 1px rgba(black, .3);
                 @include noSelection();
-                // @include boxShadow(inset -1px -1px 1px 0px rgba(0, 0, 0, 0.25));
                 background: url(./styles/images/busseat-green-4.svg);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
-                //   background-size: cover;
                 color: white;
-                // background-color: $seatColor;
                 margin-right: 8px;
                 padding: 8px 3px 0 0;
                 font-size: 1.5rem;
@@ -377,11 +363,9 @@ monospace;
                     cursor: not-allowed;
                     text-shadow: none;
                     background: url(./styles/images/busseat-reserved.svg);
-                    // background-color: rgba($colorReserved, .15);
                     color: rgba(black, .2);
                 }
                 &.selected {
-                    // background-color: $colorSelected;
                     background: url(./styles/images/busseat-red.svg);
                 }
                 &.legenda {
@@ -437,29 +421,25 @@ monospace;
                     display: inline-block;
                     @include transform(rotate(-90deg));
                 }
-                &.reserved {}
-                &.selected {}
-                &.legenda {}
             }
-            &.corredor-acima {}
-            &.corredor-abaixo {}
-            &.bus-row-legenda {}
-            &.bus-row.row {}
         }
     }
-    hr {}
-    .clean-bus {}
-    .jumbotron {}
 }
 
 .comprar-passagem-container {
-    &.loading {
+    &.loading,
+    &.saving {
         cursor: wait !important;
         input,
         button,
         a,
         .label {
             cursor: wait !important;
+        }
+    }
+    &.loading {
+        .footer-section span {
+            @include loadingStyle;
         }
     }
     .opcoes-menu {
@@ -506,12 +486,8 @@ monospace;
                     opacity: .5;
                 }
             }
-            width: inherit;
             .horarios-container {
-                // position: relative;
-                // width: $tabSize;
                 width: 100%;
-                // left: 0;
                 left: calc(50% - 175px);
                 .tab-horarios {
                     @include tabControl;
@@ -519,16 +495,10 @@ monospace;
             }
         }
     }
-    // &::after {
-    //     @include bkgImage('tree22.jpg');
-    // }
 }
 
 @include sm {
     .comprar-passagem-container {
-        &::after {
-            // @include bkgImage('tree22.jpg');
-        }
         .form-passagem-container {
             width: 578px; // SM
             $left: calc(50% - 289px); // SM

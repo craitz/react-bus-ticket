@@ -104,10 +104,10 @@
       margin-top: 5px; }
     [data-react-toolbox="snackbar"] .snack-content.success i,
     [data-react-toolbox="snackbar"] .snack-content.success span {
-      color: #4CAF50 !important; }
+      color: #00ff00 !important; }
     [data-react-toolbox="snackbar"] .snack-content.error i,
     [data-react-toolbox="snackbar"] .snack-content.error span {
-      color: #F44336 !important; }
+      color: #ff4040 !important; }
   [data-react-toolbox="snackbar"] button {
     text-transform: lowercase !important;
     font-family: "Days One" !important; }
@@ -282,23 +282,10 @@ button:disabled {
       color: #e9e9e9; }
     .navheader-container .navbar .navbar-nav .page-title {
       font-family: "Days One";
-      font-size: 3rem !important;
+      font-size: 2rem !important;
       color: rgba(255, 255, 255, 0.9) !important;
       padding-left: 0;
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8); }
-    .navheader-container .navbar .navbar-nav .icon-title.links {
-      font-size: 2rem;
-      color: rgba(255, 255, 255, 0.9) !important; }
-      .navheader-container .navbar .navbar-nav .icon-title.links:hover {
-        color: white !important; }
-    .navheader-container .navbar .navbar-nav .resultados {
-      font-size: 1.5rem;
-      margin-right: 20px; }
-      .navheader-container .navbar .navbar-nav .resultados a,
-      .navheader-container .navbar .navbar-nav .resultados a:hover {
-        color: #777777 !important; }
-      .navheader-container .navbar .navbar-nav .resultados .icon {
-        font-size: 2rem; }
 
 @media screen and (min-width: 768px) {
   .navheader-container .navbar .navheader-nav a {
@@ -400,6 +387,11 @@ button:disabled {
   .modal-trajeto-container.loading a,
   .modal-trajeto-container.loading .label {
     cursor: wait !important; }
+  .modal-trajeto-container.loading .modal-footer span {
+    color: #F0AD4E !important;
+    font-family: "Roboto" !important;
+    font-style: italic;
+    font-size: 1.5rem !important; }
 
 .modal-trajeto-container .modal-dialog {
   border-radius: 4px 4px 20px 20px;
@@ -423,10 +415,10 @@ button:disabled {
     font-size: 1.5rem; }
     .modal-trajeto-container .modal-dialog .modal-content .modal-header {
       background-color: white;
-      border-radius: 4px !important;
+      border-radius: 4px 4px 0 0 !important;
       color: #424242;
-      padding: 20px 40px 10px 40px !important;
-      border-bottom: none;
+      padding: 0 40px 0 40px !important;
+      border-bottom: 1px solid rgba(66, 66, 66, 0.1);
       font-family: "Days One";
       font-size: 2rem;
       line-height: 51px; }
@@ -434,6 +426,10 @@ button:disabled {
         margin-top: 7px; }
         .modal-trajeto-container .modal-dialog .modal-content .modal-header .ida-volta span {
           font-size: 2.4rem; }
+      @media screen and (min-width: 480px) {
+        .modal-trajeto-container .modal-dialog .modal-content .modal-header {
+          padding: 20px 40px 10px 40px !important;
+          border-bottom: none; } }
     .modal-trajeto-container .modal-dialog .modal-content .modal-body {
       padding: 10px 40px 30px 30px !important; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-body .col-ida,
@@ -446,6 +442,17 @@ button:disabled {
       .modal-trajeto-container .modal-dialog .modal-content .modal-body ._2u-08 {
         color: #F0AD4E !important;
         font-weight: bold; }
+      .modal-trajeto-container .modal-dialog .modal-content .modal-body .form-group {
+        margin-bottom: 0; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .form-group [data-react-toolbox="input"] {
+          padding-bottom: 0; }
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .form-group.data-volta {
+          margin-bottom: 15px; }
+      @media screen and (min-width: 480px) {
+        .modal-trajeto-container .modal-dialog .modal-content .modal-body .form-group {
+          margin-bottom: 15px; }
+          .modal-trajeto-container .modal-dialog .modal-content .modal-body .form-group [data-react-toolbox="input"] {
+            padding-bottom: 20px; } }
     .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
       border-top: none;
       background-color: #424242;
@@ -455,6 +462,7 @@ button:disabled {
       border-radius: 0 0 4px 4px;
       position: relative; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-footer .footer-progress {
+        opacity: 1 !important;
         position: absolute;
         left: 0;
         top: -4px;
@@ -463,9 +471,12 @@ button:disabled {
           background-color: #F0AD4E !important; }
       .modal-trajeto-container .modal-dialog .modal-content .modal-footer span {
         color: rgba(255, 255, 255, 0.8);
-        font-size: 2rem;
+        font-size: 1.5rem;
         line-height: 60px;
         font-family: "Days One"; }
+        @media screen and (min-width: 480px) {
+          .modal-trajeto-container .modal-dialog .modal-content .modal-footer span {
+            font-size: 2rem; } }
     .modal-trajeto-container .modal-dialog .modal-content .btn-buscar {
       position: absolute;
       right: 20px;
@@ -491,13 +502,21 @@ button:disabled {
 .comprar-passagem-container {
   overflow: auto;
   height: calc(100vh - 50px); }
-  .comprar-passagem-container.loading {
+  .comprar-passagem-container.loading, .comprar-passagem-container.saving {
     cursor: wait !important; }
     .comprar-passagem-container.loading input,
     .comprar-passagem-container.loading button,
     .comprar-passagem-container.loading a,
-    .comprar-passagem-container.loading .label {
+    .comprar-passagem-container.loading .label, .comprar-passagem-container.saving input,
+    .comprar-passagem-container.saving button,
+    .comprar-passagem-container.saving a,
+    .comprar-passagem-container.saving .label {
       cursor: wait !important; }
+  .comprar-passagem-container.loading .footer-section span {
+    color: #F0AD4E !important;
+    font-family: "Roboto" !important;
+    font-style: italic;
+    font-size: 1.5rem !important; }
   .comprar-passagem-container .opcoes-menu {
     position: absolute;
     z-index: 9;
@@ -516,7 +535,6 @@ button:disabled {
     width: 300px;
     margin: 106px 0 0 calc(50% - 150px) !important; }
     .comprar-passagem-container .form-passagem-container .form-centered {
-      width: inherit;
       width: inherit; }
       .comprar-passagem-container .form-passagem-container .form-centered .jumbo-comprar {
         background-color: rgba(255, 255, 255, 0.6); }
@@ -549,6 +567,15 @@ button:disabled {
           outline: none !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading {
             padding: 0; }
+            .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .header-loading {
+              display: block;
+              text-align: left;
+              margin-left: 20px; }
+              .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .header-loading span {
+                font-family: "Roboto" !important;
+                font-style: italic !important;
+                font-size: 1.5rem !important;
+                color: rgba(66, 66, 66, 0.3); }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a {
               -moz-user-select: -moz-none !important;
               -khtml-user-select: none !important;
@@ -645,6 +672,7 @@ button:disabled {
             padding: 5px 0 5px 0;
             position: relative; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-collapse .panel-body .footer-progress {
+              opacity: 1 !important;
               position: absolute;
               left: 0;
               top: -4px;
@@ -812,6 +840,7 @@ button:disabled {
             padding-left: 40px;
             margin: 12px -12px 0 -12px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section .footer-progress {
+              opacity: 1 !important;
               position: absolute;
               left: 0;
               top: -4px;
@@ -825,9 +854,12 @@ button:disabled {
               bottom: -20px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section > span {
               color: rgba(255, 255, 255, 0.8);
-              font-size: 2rem;
+              font-size: 1.5rem;
               line-height: 60px;
               font-family: "Days One"; }
+              @media screen and (min-width: 768px) {
+                .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section > span {
+                  font-size: 2rem; } }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-arrow {
             position: absolute;
             font-size: 3rem;
@@ -1078,6 +1110,11 @@ button:disabled {
     .login-container.loading a,
     .login-container.loading .label {
       cursor: wait !important; }
+    .login-container.loading .footer-section span {
+      color: #F0AD4E !important;
+      font-family: "Roboto" !important;
+      font-style: italic;
+      font-size: 1.5rem !important; }
   .login-container .login-box {
     text-align: left;
     position: relative;
@@ -1105,6 +1142,7 @@ button:disabled {
       border-radius: 0 0 4px 4px;
       position: relative; }
       .login-container .login-box form .footer-section .footer-progress {
+        opacity: 1 !important;
         position: absolute;
         left: 0;
         top: -4px;
@@ -1113,9 +1151,12 @@ button:disabled {
           background-color: #F0AD4E !important; }
       .login-container .login-box form .footer-section span {
         color: rgba(255, 255, 255, 0.8);
-        font-size: 2rem;
+        font-size: 1.5rem;
         line-height: 60px;
         font-family: "Days One"; }
+        @media screen and (min-width: 480px) {
+          .login-container .login-box form .footer-section span {
+            font-size: 2rem; } }
     .login-container .login-box form .btn-login {
       position: absolute;
       right: 20px;
@@ -1152,9 +1193,12 @@ button:disabled {
         border-radius: 0 0 4px 4px; }
         .welcome-container .info-container .jumbo-painel .footer-section span {
           color: rgba(255, 255, 255, 0.8);
-          font-size: 2rem;
+          font-size: 1.5rem;
           line-height: 60px;
           font-family: "Days One"; }
+          @media screen and (min-width: 480px) {
+            .welcome-container .info-container .jumbo-painel .footer-section span {
+              font-size: 2rem; } }
       .welcome-container .info-container .jumbo-painel .welcome-button {
         position: absolute;
         right: 20px;
@@ -1182,6 +1226,11 @@ button:disabled {
     .perfil-usuario-container.loading a,
     .perfil-usuario-container.loading .label {
       cursor: wait !important; }
+    .perfil-usuario-container.loading .footer-section span {
+      color: #F0AD4E !important;
+      font-family: "Roboto" !important;
+      font-style: italic;
+      font-size: 1.5rem !important; }
   .perfil-usuario-container .jumbotron {
     margin-top: 76px;
     position: relative;
@@ -1201,6 +1250,7 @@ button:disabled {
       border-radius: 0 0 4px 4px;
       position: relative; }
       .perfil-usuario-container .jumbotron .footer-section .footer-progress {
+        opacity: 1 !important;
         position: absolute;
         left: 0;
         top: -4px;
@@ -1209,9 +1259,12 @@ button:disabled {
           background-color: #F0AD4E !important; }
       .perfil-usuario-container .jumbotron .footer-section span {
         color: rgba(255, 255, 255, 0.8);
-        font-size: 2rem;
+        font-size: 1.5rem;
         line-height: 60px;
         font-family: "Days One"; }
+        @media screen and (min-width: 480px) {
+          .perfil-usuario-container .jumbotron .footer-section span {
+            font-size: 2rem; } }
     .perfil-usuario-container .jumbotron .btn-salvar {
       position: absolute;
       right: 20px;
@@ -1224,22 +1277,15 @@ button:disabled {
 html {
   height: 100%; }
   html body {
-    background-color: #dedede;
+    background: url("./styles/images/tree27.jpg") repeat center center;
+    background-attachment: scroll;
     height: inherit;
     position: relative; }
-    html body::after {
-      content: "";
-      background: url("./styles/images/tree26.jpg") no-repeat center center;
-      background-attachment: scroll;
-      background-size: cover;
-      opacity: 1;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      position: absolute; }
+    @media screen and (min-width: 768px) {
+      html body {
+        background: url("./styles/images/tree26.jpg") no-repeat center center;
+        background-attachment: scroll;
+        background-size: cover; } }
     html body #root {
       height: inherit; }
       html body #root .App {

@@ -17,7 +17,7 @@ import * as compraPassagemActions from '../actions/compraPassagem.actions'
 import * as utils from '../shared/Utils';
 
 const fakeDataOptions = {
-  days: 5,
+  days: 30,
   startHour: 6,
   endHour: 22,
   reservedPercentage: 0.2, // 20%
@@ -253,6 +253,7 @@ export class Login extends Component {
     const { email, senha } = this.props;
     const loading = this.state.autenticando;
     const containerClass = loading ? "login-container loading" : "login-container";
+    const footerLabel = loading ? "Autenticando usuário..." : "Entrar no sistema";
     if (firebaseHelper.isLoggedIn()) {
       return (
         <Redirect to='/' />
@@ -283,8 +284,7 @@ export class Login extends Component {
                 />
               </Row>
               <Row className="footer-section">
-                <span className="bt-mui-text hidden-xs">Login no sistema</span>
-                <span className="bt-mui-text visible-xs">Entrar</span>
+                <span className="bt-mui-text">{footerLabel}</span>
                 {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
               </Row>
               <Button
@@ -294,10 +294,11 @@ export class Login extends Component {
                 icon="directions_run"
                 disabled={loading}
                 onClick={this.handleLogin}
+              //onClick={this.handleGenerateFakeData()}
               />
             </form>
           </DivAnimated>
-        </div>
+        </div >
       );
     }
   }

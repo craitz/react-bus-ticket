@@ -34,29 +34,11 @@
             .page-title {
                 font: {
                     family: $fontNavbarHeader;
-                    size: 3rem !important; // SM
+                    size: 2rem !important; // SM
                 }
                 color: $textNavbarHeader !important;
                 padding-left: 0; // SM
                 @include textShadow(.8);
-            }
-            .icon-title.links {
-                font-size: 2rem;
-                color: $textNavbarHeader !important;
-                &:hover {
-                    color: white !important;
-                }
-            }
-            .resultados {
-                font-size: 1.5rem;
-                margin-right: 20px;
-                a,
-                a:hover {
-                    color: rgb(119, 119, 119) !important;
-                }
-                .icon {
-                    font-size: 2rem;
-                }
             }
         }
     }

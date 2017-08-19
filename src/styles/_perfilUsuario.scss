@@ -8,6 +8,9 @@
         .label {
             cursor: wait !important;
         }
+        .footer-section span {
+            @include loadingStyle;
+        }
     }
     .jumbotron {
         margin-top: 76px;
@@ -32,9 +35,12 @@
             position: relative;
             span {
                 color: rgba(white, .8);
-                font-size: 2rem;
+                font-size: 1.5rem;
                 line-height: 60px;
-                font-family: "Days One"
+                font-family: "Days One";
+                @include xs {
+                    font-size: 2rem;
+                }
             }
         }
         .btn-salvar {

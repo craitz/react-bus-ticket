@@ -202,6 +202,7 @@
 
 @mixin loadingProgress {
     .footer-progress {
+        opacity: 1 !important;
         position: absolute;
         left: 0;
         top: -4px;
@@ -210,6 +211,13 @@
             background-color: #F0AD4E !important;
         }
     }
+}
+
+@mixin loadingStyle {
+    color: #F0AD4E !important;
+    font-family: "Roboto" !important;
+    font-style: italic;
+    font-size: 1.5rem !important;
 }
 
 @mixin bkgImage($file: 'login3.jpg') {

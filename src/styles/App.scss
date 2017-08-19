@@ -22,18 +22,17 @@
 @import "perfilUsuario";
 html {
     height: 100%;
+    // &::after {
+    //     @include bkgImage('tree22.jpg');
+    // }
     body {
-        &::after {
-            @include bkgImage('tree22.jpg');
+        background: url($wallpaperXs) repeat center center;
+        background-attachment: scroll;
+        @include sm {
+            background: url($wallpaper) no-repeat center center;
+            background-attachment: scroll;
+            background-size: cover;
         }
-        // @include bkgImage('tree2.jpg');
-        // Aumente para testar as fontes em diversas resoluções
-        // font-size: 30px !important; 
-        background-color: #dedede;
-        // background: url(./styles/images/tree2.jpg) no-repeat center center;
-        // background-size: cover;
-        // background-attachment: fixed;
-        // background-color: darken(#f5f5f5, 5%);
         height: inherit;
         position: relative;
         #root {

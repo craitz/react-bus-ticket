@@ -281,6 +281,7 @@ export class ModalTrajeto extends Component {
     const { isVisible, origem, destino, cidades, isIdaVolta, data, dataVolta } = this.props;
     const loading = this.state.carregando;
     const containerClass = loading ? "modal-trajeto-container loading" : "modal-trajeto-container";
+    const footerLabel = loading ? "Procurando passagens..." : "Buscar passagens";
 
     const getIcon = () => isIdaVolta ? 'swap_horiz' : 'trending_flat';
     const getTooltip = () => isIdaVolta ? 'Ida e volta' : 'Somente ida';
@@ -306,7 +307,7 @@ export class ModalTrajeto extends Component {
         <form onSubmit={this.handleSubmit}>
           <Modal.Body>
             <FormGroup
-              className={this.state.origemActive ? "active form-trajeto-origem" : "form-trajeto-origem"}
+              className={this.state.origemActive ? "active origem" : "origem"}
               controlId="origem"
               validationState={origem.validation}
             >
@@ -322,7 +323,7 @@ export class ModalTrajeto extends Component {
             <Row>
               <Col xs={12}>
                 <FormGroup
-                  className={this.state.destinoActive ? "active form-trajeto-destino" : "form-trajeto-destino"}
+                  className={this.state.destinoActive ? "active destino" : "destino"}
                   controlId="destino"
                   validationState={destino.validation}
                 >
@@ -340,7 +341,7 @@ export class ModalTrajeto extends Component {
             <Row>
               <Col xs={12} className={isIdaVolta ? "col-ida-com-volta" : "col-ida"}>
                 <FormGroup
-                  className={this.state.idaActive ? "active form-date" : "form-date"}
+                  className={this.state.idaActive ? "active data-ida" : "data-ida"}
                   controlId="data-ida"
                   validationState={data.validation}
                 >
@@ -363,7 +364,7 @@ export class ModalTrajeto extends Component {
               <Row>
                 <Col xs={12} className={isIdaVolta ? "col-volta-com-volta" : "col-volta"}>
                   <FormGroup
-                    className={this.state.voltaActive ? "active form-date" : "form-date"}
+                    className={this.state.voltaActive ? "active data-volta" : "data-volta"}
                     controlId="data-volta"
                     validationState={dataVolta.validation}
                   >
@@ -384,8 +385,7 @@ export class ModalTrajeto extends Component {
             }
           </Modal.Body>
           <Modal.Footer>
-            <span className="hidden-xs">Buscar passagens</span>
-            <span className="visible-xs">Buscar</span>
+            <span>{footerLabel}</span>
             {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
           </Modal.Footer>
           <Button

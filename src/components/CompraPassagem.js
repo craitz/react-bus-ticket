@@ -27,8 +27,6 @@ export class CompraPassagem extends Component {
   constructor(props) {
     super(props);
     this.canRender = false;
-    this.handleChangePoltrona = this.handleChangePoltrona.bind(this);
-    this.handleChangeHorario = this.handleChangeHorario.bind(this);
     this.handleClickSeat = this.handleClickSeat.bind(this);
     this.handleResetSeats = this.handleResetSeats.bind(this);
     this.handleSaveSeats = this.handleSaveSeats.bind(this);
@@ -37,11 +35,7 @@ export class CompraPassagem extends Component {
     this.handleLimpaIda = this.handleLimpaIda.bind(this);
     this.handleLimpaVolta = this.handleLimpaVolta.bind(this);
     this.handleSelectTab = this.handleSelectTab.bind(this);
-    this.handleChangeOrigem = this.handleChangeOrigem.bind(this);
-    this.handleChangeDestino = this.handleChangeDestino.bind(this);
     this.handleExcluiVolta = this.handleExcluiVolta.bind(this);
-    this.handleHome = this.handleHome.bind(this);
-    this.handlePesquisa = this.handlePesquisa.bind(this);
     this.state = {
       salvando: false
     };
@@ -58,59 +52,9 @@ export class CompraPassagem extends Component {
     return !this.props.isFrozen;
   }
 
-  handleHome() {
-    this.props.history.push('/');
-  }
-
-  handlePesquisa() {
-    this.props.history.push('/passagens');
-  }
-
   handleExcluiVolta() {
     this.props.dispatch(actions.setIdaVolta(false));
     this.props.dispatch(actions.setActiveTab(0));
-  }
-
-  handleChangeOrigem(value) {
-    // Se limpou o input origem, cancela o evento e retorna sem fazer nada
-    // Ou seja, o input nunca pode ficar vazio
-    if (!value || value.length === 0) {
-      return;
-    }
-
-    const { dispatch, passagem } = this.props;
-    const isPristine = passagem.origem.isPristine;
-    dispatch(actions.changeOrigem(value)); // muda a origem
-    isPristine && dispatch(actions.setOrigemDirty()); // seta dirty
-
-    // Se a origem é a mesma do destino, muda o destino
-    const origemVal = parseInt(value, 10);
-    const destinoVal = parseInt(passagem.destino.value, 10);
-    if (origemVal === destinoVal) {
-      const newIndexDestino = (destinoVal === 0) ? (destinoVal + 1) : (destinoVal - 1);
-      dispatch(actions.changeDestino(newIndexDestino.toString()));
-    };
-  }
-
-  handleChangeDestino(value) {
-    // Se limpou o input destino, cancela o evento e retorna sem fazer nada
-    // Ou seja, o input nunca pode ficar vazio
-    if (!value || value.length === 0) {
-      return;
-    }
-
-    const { dispatch, passagem } = this.props;
-    const isPristine = passagem.destino.isPristine;
-    dispatch(actions.changeDestino(value)); // muda o destino
-    isPristine && dispatch(actions.setDestinoDirty()); // seta dirty
-
-    // Se o destino é o mesmo da origem, muda a origem
-    const origemVal = parseInt(passagem.origem.value, 10);
-    const destinoVal = parseInt(value, 10);
-    if (origemVal === destinoVal) {
-      const newIndexOrigem = (origemVal === 0) ? (origemVal + 1) : (origemVal - 1);
-      dispatch(actions.changeOrigem(newIndexOrigem.toString()));
-    };
   }
 
   handleSelectTab(event) {
@@ -401,46 +345,6 @@ export class CompraPassagem extends Component {
     return hasSelection;
   }
 
-  handleChangePoltrona(value) {
-    const { dispatch, passagem } = this.props;
-    const isPristine = passagem.poltrona.isPristine;
-    const hasSelection = this.updateStatusPoltronas(passagem.poltrona.value, value);
-
-    // altera poltrona e seta como 'dirty'
-    dispatch(actions.changePoltrona(value));
-    isPristine && dispatch(actions.setPoltronaDirty());
-
-    // valida poltrona
-    this.updatePoltronaValidation(hasSelection);
-  }
-
-  updatePoltronaValidation(hasSelection) {
-    const { dispatch, passagem } = this.props;
-    const oldPoltrona = passagem.poltrona;
-
-    // test required
-    if (hasSelection) {
-      (oldPoltrona.validation !== utils.ValidationStatus.NONE) &&
-        dispatch(actions.setPoltronaValidation(utils.ValidationStatus.NONE, ''));
-    } else {
-      (oldPoltrona.validation !== utils.ValidationStatus.ERROR) &&
-        dispatch(actions.setPoltronaValidation(utils.ValidationStatus.ERROR, 'Escolha ao menos uma poltrona'));
-    }
-  }
-
-  handleChangeHorario(event) {
-    const { dispatch, passagem } = this.props;
-    const { origem, destino, data } = passagem;
-    const novoHorarioText = event.target[event.target.value].text;
-
-    dispatch(actions.changeHorario({
-      val: event.target.value,
-      text: novoHorarioText
-    }));
-
-    this.updatePoltronas(origem.text, destino.text, data, novoHorarioText);
-  }
-
   formCanBeSaved() {
     const { dispatch, passagem, passagemVolta, isIdaVolta } = this.props;
     const snackType = utils.SnackbarTypes.ERROR;
@@ -449,23 +353,23 @@ export class CompraPassagem extends Component {
       if ((passagem.horario.length === 0) && (passagemVolta.horario.length === 0)) {
         dispatch(actions.setErroSalvandoIda(true));
         dispatch(actions.setErroSalvandoVolta(true));
-        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona!'));
+        dispatch(snackbarActions.show(snackType, 'Nenhuma poltrona reservada !'));
         return false
       }
       if (passagem.horario.length === 0) {
         dispatch(actions.setErroSalvandoIda(true));
-        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona para a ida!'));
+        dispatch(snackbarActions.show(snackType, 'Nenhuma poltrona reservada na ida !'));
         return false
       }
       if (passagemVolta.horario.length === 0) {
         dispatch(actions.setErroSalvandoVolta(true));
-        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona para a volta!'));
+        dispatch(snackbarActions.show(snackType, 'Nenhuma poltrona reservada na volta !'));
         return false
       }
     } else {
       if (passagem.horario.length === 0) {
         dispatch(actions.setErroSalvandoIda(true));
-        dispatch(snackbarActions.show(snackType, 'Voce precisa escolher uma poltrona!'));
+        dispatch(snackbarActions.show(snackType, 'Nenhuma poltrona reservada !'));
         return false
       }
     }
@@ -601,7 +505,8 @@ export class CompraPassagem extends Component {
       isIdaVolta, activeAccordion, activeAccordionVolta, activeTab,
       isSavingPoltronas } = this.props;
     const loading = this.state.salvando;
-    const containerClass = (loading || isSavingPoltronas) ? "comprar-passagem-container loading" : "comprar-passagem-container";
+    const loadingClass = loading ? "comprar-passagem-container loading" : "comprar-passagem-container";
+    const containerClass = isSavingPoltronas ? `${loadingClass} saving` : loadingClass;
     const momentIda = moment(passagem.data.value, 'DD/MM/YYYY');
     const strDataIda = momentIda.format('DD/MM/YYYY');
     const momentVolta = moment(passagemVolta.data.value, 'DD/MM/YYYY');
@@ -729,13 +634,24 @@ export class CompraPassagem extends Component {
         />
       </TooltipOverlay>
 
-    const ButtonSection = () =>
-      <Row className="footer-section">
-        {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
-        <span className="hidden-xs">Finalizar compra</span>
-        <span className="visible-xs">Finalizar</span>
-        <ButtonFinalizar />
-      </Row>
+    const ButtonSection = () => {
+      const getFooterLabel = () => {
+        if (loading) {
+          return "Finalizando operação...";
+        } else {
+          return "Finalizar compra"
+        }
+      };
+
+      return (
+        <Row className="footer-section">
+          {loading && <ProgressBar className="footer-progress" mode="indeterminate" />}
+          <span>{getFooterLabel()}</span>
+          {/*<span className="visible-xs">Finalizar</span>*/}
+          <ButtonFinalizar />
+        </Row>
+      );
+    }
 
     const InfoPassagem = ({ isVolta }) =>
       <HeaderTab isVolta={isVolta} />
@@ -832,15 +748,15 @@ export class CompraPassagem extends Component {
 
     return (
       <div className={containerClass}>
-        <PageHeader
+        {/*<PageHeader
           title="Compre sua passagem"
           className="header-comprar hidden-xs"
         >
           <ButtonEditar />
-        </PageHeader>
+        </PageHeader>*/}
         <PageHeader
-          title="Compre já!"
-          className="header-comprar visible-xs"
+          title="Comprar passagens"
+          className="header-comprar"
         >
           <ButtonEditar />
         </PageHeader>

@@ -111,7 +111,7 @@ const FormPerfil = ({ onSubmit, onChangeNome, onChangeCpf, onChangeDataNasciment
           spinning &&
           <ProgressBar className="footer-progress" mode="indeterminate" />
         }
-        <span>Salvar alterações</span>
+        <span>{spinning ? "Salvando alterações..." : "Confirmar alterações"}</span>
       </Row>
       <ButtonAtualizar spinning={spinning} />
     </form>

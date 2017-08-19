@@ -28,8 +28,7 @@ class Welcome extends Component {
   render() {
     return (
       <div className="welcome-container">
-        <PageHeader title="Bem-vindo !">
-        </PageHeader>
+        <PageHeader title="Seja bem-vindo !" />
         <DivAnimated className="info-container">
           <Col sm={8} smOffset={2} md={6} mdOffset={3} lg={6} lgOffset={3}>
             <Jumbotron className="jumbo-painel mui--z2">
@@ -68,7 +67,7 @@ class Welcome extends Component {
               </Row>
               <Row className="footer-section">
                 <span className="bt-mui-text hidden-xs">Compre agora sua passagem !</span>
-                <span className="bt-mui-text visible-xs">Comprar</span>
+                <span className="bt-mui-text visible-xs">Comprar passagens</span>
               </Row>
               <Button
                 floating

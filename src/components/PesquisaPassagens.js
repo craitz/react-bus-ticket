@@ -429,8 +429,7 @@ export class PesquisaPassagens extends Component {
 
     return (
       <div className="pesquisar-passagens-container">
-        <PageHeader title="Histórico de compras" className="hidden-xs" />
-        <PageHeader title="Histórico" className="visible-xs" />
+        <PageHeader title="Histórico de compras" />
         <DivAnimated>
           <Col md={10} mdOffset={1}>
             <Pagination
