@@ -97,6 +97,17 @@
 
 [data-react-toolbox="snackbar"] {
   border-radius: 4px 4px 0 0; }
+  [data-react-toolbox="snackbar"] .snack-content {
+    display: inline-flex;
+    align-items: center; }
+    [data-react-toolbox="snackbar"] .snack-content span {
+      margin-top: 5px; }
+    [data-react-toolbox="snackbar"] .snack-content.success i,
+    [data-react-toolbox="snackbar"] .snack-content.success span {
+      color: #4CAF50 !important; }
+    [data-react-toolbox="snackbar"] .snack-content.error i,
+    [data-react-toolbox="snackbar"] .snack-content.error span {
+      color: #F44336 !important; }
   [data-react-toolbox="snackbar"] button {
     text-transform: lowercase !important;
     font-family: "Days One" !important; }

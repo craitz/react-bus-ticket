@@ -11,13 +11,13 @@ const SnackContent = ({ type, message }) => {
   const getIcon = (type) => {
     switch (type) {
       case utils.SnackbarTypes.SUCCESS: {
-        return '';
+        return 'done';
       }
       case utils.SnackbarTypes.ERROR: {
-        return 'exclamation-triangle';
+        return 'error';
       }
       case utils.SnackbarTypes.WARNING: {
-        return '';
+        return 'warning';
       }
       default: {
         return '';
@@ -25,9 +25,26 @@ const SnackContent = ({ type, message }) => {
     }
   }
 
+  const getClass = (type) => {
+    switch (type) {
+      case utils.SnackbarTypes.SUCCESS: {
+        return 'snack-content success';
+      }
+      case utils.SnackbarTypes.ERROR: {
+        return 'snack-content error';
+      }
+      case utils.SnackbarTypes.WARNING: {
+        return 'snack-content warning';
+      }
+      default: {
+        return 'snack-content';
+      }
+    }
+  }
+
   return (
-    <span>
-      <FontAwesome name={getIcon(type)} />
+    <span className={getClass(type)}>
+      <i className="material-icons">{getIcon(type)}</i>
       <span className="text-after-icon">{message}</span>
     </span>
   );
@@ -89,7 +106,7 @@ class Snackbar extends Component {
       <SnackbarTB
         //className={type}
         active={visible}
-        action={getAction()}
+        action="x"
         timeout={3500}
         label={<SnackContent type={type} message={message} />}
         type={getType()}

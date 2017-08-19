@@ -19,6 +19,26 @@
 
 [data-react-toolbox="snackbar"] {
     border-radius: 4px 4px 0 0;
+    .snack-content {
+        display: inline-flex;
+        align-items: center;
+        span {
+            margin-top: 5px;
+        }
+        &.success {
+            i,
+            span {
+                color: $googleGreen !important;
+            }
+        }
+        &.error {
+            i,
+            span {
+                color: $googleRed !important;
+            }
+        }
+    }
+    // color: red !important;
     button {
         text-transform: lowercase !important;
         font-family: "Days One" !important;
