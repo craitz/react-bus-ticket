@@ -220,13 +220,13 @@
     font-size: 1.5rem !important;
 }
 
-@mixin bkgImage($file: 'login3.jpg') {
+@mixin bkgImage {
     content: "";
     // background: url(./styles/images/#{$file}) no-repeat center center;
     background: url($wallpaper) no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
-    opacity: 1;
+    opacity: .85;
     z-index: -1;
     top: 0;
     left: 0;

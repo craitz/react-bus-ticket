@@ -178,7 +178,7 @@ export class ModalTrajeto extends Component {
     dispatch(compraPassagemActions.SetFrozen(false)); // descongela o form ComprarPassagem
 
     // volta ao estado antes das alterações, caso tenha sido chamado do form ComprarPassagem
-    !isFromWelcome && dispatch(compraPassagemActions.backToState(snapshot));
+    !isFromWelcome && snapshot && dispatch(compraPassagemActions.backToState(snapshot));
   }
 
   transformHorarios(snap, data, isVolta) {

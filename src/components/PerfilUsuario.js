@@ -141,14 +141,19 @@ class PerfilUsuario extends Component {
     const user = firebaseHelper.getUser();
     dispatch(actions.changeNome(user.nome));
     dispatch(actions.setNomeDirty());
+    dispatch(actions.setNomeValidation(utils.ValidationStatus.NONE, ''));
     dispatch(actions.changeCpf(user.cpf));
     dispatch(actions.setCpfDirty());
+    dispatch(actions.setCpfValidation(utils.ValidationStatus.NONE, ''));
     dispatch(actions.changeDataNascimento(user.dataNascimento));
     dispatch(actions.setDataNascimentoDirty());
+    dispatch(actions.setDataNascimentoValidation(utils.ValidationStatus.NONE, ''));
     dispatch(actions.changeTelefone(user.telefone));
     dispatch(actions.setTelefoneDirty());
+    dispatch(actions.setTelefoneValidation(utils.ValidationStatus.NONE, ''));
     dispatch(actions.changeCelular(user.celular));
     dispatch(actions.setCelularDirty());
+    dispatch(actions.setCelularValidation(utils.ValidationStatus.NONE, ''));
   }
 
   handleChangeNome(event) {

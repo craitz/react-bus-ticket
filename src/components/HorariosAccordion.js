@@ -80,7 +80,7 @@ class HorariosAccordion extends Component {
             <TooltipOverlay text="Reservar poltronas selecionadas" position="top">
               <IconButton
                 className="icon-save"
-                icon="playlist_add"
+                icon="layers"
                 primary
                 onClick={(event) => onSaveSeats(event, isVolta, horario)}
               />
@@ -88,7 +88,7 @@ class HorariosAccordion extends Component {
             <TooltipOverlay text="Limpar seleção" position="top">
               <IconButton
                 className="icon-remove"
-                icon="clear_all"
+                icon="layers_clear"
                 primary
                 onClick={() => onResetSeats(isVolta, horario)}
               />

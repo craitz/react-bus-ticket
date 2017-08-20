@@ -25,14 +25,17 @@ html {
     // &::after {
     //     @include bkgImage('tree22.jpg');
     // }
+    background-color: rgb(137, 131, 112);
     body {
-        background: url($wallpaperXs) repeat center center;
+        // @include bkgImage();
+        background: url($wallpaperXs) no-repeat center center;
         background-attachment: scroll;
-        @include sm {
-            background: url($wallpaper) no-repeat center center;
-            background-attachment: scroll;
-            background-size: cover;
-        }
+        background-size: cover;
+        // @include sm {
+        //     background: url($wallpaper) no-repeat center center;
+        //     background-attachment: scroll;
+        //     background-size: cover;
+        // }
         height: inherit;
         position: relative;
         #root {
