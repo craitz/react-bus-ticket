@@ -104,10 +104,10 @@
       margin-top: 5px; }
     [data-react-toolbox="snackbar"] .snack-content.success i,
     [data-react-toolbox="snackbar"] .snack-content.success span {
-      color: #00ff00 !important; }
+      color: #3E8B3E !important; }
     [data-react-toolbox="snackbar"] .snack-content.error i,
     [data-react-toolbox="snackbar"] .snack-content.error span {
-      color: #ff4040 !important; }
+      color: #a33c41 !important; }
   [data-react-toolbox="snackbar"] button {
     text-transform: lowercase !important;
     font-family: "Days One" !important; }
@@ -245,7 +245,7 @@ button:disabled {
   text-align: center; }
 
 .navheader-container .navbar {
-  background-color: #353535 !important;
+  background-color: #4d4e49 !important;
   border-radius: 0;
   margin-bottom: 0;
   border: none;
@@ -270,7 +270,7 @@ button:disabled {
     transition: opacity 0.4s; }
   @media screen and (min-width: 768px) {
     .navheader-container .navbar {
-      background-color: rgba(41, 41, 41, 0.9) !important; } }
+      background-color: rgba(255, 255, 255, 0.3) !important; } }
   .navheader-container .navbar .navheader-nav a {
     padding-left: 0 !important; }
   .navheader-container .navbar .navbar-nav {
@@ -299,14 +299,27 @@ button:disabled {
   margin-left: 0 !important; }
 
 .App .navbar.nav-app {
-  background-color: #292929;
+  background-color: #40413d;
   text-align: left;
   margin-bottom: 0;
   border: none;
   border-radius: 0; }
   @media screen and (min-width: 768px) {
     .App .navbar.nav-app {
-      background-color: #292929; } }
+      background-color: #40413d; } }
+  .App .navbar.nav-app::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: -5px;
+    width: 100%;
+    height: 5px;
+    pointer-events: none;
+    opacity: 1;
+    box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+    will-change: opacity;
+    transition: opacity 0.4s; }
   .App .navbar.nav-app .container {
     margin-left: 0;
     margin-right: 0;
@@ -325,23 +338,25 @@ button:disabled {
       margin-right: 20px; }
       .App .navbar.nav-app .container .navbrand-login .header-title,
       .App .navbar.nav-app .container .navbrand-logout .header-title {
-        color: #F6952D;
+        color: #F0AD4E;
         margin-left: 15px;
         font-size: 2.2rem;
         font-family: "Days One";
-        font-weight: bold; }
+        font-weight: bold;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8); }
       .App .navbar.nav-app .container .navbrand-login .App-logo,
       .App .navbar.nav-app .container .navbrand-logout .App-logo {
-        color: #F6952D;
-        font-size: 2.5rem; }
+        color: #F0AD4E;
+        font-size: 2.5rem;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8); }
     .App .navbar.nav-app .container .navbar-nav {
       margin-left: 20px; }
       .App .navbar.nav-app .container .navbar-nav span {
-        color: rgba(255, 255, 255, 0.9); }
+        color: rgba(255, 255, 255, 0.6); }
     .App .navbar.nav-app .container .navbar-text a {
       text-decoration: none !important; }
       .App .navbar.nav-app .container .navbar-text a span {
-        color: rgba(255, 255, 255, 0.9); }
+        color: rgba(255, 255, 255, 0.6); }
     .App .navbar.nav-app .container .nav-fontes {
       margin: 0 0 0 33px; }
 
@@ -355,7 +370,7 @@ button:disabled {
     width: 300px;
     margin-left: calc(50% - 150px); }
     .loading-dialog-container .modal-dialog .modal-content {
-      background-color: #686868;
+      background-color: #74766e;
       color: white;
       border-radius: 4px;
       -moz-user-select: -moz-none !important;
@@ -416,9 +431,9 @@ button:disabled {
     .modal-trajeto-container .modal-dialog .modal-content .modal-header {
       background-color: white;
       border-radius: 4px 4px 0 0 !important;
-      color: #424242;
+      color: #4d4e49;
       padding: 0 40px 0 40px !important;
-      border-bottom: 1px solid rgba(66, 66, 66, 0.1);
+      border-bottom: 1px solid rgba(77, 78, 73, 0.1);
       font-family: "Days One";
       font-size: 2rem;
       line-height: 51px; }
@@ -455,7 +470,7 @@ button:disabled {
             padding-bottom: 20px; } }
     .modal-trajeto-container .modal-dialog .modal-content .modal-footer {
       border-top: none;
-      background-color: #424242;
+      background-color: #62635d;
       text-align: left;
       padding: 0 0 0 40px;
       height: 60px !important;
@@ -527,7 +542,7 @@ button:disabled {
     z-index: 9;
     right: 20px;
     bottom: -20px;
-    background-color: #686868 !important; }
+    background-color: #62635d !important; }
   .comprar-passagem-container .form-passagem-container {
     position: relative;
     background-color: transparent;
@@ -575,7 +590,7 @@ button:disabled {
                 font-family: "Roboto" !important;
                 font-style: italic !important;
                 font-size: 1.5rem !important;
-                color: rgba(66, 66, 66, 0.3); }
+                color: rgba(77, 78, 73, 0.3); }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a {
               -moz-user-select: -moz-none !important;
               -khtml-user-select: none !important;
@@ -606,7 +621,7 @@ button:disabled {
                   font-size: 1.7rem; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-left .horario-icon {
                   margin-top: 8px;
-                  color: rgba(66, 66, 66, 0.8); }
+                  color: rgba(77, 78, 73, 0.8); }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right {
                 font-size: 1.4rem;
                 letter-spacing: .2rem;
@@ -636,12 +651,12 @@ button:disabled {
                   position: absolute;
                   top: 1px;
                   right: 0;
-                  color: rgba(66, 66, 66, 0.8); }
+                  color: rgba(77, 78, 73, 0.8); }
                   @media screen and (min-width: 768px) {
                     .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right .icon-arrow {
                       top: 2px; } }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a .trigger-right .icon-passenger {
-                  color: rgba(66, 66, 66, 0.8);
+                  color: rgba(77, 78, 73, 0.8);
                   font-size: 2rem;
                   position: absolute;
                   left: -10px;
@@ -656,7 +671,7 @@ button:disabled {
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-arrow {
                 display: inline-block; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-remove {
-                color: rgba(66, 66, 66, 0.8);
+                color: rgba(77, 78, 73, 0.8);
                 position: absolute;
                 top: 4px;
                 right: 50px; }
@@ -665,7 +680,7 @@ button:disabled {
                     top: 3px;
                     right: 70px; } }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group .panel-heading .panel-title a[aria-expanded="true"] .icon-save {
-                color: rgba(66, 66, 66, 0.8);
+                color: rgba(77, 78, 73, 0.8);
                 position: absolute;
                 top: 4px;
                 right: 95px; }
@@ -796,7 +811,7 @@ button:disabled {
                 padding-top: 10px; } }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .jumbo-info {
             font-family: "Days One";
-            color: rgba(66, 66, 66, 0.7) !important;
+            color: rgba(77, 78, 73, 0.7) !important;
             margin-bottom: 12px;
             background-color: white;
             padding: 0 5px 5px 5px; }
@@ -815,12 +830,12 @@ button:disabled {
                   position: absolute;
                   top: 2px;
                   left: 0;
-                  color: rgba(66, 66, 66, 0.8) !important; }
+                  color: rgba(77, 78, 73, 0.8) !important; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .jumbo-info.ida .tab-row span {
                   position: absolute;
                   top: 1px;
                   left: 30px;
-                  color: rgba(66, 66, 66, 0.8) !important; }
+                  color: rgba(77, 78, 73, 0.8) !important; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .jumbo-info.volta {
               position: relative; }
               .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .jumbo-info.volta .menu-volta {
@@ -836,15 +851,15 @@ button:disabled {
                   position: absolute;
                   top: 2px;
                   right: 0;
-                  color: rgba(66, 66, 66, 0.8) !important; }
+                  color: rgba(77, 78, 73, 0.8) !important; }
                 .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .jumbo-info.volta .tab-row span {
                   position: absolute;
                   top: 1px;
                   right: 30px;
-                  color: rgba(66, 66, 66, 0.8) !important; }
+                  color: rgba(77, 78, 73, 0.8) !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .footer-section {
             border-radius: 0 0 4px 4px !important;
-            background-color: #424242;
+            background-color: #62635d;
             height: 60px;
             position: relative;
             text-align: left;
@@ -883,12 +898,12 @@ button:disabled {
             right: -28px;
             top: 41px; }
             .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .tab-menu button {
-              background-color: #686868 !important; }
+              background-color: #74766e !important; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios nav {
             font-family: "Days One";
             border-top-left-radius: 4px !important;
             border-top-right-radius: 4px !important;
-            background-color: #424242; }
+            background-color: #62635d; }
           .comprar-passagem-container .form-passagem-container .form-centered .horarios-container .tab-horarios .panel-group {
             margin-bottom: 0; }
 
@@ -914,21 +929,21 @@ button:disabled {
         margin: 0;
         padding: 40px 40px 20px 40px; }
         .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .label-localizador {
-          color: #424242; }
+          color: #4d4e49; }
         .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .localizador {
           display: block;
-          color: #424242;
+          color: #4d4e49;
           font-family: "Oswald";
           font-size: 2rem;
           font-weight: bold; }
         .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida,
         .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta {
-          border: 1px solid rgba(66, 66, 66, 0.2);
+          border: 1px solid rgba(77, 78, 73, 0.2);
           padding: 0;
           margin-top: 20px;
           margin-bottom: 20px;
           border-radius: 4px;
-          color: #424242 !important;
+          color: #4d4e49 !important;
           background-color: white !important; }
           .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida .body,
           .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body {
@@ -941,7 +956,7 @@ button:disabled {
             left: 0;
             width: 20px;
             height: 100%;
-            background-color: rgba(66, 66, 66, 0.6); }
+            background-color: rgba(77, 78, 73, 0.6); }
             .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida .body .side-ida span {
               position: 5 absolute;
               left: 53%;
@@ -961,14 +976,14 @@ button:disabled {
               position: absolute;
               top: 2px;
               right: 0;
-              color: rgba(66, 66, 66, 0.8) !important; }
+              color: rgba(77, 78, 73, 0.8) !important; }
             .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-ida .body div span {
               font-size: 1.2rem;
               font-family: "Days One";
               position: absolute;
               top: 3px;
               right: 33px;
-              color: rgba(66, 66, 66, 0.8) !important; }
+              color: rgba(77, 78, 73, 0.8) !important; }
         .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body {
           position: relative; }
           .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body .side-volta {
@@ -977,7 +992,7 @@ button:disabled {
             right: 0;
             width: 20px;
             height: 100%;
-            background-color: rgba(66, 66, 66, 0.6); }
+            background-color: rgba(77, 78, 73, 0.6); }
             .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body .side-volta span {
               position: absolute;
               left: -60%;
@@ -997,17 +1012,17 @@ button:disabled {
               position: absolute;
               top: 2px;
               left: 0;
-              color: rgba(66, 66, 66, 0.8) !important; }
+              color: rgba(77, 78, 73, 0.8) !important; }
             .confirmacao-passagem .form-centered .jumbo-detalhes .main-body .detalhes .jumbo-volta .body div span {
               font-size: 1.2rem;
               font-family: "Days One";
               position: absolute;
               top: 1px;
               left: 25px;
-              color: rgba(66, 66, 66, 0.8) !important; }
+              color: rgba(77, 78, 73, 0.8) !important; }
       .confirmacao-passagem .form-centered .jumbo-detalhes .bottom-strip {
         margin: 0;
-        background-color: #424242;
+        background-color: #62635d;
         padding: 40px;
         border-bottom-left-radius: 4px !important;
         border-bottom-right-radius: 4px !important; }
@@ -1024,7 +1039,7 @@ button:disabled {
         position: absolute;
         right: 90px;
         bottom: -14px;
-        background-color: #686868; }
+        background-color: #74766e; }
 
 @media screen and (min-width: 768px) {
   .confirmacao-passagem .form-centered {
@@ -1045,7 +1060,7 @@ button:disabled {
       .pesquisar-passagens-container div.animated table td {
         border: none; }
       .pesquisar-passagens-container div.animated table thead tr {
-        background-color: #424242;
+        background-color: #62635d;
         border-bottom: 2px solid #F44336; }
       .pesquisar-passagens-container div.animated table thead th {
         -moz-user-select: -moz-none !important;
@@ -1078,7 +1093,7 @@ button:disabled {
           .pesquisar-passagens-container div.animated table thead th div:hover span {
             color: white; }
       .pesquisar-passagens-container div.animated table tbody tr {
-        border-top: 1px solid rgba(66, 66, 66, 0.05); }
+        border-top: 1px solid rgba(77, 78, 73, 0.05); }
         .pesquisar-passagens-container div.animated table tbody tr td:first-child {
           padding-left: 50px; }
         .pesquisar-passagens-container div.animated table tbody tr td:last-child {
@@ -1094,11 +1109,11 @@ button:disabled {
           margin-top: 213px; } }
       .pesquisar-passagens-container div.animated .pagination-pesquisa li a {
         background-color: white;
-        border-color: rgba(45, 45, 45, 0.3);
-        color: #2d2d2d; }
+        border-color: rgba(77, 78, 73, 0.3);
+        color: #4D4E49; }
       .pesquisar-passagens-container div.animated .pagination-pesquisa li.active a {
-        background-color: #424242;
-        border-color: #424242 !important;
+        background-color: #62635d;
+        border-color: #62635d !important;
         color: white; }
 
 .login-container {
@@ -1148,7 +1163,7 @@ button:disabled {
           padding: 40px 50px 40px 40px; } }
     .login-container .login-box form .footer-section {
       padding: 0 0 0 40px;
-      background-color: #424242;
+      background-color: #62635d;
       height: 60px;
       border-radius: 0 0 4px 4px;
       position: relative; }
@@ -1179,7 +1194,7 @@ button:disabled {
   .welcome-container .info-container {
     margin-top: 76px;
     text-align: left;
-    color: #424242; }
+    color: #4d4e49; }
     .welcome-container .info-container .intro,
     .welcome-container .info-container .tech {
       text-align: justify;
@@ -1199,7 +1214,7 @@ button:disabled {
         border-top-right-radius: 4px; }
       .welcome-container .info-container .jumbo-painel .footer-section {
         padding: 0 0 0 40px;
-        background-color: #424242;
+        background-color: #62635d;
         height: 60px;
         border-radius: 0 0 4px 4px; }
         .welcome-container .info-container .jumbo-painel .footer-section span {
@@ -1216,7 +1231,7 @@ button:disabled {
         bottom: -20px; }
     .welcome-container .info-container h2 {
       font-family: "Days One";
-      color: #424242;
+      color: #4d4e49;
       margin-top: 30px; }
     .welcome-container .info-container .title-intro {
       margin-top: 0; }
@@ -1256,7 +1271,7 @@ button:disabled {
       padding: 40px; }
     .perfil-usuario-container .jumbotron .footer-section {
       padding: 0 0 0 40px;
-      background-color: #424242;
+      background-color: #62635d;
       height: 60px;
       border-radius: 0 0 4px 4px;
       position: relative; }
@@ -1289,7 +1304,7 @@ html {
   height: 100%;
   background-color: #898370; }
   html body {
-    background: url("./styles/images/tree26.jpg") no-repeat center center;
+    background: url("./styles/images/citybus.jpg") no-repeat top left;
     background-attachment: scroll;
     background-size: cover;
     height: inherit;

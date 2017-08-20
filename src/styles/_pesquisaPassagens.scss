@@ -18,7 +18,7 @@
             }
             thead {
                 tr {
-                    background-color: rgba($materialPrimary, 1);
+                    background-color: $colorFooterSection;
                     border-bottom: 2px solid $materialAccent;
                 }
                 th {
@@ -89,12 +89,12 @@
             }
             li a {
                 background-color: rgba(white, 1);
-                border-color: rgba(#2d2d2d, .3);
-                color: #2d2d2d;
+                border-color: rgba($materialPrimary, .3);
+                color: $materialPrimary;
             }
             li.active a {
-                background-color: rgba($materialPrimary, 1);
-                border-color: $materialPrimary !important;
+                background-color: $colorFooterSection;
+                border-color: $colorFooterSection !important;
                 color: white;
             }
         }

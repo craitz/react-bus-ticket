@@ -295,7 +295,7 @@ monospace;
     .footer-section {
         @include loadingProgress;
         border-radius: 0 0 4px 4px !important;
-        background-color: $materialPrimary;
+        background-color: $colorFooterSection;
         height: 60px;
         position: relative;
         text-align: left;
@@ -337,7 +337,7 @@ monospace;
         font-family: "Days One";
         border-top-left-radius: 4px !important;
         border-top-right-radius: 4px !important;
-        background-color: $materialPrimary;
+        background-color: $colorFooterSection;
     }
     .panel-group {
         margin-bottom: 0;
@@ -464,7 +464,8 @@ monospace;
         z-index: 9;
         right: 20px;
         bottom: -20px;
-        background-color: $materialPrimaryLight !important;
+        background-color: $colorFooterSection !important;
+        // background-color: #60695C !important;
     }
     @include containerHeight;
     .form-passagem-container {

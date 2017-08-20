@@ -16,7 +16,7 @@
             "TABLE"
         ],
         "customProperties": {
-            "color-primary": "#424242",
+            "color-primary": "#4D4E49",
             "color-accent": "#F44336",
             "input-text-highlight-color": "#F0AD4E",
             "animation-duration": "0.3s",

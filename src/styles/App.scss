@@ -28,7 +28,7 @@ html {
     background-color: rgb(137, 131, 112);
     body {
         // @include bkgImage();
-        background: url($wallpaperXs) no-repeat center center;
+        background: url($wallpaperXs) no-repeat top left;
         background-attachment: scroll;
         background-size: cover;
         // @include sm {

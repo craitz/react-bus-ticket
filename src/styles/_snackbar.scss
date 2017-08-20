@@ -28,13 +28,13 @@
         &.success {
             i,
             span {
-                color: #00ff00 !important;
+                color: #3E8B3E !important;
             }
         }
         &.error {
             i,
             span {
-                color: #ff4040 !important;
+                color: rgba(#A33C41, 1) !important;
             }
         }
     }

@@ -29,7 +29,7 @@
         .footer-section {
             @include loadingProgress;
             padding: 0 0 0 40px;
-            background-color: $materialPrimary;
+            background-color: $colorFooterSection;
             height: 60px;
             border-radius: 0 0 4px 4px;
             position: relative;

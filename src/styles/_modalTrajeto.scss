@@ -107,7 +107,7 @@ $arrowSize: 6px;
             .modal-footer {
                 @include loadingProgress;
                 border-top: none;
-                background-color: $materialPrimary;
+                background-color: $colorFooterSection;
                 text-align: left;
                 padding: 0 0 0 40px;
                 height: 60px !important;
